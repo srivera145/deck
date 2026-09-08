@@ -163,15 +163,15 @@
   /* Search icon sits on the start edge, which is the right in RTL */
   [dir="rtl"] .search > .icon { inset-inline-start: var(--space-3); }
 
-  /* Pinned grid columns and their shadows */
-  [dir="rtl"] .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start,
-  [dir="rtl"] .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start-2 {
-    box-shadow: -6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
-    clip-path: inset(0 0 0 -12px);
-  }
-  [dir="rtl"] .dg-wrap.is-scrolled-end .dg :is(th, td).dg-pin-end {
-    box-shadow: 6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
-    clip-path: inset(0 -12px 0 0);
+  /* Pinned grid columns and their shadows. Which edge is "start" is already
+     logical in both branches of 12-datagrid; only the offsets are physical,
+     so mirroring the four variables flips the scroll-state path and the
+     class-based fallback at the same time. */
+  [dir="rtl"] .dg-wrap {
+    --dg-pin-shadow-start: -6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
+    --dg-pin-shadow-end: 6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
+    --dg-pin-clip-start: inset(0 0 0 -12px);
+    --dg-pin-clip-end: inset(0 -12px 0 0);
   }
 
   /* Switch knob travels toward the end edge */

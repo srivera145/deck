@@ -74,16 +74,47 @@
   .dg thead th.dg-pin-end { z-index: 4; }
 
   /* The shadow only appears once the grid is actually scrolled sideways.
-     deck.js toggles .is-scrolled-x / .is-scrolled-end on .dg-wrap. */
-  .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start:last-of-type,
-  .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start-2,
-  .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start:not(:has(~ .dg-pin-start-2)) {
-    box-shadow: 6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
-    clip-path: inset(0 -12px 0 0);
+     A box-shadow offset is physical, so the geometry lives here and 19-logical
+     mirrors it for RTL once, rather than once per branch below. */
+  .dg-wrap {
+    --dg-pin-shadow-start: 6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
+    --dg-pin-shadow-end: -6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
+    --dg-pin-clip-start: inset(0 -12px 0 0);
+    --dg-pin-clip-end: inset(0 0 0 -12px);
   }
-  .dg-wrap.is-scrolled-end .dg :is(th, td).dg-pin-end {
-    box-shadow: -6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
-    clip-path: inset(0 0 0 -12px);
+
+  /* Ask the scroll container directly. No scroll handler, no class to keep in
+     sync, and the query is already logical so RTL needs nothing here. */
+  @supports (container-type: scroll-state) {
+    .dg-wrap { container-type: scroll-state; }
+    @container scroll-state(scrollable: inline-start) {
+      .dg :is(th, td).dg-pin-start:last-of-type,
+      .dg :is(th, td).dg-pin-start-2,
+      .dg :is(th, td).dg-pin-start:not(:has(~ .dg-pin-start-2)) {
+        box-shadow: var(--dg-pin-shadow-start);
+        clip-path: var(--dg-pin-clip-start);
+      }
+    }
+    @container scroll-state(scrollable: inline-end) {
+      .dg :is(th, td).dg-pin-end {
+        box-shadow: var(--dg-pin-shadow-end);
+        clip-path: var(--dg-pin-clip-end);
+      }
+    }
+  }
+
+  /* Where it is missing, Grid.shadows() in deck.js toggles these two classes. */
+  @supports not (container-type: scroll-state) {
+    .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start:last-of-type,
+    .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start-2,
+    .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start:not(:has(~ .dg-pin-start-2)) {
+      box-shadow: var(--dg-pin-shadow-start);
+      clip-path: var(--dg-pin-clip-start);
+    }
+    .dg-wrap.is-scrolled-end .dg :is(th, td).dg-pin-end {
+      box-shadow: var(--dg-pin-shadow-end);
+      clip-path: var(--dg-pin-clip-end);
+    }
   }
 
   /* --- Rows ---------------------------------------------------------------- */

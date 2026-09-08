@@ -626,6 +626,32 @@
     -webkit-backdrop-filter: saturate(1.6) blur(12px);
   }
 
+  /* Sitting in flow it needs no treatment at all; it earns the blur and the
+     shadow at the moment it actually sticks. A scroll-state container cannot
+     style itself, so the treatment rides on ::after, which is inside it. */
+  @supports (container-type: scroll-state) {
+    .sticky-top {
+      container-type: scroll-state;
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .sticky-top::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0;
+      background: color-mix(in oklab, var(--bg) 82%, transparent);
+      backdrop-filter: saturate(1.6) blur(12px);
+      -webkit-backdrop-filter: saturate(1.6) blur(12px);
+      transition: opacity var(--dur-2) var(--ease-out);
+    }
+    @container scroll-state(stuck: block-start) {
+      .sticky-top::after { opacity: 1; box-shadow: var(--shadow-2); }
+    }
+  }
+
   .app-shell {
     display: grid;
     min-block-size: 100dvh;
@@ -2919,16 +2945,47 @@
   .dg thead th.dg-pin-end { z-index: 4; }
 
   /* The shadow only appears once the grid is actually scrolled sideways.
-     deck.js toggles .is-scrolled-x / .is-scrolled-end on .dg-wrap. */
-  .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start:last-of-type,
-  .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start-2,
-  .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start:not(:has(~ .dg-pin-start-2)) {
-    box-shadow: 6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
-    clip-path: inset(0 -12px 0 0);
+     A box-shadow offset is physical, so the geometry lives here and 19-logical
+     mirrors it for RTL once, rather than once per branch below. */
+  .dg-wrap {
+    --dg-pin-shadow-start: 6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
+    --dg-pin-shadow-end: -6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
+    --dg-pin-clip-start: inset(0 -12px 0 0);
+    --dg-pin-clip-end: inset(0 0 0 -12px);
   }
-  .dg-wrap.is-scrolled-end .dg :is(th, td).dg-pin-end {
-    box-shadow: -6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
-    clip-path: inset(0 0 0 -12px);
+
+  /* Ask the scroll container directly. No scroll handler, no class to keep in
+     sync, and the query is already logical so RTL needs nothing here. */
+  @supports (container-type: scroll-state) {
+    .dg-wrap { container-type: scroll-state; }
+    @container scroll-state(scrollable: inline-start) {
+      .dg :is(th, td).dg-pin-start:last-of-type,
+      .dg :is(th, td).dg-pin-start-2,
+      .dg :is(th, td).dg-pin-start:not(:has(~ .dg-pin-start-2)) {
+        box-shadow: var(--dg-pin-shadow-start);
+        clip-path: var(--dg-pin-clip-start);
+      }
+    }
+    @container scroll-state(scrollable: inline-end) {
+      .dg :is(th, td).dg-pin-end {
+        box-shadow: var(--dg-pin-shadow-end);
+        clip-path: var(--dg-pin-clip-end);
+      }
+    }
+  }
+
+  /* Where it is missing, Grid.shadows() in deck.js toggles these two classes. */
+  @supports not (container-type: scroll-state) {
+    .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start:last-of-type,
+    .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start-2,
+    .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start:not(:has(~ .dg-pin-start-2)) {
+      box-shadow: var(--dg-pin-shadow-start);
+      clip-path: var(--dg-pin-clip-start);
+    }
+    .dg-wrap.is-scrolled-end .dg :is(th, td).dg-pin-end {
+      box-shadow: var(--dg-pin-shadow-end);
+      clip-path: var(--dg-pin-clip-end);
+    }
   }
 
   /* --- Rows ---------------------------------------------------------------- */
@@ -3264,8 +3321,22 @@
   }
 
   /* --- Collapsed stack -----------------------------------------------------
-     deck.js sets --i (0 = newest). Beyond the third toast they hide behind.
+     --i counts from the newest, which is the first child because push()
+     prepends. Beyond the third toast they hide behind.
      ---------------------------------------------------------------------- */
+  @supports (animation-delay: calc(sibling-index() * 1ms)) {
+    .toast-region-stacked .toast { --i: calc(sibling-index() - 1); }
+  }
+  @supports not (animation-delay: calc(sibling-index() * 1ms)) {
+    .toast-region-stacked .toast:nth-child(1)   { --i: 0; }
+    .toast-region-stacked .toast:nth-child(2)   { --i: 1; }
+    .toast-region-stacked .toast:nth-child(3)   { --i: 2; }
+    .toast-region-stacked .toast:nth-child(4)   { --i: 3; }
+    .toast-region-stacked .toast:nth-child(5)   { --i: 4; }
+    .toast-region-stacked .toast:nth-child(6)   { --i: 5; }
+    .toast-region-stacked .toast:nth-child(7)   { --i: 6; }
+    .toast-region-stacked .toast:nth-child(8)   { --i: 7; }
+  }
   .toast-region-stacked .toast {
     position: absolute;
     inset-inline: 0;
@@ -3275,8 +3346,7 @@
     opacity: calc(1 - var(--i) * .18);
     z-index: calc(100 - var(--i));
   }
-  .toast-region-stacked .toast[style*="--i: 3"],
-  .toast-region-stacked .toast[style*="--i:3"] { opacity: 0; pointer-events: none; }
+  .toast-region-stacked .toast:nth-child(n+4) { opacity: 0; pointer-events: none; }
 
   .toast-region-stacked:is(:hover, :focus-within) .toast {
     translate: 0 calc(var(--i) * (var(--toast-h, 68px) + var(--space-2)) * -1);
@@ -3692,22 +3762,32 @@
     @keyframes dk-blur { from { opacity: 0; filter: blur(8px); scale: 1.01; } }
 
     /* --- Stagger ----------------------------------------------------------
-       Put .stagger on the parent. Children animate in sequence. Works for the
-       first twelve children with pure CSS; deck.js sets --n past that.
+       Put .stagger on the parent. Children animate in sequence. sibling-index()
+       counts them, so the sequence has no ceiling and no JavaScript. The twelve
+       nth-child rules it replaced are kept below for browsers without it --
+       they stop at twelve, which is why deck.js used to patch past that.
        -------------------------------------------------------------------- */
-    .stagger > * { animation-delay: calc(var(--n, 0) * var(--stagger-step)); }
-    .stagger > :nth-child(1)  { --n: 0; }
-    .stagger > :nth-child(2)  { --n: 1; }
-    .stagger > :nth-child(3)  { --n: 2; }
-    .stagger > :nth-child(4)  { --n: 3; }
-    .stagger > :nth-child(5)  { --n: 4; }
-    .stagger > :nth-child(6)  { --n: 5; }
-    .stagger > :nth-child(7)  { --n: 6; }
-    .stagger > :nth-child(8)  { --n: 7; }
-    .stagger > :nth-child(9)  { --n: 8; }
-    .stagger > :nth-child(10) { --n: 9; }
-    .stagger > :nth-child(11) { --n: 10; }
-    .stagger > :nth-child(12) { --n: 11; }
+    @supports (animation-delay: calc(sibling-index() * 1ms)) {
+      .stagger > * { animation-delay: calc((sibling-index() - 1) * var(--stagger-step)); }
+    }
+    @supports not (animation-delay: calc(sibling-index() * 1ms)) {
+      .stagger > * { animation-delay: calc(var(--n, 0) * var(--stagger-step)); }
+      .stagger > :nth-child(1)  { --n: 0; }
+      .stagger > :nth-child(2)  { --n: 1; }
+      .stagger > :nth-child(3)  { --n: 2; }
+      .stagger > :nth-child(4)  { --n: 3; }
+      .stagger > :nth-child(5)  { --n: 4; }
+      .stagger > :nth-child(6)  { --n: 5; }
+      .stagger > :nth-child(7)  { --n: 6; }
+      .stagger > :nth-child(8)  { --n: 7; }
+      .stagger > :nth-child(9)  { --n: 8; }
+      .stagger > :nth-child(10) { --n: 9; }
+      .stagger > :nth-child(11) { --n: 10; }
+      .stagger > :nth-child(12) { --n: 11; }
+      /* Past twelve everything holds the last step rather than snapping back
+         to zero. Without sibling-index() that is as far as CSS can count. */
+      .stagger > :nth-child(n+13) { --n: 11; }
+    }
     .stagger-fast { --stagger-step: 28ms; }
     .stagger-slow { --stagger-step: 80ms; }
 
@@ -4310,15 +4390,15 @@
   /* Search icon sits on the start edge, which is the right in RTL */
   [dir="rtl"] .search > .icon { inset-inline-start: var(--space-3); }
 
-  /* Pinned grid columns and their shadows */
-  [dir="rtl"] .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start,
-  [dir="rtl"] .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start-2 {
-    box-shadow: -6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
-    clip-path: inset(0 0 0 -12px);
-  }
-  [dir="rtl"] .dg-wrap.is-scrolled-end .dg :is(th, td).dg-pin-end {
-    box-shadow: 6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
-    clip-path: inset(0 -12px 0 0);
+  /* Pinned grid columns and their shadows. Which edge is "start" is already
+     logical in both branches of 12-datagrid; only the offsets are physical,
+     so mirroring the four variables flips the scroll-state path and the
+     class-based fallback at the same time. */
+  [dir="rtl"] .dg-wrap {
+    --dg-pin-shadow-start: -6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
+    --dg-pin-shadow-end: 6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
+    --dg-pin-clip-start: inset(0 0 0 -12px);
+    --dg-pin-clip-end: inset(0 -12px 0 0);
   }
 
   /* Switch knob travels toward the end edge */
@@ -4720,8 +4800,22 @@
 
   /* --- Depth stack ---------------------------------------------------------
      A pile of records you are working through. The one on top is live, the
-     ones behind are context. Set --i on each child, 0 for the top card.
+     ones behind are context. --i is the child's own position, 0 for the top
+     card; deck.js parks a dismissed card at the end so the rest close up.
      ---------------------------------------------------------------------- */
+  @supports (animation-delay: calc(sibling-index() * 1ms)) {
+    .stack-depth > * { --i: calc(sibling-index() - 1); }
+  }
+  @supports not (animation-delay: calc(sibling-index() * 1ms)) {
+    .stack-depth > :nth-child(1)   { --i: 0; }
+    .stack-depth > :nth-child(2)   { --i: 1; }
+    .stack-depth > :nth-child(3)   { --i: 2; }
+    .stack-depth > :nth-child(4)   { --i: 3; }
+    .stack-depth > :nth-child(5)   { --i: 4; }
+    .stack-depth > :nth-child(6)   { --i: 5; }
+    .stack-depth > :nth-child(7)   { --i: 6; }
+    .stack-depth > :nth-child(8)   { --i: 7; }
+  }
   .stack-depth {
     display: grid;
     transform-style: preserve-3d;
@@ -4747,7 +4841,7 @@
     scale: 1;
     filter: none;
   }
-  .stack-depth.is-fanned > :nth-child(n+4) { opacity: 1; pointer-events: auto; }
+  .stack-depth.is-fanned > :nth-child(n+4):not(.is-dismissed) { opacity: 1; pointer-events: auto; }
 
   /* Dismiss the top card away from the pile */
   .stack-depth > .is-dismissed {
@@ -4996,6 +5090,76 @@
   .carousel-dot::before { content: ""; position: absolute; inline-size: 32px; block-size: 32px; translate: -50% -50%; inset: 50% auto auto 50%; }
   .carousel-dots > * { position: relative; }
 
+  /* --- Native carousel -----------------------------------------------------
+     ::scroll-marker gives every slide its own dot and ::scroll-button gives the
+     track its arrows, with the active state, the disabled state, the click
+     handling and the roving-tabindex keyboard order all done by the browser.
+     Where these exist, deck-extras.js skips building and wiring the DIY ones
+     and .carousel-dots / .carousel-arrow simply step aside -- the markup stays
+     exactly as it was. The buttons take the logical keywords rather than left
+     and right, so an RTL carousel flips them without a rule in deck.rtl.
+     ---------------------------------------------------------------------- */
+  @supports selector(::scroll-marker) {
+    .carousel-dots, .carousel-arrow { display: none; }
+
+    .carousel-track { scroll-marker-group: after; }
+    .carousel-track::scroll-marker-group {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-2);
+      padding-block-start: var(--space-3);
+    }
+    .carousel-slide::scroll-marker {
+      content: "";
+      inline-size: 7px;
+      block-size: 7px;
+      border-radius: var(--r-full);
+      background: var(--ink-300);
+      cursor: pointer;
+      transition: inline-size var(--dur-2) var(--ease-out),
+                  background-color var(--dur-2) var(--ease-out);
+    }
+    .carousel-slide::scroll-marker:target-current {
+      inline-size: 22px;
+      background: var(--brand-600);
+    }
+
+    .carousel-track::scroll-button(*) {
+      position: absolute;
+      inset-block-start: 50%;
+      translate: 0 -50%;
+      z-index: 2;
+      inline-size: 40px;
+      block-size: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--r-full);
+      background: color-mix(in oklab, var(--surface) 88%, transparent);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-2);
+      color: var(--text);
+      font-size: var(--text-xl);
+      line-height: 1;
+      cursor: pointer;
+      transition: opacity var(--dur-2) var(--ease-out), scale var(--dur-1) var(--ease-out);
+    }
+    .carousel-track::scroll-button(*):hover { scale: 1.06; }
+    .carousel-track::scroll-button(*):disabled { opacity: 0; pointer-events: none; }
+    .carousel-track::scroll-button(inline-start) {
+      content: "\2039" / "Previous slide";
+      inset-inline-start: var(--space-3);
+    }
+    .carousel-track::scroll-button(inline-end) {
+      content: "\203A" / "Next slide";
+      inset-inline-end: var(--space-3);
+    }
+    @media (pointer: coarse) {
+      .carousel-track::scroll-button(*) { display: none; }
+    }
+  }
+
   .carousel-caption {
     position: absolute;
     inset-inline: 0;
@@ -5176,6 +5340,19 @@
     flex-direction: column-reverse;
     align-items: flex-end;
     gap: var(--space-3);
+  }
+  @supports (animation-delay: calc(sibling-index() * 1ms)) {
+    .speed-dial-action { --i: calc(sibling-index() - 1); }
+  }
+  @supports not (animation-delay: calc(sibling-index() * 1ms)) {
+    .speed-dial-action:nth-child(1)   { --i: 0; }
+    .speed-dial-action:nth-child(2)   { --i: 1; }
+    .speed-dial-action:nth-child(3)   { --i: 2; }
+    .speed-dial-action:nth-child(4)   { --i: 3; }
+    .speed-dial-action:nth-child(5)   { --i: 4; }
+    .speed-dial-action:nth-child(6)   { --i: 5; }
+    .speed-dial-action:nth-child(7)   { --i: 6; }
+    .speed-dial-action:nth-child(8)   { --i: 7; }
   }
   .speed-dial-action {
     display: flex;

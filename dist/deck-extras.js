@@ -24,9 +24,14 @@
       const track = $('.carousel-track', car);
       if (!track) return;
       const slides = $$('.carousel-slide', track);
-      const dots = $('.carousel-dots', car);
-      const prev = $('.carousel-prev', car);
-      const next = $('.carousel-next', car);
+      /* ::scroll-marker and ::scroll-button give us the dots, the arrows, the
+         active and disabled states and the keyboard order for free. Where they
+         exist the CSS hides the DIY ones, so drop the references here and the
+         building and wiring below skips itself. */
+      const diy = !CSS.supports('selector(::scroll-marker)');
+      const dots = diy ? $('.carousel-dots', car) : null;
+      const prev = diy ? $('.carousel-prev', car) : null;
+      const next = diy ? $('.carousel-next', car) : null;
       const rtl = () => getComputedStyle(track).direction === 'rtl';
 
       if (dots && !dots.children.length) {
@@ -147,7 +152,6 @@
     $$('.speed-dial', root).forEach(dial => {
       if (!once(dial)) return;
       const fab = $('.fab', dial);
-      $$('.speed-dial-action', dial).forEach((a, i) => a.style.setProperty('--i', i));
       const set = on => {
         dial.classList.toggle('is-open', on);
         fab?.setAttribute('aria-expanded', String(on));

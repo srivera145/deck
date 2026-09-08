@@ -660,11 +660,15 @@ const Deck = (() => {
       this.table = $('.dg', wrap);
       if (!this.table) return;
       this.measurePins();
-      this.shadows();
       this.wireSort();
       this.wireSelect();
       this.wireResize();
-      wrap.addEventListener('scroll', () => this.shadows(), { passive: true });
+      /* @container scroll-state() paints the pin shadows on its own; this
+         handler is only here for browsers that do not have it yet. */
+      if (!CSS.supports('container-type: scroll-state')) {
+        this.shadows();
+        wrap.addEventListener('scroll', () => this.shadows(), { passive: true });
+      }
       new ResizeObserver(() => this.measurePins()).observe(this.table);
     }
 
@@ -675,8 +679,9 @@ const Deck = (() => {
 
     shadows() {
       const w = this.wrap;
-      w.classList.toggle('is-scrolled-x', w.scrollLeft > 0);
-      w.classList.toggle('is-scrolled-end', w.scrollLeft + w.clientWidth < w.scrollWidth - 1);
+      const x = Math.abs(w.scrollLeft);          // an RTL scroller counts down from 0
+      w.classList.toggle('is-scrolled-x', x > 0);
+      w.classList.toggle('is-scrolled-end', x + w.clientWidth < w.scrollWidth - 1);
     }
 
     wireSort() {
@@ -893,10 +898,8 @@ const Deck = (() => {
     clear() { [...this.items].forEach(i => this.dismiss(i)); },
 
     reflow() {
-      this.items.forEach((item, i) => {
-        item.node.style.setProperty('--i', i);
-        item.node.setAttribute('aria-hidden', i >= this.max ? 'true' : 'false');
-      });
+      this.items.forEach((item, i) =>
+        item.node.setAttribute('aria-hidden', i >= this.max ? 'true' : 'false'));
     },
 
     wireSwipe(item) {
@@ -972,14 +975,6 @@ const Deck = (() => {
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
 
     targets.forEach(n => { n.dataset.deckWired = '1'; io.observe(n); });
-  }
-
-  function wireStagger(root) {
-    $$('.stagger', root).forEach(group => {
-      const kids = Array.from(group.children);
-      if (kids.length <= 12) return;             // pure CSS covers the first twelve
-      kids.forEach((kid, i) => kid.style.setProperty('--n', i));
-    });
   }
 
   function wireValidationShake(root) {
@@ -1105,15 +1100,13 @@ const Deck = (() => {
     $$('.stack-depth', root).forEach(stack => {
       if (stack.dataset.deckWired) return;
       stack.dataset.deckWired = '1';
-      const index = () => Array.from(stack.children)
-        .filter(c => !c.classList.contains('is-dismissed'))
-        .forEach((c, i) => c.style.setProperty('--i', i));
-      index();
       stack.addEventListener('deck:advance', () => {
         const top = stack.querySelector(':scope > *:not(.is-dismissed)');
         if (!top) return;
         top.classList.add('is-dismissed');
-        setTimeout(index, 40);
+        /* Once it has flown off, move it to the end of the pile. It stays in
+           the DOM, but out of the way of everyone else's sibling-index(). */
+        setTimeout(() => stack.append(top), 400);
       });
     });
   }
@@ -1218,7 +1211,6 @@ const Deck = (() => {
       wireBackToTop(root);
       wireRipple(root);
       wireReveal(root);
-      wireStagger(root);
       wireValidationShake(root);
       wireTick(root);
       wireTilt(root);
@@ -1354,9 +1346,14 @@ if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
       const track = $('.carousel-track', car);
       if (!track) return;
       const slides = $$('.carousel-slide', track);
-      const dots = $('.carousel-dots', car);
-      const prev = $('.carousel-prev', car);
-      const next = $('.carousel-next', car);
+      /* ::scroll-marker and ::scroll-button give us the dots, the arrows, the
+         active and disabled states and the keyboard order for free. Where they
+         exist the CSS hides the DIY ones, so drop the references here and the
+         building and wiring below skips itself. */
+      const diy = !CSS.supports('selector(::scroll-marker)');
+      const dots = diy ? $('.carousel-dots', car) : null;
+      const prev = diy ? $('.carousel-prev', car) : null;
+      const next = diy ? $('.carousel-next', car) : null;
       const rtl = () => getComputedStyle(track).direction === 'rtl';
 
       if (dots && !dots.children.length) {
@@ -1477,7 +1474,6 @@ if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
     $$('.speed-dial', root).forEach(dial => {
       if (!once(dial)) return;
       const fab = $('.fab', dial);
-      $$('.speed-dial-action', dial).forEach((a, i) => a.style.setProperty('--i', i));
       const set = on => {
         dial.classList.toggle('is-open', on);
         fab?.setAttribute('aria-expanded', String(on));

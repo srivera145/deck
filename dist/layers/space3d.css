@@ -70,8 +70,22 @@
 
   /* --- Depth stack ---------------------------------------------------------
      A pile of records you are working through. The one on top is live, the
-     ones behind are context. Set --i on each child, 0 for the top card.
+     ones behind are context. --i is the child's own position, 0 for the top
+     card; deck.js parks a dismissed card at the end so the rest close up.
      ---------------------------------------------------------------------- */
+  @supports (animation-delay: calc(sibling-index() * 1ms)) {
+    .stack-depth > * { --i: calc(sibling-index() - 1); }
+  }
+  @supports not (animation-delay: calc(sibling-index() * 1ms)) {
+    .stack-depth > :nth-child(1)   { --i: 0; }
+    .stack-depth > :nth-child(2)   { --i: 1; }
+    .stack-depth > :nth-child(3)   { --i: 2; }
+    .stack-depth > :nth-child(4)   { --i: 3; }
+    .stack-depth > :nth-child(5)   { --i: 4; }
+    .stack-depth > :nth-child(6)   { --i: 5; }
+    .stack-depth > :nth-child(7)   { --i: 6; }
+    .stack-depth > :nth-child(8)   { --i: 7; }
+  }
   .stack-depth {
     display: grid;
     transform-style: preserve-3d;
@@ -97,7 +111,7 @@
     scale: 1;
     filter: none;
   }
-  .stack-depth.is-fanned > :nth-child(n+4) { opacity: 1; pointer-events: auto; }
+  .stack-depth.is-fanned > :nth-child(n+4):not(.is-dismissed) { opacity: 1; pointer-events: auto; }
 
   /* Dismiss the top card away from the pile */
   .stack-depth > .is-dismissed {

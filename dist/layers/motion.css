@@ -95,22 +95,32 @@
     @keyframes dk-blur { from { opacity: 0; filter: blur(8px); scale: 1.01; } }
 
     /* --- Stagger ----------------------------------------------------------
-       Put .stagger on the parent. Children animate in sequence. Works for the
-       first twelve children with pure CSS; deck.js sets --n past that.
+       Put .stagger on the parent. Children animate in sequence. sibling-index()
+       counts them, so the sequence has no ceiling and no JavaScript. The twelve
+       nth-child rules it replaced are kept below for browsers without it --
+       they stop at twelve, which is why deck.js used to patch past that.
        -------------------------------------------------------------------- */
-    .stagger > * { animation-delay: calc(var(--n, 0) * var(--stagger-step)); }
-    .stagger > :nth-child(1)  { --n: 0; }
-    .stagger > :nth-child(2)  { --n: 1; }
-    .stagger > :nth-child(3)  { --n: 2; }
-    .stagger > :nth-child(4)  { --n: 3; }
-    .stagger > :nth-child(5)  { --n: 4; }
-    .stagger > :nth-child(6)  { --n: 5; }
-    .stagger > :nth-child(7)  { --n: 6; }
-    .stagger > :nth-child(8)  { --n: 7; }
-    .stagger > :nth-child(9)  { --n: 8; }
-    .stagger > :nth-child(10) { --n: 9; }
-    .stagger > :nth-child(11) { --n: 10; }
-    .stagger > :nth-child(12) { --n: 11; }
+    @supports (animation-delay: calc(sibling-index() * 1ms)) {
+      .stagger > * { animation-delay: calc((sibling-index() - 1) * var(--stagger-step)); }
+    }
+    @supports not (animation-delay: calc(sibling-index() * 1ms)) {
+      .stagger > * { animation-delay: calc(var(--n, 0) * var(--stagger-step)); }
+      .stagger > :nth-child(1)  { --n: 0; }
+      .stagger > :nth-child(2)  { --n: 1; }
+      .stagger > :nth-child(3)  { --n: 2; }
+      .stagger > :nth-child(4)  { --n: 3; }
+      .stagger > :nth-child(5)  { --n: 4; }
+      .stagger > :nth-child(6)  { --n: 5; }
+      .stagger > :nth-child(7)  { --n: 6; }
+      .stagger > :nth-child(8)  { --n: 7; }
+      .stagger > :nth-child(9)  { --n: 8; }
+      .stagger > :nth-child(10) { --n: 9; }
+      .stagger > :nth-child(11) { --n: 10; }
+      .stagger > :nth-child(12) { --n: 11; }
+      /* Past twelve everything holds the last step rather than snapping back
+         to zero. Without sibling-index() that is as far as CSS can count. */
+      .stagger > :nth-child(n+13) { --n: 11; }
+    }
     .stagger-fast { --stagger-step: 28ms; }
     .stagger-slow { --stagger-step: 80ms; }
 

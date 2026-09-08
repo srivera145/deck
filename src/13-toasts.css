@@ -138,8 +138,22 @@
   }
 
   /* --- Collapsed stack -----------------------------------------------------
-     deck.js sets --i (0 = newest). Beyond the third toast they hide behind.
+     --i counts from the newest, which is the first child because push()
+     prepends. Beyond the third toast they hide behind.
      ---------------------------------------------------------------------- */
+  @supports (animation-delay: calc(sibling-index() * 1ms)) {
+    .toast-region-stacked .toast { --i: calc(sibling-index() - 1); }
+  }
+  @supports not (animation-delay: calc(sibling-index() * 1ms)) {
+    .toast-region-stacked .toast:nth-child(1)   { --i: 0; }
+    .toast-region-stacked .toast:nth-child(2)   { --i: 1; }
+    .toast-region-stacked .toast:nth-child(3)   { --i: 2; }
+    .toast-region-stacked .toast:nth-child(4)   { --i: 3; }
+    .toast-region-stacked .toast:nth-child(5)   { --i: 4; }
+    .toast-region-stacked .toast:nth-child(6)   { --i: 5; }
+    .toast-region-stacked .toast:nth-child(7)   { --i: 6; }
+    .toast-region-stacked .toast:nth-child(8)   { --i: 7; }
+  }
   .toast-region-stacked .toast {
     position: absolute;
     inset-inline: 0;
@@ -149,8 +163,7 @@
     opacity: calc(1 - var(--i) * .18);
     z-index: calc(100 - var(--i));
   }
-  .toast-region-stacked .toast[style*="--i: 3"],
-  .toast-region-stacked .toast[style*="--i:3"] { opacity: 0; pointer-events: none; }
+  .toast-region-stacked .toast:nth-child(n+4) { opacity: 0; pointer-events: none; }
 
   .toast-region-stacked:is(:hover, :focus-within) .toast {
     translate: 0 calc(var(--i) * (var(--toast-h, 68px) + var(--space-2)) * -1);

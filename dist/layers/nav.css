@@ -79,6 +79,76 @@
   .carousel-dot::before { content: ""; position: absolute; inline-size: 32px; block-size: 32px; translate: -50% -50%; inset: 50% auto auto 50%; }
   .carousel-dots > * { position: relative; }
 
+  /* --- Native carousel -----------------------------------------------------
+     ::scroll-marker gives every slide its own dot and ::scroll-button gives the
+     track its arrows, with the active state, the disabled state, the click
+     handling and the roving-tabindex keyboard order all done by the browser.
+     Where these exist, deck-extras.js skips building and wiring the DIY ones
+     and .carousel-dots / .carousel-arrow simply step aside -- the markup stays
+     exactly as it was. The buttons take the logical keywords rather than left
+     and right, so an RTL carousel flips them without a rule in deck.rtl.
+     ---------------------------------------------------------------------- */
+  @supports selector(::scroll-marker) {
+    .carousel-dots, .carousel-arrow { display: none; }
+
+    .carousel-track { scroll-marker-group: after; }
+    .carousel-track::scroll-marker-group {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-2);
+      padding-block-start: var(--space-3);
+    }
+    .carousel-slide::scroll-marker {
+      content: "";
+      inline-size: 7px;
+      block-size: 7px;
+      border-radius: var(--r-full);
+      background: var(--ink-300);
+      cursor: pointer;
+      transition: inline-size var(--dur-2) var(--ease-out),
+                  background-color var(--dur-2) var(--ease-out);
+    }
+    .carousel-slide::scroll-marker:target-current {
+      inline-size: 22px;
+      background: var(--brand-600);
+    }
+
+    .carousel-track::scroll-button(*) {
+      position: absolute;
+      inset-block-start: 50%;
+      translate: 0 -50%;
+      z-index: 2;
+      inline-size: 40px;
+      block-size: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--r-full);
+      background: color-mix(in oklab, var(--surface) 88%, transparent);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-2);
+      color: var(--text);
+      font-size: var(--text-xl);
+      line-height: 1;
+      cursor: pointer;
+      transition: opacity var(--dur-2) var(--ease-out), scale var(--dur-1) var(--ease-out);
+    }
+    .carousel-track::scroll-button(*):hover { scale: 1.06; }
+    .carousel-track::scroll-button(*):disabled { opacity: 0; pointer-events: none; }
+    .carousel-track::scroll-button(inline-start) {
+      content: "\2039" / "Previous slide";
+      inset-inline-start: var(--space-3);
+    }
+    .carousel-track::scroll-button(inline-end) {
+      content: "\203A" / "Next slide";
+      inset-inline-end: var(--space-3);
+    }
+    @media (pointer: coarse) {
+      .carousel-track::scroll-button(*) { display: none; }
+    }
+  }
+
   .carousel-caption {
     position: absolute;
     inset-inline: 0;
@@ -259,6 +329,19 @@
     flex-direction: column-reverse;
     align-items: flex-end;
     gap: var(--space-3);
+  }
+  @supports (animation-delay: calc(sibling-index() * 1ms)) {
+    .speed-dial-action { --i: calc(sibling-index() - 1); }
+  }
+  @supports not (animation-delay: calc(sibling-index() * 1ms)) {
+    .speed-dial-action:nth-child(1)   { --i: 0; }
+    .speed-dial-action:nth-child(2)   { --i: 1; }
+    .speed-dial-action:nth-child(3)   { --i: 2; }
+    .speed-dial-action:nth-child(4)   { --i: 3; }
+    .speed-dial-action:nth-child(5)   { --i: 4; }
+    .speed-dial-action:nth-child(6)   { --i: 5; }
+    .speed-dial-action:nth-child(7)   { --i: 6; }
+    .speed-dial-action:nth-child(8)   { --i: 7; }
   }
   .speed-dial-action {
     display: flex;

@@ -108,6 +108,32 @@
     -webkit-backdrop-filter: saturate(1.6) blur(12px);
   }
 
+  /* Sitting in flow it needs no treatment at all; it earns the blur and the
+     shadow at the moment it actually sticks. A scroll-state container cannot
+     style itself, so the treatment rides on ::after, which is inside it. */
+  @supports (container-type: scroll-state) {
+    .sticky-top {
+      container-type: scroll-state;
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .sticky-top::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0;
+      background: color-mix(in oklab, var(--bg) 82%, transparent);
+      backdrop-filter: saturate(1.6) blur(12px);
+      -webkit-backdrop-filter: saturate(1.6) blur(12px);
+      transition: opacity var(--dur-2) var(--ease-out);
+    }
+    @container scroll-state(stuck: block-start) {
+      .sticky-top::after { opacity: 1; box-shadow: var(--shadow-2); }
+    }
+  }
+
   .app-shell {
     display: grid;
     min-block-size: 100dvh;
