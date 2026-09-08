@@ -1,0 +1,197 @@
+/* ==========================================================================
+   Deck — 15 Print
+   Dealership work gets printed. Claims, ROs, invoices, and reports all end up
+   on paper or in a PDF, so this is a real stylesheet and not an afterthought.
+   ========================================================================== */
+
+@layer deck.print {
+
+  @page {
+    size: letter;
+    margin: 16mm 14mm;
+  }
+  @page :first { margin-block-start: 12mm; }
+
+  @media print {
+
+    /* --- Force the light palette. Dark mode is a screen idea. -------------- */
+    :root {
+      color-scheme: light only;
+      --bg: #fff;
+      --bg-sunken: #fff;
+      --surface: #fff;
+      --surface-2: #fff;
+      --surface-hover: #fff;
+      --text: #000;
+      --text-muted: #333;
+      --text-faint: #555;
+      --line: #bbb;
+      --line-strong: #888;
+      --shadow-1: none; --shadow-2: none; --shadow-3: none; --shadow-4: none;
+      --shadow-inset: none;
+    }
+
+    html, body {
+      background: #fff !important;
+      color: #000 !important;
+      font-size: 10.5pt;
+      line-height: 1.4;
+    }
+
+    body { padding-block-end: 0 !important; }
+
+    * {
+      box-shadow: none !important;
+      text-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      animation: none !important;
+      transition: none !important;
+    }
+
+    /* Keep intentional fills — badges, status chips, chart series */
+    .badge, .chip, .chart-col, .chart-col-stack > span, .chart-bar-fill,
+    .chart-meter > span, .donut, .icon-tile, .avatar, .chart-heat > * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* --- Chrome that should never print ------------------------------------ */
+    .tabbar, .fab, .speed-dial, .back-to-top, .toast-region, .skip-link, .theme-dock,
+    .navbar-links, .sidebar, .datepicker, .combo-list, .menu,
+    .dg-toolbar, .dg-resize, .sheet-grip, .no-print,
+    .pagination, .segmented, .tabs, .scroller::-webkit-scrollbar {
+      display: none !important;
+    }
+
+    /* Dialogs print only if they are actually open, and then as a block */
+    dialog:not([open]) { display: none !important; }
+    dialog[open] {
+      position: static !important;
+      display: block !important;
+      max-block-size: none !important;
+      inline-size: auto !important;
+      border: 0 !important;
+    }
+    dialog::backdrop { display: none !important; }
+
+    /* --- Layout ------------------------------------------------------------ */
+    .container, .container-sm, .container-md, .container-lg, .container-xl {
+      max-inline-size: none !important;
+      padding-inline: 0 !important;
+    }
+    .section { padding-block: 0 0 8mm !important; }
+    .split { display: block !important; }
+    .grid { display: block !important; }
+    .grid > * + * { margin-block-start: 4mm; }
+    .sticky-top, .sticky, .form-actions-sticky { position: static !important; }
+
+    /* --- Surfaces ---------------------------------------------------------- */
+    .card, .panel, .list, .table-wrap, .dg-wrap, .alert, .fieldset {
+      border: 1px solid #bbb !important;
+      border-radius: 0 !important;
+      background: #fff !important;
+      break-inside: avoid;
+      max-block-size: none !important;
+      overflow: visible !important;
+    }
+    .card-footer, .list-header, .dg thead th, .table thead th {
+      background: #f2f2f2 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* --- Type -------------------------------------------------------------- */
+    h1, .h1 { font-size: 20pt; }
+    h2, .h2 { font-size: 15pt; }
+    h3, .h3 { font-size: 12.5pt; }
+    h4, .h4, h5, .h5, h6, .h6 { font-size: 11pt; }
+    .display { font-size: 22pt; }
+    .lede { font-size: 11pt; color: #333 !important; }
+
+    h1, h2, h3, h4, h5, h6 { break-after: avoid; page-break-after: avoid; }
+    p, blockquote, li, figure, .stat, .timeline-item { break-inside: avoid; }
+    .prose { max-inline-size: none; }
+
+    /* Show where a link actually goes, but not for anchors or JS handles */
+    a { color: #000 !important; text-decoration: underline; }
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 8.5pt;
+      color: #555;
+      word-break: break-all;
+    }
+    a[href^="#"]::after, a[href^="javascript:"]::after, .btn::after, .no-print-url::after { content: ""; }
+
+    abbr[title]::after { content: " (" attr(title) ")"; font-size: 8.5pt; }
+
+    /* --- Tables ------------------------------------------------------------ */
+    .table, .dg { inline-size: 100% !important; font-size: 9.5pt; }
+    .table thead, .dg thead { display: table-header-group; }
+    .dg tfoot, .table tfoot { display: table-footer-group; }
+    .table tr, .dg tr { break-inside: avoid; page-break-inside: avoid; }
+    .dg :is(th, td) {
+      position: static !important;
+      block-size: auto !important;
+      padding: 4pt 6pt !important;
+      white-space: normal !important;
+      clip-path: none !important;
+      border-block-end: 1px solid #ddd !important;
+    }
+    .dg-wrap { max-block-size: none !important; overflow: visible !important; }
+
+    /* The mobile card fallbacks are a screen behaviour, not a paper one */
+    .table-stack thead, .dg-cards thead {
+      position: static !important;
+      inline-size: auto !important;
+      block-size: auto !important;
+      clip-path: none !important;
+      display: table-header-group !important;
+      overflow: visible !important;
+    }
+    .table-stack, .dg-cards { display: table !important; }
+    .table-stack tbody, .dg-cards tbody { display: table-row-group !important; }
+    .table-stack tr, .dg-cards tr { display: table-row !important; margin: 0 !important; border-radius: 0 !important; }
+    .table-stack td, .dg-cards td { display: table-cell !important; text-align: start !important; }
+    .table-stack td::before, .dg-cards td::before { content: none !important; }
+
+    /* --- Forms ------------------------------------------------------------- */
+    .input, .textarea, .select, .combo-control {
+      border: 1px solid #999 !important;
+      background: #fff !important;
+      min-block-size: auto !important;
+    }
+    .textarea { max-block-size: none !important; block-size: auto !important; }
+    .select { background-image: none !important; padding-inline-end: var(--space-3) !important; }
+    .btn, .form-actions { display: none !important; }
+    .btn.print-keep { display: inline-flex !important; border: 1px solid #999 !important; }
+
+    /* Checkboxes print as boxes with a mark, not as filled squares */
+    .check input[type="checkbox"], .check input[type="radio"] {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      border: 1px solid #000 !important;
+      background: #fff !important;
+    }
+    .check input:checked { background: #000 !important; border-color: #000 !important; }
+    .switch input { border: 1px solid #000 !important; }
+
+    /* --- Charts ------------------------------------------------------------ */
+    .chart, .chart-columns, .chart-svg { break-inside: avoid; }
+    .chart-col[data-value]::before { display: none !important; }
+    .chart-columns { background-image: none !important; border-block-end: 1px solid #999; }
+
+    /* --- Page break helpers ------------------------------------------------ */
+    .page-break { break-before: page; page-break-before: always; }
+    .page-break-after { break-after: page; page-break-after: always; }
+    .keep-together { break-inside: avoid; page-break-inside: avoid; }
+    .print-only { display: revert !important; }
+
+    /* Repeat a header on every page of a long report */
+    .print-header { position: fixed; inset-block-start: 0; inset-inline: 0; }
+    .print-footer { position: fixed; inset-block-end: 0; inset-inline: 0; font-size: 8.5pt; color: #555; }
+  }
+
+  /* Hidden on screen, shown on paper */
+  .print-only { display: none; }
+}

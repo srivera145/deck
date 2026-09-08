@@ -1,0 +1,306 @@
+/* ==========================================================================
+   Deck — 20 Gradients
+   Every gradient here is built from the brand hue, so the hue slider retunes
+   them along with everything else. Interpolation is in oklab or oklch, which
+   avoids the grey dead zone you get when sRGB blends two saturated colors.
+   ========================================================================== */
+
+@layer deck.effects {
+
+  /* --- Surface washes ------------------------------------------------------
+     Quiet. These sit behind content and must never fight it.
+     ---------------------------------------------------------------------- */
+  .g-surface {
+    background-image: linear-gradient(in oklab 180deg,
+      color-mix(in oklab, var(--brand-500) 7%, transparent),
+      transparent 60%);
+  }
+  .g-sunken {
+    background-image: linear-gradient(in oklab 180deg,
+      transparent,
+      color-mix(in oklab, var(--ink-900) 5%, transparent));
+  }
+  .g-brand {
+    background-image: linear-gradient(in oklab 135deg,
+      var(--brand-600), oklch(from var(--brand-600) l c calc(h + 34)));
+    color: var(--text-on-brand);
+  }
+  .g-brand-soft {
+    background-image: linear-gradient(in oklab 135deg,
+      var(--brand-soft), color-mix(in oklab, var(--brand-soft) 40%, var(--surface)));
+  }
+  .g-dark {
+    background-image: linear-gradient(in oklab 160deg, var(--ink-900), var(--ink-1000));
+    color: var(--ink-100);
+  }
+
+  /* --- Aurora / mesh -------------------------------------------------------
+     Three soft radial blooms. No image, no SVG filter, no blur — blur on a
+     large area is expensive and this reads the same.
+     ---------------------------------------------------------------------- */
+  .g-mesh {
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(closest-side at 18% 22%,
+        oklch(72% .14 var(--hue-brand) / .30), transparent),
+      radial-gradient(closest-side at 82% 12%,
+        oklch(76% .13 calc(var(--hue-brand) + 62) / .24), transparent),
+      radial-gradient(closest-side at 62% 88%,
+        oklch(70% .12 calc(var(--hue-brand) - 48) / .22), transparent);
+    background-size: 70% 70%, 60% 60%, 78% 78%;
+    background-repeat: no-repeat;
+  }
+  .g-mesh-warm {
+    --hue-brand: 34;
+  }
+  .g-mesh-subtle {
+    background-image:
+      radial-gradient(closest-side at 20% 0%, oklch(74% .10 var(--hue-brand) / .18), transparent),
+      radial-gradient(closest-side at 90% 30%, oklch(78% .09 calc(var(--hue-brand) + 70) / .14), transparent);
+    background-size: 80% 80%, 70% 70%;
+    background-repeat: no-repeat;
+  }
+
+  /* Slow drift for a hero. Off under reduced motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    .g-mesh-drift {
+      animation: g-drift 22s var(--ease-in-out) infinite alternate;
+    }
+    @keyframes g-drift {
+      to { background-position: 8% 6%, -6% 10%, 4% -8%; }
+    }
+  }
+
+  /* --- Text gradients ------------------------------------------------------
+     background-clip on the text. Always keep a real color underneath so the
+     text is still readable if the clip fails.
+     ---------------------------------------------------------------------- */
+  .g-text {
+    color: var(--brand-700);
+    background-image: linear-gradient(in oklab 92deg,
+      var(--brand-600), oklch(from var(--brand-500) l c calc(h + 52)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* keeps descenders from clipping in some engines */
+    padding-block-end: .06em;
+  }
+  .g-text-shine {
+    color: var(--text);
+    background-image: linear-gradient(in oklab 92deg,
+      var(--text) 0 40%, var(--brand-400) 50%, var(--text) 60% 100%);
+    background-size: 260% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .g-text-shine { animation: g-shine 4.5s var(--ease-in-out) infinite; }
+    @keyframes g-shine { to { background-position: -160% 0; } }
+  }
+
+  /* --- Gradient borders ----------------------------------------------------
+     Two backgrounds with different clip boxes. Works with any border-radius,
+     unlike border-image, and leaves the inside a real surface color.
+     ---------------------------------------------------------------------- */
+  .g-border {
+    --g-width: 1.5px;
+    border: var(--g-width) solid transparent;
+    background:
+      linear-gradient(var(--surface), var(--surface)) padding-box,
+      linear-gradient(in oklab var(--g-angle, 135deg),
+        var(--brand-500), oklch(from var(--brand-400) l c calc(h + 70))) border-box;
+  }
+  .g-border-soft {
+    background:
+      linear-gradient(var(--surface), var(--surface)) padding-box,
+      linear-gradient(in oklab 160deg,
+        color-mix(in oklab, var(--brand-400) 60%, transparent),
+        transparent 70%) border-box;
+  }
+  /* The angle is a registered property, so it can animate */
+  @media (prefers-reduced-motion: no-preference) {
+    .g-border-spin { animation: g-spin 6s linear infinite; }
+    @keyframes g-spin { to { --g-angle: 495deg; } }
+  }
+
+  /* A single glowing hairline along the top edge — good for a nav or a modal */
+  .g-hairline {
+    position: relative;
+  }
+  .g-hairline::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: 0;
+    block-size: 1px;
+    background: linear-gradient(90deg, transparent,
+      color-mix(in oklab, var(--brand-400) 70%, transparent) 30% 70%, transparent);
+  }
+
+  /* --- Scrims ---------------------------------------------------------------
+     A caption over a photo needs a legible floor. A flat 50% black overlay
+     dulls the whole image; an eased scrim only darkens where the text sits.
+     ---------------------------------------------------------------------- */
+  .g-scrim {
+    position: relative;
+    isolation: isolate;
+  }
+  .g-scrim::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to top,
+      oklch(12% .02 var(--hue-neutral) / .82) 0%,
+      oklch(12% .02 var(--hue-neutral) / .62) 22%,
+      oklch(12% .02 var(--hue-neutral) / .28) 48%,
+      transparent 78%);
+    pointer-events: none;
+  }
+  .g-scrim-top::after {
+    background: linear-gradient(to bottom,
+      oklch(12% .02 var(--hue-neutral) / .72), transparent 62%);
+  }
+  .g-scrim > * { position: relative; }
+
+  /* --- Fade masks ----------------------------------------------------------
+     Content that runs off the edge should fade, not be cut with a hard line.
+     ---------------------------------------------------------------------- */
+  .g-fade-inline {
+    mask-image: linear-gradient(90deg, transparent, #000 var(--fade, 4%),
+                                #000 calc(100% - var(--fade, 4%)), transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--fade, 4%),
+                                #000 calc(100% - var(--fade, 4%)), transparent);
+  }
+  .g-fade-end {
+    mask-image: linear-gradient(90deg, #000 70%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, #000 70%, transparent);
+  }
+  .g-fade-block {
+    mask-image: linear-gradient(180deg, #000 60%, transparent);
+    -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+  }
+  /* Long text that is collapsed: fade the bottom instead of a hard cut */
+  .g-fade-more {
+    max-block-size: var(--collapsed, 9rem);
+    overflow: hidden;
+    mask-image: linear-gradient(180deg, #000 65%, transparent);
+    -webkit-mask-image: linear-gradient(180deg, #000 65%, transparent);
+  }
+  .g-fade-more.is-open {
+    max-block-size: none;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .scroller { mask-image: linear-gradient(90deg, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, #000 92%, transparent); }
+
+  /* --- Sheen ---------------------------------------------------------------
+     A highlight that sweeps across on hover. --sheen is registered, so it
+     animates as a real percentage instead of jumping.
+     ---------------------------------------------------------------------- */
+  .g-sheen {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .g-sheen::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: var(--sheen);
+    inline-size: 40%;
+    background: linear-gradient(105deg, transparent,
+      oklch(100% 0 0 / .32) 45%, oklch(100% 0 0 / .32) 55%, transparent);
+    pointer-events: none;
+    transition: --sheen var(--dur-5) var(--ease-out);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .g-sheen:hover::after { --sheen: 110%; }
+  }
+
+  /* --- Status gradients ----------------------------------------------------- */
+  .g-good { background-image: linear-gradient(in oklab 135deg, var(--good-500), oklch(from var(--good-500) l c calc(h - 26))); color: oklch(99% .01 var(--hue-good)); }
+  .g-warn { background-image: linear-gradient(in oklab 135deg, var(--warn-500), oklch(from var(--warn-500) l c calc(h + 22))); color: oklch(24% .06 var(--hue-warn)); }
+  .g-bad  { background-image: linear-gradient(in oklab 135deg, var(--bad-500), oklch(from var(--bad-500) l c calc(h - 18))); color: oklch(99% .01 var(--hue-bad)); }
+
+  /* --- Conic accents -------------------------------------------------------- */
+  .g-conic {
+    background-image: conic-gradient(from var(--g-angle, 0deg) in oklch longer hue,
+      oklch(70% .16 0), oklch(70% .16 360));
+  }
+  .g-ring {
+    --thickness: 3px;
+    border-radius: var(--r-full);
+    background: conic-gradient(from var(--g-angle, 0deg),
+      transparent, var(--brand-500), transparent 62%);
+    mask: radial-gradient(farthest-side, transparent calc(100% - var(--thickness)), #000 calc(100% - var(--thickness) + 1px));
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--thickness)), #000 calc(100% - var(--thickness) + 1px));
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .g-ring-spin { animation: g-spin-360 1.6s linear infinite; }
+    @keyframes g-spin-360 { to { --g-angle: 360deg; } }
+  }
+
+  /* --- Structural patterns --------------------------------------------------
+     Not gradients as decoration — gradients standing in for an image. These
+     cost nothing to download and retint automatically.
+     ---------------------------------------------------------------------- */
+  .g-grid-lines {
+    background-image:
+      linear-gradient(to right, var(--line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+    background-size: var(--cell, 24px) var(--cell, 24px);
+  }
+  .g-dots {
+    background-image: radial-gradient(var(--line-strong) 1px, transparent 1px);
+    background-size: var(--cell, 18px) var(--cell, 18px);
+  }
+  .g-stripes {
+    background-image: repeating-linear-gradient(45deg,
+      color-mix(in oklab, var(--ink-500) 8%, transparent) 0 6px,
+      transparent 6px 12px);
+  }
+  /* Hatching for a "pending" or "unavailable" block in a schedule */
+  .g-hatch {
+    background-image: repeating-linear-gradient(-45deg,
+      color-mix(in oklab, var(--warn-500) 22%, transparent) 0 5px,
+      transparent 5px 10px);
+  }
+
+  /* --- Skeleton and shimmer, unified with the palette ---------------------- */
+  .g-shimmer {
+    background-image: linear-gradient(100deg,
+      transparent 20%,
+      color-mix(in oklab, var(--brand-200) 55%, transparent) 45%,
+      transparent 70%);
+    background-size: 250% 100%;
+    background-repeat: no-repeat;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .g-shimmer { animation: dk-shimmer 1.6s var(--ease-in-out) infinite; }
+  }
+
+  /* --- Chart fills ---------------------------------------------------------
+     Area charts read better with a gradient falling off to nothing.
+     ---------------------------------------------------------------------- */
+  .chart-area-g {
+    fill: url(#deck-area-gradient);
+    stroke: none;
+  }
+  .g-bar-fill {
+    background-image: linear-gradient(in oklab 180deg,
+      var(--series, var(--c1)),
+      color-mix(in oklab, var(--series, var(--c1)) 70%, var(--ink-900)));
+  }
+
+  /* --- Fallback ------------------------------------------------------------
+     Engines without oklch get the plain brand color rather than a broken
+     gradient. The declarations above simply do not apply.
+     ---------------------------------------------------------------------- */
+  @supports not (color: oklch(50% .1 200)) {
+    .g-brand, .g-good, .g-warn, .g-bad { background-image: none; background-color: var(--brand-600); }
+    .g-text { -webkit-text-fill-color: currentColor; background-image: none; }
+    .g-mesh { background-image: none; }
+  }
+}

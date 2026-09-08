@@ -1,0 +1,476 @@
+/* ==========================================================================
+   Deck — 23 Inputs, extended
+   ========================================================================== */
+
+@layer deck.components {
+
+  /* --- Floating label ------------------------------------------------------
+     No JavaScript. :placeholder-shown tells us whether the field is empty, so
+     the label lifts on focus or on content and never gets out of sync.
+     The input needs placeholder=" " for the selector to work.
+     ---------------------------------------------------------------------- */
+  .float {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .float > :is(.input, .textarea, .select) {
+    padding-block: var(--space-5) var(--space-2);
+    min-block-size: var(--control-h-lg);
+  }
+  .float > .textarea { padding-block-start: var(--space-6); }
+  .float > label {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: var(--space-3);
+    padding-inline: 2px;
+    block-size: var(--control-h-lg);
+    display: flex;
+    align-items: center;
+    color: var(--text-faint);
+    font-size: var(--text-base);
+    pointer-events: none;
+    transform-origin: inline-start center;
+    transition: translate var(--dur-2) var(--ease-out),
+                scale var(--dur-2) var(--ease-out),
+                color var(--dur-2) var(--ease-out);
+  }
+  .float:focus-within > label,
+  .float > .input:not(:placeholder-shown) ~ label,
+  .float > .textarea:not(:placeholder-shown) ~ label,
+  .float > .select ~ label {
+    translate: 0 calc(var(--control-h-lg) * -.28);
+    scale: .78;
+    color: var(--text-muted);
+  }
+  .float:focus-within > label { color: var(--brand); }
+  .float.is-invalid > label,
+  .float > :user-invalid ~ label { color: var(--bad-700); }
+
+  /* Outlined variant, where the label sits in a notch in the border */
+  .float-outline > label {
+    background: var(--surface);
+    block-size: auto;
+    inset-block-start: 50%;
+    translate: 0 -50%;
+    padding-inline: var(--space-1);
+  }
+  .float-outline:focus-within > label,
+  .float-outline > .input:not(:placeholder-shown) ~ label,
+  .float-outline > .textarea:not(:placeholder-shown) ~ label,
+  .float-outline > .select ~ label {
+    translate: 0 calc(var(--control-h-lg) * -.5 - 50%);
+    scale: .8;
+  }
+  .float-outline > :is(.input, .textarea, .select) { padding-block: var(--space-3); }
+
+  /* --- Number input --------------------------------------------------------
+     Native spinners are tiny and inconsistent across browsers. These are real
+     buttons that clear the touch target.
+     ---------------------------------------------------------------------- */
+  .number {
+    display: flex;
+    align-items: stretch;
+    inline-size: 100%;
+    max-inline-size: var(--number-width, 11rem);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    box-shadow: var(--shadow-1);
+    overflow: hidden;
+  }
+  .number:focus-within { border-color: var(--focus); box-shadow: var(--ring); }
+  .number > input {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    border: 0;
+    outline: none;
+    background: none;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    font-size: var(--text-base);
+    color: inherit;
+    padding-inline: var(--space-1);
+  }
+  @media (pointer: coarse) { .number > input { font-size: 16px; } }
+  .number > input::-webkit-outer-spin-button,
+  .number > input::-webkit-inner-spin-button { appearance: none; margin: 0; }
+  .number > input[type="number"] { appearance: textfield; -moz-appearance: textfield; }
+  .number > button {
+    inline-size: var(--control-h);
+    min-block-size: var(--control-h);
+    display: grid;
+    place-items: center;
+    background: var(--surface-2);
+    color: var(--text-muted);
+    cursor: pointer;
+    flex: 0 0 auto;
+    user-select: none;
+    transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out);
+  }
+  .number > button:hover { background: var(--surface-hover); color: var(--text); }
+  .number > button:active { background: var(--brand-soft); color: var(--brand-soft-text); }
+  .number > button[disabled] { opacity: .4; pointer-events: none; }
+  .number > button:first-child { border-inline-end: 1px solid var(--line); }
+  .number > button:last-child { border-inline-start: 1px solid var(--line); }
+  .number-unit {
+    display: grid;
+    place-items: center;
+    padding-inline: var(--space-3);
+    background: var(--surface-2);
+    border-inline-start: 1px solid var(--line);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .number-sm { --number-width: 8.5rem; }
+  .number-sm > button { inline-size: var(--control-h-sm); min-block-size: var(--control-h-sm); }
+
+  /* --- Phone input ---------------------------------------------------------
+     Country select welded to the number. The number stays LTR even in an RTL
+     document, because a phone number always reads left to right.
+     ---------------------------------------------------------------------- */
+  .phone {
+    display: flex;
+    align-items: stretch;
+    inline-size: 100%;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    box-shadow: var(--shadow-1);
+    overflow: hidden;
+  }
+  .phone:focus-within { border-color: var(--focus); box-shadow: var(--ring); }
+  .phone > .phone-country {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-inline: var(--space-3);
+    background: var(--surface-2);
+    border-inline-end: 1px solid var(--line);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+  .phone > .phone-country:hover { background: var(--surface-hover); }
+  .phone > .phone-country select {
+    appearance: none;
+    border: 0;
+    background: none;
+    outline: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    max-inline-size: 4.5rem;
+  }
+  .phone-flag { font-size: 1.1em; line-height: 1; }
+  .phone-code { font-variant-numeric: tabular-nums; color: var(--text); font-weight: 560; }
+  .phone > input {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    border: 0;
+    outline: none;
+    background: none;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-base);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .02em;
+    color: inherit;
+    direction: ltr;
+    unicode-bidi: isolate;
+    text-align: start;
+  }
+  @media (pointer: coarse) { .phone > input { font-size: 16px; } }
+  .phone.is-valid { border-color: color-mix(in oklab, var(--good-500) 55%, transparent); }
+  .phone-status { display: grid; place-items: center; padding-inline: var(--space-3); flex: 0 0 auto; }
+
+  /* --- Rating --------------------------------------------------------------
+     Radio inputs underneath, so it posts a real value and works with the
+     keyboard. Reversed flex order makes the CSS-only hover fill work.
+     ---------------------------------------------------------------------- */
+  .rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 2px;
+  }
+  .rating > input { position: absolute; opacity: 0; inline-size: 1px; block-size: 1px; }
+  .rating > label {
+    inline-size: var(--star, 26px);
+    block-size: var(--star, 26px);
+    display: grid;
+    place-items: center;
+    color: var(--ink-300);
+    cursor: pointer;
+    transition: color var(--dur-1) var(--ease-out), scale var(--dur-1) var(--ease-spring);
+  }
+  .rating > label .icon { inline-size: 100%; block-size: 100%; fill: currentColor; stroke: none; }
+  .rating > label:hover { scale: 1.14; }
+  /* the checked star and everything visually before it (after it in the DOM) */
+  .rating > input:checked ~ label,
+  .rating > label:hover,
+  .rating > label:hover ~ label {
+    color: var(--accent-500);
+  }
+  .rating > input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--r-xs); }
+  .rating-sm { --star: 18px; }
+  .rating-lg { --star: 36px; }
+
+  /* Read-only display: a fill percentage rather than whole stars */
+  .rating-static {
+    display: inline-flex;
+    gap: 2px;
+    color: var(--ink-300);
+    position: relative;
+  }
+  .rating-static > .rating-fill {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inline-size: calc(var(--value) * 1%);
+    overflow: hidden;
+    display: flex;
+    gap: 2px;
+    color: var(--accent-500);
+    white-space: nowrap;
+  }
+  .rating-static .icon { fill: currentColor; stroke: none; inline-size: var(--star, 18px); block-size: var(--star, 18px); flex: 0 0 auto; }
+
+  /* --- Range selector (two handles) ---------------------------------------
+     Two stacked native range inputs. Real inputs mean real keyboard support
+     and a real form post; the track between them is drawn from --lo and --hi.
+     ---------------------------------------------------------------------- */
+  .range-pair {
+    position: relative;
+    display: grid;
+    block-size: var(--tap);
+    align-items: center;
+  }
+  .range-pair::before {
+    content: "";
+    grid-area: 1 / 1;
+    block-size: 6px;
+    border-radius: var(--r-full);
+    background: var(--ink-200);
+  }
+  .range-pair::after {
+    content: "";
+    grid-area: 1 / 1;
+    block-size: 6px;
+    border-radius: var(--r-full);
+    background: var(--brand-500);
+    margin-inline-start: calc(var(--lo, 0) * 1%);
+    inline-size: calc((var(--hi, 100) - var(--lo, 0)) * 1%);
+  }
+  .range-pair > input[type="range"] {
+    grid-area: 1 / 1;
+    inline-size: 100%;
+    background: none;
+    appearance: none;
+    block-size: var(--tap);
+    pointer-events: none;
+    margin: 0;
+  }
+  .range-pair > input[type="range"]::-webkit-slider-runnable-track { background: transparent; block-size: 6px; }
+  .range-pair > input[type="range"]::-moz-range-track { background: transparent; block-size: 6px; }
+  .range-pair > input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    pointer-events: auto;
+    margin-block-start: -8px;
+    inline-size: 22px;
+    block-size: 22px;
+    border-radius: var(--r-full);
+    background: var(--brand-600);
+    border: 3px solid var(--ink-0);
+    box-shadow: var(--shadow-2);
+    cursor: grab;
+  }
+  .range-pair > input[type="range"]::-moz-range-thumb {
+    pointer-events: auto;
+    inline-size: 22px;
+    block-size: 22px;
+    border-radius: var(--r-full);
+    background: var(--brand-600);
+    border: 3px solid var(--ink-0);
+    box-shadow: var(--shadow-2);
+    cursor: grab;
+  }
+  .range-pair > input[type="range"]:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .range-readout {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums;
+    color: var(--text-muted);
+  }
+
+  /* Ticks under a single or paired range */
+  .range-ticks {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-2xs);
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+    padding-inline: 11px;
+  }
+
+  /* --- Copy to clipboard ---------------------------------------------------- */
+  .copy {
+    display: flex;
+    align-items: stretch;
+    inline-size: 100%;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--surface-2);
+    overflow: hidden;
+  }
+  .copy > code, .copy > .copy-value {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    padding: var(--space-2) var(--space-3);
+    background: none;
+    border: 0;
+    border-radius: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text);
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    direction: ltr;
+    unicode-bidi: isolate;
+    display: flex;
+    align-items: center;
+  }
+  .copy > :is(code, .copy-value)::-webkit-scrollbar { display: none; }
+  .copy-btn {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-inline: var(--space-3);
+    min-inline-size: var(--tap);
+    background: var(--surface);
+    border-inline-start: 1px solid var(--line);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    font-weight: 560;
+    cursor: pointer;
+    transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out);
+  }
+  .copy-btn:hover { background: var(--surface-hover); color: var(--text); }
+  .copy-btn.is-copied { color: var(--good-700); background: var(--good-100); }
+  .copy-btn .copy-done { display: none; }
+  .copy-btn.is-copied .copy-done { display: inline-flex; }
+  .copy-btn.is-copied .copy-idle { display: none; }
+
+  /* Inline icon-only variant, for a VIN or a claim number in a table */
+  .copy-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--text-faint);
+    cursor: pointer;
+    border-radius: var(--r-xs);
+    padding: 2px;
+  }
+  .copy-inline:hover { color: var(--brand); background: var(--surface-hover); }
+  .copy-inline.is-copied { color: var(--good-700); }
+
+  /* --- WYSIWYG editor -------------------------------------------------------
+     A toolbar over a contenteditable region. Deck styles the chrome; deck.js
+     wires the commands. The content area inherits .prose, so what you type
+     looks the way it will look when it is published.
+     ---------------------------------------------------------------------- */
+  .editor {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    box-shadow: var(--shadow-1);
+    overflow: clip;
+  }
+  .editor:focus-within { border-color: var(--focus); box-shadow: var(--ring); }
+
+  .editor-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-wrap: wrap;
+    padding: var(--space-1);
+    background: var(--surface-2);
+    border-block-end: 1px solid var(--line);
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 1;
+  }
+  .editor-tool {
+    inline-size: 32px;
+    block-size: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-xs);
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-weight: 620;
+    transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out);
+  }
+  .editor-tool:hover { background: var(--surface-hover); color: var(--text); }
+  .editor-tool[aria-pressed="true"] { background: var(--brand-soft); color: var(--brand-soft-text); }
+  .editor-tool-wide { inline-size: auto; padding-inline: var(--space-2); }
+  .editor-sep { inline-size: 1px; block-size: 20px; background: var(--line); margin-inline: var(--space-1); }
+  .editor-select {
+    block-size: 32px;
+    padding-inline: var(--space-2);
+    border: 0;
+    border-radius: var(--r-xs);
+    background: none;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  .editor-select:hover { background: var(--surface-hover); }
+
+  .editor-content {
+    min-block-size: var(--editor-height, 12rem);
+    max-block-size: var(--editor-max, 30rem);
+    overflow-y: auto;
+    padding: var(--space-4);
+    outline: none;
+    line-height: var(--leading-normal);
+  }
+  .editor-content:empty::before {
+    content: attr(data-placeholder);
+    color: var(--text-faint);
+    pointer-events: none;
+  }
+  .editor-content > * + * { margin-block-start: var(--space-3); }
+  .editor-content :is(h1, h2, h3) { margin-block-start: var(--space-5); }
+  .editor-content :is(ul, ol) { padding-inline-start: var(--space-6); }
+  .editor-content ul { list-style: disc; }
+  .editor-content ol { list-style: decimal; }
+  .editor-content blockquote {
+    border-inline-start: 3px solid var(--brand-300);
+    padding-inline-start: var(--space-4);
+    color: var(--text-muted);
+  }
+  .editor-content a { color: var(--brand); }
+  .editor-content img { max-inline-size: 100%; border-radius: var(--r-sm); }
+
+  .editor-footer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    border-block-start: 1px solid var(--line);
+    background: var(--surface-2);
+    font-size: var(--text-xs);
+    color: var(--text-faint);
+  }
+  .editor-count { margin-inline-start: auto; font-variant-numeric: tabular-nums; }
+  .editor-count.is-over { color: var(--bad-700); font-weight: 620; }
+}

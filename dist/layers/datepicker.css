@@ -1,0 +1,288 @@
+/* ==========================================================================
+   Deck — 10 Date picker
+   Popover calendar on desktop, bottom sheet on a phone. Single date, range,
+   and month/year jump. Behaviour lives in deck.js; this file is the skin.
+   ========================================================================== */
+
+@layer deck.components {
+
+  /* --- Trigger field ------------------------------------------------------ */
+  .datefield { position: relative; display: flex; align-items: center; }
+  .datefield > .icon {
+    position: absolute;
+    inset-inline-start: var(--space-3);
+    color: var(--text-faint);
+    pointer-events: none;
+  }
+  .datefield > .input { padding-inline-start: var(--space-10); cursor: pointer; }
+  .datefield > .datefield-clear {
+    position: absolute;
+    inset-inline-end: var(--space-2);
+    inline-size: 28px;
+    block-size: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-full);
+    color: var(--text-faint);
+    cursor: pointer;
+  }
+  .datefield > .datefield-clear:hover { background: var(--surface-hover); color: var(--text); }
+  .datefield:not(.has-value) .datefield-clear { display: none; }
+
+  /* --- Panel -------------------------------------------------------------- */
+  .datepicker {
+    position: absolute;
+    margin: 0;
+    inset: auto;
+    padding: 0;
+    inline-size: max-content;
+    max-inline-size: calc(100vw - var(--space-6));
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-4);
+    color: var(--text);
+    opacity: 0;
+    translate: 0 -6px;
+    transition: opacity var(--dur-2) var(--ease-out),
+                translate var(--dur-2) var(--ease-out),
+                overlay var(--dur-2) allow-discrete,
+                display var(--dur-2) allow-discrete;
+  }
+  .datepicker:popover-open { opacity: 1; translate: 0; }
+  @starting-style { .datepicker:popover-open { opacity: 0; translate: 0 -6px; } }
+  .datepicker::backdrop { background: transparent; }
+
+  .datepicker-layout { display: flex; flex-direction: column; }
+  @media (min-width: 40rem) {
+    .datepicker-layout:has(.datepicker-presets) { flex-direction: row; }
+  }
+
+  /* --- Preset rail --------------------------------------------------------- */
+  .datepicker-presets {
+    display: flex;
+    gap: var(--space-1);
+    padding: var(--space-2);
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-block-end: 1px solid var(--line);
+  }
+  .datepicker-presets::-webkit-scrollbar { display: none; }
+  @media (min-width: 40rem) {
+    .datepicker-presets {
+      flex-direction: column;
+      inline-size: 10.5rem;
+      overflow-x: visible;
+      border-block-end: 0;
+      border-inline-end: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+  }
+  .datepicker-preset {
+    padding: var(--space-2) var(--space-3);
+    min-block-size: 36px;
+    border-radius: var(--r-xs);
+    font-size: var(--text-sm);
+    font-weight: 520;
+    color: var(--text-muted);
+    text-align: start;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out);
+  }
+  .datepicker-preset:hover { background: var(--surface-hover); color: var(--text); }
+  .datepicker-preset[aria-pressed="true"] { background: var(--brand-soft); color: var(--brand-soft-text); font-weight: 600; }
+
+  /* --- Calendar ----------------------------------------------------------- */
+  .datepicker-main { padding: var(--space-3); }
+
+  .datepicker-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding-block-end: var(--space-2);
+  }
+  .datepicker-title {
+    flex: 1 1 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-block-size: 36px;
+    padding-inline: var(--space-3);
+    border-radius: var(--r-sm);
+    font-weight: 620;
+    font-size: var(--text-sm);
+    cursor: pointer;
+    letter-spacing: -.01em;
+  }
+  .datepicker-title:hover { background: var(--surface-hover); }
+  .datepicker-nav {
+    inline-size: 36px;
+    block-size: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-sm);
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  .datepicker-nav:hover { background: var(--surface-hover); color: var(--text); }
+  .datepicker-nav[disabled] { opacity: .35; pointer-events: none; }
+
+  .datepicker-months { display: flex; gap: var(--space-5); }
+  .datepicker-month { display: flex; flex-direction: column; }
+
+  .datepicker-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+  }
+  .datepicker-dow {
+    text-align: center;
+    font-size: var(--text-2xs);
+    font-weight: 620;
+    color: var(--text-faint);
+    padding-block: var(--space-2);
+  }
+
+  .datepicker-day {
+    position: relative;
+    inline-size: 38px;
+    block-size: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-sm);
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out);
+  }
+  @media (pointer: coarse) { .datepicker-day { inline-size: 42px; block-size: 42px; } }
+
+  .datepicker-day:hover { background: var(--surface-hover); }
+  .datepicker-day.is-outside { color: var(--text-faint); opacity: .55; }
+  .datepicker-day[disabled], .datepicker-day.is-blocked {
+    color: var(--text-faint);
+    opacity: .4;
+    pointer-events: none;
+    text-decoration: line-through;
+  }
+
+  /* Today gets a marker, not a fill, so it never competes with the selection */
+  .datepicker-day.is-today::after {
+    content: "";
+    position: absolute;
+    inset-block-end: 5px;
+    inline-size: 4px;
+    block-size: 4px;
+    border-radius: var(--r-full);
+    background: var(--brand);
+  }
+
+  .datepicker-day.is-selected {
+    background: var(--brand-600);
+    color: var(--text-on-brand);
+    font-weight: 620;
+  }
+  .datepicker-day.is-selected::after { background: var(--text-on-brand); }
+
+  /* Range: the middle days get a continuous band, the ends get the caps */
+  .datepicker-day.is-in-range {
+    background: var(--brand-soft);
+    color: var(--brand-soft-text);
+    border-radius: 0;
+  }
+  .datepicker-day.is-range-start {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+  .datepicker-day.is-range-end {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+  .datepicker-day.is-range-start.is-range-end { border-radius: var(--r-sm); }
+  .datepicker-grid:has(.is-in-range) .datepicker-day.is-in-range:first-child {
+    border-start-start-radius: var(--r-sm); border-end-start-radius: var(--r-sm);
+  }
+  .datepicker-grid:has(.is-in-range) .datepicker-day.is-in-range:nth-child(7n) {
+    border-start-end-radius: var(--r-sm); border-end-end-radius: var(--r-sm);
+  }
+  .datepicker-day.is-preview { background: color-mix(in oklab, var(--brand-soft) 60%, transparent); }
+  .datepicker-day:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; z-index: 1; }
+
+  /* --- Month and year jump grid ------------------------------------------- */
+  .datepicker-jump {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-1);
+    padding-block: var(--space-2);
+  }
+  .datepicker-jump > button {
+    min-block-size: 40px;
+    padding-inline: var(--space-2);
+    border-radius: var(--r-sm);
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  .datepicker-jump > button:hover { background: var(--surface-hover); color: var(--text); }
+  .datepicker-jump > button[aria-selected="true"] {
+    background: var(--brand-600);
+    color: var(--text-on-brand);
+    font-weight: 620;
+  }
+
+  /* --- Time row and footer ------------------------------------------------- */
+  .datepicker-time {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border-block-start: 1px solid var(--line);
+  }
+  .datepicker-time .input { inline-size: auto; min-inline-size: 7.5rem; }
+
+  .datepicker-foot {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border-block-start: 1px solid var(--line);
+    background: var(--surface-2);
+  }
+  .datepicker-readout {
+    flex: 1 1 auto;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    min-inline-size: 0;
+  }
+
+  /* --- Phone: the picker becomes a sheet ---------------------------------- */
+  @media (max-width: 30rem) {
+    .datepicker {
+      position: fixed;
+      inset: auto 0 0 0;
+      inline-size: 100%;
+      max-inline-size: 100%;
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      border-inline: 0;
+      border-block-end: 0;
+      translate: 0 100%;
+      padding-block-end: env(safe-area-inset-bottom);
+      transition: translate var(--dur-3) var(--ease-out),
+                  overlay var(--dur-3) allow-discrete,
+                  display var(--dur-3) allow-discrete;
+      opacity: 1;
+    }
+    .datepicker:popover-open { translate: 0; }
+    @starting-style { .datepicker:popover-open { translate: 0 100%; } }
+    .datepicker::backdrop { background: oklch(18% .02 var(--hue-neutral) / .45); }
+    .datepicker-months { flex-direction: column; }
+    .datepicker-day { inline-size: 100%; }
+    .datepicker-main { padding-inline: var(--space-4); }
+  }
+}

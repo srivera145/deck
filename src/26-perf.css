@@ -1,0 +1,220 @@
+/* ==========================================================================
+   Deck — 26 Performance and drag
+   The usual answer to a ten thousand row grid is a virtualization library:
+   measure the viewport, render a window of rows, absolutely position a
+   spacer, and reconcile on every scroll frame. It works, it costs about five
+   kilobytes, and it breaks find-in-page, printing, accessibility tree order,
+   and text selection across the boundary.
+
+   content-visibility does the same job in the engine. Off-screen subtrees are
+   skipped during layout, style, paint, and hit testing, but they stay in the
+   DOM, so Ctrl+F still finds them, the print stylesheet still prints them,
+   and a screen reader still reads them. It needs one line of CSS and no
+   JavaScript at all.
+   ========================================================================== */
+
+@layer deck.components {
+
+  /* --- Virtualized rows ----------------------------------------------------
+     contain-intrinsic-size is the placeholder height for a skipped row. Get it
+     roughly right and the scrollbar is stable; the `auto` keyword makes the
+     browser remember the real height once a row has been rendered once.
+     ---------------------------------------------------------------------- */
+  .dg-virtual tbody tr {
+    content-visibility: auto;
+    contain-intrinsic-size: auto var(--dg-row-h, 44px);
+  }
+  .dg-virtual.dg-compact tbody tr { contain-intrinsic-size: auto 34px; }
+  .dg-virtual.dg-comfy tbody tr { contain-intrinsic-size: auto 56px; }
+
+  .list-virtual > .list-row {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 56px;
+  }
+
+  /* Any long stack of cards: a claims feed, a chat log, search results */
+  .virtual > * {
+    content-visibility: auto;
+    contain-intrinsic-size: auto var(--item-size, 120px);
+  }
+  .virtual-sm > * { --item-size: 64px; }
+  .virtual-lg > * { --item-size: 220px; }
+
+  /* Whole sections below the fold. Cheap and safe on any page. */
+  .defer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+  }
+
+  /* Printing must render everything, or half the report comes out blank */
+  @media print {
+    .dg-virtual tbody tr, .list-virtual > .list-row, .virtual > *, .defer {
+      content-visibility: visible !important;
+      contain-intrinsic-size: none !important;
+    }
+  }
+
+  /* --- Containment ---------------------------------------------------------
+     Tell the engine that a component's layout cannot affect anything outside
+     it. On a dashboard with twenty cards this is the difference between one
+     layout pass and twenty.
+     ---------------------------------------------------------------------- */
+  .contain { contain: layout style; }
+  .contain-paint { contain: layout style paint; }
+  .card, .panel, .list, .dg-wrap, .chart { contain: layout style; }
+
+  /* --- Drag and drop -------------------------------------------------------
+     Deck styles the states; deck-adapters.js drives them with SortableJS when
+     it is present, or with the native HTML drag and drop API when it is not.
+     The class names are SortableJS's defaults, so no configuration is needed.
+     ---------------------------------------------------------------------- */
+  .sortable { position: relative; }
+  .sortable [draggable="true"], .drag-handle { cursor: grab; touch-action: none; }
+  .sortable [draggable="true"]:active, .drag-handle:active { cursor: grabbing; }
+
+  .drag-handle {
+    display: grid;
+    place-items: center;
+    inline-size: 28px;
+    min-block-size: var(--tap);
+    color: var(--text-faint);
+    flex: 0 0 auto;
+    opacity: 0;
+    transition: opacity var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out);
+  }
+  :is(.list-row, .dg tbody tr, .kanban-card):is(:hover, :focus-within) .drag-handle { opacity: 1; }
+  .drag-handle:hover { color: var(--text); }
+  @media (pointer: coarse) { .drag-handle { opacity: 1; } }
+
+  /* The item being dragged, following the pointer */
+  .sortable-drag {
+    opacity: 1 !important;
+    box-shadow: var(--shadow-4);
+    rotate: 1.5deg;
+    scale: 1.02;
+    cursor: grabbing;
+  }
+  /* The gap left where the item will land */
+  .sortable-ghost {
+    opacity: .4;
+    background: var(--brand-soft) !important;
+    outline: 2px dashed var(--brand-400);
+    outline-offset: -2px;
+  }
+  .sortable-ghost > * { visibility: hidden; }
+  .sortable-chosen { background: var(--surface-hover); }
+  .sortable-fallback { opacity: .9; }
+
+  /* A list that is accepting a drop */
+  .drop-target {
+    outline: 2px dashed var(--brand-400);
+    outline-offset: 3px;
+    border-radius: var(--r-md);
+    background: color-mix(in oklab, var(--brand-soft) 55%, transparent);
+  }
+  .drop-reject { outline-color: var(--bad-500); background: color-mix(in oklab, var(--bad-100) 55%, transparent); }
+
+  /* --- Kanban --------------------------------------------------------------
+     The obvious thing to build once you have drag and drop. A claims queue by
+     status is the same shape as a board.
+     ---------------------------------------------------------------------- */
+  .kanban {
+    display: flex;
+    gap: var(--space-4);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding-block-end: var(--space-3);
+    align-items: flex-start;
+    scroll-snap-type: x proximity;
+  }
+  .kanban-col {
+    flex: 0 0 min(19rem, 82vw);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    max-block-size: var(--kanban-height, 70dvh);
+    background: var(--bg-sunken);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+  }
+  .kanban-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-block-end: 1px solid var(--line);
+    font-size: var(--text-sm);
+    font-weight: 620;
+    position: sticky;
+    inset-block-start: 0;
+    background: inherit;
+    border-start-start-radius: var(--r-md);
+    border-start-end-radius: var(--r-md);
+    z-index: 1;
+  }
+  .kanban-count {
+    margin-inline-start: auto;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-full);
+    padding: 1px 7px;
+    font-variant-numeric: tabular-nums;
+  }
+  .kanban-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-block-size: 5rem;
+  }
+  .kanban-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    padding: var(--space-3);
+    box-shadow: var(--shadow-1);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    content-visibility: auto;
+    contain-intrinsic-size: auto 110px;
+  }
+  .kanban-card:hover { box-shadow: var(--shadow-2); }
+  .kanban-card-title { font-size: var(--text-sm); font-weight: 580; }
+  .kanban-card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+  .kanban-empty {
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--r-sm);
+    padding: var(--space-5);
+    text-align: center;
+    color: var(--text-faint);
+    font-size: var(--text-sm);
+  }
+  .kanban-col:has(.kanban-card) .kanban-empty { display: none; }
+
+  /* --- Reorderable list ----------------------------------------------------- */
+  .reorder .list-row { user-select: none; }
+  .reorder .list-row.is-lifted {
+    box-shadow: var(--shadow-3);
+    background: var(--surface);
+    border-radius: var(--r-sm);
+    z-index: 2;
+    position: relative;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sortable-drag { rotate: none; scale: 1; }
+  }
+}

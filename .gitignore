@@ -1,0 +1,18 @@
+# Dependencies
+/node_modules/
+/vendor/
+composer.lock
+package-lock.json
+
+# Published copies of dist/. Regenerate with: npm run publish
+/public_html/assets/deck/
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+
+# Local Helm/XAMPP overrides
+/public_html/.htaccess.local
+*.log

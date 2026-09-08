@@ -1,0 +1,652 @@
+/* ==========================================================================
+   Deck — 22 Navigation and structure
+   ========================================================================== */
+
+@layer deck.components {
+
+  /* --- Carousel ------------------------------------------------------------
+     Scroll snap does the work. Arrows and dots are progressive enhancement,
+     so it still swipes correctly with JavaScript switched off.
+     ---------------------------------------------------------------------- */
+  .carousel { position: relative; }
+
+  .carousel-track {
+    display: flex;
+    gap: var(--gap, var(--space-4));
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-inline: contain;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    border-radius: var(--r-md);
+  }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    min-inline-size: 0;
+  }
+  .carousel-peek .carousel-slide { flex-basis: 86%; }
+  .carousel-multi .carousel-slide { flex-basis: calc((100% - var(--space-4) * 2) / 3); }
+  @media (max-width: 48rem) {
+    .carousel-multi .carousel-slide { flex-basis: 78%; }
+  }
+  .carousel-slide img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+
+  .carousel-arrow {
+    position: absolute;
+    inset-block-start: 50%;
+    translate: 0 -50%;
+    z-index: 2;
+    inline-size: 40px;
+    block-size: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-full);
+    background: color-mix(in oklab, var(--surface) 88%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-2);
+    color: var(--text);
+    cursor: pointer;
+    transition: opacity var(--dur-2) var(--ease-out), scale var(--dur-1) var(--ease-out);
+  }
+  .carousel-arrow:hover { scale: 1.06; }
+  .carousel-arrow[disabled] { opacity: 0; pointer-events: none; }
+  .carousel-prev { inset-inline-start: var(--space-3); }
+  .carousel-next { inset-inline-end: var(--space-3); }
+  @media (pointer: coarse) { .carousel-arrow { display: none; } }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    padding-block-start: var(--space-3);
+  }
+  .carousel-dot {
+    inline-size: 7px;
+    block-size: 7px;
+    border-radius: var(--r-full);
+    background: var(--ink-300);
+    cursor: pointer;
+    padding: 0;
+    transition: inline-size var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out);
+  }
+  .carousel-dot[aria-current="true"] { inline-size: 22px; background: var(--brand-600); }
+  /* the tap target is bigger than the dot */
+  .carousel-dot::before { content: ""; position: absolute; inline-size: 32px; block-size: 32px; translate: -50% -50%; inset: 50% auto auto 50%; }
+  .carousel-dots > * { position: relative; }
+
+  .carousel-caption {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    padding: var(--space-8) var(--space-5) var(--space-5);
+    color: oklch(98% 0 0);
+  }
+
+  /* --- Drawer --------------------------------------------------------------
+     A side panel. The bottom sheet is in 08-mobile; this one comes in from an
+     edge and is the right shape for filters, settings, and a mobile nav.
+     ---------------------------------------------------------------------- */
+  .drawer {
+    --drawer-size: min(22rem, 88vw);
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inset-inline-end: auto;
+    margin: 0;
+    max-block-size: none;
+    block-size: 100dvh;
+    inline-size: var(--drawer-size);
+    max-inline-size: var(--drawer-size);
+    padding: 0;
+    border: 0;
+    border-inline-end: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: var(--shadow-4);
+    display: flex;
+    flex-direction: column;
+    translate: -100% 0;
+    transition: translate var(--dur-3) var(--ease-emphasized),
+                display var(--dur-3) allow-discrete,
+                overlay var(--dur-3) allow-discrete;
+  }
+  .drawer[open] { translate: 0; }
+  @starting-style { .drawer[open] { translate: -100% 0; } }
+
+  .drawer-end {
+    inset-inline: auto 0;
+    border-inline: 1px solid var(--line) 0;
+    border-inline-start: 1px solid var(--line);
+    border-inline-end: 0;
+    translate: 100% 0;
+  }
+  @starting-style { .drawer-end[open] { translate: 100% 0; } }
+
+  .drawer::backdrop {
+    background: oklch(18% .02 var(--hue-neutral) / .5);
+    opacity: 0;
+    transition: opacity var(--dur-3) var(--ease-out),
+                display var(--dur-3) allow-discrete,
+                overlay var(--dur-3) allow-discrete;
+  }
+  .drawer[open]::backdrop { opacity: 1; }
+  @starting-style { .drawer[open]::backdrop { opacity: 0; } }
+
+  .drawer-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+    padding-block-start: max(var(--space-4), env(safe-area-inset-top));
+    border-block-end: 1px solid var(--line);
+    flex: 0 0 auto;
+  }
+  .drawer-title { font-size: var(--text-md); font-weight: 640; }
+  .drawer-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: var(--space-4) var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .drawer-footer {
+    flex: 0 0 auto;
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+    padding-block-end: max(var(--space-4), env(safe-area-inset-bottom));
+    border-block-start: 1px solid var(--line);
+    background: var(--surface-2);
+  }
+  .drawer-footer > .btn { flex: 1 1 auto; }
+
+  /* --- Mega menu -----------------------------------------------------------
+     A wide panel under a nav item. Built on the popover attribute, so escape
+     and outside-click are the browser's job.
+     ---------------------------------------------------------------------- */
+  .mega {
+    position: absolute;
+    inset: auto;
+    margin: 0;
+    inline-size: min(64rem, calc(100vw - var(--space-8)));
+    padding: var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-4);
+    opacity: 0;
+    translate: 0 -8px;
+    transition: opacity var(--dur-2) var(--ease-out),
+                translate var(--dur-2) var(--ease-out),
+                overlay var(--dur-2) allow-discrete,
+                display var(--dur-2) allow-discrete;
+  }
+  .mega:popover-open { opacity: 1; translate: 0; }
+  @starting-style { .mega:popover-open { opacity: 0; translate: 0 -8px; } }
+  .mega::backdrop { background: transparent; }
+
+  .mega-grid {
+    display: grid;
+    gap: var(--space-5);
+    grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  }
+  .mega-col { display: flex; flex-direction: column; gap: var(--space-1); }
+  .mega-heading {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--text-faint);
+    padding: var(--space-2) var(--space-2) var(--space-1);
+  }
+  .mega-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-2);
+    border-radius: var(--r-sm);
+    color: var(--text);
+    text-decoration: none;
+    transition: background-color var(--dur-1) var(--ease-out);
+  }
+  .mega-item:hover { background: var(--surface-hover); }
+  .mega-item-title { font-weight: 560; font-size: var(--text-sm); }
+  .mega-item-note { font-size: var(--text-xs); color: var(--text-muted); }
+  .mega-feature {
+    grid-column: span 1;
+    padding: var(--space-4);
+    border-radius: var(--r-sm);
+    background: var(--brand-soft);
+    color: var(--brand-soft-text);
+  }
+  .mega-footer {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-block-start: var(--space-5);
+    padding-block-start: var(--space-4);
+    border-block-start: 1px solid var(--line);
+    font-size: var(--text-sm);
+  }
+
+  /* --- Speed dial ----------------------------------------------------------
+     A FAB that fans out into related actions.
+     ---------------------------------------------------------------------- */
+  .speed-dial {
+    position: fixed;
+    inset-block-end: calc(var(--space-5) + env(safe-area-inset-bottom));
+    inset-inline-end: var(--space-5);
+    z-index: var(--z-nav);
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: var(--space-3);
+  }
+  body:has(.tabbar) .speed-dial {
+    inset-block-end: calc(var(--space-4) + var(--tap) + var(--space-3) + env(safe-area-inset-bottom));
+  }
+  @media (min-width: 48rem) {
+    body:has(.tabbar) .speed-dial { inset-block-end: calc(var(--space-5) + env(safe-area-inset-bottom)); }
+  }
+
+  .speed-dial-actions {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: var(--space-3);
+  }
+  .speed-dial-action {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    opacity: 0;
+    translate: 0 12px;
+    scale: .85;
+    pointer-events: none;
+    transition: opacity var(--dur-2) var(--ease-out),
+                translate var(--dur-2) var(--ease-spring),
+                scale var(--dur-2) var(--ease-spring);
+    transition-delay: calc(var(--i, 0) * 35ms);
+  }
+  .speed-dial.is-open .speed-dial-action {
+    opacity: 1;
+    translate: 0;
+    scale: 1;
+    pointer-events: auto;
+  }
+  .speed-dial-label {
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--r-sm);
+    background: var(--ink-900);
+    color: var(--ink-50);
+    font-size: var(--text-xs);
+    font-weight: 560;
+    white-space: nowrap;
+    box-shadow: var(--shadow-2);
+  }
+  .speed-dial-button {
+    inline-size: 42px;
+    block-size: 42px;
+    border-radius: var(--r-full);
+    display: grid;
+    place-items: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--text);
+    box-shadow: var(--shadow-3);
+    cursor: pointer;
+  }
+  .speed-dial-button:hover { background: var(--surface-hover); }
+  .speed-dial > .fab { position: static; }
+  .speed-dial > .fab .icon { transition: rotate var(--dur-3) var(--ease-spring); }
+  .speed-dial.is-open > .fab .icon { rotate: 135deg; }
+
+  /* --- Back to top ---------------------------------------------------------
+     A link, not a button. #top is a real target at the head of the document,
+     so the browser moves focus there along with the scroll. A button calling
+     scrollTo() leaves a keyboard user parked at the bottom of the page while
+     looking at the top of it, which is the whole bug this component usually
+     ships with.
+
+     Showing and hiding is a scroll-driven animation, so there is no scroll
+     listener anywhere -- same mechanism as .scroll-progress in 16-motion.
+     visibility is in the keyframe on purpose: it takes the link out of the tab
+     order and out of the accessibility tree while it is off screen, which is
+     what aria-hidden reaches for and which CSS can actually do by itself.
+     deck.js only steps in where animation-timeline is missing, and it uses an
+     IntersectionObserver on a sentinel, not a scroll handler.
+     ---------------------------------------------------------------------- */
+  .back-to-top {
+    position: fixed;
+    inset-block-end: calc(var(--space-5) + env(safe-area-inset-bottom));
+    inset-inline-end: var(--space-5);
+    /* One above the rest of the bottom chrome, so it stays clickable whatever
+       order the markup happens to be in. Same token, same band. */
+    z-index: calc(var(--z-nav) + 1);
+    inline-size: var(--tap);
+    block-size: var(--tap);
+    border-radius: var(--r-full);
+    display: grid;
+    place-items: center;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-3);
+    text-decoration: none;
+    transition: opacity var(--dur-2) var(--ease-out),
+                visibility var(--dur-2) var(--ease-out),
+                background-color var(--dur-2) var(--ease-out),
+                border-color var(--dur-2) var(--ease-out),
+                scale var(--dur-2) var(--ease-spring);
+  }
+  .back-to-top:hover {
+    background: var(--brand-600);
+    color: var(--text-on-brand);
+    border-color: transparent;
+    scale: 1.06;
+  }
+  .back-to-top:active { scale: .94; }
+
+  /* Stack above whatever else is parked in that corner. .fab and .speed-dial
+     both sit at inset-block-end: var(--space-5) and both already lift over a
+     tab bar, so back-to-top repeats their arithmetic one storey higher. 56px
+     is the FAB's own size from 05-buttons; it has no token, so neither does
+     this. Every branch keeps env(safe-area-inset-bottom) on the end. */
+  body:has(:is(.fab, .speed-dial)) .back-to-top {
+    inset-block-end: calc(var(--space-5) + 56px + var(--space-3) + env(safe-area-inset-bottom));
+  }
+  body:has(.tabbar) .back-to-top {
+    inset-block-end: calc(var(--space-4) + var(--tap) + var(--space-3) + env(safe-area-inset-bottom));
+  }
+  body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top {
+    inset-block-end: calc(var(--space-4) + var(--tap) + var(--space-3) + 56px + var(--space-3) + env(safe-area-inset-bottom));
+  }
+  @media (min-width: 48rem) {
+    /* The tab bar is display:none at this width, so the offsets collapse back */
+    body:has(.tabbar) .back-to-top {
+      inset-block-end: calc(var(--space-5) + env(safe-area-inset-bottom));
+    }
+    body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top {
+      inset-block-end: calc(var(--space-5) + 56px + var(--space-3) + env(safe-area-inset-bottom));
+    }
+  }
+
+  /* A speed dial fans out across the band the button sits in -- its collapsed
+     actions still take their layout space, so the corner is the dial's while it
+     is open. display is the one property the reveal animation does not touch,
+     so this wins the cascade without !important. */
+  body:has(.speed-dial.is-open) .back-to-top { display: none; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: scroll()) {
+      .back-to-top {
+        animation: dk-btt-in linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 400px 520px;
+      }
+    }
+    /* No scroll timeline: deck.js marks the link with data-deck-btt and toggles
+       .is-visible from an IntersectionObserver on a sentinel at the top of the
+       page. Unmarked -- no JS -- the link simply stays visible and still works. */
+    @supports not (animation-timeline: scroll()) {
+      .back-to-top[data-deck-btt] { opacity: 0; visibility: hidden; }
+      .back-to-top[data-deck-btt].is-visible { opacity: 1; visibility: visible; }
+    }
+  }
+
+  /* Under prefers-reduced-motion: reduce neither branch above applies, so the
+     link is simply always there -- no entrance, and 02-reset has already put
+     html back to scroll-behavior: auto, so the jump is instant. */
+  @keyframes dk-btt-in {
+    from { opacity: 0; visibility: hidden; }
+    to   { opacity: 1; visibility: visible; }
+  }
+
+  /* --- Stepper -------------------------------------------------------------
+     A wizard. The timeline in 07 records what happened; this one shows where
+     you are in a process you are actively moving through.
+     ---------------------------------------------------------------------- */
+  .stepper {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+    scrollbar-width: none;
+    counter-reset: step;
+  }
+  .stepper::-webkit-scrollbar { display: none; }
+  .step {
+    flex: 1 1 0;
+    min-inline-size: 7rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    position: relative;
+    counter-increment: step;
+  }
+  .step-marker {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .step-marker::before {
+    content: counter(step);
+    inline-size: 26px;
+    block-size: 26px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-full);
+    border: 1.5px solid var(--line-strong);
+    background: var(--surface);
+    font-size: var(--text-xs);
+    font-weight: 640;
+    color: var(--text-muted);
+    transition: background-color var(--dur-2) var(--ease-out),
+                border-color var(--dur-2) var(--ease-out),
+                color var(--dur-2) var(--ease-out);
+  }
+  .step-marker::after {
+    content: "";
+    flex: 1 1 auto;
+    block-size: 2px;
+    background: var(--line);
+    border-radius: var(--r-full);
+  }
+  .step:last-child .step-marker::after { display: none; }
+  .step-label { font-size: var(--text-sm); font-weight: 560; color: var(--text-muted); }
+  .step-note { font-size: var(--text-xs); color: var(--text-faint); }
+
+  .step.is-done .step-marker::before {
+    content: "";
+    background: var(--brand-600);
+    border-color: var(--brand-600);
+    background-image: linear-gradient(var(--text-on-brand), var(--text-on-brand));
+    background-size: 10px 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-mask: none;
+    clip-path: none;
+  }
+  .step.is-done .step-marker::after { background: var(--brand-500); }
+  .step.is-done .step-label { color: var(--text); }
+  .step.is-current .step-marker::before {
+    border-color: var(--brand-600);
+    color: var(--brand);
+    box-shadow: 0 0 0 3px var(--brand-soft);
+  }
+  .step.is-current .step-label { color: var(--text); font-weight: 620; }
+
+  /* Vertical on a phone, where five steps side by side never fits */
+  .stepper-vertical { flex-direction: column; gap: var(--space-5); }
+  .stepper-vertical .step { flex-direction: row; gap: var(--space-3); min-inline-size: 0; }
+  .stepper-vertical .step-marker { flex-direction: column; align-self: stretch; }
+  .stepper-vertical .step-marker::after { inline-size: 2px; block-size: auto; flex: 1 1 auto; }
+  @media (max-width: 40rem) {
+    .stepper-auto { flex-direction: column; gap: var(--space-5); }
+    .stepper-auto .step { flex-direction: row; gap: var(--space-3); min-inline-size: 0; }
+    .stepper-auto .step-marker { flex-direction: column; align-self: stretch; }
+    .stepper-auto .step-marker::after { inline-size: 2px; block-size: auto; flex: 1 1 auto; }
+  }
+
+  /* --- Sticky banner -------------------------------------------------------
+     An announcement strip. Top or bottom, dismissible, out of the way.
+     ---------------------------------------------------------------------- */
+  .banner {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: calc(var(--z-nav) + 1);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-gutter);
+    padding-block-start: max(var(--space-3), env(safe-area-inset-top));
+    background: var(--brand-soft);
+    color: var(--brand-soft-text);
+    border-block-end: 1px solid color-mix(in oklab, var(--brand-400) 30%, transparent);
+    font-size: var(--text-sm);
+  }
+  .banner-bottom {
+    inset-block: auto 0;
+    border-block: 1px solid color-mix(in oklab, var(--brand-400) 30%, transparent) 0;
+    border-block-start: 1px solid color-mix(in oklab, var(--brand-400) 30%, transparent);
+    border-block-end: 0;
+    padding-block-end: max(var(--space-3), env(safe-area-inset-bottom));
+  }
+  .banner-fixed { position: fixed; inset-inline: 0; }
+  .banner-dark { background: var(--ink-900); color: var(--ink-100); border-color: transparent; }
+  .banner-warn { background: var(--warn-100); color: var(--warn-700); border-color: transparent; }
+  .banner-close { margin-inline-start: auto; opacity: .7; cursor: pointer; flex: 0 0 auto; }
+  .banner-close:hover { opacity: 1; }
+  .banner[hidden] { display: none; }
+
+  /* --- Jumbotron -----------------------------------------------------------
+     A hero block. Kept deliberately plain so the content carries it.
+     ---------------------------------------------------------------------- */
+  .jumbotron {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-section) var(--space-gutter);
+    border-radius: var(--r-lg);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    text-align: start;
+  }
+  .jumbotron-center { text-align: center; align-items: center; }
+  .jumbotron-center .lede { margin-inline: auto; }
+  .jumbotron-media {
+    display: grid;
+    gap: var(--space-8);
+    align-items: center;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 56rem) {
+    .jumbotron-media { grid-template-columns: 1.1fr .9fr; }
+  }
+  .jumbotron h1 { max-inline-size: 18ch; }
+  .jumbotron-center h1 { margin-inline: auto; }
+  .jumbotron-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+  @media (max-width: 30rem) {
+    .jumbotron-actions > .btn { inline-size: 100%; }
+  }
+
+  /* --- Footer --------------------------------------------------------------
+     A real component rather than the demo's ad-hoc one.
+     ---------------------------------------------------------------------- */
+  .footer {
+    border-block-start: 1px solid var(--line);
+    padding-block: var(--space-10) var(--space-8);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+  .footer-grid {
+    display: grid;
+    gap: var(--space-8);
+    grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+    padding-block-end: var(--space-8);
+  }
+  .footer-brand { display: flex; flex-direction: column; gap: var(--space-3); max-inline-size: 26ch; }
+  .footer-col { display: flex; flex-direction: column; gap: var(--space-2); }
+  .footer-heading {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--text);
+    margin-block-end: var(--space-1);
+  }
+  .footer a { color: var(--text-muted); text-decoration: none; }
+  .footer a:hover { color: var(--brand); text-decoration: underline; }
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    padding-block-start: var(--space-5);
+    border-block-start: 1px solid var(--line);
+    font-size: var(--text-xs);
+  }
+  .footer-social { display: flex; gap: var(--space-1); margin-inline-start: auto; }
+  .footer-social a {
+    inline-size: 34px;
+    block-size: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-sm);
+  }
+  .footer-social a:hover { background: var(--surface-hover); }
+
+  /* --- Indicators ----------------------------------------------------------
+     Status dots, counts on an icon, and unread markers.
+     ---------------------------------------------------------------------- */
+  .indicator {
+    display: inline-block;
+    inline-size: 8px;
+    block-size: 8px;
+    border-radius: var(--r-full);
+    background: var(--ink-400);
+    flex: 0 0 auto;
+  }
+  .indicator-good { background: var(--good-500); }
+  .indicator-warn { background: var(--warn-500); }
+  .indicator-bad { background: var(--bad-500); }
+  .indicator-brand { background: var(--brand-500); }
+  .indicator-lg { inline-size: 11px; block-size: 11px; }
+  .indicator-ring { box-shadow: 0 0 0 2px var(--surface); }
+
+  /* A count or dot anchored to a corner of something */
+  .with-indicator { position: relative; display: inline-flex; }
+  .with-indicator > .indicator-badge {
+    position: absolute;
+    inset-block-start: -4px;
+    inset-inline-end: -6px;
+    min-inline-size: 18px;
+    block-size: 18px;
+    padding-inline: 5px;
+    border-radius: var(--r-full);
+    background: var(--bad-500);
+    color: oklch(99% .01 var(--hue-bad));
+    font-size: var(--text-2xs);
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+    box-shadow: 0 0 0 2px var(--surface);
+    font-variant-numeric: tabular-nums;
+  }
+  .with-indicator > .indicator-badge-dot {
+    min-inline-size: 9px;
+    inline-size: 9px;
+    block-size: 9px;
+    padding: 0;
+    inset-block-start: -1px;
+    inset-inline-end: -1px;
+  }
+  .with-indicator > .indicator-badge-brand { background: var(--brand-600); color: var(--text-on-brand); }
+
+  /* Live status line: dot plus label, the pattern used in status pages */
+  .status-line { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); }
+  .status-line .indicator { position: relative; }
+}

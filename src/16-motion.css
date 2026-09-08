@@ -1,0 +1,359 @@
+/* ==========================================================================
+   Deck — 16 Motion
+   Motion answers an action or shows what changed. It is not decoration.
+   Nothing in this file runs unless you ask for it by class, except the
+   view-transition setup, which you opt into with one at-rule in your app CSS.
+   ========================================================================== */
+
+@layer deck.motion {
+
+  /* --- Extended motion tokens ---------------------------------------------
+     The base set lives in tokens. These are the rest of the vocabulary.
+     ---------------------------------------------------------------------- */
+  :root {
+    --ease-in: cubic-bezier(.55, 0, 1, .45);
+    --ease-emphasized: cubic-bezier(.2, 0, 0, 1);
+    --ease-decelerate: cubic-bezier(0, 0, .2, 1);
+    --ease-accelerate: cubic-bezier(.4, 0, 1, 1);
+
+    /* linear() springs — real spring feel with no JS */
+    --ease-bounce: linear(0, .004 2%, .016 4%, .062 8%, .137 12%, .5 24%, .68 28%,
+                          .824 32%, .93 36%, .995 40%, 1.02 44%, 1.01 52%, 1 60%);
+    --ease-overshoot: linear(0, .22 8%, .58 16%, .87 24%, 1.06 32%, 1.11 38%,
+                             1.08 46%, 1.02 58%, 1);
+    --ease-snap: linear(0, .48 12%, .82 22%, .97 32%, 1.02 42%, 1);
+
+    --dur-0: 0ms;
+    --dur-4: 420ms;
+    --dur-5: 620ms;
+    --dur-slow: 900ms;
+
+    --stagger-step: 45ms;
+    --travel: 12px;   /* how far entrances move */
+  }
+
+  /* --- Reduced motion ------------------------------------------------------
+     Everything below is wrapped in no-preference. A person who asked their OS
+     to calm things down gets the end state instantly, with one exception:
+     loading indicators keep moving, because a frozen spinner reads as broken.
+     ---------------------------------------------------------------------- */
+  /* --- Transition utilities ------------------------------------------------ */
+  .transition        { transition: all var(--dur-2) var(--ease-out); }
+  .transition-colors { transition: background-color var(--dur-1) var(--ease-out),
+                                   border-color var(--dur-1) var(--ease-out),
+                                   color var(--dur-1) var(--ease-out),
+                                   fill var(--dur-1) var(--ease-out),
+                                   stroke var(--dur-1) var(--ease-out); }
+  .transition-move   { transition: translate var(--dur-2) var(--ease-out),
+                                   scale var(--dur-2) var(--ease-out),
+                                   rotate var(--dur-2) var(--ease-out); }
+  .transition-size   { transition: inline-size var(--dur-3) var(--ease-out),
+                                   block-size var(--dur-3) var(--ease-out); }
+  .transition-opacity{ transition: opacity var(--dur-2) var(--ease-out); }
+
+  .dur-1 { transition-duration: var(--dur-1); animation-duration: var(--dur-1); }
+  .dur-2 { transition-duration: var(--dur-2); animation-duration: var(--dur-2); }
+  .dur-3 { transition-duration: var(--dur-3); animation-duration: var(--dur-3); }
+  .dur-4 { transition-duration: var(--dur-4); animation-duration: var(--dur-4); }
+  .dur-5 { transition-duration: var(--dur-5); animation-duration: var(--dur-5); }
+
+  .ease-out { transition-timing-function: var(--ease-out); animation-timing-function: var(--ease-out); }
+  .ease-in { transition-timing-function: var(--ease-in); animation-timing-function: var(--ease-in); }
+  .ease-spring { transition-timing-function: var(--ease-spring); animation-timing-function: var(--ease-spring); }
+  .ease-bounce { transition-timing-function: var(--ease-bounce); animation-timing-function: var(--ease-bounce); }
+  .ease-overshoot { transition-timing-function: var(--ease-overshoot); animation-timing-function: var(--ease-overshoot); }
+  .ease-linear { transition-timing-function: linear; animation-timing-function: linear; }
+
+  .delay-1 { transition-delay: 60ms; animation-delay: 60ms; }
+  .delay-2 { transition-delay: 140ms; animation-delay: 140ms; }
+  .delay-3 { transition-delay: 260ms; animation-delay: 260ms; }
+  .no-motion { transition: none !important; animation: none !important; }
+
+  /* Tell the compositor what is about to move, then let go. Never leave
+     will-change on permanently — it costs memory on every element. */
+  .will-move:is(:hover, :focus-within, .is-animating) { will-change: translate, scale, opacity; }
+
+  @media (prefers-reduced-motion: no-preference) {
+
+    /* --- Entrances --------------------------------------------------------
+       One-shot, on load. Use for content that appears, not for every section.
+       -------------------------------------------------------------------- */
+    .enter        { animation: dk-fade var(--dur-3) var(--ease-out) both; }
+    .enter-rise   { animation: dk-rise var(--dur-3) var(--ease-out) both; }
+    .enter-drop   { animation: dk-drop var(--dur-3) var(--ease-out) both; }
+    .enter-start  { animation: dk-in-start var(--dur-3) var(--ease-out) both; }
+    .enter-end    { animation: dk-in-end var(--dur-3) var(--ease-out) both; }
+    .enter-pop    { animation: dk-pop var(--dur-3) var(--ease-spring) both; }
+    .enter-blur   { animation: dk-blur var(--dur-4) var(--ease-out) both; }
+
+    @keyframes dk-fade { from { opacity: 0; } }
+    @keyframes dk-rise { from { opacity: 0; translate: 0 var(--travel); } }
+    @keyframes dk-drop { from { opacity: 0; translate: 0 calc(var(--travel) * -1); } }
+    @keyframes dk-in-start { from { opacity: 0; translate: calc(var(--travel) * -1.6) 0; } }
+    @keyframes dk-in-end { from { opacity: 0; translate: calc(var(--travel) * 1.6) 0; } }
+    @keyframes dk-pop { from { opacity: 0; scale: .92; } }
+    @keyframes dk-blur { from { opacity: 0; filter: blur(8px); scale: 1.01; } }
+
+    /* --- Stagger ----------------------------------------------------------
+       Put .stagger on the parent. Children animate in sequence. Works for the
+       first twelve children with pure CSS; deck.js sets --n past that.
+       -------------------------------------------------------------------- */
+    .stagger > * { animation-delay: calc(var(--n, 0) * var(--stagger-step)); }
+    .stagger > :nth-child(1)  { --n: 0; }
+    .stagger > :nth-child(2)  { --n: 1; }
+    .stagger > :nth-child(3)  { --n: 2; }
+    .stagger > :nth-child(4)  { --n: 3; }
+    .stagger > :nth-child(5)  { --n: 4; }
+    .stagger > :nth-child(6)  { --n: 5; }
+    .stagger > :nth-child(7)  { --n: 6; }
+    .stagger > :nth-child(8)  { --n: 7; }
+    .stagger > :nth-child(9)  { --n: 8; }
+    .stagger > :nth-child(10) { --n: 9; }
+    .stagger > :nth-child(11) { --n: 10; }
+    .stagger > :nth-child(12) { --n: 11; }
+    .stagger-fast { --stagger-step: 28ms; }
+    .stagger-slow { --stagger-step: 80ms; }
+
+    /* --- Scroll-driven reveals -------------------------------------------
+       No IntersectionObserver, no JS. The animation is tied to the element's
+       position in the scrollport. deck.js provides a fallback for browsers
+       without animation-timeline by adding .is-revealed.
+       -------------------------------------------------------------------- */
+    @supports (animation-timeline: view()) {
+      .reveal {
+        animation: dk-rise linear both;
+        animation-timeline: view();
+        animation-range: entry 8% cover 26%;
+      }
+      .reveal-fade { animation-name: dk-fade; }
+      .reveal-pop { animation-name: dk-pop; }
+      .reveal-late { animation-range: entry 20% cover 42%; }
+
+      /* A progress bar that fills as the page scrolls — good for long reports */
+      .scroll-progress {
+        position: fixed;
+        inset-block-start: 0;
+        inset-inline: 0;
+        block-size: 3px;
+        background: var(--brand-500);
+        transform-origin: left center;
+        z-index: var(--z-toast);
+        animation: dk-scale-x linear both;
+        animation-timeline: scroll(root block);
+      }
+      @keyframes dk-scale-x { from { scale: 0 1; } to { scale: 1 1; } }
+
+      /* Sticky header that condenses once you scroll past the top */
+      .shrink-on-scroll {
+        animation: dk-shrink linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 0 120px;
+      }
+      @keyframes dk-shrink {
+        to { --control-h-lg: 42px; box-shadow: var(--shadow-2); }
+      }
+    }
+    @supports not (animation-timeline: view()) {
+      .reveal, .reveal-fade, .reveal-pop { opacity: 0; }
+      .reveal.is-revealed { animation: dk-rise var(--dur-4) var(--ease-out) both; }
+      .reveal-fade.is-revealed { animation: dk-fade var(--dur-4) var(--ease-out) both; }
+      .reveal-pop.is-revealed { animation: dk-pop var(--dur-4) var(--ease-spring) both; }
+    }
+
+    /* --- Attention and feedback ------------------------------------------- */
+    .shake { animation: dk-shake 420ms var(--ease-in-out); }
+    @keyframes dk-shake {
+      10%, 90% { translate: -2px 0; }
+      20%, 80% { translate: 4px 0; }
+      30%, 50%, 70% { translate: -6px 0; }
+      40%, 60% { translate: 6px 0; }
+    }
+    /* A field that failed validation shakes once, then stops */
+    .field.is-invalid:not(.was-shaken) :is(.input, .textarea, .select, .combo-control) {
+      animation: dk-shake 420ms var(--ease-in-out);
+    }
+
+    .flash { animation: dk-flash 1.2s var(--ease-out); }
+    @keyframes dk-flash {
+      from { background-color: var(--brand-soft); }
+      to { background-color: transparent; }
+    }
+    .flash-good { animation: dk-flash-good 1.4s var(--ease-out); }
+    @keyframes dk-flash-good {
+      from { background-color: var(--good-100); }
+      to { background-color: transparent; }
+    }
+
+    .pulse { animation: dk-pulse 2s var(--ease-in-out) infinite; }
+    @keyframes dk-pulse { 50% { opacity: .55; } }
+
+    /* Ping ring for a live indicator — a dot with a halo going out */
+    .ping { position: relative; }
+    .ping::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: currentColor;
+      animation: dk-ping 1.8s var(--ease-out) infinite;
+      pointer-events: none;
+    }
+    @keyframes dk-ping {
+      from { opacity: .6; scale: 1; }
+      to { opacity: 0; scale: 2.2; }
+    }
+
+    .nudge { animation: dk-nudge 1.6s var(--ease-in-out) infinite; }
+    @keyframes dk-nudge { 50% { translate: 4px 0; } }
+
+    /* --- Micro-interactions ----------------------------------------------- */
+    .lift { transition: translate var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out); }
+    .lift:hover { translate: 0 -2px; box-shadow: var(--shadow-3); }
+    .lift:active { translate: 0 0; box-shadow: var(--shadow-1); }
+
+    .press { transition: scale var(--dur-1) var(--ease-out); }
+    .press:active { scale: .97; }
+
+    /* Underline that draws in from the start edge */
+    .sweep {
+      position: relative;
+      text-decoration: none;
+      background-image: linear-gradient(currentColor, currentColor);
+      background-size: 0 1.5px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: background-size var(--dur-2) var(--ease-out);
+      padding-block-end: 1px;
+    }
+    .sweep:hover, .sweep:focus-visible { background-size: 100% 1.5px; }
+
+    /* An arrow that steps forward when its button is hovered */
+    .btn:hover .icon-follow, .list-row:hover .icon-follow, .card-link:hover .icon-follow {
+      translate: 3px 0;
+    }
+    .icon-follow { transition: translate var(--dur-2) var(--ease-spring); }
+
+    /* Ripple. deck.js sets --rx/--ry from the pointer position. */
+    .ripple { position: relative; overflow: hidden; }
+    .ripple > .ripple-ink {
+      position: absolute;
+      inset-block-start: var(--ry, 50%);
+      inset-inline-start: var(--rx, 50%);
+      inline-size: 8px;
+      block-size: 8px;
+      margin: -4px 0 0 -4px;
+      border-radius: var(--r-full);
+      background: currentColor;
+      opacity: .28;
+      pointer-events: none;
+      animation: dk-ripple 520ms var(--ease-out) forwards;
+    }
+    @keyframes dk-ripple {
+      to { scale: 26; opacity: 0; }
+    }
+
+    /* --- Expand and collapse ----------------------------------------------
+       Real height:auto transitions, no measuring in JS. Needs
+       interpolate-size, which tokens opts into on :root.
+       -------------------------------------------------------------------- */
+    .expand {
+      block-size: 0;
+      overflow: hidden;
+      transition: block-size var(--dur-3) var(--ease-out),
+                  opacity var(--dur-2) var(--ease-out);
+      opacity: 0;
+    }
+    .expand.is-open { block-size: auto; opacity: 1; }
+
+    /* --- Discrete-property transitions ------------------------------------
+       Anything that goes display:none can still animate out.
+       -------------------------------------------------------------------- */
+    .fade-swap {
+      transition: opacity var(--dur-2) var(--ease-out),
+                  display var(--dur-2) allow-discrete;
+    }
+    .fade-swap[hidden] { opacity: 0; }
+    @starting-style { .fade-swap:not([hidden]) { opacity: 0; } }
+
+    /* --- Marquee / ticker --------------------------------------------------
+       For a status strip: recalls, open campaigns, parts on backorder.
+       -------------------------------------------------------------------- */
+    .marquee {
+      display: flex;
+      overflow: hidden;
+      gap: var(--space-8);
+      mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    }
+    .marquee-track {
+      display: flex;
+      gap: var(--space-8);
+      flex: 0 0 auto;
+      padding-inline-end: var(--space-8);
+      animation: dk-marquee var(--marquee-dur, 26s) linear infinite;
+      white-space: nowrap;
+    }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    @keyframes dk-marquee { to { translate: -100% 0; } }
+
+    /* --- Number and value changes ------------------------------------------ */
+    .tick { transition: translate var(--dur-2) var(--ease-spring); }
+    .tick.is-up { animation: dk-tick-up var(--dur-3) var(--ease-out); }
+    .tick.is-down { animation: dk-tick-down var(--dur-3) var(--ease-out); }
+    @keyframes dk-tick-up { from { translate: 0 6px; opacity: 0; color: var(--good-500); } }
+    @keyframes dk-tick-down { from { translate: 0 -6px; opacity: 0; color: var(--bad-500); } }
+  }
+
+  /* --- View transitions ----------------------------------------------------
+     This is the big one for Keel. Add this to your app CSS:
+
+       @view-transition { navigation: auto; }
+
+     and full page loads in a plain PHP multi-page app cross-fade like a single
+     page app, with no router and no JavaScript. The rules below style what the
+     browser generates. They are inert until you opt in.
+     ---------------------------------------------------------------------- */
+
+  ::view-transition-group(root) { animation-duration: var(--dur-3); }
+
+  ::view-transition-old(root) {
+    animation: dk-vt-out var(--dur-2) var(--ease-in) both;
+  }
+  ::view-transition-new(root) {
+    animation: dk-vt-in var(--dur-3) var(--ease-out) both;
+  }
+  @keyframes dk-vt-out { to { opacity: 0; translate: 0 -6px; } }
+  @keyframes dk-vt-in { from { opacity: 0; translate: 0 8px; } }
+
+  /* Forward and back get direction. Set data-vt="back" on <html> before you
+     navigate, or let deck.js do it on popstate. */
+  html[data-vt="back"]::view-transition-old(root) { animation-name: dk-vt-out-back; }
+  html[data-vt="back"]::view-transition-new(root) { animation-name: dk-vt-in-back; }
+  @keyframes dk-vt-out-back { to { opacity: 0; translate: 6% 0; } }
+  @keyframes dk-vt-in-back { from { opacity: 0; translate: -6% 0; } }
+
+  /* Elements that persist across the navigation. Give the same
+     view-transition-name to the matching element on both pages and the browser
+     tweens between them — a row in a list morphing into a detail header. */
+  .vt-hold { view-transition-name: var(--vt); }
+  .vt-header { view-transition-name: dk-header; }
+  .vt-main { view-transition-name: dk-main; }
+  .vt-tabbar { view-transition-name: dk-tabbar; }
+
+  /* The nav chrome should sit still while the content changes */
+  ::view-transition-group(dk-header),
+  ::view-transition-group(dk-tabbar) { animation-duration: var(--dur-1); }
+  ::view-transition-old(dk-header), ::view-transition-new(dk-header),
+  ::view-transition-old(dk-tabbar), ::view-transition-new(dk-tabbar) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation-duration: 1ms !important;
+    }
+  }
+}

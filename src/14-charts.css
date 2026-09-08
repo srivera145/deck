@@ -1,0 +1,297 @@
+/* ==========================================================================
+   Deck — 14 Charts
+   No charting library. Bars and donuts are plain CSS driven by a --value
+   custom property. Lines and areas are inline SVG that you style with these
+   classes. Everything reads the brand palette, so charts retheme with the
+   rest of the app.
+   ========================================================================== */
+
+@layer deck.components {
+
+  .chart {
+    --c1: var(--brand-500);
+    --c2: oklch(64% .13 calc(var(--hue-brand) + 48));
+    --c3: oklch(70% .14 calc(var(--hue-brand) + 96));
+    --c4: oklch(62% .13 calc(var(--hue-brand) - 52));
+    --c5: oklch(74% .12 calc(var(--hue-brand) + 148));
+    --c6: oklch(56% .10 calc(var(--hue-brand) + 200));
+    --chart-h: 240px;
+    --chart-grid: color-mix(in oklab, var(--line) 90%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-inline-size: 0;
+  }
+  .chart-sm { --chart-h: 150px; }
+  .chart-lg { --chart-h: 340px; }
+
+  .chart-head { display: flex; align-items: baseline; gap: var(--space-3); flex-wrap: wrap; }
+  .chart-title { font-size: var(--text-sm); font-weight: 620; }
+  .chart-note { font-size: var(--text-xs); color: var(--text-muted); }
+
+  /* --- Legend -------------------------------------------------------------- */
+  .chart-legend { display: flex; flex-wrap: wrap; gap: var(--space-3); font-size: var(--text-xs); color: var(--text-muted); }
+  .chart-legend > * { display: inline-flex; align-items: center; gap: var(--space-2); }
+  .chart-legend > *::before {
+    content: "";
+    inline-size: 10px;
+    block-size: 10px;
+    border-radius: 3px;
+    background: var(--series, var(--c1));
+    flex: 0 0 auto;
+  }
+  .chart-legend [aria-pressed="false"] { opacity: .4; }
+  .chart-legend button { cursor: pointer; }
+
+  /* --- Columns (vertical bars) --------------------------------------------
+     <div class="chart-columns">
+       <div class="chart-col" style="--value:68" data-label="Mar" data-value="68"></div>
+     ---------------------------------------------------------------------- */
+  .chart-columns {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--gap, 6px);
+    block-size: var(--chart-h);
+    padding-block-end: 22px;
+    position: relative;
+    background:
+      repeating-linear-gradient(to top,
+        var(--chart-grid) 0 1px,
+        transparent 1px calc((100% - 22px) / 4));
+    background-position: 0 -22px;
+    background-size: 100% calc(100% - 22px);
+    background-repeat: no-repeat;
+  }
+  .chart-col {
+    flex: 1 1 0;
+    min-inline-size: 6px;
+    block-size: calc(var(--value) * 1%);
+    background: var(--series, var(--c1));
+    border-radius: var(--r-xs) var(--r-xs) 2px 2px;
+    position: relative;
+    transform-origin: bottom;
+    animation: chart-rise var(--dur-3) var(--ease-out);
+    transition: filter var(--dur-1) var(--ease-out);
+  }
+  .chart-col:hover { filter: brightness(1.08) saturate(1.1); }
+  .chart-col[data-label]::after {
+    content: attr(data-label);
+    position: absolute;
+    inset-block-start: 100%;
+    inset-inline: 0;
+    padding-block-start: 6px;
+    text-align: center;
+    font-size: var(--text-2xs);
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+  .chart-col[data-value]::before {
+    content: attr(data-value);
+    position: absolute;
+    inset-block-end: calc(100% + 6px);
+    inset-inline-start: 50%;
+    translate: -50% 0;
+    padding: 3px 7px;
+    background: var(--ink-900);
+    color: var(--ink-50);
+    border-radius: var(--r-xs);
+    font-size: var(--text-2xs);
+    font-weight: 620;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-1) var(--ease-out);
+    z-index: 2;
+  }
+  .chart-col:hover::before { opacity: 1; }
+  @keyframes chart-rise { from { scale: 1 0; } }
+
+  /* Stacked columns: nest segments inside a .chart-col-stack */
+  .chart-col-stack {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column-reverse;
+    block-size: calc(var(--value) * 1%);
+    border-radius: var(--r-xs) var(--r-xs) 2px 2px;
+    overflow: hidden;
+    position: relative;
+    animation: chart-rise var(--dur-3) var(--ease-out);
+  }
+  .chart-col-stack > span { block-size: calc(var(--part) * 1%); background: var(--series, var(--c1)); }
+
+  /* Grouped columns */
+  .chart-group { flex: 1 1 0; display: flex; align-items: flex-end; gap: 2px; block-size: 100%; position: relative; }
+  .chart-group > .chart-col { border-radius: 2px 2px 1px 1px; }
+
+  /* --- Bars (horizontal) --------------------------------------------------- */
+  .chart-bars { display: flex; flex-direction: column; gap: var(--space-3); }
+  .chart-bar {
+    display: grid;
+    grid-template-columns: minmax(4.5rem, auto) 1fr auto;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+  }
+  .chart-bar-label { color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .chart-bar-track {
+    block-size: 10px;
+    border-radius: var(--r-full);
+    background: var(--bg-sunken);
+    overflow: hidden;
+  }
+  .chart-bar-fill {
+    display: block;
+    block-size: 100%;
+    inline-size: calc(var(--value) * 1%);
+    border-radius: var(--r-full);
+    background: var(--series, var(--c1));
+    transform-origin: left;
+    animation: chart-grow var(--dur-3) var(--ease-out);
+  }
+  .chart-bar-value { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--text); }
+  @keyframes chart-grow { from { scale: 0 1; } }
+
+  /* --- Line and area (inline SVG) ------------------------------------------
+     <svg class="chart-svg" viewBox="0 0 300 100" preserveAspectRatio="none">
+       <path class="chart-area" d="..."/>
+       <path class="chart-line" d="..."/>
+     ---------------------------------------------------------------------- */
+  .chart-svg {
+    inline-size: 100%;
+    block-size: var(--chart-h);
+    overflow: visible;
+  }
+  .chart-line {
+    fill: none;
+    stroke: var(--series, var(--c1));
+    stroke-width: var(--stroke, 2);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: chart-draw 1s var(--ease-out) forwards;
+  }
+  @keyframes chart-draw { to { stroke-dashoffset: 0; } }
+  .chart-line-dashed { stroke-dasharray: 5 4; animation: none; stroke-dashoffset: 0; opacity: .6; }
+
+  .chart-area {
+    fill: var(--series, var(--c1));
+    opacity: .14;
+    stroke: none;
+    animation: chart-fade var(--dur-3) var(--ease-out);
+  }
+  @keyframes chart-fade { from { opacity: 0; } }
+
+  .chart-dot {
+    fill: var(--surface);
+    stroke: var(--series, var(--c1));
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+  .chart-dot-active { fill: var(--series, var(--c1)); }
+
+  .chart-gridline {
+    stroke: var(--chart-grid);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+  .chart-baseline { stroke: var(--line-strong); stroke-width: 1; vector-effect: non-scaling-stroke; }
+
+  /* --- Axis labels --------------------------------------------------------- */
+  .chart-x {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-2xs);
+    color: var(--text-faint);
+    padding-block-start: var(--space-2);
+  }
+  .chart-y {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    font-size: var(--text-2xs);
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+    text-align: end;
+    padding-inline-end: var(--space-2);
+    min-inline-size: 2.5rem;
+  }
+  .chart-plot { display: grid; grid-template-columns: auto 1fr; }
+
+  /* --- Sparkline ----------------------------------------------------------- */
+  .sparkline {
+    inline-size: var(--spark-w, 88px);
+    block-size: var(--spark-h, 28px);
+    overflow: visible;
+    vertical-align: middle;
+  }
+  .sparkline .chart-line { stroke-width: 1.75; animation: none; stroke-dashoffset: 0; }
+  .sparkline-good .chart-line { stroke: var(--good-500); }
+  .sparkline-bad .chart-line { stroke: var(--bad-500); }
+
+  /* --- Donut --------------------------------------------------------------- */
+  .donut {
+    --size: 128px;
+    --thickness: 18px;
+    inline-size: var(--size);
+    block-size: var(--size);
+    border-radius: var(--r-full);
+    background: conic-gradient(var(--stops, var(--c1) 0 100%));
+    mask: radial-gradient(farthest-side, transparent calc(100% - var(--thickness)), #000 calc(100% - var(--thickness) + 1px));
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--thickness)), #000 calc(100% - var(--thickness) + 1px));
+    animation: dk-spin-in var(--dur-3) var(--ease-out);
+  }
+  @keyframes dk-spin-in { from { rotate: -40deg; opacity: 0; } }
+  .donut-wrap { position: relative; display: inline-grid; place-items: center; }
+  .donut-center {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    line-height: 1.15;
+  }
+  .donut-center .donut-value { font-size: var(--text-xl); font-weight: 660; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .donut-center .donut-label { font-size: var(--text-2xs); color: var(--text-muted); }
+
+  /* --- Progress-style comparison ------------------------------------------- */
+  .chart-meter {
+    display: flex;
+    block-size: 12px;
+    border-radius: var(--r-full);
+    overflow: hidden;
+    background: var(--bg-sunken);
+  }
+  .chart-meter > span {
+    inline-size: calc(var(--value) * 1%);
+    background: var(--series, var(--c1));
+    transition: inline-size var(--dur-3) var(--ease-out);
+  }
+  .chart-meter > span + span { border-inline-start: 1px solid var(--surface); }
+
+  /* --- Heat cells ---------------------------------------------------------- */
+  .chart-heat { display: grid; grid-template-columns: repeat(var(--cols, 7), 1fr); gap: 3px; }
+  .chart-heat > * {
+    aspect-ratio: 1;
+    border-radius: 3px;
+    background: color-mix(in oklab, var(--c1) calc(var(--value) * 1%), var(--bg-sunken));
+  }
+  .chart-heat > *:hover { outline: 2px solid var(--brand); outline-offset: 1px; }
+
+  /* --- Series color helpers ------------------------------------------------ */
+  .s1 { --series: var(--c1); }
+  .s2 { --series: var(--c2); }
+  .s3 { --series: var(--c3); }
+  .s4 { --series: var(--c4); }
+  .s5 { --series: var(--c5); }
+  .s6 { --series: var(--c6); }
+  .s-good { --series: var(--good-500); }
+  .s-warn { --series: var(--warn-500); }
+  .s-bad  { --series: var(--bad-500); }
+  .s-muted { --series: var(--ink-300); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chart-col, .chart-col-stack, .chart-bar-fill, .chart-line, .chart-area, .donut { animation: none; }
+    .chart-line { stroke-dashoffset: 0; }
+  }
+}

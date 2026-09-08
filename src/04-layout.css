@@ -1,0 +1,124 @@
+/* ==========================================================================
+   Deck — 04 Layout
+   Composable primitives. You lay out with about eight classes, not forty.
+   ========================================================================== */
+
+@layer deck.layout {
+
+  .container {
+    inline-size: 100%;
+    max-inline-size: var(--container, 76rem);
+    margin-inline: auto;
+    padding-inline: var(--space-gutter);
+  }
+  .container-sm { --container: 40rem; }
+  .container-md { --container: 56rem; }
+  .container-lg { --container: 76rem; }
+  .container-xl { --container: 90rem; }
+  .container-full { --container: none; }
+
+  /* Vertical rhythm without margin collapse surprises */
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap, var(--space-4));
+  }
+  .stack-1 { --gap: var(--space-1); }
+  .stack-2 { --gap: var(--space-2); }
+  .stack-3 { --gap: var(--space-3); }
+  .stack-6 { --gap: var(--space-6); }
+  .stack-8 { --gap: var(--space-8); }
+
+  /* Horizontal group that wraps instead of overflowing on a phone */
+  .cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--gap, var(--space-3));
+  }
+  .cluster-tight { --gap: var(--space-2); }
+  .cluster-end { justify-content: flex-end; }
+  .cluster-center { justify-content: center; }
+  .cluster-between { justify-content: space-between; }
+
+  /* Push the last child away from the rest */
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .bar > .push { margin-inline-start: auto; }
+
+  /* Auto-fitting grid: no breakpoints needed, it responds to its own width */
+  .grid {
+    display: grid;
+    gap: var(--gap, var(--space-4));
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--min, 17rem), 100%), 1fr));
+  }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr)); }
+  .grid-tight { --min: 12rem; }
+  .grid-wide { --min: 24rem; }
+  .grid-fixed-2 { grid-template-columns: 1fr 1fr; }
+  .grid-fixed-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-fixed-4 { grid-template-columns: repeat(4, 1fr); }
+
+  /* Content + rail. Collapses to one column below the width it needs. */
+  .split {
+    display: grid;
+    gap: var(--gap, var(--space-6));
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 64rem) {
+    .split { grid-template-columns: minmax(0, 1fr) var(--rail, 20rem); }
+    .split-rail-start { grid-template-columns: var(--rail, 20rem) minmax(0, 1fr); }
+  }
+
+  /* Center a thing with a max width and no side effects */
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--gap, var(--space-4));
+  }
+
+  .section { padding-block: var(--space-section); }
+
+  /* Everything stays on one line and scrolls sideways — cards, chips, dates */
+  .scroller {
+    display: flex;
+    gap: var(--gap, var(--space-3));
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    padding-block-end: var(--space-2);
+    margin-inline: calc(var(--space-gutter) * -1);
+    padding-inline: var(--space-gutter);
+  }
+  .scroller::-webkit-scrollbar { display: none; }
+  .scroller > * { scroll-snap-align: start; flex: 0 0 auto; }
+
+  .sticky-top {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 82%, transparent);
+    backdrop-filter: saturate(1.6) blur(12px);
+    -webkit-backdrop-filter: saturate(1.6) blur(12px);
+  }
+
+  .app-shell {
+    display: grid;
+    min-block-size: 100dvh;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  /* Aspect boxes for media */
+  .ratio-16x9 { aspect-ratio: 16 / 9; object-fit: cover; inline-size: 100%; }
+  .ratio-4x3  { aspect-ratio: 4 / 3;  object-fit: cover; inline-size: 100%; }
+  .ratio-1x1  { aspect-ratio: 1;      object-fit: cover; inline-size: 100%; }
+
+  /* Container queries: components respond to their slot, not the viewport */
+  .cq { container-type: inline-size; }
+}

@@ -1,0 +1,266 @@
+/* ==========================================================================
+   Deck — 21 Space (3D transforms)
+   3D earns its place when depth carries meaning: a card that has two sides, a
+   stack you are working down through, a control that physically depresses.
+   It does not earn its place as decoration on a landing page.
+
+   Every transform here uses translate / rotate / scale as individual
+   properties rather than the transform shorthand, so two effects on the same
+   element compose instead of overwriting each other.
+   ========================================================================== */
+
+@layer deck.effects {
+
+  /* --- Scene ---------------------------------------------------------------
+     A scene establishes the vanishing point. Children need preserve-3d to
+     stay in the same space instead of being flattened.
+     ---------------------------------------------------------------------- */
+  .scene {
+    perspective: var(--perspective, 1000px);
+    perspective-origin: var(--vanish, 50% 50%);
+  }
+  .scene-near { --perspective: 560px; }
+  .scene-far { --perspective: 2000px; }
+  .space { transform-style: preserve-3d; }
+  .flat { transform-style: flat; }
+  .backface-hidden { backface-visibility: hidden; }
+
+  /* --- Flip card -----------------------------------------------------------
+     Two faces, one footprint. Front and back are stacked in the same grid
+     cell so the card is exactly as tall as its taller side.
+     ---------------------------------------------------------------------- */
+  .flip {
+    display: grid;
+    transform-style: preserve-3d;
+    transition: rotate var(--dur-4) var(--ease-spring);
+  }
+  .flip > .flip-front, .flip > .flip-back {
+    grid-area: 1 / 1;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .flip > .flip-back { rotate: y 180deg; }
+  .flip.is-flipped { rotate: y 180deg; }
+  .flip-x { transition: rotate var(--dur-4) var(--ease-spring); }
+  .flip-x > .flip-back { rotate: x 180deg; }
+  .flip-x.is-flipped { rotate: x 180deg; }
+
+  /* Hover flip for pointer devices only — on touch it needs a real tap */
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .flip-hover:hover { rotate: y 180deg; }
+  }
+
+  /* --- Tilt ----------------------------------------------------------------
+     deck.js writes --tilt-x and --tilt-y from the pointer position. Both are
+     registered angles, so they interpolate smoothly back to rest.
+     ---------------------------------------------------------------------- */
+  .tilt {
+    transform-style: preserve-3d;
+    rotate: var(--tilt-axis, 1 1 0) var(--tilt-amount, 0deg);
+    transition: rotate var(--dur-3) var(--ease-out), scale var(--dur-2) var(--ease-out);
+    will-change: auto;
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .tilt.is-tilting { transition: rotate 80ms linear; }
+    .tilt:hover { scale: 1.015; }
+    /* Content that should float above the card face while it tilts */
+    .tilt .tilt-lift { transform: translateZ(var(--depth, 28px)); }
+    .tilt .tilt-lift-sm { transform: translateZ(12px); }
+  }
+
+  /* --- Depth stack ---------------------------------------------------------
+     A pile of records you are working through. The one on top is live, the
+     ones behind are context. Set --i on each child, 0 for the top card.
+     ---------------------------------------------------------------------- */
+  .stack-depth {
+    display: grid;
+    transform-style: preserve-3d;
+    perspective: 1200px;
+  }
+  .stack-depth > * {
+    grid-area: 1 / 1;
+    translate: 0 calc(var(--i, 0) * 10px);
+    scale: calc(1 - var(--i, 0) * .045);
+    z-index: calc(10 - var(--i, 0));
+    filter: brightness(calc(1 - var(--i, 0) * .04));
+    transition: translate var(--dur-3) var(--ease-out),
+                scale var(--dur-3) var(--ease-out),
+                rotate var(--dur-3) var(--ease-out),
+                opacity var(--dur-2) var(--ease-out);
+  }
+  .stack-depth > :nth-child(n+4) { opacity: 0; pointer-events: none; }
+
+  /* Fan the pile out to see what is in it */
+  .stack-depth.is-fanned > * {
+    translate: calc(var(--i, 0) * 14px) calc(var(--i, 0) * 22px);
+    rotate: calc(var(--i, 0) * 2.5deg);
+    scale: 1;
+    filter: none;
+  }
+  .stack-depth.is-fanned > :nth-child(n+4) { opacity: 1; pointer-events: auto; }
+
+  /* Dismiss the top card away from the pile */
+  .stack-depth > .is-dismissed {
+    translate: 120% -20px;
+    rotate: 14deg;
+    opacity: 0;
+  }
+
+  /* --- Coverflow -----------------------------------------------------------
+     A horizontal scroller where the off-center items rotate away. Uses scroll
+     snap for the mechanics and 3D only for the read.
+     ---------------------------------------------------------------------- */
+  .coverflow {
+    display: flex;
+    gap: var(--space-4);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    perspective: 1200px;
+    padding-block: var(--space-6);
+    padding-inline: max(var(--space-gutter), 20%);
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+  }
+  .coverflow::-webkit-scrollbar { display: none; }
+  .coverflow > * {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    transform-style: preserve-3d;
+    transition: rotate var(--dur-3) var(--ease-out), scale var(--dur-3) var(--ease-out);
+  }
+  /* deck.js marks the centered item; without JS everything simply sits flat */
+  .coverflow > .is-behind-start { rotate: y 32deg; scale: .88; }
+  .coverflow > .is-behind-end { rotate: y -32deg; scale: .88; }
+  .coverflow > .is-front { rotate: y 0deg; scale: 1; }
+
+  /* --- Cube ----------------------------------------------------------------
+     Six faces for a rotating status block or an empty-state illustration.
+     ---------------------------------------------------------------------- */
+  .cube {
+    --size: 120px;
+    position: relative;
+    inline-size: var(--size);
+    block-size: var(--size);
+    transform-style: preserve-3d;
+    transition: rotate var(--dur-5) var(--ease-spring);
+  }
+  .cube > * {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    background: color-mix(in oklab, var(--surface) 88%, transparent);
+    backface-visibility: visible;
+  }
+  .cube > .face-front  { transform: translateZ(calc(var(--size) / 2)); }
+  .cube > .face-back   { transform: rotateY(180deg) translateZ(calc(var(--size) / 2)); }
+  .cube > .face-end    { transform: rotateY(90deg) translateZ(calc(var(--size) / 2)); }
+  .cube > .face-start  { transform: rotateY(-90deg) translateZ(calc(var(--size) / 2)); }
+  .cube > .face-top    { transform: rotateX(90deg) translateZ(calc(var(--size) / 2)); }
+  .cube > .face-bottom { transform: rotateX(-90deg) translateZ(calc(var(--size) / 2)); }
+
+  .cube[data-face="front"]  { rotate: 0deg; }
+  .cube[data-face="end"]    { rotate: y -90deg; }
+  .cube[data-face="back"]   { rotate: y 180deg; }
+  .cube[data-face="start"]  { rotate: y 90deg; }
+  .cube[data-face="top"]    { rotate: x -90deg; }
+  .cube[data-face="bottom"] { rotate: x 90deg; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cube-spin { animation: dk-cube 14s linear infinite; }
+    @keyframes dk-cube {
+      from { transform: rotateX(-18deg) rotateY(0deg); }
+      to   { transform: rotateX(-18deg) rotateY(360deg); }
+    }
+  }
+
+  /* --- Depressible controls ------------------------------------------------
+     A button with real thickness. The face moves down into the shadow instead
+     of just changing color.
+     ---------------------------------------------------------------------- */
+  .btn-3d {
+    --lift: 3px;
+    position: relative;
+    border: 0;
+    box-shadow:
+      0 var(--lift) 0 0 color-mix(in oklab, var(--brand-600) 62%, var(--ink-900)),
+      0 calc(var(--lift) + 3px) 8px oklch(20% .03 var(--hue-neutral) / .22);
+    translate: 0 0;
+    transition: translate 70ms var(--ease-out), box-shadow 70ms var(--ease-out);
+  }
+  .btn-3d:active {
+    translate: 0 var(--lift);
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--brand-600) 62%, var(--ink-900));
+  }
+
+  /* --- Parallax layers -----------------------------------------------------
+     True 3D parallax: layers sit at different Z depths inside a perspective
+     container, so the browser does the math on the compositor. No scroll
+     handler, no jank.
+     ---------------------------------------------------------------------- */
+  .parallax {
+    block-size: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    perspective: 8px;
+    perspective-origin: 0 0;
+  }
+  .parallax-layer {
+    position: absolute;
+    inset: 0;
+    transform-origin: 0 0;
+  }
+  .parallax-back  { transform: translateZ(-6px) scale(1.75); }
+  .parallax-mid   { transform: translateZ(-3px) scale(1.375); }
+  .parallax-front { transform: translateZ(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .parallax { perspective: none; }
+    .parallax-layer { transform: none; position: relative; }
+  }
+
+  /* --- Page turn -----------------------------------------------------------
+     For stepping through a multi-page form or a wizard. Pairs with
+     Deck.transition() so the DOM swap and the motion happen together.
+     ---------------------------------------------------------------------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .turn-out { animation: dk-turn-out var(--dur-3) var(--ease-in) both; transform-origin: left center; }
+    .turn-in  { animation: dk-turn-in var(--dur-4) var(--ease-out) both; transform-origin: left center; }
+    @keyframes dk-turn-out {
+      to { transform: perspective(1400px) rotateY(-22deg); opacity: 0; }
+    }
+    @keyframes dk-turn-in {
+      from { transform: perspective(1400px) rotateY(24deg); opacity: 0; }
+    }
+    [dir="rtl"] :is(.turn-out, .turn-in) { transform-origin: right center; }
+  }
+
+  /* --- Layered elevation ---------------------------------------------------
+     Lift an element toward the viewer inside a scene, rather than faking it
+     with a bigger shadow.
+     ---------------------------------------------------------------------- */
+  .z-lift-1 { transform: translateZ(8px); }
+  .z-lift-2 { transform: translateZ(20px); }
+  .z-lift-3 { transform: translateZ(40px); }
+  .z-sink   { transform: translateZ(-16px); }
+
+  /* --- Performance guard ---------------------------------------------------
+     3D forces layers onto the GPU. Promote only while something is actually
+     moving, and hand the memory back when it stops.
+     ---------------------------------------------------------------------- */
+  .tilt.is-tilting, .flip.is-flipped, .stack-depth.is-fanned > *,
+  .coverflow > *, .cube {
+    will-change: transform, rotate, scale;
+  }
+  .tilt:not(.is-tilting), .flip:not(.is-flipped) { will-change: auto; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flip, .flip-x, .tilt, .cube, .stack-depth > *, .coverflow > * {
+      transition-duration: 1ms;
+      rotate: none;
+    }
+    .flip.is-flipped, .flip-x.is-flipped { rotate: y 180deg; }
+    .coverflow > * { rotate: none; scale: 1; }
+  }
+}

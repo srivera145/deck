@@ -1,0 +1,73 @@
+{
+  "name": "echodial/deck",
+  "description": "A mobile-first CSS framework with no build step, no config file, and no dependencies. Ships the stylesheet, the icon sprite, and a small PHP helper for emitting the tags.",
+  "keywords": [
+    "css",
+    "css-framework",
+    "frontend",
+    "assets",
+    "mobile-first",
+    "no-build",
+    "keel"
+  ],
+  "homepage": "https://get-keel.dev/deck",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "EchoDial LLC",
+      "homepage": "https://get-keel.dev"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/echodial/deck/issues",
+    "source": "https://github.com/echodial/deck"
+  },
+  "require": {
+    "php": ">=8.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "EchoDial\\Deck\\": "php/"
+    }
+  },
+  "scripts": {
+    "deck-publish": "EchoDial\\Deck\\Installer::publish",
+    "post-install-cmd": [
+      "EchoDial\\Deck\\Installer::postInstall"
+    ],
+    "post-update-cmd": [
+      "EchoDial\\Deck\\Installer::postInstall"
+    ]
+  },
+  "scripts-descriptions": {
+    "deck-publish": "Copy Deck's assets into your public directory. Reads extra.deck.publish-to from composer.json, or defaults to public/assets/deck."
+  },
+  "extra": {
+    "deck": {
+      "publish-to": "public/assets/deck",
+      "auto-publish": true,
+      "files": [
+        "deck.css",
+        "deck.min.css",
+        "deck-icons.svg",
+        "deck.js",
+        "deck-extras.js",
+        "deck-adapters.js",
+        "deck.bundle.js",
+        "deck.bundle.min.js"
+      ]
+    },
+    "branch-alias": {
+      "dev-main": "0.1.x-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}

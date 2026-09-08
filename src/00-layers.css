@@ -1,0 +1,87 @@
+/* ==========================================================================
+   Deck — 00 Layers
+   The whole cascade contract in one place, declared before any rule exists.
+   Order is decided here, not by file order, not by specificity, and never by
+   !important.
+
+   Later layers win. Anything you write OUTSIDE a layer beats every layer, so
+   a plain rule in a page template always wins with no escalation.
+
+     deck.*    the framework
+     app.*     your slots, in the order you almost certainly want them
+
+   In a Keel view you can write:
+
+     @layer app.pages {
+       .claim-header { padding-block: var(--space-8); }
+     }
+
+   and it beats every deck rule without a single !important, while still being
+   overridable by app.overrides and by unlayered CSS.
+   ========================================================================== */
+
+@layer
+  deck.reset,      /* normalize and element defaults        */
+  deck.tokens,     /* custom properties only                */
+  deck.type,       /* headings, prose, links                */
+  deck.layout,     /* containers, stack, grid, containers   */
+  deck.components, /* buttons, forms, cards, grid, charts   */
+  deck.mobile,     /* sheets, tab bar, icons, emoji         */
+  deck.motion,     /* transitions, entrances, view trans.   */
+  deck.effects,    /* gradients, 3D, surface treatments     */
+  deck.utilities,  /* single-purpose classes                */
+  deck.rtl,        /* direction fixes, must beat utilities  */
+  deck.print,      /* paper                                 */
+
+  app.base,        /* your resets and element styles        */
+  app.components,  /* your components and deck overrides    */
+  app.pages,       /* per-page and per-view tweaks          */
+  app.overrides;   /* the escape hatch, still not !important */
+
+/* --------------------------------------------------------------------------
+   Registered custom properties.
+   @property is not affected by layers. Registering a property gives it a type,
+   which is what lets the browser interpolate it — an angle or a color in a
+   custom property can now animate, which plain custom properties cannot do.
+   -------------------------------------------------------------------------- */
+
+@property --g-angle {
+  syntax: "<angle>";
+  initial-value: 180deg;
+  inherits: false;
+}
+@property --g-from {
+  syntax: "<color>";
+  initial-value: transparent;
+  inherits: false;
+}
+@property --g-to {
+  syntax: "<color>";
+  initial-value: transparent;
+  inherits: false;
+}
+@property --g-stop {
+  syntax: "<percentage>";
+  initial-value: 50%;
+  inherits: false;
+}
+@property --sheen {
+  syntax: "<percentage>";
+  initial-value: -40%;
+  inherits: false;
+}
+@property --tilt-x {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@property --tilt-y {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@property --depth {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: false;
+}

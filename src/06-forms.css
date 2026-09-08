@@ -1,0 +1,346 @@
+/* ==========================================================================
+   Deck — 06 Forms
+   Inputs are 16px on touch devices so iOS never zooms on focus.
+   ========================================================================== */
+
+@layer deck.components {
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-inline-size: 0;
+  }
+
+  .label {
+    font-size: var(--text-sm);
+    font-weight: 580;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .label .optional { color: var(--text-faint); font-weight: 400; }
+  .label .required { color: var(--bad-500); }
+
+  .help { font-size: var(--text-sm); color: var(--text-muted); }
+  .error {
+    font-size: var(--text-sm);
+    color: light-dark(var(--bad-700), oklch(76% .13 var(--hue-bad)));
+    display: flex;
+    gap: var(--space-2);
+    align-items: flex-start;
+  }
+
+  .input, .textarea, .select {
+    inline-size: 100%;
+    min-block-size: var(--control-h);
+    padding: var(--space-2) var(--space-3);
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-sm);
+    box-shadow: var(--shadow-1);
+    font-size: var(--text-base);
+    line-height: 1.45;
+    transition: border-color var(--dur-1) var(--ease-out),
+                box-shadow var(--dur-1) var(--ease-out),
+                background-color var(--dur-1) var(--ease-out);
+  }
+
+  @media (pointer: coarse) {
+    .input, .textarea, .select { font-size: 16px; }
+  }
+
+  .input::placeholder, .textarea::placeholder { color: var(--text-faint); }
+
+  .input:hover, .textarea:hover, .select:hover { border-color: var(--ink-400); }
+
+  .input:focus, .textarea:focus, .select:focus {
+    outline: none;
+    border-color: var(--focus);
+    box-shadow: var(--ring);
+  }
+
+  .input[disabled], .textarea[disabled], .select[disabled] {
+    background: var(--bg-sunken);
+    color: var(--text-faint);
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  .input[readonly] { background: var(--surface-2); }
+
+  /* Grows with its content instead of scrolling in a 4-row box */
+  .textarea {
+    min-block-size: calc(var(--control-h) * 2);
+    resize: vertical;
+    field-sizing: content;
+    max-block-size: 22rem;
+  }
+
+  .select {
+    appearance: none;
+    padding-inline-end: var(--space-10);
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+                      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: calc(100% - 19px) calc(50% + 1px), calc(100% - 14px) calc(50% + 1px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+
+  /* Validation only after the user has actually interacted */
+  .input:user-invalid, .textarea:user-invalid, .select:user-invalid,
+  .field.is-invalid :is(.input, .textarea, .select) {
+    border-color: var(--bad-500);
+  }
+  .input:user-invalid:focus, .field.is-invalid :is(.input, .textarea, .select):focus {
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--bad-500) 26%, transparent);
+  }
+
+  /* --- Input group: prefix / suffix / attached button --------------------- */
+  .input-group {
+    display: flex;
+    align-items: stretch;
+    inline-size: 100%;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-sm);
+    background: var(--surface);
+    box-shadow: var(--shadow-1);
+    overflow: hidden;
+  }
+  .input-group:focus-within { border-color: var(--focus); box-shadow: var(--ring); }
+  .input-group > .input {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+  .input-group > .input:focus { box-shadow: none; }
+  .input-group > .addon {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-inline: var(--space-3);
+    background: var(--surface-2);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    white-space: nowrap;
+    border-inline-end: 1px solid var(--line);
+  }
+  .input-group > .addon:last-child { border-inline-start: 1px solid var(--line); border-inline-end: 0; }
+  .input-group > .btn { border-radius: 0; border-block: 0; border-inline-end: 0; box-shadow: none; }
+
+  /* --- Search field ------------------------------------------------------- */
+  .search { position: relative; display: flex; align-items: center; }
+  .search > .icon {
+    position: absolute;
+    inset-inline-start: var(--space-3);
+    color: var(--text-faint);
+    pointer-events: none;
+  }
+  .search > .input { padding-inline-start: var(--space-10); border-radius: var(--r-full); }
+
+  /* --- Checkbox and radio ------------------------------------------------- */
+  .check {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    min-block-size: var(--tap);
+    padding-block: var(--space-2);
+    cursor: pointer;
+    line-height: 1.4;
+  }
+  .check input[type="checkbox"], .check input[type="radio"] {
+    appearance: none;
+    flex: 0 0 auto;
+    inline-size: 20px;
+    block-size: 20px;
+    margin-block-start: 1px;
+    border: 1.5px solid var(--line-strong);
+    background: var(--surface);
+    border-radius: var(--r-xs);
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    transition: background-color var(--dur-1) var(--ease-out),
+                border-color var(--dur-1) var(--ease-out);
+  }
+  .check input[type="radio"] { border-radius: var(--r-full); }
+  .check input:hover { border-color: var(--brand-400); }
+  .check input:checked { background: var(--brand-600); border-color: var(--brand-600); }
+  .check input[type="checkbox"]::before {
+    content: "";
+    inline-size: 11px;
+    block-size: 11px;
+    scale: 0;
+    transition: scale var(--dur-2) var(--ease-spring);
+    box-shadow: inset 1em 1em var(--text-on-brand);
+    clip-path: polygon(14% 44%, 0 65%, 41% 100%, 100% 16%, 84% 0, 39% 68%);
+  }
+  .check input[type="radio"]::before {
+    content: "";
+    inline-size: 9px;
+    block-size: 9px;
+    border-radius: var(--r-full);
+    background: var(--text-on-brand);
+    scale: 0;
+    transition: scale var(--dur-2) var(--ease-spring);
+  }
+  .check input:checked::before { scale: 1; }
+  .check input:indeterminate { background: var(--brand-600); border-color: var(--brand-600); }
+  .check input:indeterminate::before {
+    scale: 1;
+    clip-path: polygon(10% 42%, 90% 42%, 90% 58%, 10% 58%);
+  }
+  .check input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .check .check-text { display: flex; flex-direction: column; gap: 2px; }
+  .check .check-note { font-size: var(--text-sm); color: var(--text-muted); }
+
+  /* Card-style choice, good for pricing and plan pickers */
+  .check-card {
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: var(--space-4);
+    background: var(--surface);
+    transition: border-color var(--dur-1) var(--ease-out), background-color var(--dur-1) var(--ease-out);
+  }
+  .check-card:has(input:checked) {
+    border-color: var(--brand-500);
+    background: var(--brand-soft);
+  }
+
+  /* --- Switch ------------------------------------------------------------- */
+  .switch { display: flex; align-items: center; gap: var(--space-3); min-block-size: var(--tap); cursor: pointer; }
+  .switch input {
+    appearance: none;
+    flex: 0 0 auto;
+    inline-size: 46px;
+    block-size: 28px;
+    border-radius: var(--r-full);
+    background: var(--ink-300);
+    position: relative;
+    cursor: pointer;
+    transition: background-color var(--dur-2) var(--ease-out);
+  }
+  .switch input::after {
+    content: "";
+    position: absolute;
+    inset-block-start: 3px;
+    inset-inline-start: 3px;
+    inline-size: 22px;
+    block-size: 22px;
+    border-radius: var(--r-full);
+    background: var(--ink-0);
+    box-shadow: var(--shadow-2);
+    transition: translate var(--dur-2) var(--ease-spring);
+  }
+  .switch input:checked { background: var(--brand-600); }
+  .switch input:checked::after { translate: 18px 0; }
+  .switch input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  /* --- Range -------------------------------------------------------------- */
+  .range {
+    inline-size: 100%;
+    appearance: none;
+    background: transparent;
+    block-size: var(--tap);
+  }
+  .range::-webkit-slider-runnable-track {
+    block-size: 6px;
+    border-radius: var(--r-full);
+    background: var(--ink-200);
+  }
+  .range::-moz-range-track {
+    block-size: 6px;
+    border-radius: var(--r-full);
+    background: var(--ink-200);
+  }
+  .range::-webkit-slider-thumb {
+    appearance: none;
+    margin-block-start: -8px;
+    inline-size: 22px;
+    block-size: 22px;
+    border-radius: var(--r-full);
+    background: var(--brand-600);
+    border: 3px solid var(--ink-0);
+    box-shadow: var(--shadow-2);
+    cursor: grab;
+  }
+  .range::-moz-range-thumb {
+    inline-size: 22px;
+    block-size: 22px;
+    border-radius: var(--r-full);
+    background: var(--brand-600);
+    border: 3px solid var(--ink-0);
+    box-shadow: var(--shadow-2);
+    cursor: grab;
+  }
+  .range:active::-webkit-slider-thumb { cursor: grabbing; scale: 1.08; }
+
+  /* --- File --------------------------------------------------------------- */
+  .file {
+    display: grid;
+    place-items: center;
+    gap: var(--space-2);
+    padding: var(--space-6);
+    border: 1.5px dashed var(--line-strong);
+    border-radius: var(--r-md);
+    background: var(--surface-2);
+    text-align: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: border-color var(--dur-1) var(--ease-out), background-color var(--dur-1) var(--ease-out);
+  }
+  .file:hover, .file:focus-within { border-color: var(--brand-500); background: var(--brand-soft); }
+  .file input[type="file"] { position: absolute; opacity: 0; inline-size: 1px; block-size: 1px; }
+
+  /* --- Fieldset ----------------------------------------------------------- */
+  .fieldset {
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    min-inline-size: 0;
+  }
+  .fieldset > legend {
+    padding-inline: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  /* Two fields side by side on anything wider than a phone */
+  .field-row {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 40rem) {
+    .field-row { grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); }
+  }
+
+  /* Sticky save bar for long forms on mobile */
+  .form-actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+  .form-actions-sticky {
+    position: sticky;
+    inset-block-end: 0;
+    z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 88%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-block-start: 1px solid var(--line);
+    padding-block: var(--space-3);
+    padding-block-end: calc(var(--space-3) + env(safe-area-inset-bottom));
+  }
+  .form-actions-sticky > .btn { flex: 1 1 auto; }
+  @media (min-width: 48rem) {
+    .form-actions-sticky > .btn { flex: 0 0 auto; }
+  }
+}

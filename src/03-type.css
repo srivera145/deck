@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Deck — 03 Type
+   ========================================================================== */
+
+@layer deck.type {
+
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    font-family: var(--font-display);
+    font-weight: 640;
+    line-height: var(--leading-tight);
+    letter-spacing: -.021em;
+    color: var(--text);
+  }
+
+  h1, .h1 { font-size: var(--text-3xl); letter-spacing: -.031em; }
+  h2, .h2 { font-size: var(--text-2xl); letter-spacing: -.026em; }
+  h3, .h3 { font-size: var(--text-xl); }
+  h4, .h4 { font-size: var(--text-lg); letter-spacing: -.014em; }
+  h5, .h5 { font-size: var(--text-md); letter-spacing: -.008em; font-weight: 620; }
+  h6, .h6 { font-size: var(--text-base); letter-spacing: 0; font-weight: 640; }
+
+  .display {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -.036em;
+  }
+
+  .lede {
+    font-size: var(--text-md);
+    line-height: var(--leading-loose);
+    color: var(--text-muted);
+    max-inline-size: var(--measure);
+  }
+
+  small, .text-small { font-size: var(--text-sm); }
+  .text-tiny { font-size: var(--text-xs); }
+
+  strong, b { font-weight: 640; }
+
+  a {
+    color: var(--brand);
+    text-decoration-thickness: 1px;
+    text-underline-offset: .18em;
+    text-decoration-color: color-mix(in oklab, currentColor 40%, transparent);
+    transition: color var(--dur-1) var(--ease-out),
+                text-decoration-color var(--dur-1) var(--ease-out);
+  }
+  a:hover { color: var(--brand-hover); text-decoration-color: currentColor; }
+
+  .link-quiet { color: var(--text); text-decoration: none; }
+  .link-quiet:hover { color: var(--brand); text-decoration: underline; }
+
+  code, kbd, samp, pre { font-family: var(--font-mono); font-size: .92em; }
+
+  :not(pre) > code {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-xs);
+    padding: .12em .38em;
+    color: light-dark(var(--brand-800), var(--brand-200));
+  }
+
+  pre {
+    background: var(--ink-950);
+    color: var(--ink-100);
+    padding: var(--space-4);
+    border-radius: var(--r-md);
+    overflow-x: auto;
+    line-height: 1.6;
+    font-size: var(--text-sm);
+    -webkit-overflow-scrolling: touch;
+  }
+  pre code { background: none; border: 0; padding: 0; color: inherit; }
+
+  kbd {
+    display: inline-block;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-block-end-width: 2px;
+    border-radius: var(--r-xs);
+    padding: .1em .42em;
+    font-size: var(--text-xs);
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  blockquote {
+    border-inline-start: 3px solid var(--brand-300);
+    padding-inline-start: var(--space-4);
+    color: var(--text-muted);
+    font-size: var(--text-md);
+    line-height: var(--leading-loose);
+  }
+
+  mark {
+    background: var(--accent-100);
+    color: light-dark(var(--ink-900), var(--ink-900));
+    padding: .05em .2em;
+    border-radius: var(--r-xs);
+  }
+
+  abbr[title] { text-decoration: underline dotted; cursor: help; }
+
+  /* Prose: for anything that came out of a WYSIWYG or markdown */
+  .prose { max-inline-size: var(--measure); }
+  .prose > * + * { margin-block-start: var(--space-4); }
+  .prose > * + :is(h2, h3, h4) { margin-block-start: var(--space-8); }
+  .prose :is(ul, ol) { padding-inline-start: var(--space-6); display: grid; gap: var(--space-2); }
+  .prose ul { list-style: disc; }
+  .prose ol { list-style: decimal; }
+  .prose li::marker { color: var(--text-faint); }
+  .prose img { border-radius: var(--r-md); }
+  .prose hr { margin-block: var(--space-8); }
+}

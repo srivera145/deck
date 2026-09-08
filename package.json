@@ -1,0 +1,91 @@
+{
+  "name": "@echodial/deck",
+  "version": "0.1.0",
+  "description": "A mobile-first CSS framework with no build step, no config file, and no dependencies. Retheme an entire app from one number.",
+  "keywords": [
+    "css",
+    "css-framework",
+    "mobile-first",
+    "no-build",
+    "design-tokens",
+    "oklch",
+    "cascade-layers",
+    "container-queries",
+    "logical-properties",
+    "view-transitions",
+    "rtl",
+    "php",
+    "keel"
+  ],
+  "homepage": "https://get-keel.dev/deck",
+  "bugs": "https://github.com/srivera145/deck/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srivera145/deck.git"
+  },
+  "license": "MIT",
+  "author": "Santos Rivera",
+  "type": "module",
+  "sideEffects": [
+    "*.css",
+    "./dist/deck.js",
+    "./dist/deck-extras.js",
+    "./dist/deck-adapters.js",
+    "./dist/deck.bundle.js"
+  ],
+  "main": "./dist/deck.bundle.js",
+  "module": "./dist/deck.esm.js",
+  "style": "./dist/deck.css",
+  "unpkg": "./dist/deck.min.css",
+  "jsdelivr": "./dist/deck.min.css",
+  "bin": {
+    "deck": "./bin/deck.mjs"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/deck.esm.js",
+      "require": "./dist/deck.bundle.js",
+      "default": "./dist/deck.bundle.js"
+    },
+    "./css": "./dist/deck.css",
+    "./css/min": "./dist/deck.min.css",
+    "./icons": "./dist/deck-icons.svg",
+    "./js": "./dist/deck.js",
+    "./extras": "./dist/deck-extras.js",
+    "./adapters": "./dist/deck-adapters.js",
+    "./bundle": "./dist/deck.bundle.js",
+    "./layers/*": "./dist/layers/*",
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "bin",
+    "build.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "demo": "node build.mjs && node bin/deck.mjs init public_html/assets/deck --force && node -e \"import('node:fs/promises').then(f=>Promise.all(['deck.min.css','deck.bundle.min.js'].map(n=>f.copyFile('dist/'+n,'public_html/assets/deck/'+n))))\"",
+    "start": "php -S localhost:4321 -t public_html",
+    "clean": "node -e \"import('node:fs/promises').then(f=>f.rm('dist',{recursive:true,force:true}))\"",
+    "prepublishOnly": "node build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "browserslist": [
+    "chrome >= 117",
+    "edge >= 117",
+    "safari >= 17.4",
+    "firefox >= 128"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

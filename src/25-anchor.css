@@ -1,0 +1,185 @@
+/* ==========================================================================
+   Deck — 25 Anchor positioning
+   Every floating thing in Deck was positioned by hand with
+   getBoundingClientRect, which does not flip when it hits the bottom of the
+   window, does not shift back inside when it hits an edge, and does not
+   follow its anchor inside a scrolling container. Those are exactly the
+   problems Floating UI solves, and they are also exactly what CSS anchor
+   positioning solves natively — with no JavaScript, on the compositor, and
+   without a resize or scroll listener.
+
+   So Deck uses anchor positioning where the browser has it, and hands off to
+   Floating UI where it does not, if you have loaded it. Neither is required.
+   ========================================================================== */
+
+@layer deck.components {
+
+  @supports (anchor-name: --a) {
+
+    /* --- Naming an anchor --------------------------------------------------
+       Put .anchor on the trigger and --anchor on both trigger and panel.
+       Each pair needs a unique name, so generate it server-side in Keel:
+         <button class="anchor" style="--anchor:--menu-<?= $id ?>">
+       ---------------------------------------------------------------------- */
+    .anchor { anchor-name: var(--anchor); }
+
+    /* --- Menus and mega menus ---------------------------------------------- */
+    .menu, .mega, .datepicker {
+      position-anchor: var(--anchor);
+      position-area: block-end span-inline-end;
+      position-try-fallbacks:
+        block-end span-inline-start,
+        block-start span-inline-end,
+        block-start span-inline-start,
+        flip-block, flip-inline;
+      position-try-order: most-block-size;
+      margin-block: var(--space-2);
+      /* stay inside the viewport no matter which fallback wins */
+      max-block-size: calc(100dvh - var(--space-8));
+      max-inline-size: calc(100vw - var(--space-6));
+      inset: auto;
+    }
+    .menu { min-inline-size: max(12rem, anchor-size(inline)); }
+
+    .mega {
+      position-area: block-end;
+      justify-self: anchor-center;
+    }
+
+    /* A dropdown that should match the width of the field it belongs to */
+    .menu-match { inline-size: anchor-size(inline); min-inline-size: 0; }
+
+    /* --- Combobox list ------------------------------------------------------
+       The listbox is a sibling today, positioned with absolute. With anchor
+       positioning it can go in the top layer and escape overflow:hidden
+       ancestors, which is the bug that bites every combobox inside a modal.
+       ---------------------------------------------------------------------- */
+    .combo-control { anchor-name: var(--anchor, --combo); }
+    .combo-list {
+      position-anchor: var(--anchor, --combo);
+      position-area: block-end;
+      position-try-fallbacks: flip-block;
+      inline-size: anchor-size(inline);
+      inset: auto;
+      margin-block: 4px;
+    }
+    .combo-list.is-above { inset: auto; }
+
+    /* --- Tooltips -----------------------------------------------------------
+       The ::after tooltip could never flip. This one can, and it can carry a
+       real arrow that stays pointed at the anchor.
+       ---------------------------------------------------------------------- */
+    .tip {
+      position: fixed;
+      position-anchor: var(--anchor);
+      position-area: block-start;
+      position-try-fallbacks: flip-block, flip-inline;
+      justify-self: anchor-center;
+      margin: var(--space-2);
+      inline-size: max-content;
+      max-inline-size: 16rem;
+      padding: var(--space-2) var(--space-3);
+      border: 0;
+      border-radius: var(--r-xs);
+      background: var(--ink-900);
+      color: var(--ink-50);
+      font-size: var(--text-xs);
+      line-height: 1.4;
+      box-shadow: var(--shadow-3);
+      opacity: 0;
+      transition: opacity var(--dur-2) var(--ease-out),
+                  overlay var(--dur-2) allow-discrete,
+                  display var(--dur-2) allow-discrete;
+    }
+    .tip:popover-open { opacity: 1; }
+    @starting-style { .tip:popover-open { opacity: 0; } }
+    .tip::backdrop { background: transparent; }
+
+    .tip-arrow {
+      position: absolute;
+      inline-size: 8px;
+      block-size: 8px;
+      rotate: 45deg;
+      background: inherit;
+      position-anchor: var(--anchor);
+      justify-self: anchor-center;
+    }
+
+    /* --- Popover card -------------------------------------------------------
+       A richer tooltip: a heading, body copy, and actions. Used for the
+       "what does this labor code mean" pattern.
+       ---------------------------------------------------------------------- */
+    .pop {
+      position: fixed;
+      position-anchor: var(--anchor);
+      position-area: block-end;
+      position-try-fallbacks: flip-block, flip-inline, block-start span-inline-start;
+      justify-self: anchor-center;
+      margin: var(--space-2);
+      inline-size: min(20rem, calc(100vw - var(--space-6)));
+      padding: var(--space-4);
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      box-shadow: var(--shadow-4);
+      opacity: 0;
+      translate: 0 -4px;
+      transition: opacity var(--dur-2) var(--ease-out),
+                  translate var(--dur-2) var(--ease-out),
+                  overlay var(--dur-2) allow-discrete,
+                  display var(--dur-2) allow-discrete;
+    }
+    .pop:popover-open { opacity: 1; translate: 0; }
+    @starting-style { .pop:popover-open { opacity: 0; translate: 0 -4px; } }
+    .pop::backdrop { background: transparent; }
+    .pop-title { font-weight: 620; margin-block-end: var(--space-1); }
+    .pop-body { font-size: var(--text-sm); color: var(--text-muted); }
+    .pop-actions { display: flex; gap: var(--space-2); margin-block-start: var(--space-3); }
+
+    /* --- Hide the anchored element when its anchor scrolls out of view ------ */
+    .menu, .mega, .tip, .pop, .datepicker, .combo-list {
+      position-visibility: anchors-visible;
+    }
+  }
+
+  /* --- Floating UI handoff --------------------------------------------------
+     Where anchor positioning is missing, deck-adapters.js uses Floating UI if
+     it is on the page and falls back to Deck's own placement if it is not.
+     These rules just get out of the way so the adapter can set inset.
+     ---------------------------------------------------------------------- */
+  @supports not (anchor-name: --a) {
+    .tip, .pop {
+      position: fixed;
+      inset: auto;
+      margin: 0;
+      inline-size: max-content;
+      max-inline-size: 16rem;
+      border: 0;
+      border-radius: var(--r-xs);
+      background: var(--ink-900);
+      color: var(--ink-50);
+      font-size: var(--text-xs);
+      padding: var(--space-2) var(--space-3);
+      box-shadow: var(--shadow-3);
+      opacity: 0;
+      transition: opacity var(--dur-2) var(--ease-out),
+                  overlay var(--dur-2) allow-discrete,
+                  display var(--dur-2) allow-discrete;
+    }
+    .pop {
+      inline-size: min(20rem, calc(100vw - var(--space-6)));
+      max-inline-size: none;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      box-shadow: var(--shadow-4);
+      padding: var(--space-4);
+    }
+    .tip:popover-open, .pop:popover-open { opacity: 1; }
+    @starting-style { .tip:popover-open, .pop:popover-open { opacity: 0; } }
+    .tip::backdrop, .pop::backdrop { background: transparent; }
+    .tip-arrow { position: absolute; inline-size: 8px; block-size: 8px; rotate: 45deg; background: inherit; }
+  }
+}

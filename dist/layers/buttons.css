@@ -1,0 +1,188 @@
+/* ==========================================================================
+   Deck — 05 Buttons
+   ========================================================================== */
+
+@layer deck.components {
+
+  .btn {
+    --btn-bg: var(--surface);
+    --btn-text: var(--text);
+    --btn-border: var(--line-strong);
+    --btn-shadow: var(--shadow-1);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    block-size: var(--control-h);
+    min-inline-size: var(--control-h);
+    padding-inline: var(--space-4);
+    border: 1px solid var(--btn-border);
+    border-radius: var(--r-sm);
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    box-shadow: var(--btn-shadow);
+    font-size: var(--text-base);
+    font-weight: 560;
+    line-height: 1;
+    letter-spacing: -.008em;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: background-color var(--dur-1) var(--ease-out),
+                border-color var(--dur-1) var(--ease-out),
+                color var(--dur-1) var(--ease-out),
+                box-shadow var(--dur-1) var(--ease-out),
+                translate var(--dur-1) var(--ease-out);
+  }
+
+  /* Every button clears the 44px touch target even when it looks smaller */
+  .btn { position: relative; }
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    translate: -50% -50%;
+    inline-size: 100%;
+    block-size: 100%;
+    min-inline-size: var(--tap);
+    min-block-size: var(--tap);
+  }
+
+  .btn:hover { background: var(--surface-hover); border-color: var(--ink-400); }
+  .btn:active { translate: 0 1px; box-shadow: none; }
+  .btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  .btn[disabled], .btn[aria-disabled="true"], .btn.is-disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* --- Variants ----------------------------------------------------------- */
+  .btn-primary {
+    --btn-bg: var(--brand-600);
+    --btn-text: var(--text-on-brand);
+    --btn-border: transparent;
+    --btn-shadow: var(--shadow-2), var(--shadow-inset);
+  }
+  .btn-primary:hover { --btn-bg: var(--brand-700); border-color: transparent; background: var(--brand-700); }
+
+  .btn-accent {
+    --btn-bg: var(--accent-500);
+    --btn-text: oklch(24% .06 var(--hue-accent));
+    --btn-border: transparent;
+    --btn-shadow: var(--shadow-2), var(--shadow-inset);
+  }
+  .btn-accent:hover { background: oklch(from var(--accent-500) calc(l - .05) c h); border-color: transparent; }
+
+  .btn-danger {
+    --btn-bg: var(--bad-500);
+    --btn-text: oklch(99% .01 var(--hue-bad));
+    --btn-border: transparent;
+    --btn-shadow: var(--shadow-2), var(--shadow-inset);
+  }
+  .btn-danger:hover { background: var(--bad-700); border-color: transparent; }
+
+  .btn-soft {
+    --btn-bg: var(--brand-soft);
+    --btn-text: var(--brand-soft-text);
+    --btn-border: transparent;
+    --btn-shadow: none;
+  }
+  .btn-soft:hover { background: color-mix(in oklab, var(--brand-soft) 80%, var(--brand-300)); border-color: transparent; }
+
+  .btn-ghost {
+    --btn-bg: transparent;
+    --btn-border: transparent;
+    --btn-shadow: none;
+  }
+  .btn-ghost:hover { background: var(--surface-hover); border-color: transparent; }
+
+  .btn-outline {
+    --btn-bg: transparent;
+    --btn-text: var(--brand);
+    --btn-border: color-mix(in oklab, var(--brand) 45%, transparent);
+    --btn-shadow: none;
+  }
+  .btn-outline:hover { background: var(--brand-soft); border-color: var(--brand); }
+
+  .btn-link {
+    --btn-bg: transparent;
+    --btn-border: transparent;
+    --btn-shadow: none;
+    --btn-text: var(--brand);
+    padding-inline: var(--space-1);
+    block-size: auto;
+  }
+  .btn-link:hover { background: none; border-color: transparent; text-decoration: underline; }
+
+  /* --- Sizes -------------------------------------------------------------- */
+  .btn-sm {
+    block-size: var(--control-h-sm);
+    padding-inline: var(--space-3);
+    font-size: var(--text-sm);
+    border-radius: var(--r-xs);
+    gap: var(--space-1);
+  }
+  .btn-lg {
+    block-size: var(--control-h-lg);
+    padding-inline: var(--space-6);
+    font-size: var(--text-md);
+    font-weight: 600;
+  }
+  .btn-block { inline-size: 100%; }
+
+  .btn-icon { padding-inline: 0; inline-size: var(--control-h); }
+  .btn-icon.btn-sm { inline-size: var(--control-h-sm); }
+  .btn-icon.btn-lg { inline-size: var(--control-h-lg); }
+  .btn-round { border-radius: var(--r-full); }
+
+  /* --- Group -------------------------------------------------------------- */
+  .btn-group { display: inline-flex; }
+  .btn-group > .btn { border-radius: 0; box-shadow: none; }
+  .btn-group > .btn:first-child { border-start-start-radius: var(--r-sm); border-end-start-radius: var(--r-sm); }
+  .btn-group > .btn:last-child  { border-start-end-radius: var(--r-sm); border-end-end-radius: var(--r-sm); }
+  .btn-group > .btn + .btn { margin-inline-start: -1px; }
+  .btn-group > .btn:hover, .btn-group > .btn:focus-visible { z-index: 1; }
+
+  /* --- Loading ------------------------------------------------------------ */
+  .btn.is-loading { color: transparent; pointer-events: none; }
+  .btn.is-loading::after {
+    content: "";
+    position: absolute;
+    inline-size: 1em;
+    block-size: 1em;
+    border: 2px solid color-mix(in oklab, var(--btn-text) 30%, transparent);
+    border-block-start-color: var(--btn-text);
+    border-radius: var(--r-full);
+    animation: dk-spin .62s linear infinite;
+  }
+
+  @keyframes dk-spin { to { rotate: 360deg; } }
+
+  /* Floating action button, parked above the tab bar and the notch */
+  .fab {
+    position: fixed;
+    inset-block-end: calc(var(--space-5) + env(safe-area-inset-bottom));
+    inset-inline-end: var(--space-5);
+    z-index: var(--z-nav);
+    inline-size: 56px;
+    block-size: 56px;
+    border-radius: var(--r-full);
+    background: var(--brand-600);
+    color: var(--text-on-brand);
+    box-shadow: var(--shadow-4);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: scale var(--dur-2) var(--ease-spring), background-color var(--dur-1) var(--ease-out);
+  }
+  .fab:hover { background: var(--brand-700); scale: 1.04; }
+  .fab:active { scale: .96; }
+  body:has(.tabbar) .fab { inset-block-end: calc(var(--space-4) + var(--tap) + var(--space-3) + env(safe-area-inset-bottom)); }
+}

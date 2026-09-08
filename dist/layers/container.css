@@ -1,0 +1,189 @@
+/* ==========================================================================
+   Deck — 18 Container queries
+   A component should respond to the space it was given, not to the size of the
+   window. A card in a narrow sidebar and the same card in a wide main column
+   are the same markup and should lay out differently without either one
+   knowing where it was placed.
+   ========================================================================== */
+
+@layer deck.layout {
+
+  /* --- Declaring a container ----------------------------------------------
+     .cq is the plain one. The named versions let a nested component query a
+     specific ancestor instead of the closest one.
+     ---------------------------------------------------------------------- */
+  .cq        { container-type: inline-size; }
+  .cq-size   { container-type: size; }
+  .cq-normal { container-type: normal; }
+
+  .cq-panel  { container: panel / inline-size; }
+  .cq-pane   { container: pane / inline-size; }
+  .cq-row    { container: row / inline-size; }
+  .cq-shell  { container: shell / inline-size; }
+
+  /* Every layout primitive can become a container without extra markup */
+  .card.cq, .panel.cq, .list.cq, .split > .cq, .grid > .cq { container-type: inline-size; }
+
+  /* --- Container query units -----------------------------------------------
+     cqi is 1% of the container's inline size. Type that scales with its column
+     rather than with the viewport — a heading in a sidebar stays small even on
+     a 32 inch monitor.
+     ---------------------------------------------------------------------- */
+  .cq :is(.text-cq) { font-size: clamp(var(--text-sm), 3.4cqi, var(--text-lg)); }
+  .cq :is(.display-cq) {
+    font-size: clamp(1.5rem, 8cqi, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -.03em;
+  }
+  .cq :is(.pad-cq) { padding: clamp(var(--space-3), 4cqi, var(--space-8)); }
+  .cq :is(.gap-cq) { gap: clamp(var(--space-2), 2.5cqi, var(--space-6)); }
+
+  /* --- Container-driven components ---------------------------------------- */
+
+  /* A card that turns into a horizontal media object once it has the room */
+  .card-flex { display: flex; flex-direction: column; }
+  .card-flex .card-media { flex: 0 0 auto; }
+  .card-flex .card-media img { inline-size: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+  @container (min-width: 30rem) {
+    .card-flex { flex-direction: row; }
+    .card-flex .card-media { inline-size: 40%; max-inline-size: 15rem; }
+    .card-flex .card-media img { block-size: 100%; aspect-ratio: auto; }
+  }
+
+  /* A stat block that stacks tight, then spreads, then goes inline */
+  .stat-cq { display: flex; flex-direction: column; gap: var(--space-1); }
+  @container (min-width: 18rem) {
+    .stat-cq .stat-value { font-size: var(--text-2xl); }
+  }
+  @container (min-width: 28rem) {
+    .stat-cq {
+      flex-direction: row;
+      align-items: baseline;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+    .stat-cq .stat-label { order: -1; min-inline-size: 100%; }
+  }
+
+  /* List rows that reveal their metadata as space allows */
+  .row-cq { display: flex; align-items: center; gap: var(--space-3); }
+  .row-cq .row-meta { display: none; }
+  @container (min-width: 26rem) {
+    .row-cq .row-meta { display: block; color: var(--text-muted); font-size: var(--text-sm); }
+  }
+  @container (min-width: 38rem) {
+    .row-cq .row-meta-wide { display: block; }
+  }
+  .row-cq .row-meta-wide { display: none; }
+
+  /* Form fields that pair up inside their own container, not the viewport.
+     This is the one that keeps biting people: a two-up field row inside a
+     narrow modal should stay stacked even on a desktop. */
+  .field-row-cq { display: grid; gap: var(--space-4); grid-template-columns: 1fr; }
+  @container (min-width: 32rem) {
+    .field-row-cq { grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr)); }
+  }
+
+  /* Button rows that go full width when cramped */
+  .actions-cq { display: flex; flex-direction: column; gap: var(--space-2); }
+  .actions-cq > .btn { inline-size: 100%; }
+  @container (min-width: 24rem) {
+    .actions-cq { flex-direction: row; }
+    .actions-cq > .btn { inline-size: auto; }
+  }
+
+  /* A data grid that drops to cards based on its own width. This is strictly
+     better than the media-query version, because a grid inside a sheet is
+     narrow no matter how wide the screen is. */
+  @container (max-width: 44rem) {
+    .dg-cq thead, .dg-cq tfoot { display: none; }
+    .dg-cq, .dg-cq tbody, .dg-cq tr, .dg-cq td { display: block; inline-size: 100%; }
+    .dg-cq tr {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      margin-block-end: var(--space-3);
+      overflow: hidden;
+    }
+    .dg-cq td {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      block-size: auto;
+      min-block-size: var(--tap);
+      text-align: end;
+      white-space: normal;
+      position: static !important;
+      box-shadow: none !important;
+      clip-path: none !important;
+    }
+    .dg-cq td::before {
+      content: attr(data-label);
+      font-size: var(--text-xs);
+      font-weight: 620;
+      color: var(--text-muted);
+      text-align: start;
+    }
+  }
+
+  /* Named-container example: a sidebar nav that collapses to icons when the
+     shell is narrow, regardless of what is nested inside it. */
+  @container shell (max-width: 15rem) {
+    .sidebar-link span { display: none; }
+    .sidebar-link { justify-content: center; }
+    .sidebar-group { text-align: center; font-size: 0; }
+  }
+
+  /* --- Container breakpoint utilities --------------------------------------
+     Same idea as the responsive utilities, but keyed to the container.
+     ---------------------------------------------------------------------- */
+  @container (min-width: 24rem) {
+    .cq-sm\:row { flex-direction: row; }
+    .cq-sm\:flex { display: flex; }
+    .cq-sm\:hidden { display: none; }
+    .cq-sm\:block { display: block; }
+    .cq-sm\:w-auto { inline-size: auto; }
+  }
+  @container (min-width: 32rem) {
+    .cq-md\:row { flex-direction: row; }
+    .cq-md\:col { flex-direction: column; }
+    .cq-md\:flex { display: flex; }
+    .cq-md\:grid { display: grid; }
+    .cq-md\:hidden { display: none; }
+    .cq-md\:block { display: block; }
+    .cq-md\:items-center { align-items: center; }
+    .cq-md\:justify-between { justify-content: space-between; }
+  }
+  @container (min-width: 44rem) {
+    .cq-lg\:row { flex-direction: row; }
+    .cq-lg\:flex { display: flex; }
+    .cq-lg\:hidden { display: none; }
+    .cq-lg\:block { display: block; }
+    .cq-lg\:grid-2 { display: grid; grid-template-columns: 1fr 1fr; }
+  }
+
+  /* --- Style queries -------------------------------------------------------
+     Query a custom property rather than a size. Set --tone on a container and
+     everything inside it adapts, with no extra classes on the children.
+     Supported in current Chrome and Safari; the fallback is simply no change.
+     ---------------------------------------------------------------------- */
+  .cq-tone { container-type: inline-size; }
+
+  @container style(--tone: critical) {
+    .tone-surface { background: var(--bad-100); border-color: color-mix(in oklab, var(--bad-500) 35%, transparent); }
+    .tone-text { color: var(--bad-700); }
+    .tone-icon { color: var(--bad-500); }
+  }
+  @container style(--tone: caution) {
+    .tone-surface { background: var(--warn-100); border-color: color-mix(in oklab, var(--warn-500) 35%, transparent); }
+    .tone-text { color: var(--warn-700); }
+    .tone-icon { color: var(--warn-500); }
+  }
+  @container style(--tone: clear) {
+    .tone-surface { background: var(--good-100); border-color: color-mix(in oklab, var(--good-500) 35%, transparent); }
+    .tone-text { color: var(--good-700); }
+    .tone-icon { color: var(--good-500); }
+  }
+}

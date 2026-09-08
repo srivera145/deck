@@ -1,0 +1,195 @@
+/* ==========================================================================
+   Deck — 19 Logical properties and direction
+   The framework is written in logical properties end to end: inline-size,
+   block-size, inset-inline-start, padding-block, margin-inline, border-start-
+   start-radius. That means Deck already lays out correctly in Arabic, Hebrew,
+   Urdu, and Farsi with nothing but dir="rtl" on the html element.
+
+   What logical properties cannot fix by themselves is content: icons that
+   point somewhere, characters that are inherently one-directional, and the few
+   places where a physical direction is genuinely meant. That is what this file
+   handles.
+   ========================================================================== */
+
+@layer deck.utilities {
+
+  /* --- Logical spacing utilities -------------------------------------------
+     The short physical-looking names in the utility layer (.mt-4, .px-3) are
+     already logical underneath — .mt-4 sets margin-block-start. These are the
+     explicitly named versions for when the distinction matters in review.
+     ---------------------------------------------------------------------- */
+  .mi-auto { margin-inline: auto; }
+  .mis-auto { margin-inline-start: auto; }
+  .mie-auto { margin-inline-end: auto; }
+
+  .mis-1 { margin-inline-start: var(--space-1); }
+  .mis-2 { margin-inline-start: var(--space-2); }
+  .mis-3 { margin-inline-start: var(--space-3); }
+  .mis-4 { margin-inline-start: var(--space-4); }
+  .mie-1 { margin-inline-end: var(--space-1); }
+  .mie-2 { margin-inline-end: var(--space-2); }
+  .mie-3 { margin-inline-end: var(--space-3); }
+  .mie-4 { margin-inline-end: var(--space-4); }
+
+  .mbs-2 { margin-block-start: var(--space-2); }
+  .mbs-4 { margin-block-start: var(--space-4); }
+  .mbs-6 { margin-block-start: var(--space-6); }
+  .mbe-2 { margin-block-end: var(--space-2); }
+  .mbe-4 { margin-block-end: var(--space-4); }
+  .mbe-6 { margin-block-end: var(--space-6); }
+
+  .pis-3 { padding-inline-start: var(--space-3); }
+  .pis-4 { padding-inline-start: var(--space-4); }
+  .pie-3 { padding-inline-end: var(--space-3); }
+  .pie-4 { padding-inline-end: var(--space-4); }
+  .pbs-4 { padding-block-start: var(--space-4); }
+  .pbe-4 { padding-block-end: var(--space-4); }
+
+  .bis { border-inline-start: 1px solid var(--line); }
+  .bie { border-inline-end: 1px solid var(--line); }
+  .bbs { border-block-start: 1px solid var(--line); }
+  .bbe { border-block-end: 1px solid var(--line); }
+
+  .is-full { inline-size: 100%; }
+  .is-auto { inline-size: auto; }
+  .bs-full { block-size: 100%; }
+  .min-is-0 { min-inline-size: 0; }
+  .max-is-prose { max-inline-size: var(--measure); }
+
+  .inset-is-0 { inset-inline-start: 0; }
+  .inset-ie-0 { inset-inline-end: 0; }
+  .inset-bs-0 { inset-block-start: 0; }
+  .inset-be-0 { inset-block-end: 0; }
+
+  /* Radius on the leading and trailing edges, not left and right */
+  .r-start { border-start-start-radius: var(--r-md); border-end-start-radius: var(--r-md); }
+  .r-end { border-start-end-radius: var(--r-md); border-end-end-radius: var(--r-md); }
+
+  /* --- Writing mode --------------------------------------------------------
+     Vertical text for a table header that would otherwise need a 40 character
+     column, or for a sidebar label.
+     ---------------------------------------------------------------------- */
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+  .writing-vertical-lr { writing-mode: vertical-lr; }
+  .writing-upright { text-orientation: upright; letter-spacing: .1em; }
+  .writing-sideways { writing-mode: sideways-lr; }
+  .writing-normal { writing-mode: horizontal-tb; }
+
+  /* A rotated column header that still measures and aligns correctly */
+  .th-vertical {
+    writing-mode: vertical-rl;
+    rotate: 180deg;
+    white-space: nowrap;
+    block-size: 8rem;
+    padding-block: var(--space-3);
+    text-align: start;
+  }
+
+  /* --- Explicit direction --------------------------------------------------
+     Sometimes a value has one true direction regardless of the page. A VIN,
+     an account number, a URL, and a code block read left to right even on an
+     Arabic page. Isolate them so they do not scramble the surrounding text.
+     ---------------------------------------------------------------------- */
+  .dir-ltr { direction: ltr; unicode-bidi: isolate; }
+  .dir-rtl { direction: rtl; unicode-bidi: isolate; }
+  .dir-auto { unicode-bidi: isolate; }
+  .bidi-isolate { unicode-bidi: isolate; }
+  .bidi-plaintext { unicode-bidi: plaintext; }
+
+  /* Identifiers Deck ships with: keep them LTR wherever they appear */
+  .mono, code, kbd, samp, .vin, .nums { unicode-bidi: isolate; }
+  .vin, .code-ltr { direction: ltr; unicode-bidi: isolate; text-align: start; }
+}
+
+@layer deck.rtl {
+
+  /* --- Icons that point ----------------------------------------------------
+     An arrow, a chevron, a reply glyph, and a back button all mean "the
+     direction of reading". They must mirror. A checkmark, a clock, a wrench,
+     and a logo must not. Mark the ones that point.
+     ---------------------------------------------------------------------- */
+  [dir="rtl"] .flip-rtl { scale: -1 1; }
+
+  /* The pointing icons in Deck's own sprite, mirrored automatically */
+  [dir="rtl"] :is(
+    .icon:has(use[href$="#chevron-left"]),
+    .icon:has(use[href$="#chevron-right"]),
+    .icon:has(use[href$="#arrow-left"]),
+    .icon:has(use[href$="#arrow-right"]),
+    .icon:has(use[href$="#arrow-up-right"]),
+    .icon:has(use[href$="#external"]),
+    .icon:has(use[href$="#log-out"]),
+    .icon:has(use[href$="#send"]),
+    .icon:has(use[href$="#trend-up"]),
+    .icon:has(use[href$="#trend-down"])
+  ) { scale: -1 1; }
+
+  /* Things that must never mirror, even inside a flipped ancestor */
+  [dir="rtl"] .no-flip { scale: 1 1; }
+
+  /* --- Direction-aware motion ---------------------------------------------
+     The entrance animations move toward the reader. In RTL the start edge is
+     on the right, so the keyframes flip too.
+     ---------------------------------------------------------------------- */
+  @media (prefers-reduced-motion: no-preference) {
+    [dir="rtl"] .enter-start { animation-name: dk-in-start-rtl; }
+    [dir="rtl"] .enter-end { animation-name: dk-in-end-rtl; }
+    @keyframes dk-in-start-rtl { from { opacity: 0; translate: calc(var(--travel) * 1.6) 0; } }
+    @keyframes dk-in-end-rtl { from { opacity: 0; translate: calc(var(--travel) * -1.6) 0; } }
+
+    [dir="rtl"] .icon-follow { transition: translate var(--dur-2) var(--ease-spring); }
+    [dir="rtl"] .btn:hover .icon-follow,
+    [dir="rtl"] .list-row:hover .icon-follow,
+    [dir="rtl"] .card-link:hover .icon-follow { translate: -3px 0; }
+
+    [dir="rtl"] .sweep { background-position: 100% 100%; }
+    [dir="rtl"] .marquee-track { animation-name: dk-marquee-rtl; }
+    @keyframes dk-marquee-rtl { to { translate: 100% 0; } }
+  }
+
+  /* --- Components that hard-code a direction ------------------------------- */
+
+  /* The select arrow is drawn with background-position from the right edge */
+  [dir="rtl"] .select {
+    background-position: 19px calc(50% + 1px), 14px calc(50% + 1px);
+    background-image: linear-gradient(135deg, transparent 50%, currentColor 50%),
+                      linear-gradient(45deg, currentColor 50%, transparent 50%);
+    padding-inline: var(--space-10) var(--space-3);
+  }
+
+  /* Search icon sits on the start edge, which is the right in RTL */
+  [dir="rtl"] .search > .icon { inset-inline-start: var(--space-3); }
+
+  /* Pinned grid columns and their shadows */
+  [dir="rtl"] .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start,
+  [dir="rtl"] .dg-wrap.is-scrolled-x .dg :is(th, td).dg-pin-start-2 {
+    box-shadow: -6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
+    clip-path: inset(0 0 0 -12px);
+  }
+  [dir="rtl"] .dg-wrap.is-scrolled-end .dg :is(th, td).dg-pin-end {
+    box-shadow: 6px 0 8px -6px oklch(20% .03 var(--hue-neutral) / .28);
+    clip-path: inset(0 -12px 0 0);
+  }
+
+  /* Switch knob travels toward the end edge */
+  [dir="rtl"] .switch input::after { translate: 0 0; }
+  [dir="rtl"] .switch input:checked::after { translate: -18px 0; }
+
+  /* Toast swipe, chart bars, and progress fills grow from the start edge */
+  [dir="rtl"] :is(.chart-bar-fill, .progress::-webkit-progress-value, .toast-timer) {
+    transform-origin: right center;
+  }
+  [dir="rtl"] .scroll-progress { transform-origin: right center; }
+
+  /* Breadcrumb separator */
+  [dir="rtl"] .breadcrumb li + li::before { content: "\\\\"; }
+
+  /* Timeline rail and dots */
+  [dir="rtl"] .timeline-item:not(:last-child)::before { inset-inline-start: 10px; }
+
+  /* Mixed-direction pages: a block that is LTR inside an RTL document */
+  [dir="ltr"] [dir="rtl"], [dir="rtl"] [dir="ltr"] { unicode-bidi: isolate; }
+}

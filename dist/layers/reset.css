@@ -1,0 +1,103 @@
+/* ==========================================================================
+   Deck — 02 Reset
+   ========================================================================== */
+
+@layer deck.reset {
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  * { margin: 0; }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    tab-size: 2;
+    scroll-behavior: smooth;
+    scroll-padding-block-start: calc(var(--control-h-lg) + var(--space-4));
+  }
+
+  body {
+    min-block-size: 100dvh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-wrap: break-word;
+  }
+
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    max-inline-size: 100%;
+  }
+  img, video { block-size: auto; }
+
+  input, button, textarea, select { font: inherit; color: inherit; }
+
+  button { background: none; border: 0; }
+
+  p, li, figcaption { text-wrap: pretty; }
+  h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
+
+  ul[class], ol[class] { list-style: none; padding: 0; }
+
+  table { border-collapse: collapse; border-spacing: 0; }
+
+  hr {
+    border: 0;
+    block-size: 1px;
+    background: var(--line);
+  }
+
+  :target { scroll-margin-block-start: var(--space-16); }
+
+  ::selection {
+    background: var(--brand-200);
+    color: var(--ink-950);
+  }
+
+  /* One focus treatment for the whole framework */
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: var(--r-xs);
+  }
+  :focus:not(:focus-visible) { outline: none; }
+
+  /* Firefox needs help with the scrollbar; WebKit gets the thin version */
+  * { scrollbar-color: var(--ink-300) transparent; scrollbar-width: thin; }
+  ::-webkit-scrollbar { inline-size: 10px; block-size: 10px; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--ink-300);
+    border-radius: var(--r-full);
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--ink-400); background-clip: content-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+      scroll-behavior: auto !important;
+    }
+    /* Loading indicators keep moving, slowly. A frozen spinner reads as broken,
+       and progress feedback is information, not decoration. */
+    .spinner, .icon-spin, .skeleton, .marquee-track, .btn.is-loading::after,
+    .dg-wrap.is-loading::after, .ping::after {
+      animation-duration: 2.4s !important;
+      animation-iteration-count: infinite !important;
+    }
+  }
+
+  /* Opt in per-element where a smooth auto height matters */
+  @supports (interpolate-size: allow-keywords) {
+    :root { interpolate-size: allow-keywords; }
+  }
+}

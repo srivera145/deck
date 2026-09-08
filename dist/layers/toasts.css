@@ -1,0 +1,172 @@
+/* ==========================================================================
+   Deck — 13 Toasts
+   A stack, not a list. Collapsed toasts sit behind the newest one and fan out
+   on hover or focus. Queue logic is in deck.js (Deck.toast).
+   ========================================================================== */
+
+@layer deck.components {
+
+  .toast-region {
+    position: fixed;
+    z-index: var(--z-toast);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    inline-size: min(23rem, calc(100vw - var(--space-6)));
+    pointer-events: none;
+    /* the stack grows upward from the bottom by default */
+    inset-block-end: calc(var(--space-4) + env(safe-area-inset-bottom));
+    inset-inline-end: var(--space-4);
+  }
+  body:has(.tabbar) .toast-region {
+    inset-block-end: calc(var(--space-4) + var(--tap) + env(safe-area-inset-bottom));
+  }
+  @media (min-width: 48rem) {
+    body:has(.tabbar) .toast-region { inset-block-end: calc(var(--space-4) + env(safe-area-inset-bottom)); }
+  }
+
+  .toast-region-start { inset-inline: var(--space-4) auto; }
+  .toast-region-center { inset-inline: 0; margin-inline: auto; }
+  .toast-region-top {
+    inset-block: calc(var(--space-4) + env(safe-area-inset-top)) auto;
+    flex-direction: column-reverse;
+  }
+
+  /* On a phone the stack spans the width and sits above the thumb */
+  @media (max-width: 30rem) {
+    .toast-region { inset-inline: var(--space-3); inline-size: auto; }
+  }
+
+  /* --- The toast ----------------------------------------------------------- */
+  .toast {
+    --toast-accent: var(--ink-400);
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-4);
+    font-size: var(--text-sm);
+    pointer-events: auto;
+    overflow: hidden;
+    touch-action: pan-y;
+    transform-origin: bottom center;
+    transition: translate var(--dur-3) var(--ease-out),
+                scale var(--dur-3) var(--ease-out),
+                opacity var(--dur-2) var(--ease-out),
+                margin var(--dur-3) var(--ease-out);
+  }
+  .toast::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inline-size: 3px;
+    background: var(--toast-accent);
+  }
+
+  .toast-icon { color: var(--toast-accent); margin-block-start: 1px; flex: 0 0 auto; }
+  .toast-main { flex: 1 1 auto; min-inline-size: 0; display: flex; flex-direction: column; gap: 2px; }
+  .toast-title { font-weight: 620; }
+  .toast-text { color: var(--text-muted); }
+  .toast-close {
+    flex: 0 0 auto;
+    inline-size: 26px;
+    block-size: 26px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-full);
+    color: var(--text-faint);
+    cursor: pointer;
+    margin-block-start: -2px;
+    margin-inline-end: -4px;
+  }
+  .toast-close:hover { background: var(--surface-hover); color: var(--text); }
+  .toast-actions { display: flex; gap: var(--space-2); margin-block-start: var(--space-2); }
+  .toast-action {
+    font-size: var(--text-sm);
+    font-weight: 620;
+    color: var(--brand);
+    cursor: pointer;
+    padding: var(--space-1) 0;
+  }
+  .toast-action:hover { text-decoration: underline; }
+
+  /* --- Kinds --------------------------------------------------------------- */
+  .toast-good { --toast-accent: var(--good-500); }
+  .toast-warn { --toast-accent: var(--warn-500); }
+  .toast-bad  { --toast-accent: var(--bad-500); }
+  .toast-info { --toast-accent: var(--brand-500); }
+  .toast-loading { --toast-accent: var(--brand-500); }
+
+  /* --- Auto-dismiss timer -------------------------------------------------- */
+  .toast-timer {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    block-size: 2px;
+    inline-size: 100%;
+    background: var(--toast-accent);
+    opacity: .5;
+    transform-origin: left center;
+    animation: dk-toast-timer linear forwards;
+    animation-duration: var(--toast-duration, 5s);
+  }
+  @keyframes dk-toast-timer { to { scale: 0 1; } }
+  /* Hovering the stack pauses every timer in it */
+  .toast-region:is(:hover, :focus-within) .toast-timer { animation-play-state: paused; }
+
+  /* --- Enter and exit ------------------------------------------------------ */
+  .toast { animation: dk-toast-in var(--dur-3) var(--ease-spring); }
+  @keyframes dk-toast-in {
+    from { opacity: 0; translate: 0 16px; scale: .94; }
+  }
+  .toast-region-top .toast { animation-name: dk-toast-in-top; }
+  @keyframes dk-toast-in-top {
+    from { opacity: 0; translate: 0 -16px; scale: .94; }
+  }
+  .toast.is-leaving {
+    opacity: 0;
+    scale: .94;
+    translate: var(--toast-exit-x, 0) 8px;
+    margin-block-end: calc((var(--toast-h, 60px) + var(--space-2)) * -1);
+    pointer-events: none;
+  }
+
+  /* --- Collapsed stack -----------------------------------------------------
+     deck.js sets --i (0 = newest). Beyond the third toast they hide behind.
+     ---------------------------------------------------------------------- */
+  .toast-region-stacked .toast {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    translate: 0 calc(var(--i) * -8px);
+    scale: calc(1 - var(--i) * .04);
+    opacity: calc(1 - var(--i) * .18);
+    z-index: calc(100 - var(--i));
+  }
+  .toast-region-stacked .toast[style*="--i: 3"],
+  .toast-region-stacked .toast[style*="--i:3"] { opacity: 0; pointer-events: none; }
+
+  .toast-region-stacked:is(:hover, :focus-within) .toast {
+    translate: 0 calc(var(--i) * (var(--toast-h, 68px) + var(--space-2)) * -1);
+    scale: 1;
+    opacity: 1;
+  }
+
+  /* --- Swipe to dismiss ---------------------------------------------------- */
+  .toast.is-dragging { transition: none; cursor: grabbing; user-select: none; }
+
+  /* --- Undo pattern -------------------------------------------------------- */
+  .toast-undo { --toast-accent: var(--ink-500); }
+  .toast-undo .toast-action { color: var(--text); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toast, .toast-region-stacked .toast { animation: none; transition: opacity var(--dur-1) linear; }
+    .toast-timer { animation: none; display: none; }
+  }
+}
