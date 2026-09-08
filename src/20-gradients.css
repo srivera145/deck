@@ -220,9 +220,9 @@
   }
 
   /* --- Status gradients ----------------------------------------------------- */
-  .g-good { background-image: linear-gradient(in oklab 135deg, var(--good-500), oklch(from var(--good-500) l c calc(h - 26))); color: oklch(99% .01 var(--hue-good)); }
-  .g-warn { background-image: linear-gradient(in oklab 135deg, var(--warn-500), oklch(from var(--warn-500) l c calc(h + 22))); color: oklch(24% .06 var(--hue-warn)); }
-  .g-bad  { background-image: linear-gradient(in oklab 135deg, var(--bad-500), oklch(from var(--bad-500) l c calc(h - 18))); color: oklch(99% .01 var(--hue-bad)); }
+  .g-good { background-image: linear-gradient(in oklab 135deg, var(--good-600), oklch(from var(--good-600) l c calc(h - 26))); color: var(--text-on-good); }
+  .g-warn { background-image: linear-gradient(in oklab 135deg, var(--warn-500), oklch(from var(--warn-500) l c calc(h + 22))); color: var(--text-on-warn); }
+  .g-bad  { background-image: linear-gradient(in oklab 135deg, var(--bad-600), oklch(from var(--bad-600) l c calc(h - 18))); color: var(--text-on-bad); }
 
   /* --- Conic accents -------------------------------------------------------- */
   .g-conic {

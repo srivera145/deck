@@ -165,12 +165,14 @@
     /* --- Status ------------------------------------------------------------ */
     --good-100: oklch(94% calc(var(--chroma-status) * .3) var(--hue-good));
     --good-500: oklch(62% var(--chroma-status) var(--hue-good));
+    --good-600: oklch(52% var(--chroma-status) var(--hue-good));
     --good-700: oklch(44% var(--chroma-status) var(--hue-good));
     --warn-100: oklch(95% calc(var(--chroma-status) * .32) var(--hue-warn));
     --warn-500: oklch(76% var(--chroma-status) var(--hue-warn));
     --warn-700: oklch(50% var(--chroma-status) var(--hue-warn));
     --bad-100:  oklch(94.5% calc(var(--chroma-status) * .3) var(--hue-bad));
     --bad-500:  oklch(58% calc(var(--chroma-status) * 1.25) var(--hue-bad));
+    --bad-600:  oklch(52% calc(var(--chroma-status) * 1.25) var(--hue-bad));
     --bad-700:  oklch(44% calc(var(--chroma-status) * 1.1) var(--hue-bad));
     --accent-100: oklch(95% calc(var(--chroma-accent) * .3) var(--hue-accent));
     --accent-500: oklch(74% var(--chroma-accent) var(--hue-accent));
@@ -188,7 +190,16 @@
     --text:        light-dark(var(--ink-900), var(--ink-100));
     --text-muted:  light-dark(var(--ink-600), var(--ink-400));
     --text-faint:  light-dark(var(--ink-500), var(--ink-500));
-    --text-on-brand: oklch(99% .01 var(--hue-brand));
+    /* --- Ink on a coloured surface ----------------------------------------
+       One per saturated surface. These are the static values: they are correct
+       for the shipped hues but they are guesses about any hue you set, which
+       is what the @supports block below fixes.
+       -------------------------------------------------------------------- */
+    --text-on-brand:  oklch(99% .01 var(--hue-brand));
+    --text-on-accent: oklch(24% .06 var(--hue-accent));
+    --text-on-good:   oklch(99% .01 var(--hue-good));
+    --text-on-warn:   oklch(24% .06 var(--hue-warn));
+    --text-on-bad:    oklch(99% .01 var(--hue-bad));
 
     --brand:       light-dark(var(--brand-600), var(--brand-400));
     --brand-hover: light-dark(var(--brand-700), var(--brand-300));
@@ -279,6 +290,22 @@
     --z-sheet: 300;
     --z-modal: 400;
     --z-toast: 500;
+  }
+
+  /* contrast-color() resolves against the colour as it actually computes, so
+     these follow --hue-brand and friends wherever they are dragged. It returns
+     only black or white and it aims at AA (4.5:1), which is why every surface
+     that carries text is kept out of the 55-65% lightness band -- see
+     --good-600 and --bad-600 above. Baseline Newly Available, so the static
+     values in :root stand in where it is missing. */
+  @supports (color: contrast-color(red)) {
+    :root {
+      --text-on-brand:  contrast-color(var(--brand-600));
+      --text-on-accent: contrast-color(var(--accent-500));
+      --text-on-good:   contrast-color(var(--good-600));
+      --text-on-warn:   contrast-color(var(--warn-500));
+      --text-on-bad:    contrast-color(var(--bad-600));
+    }
   }
 
   /* Explicit theme override beats the OS setting */
@@ -743,15 +770,15 @@
 
   .btn-accent {
     --btn-bg: var(--accent-500);
-    --btn-text: oklch(24% .06 var(--hue-accent));
+    --btn-text: var(--text-on-accent);
     --btn-border: transparent;
     --btn-shadow: var(--shadow-2), var(--shadow-inset);
   }
   .btn-accent:hover { background: oklch(from var(--accent-500) calc(l - .05) c h); border-color: transparent; }
 
   .btn-danger {
-    --btn-bg: var(--bad-500);
-    --btn-text: oklch(99% .01 var(--hue-bad));
+    --btn-bg: var(--bad-600);
+    --btn-text: var(--text-on-bad);
     --btn-border: transparent;
     --btn-shadow: var(--shadow-2), var(--shadow-inset);
   }
@@ -3443,6 +3470,23 @@
     transition: filter var(--dur-1) var(--ease-out);
   }
   .chart-col:hover { filter: brightness(1.08) saturate(1.1); }
+
+  /* A label placed inside a bar gets ink chosen for that series rather than
+     the page's --text. contrast-color() is written directly on the elements
+     that carry the fill, not hoisted into a custom property: var() is
+     substituted where a property is declared, so a shared --text-on-series
+     token would read --series from .chart and get it wrong for the usual
+     markup, which puts .s1 .. .s6 on the bar itself.
+
+     Only inside @supports: with six hue-derived series there is no single
+     static answer, and guessing one would be worse than the inheritance it
+     replaced. Series colours are chosen for discriminability and some sit in
+     the 55-65% band, so this raises the floor rather than guaranteeing AA. */
+  @supports (color: contrast-color(red)) {
+    .chart-col, .chart-col-stack > span, .chart-bar-fill, .chart-meter > span {
+      color: contrast-color(var(--series, var(--c1)));
+    }
+  }
   .chart-col[data-label]::after {
     content: attr(data-label);
     position: absolute;
@@ -4643,9 +4687,9 @@
   }
 
   /* --- Status gradients ----------------------------------------------------- */
-  .g-good { background-image: linear-gradient(in oklab 135deg, var(--good-500), oklch(from var(--good-500) l c calc(h - 26))); color: oklch(99% .01 var(--hue-good)); }
-  .g-warn { background-image: linear-gradient(in oklab 135deg, var(--warn-500), oklch(from var(--warn-500) l c calc(h + 22))); color: oklch(24% .06 var(--hue-warn)); }
-  .g-bad  { background-image: linear-gradient(in oklab 135deg, var(--bad-500), oklch(from var(--bad-500) l c calc(h - 18))); color: oklch(99% .01 var(--hue-bad)); }
+  .g-good { background-image: linear-gradient(in oklab 135deg, var(--good-600), oklch(from var(--good-600) l c calc(h - 26))); color: var(--text-on-good); }
+  .g-warn { background-image: linear-gradient(in oklab 135deg, var(--warn-500), oklch(from var(--warn-500) l c calc(h + 22))); color: var(--text-on-warn); }
+  .g-bad  { background-image: linear-gradient(in oklab 135deg, var(--bad-600), oklch(from var(--bad-600) l c calc(h - 18))); color: var(--text-on-bad); }
 
   /* --- Conic accents -------------------------------------------------------- */
   .g-conic {
@@ -5721,8 +5765,8 @@
     block-size: 18px;
     padding-inline: 5px;
     border-radius: var(--r-full);
-    background: var(--bad-500);
-    color: oklch(99% .01 var(--hue-bad));
+    background: var(--bad-600);
+    color: var(--text-on-bad);
     font-size: var(--text-2xs);
     font-weight: 700;
     line-height: 18px;

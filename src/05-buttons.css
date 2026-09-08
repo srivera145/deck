@@ -74,15 +74,15 @@
 
   .btn-accent {
     --btn-bg: var(--accent-500);
-    --btn-text: oklch(24% .06 var(--hue-accent));
+    --btn-text: var(--text-on-accent);
     --btn-border: transparent;
     --btn-shadow: var(--shadow-2), var(--shadow-inset);
   }
   .btn-accent:hover { background: oklch(from var(--accent-500) calc(l - .05) c h); border-color: transparent; }
 
   .btn-danger {
-    --btn-bg: var(--bad-500);
-    --btn-text: oklch(99% .01 var(--hue-bad));
+    --btn-bg: var(--bad-600);
+    --btn-text: var(--text-on-bad);
     --btn-border: transparent;
     --btn-shadow: var(--shadow-2), var(--shadow-inset);
   }

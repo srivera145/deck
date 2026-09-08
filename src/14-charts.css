@@ -74,6 +74,23 @@
     transition: filter var(--dur-1) var(--ease-out);
   }
   .chart-col:hover { filter: brightness(1.08) saturate(1.1); }
+
+  /* A label placed inside a bar gets ink chosen for that series rather than
+     the page's --text. contrast-color() is written directly on the elements
+     that carry the fill, not hoisted into a custom property: var() is
+     substituted where a property is declared, so a shared --text-on-series
+     token would read --series from .chart and get it wrong for the usual
+     markup, which puts .s1 .. .s6 on the bar itself.
+
+     Only inside @supports: with six hue-derived series there is no single
+     static answer, and guessing one would be worse than the inheritance it
+     replaced. Series colours are chosen for discriminability and some sit in
+     the 55-65% band, so this raises the floor rather than guaranteeing AA. */
+  @supports (color: contrast-color(red)) {
+    .chart-col, .chart-col-stack > span, .chart-bar-fill, .chart-meter > span {
+      color: contrast-color(var(--series, var(--c1)));
+    }
+  }
   .chart-col[data-label]::after {
     content: attr(data-label);
     position: absolute;

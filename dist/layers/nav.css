@@ -710,8 +710,8 @@
     block-size: 18px;
     padding-inline: 5px;
     border-radius: var(--r-full);
-    background: var(--bad-500);
-    color: oklch(99% .01 var(--hue-bad));
+    background: var(--bad-600);
+    color: var(--text-on-bad);
     font-size: var(--text-2xs);
     font-weight: 700;
     line-height: 18px;

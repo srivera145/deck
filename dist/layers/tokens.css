@@ -60,12 +60,14 @@
     /* --- Status ------------------------------------------------------------ */
     --good-100: oklch(94% calc(var(--chroma-status) * .3) var(--hue-good));
     --good-500: oklch(62% var(--chroma-status) var(--hue-good));
+    --good-600: oklch(52% var(--chroma-status) var(--hue-good));
     --good-700: oklch(44% var(--chroma-status) var(--hue-good));
     --warn-100: oklch(95% calc(var(--chroma-status) * .32) var(--hue-warn));
     --warn-500: oklch(76% var(--chroma-status) var(--hue-warn));
     --warn-700: oklch(50% var(--chroma-status) var(--hue-warn));
     --bad-100:  oklch(94.5% calc(var(--chroma-status) * .3) var(--hue-bad));
     --bad-500:  oklch(58% calc(var(--chroma-status) * 1.25) var(--hue-bad));
+    --bad-600:  oklch(52% calc(var(--chroma-status) * 1.25) var(--hue-bad));
     --bad-700:  oklch(44% calc(var(--chroma-status) * 1.1) var(--hue-bad));
     --accent-100: oklch(95% calc(var(--chroma-accent) * .3) var(--hue-accent));
     --accent-500: oklch(74% var(--chroma-accent) var(--hue-accent));
@@ -83,7 +85,16 @@
     --text:        light-dark(var(--ink-900), var(--ink-100));
     --text-muted:  light-dark(var(--ink-600), var(--ink-400));
     --text-faint:  light-dark(var(--ink-500), var(--ink-500));
-    --text-on-brand: oklch(99% .01 var(--hue-brand));
+    /* --- Ink on a coloured surface ----------------------------------------
+       One per saturated surface. These are the static values: they are correct
+       for the shipped hues but they are guesses about any hue you set, which
+       is what the @supports block below fixes.
+       -------------------------------------------------------------------- */
+    --text-on-brand:  oklch(99% .01 var(--hue-brand));
+    --text-on-accent: oklch(24% .06 var(--hue-accent));
+    --text-on-good:   oklch(99% .01 var(--hue-good));
+    --text-on-warn:   oklch(24% .06 var(--hue-warn));
+    --text-on-bad:    oklch(99% .01 var(--hue-bad));
 
     --brand:       light-dark(var(--brand-600), var(--brand-400));
     --brand-hover: light-dark(var(--brand-700), var(--brand-300));
@@ -174,6 +185,22 @@
     --z-sheet: 300;
     --z-modal: 400;
     --z-toast: 500;
+  }
+
+  /* contrast-color() resolves against the colour as it actually computes, so
+     these follow --hue-brand and friends wherever they are dragged. It returns
+     only black or white and it aims at AA (4.5:1), which is why every surface
+     that carries text is kept out of the 55-65% lightness band -- see
+     --good-600 and --bad-600 above. Baseline Newly Available, so the static
+     values in :root stand in where it is missing. */
+  @supports (color: contrast-color(red)) {
+    :root {
+      --text-on-brand:  contrast-color(var(--brand-600));
+      --text-on-accent: contrast-color(var(--accent-500));
+      --text-on-good:   contrast-color(var(--good-600));
+      --text-on-warn:   contrast-color(var(--warn-500));
+      --text-on-bad:    contrast-color(var(--bad-600));
+    }
   }
 
   /* Explicit theme override beats the OS setting */
