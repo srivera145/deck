@@ -12,15 +12,29 @@
 
        DECK_SITE_BASE=http://deck.local php -S 0.0.0.0:80 -t public_html
 
-   Numbers in this block are measured, not estimated. Every gzipped size is
-   what `npm run build` prints, in decimal KB. Reproduce them with:
+   No size is typed into this file. Every one is read from dist/sizes.json,
+   which build.mjs writes after measuring the files it just produced, so a
+   rebuild updates the page and nothing can drift. The counts below are the
+   only hand-kept numbers; reproduce them with:
 
-       npm run build                          -> css_gzip, js_gzip, bundle_gzip
        ls src/*.css | wc -l                   -> 26      source_files
        grep -c '<symbol' src/deck-icons.svg    -> 152 symbols (75 x 2 + 2 marks)
-       grep -c '=' tools/icons/icons.txt       -> entries on the sprite list
        grep -rhoE '\.[a-zA-Z][\w-]*' src/*.css | sort -u | wc -l   -> classes
    ============================================================================= */
+
+/* dist/sizes.json is generated. If it is missing the build has not run, and
+   guessing a number here is exactly the failure this indirection removes. */
+$sizesFile = __DIR__ . '/../dist/sizes.json';
+if (!is_readable($sizesFile)) {
+    http_response_code(500);
+    exit('dist/sizes.json is missing. Run `npm run build` first.');
+}
+$sizes = json_decode(file_get_contents($sizesFile), true, 512, JSON_THROW_ON_ERROR);
+
+/* Bytes -> "26.6 KB", the same decimal KB the build prints. */
+$kb = static fn(int $bytes): string => number_format($bytes / 1000, 1) . ' KB';
+$br = static fn(string $f): string => $kb($sizes['files'][$f]['brotli']);
+$gz = static fn(string $f): string => $kb($sizes['files'][$f]['gzip']);
 
 $site = [
     'name'         => 'Deck',
@@ -35,16 +49,26 @@ $site = [
     /* Title: 49 characters. Description: 153. Both carry "CSS framework",
        which is the term people actually search for. */
     'title'        => 'Deck — a CSS framework in one file, no build step',
-    'description'  => 'Deck is a CSS framework that ships as one 32.5 KB stylesheet with components, icons, and runtime theming. No build step, no config file, no dependencies.',
+    'description'  => 'Deck is a CSS framework that ships as one ' . $br('deck.min.css')
+                      . ' stylesheet with components, icons, and runtime theming.'
+                      . ' No build step, no config file, no dependencies.',
 
-    /* Measured facts, quoted throughout the page. */
-    'css_gzip'     => '32.5 KB',
-    'css_min'      => '168 KB',
-    'sprite_gzip'  => '33.6 KB',
-    'js_gzip'      => '10.0 KB',
-    'bundle_gzip'  => '19.5 KB',
-    'total_gzip'   => '76.1 KB',
-    'sprite_12'    => '6.9 KB',
+    /* Every size below comes from dist/sizes.json. Brotli leads because that is
+       what servers negotiate; gzip is quoted beside it as the fallback. */
+    'css_br'       => $br('deck.min.css'),
+    'css_gzip'     => $gz('deck.min.css'),
+    'sprite_br'    => $br('deck-icons.svg'),
+    'sprite_gzip'  => $gz('deck-icons.svg'),
+    'js_br'        => $br('deck.min.js'),
+    'js_gzip'      => $gz('deck.min.js'),
+    'bundle_br'    => $br('deck.bundle.min.js'),
+    'bundle_gzip'  => $gz('deck.bundle.min.js'),
+    'total_br'     => $kb($sizes['totals']['core']['brotli']),
+    'total_gzip'   => $kb($sizes['totals']['core']['gzip']),
+    'total_bundle_br'   => $kb($sizes['totals']['bundle']['brotli']),
+    'total_bundle_gzip' => $kb($sizes['totals']['bundle']['gzip']),
+    'sprite_12_br'      => $kb($sizes['sample']['brotli']),
+    'sprite_12_gzip'    => $kb($sizes['sample']['gzip']),
     'source_files' => 26,
     'classes'      => 927,
     'icons'        => 75,
@@ -317,7 +341,7 @@ $ogImage = $url('assets/images/deck-og.png');
   <section class="container section stack-6" id="about">
     <h2>What is Deck?</h2>
     <p class="lede">Deck is a CSS framework that ships as a single
-      <?= $e($site['css_gzip']) ?> gzipped stylesheet containing buttons, forms, tables,
+      <?= $e($site['css_br']) ?> stylesheet containing buttons, forms, tables,
       a data grid, charts, overlays, an icon sprite, and a complete color system. You add
       it to a page with one <code>&lt;link&gt;</code> tag, and it has no build step, no
       configuration file, and <?= (int) $site['deps'] ?> runtime dependencies.</p>
@@ -330,47 +354,61 @@ $ogImage = $url('assets/images/deck-og.png');
 
     <h3>What does Deck actually weigh?</h3>
     <p>A page that loads the stylesheet, the icon sprite, and the optional JavaScript
-      transfers <?= $e($site['total_gzip']) ?> gzipped. The sprite is the largest single
-      file and is slightly bigger than the stylesheet, which is worth saying plainly
-      rather than leaving for you to find in devtools.</p>
+      transfers <?= $e($site['total_br']) ?> Brotli, or <?= $e($site['total_gzip']) ?> gzip.
+      Every browser Deck supports sends <code>br</code> in <code>Accept-Encoding</code>, and
+      Cloudflare, Vercel, Netlify, and nginx with <code>ngx_brotli</code> negotiate it for
+      text by default, so Brotli is what most users receive.</p>
 
     <div class="table-wrap">
       <table class="table table-stack">
-        <caption class="sr-only">Transfer size of each Deck file, gzipped</caption>
+        <caption class="sr-only">Transfer size of each Deck file, Brotli and gzip</caption>
         <thead>
-          <tr><th scope="col">File</th><th scope="col" class="num">Gzipped</th><th scope="col">What it is</th></tr>
+          <tr>
+            <th scope="col">File</th>
+            <th scope="col" class="num">Brotli</th>
+            <th scope="col" class="num">gzip</th>
+            <th scope="col">What it is</th>
+          </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row" data-label="File"><code>deck.min.css</code></th>
-            <td data-label="Gzipped" class="num nums"><?= $e($site['css_gzip']) ?></td>
+            <td data-label="Brotli" class="num nums"><strong><?= $e($site['css_br']) ?></strong></td>
+            <td data-label="gzip" class="num nums"><?= $e($site['css_gzip']) ?></td>
             <td data-label="What it is">The whole framework. Fixed size.</td>
           </tr>
           <tr>
             <th scope="row" data-label="File"><code>deck-icons.svg</code></th>
-            <td data-label="Gzipped" class="num nums"><?= $e($site['sprite_gzip']) ?></td>
+            <td data-label="Brotli" class="num nums"><strong><?= $e($site['sprite_br']) ?></strong></td>
+            <td data-label="gzip" class="num nums"><?= $e($site['sprite_gzip']) ?></td>
             <td data-label="What it is"><?= (int) $site['icons'] ?> icons at two weights,
               <?= (int) $site['symbols'] ?> symbols. Only if you use the icons.</td>
           </tr>
           <tr>
             <th scope="row" data-label="File"><code>deck.min.js</code></th>
-            <td data-label="Gzipped" class="num nums"><?= $e($site['js_gzip']) ?></td>
+            <td data-label="Brotli" class="num nums"><strong><?= $e($site['js_br']) ?></strong></td>
+            <td data-label="gzip" class="num nums"><?= $e($site['js_gzip']) ?></td>
             <td data-label="What it is">Optional. Only for components that need behaviour.</td>
           </tr>
           <tr>
             <th scope="row" data-label="File"><strong>All three</strong></th>
-            <td data-label="Gzipped" class="num nums"><strong><?= $e($site['total_gzip']) ?></strong></td>
+            <td data-label="Brotli" class="num nums"><strong><?= $e($site['total_br']) ?></strong></td>
+            <td data-label="gzip" class="num nums"><strong><?= $e($site['total_gzip']) ?></strong></td>
             <td data-label="What it is">The honest total for a page that uses everything.</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <p class="text-muted">Swapping <code>deck.min.js</code> for the full
+    <p class="text-muted">The sprite is the largest single file, slightly bigger than the
+      stylesheet, which is worth saying plainly rather than leaving for you to find in
+      devtools. Swapping <code>deck.min.js</code> for the full
       <code>deck.bundle.min.js</code>, which adds the date picker, combobox, data grid,
-      toasts, and QR encoder, makes the JavaScript <?= $e($site['bundle_gzip']) ?> and the
-      total 85.6 KB. Every figure here is what <code>npm run build</code> prints; run it
-      yourself.</p>
+      toasts, and QR encoder, makes the JavaScript <?= $e($site['bundle_br']) ?> and the
+      total <?= $e($site['total_bundle_br']) ?> Brotli
+      (<?= $e($site['total_bundle_gzip']) ?> gzip). Every figure here is measured by
+      <code>npm run build</code>; the page reads them from <code>dist/sizes.json</code>
+      rather than carrying its own copy.</p>
 
     <h3>The sprite is a manifest, not a fixed cost</h3>
     <p>The <?= (int) $site['icons'] ?> icons in the sprite are a default so the demo works
@@ -389,9 +427,10 @@ EOF
 
 $ npm run icons</code></pre>
 
-    <p><strong>A twelve icon sprite measures <?= $e($site['sprite_12']) ?> gzipped</strong>
-      — that figure was generated and measured, not estimated. Against
-      <?= $e($site['sprite_gzip']) ?> for the full set, trimming the manifest to what a
+    <p><strong>A twelve icon sprite measures <?= $e($site['sprite_12_br']) ?> Brotli
+      (<?= $e($site['sprite_12_gzip']) ?> gzip)</strong> — that figure was generated and
+      measured, not estimated. Against
+      <?= $e($site['sprite_br']) ?> for the full set, trimming the manifest to what a
       project actually uses is the difference between the sprite dominating the page
       weight and disappearing into it.</p>
 
@@ -481,8 +520,8 @@ $ npm run icons</code></pre>
             <td data-label="Bootstrap">0 for the CSS; Popper for dropdown and tooltip JavaScript</td>
           </tr>
           <tr>
-            <th scope="row" data-label="Question">CSS size, gzipped</th>
-            <td data-label="Deck"><?= $e($site['css_gzip']) ?>, fixed</td>
+            <th scope="row" data-label="Question">CSS size, compressed</th>
+            <td data-label="Deck"><?= $e($site['css_br']) ?> Brotli, fixed</td>
             <td data-label="Tailwind CSS">Varies with how many utilities you use</td>
             <td data-label="Bootstrap">Fixed; see their release notes for the current figure</td>
           </tr>
@@ -531,7 +570,7 @@ $ npm run icons</code></pre>
       autocomplete extension, and one maintainer, so a team that needs a large hiring
       pool or an off-the-shelf admin template is better served by Tailwind CSS or
       Bootstrap. Deck also has a fixed stylesheet size: a page that uses six components
-      downloads the same <?= $e($site['css_gzip']) ?> as a page that uses all of them,
+      downloads the same <?= $e($site['css_br']) ?> as a page that uses all of them,
       whereas Tailwind's generated output scales down with usage.</p>
 
     <p class="text-muted">Deck's figures above are measured from this repository with
@@ -1006,7 +1045,7 @@ $ npm run icons</code></pre>
       <h2>Icons and emoji</h2>
       <p class="text-muted">Deck ships <?= (int) $site['icons'] ?> icons as a single SVG
         sprite of <?= (int) $site['symbols'] ?> symbols — each icon at two weights, plus two
-        brand marks, <?= $e($site['sprite_gzip']) ?> gzipped — and they
+        brand marks, <?= $e($site['sprite_br']) ?> Brotli — and they
         inherit color and font size, so they sit on the text baseline without nudging. The
         sprite is generated from the Material Symbols variable font, so any of its
         <?= $e($site['icons_avail']) ?> icons can be added by putting its name in

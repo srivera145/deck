@@ -61,6 +61,46 @@ const CUTS = [
   { suffix: '-sm', axes: { FILL: 0, GRAD: 0, opsz: 24, wght: 500 } },
 ];
 
+/* Brotli at the setting a CDN uses for a cached static asset. Browsers
+   negotiate br for SVG and CSS, so it is the figure the docs lead with. */
+const brotli = (buf) => zlib.brotliCompressSync(buf, {
+  params: {
+    [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+    [zlib.constants.BROTLI_PARAM_SIZE_HINT]: buf.length,
+  },
+}).length;
+
+/* The sample the docs quote when they say "trim the manifest". Held here
+   rather than read from icons.txt so the published figure stays comparable
+   between releases no matter what the real manifest happens to contain. */
+const SAMPLE_ICONS = [
+  { id: 'check', glyph: 'check' },
+  { id: 'search', glyph: 'search' },
+  { id: 'settings', glyph: 'settings' },
+  { id: 'plus', glyph: 'add' },
+  { id: 'x', glyph: 'close' },
+  { id: 'chevron-down', glyph: 'keyboard_arrow_down' },
+  { id: 'chevron-right', glyph: 'chevron_right' },
+  { id: 'trash', glyph: 'delete' },
+  { id: 'edit', glyph: 'edit' },
+  { id: 'user', glyph: 'person' },
+  { id: 'bell', glyph: 'notifications' },
+  { id: 'calendar', glyph: 'calendar_month' },
+];
+
+/* dist/sizes.json is written by build.mjs and owns every published figure.
+   This script owns one key in it: the sample sprite, because measuring that
+   needs the font. Merge rather than overwrite so a build and an icon run can
+   happen in either order. */
+function recordSample(sample) {
+  const file = path.join(ROOT, 'dist', 'sizes.json');
+  let current = {};
+  try { current = JSON.parse(fs.readFileSync(file, 'utf8')); } catch { /* first run */ }
+  current.sample = sample;
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, JSON.stringify(current, null, 2) + '\n');
+}
+
 const die = (msg) => {
   console.error(`\n  icons: ${msg}\n`);
   process.exit(1);
@@ -461,6 +501,72 @@ function main() {
   if (font.unitsPerEm !== UPM) die(`expected a ${UPM} upm font, got ${font.unitsPerEm}.`);
   if (!font.tables.fvar || !font.tables.gvar) die('that font is not a variable font.');
 
+  const built = buildSprite(entries, carried, font);
+  const { missing, outside, counts, commandCount } = built;
+  const document = built.document;
+
+  if (missing.length) {
+    die(
+      `${missing.length} icon(s) could not be extracted:\n` +
+        missing
+          .map((m) => `    ${m.id} = ${m.glyph}${m.reason ? ` (${m.reason})` : ' (no such glyph)'}`)
+          .join('\n') +
+        '\n  Check the names against https://fonts.google.com/icons.'
+    );
+  }
+
+  const before = previous === null ? 0 : Buffer.byteLength(previous, 'utf8');
+  fs.writeFileSync(OUT, document, 'utf8');
+  const buf = Buffer.from(document, 'utf8');
+  const after = buf.length;
+  const gzipped = zlib.gzipSync(buf).length;
+  const brotlied = brotli(buf);
+
+  /* The twelve icon figure the docs quote. Generating a second sprite from a
+     sample manifest is the only honest way to publish it, so it is measured
+     here rather than estimated, and recorded in dist/sizes.json alongside the
+     real ones. This script owns that number because it is the only one with
+     the font. */
+  const sampleDoc = buildSprite(SAMPLE_ICONS, carried, font).document;
+  const sampleBuf = Buffer.from(sampleDoc, 'utf8');
+  const sample = {
+    icons: SAMPLE_ICONS.length,
+    raw: sampleBuf.length,
+    gzip: zlib.gzipSync(sampleBuf).length,
+    brotli: brotli(sampleBuf),
+  };
+  recordSample(sample);
+
+  const kb = (n) => `${(n / 1000).toFixed(1)} KB`;
+  console.log(`
+  icons: wrote ${path.relative(ROOT, OUT)}
+
+    ${counts.icons} icons x ${CUTS.length} cuts = ${counts.generated} generated symbols
+    ${counts.hand} hand authored symbols carried over: ${carried.map((c) => `#${c.id}`).join(', ')}
+    ${counts.generated + counts.hand} symbols total, ${commandCount} path commands
+    ${outside.length} glyph(s) outside the 0 0 24 24 viewBox
+    size ${kb(before)} to ${kb(after)}  (${kb(gzipped)} gzip, ${kb(brotlied)} brotli)
+    ${sample.icons} icon sample sprite: ${kb(sample.gzip)} gzip, ${kb(sample.brotli)} brotli
+`);
+
+  if (outside.length) {
+    console.log('  glyphs outside the viewBox:');
+    for (const o of outside) {
+      console.log(
+        `    #${o.id} (${o.glyph}) x ${o.box.x1}..${o.box.x2}  y ${o.box.y1}..${o.box.y2}`
+      );
+    }
+    console.log('');
+  }
+}
+
+/**
+ * Assemble a whole sprite document from a list of {id, glyph} entries.
+ * Split out of main() so the twelve icon sample sprite the docs quote is
+ * produced by exactly the same code path as the real one, and is therefore a
+ * measurement rather than an estimate.
+ */
+function buildSprite(entries, carried, font) {
   const missing = [];
   const outside = [];
   const symbols = [];
@@ -521,16 +627,6 @@ function main() {
     }
   }
 
-  if (missing.length) {
-    die(
-      `${missing.length} icon(s) could not be extracted:\n` +
-        missing
-          .map((m) => `    ${m.id} = ${m.glyph}${m.reason ? ` (${m.reason})` : ' (no such glyph)'}`)
-          .join('\n') +
-        '\n  Check the names against https://fonts.google.com/icons.'
-    );
-  }
-
   const counts = { icons: entries.length, generated: symbols.length, hand: carried.length };
   const block =
     `\n${symbols.join('\n')}\n` +
@@ -542,33 +638,13 @@ function main() {
         `${carried.map((c) => c.markup).join('\n')}\n`
       : '');
 
-  const document = spliceBeforeLastClose(header(counts), block);
-
-  const before = previous === null ? 0 : Buffer.byteLength(previous, 'utf8');
-  fs.writeFileSync(OUT, document, 'utf8');
-  const after = Buffer.byteLength(document, 'utf8');
-  const gzipped = zlib.gzipSync(Buffer.from(document, 'utf8')).length;
-
-  const kb = (n) => `${(n / 1000).toFixed(1)} KB`;
-  console.log(`
-  icons: wrote ${path.relative(ROOT, OUT)}
-
-    ${counts.icons} icons x ${CUTS.length} cuts = ${counts.generated} generated symbols
-    ${counts.hand} hand authored symbols carried over: ${carried.map((c) => `#${c.id}`).join(', ')}
-    ${counts.generated + counts.hand} symbols total, ${commandCount} path commands
-    ${outside.length} glyph(s) outside the 0 0 24 24 viewBox
-    size ${kb(before)} to ${kb(after)}  (${kb(gzipped)} gzipped)
-`);
-
-  if (outside.length) {
-    console.log('  glyphs outside the viewBox:');
-    for (const o of outside) {
-      console.log(
-        `    #${o.id} (${o.glyph}) x ${o.box.x1}..${o.box.x2}  y ${o.box.y1}..${o.box.y2}`
-      );
-    }
-    console.log('');
-  }
+  return {
+    document: spliceBeforeLastClose(header(counts), block),
+    missing,
+    outside,
+    counts,
+    commandCount,
+  };
 }
 
 main();

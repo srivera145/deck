@@ -1,6 +1,6 @@
 # Deck
 
-**Deck is a CSS framework that ships as one 32.5 KB gzipped stylesheet: buttons, forms,
+**Deck is a CSS framework that ships as one 26.6 KB Brotli (32.5 KB gzip) stylesheet: buttons, forms,
 tables, a data grid, charts, overlays, an icon sprite, and a full color system. You add it
 with one `<link>` tag. There is no build step, no config file, and zero dependencies.**
 
@@ -23,19 +23,21 @@ Version 0.1.0 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
 ## What Deck weighs
 
-A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers
-**76.1 KB** gzipped. The sprite is the largest single file and is slightly bigger than the
-stylesheet — worth stating plainly rather than leaving you to find it in devtools.
+A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **62.7 KB** Brotli, or **76.1 KB** gzip. Every browser Deck supports sends `br` in
+`Accept-Encoding`, and Cloudflare, Vercel, Netlify, and nginx with `ngx_brotli` negotiate
+it for text by default, so Brotli is what most users actually receive.
 
-| File | Gzipped | Notes |
+| File | Brotli | gzip |
 | --- | --- | --- |
-| `deck.min.css` | **32.5 KB** | The whole framework. Fixed size. |
-| `deck-icons.svg` | **33.6 KB** | 75 icons at two weights, 152 symbols. Only if you use them. |
-| `deck.min.js` | **10.0 KB** | Optional. Only for components that need behaviour. |
-| **All three** | **76.1 KB** | The honest total for a page that uses everything. |
+| `deck.min.css` | **26.6 KB** | 32.5 KB |
+| `deck-icons.svg` | **27.1 KB** | 33.6 KB |
+| `deck.min.js` | **8.9 KB** | 10.0 KB |
+| **All three** | **62.7 KB** | **76.1 KB** |
 
-Swapping `deck.min.js` for the full `deck.bundle.min.js` (adds the date picker, combobox,
-data grid, toasts, QR encoder) makes the JavaScript 19.5 KB and the total 85.6 KB.
+The sprite is the largest single file, slightly bigger than the stylesheet — worth stating
+plainly rather than leaving you to find it in devtools. Swapping `deck.min.js` for the full
+`deck.bundle.min.js` (adds the date picker, combobox, data grid, toasts, QR encoder)
+makes the JavaScript 17.3 KB and the total 71.1 KB Brotli (85.6 KB gzip).
 
 ### The sprite is a manifest, not a fixed cost
 
@@ -55,8 +57,8 @@ EOF
 $ npm run icons
 ```
 
-**A twelve-icon sprite measures 6.9 KB gzipped** — generated and measured, not estimated.
-Against 33.6 KB for the full set, trimming the manifest is the difference between the
+**A twelve-icon sprite measures 5.7 KB Brotli (6.9 KB gzip)** — generated and measured, not
+estimated. Against 27.1 KB for the full set, trimming the manifest is the difference between the
 sprite dominating page weight and disappearing into it.
 
 This matters because an external sprite is all-or-nothing per request: the browser fetches
@@ -66,20 +68,21 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 
 ### Everything in the package
 
-| File | Gzipped | What it is |
-| --- | --- | --- |
-| `deck.min.css` | 32.5 KB | The whole framework |
-| `deck.min.js` | 10.0 KB | Optional behaviour, no dependencies |
-| `deck-extras.min.js` | 6.5 KB | Date picker, combobox, data grid, toasts, QR encoder |
-| `deck-adapters.min.js` | 4.5 KB | Optional library integrations, inert unless one is loaded |
-| `deck.bundle.min.js` | 19.5 KB | All three scripts in one file |
-| `deck-icons.svg` | 33.6 KB | 152 symbols: 75 icons at two weights, plus two brand marks |
-| `src/` | — | The 26 source stylesheets, concatenated to build `deck.css` |
-| `dist/layers/` | — | One file per layer, if you only want part of Deck |
-| `php/` | — | Optional PHP helper for Composer users |
-| `bin/deck.mjs` | — | The `npx @echodial/deck` CLI |
+| File | Brotli | gzip | What it is |
+| --- | --- | --- | --- |
+| `deck.min.css` | 26.6 KB | 32.5 KB | The whole framework |
+| `deck.min.js` | 8.9 KB | 10.0 KB | Optional behaviour, no dependencies |
+| `deck-extras.min.js` | 5.7 KB | 6.5 KB | Date picker, combobox, data grid, toasts, QR encoder |
+| `deck-adapters.min.js` | 4.0 KB | 4.5 KB | Optional library integrations, inert unless one is loaded |
+| `deck.bundle.min.js` | 17.3 KB | 19.5 KB | All three scripts in one file |
+| `deck-icons.svg` | 27.1 KB | 33.6 KB | 152 symbols: 75 icons at two weights, plus two brand marks |
+| `src/` | — | — | The 26 source stylesheets, concatenated to build `deck.css` |
+| `dist/layers/` | — | — | One file per layer, if you only want part of Deck |
+| `php/` | — | — | Optional PHP helper for Composer users |
+| `bin/deck.mjs` | — | — | The `npx @echodial/deck` CLI |
 
-Every size above is what `npm run build` prints, in decimal KB.
+Every size above is what `npm run build` prints, in decimal KB, and is written into this
+file by the build rather than typed.
 
 The component demo is `public_html/index.php` — every component on one page. Run it with
 `npm run demo && npm start`.
@@ -370,7 +373,7 @@ That reads `tools/icons/icons.txt` — one `sprite-id = material-glyph-name` per
 out of the Material Symbols Rounded variable font and writes both cuts of every listed
 icon. To add, drop or swap an icon, edit that list and rerun. Any of the 4,025 glyphs in
 the font is available; only the names on the list end up in the sprite, which is how a
-4,025 icon library ships as a 75 icon file — or a twelve icon one at 6.9 KB gzipped, if
+4,025 icon library ships as a 75 icon file — or a twelve icon one at 5.7 KB Brotli, if
 that is all your project uses.
 
 The font is a **build time source only**. It never reaches a browser: a webfont would be
