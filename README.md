@@ -482,7 +482,7 @@ The real `<select>` stays in the DOM and stays in sync, so a normal PHP form pos
 works with nothing extra on the server. `data-sub` adds a second line, `data-group`
 groups options, `data-create` allows adding new values, `data-multi` gives tokens.
 
-For a remote source, set `data-url="/api/vins?q="` — deck.js appends the query,
+For a remote source, set `data-url="/api/repos?q="` — deck.js appends the query,
 debounces (`data-debounce`, default 220ms), and expects JSON rows of
 `{ value, label, sub, group, disabled }`. Use `data-min-chars` to hold off until
 the user has typed enough.
@@ -496,7 +496,7 @@ Events: `deck:change` with `{ values }`, `deck:create` with `{ value }`.
   <table class="dg dg-zebra">
     <thead><tr>
       <th class="dg-check dg-pin-start">…</th>
-      <th class="dg-pin-start-2" data-sort="text" data-resize>Claim</th>
+      <th class="dg-pin-start-2" data-sort="text" data-resize>Order</th>
       <th class="dg-num" data-sort="num">Total</th>
       <th class="dg-actions dg-pin-end"></th>
     </tr></thead>
@@ -516,11 +516,11 @@ Events: `deck:sort`, `deck:select`.
 ## Toasts
 
 ```js
-Deck.toast('Claim 88214 approved');
+Deck.toast('Deploy succeeded');
 
 Deck.toast({
   kind: 'warn',            // good | warn | bad | info | loading | ''
-  title: 'Claim withdrawn',
+  title: 'Project archived',
   text: 'You can undo this.',
   duration: 8000,          // 0 keeps it until dismissed
   actions: [{ label: 'Undo', onClick: () => restore() }]
@@ -669,8 +669,8 @@ Give the same `view-transition-name` to matching elements on both pages and the
 browser tweens between them — a row in a list morphing into a detail page header:
 
 ```html
-<!-- list page -->  <tr style="view-transition-name: claim-88214">
-<!-- detail page --> <h1 style="view-transition-name: claim-88214">
+<!-- list page -->  <tr style="view-transition-name: order-1042">
+<!-- detail page --> <h1 style="view-transition-name: order-1042">
 ```
 
 Helpers: `.vt-header` `.vt-main` `.vt-tabbar`, and `.vt-hold` with `--vt` for a
@@ -789,8 +789,9 @@ grid pin shadows, chart fills, marquee, and entrance animations all flip; and th
 breadcrumb separator swaps.
 
 - **Explicit direction:** `.dir-ltr` `.dir-rtl` `.bidi-isolate` `.bidi-plaintext`.
-  `.vin`, `.mono`, `code`, and `.nums` are isolated by default — a VIN reads left to
-  right in every language and must not scramble the text around it.
+  `.code-ltr` (alias `.vin`), `.mono`, `code`, and `.nums` are isolated by default — an
+  identifier like a commit hash or an order number reads left to right in every
+  language and must not scramble the text around it.
 - **Mirroring control:** `.flip-rtl` to mirror, `.no-flip` to never mirror.
 - **Logical utilities:** `.mis-*` `.mie-*` `.mbs-*` `.mbe-*` `.pis-*` `.pie-*`
   `.bis` `.bie` `.is-full` `.bs-full` `.inset-is-0` `.r-start` `.r-end`.
@@ -963,7 +964,7 @@ for recording what already happened — they aren't the same component.
   mean real keyboard support and a real form post; `data-gap` keeps the handles apart.
   Fires `deck:change` with `{ min, max }`.
 - **Copy** — `.copy` with `.copy-btn data-deck-copy`, or `.copy-inline` for an icon
-  beside a VIN in a table. Falls back to `execCommand` on http origins where the
+  beside an identifier in a table. Falls back to `execCommand` on http origins where the
   clipboard API is unavailable.
 
 ### WYSIWYG editor
@@ -995,7 +996,7 @@ keeps its tail, and repeated avatars hide themselves.
 ### QR code
 
 ```html
-<div class="qr" data-deck-qr="https://claim-iq.io/c/88214" data-ecl="M"></div>
+<div class="qr" data-deck-qr="https://example.com/orders/1042" data-ecl="M"></div>
 ```
 
 ```js
@@ -1037,10 +1038,10 @@ dot plus a label, and `.with-indicator` + `.indicator-badge` for a count on an i
 
 ```html
 <aside class="cq-shell">
-  <nav class="panel sidebar" aria-label="Warranty desk">
-    <span class="sidebar-group">Claims</span>
-    <a class="sidebar-link" aria-current="page" href="/claims">
-      <svg class="icon">…</svg><span>Open claims</span><span class="badge push">42</span>
+  <nav class="panel sidebar" aria-label="Workspace">
+    <span class="sidebar-group">Issues</span>
+    <a class="sidebar-link" aria-current="page" href="/issues">
+      <svg class="icon">…</svg><span>Open</span><span class="badge push">42</span>
     </a>
   </nav>
 </aside>
@@ -1062,10 +1063,10 @@ container.
 There are two, and the difference matters.
 
 ```html
-<button class="btn btn-icon tooltip" data-tip="Recheck coverage" aria-label="Recheck coverage">…</button>
+<button class="btn btn-icon tooltip" data-tip="Re-run failed jobs" aria-label="Re-run failed jobs">…</button>
 
-<button class="btn" popovertarget="tipVin">Why did this VIN fail?</button>
-<div class="tip" id="tipVin" popover>Coverage ended at 36,000 miles.<span class="tip-arrow"></span></div>
+<button class="btn" popovertarget="tipBuild">Why did this build fail?</button>
+<div class="tip" id="tipBuild" popover>The integration suite timed out.<span class="tip-arrow"></span></div>
 ```
 
 - `.tooltip` is a `::after` on the trigger reading `data-tip`. No extra markup, no
@@ -1084,9 +1085,9 @@ for `.tip` when the text is longer, has to survive an edge, or should open on cl
 
 ```html
 <div class="gallery">
-  <a class="span-2" href="…"><img src="…" alt="Cooler line at the failure point"></a>
-  <a href="…"><img src="…" alt="VIN plate"></a>
-  <a class="span-wide" href="…"><img src="…" alt="Repair order 44190"></a>
+  <a class="span-2" href="…"><img src="…" alt="Dashboard screenshot"></a>
+  <a href="…"><img src="…" alt="Logo on a light background"></a>
+  <a class="span-wide" href="…"><img src="…" alt="Social card, 1200 by 630"></a>
 </div>
 ```
 

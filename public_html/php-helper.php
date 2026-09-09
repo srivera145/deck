@@ -21,20 +21,20 @@ Deck::configure([
 ]);
 
 // Pretend these came from the database
-$tenant = ['name' => 'Orchid Isle Ford', 'hue' => 196];
+$tenant = ['name' => 'Acme Design', 'hue' => 196];
 $user   = ['theme' => null];   // null follows the operating system
 
-$claims = [
-    ['id' => 88214, 'vehicle' => '2021 F-150 XLT',   'status' => 'good', 'label' => 'Approved', 'total' => 842.16],
-    ['id' => 88220, 'vehicle' => '2023 Explorer ST', 'status' => 'warn', 'label' => 'Pending',  'total' => 318.00],
-    ['id' => 88109, 'vehicle' => '2020 Escape SE',   'status' => 'bad',  'label' => 'Denied',   'total' => 0.00],
+$orders = [
+    ['id' => 1042, 'customer' => 'Northwind Traders',   'status' => 'good', 'label' => 'Paid',     'total' => 842.16],
+    ['id' => 1041, 'customer' => 'Globex Corp',         'status' => 'warn', 'label' => 'Pending',  'total' => 318.00],
+    ['id' => 1039, 'customer' => 'Initech',             'status' => 'bad',  'label' => 'Refunded', 'total' => 0.00],
 ];
 ?>
 <!doctype html>
 <html <?= Deck::htmlAttributes(lang: 'en') ?> <?= Deck::theme(hue: $tenant['hue'], mode: $user['theme']) ?>>
 <head>
 <meta charset="utf-8">
-<title><?= htmlspecialchars($tenant['name']) ?> — claims</title>
+<title><?= htmlspecialchars($tenant['name']) ?> — orders</title>
 <?= Deck::head(viewport: true) ?>
 </head>
 <body>
@@ -43,7 +43,7 @@ $claims = [
   <div class="container">
     <nav class="navbar">
       <a class="navbar-brand" href="/">
-        <?= Deck::icon('gauge', 'icon icon-lg') ?>
+        <?= Deck::icon('grid', 'icon icon-lg') ?>
         <?= htmlspecialchars($tenant['name']) ?>
       </a>
       <button class="btn btn-icon btn-ghost push" data-deck-theme aria-label="Switch theme">
@@ -56,28 +56,28 @@ $claims = [
 <main class="container section stack-6">
 
   <div class="stack-2">
-    <h1>Open claims</h1>
+    <h1>Recent orders</h1>
     <p class="lede">Rendered by <code>php/Deck.php</code>. The brand hue comes from the
       tenant record, applied as one inline style on the <code>&lt;html&gt;</code> tag —
       no rebuild and no second stylesheet.</p>
   </div>
 
   <div class="list">
-    <?php foreach ($claims as $claim): ?>
-      <a class="list-row" href="#claim-<?= $claim['id'] ?>">
-        <span class="icon-tile icon-tile-<?= $claim['status'] ?>">
-          <?= Deck::icon(match ($claim['status']) {
+    <?php foreach ($orders as $order): ?>
+      <a class="list-row" href="#order-<?= $order['id'] ?>">
+        <span class="icon-tile icon-tile-<?= $order['status'] ?>">
+          <?= Deck::icon(match ($order['status']) {
                 'good' => 'check',
                 'warn' => 'clock',
                 default => 'x',
             }) ?>
         </span>
         <span class="list-main">
-          <span class="list-title">Claim <?= $claim['id'] ?></span>
-          <span class="list-sub"><?= htmlspecialchars($claim['vehicle']) ?></span>
+          <span class="list-title">Order #<?= $order['id'] ?></span>
+          <span class="list-sub"><?= htmlspecialchars($order['customer']) ?></span>
         </span>
-        <span class="badge badge-<?= $claim['status'] ?>"><?= htmlspecialchars($claim['label']) ?></span>
-        <span class="list-trail nums">$<?= number_format($claim['total'], 2) ?></span>
+        <span class="badge badge-<?= $order['status'] ?>"><?= htmlspecialchars($order['label']) ?></span>
+        <span class="list-trail nums">$<?= number_format($order['total'], 2) ?></span>
       </a>
     <?php endforeach; ?>
   </div>

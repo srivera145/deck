@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Deck — the CSS framework for Keel</title>
+<title>Deck — a CSS framework in one file</title>
 
 <!-- Brand marks. These are the static ones: an <img> or a <link> gets no colour
      context, so currentColor would resolve to black. Everything on the page
@@ -14,8 +14,8 @@
 
 <meta name="description" content="Deck is one stylesheet: a full component set, an icon system, and a palette that recolors from a single number. No build step, no config file, no dependencies.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Deck — the CSS framework for Keel">
-<meta property="og:description" content="One stylesheet. Retheme the entire app from one number.">
+<meta property="og:title" content="Deck — a CSS framework in one file">
+<meta property="og:description" content="One stylesheet, one link tag, zero dependencies. Retheme the whole app from one number.">
 <meta property="og:image" content="assets/images/deck-og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -96,14 +96,17 @@
   <section class="container hero stack-6">
     <div class="cluster cluster-tight">
       <span class="badge badge-brand badge-dot">v0.1</span>
+      <span class="badge">One stylesheet</span>
       <span class="badge">No build step</span>
-      <span class="badge">One file</span>
+      <span class="badge">0 dependencies</span>
     </div>
-    <h1 class="display mb-3">Drag the slider. Watch the whole page change its mind.</h1>
+    <h1 class="display mb-3">A CSS framework you add with one link tag.</h1>
     <p class="lede mb-2">
-      Deck is one stylesheet. Drop it in a Keel view and you have a full component
-      set, an icon system, and a palette that recolors from a single number — no
-      config file, no purge step, no rebuild to change a brand color.
+      Deck is a single stylesheet: buttons, forms, tables, a data grid, charts,
+      overlays, an icon sprite, and a full color system. There is no build step, no
+      config file, no purge pass, and nothing to install. It ships in cascade layers,
+      so your own CSS wins without <code>!important</code>, and every color on the page
+      derives from one number you can change at runtime.
     </p>
     <div class="cluster">
       <a class="btn btn-primary btn-lg" href="#main">
@@ -115,7 +118,7 @@
         Copy the link tag
       </button>
       <div class="menu" id="installMenu" popover style="position:fixed;inset-block-start:auto">
-        <div class="menu-label">Add to a Keel layout</div>
+        <div class="menu-label">That is the whole install</div>
         <code style="display:block;padding:var(--space-3);white-space:pre-wrap;font-size:var(--text-xs)">&lt;link rel="stylesheet" href="/assets/deck/deck.css"&gt;</code>
       </div>
     </div>
@@ -133,6 +136,10 @@
       <div style="background:var(--brand-900)"></div>
       <div style="background:var(--brand-950)"></div>
     </div>
+    <p class="text-sm text-muted">Those eleven steps, every button, link, focus ring,
+      badge, chart series, and shadow on this page are computed from
+      <code>--hue-brand</code>. Drag the slider in the header and watch all of it
+      retune, live, with no rebuild.</p>
   </section>
 
   <hr>
@@ -151,7 +158,7 @@
       <button class="btn btn-outline">Preview</button>
       <button class="btn btn-ghost">Skip</button>
       <button class="btn btn-accent">Upgrade</button>
-      <button class="btn btn-danger">Delete claim</button>
+      <button class="btn btn-danger">Delete project</button>
       <button class="btn" disabled>Unavailable</button>
       <button class="btn btn-primary is-loading">Submitting</button>
     </div>
@@ -184,7 +191,7 @@
       <article class="card">
         <div class="card-body">
           <div class="stat">
-            <span class="stat-label">Claims submitted</span>
+            <span class="stat-label">Orders this month</span>
             <span class="stat-value">1,284</span>
             <span class="stat-delta stat-delta-up">
               <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#trend-up-sm"></use></svg>
@@ -197,7 +204,7 @@
       <article class="card">
         <div class="card-body">
           <div class="stat">
-            <span class="stat-label">Average approval time</span>
+            <span class="stat-label">Average time to ship</span>
             <span class="stat-value">3.2 days</span>
             <span class="stat-delta stat-delta-down">
               <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#trend-down-sm"></use></svg>
@@ -210,10 +217,10 @@
       <article class="card card-link">
         <div class="card-body">
           <div class="cluster cluster-tight">
-            <span class="icon-tile"><svg class="icon"><use href="assets/deck/deck-icons.svg#wrench"></use></svg></span>
+            <span class="icon-tile"><svg class="icon"><use href="assets/deck/deck-icons.svg#clipboard"></use></svg></span>
             <div class="grow">
-              <h3 class="card-title"><a class="link-quiet stretch" href="#main">Open repair orders</a></h3>
-              <p class="text-sm text-muted">17 waiting on parts</p>
+              <h3 class="card-title"><a class="link-quiet stretch" href="#main">Open support tickets</a></h3>
+              <p class="text-sm text-muted">17 waiting on a reply</p>
             </div>
             <svg class="icon icon-muted"><use href="assets/deck/deck-icons.svg#chevron-right"></use></svg>
           </div>
@@ -224,21 +231,21 @@
     <div class="grid grid-wide">
       <article class="card">
         <header class="card-header">
-          <span class="avatar">RM</span>
+          <span class="avatar">PL</span>
           <div class="grow">
-            <div class="fw-semi">Rissa Molina</div>
-            <div class="text-sm text-muted">Warranty administrator</div>
+            <div class="fw-semi">Priya Lakhani</div>
+            <div class="text-sm text-muted">Engineering manager</div>
           </div>
           <button class="btn btn-icon btn-ghost btn-sm" aria-label="More">
             <svg class="icon"><use href="assets/deck/deck-icons.svg#more-horizontal"></use></svg>
           </button>
         </header>
         <div class="card-body">
-          <p class="text-muted">Submitted eleven claims this week. Two came back needing
-            additional cause and correction detail.</p>
+          <p class="text-muted">Opened eleven pull requests this week. Two are blocked on
+            a review from the platform team.</p>
           <div class="cluster cluster-tight">
-            <span class="badge badge-good">9 approved</span>
-            <span class="badge badge-warn">2 returned</span>
+            <span class="badge badge-good">9 merged</span>
+            <span class="badge badge-warn">2 blocked</span>
           </div>
         </div>
         <footer class="card-footer">
@@ -251,29 +258,29 @@
         <div class="alert alert-info mb-2">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#info"></use></svg>
           <div>
-            <div class="alert-title">Policy update</div>
-            <p class="alert-body">Labor time allowances changed for 2024 model year Broncos.</p>
+            <div class="alert-title">Scheduled maintenance</div>
+            <p class="alert-body">The API will be read only on Sunday from 02:00 to 04:00 UTC.</p>
           </div>
         </div>
         <div class="alert alert-good mb-2">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#check-circle"></use></svg>
           <div>
-            <div class="alert-title">Claim 88214 approved</div>
-            <p class="alert-body">Paid at $842.16 on the next statement.</p>
+            <div class="alert-title">Deploy succeeded</div>
+            <p class="alert-body">Build 4471 is live on production. 42 seconds, no errors.</p>
           </div>
         </div>
         <div class="alert alert-warn mb-2">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#alert-triangle"></use></svg>
           <div>
-            <div class="alert-title">Missing documentation</div>
-            <p class="alert-body">Three claims need a technician story before Friday.</p>
+            <div class="alert-title">Storage is nearly full</div>
+            <p class="alert-body">You are using 47 GB of your 50 GB plan.</p>
           </div>
         </div>
         <div class="alert alert-bad mb-2">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#x-circle"></use></svg>
           <div>
-            <div class="alert-title">Claim 88109 denied</div>
-            <p class="alert-body">Outside the coverage window by 412 miles.</p>
+            <div class="alert-title">Payment failed</div>
+            <p class="alert-body">The card ending 4242 was declined. Update it to keep the plan active.</p>
           </div>
         </div>
       </div>
@@ -294,89 +301,89 @@
       <form class="stack-5">
         <div class="field-row">
           <div class="field">
-            <label class="label" for="vin">VIN <span class="required">*</span></label>
-            <input class="input" id="vin" placeholder="1FMCU9J91LUA12345" required>
-            <span class="help">17 characters, no spaces.</span>
+            <label class="label" for="wsname">Workspace name <span class="required">*</span></label>
+            <input class="input" id="wsname" placeholder="Acme Design" required>
+            <span class="help">Shown in the header and on invoices.</span>
           </div>
           <div class="field">
-            <label class="label" for="ro">RO number <span class="optional">optional</span></label>
-            <input class="input" id="ro" placeholder="482910">
+            <label class="label" for="wsslug">URL slug <span class="optional">optional</span></label>
+            <input class="input" id="wsslug" placeholder="acme-design">
           </div>
         </div>
 
         <div class="field">
-          <label class="label" for="email">Email</label>
+          <label class="label" for="email">Billing email</label>
           <input class="input" id="email" type="email" value="not-an-email" required>
           <span class="error">
             <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#alert-circle-sm"></use></svg>
-            Enter an address in the form name@shop.com
+            Enter an address in the form name@example.com
           </span>
         </div>
 
         <div class="field">
-          <label class="label" for="type">Claim type</label>
+          <label class="label" for="type">Default role for new members</label>
           <select class="select" id="type">
-            <option>Base warranty</option>
-            <option>Extended service plan</option>
-            <option>Field service action</option>
-            <option>Goodwill</option>
+            <option>Viewer</option>
+            <option>Editor</option>
+            <option>Admin</option>
+            <option>Owner</option>
           </select>
         </div>
 
         <div class="field">
-          <label class="label" for="labor">Labor</label>
+          <label class="label" for="seatrate">Seat price</label>
           <div class="input-group">
             <span class="addon">$</span>
-            <input class="input" id="labor" inputmode="decimal" placeholder="0.00">
-            <span class="addon">per hour</span>
+            <input class="input" id="seatrate" inputmode="decimal" placeholder="0.00">
+            <span class="addon">per month</span>
           </div>
         </div>
 
         <div class="field">
-          <label class="label" for="story">Technician story</label>
-          <textarea class="textarea" id="story" placeholder="Cause, correction, and what was verified."></textarea>
+          <label class="label" for="story">Workspace description</label>
+          <textarea class="textarea" id="story" placeholder="What this workspace is for, and who should join it."></textarea>
           <span class="help">This box grows as you type.</span>
         </div>
 
         <div class="field">
-          <span class="label">Notify</span>
+          <span class="label">Email me when</span>
           <label class="check">
             <input type="checkbox" checked>
             <span class="check-text">
-              <span>Email me on approval</span>
-              <span class="check-note">Sent within a minute of the status change.</span>
+              <span>Someone mentions me</span>
+              <span class="check-note">Sent within a minute of the comment.</span>
             </span>
           </label>
           <label class="check">
             <input type="checkbox">
-            <span class="check-text"><span>Text me on denial</span></span>
+            <span class="check-text"><span>A deploy fails</span></span>
           </label>
           <label class="check">
             <input type="checkbox" id="indet">
-            <span class="check-text"><span>Weekly summary</span></span>
+            <span class="check-text"><span>Weekly digest</span></span>
           </label>
         </div>
 
         <label class="switch">
           <input type="checkbox" checked>
-          <span>Auto-submit claims that pass validation</span>
+          <span>Require two-factor authentication for everyone</span>
         </label>
 
         <div class="stack-3">
-          <span class="label">Priority</span>
+          <span class="label">Plan</span>
           <div class="grid grid-tight">
             <label class="check check-card">
               <input type="radio" name="pri" checked>
               <span class="check-text">
-                <span class="fw-semi">Standard</span>
-                <span class="check-note">Reviewed in order received</span>
+                <span class="fw-semi">Team</span>
+                <span class="check-note">$12 per seat, billed monthly</span>
               </span>
             </label>
             <label class="check check-card">
               <input type="radio" name="pri">
               <span class="check-text">
-                <span class="fw-semi">Expedite</span>
-                <span class="check-note">Customer is waiting</span>
+                <span class="fw-semi">Enterprise</span>
+                <span class="check-note">SSO, audit log, and a support SLA</span>
               </span>
             </label>
           </div>
@@ -385,26 +392,26 @@
         <label class="file">
           <input type="file">
           <svg class="icon icon-xl icon-muted"><use href="assets/deck/deck-icons.svg#upload"></use></svg>
-          <span class="fw-semi text-inherit">Add photos or the repair order</span>
-          <span class="text-sm">PDF, JPG, or PNG up to 20 MB</span>
+          <span class="fw-semi text-inherit">Drop a workspace logo here</span>
+          <span class="text-sm">SVG, PNG, or JPG up to 20 MB</span>
         </label>
 
         <div class="form-actions">
-          <button class="btn btn-primary" type="button">Submit claim</button>
-          <button class="btn" type="button">Save draft</button>
+          <button class="btn btn-primary" type="button">Save settings</button>
+          <button class="btn" type="button">Cancel</button>
         </div>
       </form>
 
       <aside class="stack-4">
         <div class="search">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#search"></use></svg>
-          <input class="input" type="search" placeholder="Search claims">
+          <input class="input" type="search" placeholder="Search invoices">
         </div>
 
         <div class="segmented" role="tablist">
-          <button role="tab" aria-selected="true">Open</button>
-          <button role="tab" aria-selected="false">Paid</button>
-          <button role="tab" aria-selected="false">Denied</button>
+          <button role="tab" aria-selected="true">Paid</button>
+          <button role="tab" aria-selected="false">Open</button>
+          <button role="tab" aria-selected="false">Overdue</button>
         </div>
 
         <div class="list">
@@ -412,24 +419,24 @@
           <a class="list-row" href="#forms">
             <span class="icon-tile icon-tile-good"><svg class="icon"><use href="assets/deck/deck-icons.svg#check"></use></svg></span>
             <span class="list-main">
-              <span class="list-title">Claim 88214</span>
-              <span class="list-sub truncate">2021 F-150 · transmission cooler line</span>
+              <span class="list-title">INV-2041</span>
+              <span class="list-sub truncate">Northwind Traders · 24 seats, March</span>
             </span>
             <span class="list-trail nums">$842.16</span>
           </a>
           <a class="list-row" href="#forms">
             <span class="icon-tile icon-tile-warn"><svg class="icon"><use href="assets/deck/deck-icons.svg#clock"></use></svg></span>
             <span class="list-main">
-              <span class="list-title">Claim 88220</span>
-              <span class="list-sub truncate">2023 Explorer · waiting on parts</span>
+              <span class="list-title">INV-2040</span>
+              <span class="list-sub truncate">Globex Corp · awaiting a purchase order</span>
             </span>
             <span class="list-trail nums">$318.00</span>
           </a>
           <a class="list-row" href="#forms">
             <span class="icon-tile icon-tile-bad"><svg class="icon"><use href="assets/deck/deck-icons.svg#x"></use></svg></span>
             <span class="list-main">
-              <span class="list-title">Claim 88109</span>
-              <span class="list-sub truncate">2020 Escape · out of coverage</span>
+              <span class="list-title">INV-2038</span>
+              <span class="list-sub truncate">Initech · card declined twice</span>
             </span>
             <span class="list-trail nums">$0.00</span>
           </a>
@@ -444,7 +451,7 @@
               <span class="ring-label">68%</span>
             </div>
             <div class="spinner"></div>
-            <span class="text-sm text-muted">Syncing with OASIS</span>
+            <span class="text-sm text-muted">Importing from CSV</span>
           </div>
         </div>
 
@@ -487,28 +494,28 @@
     <div class="table-wrap">
       <table class="table table-stack">
         <thead>
-          <tr><th>Claim</th><th>Vehicle</th><th>Status</th><th class="num">Amount</th><th class="num">Age</th></tr>
+          <tr><th>Order</th><th>Customer</th><th>Status</th><th class="num">Total</th><th class="num">Age</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td data-label="Claim"><a href="#main">88214</a></td>
-            <td data-label="Vehicle">2021 F-150</td>
-            <td data-label="Status"><span class="badge badge-good">Approved</span></td>
-            <td data-label="Amount" class="num nums">$842.16</td>
+            <td data-label="Order"><a href="#main">#1042</a></td>
+            <td data-label="Customer">Northwind Traders</td>
+            <td data-label="Status"><span class="badge badge-good">Shipped</span></td>
+            <td data-label="Total" class="num nums">$842.16</td>
             <td data-label="Age" class="num nums">2d</td>
           </tr>
           <tr>
-            <td data-label="Claim"><a href="#main">88220</a></td>
-            <td data-label="Vehicle">2023 Explorer</td>
-            <td data-label="Status"><span class="badge badge-warn">Pending</span></td>
-            <td data-label="Amount" class="num nums">$318.00</td>
+            <td data-label="Order"><a href="#main">#1041</a></td>
+            <td data-label="Customer">Globex Corp</td>
+            <td data-label="Status"><span class="badge badge-warn">Packing</span></td>
+            <td data-label="Total" class="num nums">$318.00</td>
             <td data-label="Age" class="num nums">5d</td>
           </tr>
           <tr>
-            <td data-label="Claim"><a href="#main">88109</a></td>
-            <td data-label="Vehicle">2020 Escape</td>
-            <td data-label="Status"><span class="badge badge-bad">Denied</span></td>
-            <td data-label="Amount" class="num nums">$0.00</td>
+            <td data-label="Order"><a href="#main">#1039</a></td>
+            <td data-label="Customer">Initech</td>
+            <td data-label="Status"><span class="badge badge-bad">Refunded</span></td>
+            <td data-label="Total" class="num nums">$0.00</td>
             <td data-label="Age" class="num nums">11d</td>
           </tr>
         </tbody>
@@ -535,16 +542,16 @@
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <ol class="cluster cluster-tight" style="display:flex;list-style:none;padding:0;margin:0">
         <li><a href="#main">Dashboard</a></li>
-        <li><a href="#main">Claims</a></li>
-        <li aria-current="page">88214</li>
+        <li><a href="#main">Orders</a></li>
+        <li aria-current="page">#1042</li>
       </ol>
     </nav>
 
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" aria-selected="true">Summary</button>
-      <button class="tab" role="tab" aria-selected="false">Parts</button>
-      <button class="tab" role="tab" aria-selected="false">Labor</button>
-      <button class="tab" role="tab" aria-selected="false">Attachments</button>
+      <button class="tab" role="tab" aria-selected="false">Items</button>
+      <button class="tab" role="tab" aria-selected="false">Shipping</button>
+      <button class="tab" role="tab" aria-selected="false">Invoices</button>
       <button class="tab" role="tab" aria-selected="false">History</button>
     </div>
 
@@ -553,41 +560,41 @@
         <details open>
           <summary>
             <svg class="icon icon-muted"><use href="assets/deck/deck-icons.svg#help"></use></svg>
-            Why was this claim returned?
+            How do I invite someone to a workspace?
           </summary>
-          <div class="accordion-body">The technician story did not state what was verified
-            before the part was replaced. Add the diagnostic steps and resubmit.</div>
+          <div class="accordion-body">Settings, then Members, then Invite. They get an
+            email with a link that expires after seven days.</div>
         </details>
         <details>
           <summary>
             <svg class="icon icon-muted"><use href="assets/deck/deck-icons.svg#help"></use></svg>
-            How long does review take?
+            Can I change my plan mid-cycle?
           </summary>
-          <div class="accordion-body">Most claims clear in two to four business days.
-            Expedited claims are reviewed the same day when submitted before noon.</div>
+          <div class="accordion-body">Yes. Upgrades take effect immediately and we prorate
+            the difference. Downgrades apply at the start of the next billing period.</div>
         </details>
         <details>
           <summary>
             <svg class="icon icon-muted"><use href="assets/deck/deck-icons.svg#help"></use></svg>
-            Can I edit a submitted claim?
+            Where do I find my API key?
           </summary>
-          <div class="accordion-body">Until it enters review. After that, withdraw it and
-            submit a corrected version.</div>
+          <div class="accordion-body">Settings, then Developers. Keys are shown once at
+            creation time, so store it somewhere safe before you close the dialog.</div>
         </details>
       </div>
 
       <div class="timeline">
         <div class="timeline-item is-done">
           <span class="timeline-dot"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check-sm"></use></svg></span>
-          <div><div class="fw-semi">Submitted</div><div class="text-sm text-muted">Mar 3, 8:14 AM</div></div>
+          <div><div class="fw-semi">Order placed</div><div class="text-sm text-muted">Mar 3, 8:14 AM</div></div>
         </div>
         <div class="timeline-item is-done">
           <span class="timeline-dot"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check-sm"></use></svg></span>
-          <div><div class="fw-semi">In review</div><div class="text-sm text-muted">Mar 3, 2:40 PM</div></div>
+          <div><div class="fw-semi">Handed to the carrier</div><div class="text-sm text-muted">Mar 3, 2:40 PM</div></div>
         </div>
         <div class="timeline-item">
           <span class="timeline-dot"></span>
-          <div><div class="fw-semi">Payment</div><div class="text-sm text-muted">Expected Mar 12</div></div>
+          <div><div class="fw-semi">Delivery</div><div class="text-sm text-muted">Expected Mar 12</div></div>
         </div>
       </div>
     </div>
@@ -605,12 +612,12 @@
     </div>
 
     <div class="scroller">
-      <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#car"></use></svg></span>
-      <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#wrench"></use></svg></span>
-      <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#clipboard"></use></svg></span>
-      <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#receipt"></use></svg></span>
-      <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#truck"></use></svg></span>
-      <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#gauge"></use></svg></span>
+      <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#home"></use></svg></span>
+      <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#user"></use></svg></span>
+      <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#folder"></use></svg></span>
+      <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#calendar"></use></svg></span>
+      <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#mail"></use></svg></span>
+      <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#chart"></use></svg></span>
       <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#shield"></use></svg></span>
       <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#sparkle"></use></svg></span>
       <span class="icon-tile icon-tile-lg"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#map-pin"></use></svg></span>
@@ -618,9 +625,9 @@
     </div>
 
     <div class="cluster">
-      <span class="emoji-tile">🔧</span>
-      <span class="emoji-tile emoji-tile-round">🚙</span>
-      <span class="emoji-tile">📋</span>
+      <span class="emoji-tile">🚀</span>
+      <span class="emoji-tile emoji-tile-round">🎨</span>
+      <span class="emoji-tile">📦</span>
       <button class="reaction" aria-pressed="true"><span class="emoji">👍</span> 4</button>
       <button class="reaction"><span class="emoji">🎉</span> 2</button>
       <button class="reaction"><span class="emoji">🔥</span> 1</button>
@@ -633,8 +640,8 @@
         <button>😀</button><button>😄</button><button>🙂</button><button>😉</button>
         <button>😊</button><button>🤝</button><button>👍</button><button>👏</button>
         <button>🙌</button><button>💪</button><button>🔥</button><button>✨</button>
-        <button>🎉</button><button>✅</button><button>⚠️</button><button>🚗</button>
-        <button>🔧</button><button>🧰</button><button>📋</button><button>💵</button>
+        <button>🎉</button><button>✅</button><button>⚠️</button><button>🚀</button>
+        <button>🐛</button><button>📦</button><button>📈</button><button>🎨</button>
       </div>
     </div></div>
   </section>
@@ -655,7 +662,7 @@
       <button class="btn btn-primary" onclick="document.getElementById('m1').showModal()">Open modal</button>
       <button class="btn" onclick="document.getElementById('s1').showModal()">Open bottom sheet</button>
       <button class="btn" popovertarget="menu1">Open menu</button>
-      <button class="btn" onclick="toast('Claim 88214 approved', 'good')">Fire a toast</button>
+      <button class="btn" onclick="toast('Project archived', 'good')">Fire a toast</button>
       <span class="btn btn-ghost tooltip" data-tip="Tooltips hide themselves on touch devices, where they never worked anyway.">
         <svg class="icon"><use href="assets/deck/deck-icons.svg#info"></use></svg>
         Hover me
@@ -663,43 +670,43 @@
     </div>
 
     <div class="menu" id="menu1" popover>
-      <div class="menu-label">Claim actions</div>
-      <button class="menu-item"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#edit-sm"></use></svg> Edit</button>
+      <div class="menu-label">Project actions</div>
+      <button class="menu-item"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#edit-sm"></use></svg> Rename</button>
       <button class="menu-item"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#copy-sm"></use></svg> Duplicate <kbd class="push">⌘D</kbd></button>
-      <button class="menu-item"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#download-sm"></use></svg> Export PDF</button>
+      <button class="menu-item"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#download-sm"></use></svg> Export as JSON</button>
       <div class="menu-sep"></div>
-      <button class="menu-item menu-item-danger"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#trash-sm"></use></svg> Withdraw claim</button>
+      <button class="menu-item menu-item-danger"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#trash-sm"></use></svg> Delete project</button>
     </div>
 
     <dialog class="modal" id="m1">
       <div class="modal-header">
         <span class="icon-tile icon-tile-bad"><svg class="icon"><use href="assets/deck/deck-icons.svg#alert-triangle"></use></svg></span>
         <div class="grow">
-          <h3 class="modal-title">Withdraw claim 88214?</h3>
-          <p class="text-sm text-muted mt-1">The claim leaves the review queue. You can
-            submit a corrected version afterward.</p>
+          <h3 class="modal-title">Delete the api-gateway project?</h3>
+          <p class="text-sm text-muted mt-1">This removes 340 issues and every deploy
+            record. It cannot be undone.</p>
         </div>
       </div>
       <div class="modal-body">
         <div class="field">
           <label class="label" for="reason">Reason</label>
           <select class="select" id="reason">
-            <option>Incorrect labor operation</option>
-            <option>Wrong VIN</option>
-            <option>Duplicate submission</option>
+            <option>Replaced by another project</option>
+            <option>Created by mistake</option>
+            <option>No longer maintained</option>
           </select>
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn" onclick="this.closest('dialog').close()">Keep it open</button>
-        <button class="btn btn-danger" onclick="this.closest('dialog').close(); toast('Claim withdrawn','bad')">Withdraw claim</button>
+        <button class="btn" onclick="this.closest('dialog').close()">Keep it</button>
+        <button class="btn btn-danger" onclick="this.closest('dialog').close(); toast('Project deleted','bad')">Delete project</button>
       </div>
     </dialog>
 
     <dialog class="sheet" id="s1">
       <div class="sheet-grip"></div>
       <div class="sheet-header">
-        <h3 class="sheet-title grow">Filter claims</h3>
+        <h3 class="sheet-title grow">Filter issues</h3>
         <button class="btn btn-icon btn-ghost btn-sm" aria-label="Close" onclick="this.closest('dialog').close()">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#x"></use></svg>
         </button>
@@ -708,26 +715,26 @@
         <div class="segmented">
           <button aria-selected="true">All</button>
           <button aria-selected="false">Mine</button>
-          <button aria-selected="false">Flagged</button>
+          <button aria-selected="false">Starred</button>
         </div>
         <div class="field">
           <span class="label">Status</span>
-          <label class="check"><input type="checkbox" checked><span class="check-text"><span>Approved</span></span></label>
-          <label class="check"><input type="checkbox" checked><span class="check-text"><span>Pending</span></span></label>
-          <label class="check"><input type="checkbox"><span class="check-text"><span>Denied</span></span></label>
+          <label class="check"><input type="checkbox" checked><span class="check-text"><span>Open</span></span></label>
+          <label class="check"><input type="checkbox" checked><span class="check-text"><span>In progress</span></span></label>
+          <label class="check"><input type="checkbox"><span class="check-text"><span>Closed</span></span></label>
         </div>
         <div class="field">
-          <label class="label" for="amt">Minimum amount</label>
+          <label class="label" for="amt">Minimum story points</label>
           <input class="range" id="amt" type="range" min="0" max="2000" value="250">
         </div>
-        <button class="btn btn-primary btn-block btn-lg" onclick="this.closest('dialog').close()">Show 42 claims</button>
+        <button class="btn btn-primary btn-block btn-lg" onclick="this.closest('dialog').close()">Show 42 issues</button>
       </div>
     </dialog>
 
     <div class="card">
       <div class="empty">
         <span class="empty-art"><span class="emoji">📭</span></span>
-        <span class="empty-title">No claims match those filters</span>
+        <span class="empty-title">No issues match those filters</span>
         <p>Clear a filter or widen the date range to see more.</p>
         <button class="btn btn-soft">Clear filters</button>
       </div>
@@ -746,14 +753,14 @@
 
     <div class="grid grid-tight">
       <div class="field">
-        <label class="label" for="d1">Repair date</label>
+        <label class="label" for="d1">Publish on</label>
         <div class="datefield" data-deck-datepicker data-format="mdy">
           <input class="input" id="d1" placeholder="Pick a date">
         </div>
       </div>
 
       <div class="field">
-        <label class="label" for="d2">Claim period</label>
+        <label class="label" for="d2">Report period</label>
         <div class="datefield" data-deck-datepicker data-mode="range" data-months="2" data-presets>
           <input class="input" id="d2" placeholder="Start – end">
         </div>
@@ -761,7 +768,7 @@
       </div>
 
       <div class="field">
-        <label class="label" for="d3">Within warranty window only</label>
+        <label class="label" for="d3">Inside the trial window only</label>
         <div class="datefield" data-deck-datepicker data-min="2026-08-15" data-max="2026-10-15">
           <input class="input" id="d3" placeholder="Aug 15 – Oct 15">
         </div>
@@ -783,16 +790,16 @@
 
     <div class="grid grid-tight">
       <div class="field">
-        <label class="label" for="c1">Labor operation</label>
-        <div class="combo" data-deck-combo data-placeholder="Search operations">
+        <label class="label" for="c1">Repository</label>
+        <div class="combo" data-deck-combo data-placeholder="Search repositories">
           <select id="c1" hidden>
-            <option value="0110" data-sub="Engine · 1.4 hrs" data-group="Powertrain">Cylinder head gasket</option>
-            <option value="0219" data-sub="Engine · 0.6 hrs" data-group="Powertrain">Oil pan reseal</option>
-            <option value="0331" data-sub="Transmission · 2.8 hrs" data-group="Powertrain">Cooler line replacement</option>
-            <option value="1402" data-sub="Electrical · 0.4 hrs" data-group="Electrical">Battery cable</option>
-            <option value="1490" data-sub="Electrical · 1.1 hrs" data-group="Electrical">BCM reprogram</option>
-            <option value="2201" data-sub="Body · 0.9 hrs" data-group="Body">Door latch actuator</option>
-            <option value="2277" data-sub="Body · 1.6 hrs" data-group="Body">Liftgate strut</option>
+            <option value="api-gateway" data-sub="Go · 41 open issues" data-group="Backend">api-gateway</option>
+            <option value="billing-service" data-sub="Go · 12 open issues" data-group="Backend">billing-service</option>
+            <option value="search-indexer" data-sub="Rust · 7 open issues" data-group="Backend">search-indexer</option>
+            <option value="web-app" data-sub="TypeScript · 63 open issues" data-group="Frontend">web-app</option>
+            <option value="design-system" data-sub="CSS · 9 open issues" data-group="Frontend">design-system</option>
+            <option value="terraform-modules" data-sub="HCL · 3 open issues" data-group="Infrastructure">terraform-modules</option>
+            <option value="runbooks" data-sub="Markdown · 1 open issue" data-group="Infrastructure">runbooks</option>
           </select>
         </div>
         <span class="help">Grouped, with a second line of detail per option.</span>
@@ -802,7 +809,7 @@
         <label class="label" for="c2">Assign to</label>
         <div class="combo" data-deck-combo data-multi data-create data-placeholder="Add people">
           <select id="c2" multiple hidden>
-            <option value="rissa" selected>Rissa Molina</option>
+            <option value="priya" selected>Priya Lakhani</option>
             <option value="ken">Ken Spence</option>
             <option value="dana">Dana Whitfield</option>
             <option value="marco">Marco Reyes</option>
@@ -828,7 +835,7 @@
     <div class="dg-toolbar">
       <div class="search">
         <svg class="icon"><use href="assets/deck/deck-icons.svg#search"></use></svg>
-        <input class="input" type="search" placeholder="Filter claims">
+        <input class="input" type="search" placeholder="Filter orders">
       </div>
       <div class="segmented" style="inline-size:auto">
         <button aria-selected="true">Comfortable</button>
@@ -843,8 +850,8 @@
     <div class="dg-selection" data-dg-selection hidden>
       <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check-circle-sm"></use></svg>
       <span><span data-dg-count>0</span> selected</span>
-      <button class="btn btn-sm push">Reassign</button>
-      <button class="btn btn-sm btn-danger">Withdraw</button>
+      <button class="btn btn-sm push">Mark as fulfilled</button>
+      <button class="btn btn-sm btn-danger">Refund</button>
     </div>
 
     <div class="dg-wrap dg-cards-wrap" data-deck-grid style="--dg-height:360px">
@@ -852,96 +859,96 @@
         <thead>
           <tr>
             <th class="dg-check dg-pin-start"><label class="check"><input type="checkbox" aria-label="Select all"></label></th>
-            <th class="dg-pin-start-2" data-sort="text" data-resize>Claim</th>
-            <th data-sort="text" data-resize>VIN</th>
-            <th data-sort="text">Vehicle</th>
-            <th data-sort="text">Operation</th>
-            <th data-sort="text">Advisor</th>
+            <th class="dg-pin-start-2" data-sort="text" data-resize>Order</th>
+            <th data-sort="text" data-resize>Customer ID</th>
+            <th data-sort="text">Customer</th>
+            <th data-sort="text">Product</th>
+            <th data-sort="text">Rep</th>
             <th data-sort="text">Status</th>
-            <th class="dg-num" data-sort="num">Labor</th>
-            <th class="dg-num" data-sort="num">Parts</th>
+            <th class="dg-num" data-sort="num">Subtotal</th>
+            <th class="dg-num" data-sort="num">Tax</th>
             <th class="dg-num" data-sort="num">Total</th>
-            <th class="dg-num" data-sort="date">Submitted</th>
+            <th class="dg-num" data-sort="date">Placed</th>
             <th class="dg-actions dg-pin-end"></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="dg-check dg-pin-start"><label class="check"><input type="checkbox" aria-label="Select claim 88214"></label></td>
-            <td class="dg-pin-start-2" data-label="Claim"><a href="#grid">88214</a></td>
-            <td data-label="VIN" class="mono">1FTFW1E85MFA12345</td>
-            <td data-label="Vehicle">2021 F-150 XLT</td>
-            <td data-label="Operation">Cooler line replacement</td>
-            <td data-label="Advisor">Rissa Molina</td>
-            <td data-label="Status"><span class="badge badge-good">Approved</span></td>
-            <td data-label="Labor" class="dg-num">$392.00</td>
-            <td data-label="Parts" class="dg-num">$450.16</td>
+            <td class="dg-check dg-pin-start"><label class="check"><input type="checkbox" aria-label="Select order 1042"></label></td>
+            <td class="dg-pin-start-2" data-label="Order"><a href="#grid">#1042</a></td>
+            <td data-label="Customer ID" class="mono">cus_Q4nR8vTk2LpZ</td>
+            <td data-label="Customer">Northwind Traders</td>
+            <td data-label="Product">Standard plan, 24 seats</td>
+            <td data-label="Rep">Marco Reyes</td>
+            <td data-label="Status"><span class="badge badge-good">Paid</span></td>
+            <td data-label="Subtotal" class="dg-num">$780.00</td>
+            <td data-label="Tax" class="dg-num">$62.16</td>
             <td data-label="Total" class="dg-num">$842.16</td>
-            <td data-label="Submitted" class="dg-num">2026-09-03</td>
+            <td data-label="Placed" class="dg-num">2026-09-03</td>
             <td class="dg-actions dg-pin-end">
               <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal-sm"></use></svg></button>
             </td>
           </tr>
           <tr>
-            <td class="dg-check dg-pin-start"><label class="check"><input type="checkbox" aria-label="Select claim 88220"></label></td>
-            <td class="dg-pin-start-2" data-label="Claim"><a href="#grid">88220</a></td>
-            <td data-label="VIN" class="mono">1FMSK8DH2PGA98721</td>
-            <td data-label="Vehicle">2023 Explorer ST</td>
-            <td data-label="Operation">BCM reprogram</td>
-            <td data-label="Advisor">Ken Spence</td>
+            <td class="dg-check dg-pin-start"><label class="check"><input type="checkbox" aria-label="Select order 1041"></label></td>
+            <td class="dg-pin-start-2" data-label="Order"><a href="#grid">#1041</a></td>
+            <td data-label="Customer ID" class="mono">cus_H7mE3bXw9Ktf</td>
+            <td data-label="Customer">Globex Corp</td>
+            <td data-label="Product">Team plan, 8 seats</td>
+            <td data-label="Rep">Ken Spence</td>
             <td data-label="Status"><span class="badge badge-warn">Pending</span></td>
-            <td data-label="Labor" class="dg-num">$154.00</td>
-            <td data-label="Parts" class="dg-num">$164.00</td>
+            <td data-label="Subtotal" class="dg-num">$295.00</td>
+            <td data-label="Tax" class="dg-num">$23.00</td>
             <td data-label="Total" class="dg-num">$318.00</td>
-            <td data-label="Submitted" class="dg-num">2026-08-31</td>
+            <td data-label="Placed" class="dg-num">2026-08-31</td>
             <td class="dg-actions dg-pin-end">
               <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal-sm"></use></svg></button>
             </td>
           </tr>
           <tr>
-            <td class="dg-check dg-pin-start"><label class="check"><input type="checkbox" aria-label="Select claim 88109"></label></td>
-            <td class="dg-pin-start-2" data-label="Claim"><a href="#grid">88109</a></td>
-            <td data-label="VIN" class="mono">1FMCU9J91LUA55310</td>
-            <td data-label="Vehicle">2020 Escape SE</td>
-            <td data-label="Operation">Door latch actuator</td>
-            <td data-label="Advisor">Dana Whitfield</td>
-            <td data-label="Status"><span class="badge badge-bad">Denied</span></td>
-            <td data-label="Labor" class="dg-num">$0.00</td>
-            <td data-label="Parts" class="dg-num">$0.00</td>
+            <td class="dg-check dg-pin-start"><label class="check"><input type="checkbox" aria-label="Select order 1039"></label></td>
+            <td class="dg-pin-start-2" data-label="Order"><a href="#grid">#1039</a></td>
+            <td data-label="Customer ID" class="mono">cus_K2pA9zLd4Rye</td>
+            <td data-label="Customer">Initech</td>
+            <td data-label="Product">Starter plan, 3 seats</td>
+            <td data-label="Rep">Dana Whitfield</td>
+            <td data-label="Status"><span class="badge badge-bad">Refunded</span></td>
+            <td data-label="Subtotal" class="dg-num">$0.00</td>
+            <td data-label="Tax" class="dg-num">$0.00</td>
             <td data-label="Total" class="dg-num">$0.00</td>
-            <td data-label="Submitted" class="dg-num">2026-08-27</td>
+            <td data-label="Placed" class="dg-num">2026-08-27</td>
             <td class="dg-actions dg-pin-end">
               <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal-sm"></use></svg></button>
             </td>
           </tr>
           <tr>
-            <td class="dg-check dg-pin-start"><label class="check"><input type="checkbox" aria-label="Select claim 88301"></label></td>
-            <td class="dg-pin-start-2" data-label="Claim"><a href="#grid">88301</a></td>
-            <td data-label="VIN" class="mono">1FTBR1C86PKA44029</td>
-            <td data-label="Vehicle">2023 Transit 250</td>
-            <td data-label="Operation">Liftgate strut</td>
-            <td data-label="Advisor">Marco Reyes</td>
-            <td data-label="Status"><span class="badge badge-good">Approved</span></td>
-            <td data-label="Labor" class="dg-num">$224.00</td>
-            <td data-label="Parts" class="dg-num">$97.40</td>
+            <td class="dg-check dg-pin-start"><label class="check"><input type="checkbox" aria-label="Select order 1038"></label></td>
+            <td class="dg-pin-start-2" data-label="Order"><a href="#grid">#1038</a></td>
+            <td data-label="Customer ID" class="mono">cus_R5tY6wQn1Bge</td>
+            <td data-label="Customer">Umbrella Ltd</td>
+            <td data-label="Product">Enterprise add-on, SSO</td>
+            <td data-label="Rep">Priya Lakhani</td>
+            <td data-label="Status"><span class="badge badge-good">Paid</span></td>
+            <td data-label="Subtotal" class="dg-num">$298.00</td>
+            <td data-label="Tax" class="dg-num">$23.40</td>
             <td data-label="Total" class="dg-num">$321.40</td>
-            <td data-label="Submitted" class="dg-num">2026-09-05</td>
+            <td data-label="Placed" class="dg-num">2026-09-05</td>
             <td class="dg-actions dg-pin-end">
               <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal-sm"></use></svg></button>
             </td>
           </tr>
           <tr>
-            <td class="dg-check dg-pin-start"><label class="check"><input type="checkbox" aria-label="Select claim 88344"></label></td>
-            <td class="dg-pin-start-2" data-label="Claim"><a href="#grid">88344</a></td>
-            <td data-label="VIN" class="mono">3FMTK3SU9NMA10388</td>
-            <td data-label="Vehicle">2022 Mustang Mach-E</td>
-            <td data-label="Operation">Battery cable</td>
-            <td data-label="Advisor">Tina Okafor</td>
+            <td class="dg-check dg-pin-start"><label class="check"><input type="checkbox" aria-label="Select order 1037"></label></td>
+            <td class="dg-pin-start-2" data-label="Order"><a href="#grid">#1037</a></td>
+            <td data-label="Customer ID" class="mono">cus_B8xC4uMs7Wdq</td>
+            <td data-label="Customer">Vandelay Industries</td>
+            <td data-label="Product">Team plan, 6 seats</td>
+            <td data-label="Rep">Tina Okafor</td>
             <td data-label="Status"><span class="badge badge-warn">Pending</span></td>
-            <td data-label="Labor" class="dg-num">$88.00</td>
-            <td data-label="Parts" class="dg-num">$212.75</td>
+            <td data-label="Subtotal" class="dg-num">$278.75</td>
+            <td data-label="Tax" class="dg-num">$22.00</td>
             <td data-label="Total" class="dg-num">$300.75</td>
-            <td data-label="Submitted" class="dg-num">2026-09-06</td>
+            <td data-label="Placed" class="dg-num">2026-09-06</td>
             <td class="dg-actions dg-pin-end">
               <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal-sm"></use></svg></button>
             </td>
@@ -950,10 +957,10 @@
         <tfoot>
           <tr>
             <td class="dg-pin-start"></td>
-            <td class="dg-pin-start-2">5 claims</td>
+            <td class="dg-pin-start-2">5 orders</td>
             <td colspan="5"></td>
-            <td class="dg-num">$858.00</td>
-            <td class="dg-num">$924.31</td>
+            <td class="dg-num">$1,651.75</td>
+            <td class="dg-num">$130.56</td>
             <td class="dg-num">$1,782.31</td>
             <td></td>
             <td class="dg-pin-end"></td>
@@ -981,11 +988,11 @@
     </div>
 
     <div class="cluster">
-      <button class="btn" onclick="Deck.toast({kind:'good', title:'Claim 88214 approved', text:'Paid at $842.16 on the next statement.'})">Success</button>
-      <button class="btn" onclick="Deck.toast({kind:'warn', title:'Missing documentation', text:'Three claims need a technician story.'})">Warning</button>
-      <button class="btn" onclick="Deck.toast({kind:'bad', title:'Claim 88109 denied', text:'Outside the coverage window by 412 miles.'})">Error</button>
-      <button class="btn" onclick="Deck.toast({kind:'info', title:'Policy update', text:'Labor allowances changed for 2024 Broncos.'})">Info</button>
-      <button class="btn btn-soft" onclick="Deck.toast({kind:'', title:'Claim withdrawn', text:'It has left the review queue.', duration:9000, actions:[{label:'Undo', onClick:()=>Deck.toast({kind:'good',title:'Restored'})}]})">With an action</button>
+      <button class="btn" onclick="Deck.toast({kind:'good', title:'Deploy succeeded', text:'Build 4471 is live on production.'})">Success</button>
+      <button class="btn" onclick="Deck.toast({kind:'warn', title:'Storage is nearly full', text:'47 GB of your 50 GB plan is in use.'})">Warning</button>
+      <button class="btn" onclick="Deck.toast({kind:'bad', title:'Payment failed', text:'The card ending 4242 was declined.'})">Error</button>
+      <button class="btn" onclick="Deck.toast({kind:'info', title:'Scheduled maintenance', text:'The API is read only on Sunday, 02:00 UTC.'})">Info</button>
+      <button class="btn btn-soft" onclick="Deck.toast({kind:'', title:'Project archived', text:'It is out of the sidebar but nothing was deleted.', duration:9000, actions:[{label:'Undo', onClick:()=>Deck.toast({kind:'good',title:'Restored'})}]})">With an action</button>
       <button class="btn btn-soft" onclick="demoProgress()">Loading, then done</button>
       <button class="btn btn-ghost" onclick="Deck.toasts.clear()">Clear all</button>
     </div>
@@ -1006,7 +1013,7 @@
       <div class="card"><div class="card-body">
         <div class="chart">
           <div class="chart-head">
-            <span class="chart-title">Claims submitted by month</span>
+            <span class="chart-title">New signups by month</span>
             <span class="chart-note push">2026</span>
           </div>
           <div class="chart-columns">
@@ -1023,8 +1030,8 @@
 
       <div class="card"><div class="card-body">
         <div class="chart">
-          <div class="chart-head"><span class="chart-title">Approval rate</span></div>
-          <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none" role="img" aria-label="Approval rate trending up">
+          <div class="chart-head"><span class="chart-title">Weekly active users</span></div>
+          <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none" role="img" aria-label="Weekly active users trending up">
             <line class="chart-gridline" x1="0" y1="30" x2="300" y2="30"/>
             <line class="chart-gridline" x1="0" y1="60" x2="300" y2="60"/>
             <line class="chart-gridline" x1="0" y1="90" x2="300" y2="90"/>
@@ -1035,8 +1042,8 @@
           </svg>
           <div class="chart-x"><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span></div>
           <div class="chart-legend">
-            <span class="s1">This dealer</span>
-            <span class="s-muted">Region average</span>
+            <span class="s1">This workspace</span>
+            <span class="s-muted">Account average</span>
           </div>
         </div>
       </div></div>
@@ -1044,7 +1051,7 @@
 
     <div class="grid">
       <div class="card"><div class="card-body">
-        <span class="chart-title">Claims by status</span>
+        <span class="chart-title">Sessions by device</span>
         <div class="cluster" style="justify-content:center;padding-block:var(--space-2)">
           <div class="donut-wrap">
             <div class="donut" style="--stops: var(--c1) 0 62%, var(--c3) 62% 84%, var(--c4) 84% 100%"></div>
@@ -1055,37 +1062,37 @@
           </div>
         </div>
         <div class="chart-legend" style="justify-content:center">
-          <span class="s1">Approved 62%</span>
-          <span class="s3">Pending 22%</span>
-          <span class="s4">Denied 16%</span>
+          <span class="s1">Desktop 62%</span>
+          <span class="s3">Mobile 22%</span>
+          <span class="s4">Tablet 16%</span>
         </div>
       </div></div>
 
       <div class="card"><div class="card-body">
-        <span class="chart-title mb-3">Top labor operations</span>
+        <span class="chart-title mb-3">Top traffic sources</span>
         <div class="chart chart-bars">
           <div class="chart-bar">
-            <span class="chart-bar-label">Cooler line</span>
+            <span class="chart-bar-label">Direct</span>
             <span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:92"></span></span>
             <span class="chart-bar-value">92</span>
           </div>
           <div class="chart-bar">
-            <span class="chart-bar-label">BCM reprogram</span>
+            <span class="chart-bar-label">Search</span>
             <span class="chart-bar-track"><span class="chart-bar-fill s2" style="--value:71"></span></span>
             <span class="chart-bar-value">71</span>
           </div>
           <div class="chart-bar">
-            <span class="chart-bar-label">Door latch</span>
+            <span class="chart-bar-label">Referral</span>
             <span class="chart-bar-track"><span class="chart-bar-fill s3" style="--value:54"></span></span>
             <span class="chart-bar-value">54</span>
           </div>
           <div class="chart-bar">
-            <span class="chart-bar-label">Liftgate strut</span>
+            <span class="chart-bar-label">Newsletter</span>
             <span class="chart-bar-track"><span class="chart-bar-fill s4" style="--value:38"></span></span>
             <span class="chart-bar-value">38</span>
           </div>
           <div class="chart-bar">
-            <span class="chart-bar-label">Battery cable</span>
+            <span class="chart-bar-label">Social</span>
             <span class="chart-bar-track"><span class="chart-bar-fill s5" style="--value:21"></span></span>
             <span class="chart-bar-value">21</span>
           </div>
@@ -1094,7 +1101,7 @@
 
       <div class="card"><div class="card-body stack-4">
         <div class="stat">
-          <span class="stat-label">Reimbursement this week</span>
+          <span class="stat-label">Revenue this week</span>
           <div class="cluster cluster-tight">
             <span class="stat-value">$18,402</span>
             <svg class="sparkline sparkline-good" viewBox="0 0 88 28" preserveAspectRatio="none">
@@ -1107,7 +1114,7 @@
           </span>
         </div>
         <div class="stack-2">
-          <span class="chart-note">Queue mix</span>
+          <span class="chart-note">Plan mix</span>
           <div class="chart-meter">
             <span class="s1" style="--value:62"></span>
             <span class="s3" style="--value:22"></span>
@@ -1115,7 +1122,7 @@
           </div>
         </div>
         <div class="stack-2">
-          <span class="chart-note">Submissions, last five weeks</span>
+          <span class="chart-note">Commits, last five weeks</span>
           <div class="chart-heat" style="--cols:7">
             <div style="--value:10"></div><div style="--value:35"></div><div style="--value:80"></div>
             <div style="--value:55"></div><div style="--value:95"></div><div style="--value:20"></div>
@@ -1147,10 +1154,10 @@
     <div class="stack-3">
       <span class="demo-label">Entrances, staggered</span>
       <div class="grid grid-tight stagger" id="entranceDemo">
-        <div class="card enter-rise"><div class="card-body"><span class="fw-semi">Submitted</span><span class="text-sm text-muted">42 claims</span></div></div>
-        <div class="card enter-rise"><div class="card-body"><span class="fw-semi">In review</span><span class="text-sm text-muted">18 claims</span></div></div>
-        <div class="card enter-rise"><div class="card-body"><span class="fw-semi">Approved</span><span class="text-sm text-muted">311 claims</span></div></div>
-        <div class="card enter-rise"><div class="card-body"><span class="fw-semi">Denied</span><span class="text-sm text-muted">41 claims</span></div></div>
+        <div class="card enter-rise"><div class="card-body"><span class="fw-semi">Backlog</span><span class="text-sm text-muted">42 issues</span></div></div>
+        <div class="card enter-rise"><div class="card-body"><span class="fw-semi">In progress</span><span class="text-sm text-muted">18 issues</span></div></div>
+        <div class="card enter-rise"><div class="card-body"><span class="fw-semi">Shipped</span><span class="text-sm text-muted">311 issues</span></div></div>
+        <div class="card enter-rise"><div class="card-body"><span class="fw-semi">Closed</span><span class="text-sm text-muted">41 issues</span></div></div>
       </div>
       <button class="btn btn-sm" onclick="replayEntrances()">Replay</button>
     </div>
@@ -1195,8 +1202,8 @@
         <div class="list-row" id="flashRow">
           <span class="icon-tile icon-tile-good"><svg class="icon"><use href="assets/deck/deck-icons.svg#check"></use></svg></span>
           <span class="list-main">
-            <span class="list-title">Claim 88214</span>
-            <span class="list-sub">Reimbursement total</span>
+            <span class="list-title">Order #1042</span>
+            <span class="list-sub">Order total</span>
           </span>
           <span class="list-trail nums fw-semi" data-deck-tick id="total">$842.16</span>
         </div>
@@ -1210,9 +1217,9 @@
       <button class="btn btn-sm" onclick="Deck.toggle(document.getElementById('exp'))">Toggle details</button>
       <div class="expand" id="exp">
         <div class="panel">
-          <p class="text-muted">Cause: transmission fluid seeping at the cooler line
-            fitting. Correction: replaced the line assembly, refilled, road tested
-            twelve miles with no recurrence. Verified with a lift inspection.</p>
+          <p class="text-muted">The connection pool was exhausted because a background
+            job opened a transaction per row instead of per batch. The fix batches at a
+            thousand rows and returns the connection in a <code>finally</code> block.</p>
         </div>
       </div>
     </div>
@@ -1221,16 +1228,16 @@
       <span class="demo-label">Ticker</span>
       <div class="marquee card" style="padding-block:var(--space-3)">
         <div class="marquee-track text-sm text-muted">
-          <span>FSA 24B12 open on 2,140 units</span>
-          <span>Parts backorder: cooler line assembly, ETA Sep 19</span>
-          <span>Labor time allowance updated for operation 0331</span>
-          <span>Statement posts Friday</span>
+          <span>v2.4.0 is rolling out to 12% of traffic</span>
+          <span>Postgres upgrade to 17 scheduled for Sep 19</span>
+          <span>The legacy /v1 API retires at the end of the quarter</span>
+          <span>Invoices post on Friday</span>
         </div>
         <div class="marquee-track text-sm text-muted" aria-hidden="true">
-          <span>FSA 24B12 open on 2,140 units</span>
-          <span>Parts backorder: cooler line assembly, ETA Sep 19</span>
-          <span>Labor time allowance updated for operation 0331</span>
-          <span>Statement posts Friday</span>
+          <span>v2.4.0 is rolling out to 12% of traffic</span>
+          <span>Postgres upgrade to 17 scheduled for Sep 19</span>
+          <span>The legacy /v1 API retires at the end of the quarter</span>
+          <span>Invoices post on Friday</span>
         </div>
       </div>
     </div>
@@ -1238,11 +1245,11 @@
     <div class="alert alert-info">
       <svg class="icon"><use href="assets/deck/deck-icons.svg#sparkle"></use></svg>
       <div>
-        <div class="alert-title">Page transitions in a plain PHP app</div>
+        <div class="alert-title">Page transitions without a router</div>
         <p class="alert-body">Add <code>@view-transition { navigation: auto; }</code> to
-          your app CSS and full page loads in Keel cross-fade like a single page app —
-          no router, no JavaScript. Deck styles what the browser generates, including
-          holding the header and tab bar still while the content changes.</p>
+          your app CSS and full page loads cross-fade like a single page app — no
+          router, no JavaScript, no framework. Deck styles what the browser generates,
+          including holding the header and tab bar still while the content changes.</p>
       </div>
     </div>
   </section>
@@ -1276,7 +1283,7 @@
       <div class="card"><div class="card-body">
         <span class="card-title">Unlayered always wins</span>
         <p class="text-sm text-muted">Anything outside a layer beats all layers. A one-off
-          rule in a Keel view template overrides Deck with nothing special.</p>
+          rule in a page template overrides Deck with nothing special.</p>
       </div></div>
       <div class="card"><div class="card-body">
         <span class="card-title">Third-party CSS</span>
@@ -1302,11 +1309,11 @@
         <article class="card card-flex">
           <figure class="card-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23cfd8dc'/%3E%3C/svg%3E" alt=""></figure>
           <div class="card-body">
-            <h3 class="card-title">Cooler line replacement</h3>
-            <p class="text-sm text-muted">Operation 0331 · 2.8 hours · 2021 F-150</p>
+            <h3 class="card-title">Designing with container queries</h3>
+            <p class="text-sm text-muted">Guides · 8 min read · updated Mar 3</p>
             <div class="actions-cq">
-              <button class="btn btn-sm btn-primary">Open claim</button>
-              <button class="btn btn-sm">History</button>
+              <button class="btn btn-sm btn-primary">Read it</button>
+              <button class="btn btn-sm">Share</button>
             </div>
           </div>
         </article>
@@ -1316,11 +1323,11 @@
         <article class="card card-flex">
           <figure class="card-media"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23cfd8dc'/%3E%3C/svg%3E" alt=""></figure>
           <div class="card-body">
-            <h3 class="card-title">Cooler line replacement</h3>
-            <p class="text-sm text-muted">Operation 0331 · 2.8 hours · 2021 F-150</p>
+            <h3 class="card-title">Designing with container queries</h3>
+            <p class="text-sm text-muted">Guides · 8 min read · updated Mar 3</p>
             <div class="actions-cq">
-              <button class="btn btn-sm btn-primary">Open claim</button>
-              <button class="btn btn-sm">History</button>
+              <button class="btn btn-sm btn-primary">Read it</button>
+              <button class="btn btn-sm">Share</button>
             </div>
           </div>
         </article>
@@ -1333,19 +1340,19 @@
         <div class="cq-tone" style="--tone: clear">
           <div class="card tone-surface"><div class="card-body cluster cluster-tight">
             <svg class="icon icon-lg tone-icon"><use href="assets/deck/deck-icons.svg#check-circle"></use></svg>
-            <span class="tone-text fw-semi">Within coverage</span>
+            <span class="tone-text fw-semi">All checks passed</span>
           </div></div>
         </div>
         <div class="cq-tone" style="--tone: caution">
           <div class="card tone-surface"><div class="card-body cluster cluster-tight">
             <svg class="icon icon-lg tone-icon"><use href="assets/deck/deck-icons.svg#alert-triangle"></use></svg>
-            <span class="tone-text fw-semi">Documentation needed</span>
+            <span class="tone-text fw-semi">Review requested</span>
           </div></div>
         </div>
         <div class="cq-tone" style="--tone: critical">
           <div class="card tone-surface"><div class="card-body cluster cluster-tight">
             <svg class="icon icon-lg tone-icon"><use href="assets/deck/deck-icons.svg#x-circle"></use></svg>
-            <span class="tone-text fw-semi">Out of coverage</span>
+            <span class="tone-text fw-semi">Build failed</span>
           </div></div>
         </div>
       </div>
@@ -1361,7 +1368,8 @@
       <p class="text-muted">Deck is written in logical properties end to end, so a full
         right-to-left flip needs nothing but <code>dir="rtl"</code>. Try the switch — the
         layout, the switch knob, the chart fills, the sidebar, and the pointing icons all
-        mirror. The VIN does not, because a VIN reads left to right in every language.</p>
+        mirror. The commit hash does not, because an identifier reads left to right in
+        every language.</p>
     </div>
 
     <div class="cluster">
@@ -1377,10 +1385,10 @@
         <span class="card-title">Mirrors</span>
         <div class="cluster cluster-tight">
           <button class="btn btn-sm">Next <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></button>
-          <label class="switch"><input type="checkbox" checked><span class="text-sm">Auto-submit</span></label>
+          <label class="switch"><input type="checkbox" checked><span class="text-sm">Auto-merge</span></label>
         </div>
         <div class="chart-bar">
-          <span class="chart-bar-label">Approved</span>
+          <span class="chart-bar-label">Coverage</span>
           <span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:74"></span></span>
           <span class="chart-bar-value">74</span>
         </div>
@@ -1391,9 +1399,9 @@
         <p class="text-sm text-muted">Identifiers stay in their own direction and stay
           isolated from the text around them.</p>
         <div class="stack-2">
-          <span class="mono vin">1FTFW1E85MFA12345</span>
+          <span class="mono code-ltr">a81ac26bc87ec010f4d9</span>
           <span class="cluster cluster-tight">
-            <svg class="icon no-flip"><use href="assets/deck/deck-icons.svg#wrench"></use></svg>
+            <svg class="icon no-flip"><use href="assets/deck/deck-icons.svg#settings"></use></svg>
             <svg class="icon no-flip"><use href="assets/deck/deck-icons.svg#clock"></use></svg>
             <svg class="icon no-flip"><use href="assets/deck/deck-icons.svg#check"></use></svg>
             <span class="text-sm text-muted">glyphs with no direction</span>
@@ -1424,7 +1432,7 @@
 
     <div class="card g-mesh g-mesh-drift" style="min-block-size:200px">
       <div class="card-body center" style="justify-content:center;block-size:100%">
-        <h3 class="display-cq g-text" style="font-size:var(--text-2xl)">Warranty, handled</h3>
+        <h3 class="display-cq g-text" style="font-size:var(--text-2xl)">Ship it on Friday</h3>
         <p class="text-muted">Mesh background, gradient text, no images</p>
       </div>
     </div>
@@ -1446,9 +1454,9 @@
 
     <div class="cluster">
       <button class="btn btn-primary g-sheen">Hover for sheen</button>
-      <span class="badge g-good">Approved</span>
-      <span class="badge g-warn">Pending</span>
-      <span class="badge g-bad">Denied</span>
+      <span class="badge g-good">Passing</span>
+      <span class="badge g-warn">Queued</span>
+      <span class="badge g-bad">Failing</span>
       <span class="g-ring g-ring-spin" style="inline-size:28px;block-size:28px;display:inline-block"></span>
     </div>
 
@@ -1480,13 +1488,13 @@
       <div class="scene">
         <div class="flip card" id="flipCard" style="min-block-size:170px">
           <div class="flip-front card-body stack-2">
-            <span class="card-title">Claim 88214</span>
-            <p class="text-sm text-muted">2021 F-150 · cooler line</p>
+            <span class="card-title">Order #1042</span>
+            <p class="text-sm text-muted">Northwind Traders · 24 seats</p>
             <button class="btn btn-sm push" data-deck-flip>See the breakdown</button>
           </div>
           <div class="flip-back card-body stack-2 g-brand-soft">
             <span class="card-title">Breakdown</span>
-            <p class="text-sm">Labor $392.00 · Parts $450.16</p>
+            <p class="text-sm">Subtotal $780.00 · Tax $62.16</p>
             <button class="btn btn-sm" data-deck-flip>Back</button>
           </div>
         </div>
@@ -1504,10 +1512,10 @@
 
       <div class="stack-3">
         <div class="stack-depth" id="pile" style="min-block-size:150px">
-          <div class="card"><div class="card-body"><span class="fw-semi">Claim 88301</span><span class="text-sm text-muted">Awaiting review</span></div></div>
-          <div class="card"><div class="card-body"><span class="fw-semi">Claim 88344</span><span class="text-sm text-muted">Awaiting review</span></div></div>
-          <div class="card"><div class="card-body"><span class="fw-semi">Claim 88350</span><span class="text-sm text-muted">Awaiting review</span></div></div>
-          <div class="card"><div class="card-body"><span class="fw-semi">Claim 88361</span><span class="text-sm text-muted">Awaiting review</span></div></div>
+          <div class="card"><div class="card-body"><span class="fw-semi">PR #418</span><span class="text-sm text-muted">Awaiting review</span></div></div>
+          <div class="card"><div class="card-body"><span class="fw-semi">PR #421</span><span class="text-sm text-muted">Awaiting review</span></div></div>
+          <div class="card"><div class="card-body"><span class="fw-semi">PR #423</span><span class="text-sm text-muted">Awaiting review</span></div></div>
+          <div class="card"><div class="card-body"><span class="fw-semi">PR #427</span><span class="text-sm text-muted">Awaiting review</span></div></div>
         </div>
         <div class="cluster cluster-tight">
           <button class="btn btn-sm" onclick="document.getElementById('pile').classList.toggle('is-fanned')">Fan out</button>
@@ -1520,12 +1528,12 @@
       <button class="btn btn-primary btn-3d">Press me</button>
       <div class="scene">
         <div class="cube cube-spin" style="--size:88px">
-          <div class="face-front"><span class="emoji">🔧</span></div>
-          <div class="face-back"><span class="emoji">📋</span></div>
-          <div class="face-end"><span class="emoji">🚙</span></div>
-          <div class="face-start"><span class="emoji">💵</span></div>
+          <div class="face-front"><span class="emoji">🚀</span></div>
+          <div class="face-back"><span class="emoji">📦</span></div>
+          <div class="face-end"><span class="emoji">🎨</span></div>
+          <div class="face-start"><span class="emoji">📈</span></div>
           <div class="face-top"><span class="emoji">✅</span></div>
-          <div class="face-bottom"><span class="emoji">🧰</span></div>
+          <div class="face-bottom"><span class="emoji">🐛</span></div>
         </div>
       </div>
     </div>
@@ -1533,11 +1541,11 @@
     <div class="stack-2">
       <span class="demo-label">Coverflow — scroll it sideways</span>
       <div class="coverflow">
-        <div class="card" style="inline-size:190px"><div class="card-body"><span class="fw-semi">March</span><span class="text-sm text-muted">84 claims</span></div></div>
-        <div class="card" style="inline-size:190px"><div class="card-body"><span class="fw-semi">April</span><span class="text-sm text-muted">116 claims</span></div></div>
-        <div class="card" style="inline-size:190px"><div class="card-body"><span class="fw-semi">May</span><span class="text-sm text-muted">102 claims</span></div></div>
-        <div class="card" style="inline-size:190px"><div class="card-body"><span class="fw-semi">June</span><span class="text-sm text-muted">146 claims</span></div></div>
-        <div class="card" style="inline-size:190px"><div class="card-body"><span class="fw-semi">July</span><span class="text-sm text-muted">132 claims</span></div></div>
+        <div class="card" style="inline-size:190px"><div class="card-body"><span class="fw-semi">March</span><span class="text-sm text-muted">84 releases</span></div></div>
+        <div class="card" style="inline-size:190px"><div class="card-body"><span class="fw-semi">April</span><span class="text-sm text-muted">116 releases</span></div></div>
+        <div class="card" style="inline-size:190px"><div class="card-body"><span class="fw-semi">May</span><span class="text-sm text-muted">102 releases</span></div></div>
+        <div class="card" style="inline-size:190px"><div class="card-body"><span class="fw-semi">June</span><span class="text-sm text-muted">146 releases</span></div></div>
+        <div class="card" style="inline-size:190px"><div class="card-body"><span class="fw-semi">July</span><span class="text-sm text-muted">132 releases</span></div></div>
       </div>
     </div>
   </section>
@@ -1555,10 +1563,10 @@
     <div class="carousel carousel-peek" data-deck-carousel tabindex="0">
       <button class="carousel-arrow carousel-prev" aria-label="Previous"><svg class="icon"><use href="assets/deck/deck-icons.svg#chevron-left"></use></svg></button>
       <div class="carousel-track">
-        <div class="carousel-slide card"><div class="card-body"><span class="fw-semi">Open claims</span><span class="stat-value">42</span></div></div>
-        <div class="carousel-slide card"><div class="card-body"><span class="fw-semi">Approved this week</span><span class="stat-value">311</span></div></div>
-        <div class="carousel-slide card"><div class="card-body"><span class="fw-semi">Average payout</span><span class="stat-value">$614</span></div></div>
-        <div class="carousel-slide card"><div class="card-body"><span class="fw-semi">Waiting on parts</span><span class="stat-value">17</span></div></div>
+        <div class="carousel-slide card"><div class="card-body"><span class="fw-semi">Open issues</span><span class="stat-value">42</span></div></div>
+        <div class="carousel-slide card"><div class="card-body"><span class="fw-semi">Merged this week</span><span class="stat-value">311</span></div></div>
+        <div class="carousel-slide card"><div class="card-body"><span class="fw-semi">Average order</span><span class="stat-value">$614</span></div></div>
+        <div class="carousel-slide card"><div class="card-body"><span class="fw-semi">Awaiting review</span><span class="stat-value">17</span></div></div>
       </div>
       <button class="carousel-arrow carousel-next" aria-label="Next"><svg class="icon"><use href="assets/deck/deck-icons.svg#chevron-right"></use></svg></button>
       <div class="carousel-dots"></div>
@@ -1581,18 +1589,18 @@
 
     <dialog class="drawer" id="drawer1">
       <div class="drawer-header">
-        <h3 class="drawer-title grow">Filter claims</h3>
+        <h3 class="drawer-title grow">Filter orders</h3>
         <button class="btn btn-icon btn-ghost btn-sm" data-drawer-close aria-label="Close"><svg class="icon"><use href="assets/deck/deck-icons.svg#x"></use></svg></button>
       </div>
       <div class="drawer-body">
         <div class="field">
           <span class="label">Status</span>
-          <label class="check"><input type="checkbox" checked><span class="check-text"><span>Approved</span></span></label>
+          <label class="check"><input type="checkbox" checked><span class="check-text"><span>Paid</span></span></label>
           <label class="check"><input type="checkbox" checked><span class="check-text"><span>Pending</span></span></label>
-          <label class="check"><input type="checkbox"><span class="check-text"><span>Denied</span></span></label>
+          <label class="check"><input type="checkbox"><span class="check-text"><span>Refunded</span></span></label>
         </div>
         <div class="field">
-          <span class="label">Payout range</span>
+          <span class="label">Order total</span>
           <div class="range-pair" data-gap="5">
             <input type="range" min="0" max="2000" value="250" data-prefix="$" aria-label="Minimum">
             <input type="range" min="0" max="2000" value="1400" data-prefix="$" aria-label="Maximum">
@@ -1609,18 +1617,18 @@
     <div class="mega" id="mega1" popover>
       <div class="mega-grid">
         <div class="mega-col">
-          <span class="mega-heading">Claims</span>
-          <a class="mega-item" href="#more"><span class="icon-tile"><svg class="icon"><use href="assets/deck/deck-icons.svg#clipboard"></use></svg></span><span><span class="mega-item-title">Submit a claim</span><span class="mega-item-note">Start from a VIN or an RO</span></span></a>
-          <a class="mega-item" href="#more"><span class="icon-tile"><svg class="icon"><use href="assets/deck/deck-icons.svg#search"></use></svg></span><span><span class="mega-item-title">Look up coverage</span><span class="mega-item-note">Per VIN, in seconds</span></span></a>
+          <span class="mega-heading">Build</span>
+          <a class="mega-item" href="#more"><span class="icon-tile"><svg class="icon"><use href="assets/deck/deck-icons.svg#clipboard"></use></svg></span><span><span class="mega-item-title">Issue tracker</span><span class="mega-item-note">Boards, sprints, and labels</span></span></a>
+          <a class="mega-item" href="#more"><span class="icon-tile"><svg class="icon"><use href="assets/deck/deck-icons.svg#search"></use></svg></span><span><span class="mega-item-title">Code search</span><span class="mega-item-note">Across every repository</span></span></a>
         </div>
         <div class="mega-col">
-          <span class="mega-heading">Reporting</span>
-          <a class="mega-item" href="#more"><span class="icon-tile"><svg class="icon"><use href="assets/deck/deck-icons.svg#chart"></use></svg></span><span><span class="mega-item-title">Dashboards</span><span class="mega-item-note">Approval rate and aging</span></span></a>
-          <a class="mega-item" href="#more"><span class="icon-tile"><svg class="icon"><use href="assets/deck/deck-icons.svg#receipt"></use></svg></span><span><span class="mega-item-title">Statements</span><span class="mega-item-note">Reconcile the payout</span></span></a>
+          <span class="mega-heading">Measure</span>
+          <a class="mega-item" href="#more"><span class="icon-tile"><svg class="icon"><use href="assets/deck/deck-icons.svg#chart"></use></svg></span><span><span class="mega-item-title">Analytics</span><span class="mega-item-note">Funnels, retention, cohorts</span></span></a>
+          <a class="mega-item" href="#more"><span class="icon-tile"><svg class="icon"><use href="assets/deck/deck-icons.svg#credit-card"></use></svg></span><span><span class="mega-item-title">Billing</span><span class="mega-item-note">Invoices and usage</span></span></a>
         </div>
         <div class="mega-feature">
-          <span class="fw-semi">The Warranty Desk</span>
-          <p class="text-sm mt-1">Self-serve answers to general and per-VIN warranty questions.</p>
+          <span class="fw-semi">What's new in v2.4</span>
+          <p class="text-sm mt-1">Saved views, a public API for boards, and faster search.</p>
         </div>
       </div>
       <div class="mega-footer"><a href="#more">Documentation</a><a href="#more">Release notes</a><a href="#more">Contact support</a></div>
@@ -1629,10 +1637,10 @@
     <div class="stack-3">
       <span class="demo-label">Stepper</span>
       <div class="stepper stepper-auto">
-        <div class="step is-done"><div class="step-marker"></div><span class="step-label">Vehicle</span><span class="step-note">VIN verified</span></div>
-        <div class="step is-done"><div class="step-marker"></div><span class="step-label">Repair</span><span class="step-note">Operation 0331</span></div>
-        <div class="step is-current"><div class="step-marker"></div><span class="step-label">Documentation</span><span class="step-note">Story and photos</span></div>
-        <div class="step"><div class="step-marker"></div><span class="step-label">Review</span><span class="step-note">Two to four days</span></div>
+        <div class="step is-done"><div class="step-marker"></div><span class="step-label">Account</span><span class="step-note">Email confirmed</span></div>
+        <div class="step is-done"><div class="step-marker"></div><span class="step-label">Workspace</span><span class="step-note">Named and branded</span></div>
+        <div class="step is-current"><div class="step-marker"></div><span class="step-label">Invite the team</span><span class="step-note">Three seats left</span></div>
+        <div class="step"><div class="step-marker"></div><span class="step-label">Billing</span><span class="step-note">After the trial</span></div>
       </div>
     </div>
 
@@ -1641,19 +1649,19 @@
       <div class="grid grid-tight">
         <div class="float">
           <input class="input" id="f1" placeholder=" ">
-          <label for="f1">Repair order number</label>
+          <label for="f1">Project name</label>
         </div>
         <div class="float float-outline">
           <input class="input" id="f2" placeholder=" ">
           <label for="f2">Customer name</label>
         </div>
         <div class="field">
-          <label class="label" for="n1">Labor hours</label>
+          <label class="label" for="n1">Seats</label>
           <div class="number">
             <button type="button" data-step="-1" aria-label="Decrease"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#minus-sm"></use></svg></button>
-            <input id="n1" type="number" value="2.8" step="0.1" min="0" max="24">
+            <input id="n1" type="number" value="12" step="1" min="0" max="500">
             <button type="button" data-step="1" aria-label="Increase"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#plus-sm"></use></svg></button>
-            <span class="number-unit">hrs</span>
+            <span class="number-unit">seats</span>
           </div>
         </div>
         <div class="field">
@@ -1673,7 +1681,7 @@
           </div>
         </div>
         <div class="field">
-          <span class="label">Rate this repair</span>
+          <span class="label">Rate this release</span>
           <div class="rating">
             <input type="radio" name="rate" id="r5" value="5"><label for="r5"><svg class="icon"><use href="assets/deck/deck-icons.svg#star"></use></svg></label>
             <input type="radio" name="rate" id="r4" value="4"><label for="r4"><svg class="icon"><use href="assets/deck/deck-icons.svg#star"></use></svg></label>
@@ -1683,9 +1691,9 @@
           </div>
         </div>
         <div class="field">
-          <span class="label">Claim number</span>
+          <span class="label">API key</span>
           <div class="copy">
-            <code class="copy-value">88214-2026-0331</code>
+            <code class="copy-value">sk_live_7Kd2Rq9XmB4tPw</code>
             <button class="copy-btn" data-deck-copy>
               <span class="copy-idle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy</span>
               <span class="copy-done"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check-sm"></use></svg> Copied</span>
@@ -1714,7 +1722,7 @@
           <span class="editor-sep"></span>
           <button class="editor-tool" data-cmd="undo" aria-label="Undo"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#refresh-sm"></use></svg></button>
         </div>
-        <div class="editor-content" data-placeholder="Cause, correction, and what was verified."></div>
+        <div class="editor-content" data-placeholder="Describe the bug: what you expected, and what happened instead."></div>
         <div class="editor-footer"><span>Pastes arrive as plain text</span><span class="editor-count">0 / 600</span></div>
       </div>
     </div>
@@ -1726,18 +1734,18 @@
           <div class="chat" style="max-block-size:280px">
             <span class="chat-day">Today</span>
             <div class="msg">
-              <span class="avatar avatar-xs">RM</span>
-              <div><div class="bubble"><span class="bubble-name">Rissa</span>The story on 88214 is missing the diagnostic steps.</div></div>
+              <span class="avatar avatar-xs">PL</span>
+              <div><div class="bubble"><span class="bubble-name">Priya</span>The CSV export drops the last row on files over 10 MB.</div></div>
             </div>
             <div class="msg">
-              <span class="avatar avatar-xs">RM</span>
-              <div><div class="bubble">Can you add what the tech verified before the line was replaced?<div class="bubble-meta">8:14 AM</div></div></div>
+              <span class="avatar avatar-xs">PL</span>
+              <div><div class="bubble">Can you check whether the stream is flushed before the response closes?<div class="bubble-meta">8:14 AM</div></div></div>
             </div>
             <div class="msg msg-out">
-              <div><div class="bubble">On it. He pressure tested the cooler circuit first — I'll write it up.<div class="bubble-meta">8:16 AM <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check-double-sm"></use></svg></div></div></div>
+              <div><div class="bubble">Found it — the writer is buffered and never flushed on the last chunk. Patch is up.<div class="bubble-meta">8:16 AM <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check-double-sm"></use></svg></div></div></div>
             </div>
             <div class="msg">
-              <span class="avatar avatar-xs">RM</span>
+              <span class="avatar avatar-xs">PL</span>
               <div><div class="bubble bubble-typing"><span></span><span></span><span></span></div></div>
             </div>
           </div>
@@ -1751,8 +1759,8 @@
       <div class="stack-3">
         <span class="demo-label">QR code — encoded in the browser, no library and no network call</span>
         <div class="cluster">
-          <div class="qr" data-deck-qr="https://claim-iq.io/c/88214" data-ecl="M"></div>
-          <div class="qr qr-sm" data-deck-qr="1FTFW1E85MFA12345" data-ecl="H"></div>
+          <div class="qr" data-deck-qr="https://example.com/orders/1042" data-ecl="M"></div>
+          <div class="qr qr-sm" data-deck-qr="sk_live_7Kd2Rq9XmB4tPw" data-ecl="H"></div>
         </div>
         <span class="demo-label">Video</span>
         <div class="video">
@@ -1779,12 +1787,12 @@
 
     <div class="jumbotron jumbotron-center g-mesh-subtle">
       <span class="badge badge-brand">Jumbotron</span>
-      <h2>Every claim, answered the first time</h2>
-      <p class="lede">Coverage checks, labor allowances, and submission validation before
-        anything reaches the review queue.</p>
+      <h2>Everything you need on the first page load</h2>
+      <p class="lede">One stylesheet, one link tag, and no dependencies. Every component
+        on this page came out of the box.</p>
       <div class="jumbotron-actions">
-        <button class="btn btn-primary btn-lg">Start a claim</button>
-        <button class="btn btn-lg">See a sample</button>
+        <button class="btn btn-primary btn-lg">Read the docs</button>
+        <button class="btn btn-lg">View on GitHub</button>
       </div>
     </div>
   </section>
@@ -1795,25 +1803,25 @@
   <section class="container section stack-6" id="gallery">
     <div class="stack-2">
       <h2>Gallery</h2>
-      <p class="text-muted">Equal tiles for claim evidence — the damage photos, the RO,
-        the part tag. <code>.gallery</code> is a grid of square cells that reflows on its
-        own, so an advisor uploading nine photos and one uploading three both get a tidy
+      <p class="text-muted">Equal tiles for a media library — screenshots, exports, brand
+        assets. <code>.gallery</code> is a grid of square cells that reflows on its own,
+        so someone uploading nine files and someone uploading three both get a tidy
         block. <code>.span-2</code> promotes a tile to a 2&times;2 feature and
         <code>.span-wide</code> makes it a 2&times;1 banner, which is how you lead with
-        the shot the reviewer actually needs to see.</p>
+        the one image that should be seen first.</p>
     </div>
 
     <div class="stack-3">
-      <span class="demo-label">Claim WC-88214 &middot; 2021 F-150 &middot; VIN 1FTFW1E85MFA12345</span>
+      <span class="demo-label">Assets &middot; Acme Design &middot; 8 files, 24 MB</span>
       <div class="gallery">
-        <a class="span-2" href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%2378909c'/%3E%3C/svg%3E" alt="Transmission cooler line at the failure point"></a>
-        <a href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%2390a4ae'/%3E%3C/svg%3E" alt="VIN plate"></a>
-        <a href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23b0bec5'/%3E%3C/svg%3E" alt="Odometer at 41,203 miles"></a>
-        <a href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23cfd8dc'/%3E%3C/svg%3E" alt="Part tag, number BL3Z-7R081-B"></a>
-        <a href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%2390a4ae'/%3E%3C/svg%3E" alt="Fluid pooled on the crossmember"></a>
-        <a class="span-wide" href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300'%3E%3Crect width='600' height='300' fill='%2378909c'/%3E%3C/svg%3E" alt="Repair order 44190, signed by the customer"></a>
-        <a href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23b0bec5'/%3E%3C/svg%3E" alt="Replacement line installed"></a>
-        <a href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23cfd8dc'/%3E%3C/svg%3E" alt="Post-repair road test printout"></a>
+        <a class="span-2" href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%2378909c'/%3E%3C/svg%3E" alt="Dashboard screenshot, dark theme"></a>
+        <a href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%2390a4ae'/%3E%3C/svg%3E" alt="Logo on a light background"></a>
+        <a href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23b0bec5'/%3E%3C/svg%3E" alt="Color palette sheet"></a>
+        <a href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23cfd8dc'/%3E%3C/svg%3E" alt="Icon set contact sheet"></a>
+        <a href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%2390a4ae'/%3E%3C/svg%3E" alt="Mobile layout, three breakpoints"></a>
+        <a class="span-wide" href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300'%3E%3Crect width='600' height='300' fill='%2378909c'/%3E%3C/svg%3E" alt="Social card, 1200 by 630"></a>
+        <a href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23b0bec5'/%3E%3C/svg%3E" alt="Empty state illustration"></a>
+        <a href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23cfd8dc'/%3E%3C/svg%3E" alt="Typography specimen"></a>
       </div>
     </div>
   </section>
@@ -1837,13 +1845,13 @@
     <div class="split" style="--rail: 17rem">
       <div class="stack-4">
         <div class="card"><div class="card-body stack-2">
-          <h3 class="card-title">Open claims</h3>
-          <p class="text-sm text-muted">Forty-two claims are waiting on something. Thirty-one
-            of them are waiting on the dealer, not on the review queue.</p>
+          <h3 class="card-title">Open issues</h3>
+          <p class="text-sm text-muted">Forty-two issues are waiting on something. Thirty-one
+            of them are waiting on a reviewer, not on the build.</p>
           <div class="cluster cluster-tight">
             <span class="badge badge-brand">42 open</span>
-            <span class="badge">17 awaiting parts</span>
-            <span class="badge">6 need photos</span>
+            <span class="badge">17 in review</span>
+            <span class="badge">6 need triage</span>
           </div>
         </div></div>
         <p class="text-sm text-muted">The rail beside this column is the same markup at every
@@ -1851,37 +1859,37 @@
       </div>
 
       <aside class="cq-shell" style="resize: horizontal; overflow: auto; min-inline-size: 7rem; max-inline-size: 22rem">
-        <nav class="panel sidebar" aria-label="Warranty desk">
-          <span class="sidebar-group">Claims</span>
+        <nav class="panel sidebar" aria-label="Workspace">
+          <span class="sidebar-group">Issues</span>
           <a class="sidebar-link" aria-current="page" href="#sidebar">
             <svg class="icon"><use href="assets/deck/deck-icons.svg#clipboard"></use></svg>
-            <span>Open claims</span><span class="badge push">42</span>
+            <span>Open</span><span class="badge push">42</span>
           </a>
           <a class="sidebar-link" href="#sidebar">
             <svg class="icon"><use href="assets/deck/deck-icons.svg#check-circle"></use></svg>
-            <span>Approved</span><span class="badge push">311</span>
+            <span>Closed</span><span class="badge push">311</span>
           </a>
           <a class="sidebar-link" href="#sidebar">
             <svg class="icon"><use href="assets/deck/deck-icons.svg#alert-triangle"></use></svg>
-            <span>Needs documentation</span><span class="badge push">6</span>
+            <span>Needs triage</span><span class="badge push">6</span>
           </a>
-          <span class="sidebar-group">Vehicles</span>
+          <span class="sidebar-group">Code</span>
           <a class="sidebar-link" href="#sidebar">
             <svg class="icon"><use href="assets/deck/deck-icons.svg#search"></use></svg>
-            <span>Look up a VIN</span>
+            <span>Search</span>
           </a>
           <a class="sidebar-link" href="#sidebar">
-            <svg class="icon"><use href="assets/deck/deck-icons.svg#car"></use></svg>
-            <span>Coverage lookup</span>
+            <svg class="icon"><use href="assets/deck/deck-icons.svg#folder"></use></svg>
+            <span>Repositories</span>
           </a>
-          <span class="sidebar-group">Desk</span>
+          <span class="sidebar-group">Workspace</span>
           <a class="sidebar-link" href="#sidebar">
             <svg class="icon"><use href="assets/deck/deck-icons.svg#users"></use></svg>
-            <span>Advisors</span>
+            <span>Members</span>
           </a>
           <a class="sidebar-link" href="#sidebar">
-            <svg class="icon"><use href="assets/deck/deck-icons.svg#receipt"></use></svg>
-            <span>Statements</span>
+            <svg class="icon"><use href="assets/deck/deck-icons.svg#credit-card"></use></svg>
+            <span>Billing</span>
           </a>
         </nav>
       </aside>
@@ -1909,14 +1917,14 @@
     <div class="stack-3">
       <span class="demo-label">.tooltip &mdash; CSS only, hover or focus, never flips, gone on touch</span>
       <div class="cluster">
-        <button class="btn btn-icon tooltip" data-tip="Recheck coverage for this VIN" aria-label="Recheck coverage">
+        <button class="btn btn-icon tooltip" data-tip="Re-run the failed jobs" aria-label="Re-run the failed jobs">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#refresh"></use></svg>
         </button>
-        <button class="btn btn-icon tooltip" data-tip="Attach repair order 44190" aria-label="Attach the repair order">
+        <button class="btn btn-icon tooltip" data-tip="Upload a build artifact" aria-label="Upload a build artifact">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#upload"></use></svg>
         </button>
-        <span class="btn btn-ghost tooltip" data-tip="Labor allowance for operation 0331 is 2.8 hours" tabindex="0">
-          Operation 0331 <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#help-sm"></use></svg>
+        <span class="btn btn-ghost tooltip" data-tip="Rate limit is 1,000 requests per minute per key" tabindex="0">
+          Rate limits <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#help-sm"></use></svg>
         </span>
       </div>
     </div>
@@ -1924,14 +1932,14 @@
     <div class="stack-3">
       <span class="demo-label">.tip &mdash; anchored popover, flips at an edge, carries an arrow</span>
       <div class="cluster">
-        <button class="btn" popovertarget="tipVin">Why did this VIN fail?</button>
-        <div class="tip" id="tipVin" popover>Coverage ended at 36,000 miles. The odometer read
-          41,203 on the repair order, so this one needs a goodwill authorisation before it can
-          be submitted.<span class="tip-arrow"></span></div>
+        <button class="btn" popovertarget="tipBuild">Why did this build fail?</button>
+        <div class="tip" id="tipBuild" popover>The integration suite timed out after 10 minutes
+          waiting on a database container that never became healthy. Re-run the job, or raise
+          the health check timeout in the workflow file.<span class="tip-arrow"></span></div>
 
-        <button class="btn" popovertarget="tipPayout">Payout breakdown</button>
-        <div class="tip" id="tipPayout">Parts $318.40, labor 2.8&nbsp;hours at $142, less the
-          $100 deductible. Advisor D. Okafor.<span class="tip-arrow"></span></div>
+        <button class="btn" popovertarget="tipPayout">Invoice breakdown</button>
+        <div class="tip" id="tipPayout">24 seats at $32.50, less the 10% annual discount, plus
+          $62.16 tax. Billed to Northwind Traders.<span class="tip-arrow"></span></div>
       </div>
     </div>
   </section>
@@ -2013,14 +2021,15 @@
       <div class="cluster">
         <button class="btn" popovertarget="tip1">Hover-free tooltip</button>
         <div class="tip" id="tip1" popover>Placement is native. Scroll the page to the edge and it flips instead of running off.<span class="tip-arrow"></span></div>
-        <button class="btn" popovertarget="pop1">Explain operation 0331</button>
+        <button class="btn" popovertarget="pop1">What is a cascade layer?</button>
         <div class="pop" id="pop1" popover>
-          <div class="pop-title">Operation 0331</div>
-          <p class="pop-body">Transmission cooler line replacement. Allowance 2.8 hours,
-            includes fluid fill and a road test.</p>
+          <div class="pop-title">Cascade layers</div>
+          <p class="pop-body">An ordering mechanism that sits above specificity. A rule in
+            a later layer beats one in an earlier layer no matter how the selectors compare,
+            which is how your CSS overrides Deck without <code>!important</code>.</p>
           <div class="pop-actions">
             <button class="btn btn-sm btn-primary" popovertarget="pop1" popovertargetaction="hide">Got it</button>
-            <button class="btn btn-sm">Open the manual</button>
+            <button class="btn btn-sm">Read the docs</button>
           </div>
         </div>
       </div>
@@ -2030,37 +2039,37 @@
       <span class="demo-label">Kanban with drag reordering</span>
       <div class="kanban">
         <div class="kanban-col">
-          <div class="kanban-head">Submitted <span class="kanban-count">3</span></div>
-          <div class="kanban-body" data-deck-sortable="claims" data-handle=".drag-handle">
-            <div class="kanban-card" data-id="88214">
-              <div class="bar"><span class="kanban-card-title grow">88214 · Cooler line</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical-sm"></use></svg></span></div>
-              <div class="kanban-card-meta"><span class="indicator indicator-warn"></span> 2021 F-150 · $842.16</div>
+          <div class="kanban-head">Backlog <span class="kanban-count">3</span></div>
+          <div class="kanban-body" data-deck-sortable="issues" data-handle=".drag-handle">
+            <div class="kanban-card" data-id="418">
+              <div class="bar"><span class="kanban-card-title grow">#418 · CSV export truncates</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical-sm"></use></svg></span></div>
+              <div class="kanban-card-meta"><span class="indicator indicator-warn"></span> api-gateway · 3 points</div>
             </div>
-            <div class="kanban-card" data-id="88301">
-              <div class="bar"><span class="kanban-card-title grow">88301 · Liftgate strut</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical-sm"></use></svg></span></div>
-              <div class="kanban-card-meta"><span class="indicator indicator-warn"></span> 2023 Transit · $321.40</div>
+            <div class="kanban-card" data-id="421">
+              <div class="bar"><span class="kanban-card-title grow">#421 · Dark mode focus rings</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical-sm"></use></svg></span></div>
+              <div class="kanban-card-meta"><span class="indicator indicator-warn"></span> design-system · 1 point</div>
             </div>
-            <div class="kanban-card" data-id="88344">
-              <div class="bar"><span class="kanban-card-title grow">88344 · Battery cable</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical-sm"></use></svg></span></div>
-              <div class="kanban-card-meta"><span class="indicator indicator-warn"></span> 2022 Mach-E · $300.75</div>
+            <div class="kanban-card" data-id="423">
+              <div class="bar"><span class="kanban-card-title grow">#423 · Rate limit headers</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical-sm"></use></svg></span></div>
+              <div class="kanban-card-meta"><span class="indicator indicator-warn"></span> api-gateway · 2 points</div>
             </div>
-            <div class="kanban-empty">Drop a claim here</div>
+            <div class="kanban-empty">Drop an issue here</div>
           </div>
         </div>
         <div class="kanban-col">
-          <div class="kanban-head">In review <span class="kanban-count">1</span></div>
-          <div class="kanban-body" data-deck-sortable="claims" data-handle=".drag-handle">
-            <div class="kanban-card" data-id="88220">
-              <div class="bar"><span class="kanban-card-title grow">88220 · BCM reprogram</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical-sm"></use></svg></span></div>
-              <div class="kanban-card-meta"><span class="indicator indicator-brand"></span> 2023 Explorer · $318.00</div>
+          <div class="kanban-head">In progress <span class="kanban-count">1</span></div>
+          <div class="kanban-body" data-deck-sortable="issues" data-handle=".drag-handle">
+            <div class="kanban-card" data-id="427">
+              <div class="bar"><span class="kanban-card-title grow">#427 · Search pagination</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical-sm"></use></svg></span></div>
+              <div class="kanban-card-meta"><span class="indicator indicator-brand"></span> search-indexer · 5 points</div>
             </div>
-            <div class="kanban-empty">Drop a claim here</div>
+            <div class="kanban-empty">Drop an issue here</div>
           </div>
         </div>
         <div class="kanban-col">
-          <div class="kanban-head">Paid <span class="kanban-count">0</span></div>
-          <div class="kanban-body" data-deck-sortable="claims" data-handle=".drag-handle">
-            <div class="kanban-empty">Drop a claim here</div>
+          <div class="kanban-head">Shipped <span class="kanban-count">0</span></div>
+          <div class="kanban-body" data-deck-sortable="issues" data-handle=".drag-handle">
+            <div class="kanban-empty">Drop an issue here</div>
           </div>
         </div>
       </div>
@@ -2070,12 +2079,13 @@
       <span class="demo-label">Virtualized grid — 5,000 rows, no virtualization library</span>
       <p class="text-muted text-sm">One line of CSS. Off-screen rows are skipped during
         layout, style, and paint, but they stay in the DOM — so Ctrl+F still finds them
-        and the print stylesheet still prints them, which a JavaScript virtualizer breaks.</p>
+        and the print stylesheet still prints them, which a JavaScript virtualizer breaks.
+        No library, no fixed row height, no scroll listener.</p>
       <div class="dg-wrap" data-deck-grid style="--dg-height:320px">
         <table class="dg dg-virtual dg-compact dg-zebra">
           <thead><tr>
-            <th class="dg-pin-start" data-sort="text">Claim</th>
-            <th>VIN</th><th>Vehicle</th><th>Advisor</th><th>Status</th>
+            <th class="dg-pin-start" data-sort="text">Order</th>
+            <th>Customer ID</th><th>Customer</th><th>Rep</th><th>Status</th>
             <th class="dg-num" data-sort="num">Total</th>
           </tr></thead>
           <tbody id="bigRows"></tbody>
@@ -2113,10 +2123,10 @@
   <section class="container section stack-6" id="print">
     <div class="stack-2">
       <h2>Print</h2>
-      <p class="text-muted">Dealership work ends up on paper. Print this page and the
-        nav, tab bar, buttons, toasts, and theme dock drop out; the grid unfreezes and
-        prints every column; the mobile card fallbacks revert to real tables; dark mode
-        is forced back to light.</p>
+      <p class="text-muted">Invoices, packing slips, and reports still end up on paper.
+        Print this page and the nav, tab bar, buttons, toasts, and theme dock drop out;
+        the grid unfreezes and prints every column; the mobile card fallbacks revert to
+        real tables; dark mode is forced back to light.</p>
     </div>
 
     <div class="cluster">
@@ -2141,8 +2151,8 @@
     </div>
 
     <div class="print-only panel">
-      <h3>Claim summary — 88214</h3>
-      <p>Printed from ClaimIQ on <span class="mono">2026-09-07</span>.</p>
+      <h3>Invoice INV-2041 — Northwind Traders</h3>
+      <p>Printed on <span class="mono">2026-09-07</span>.</p>
     </div>
   </section>
 
@@ -2154,7 +2164,7 @@
       <div class="cluster cluster-tight">
         <svg class="icon icon-fill" style="color:var(--brand)"><use href="assets/deck/deck-icons.svg#deck-mark"></use></svg>
         <span class="fw-semi text-inherit">Deck</span>
-        <span class="text-sm">for Keel and Helm</span>
+        <span class="text-sm">one stylesheet, no build step</span>
       </div>
       <div class="cluster cluster-tight text-sm">
         <span class="badge" id="lineCount">CSS + optional JS</span>
@@ -2167,9 +2177,9 @@
 <!-- ===================== Mobile tab bar ===================== -->
 <div class="speed-dial">
   <div class="speed-dial-actions">
-    <div class="speed-dial-action"><span class="speed-dial-label">New claim</span><button class="speed-dial-button" aria-label="New claim"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#clipboard-sm"></use></svg></button></div>
-    <div class="speed-dial-action"><span class="speed-dial-label">Look up VIN</span><button class="speed-dial-button" aria-label="Look up VIN"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#search-sm"></use></svg></button></div>
-    <div class="speed-dial-action"><span class="speed-dial-label">Upload photos</span><button class="speed-dial-button" aria-label="Upload photos"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#camera-sm"></use></svg></button></div>
+    <div class="speed-dial-action"><span class="speed-dial-label">New issue</span><button class="speed-dial-button" aria-label="New issue"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#clipboard-sm"></use></svg></button></div>
+    <div class="speed-dial-action"><span class="speed-dial-label">Search</span><button class="speed-dial-button" aria-label="Search"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#search-sm"></use></svg></button></div>
+    <div class="speed-dial-action"><span class="speed-dial-label">Upload a file</span><button class="speed-dial-button" aria-label="Upload a file"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#camera-sm"></use></svg></button></div>
   </div>
   <button class="fab" aria-label="Quick actions" aria-expanded="false"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#plus"></use></svg></button>
 </div>
@@ -2183,7 +2193,7 @@
     <svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#home"></use></svg> Home
   </a>
   <a class="tabbar-item" href="#forms">
-    <svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#clipboard"></use></svg> Claims
+    <svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#clipboard"></use></svg> Issues
   </a>
   <a class="tabbar-item" href="#mobile">
     <svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#chart"></use></svg> Reports
@@ -2221,8 +2231,8 @@
 
     // Loading toast that resolves into a success toast
     window.demoProgress = function demoProgress() {
-      const t = Deck.toast({ kind: 'loading', title: 'Submitting claim 88410', duration: 0, dismissible: false });
-      setTimeout(() => t.update({ kind: 'good', title: 'Claim 88410 submitted', text: 'Review usually takes two to four days.', duration: 5000, dismissible: true }), 2200);
+      const t = Deck.toast({ kind: 'loading', title: 'Deploying build 4471', duration: 0, dismissible: false });
+      setTimeout(() => t.update({ kind: 'good', title: 'Build 4471 is live', text: 'Deployed to production in 42 seconds.', duration: 5000, dismissible: true }), 2200);
     };
 
     // Density toggle on the grid demo
@@ -2269,18 +2279,18 @@
       const body = document.getElementById('bigRows');
       if (!body) return;
       const t0 = performance.now();
-      const vehicles = ['2021 F-150 XLT','2023 Explorer ST','2020 Escape SE','2023 Transit 250','2022 Mustang Mach-E'];
-      const advisors = ['Rissa Molina','Ken Spence','Dana Whitfield','Marco Reyes','Tina Okafor'];
-      const statuses = [['good','Approved'],['warn','Pending'],['bad','Denied']];
+      const customers = ['Northwind Traders','Globex Corp','Initech','Umbrella Ltd','Vandelay Industries'];
+      const reps = ['Priya Lakhani','Ken Spence','Dana Whitfield','Marco Reyes','Tina Okafor'];
+      const statuses = [['good','Paid'],['warn','Pending'],['bad','Refunded']];
       const frag = document.createDocumentFragment();
       for (let i = 0; i < 5000; i++) {
         const [kind, label] = statuses[i % 3];
         const tr = document.createElement('tr');
         tr.innerHTML =
-          '<td class="dg-pin-start"><a href="#libs">' + (88000 + i) + '</a></td>' +
-          '<td class="mono">1FTFW1E85MFA' + String(10000 + i).slice(-5) + '</td>' +
-          '<td>' + vehicles[i % 5] + '</td>' +
-          '<td>' + advisors[i % 5] + '</td>' +
+          '<td class="dg-pin-start"><a href="#libs">#' + (1000 + i) + '</a></td>' +
+          '<td class="mono">cus_Q4nR8uTk' + String(10000 + i).slice(-5) + '</td>' +
+          '<td>' + customers[i % 5] + '</td>' +
+          '<td>' + reps[i % 5] + '</td>' +
           '<td><span class="badge badge-' + kind + '">' + label + '</span></td>' +
           '<td class="dg-num">$' + ((i * 37) % 1900 + 100).toFixed(2) + '</td>';
         frag.append(tr);
@@ -2288,7 +2298,7 @@
       body.append(frag);
       const ms = (performance.now() - t0).toFixed(0);
       document.getElementById('rowStat').textContent =
-        '5,000 rows built and inserted in ' + ms + ' ms. Try Ctrl+F for a claim number near the bottom.';
+        '5,000 rows built and inserted in ' + ms + ' ms. Try Ctrl+F for an order number near the bottom.';
     })();
 
     // Reactions
