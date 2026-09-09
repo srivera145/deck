@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Deck's sitemap.
+
+  Deck's documentation is one page, so this file has one meaningful entry. That
+  is an honest reflection of the site, not an oversight: a sitemap listing
+  fragment URLs such as /deck#charts would be ignored, because a fragment is not
+  a separate URL to a crawler. Splitting the documentation into a page per topic
+  is what would make this file longer, and would also be what lets those topics
+  rank on their own.
+
+  The URLs below use the canonical base from package.json. If you deploy Deck
+  somewhere else, rewrite them: a sitemap may only list URLs on the same host as
+  the sitemap itself.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://get-keel.dev/deck/</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://get-keel.dev/deck/php-helper.php</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>

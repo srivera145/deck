@@ -1,17 +1,45 @@
-# Deck v0.1
+# Deck
 
-The CSS framework for Keel. Mobile first, one file, no build step.
+**Deck is a CSS framework that ships as one 31.8 KB gzipped stylesheet: buttons, forms,
+tables, a data grid, charts, overlays, an icon sprite, and a full color system. You add it
+with one `<link>` tag. There is no build step, no config file, and zero dependencies.**
 
-- `deck.css` / `deck.min.css` — the whole framework (~31 KB gzipped minified)
-- `deck.js` — optional behaviour, no dependencies (~11 KB gzipped)
-- `deck-extras.js` — behaviour for the extended set, including the QR encoder (~9 KB gzipped)
-- `deck-adapters.js` — optional library integrations, inert unless a library is present (~6 KB gzipped)
-- `deck-icons.svg` — 74-icon sprite in two weights, plus the two brand marks
-- `index.html` — kitchen sink demo, open it in a browser
-- `src/` — the twenty-six source files, concatenated to build `deck.css`
-- `dist/layers/` — one file per layer, if you only want part of Deck
-- `php/` — the optional PHP helper for Composer users
-- `bin/deck.mjs` — the `npx @echodial/deck` CLI
+```html
+<link rel="stylesheet" href="/assets/deck/deck.css">
+```
+
+That is the whole install. Nothing to compile, nothing to purge, nothing to configure.
+
+- **No build step.** The file you download is the file the browser reads.
+- **Retheme from one number.** Set `--hue-brand` to 0–360 and every brand color, focus
+  ring, badge, chart series, and shadow is recomputed — at runtime, no rebuild.
+- **Your CSS wins.** Deck ships in cascade layers, so an ordinary unlayered rule
+  overrides it without a single `!important`.
+- **RTL built in.** Written in logical properties end to end; `dir="rtl"` flips the
+  whole page with no second stylesheet.
+- **Zero runtime dependencies.** The JavaScript is optional and dependency-free.
+
+Version 0.1.0 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
+
+### What is in the package
+
+| File | Size | What it is |
+| --- | --- | --- |
+| `deck.min.css` | 168 KB raw, **31.8 KB gzipped** | The whole framework |
+| `deck.js` | 9.8 KB gzipped | Optional behaviour, no dependencies |
+| `deck-extras.js` | 6.3 KB gzipped | Date picker, combobox, data grid, toasts, QR encoder |
+| `deck-adapters.js` | 4.4 KB gzipped | Optional library integrations, inert unless one is loaded |
+| `deck.bundle.min.js` | 19.0 KB gzipped | All three scripts in one file |
+| `deck-icons.svg` | — | 150 symbols: 74 icons at two weights, plus two brand marks |
+| `src/` | — | The 26 source stylesheets, concatenated to build `deck.css` |
+| `dist/layers/` | — | One file per layer, if you only want part of Deck |
+| `php/` | — | Optional PHP helper for Composer users |
+| `bin/deck.mjs` | — | The `npx @echodial/deck` CLI |
+
+Every figure above is measured, not estimated. Reproduce them with `npm run build`.
+
+The component demo is `public_html/index.php` — every component on one page. Run it with
+`npm run demo && npm start`.
 
 ## Repository layout
 
@@ -297,9 +325,9 @@ npm run icons
 
 That reads `tools/icons/icons.txt` — one `sprite-id = material-glyph-name` per line —
 out of the Material Symbols Rounded variable font and writes both cuts of every listed
-icon. To add, drop or swap an icon, edit that list and rerun. Any of the 4,390 glyphs in
+icon. To add, drop or swap an icon, edit that list and rerun. Any of the 4,025 glyphs in
 the font is available; only the names on the list end up in the sprite, which is how a
-4,390 icon library ships as an 80 icon file.
+4,025 icon library ships as an 80 icon file.
 
 The font is a **build time source only**. It never reaches a browser: a webfont would be
 a 15 MB download or a subsetting step, and Deck's whole premise is not having a build
@@ -1236,7 +1264,7 @@ Deck.locale('es-MX')   // { months, monthsShort, days, weekStart, long, full }
 
 The 74-icon sprite covers what the framework itself needs plus the automotive set it was
 built for. Past that, the cheapest move is to add the name to `tools/icons/icons.txt` and
-run `npm run icons` — any of the 4,390 Material Symbols glyphs is one line away.
+run `npm run icons` — any of the 4,025 Material Symbols glyphs is one line away.
 
 If you would rather not regenerate, write `<span data-icon="briefcase" class="icon">` and
 the Lucide adapter swaps in the path data, keeping Deck's `.icon` sizing rules. No

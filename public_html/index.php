@@ -1,9 +1,73 @@
+<?php
+/* =============================================================================
+   Page config.
+   -----------------------------------------------------------------------------
+   Every meta tag, the canonical URL, and the JSON-LD below read from this one
+   array. Change a fact here and it changes everywhere on the page.
+
+   DECK_SITE_BASE lets the same file serve the canonical deployment and a local
+   Helm vhost without editing anything: set it in the environment and the
+   canonical, Open Graph, and structured-data URLs all follow. The fallback is
+   the canonical URL from package.json.
+
+       DECK_SITE_BASE=http://deck.local php -S 0.0.0.0:80 -t public_html
+
+   Numbers in this block are measured, not estimated. Reproduce them with:
+       npm run build                        -> css_gzip, css_min, js_gzip
+       ls src/*.css | wc -l                 -> source_files
+       grep -c '<symbol' src/deck-icons.svg  -> 150 symbols (74 icons x 2 + 2 marks)
+       grep -c '=' tools/icons/icons.txt     -> icons on the sprite list
+       grep -rhoE '\.[a-zA-Z][\w-]*' src/*.css | sort -u | wc -l   -> classes
+   ============================================================================= */
+
+$site = [
+    'name'         => 'Deck',
+    'version'      => '0.1.0',
+    'base'         => rtrim(getenv('DECK_SITE_BASE') ?: 'https://get-keel.dev/deck', '/'),
+    'locale'       => 'en_US',
+    'author'       => 'Santos Rivera',
+    'repository'   => 'https://github.com/srivera145/deck',
+    'license'      => 'https://opensource.org/licenses/MIT',
+    'license_name' => 'MIT',
+
+    /* Title: 49 characters. Description: 153. Both carry "CSS framework",
+       which is the term people actually search for. */
+    'title'        => 'Deck — a CSS framework in one file, no build step',
+    'description'  => 'Deck is a CSS framework that ships as one 31.8 KB stylesheet with components, icons, and runtime theming. No build step, no config file, no dependencies.',
+
+    /* Measured facts, quoted throughout the page. */
+    'css_gzip'     => '31.8 KB',
+    'css_min'      => '168 KB',
+    'js_gzip'      => '9.8 KB',
+    'source_files' => 26,
+    'classes'      => 927,
+    'icons'        => 74,
+    'icons_avail'  => '4,025',
+    'deps'         => 0,
+];
+
+/* Absolute URL for a path under the site base. */
+$url = static fn(string $path = ''): string =>
+    $site['base'] . ($path === '' ? '' : '/' . ltrim($path, '/'));
+
+/* Escape for an HTML attribute or text node. */
+$e = static fn(?string $s): string => htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
+
+$ogImage = $url('assets/images/deck-og.png');
+?>
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Deck — a CSS framework in one file</title>
+<title><?= $e($site['title']) ?></title>
+<link rel="canonical" href="<?= $e($url()) ?>">
+<meta name="description" content="<?= $e($site['description']) ?>">
+
+<!-- Let search and answer engines quote the page in full. Nothing here is
+     paywalled or time-sensitive, so there is no reason to cap the snippet. -->
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="author" content="<?= $e($site['author']) ?>">
 
 <!-- Brand marks. These are the static ones: an <img> or a <link> gets no colour
      context, so currentColor would resolve to black. Everything on the page
@@ -12,15 +76,86 @@
 <link rel="icon" href="assets/images/deck-mark.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/images/deck-apple-touch-icon.png">
 
-<meta name="description" content="Deck is one stylesheet: a full component set, an icon system, and a palette that recolors from a single number. No build step, no config file, no dependencies.">
+<!-- Open Graph and Twitter both need an absolute URL and a raster image;
+     no social platform renders an SVG og:image. -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Deck — a CSS framework in one file">
-<meta property="og:description" content="One stylesheet, one link tag, zero dependencies. Retheme the whole app from one number.">
-<meta property="og:image" content="assets/images/deck-og.png">
+<meta property="og:site_name" content="<?= $e($site['name']) ?>">
+<meta property="og:locale" content="<?= $e($site['locale']) ?>">
+<meta property="og:url" content="<?= $e($url()) ?>">
+<meta property="og:title" content="<?= $e($site['title']) ?>">
+<meta property="og:description" content="<?= $e($site['description']) ?>">
+<meta property="og:image" content="<?= $e($ogImage) ?>">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Deck logo, white on the brand teal.">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?= $e($site['title']) ?>">
+<meta name="twitter:description" content="<?= $e($site['description']) ?>">
+<meta name="twitter:image" content="<?= $e($ogImage) ?>">
+<meta name="twitter:image:alt" content="The Deck logo, white on the brand teal.">
+
+<!-- SoftwareApplication describes the thing you install; SoftwareSourceCode
+     describes the repository it is built from. They point at each other.
+     No FAQPage: Google retired FAQ rich results on 7 May 2026, and its
+     generative-AI guidance (15 May 2026) states no special markup is needed
+     for AI Overviews or AI Mode. The question-shaped headings below are the
+     part that actually works. -->
+<script type="application/ld+json">
+<?= json_encode([
+    '@context' => 'https://schema.org',
+    '@graph'   => [
+        [
+            '@type'               => 'SoftwareApplication',
+            '@id'                 => $url() . '#software',
+            'name'                => $site['name'],
+            'description'         => $site['description'],
+            'applicationCategory' => 'DeveloperApplication',
+            'applicationSubCategory' => 'CSS framework',
+            'operatingSystem'     => 'Any modern web browser',
+            'softwareVersion'     => $site['version'],
+            'url'                 => $url(),
+            'image'               => $ogImage,
+            'license'             => $site['license'],
+            'isAccessibleForFree' => true,
+            'author'              => ['@type' => 'Person', 'name' => $site['author']],
+            'publisher'           => ['@type' => 'Person', 'name' => $site['author']],
+            'offers'              => [
+                '@type'         => 'Offer',
+                'price'         => '0',
+                'priceCurrency' => 'USD',
+            ],
+            'featureList' => [
+                'No build step: one stylesheet linked with a single link tag',
+                'No configuration file',
+                'Zero runtime dependencies',
+                'Retheme the whole palette from one CSS custom property at runtime',
+                'Ships in cascade layers, so application CSS overrides it without !important',
+                'Right-to-left support built in through logical properties',
+                'SVG icon sprite',
+            ],
+            'isBasedOn'           => ['@id' => $url() . '#source'],
+        ],
+        [
+            '@type'               => 'SoftwareSourceCode',
+            '@id'                 => $url() . '#source',
+            'name'                => $site['name'],
+            'description'         => $site['description'],
+            'codeRepository'      => $site['repository'],
+            'programmingLanguage' => [
+                ['@type' => 'ComputerLanguage', 'name' => 'CSS'],
+                ['@type' => 'ComputerLanguage', 'name' => 'JavaScript'],
+            ],
+            'runtimePlatform'     => 'Web browser',
+            'codeSampleType'      => 'full solution',
+            'version'             => $site['version'],
+            'license'             => $site['license'],
+            'author'              => ['@type' => 'Person', 'name' => $site['author']],
+            'targetProduct'       => ['@id' => $url() . '#software'],
+        ],
+    ],
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
+</script>
 
 <link rel="stylesheet" href="assets/deck/deck.css">
 <script src="assets/deck/deck.js" defer></script>
@@ -65,7 +200,9 @@
         Deck
       </a>
       <nav class="navbar-links">
-        <a class="nav-link" aria-current="page" href="#main">Components</a>
+        <a class="nav-link" aria-current="page" href="#main">Overview</a>
+        <a class="nav-link" href="#about">What it is</a>
+        <a class="nav-link" href="#compare">Compare</a>
         <a class="nav-link" href="#forms">Forms</a>
         <a class="nav-link" href="#grid">Grid</a>
         <a class="nav-link" href="#charts">Charts</a>
@@ -140,6 +277,163 @@
       badge, chart series, and shadow on this page are computed from
       <code>--hue-brand</code>. Drag the slider in the header and watch all of it
       retune, live, with no rebuild.</p>
+  </section>
+
+  <hr>
+
+  <!-- ===================== What / how / why =====================
+       Question-shaped headings, each answered completely in its first
+       sentence, so a paragraph still makes sense lifted out on its own. -->
+  <section class="container section stack-6" id="about">
+    <h2>What is Deck?</h2>
+    <p class="lede">Deck is a CSS framework that ships as a single
+      <?= $e($site['css_gzip']) ?> gzipped stylesheet containing buttons, forms, tables,
+      a data grid, charts, overlays, an icon sprite, and a complete color system. You add
+      it to a page with one <code>&lt;link&gt;</code> tag, and it has no build step, no
+      configuration file, and <?= (int) $site['deps'] ?> runtime dependencies.</p>
+
+    <p class="text-muted">Deck is written as <?= (int) $site['source_files'] ?> plain CSS
+      files that are concatenated into <code>deck.css</code>, defining
+      <?= number_format($site['classes']) ?> classes. It is published under the
+      <?= $e($site['license_name']) ?> license, and version
+      <?= $e($site['version']) ?> is the release documented on this page.</p>
+
+    <h3>Do I need a build step to use Deck?</h3>
+    <p>No — Deck needs no build step, because it is distributed as a finished stylesheet
+      with no compiler, no bundler plugin, no PostCSS pipeline, and no purge pass between
+      you and a styled page. The file you download is the file the browser reads, which means a Deck
+      project has nothing to rebuild when you change a color, and nothing to reinstall
+      when you clone it onto a new machine.</p>
+
+    <h3>How do I install Deck?</h3>
+    <p>Add one <code>&lt;link&gt;</code> tag pointing at <code>deck.css</code> and the
+      framework is installed. The JavaScript file is optional and only needed for
+      components that require behaviour, such as the date picker, the combobox, and the
+      toast queue; every other component works as pure CSS with the script absent.</p>
+    <pre><code>&lt;link rel="stylesheet" href="/assets/deck/deck.css"&gt;
+&lt;script src="/assets/deck/deck.js" defer&gt;&lt;/script&gt;  &lt;!-- optional --&gt;</code></pre>
+    <p class="text-muted">Deck is also on npm as <code>@echodial/deck</code> and on
+      Packagist as <code>echodial/deck</code>, and the
+      <code>npx @echodial/deck init public/assets/deck</code> command copies the files
+      into a project without installing anything permanently.</p>
+
+    <h3>How do I change the color scheme?</h3>
+    <p>Set <code>--hue-brand</code> to a number between 0 and 360 and every brand color
+      in the framework is recomputed from it. Deck derives its whole palette from six hue
+      values in <a href="#layers">oklch</a>, so a theme change is one custom property
+      rather than a rebuild, a second stylesheet, or a set of overrides.</p>
+    <pre><code>:root { --hue-brand: 265; }        /* violet instead of teal */
+&lt;html style="--hue-brand: 320"&gt;   /* or per tenant, at runtime */</code></pre>
+
+    <h3>What browsers does Deck support?</h3>
+    <p>Deck targets Chrome 117, Edge 117, Safari 17.4, and Firefox 128 and newer, which
+      are the versions that shipped cascade layers, container queries, <code>oklch()</code>,
+      and the <code>popover</code> attribute. Those features are load-bearing rather than
+      progressive enhancements, so Deck does not attempt to support browsers released
+      before them.</p>
+
+    <h3>Is Deck free to use commercially?</h3>
+    <p>Yes — Deck is <?= $e($site['license_name']) ?> licensed, which permits commercial
+      use, modification, and redistribution provided the copyright notice is kept. The
+      bundled icon outlines are derived from Google's Material Symbols and carry the
+      Apache License 2.0, whose notice is reproduced in the sprite's header comment.</p>
+  </section>
+
+  <hr>
+
+  <!-- ===================== Comparison ===================== -->
+  <section class="container section stack-6" id="compare">
+    <h2>How is Deck different from Tailwind CSS and Bootstrap?</h2>
+    <p class="lede">Deck differs from Tailwind CSS and Bootstrap in that it has no build
+      step and no configuration file, and its entire palette can be rethemed at runtime
+      by changing one CSS custom property. Tailwind generates a stylesheet from your
+      markup at build time, and Bootstrap needs a Sass compile to customise beyond its
+      CSS variables; Deck is a fixed file that you link and then override with ordinary
+      CSS.</p>
+
+    <div class="table-wrap">
+      <table class="table table-stack">
+        <caption class="sr-only">Deck compared with Tailwind CSS and Bootstrap</caption>
+        <thead>
+          <tr><th scope="col">Question</th><th scope="col">Deck</th><th scope="col">Tailwind CSS</th><th scope="col">Bootstrap</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" data-label="Question">Build step</th>
+            <td data-label="Deck">None</td>
+            <td data-label="Tailwind CSS">Required — the stylesheet is generated from your markup</td>
+            <td data-label="Bootstrap">Not for the prebuilt CSS; required to customise via Sass</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Question">Config file</th>
+            <td data-label="Deck">None</td>
+            <td data-label="Tailwind CSS"><code>tailwind.config.js</code>, or a CSS <code>@theme</code> block in v4</td>
+            <td data-label="Bootstrap">Sass variables</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Question">Runtime dependencies</th>
+            <td data-label="Deck">0</td>
+            <td data-label="Tailwind CSS">0 in the output CSS; a Node toolchain to produce it</td>
+            <td data-label="Bootstrap">0 for the CSS; Popper for dropdown and tooltip JavaScript</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Question">CSS size, gzipped</th>
+            <td data-label="Deck"><?= $e($site['css_gzip']) ?>, fixed</td>
+            <td data-label="Tailwind CSS">Varies with how many utilities you use</td>
+            <td data-label="Bootstrap">Fixed; see their release notes for the current figure</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Question">Retheme without rebuilding</th>
+            <td data-label="Deck">Yes — one custom property, at runtime</td>
+            <td data-label="Tailwind CSS">Partly — v4 exposes CSS variables; config changes need a rebuild</td>
+            <td data-label="Bootstrap">Partly — v5.3 exposes CSS variables; Sass changes need a recompile</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Question">Right-to-left</th>
+            <td data-label="Deck">Built in — set <code>dir="rtl"</code>, no second file</td>
+            <td data-label="Tailwind CSS">Logical-property utilities; a plugin for full coverage</td>
+            <td data-label="Bootstrap">A separate right-to-left stylesheet build</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Question">Overriding the framework</th>
+            <td data-label="Deck">Cascade layers — unlayered CSS always wins</td>
+            <td data-label="Tailwind CSS">Utility order and <code>!important</code> where needed</td>
+            <td data-label="Bootstrap">Specificity, or <code>!important</code></td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Question">Ecosystem and plugins</th>
+            <td data-label="Deck">None</td>
+            <td data-label="Tailwind CSS">Large — component kits, plugins, templates</td>
+            <td data-label="Bootstrap">Large — themes, plugins, long-standing community</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Question">Editor tooling</th>
+            <td data-label="Deck">None</td>
+            <td data-label="Tailwind CSS">Official IntelliSense extension</td>
+            <td data-label="Bootstrap">Community extensions and snippets</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Question">Maturity</th>
+            <td data-label="Deck">Version <?= $e($site['version']) ?>, one author</td>
+            <td data-label="Tailwind CSS">Established, funded, large team</td>
+            <td data-label="Bootstrap">Established since 2011, large team</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Where Deck loses</h3>
+    <p>Deck has no plugin marketplace, no third-party component kits, no editor
+      autocomplete extension, and one maintainer, so a team that needs a large hiring
+      pool or an off-the-shelf admin template is better served by Tailwind CSS or
+      Bootstrap. Deck also has a fixed stylesheet size: a page that uses six components
+      downloads the same <?= $e($site['css_gzip']) ?> as a page that uses all of them,
+      whereas Tailwind's generated output scales down with usage.</p>
+
+    <p class="text-muted">Deck's figures above are measured from this repository with
+      <code>npm run build</code>. The Tailwind CSS and Bootstrap columns describe
+      documented behaviour rather than measurements taken here; both projects change
+      between releases, so check their current documentation before relying on a number.</p>
   </section>
 
   <hr>
@@ -606,8 +900,14 @@
   <section class="container section stack-6" id="mobile">
     <div class="stack-2">
       <h2>Icons and emoji</h2>
-      <p class="text-muted">Icons come from one sprite file and inherit color and font
-        size, so they sit on the text baseline without nudging. Emoji get a pinned font
+      <p class="text-muted">Deck ships <?= (int) $site['icons'] ?> icons as a single SVG
+        sprite of 150 symbols — each icon at two weights, plus two brand marks — and they
+        inherit color and font size, so they sit on the text baseline without nudging. The
+        sprite is generated from the Material Symbols variable font, so any of its
+        <?= $e($site['icons_avail']) ?> icons can be added by putting its name in
+        <code>tools/icons/icons.txt</code> and running <code>npm run icons</code>; only
+        the listed names are extracted, which is how a <?= $e($site['icons_avail']) ?> icon
+        library ships as an <?= (int) $site['icons'] ?> icon file. Emoji get a pinned font
         stack so they render the same on Windows, iOS, and Android.</p>
     </div>
 
@@ -1787,7 +2087,10 @@
 
     <div class="jumbotron jumbotron-center g-mesh-subtle">
       <span class="badge badge-brand">Jumbotron</span>
-      <h2>Everything you need on the first page load</h2>
+      <!-- h3, not h2: this promo band sits inside the section above, and a
+           marketing line should not read as a top-level topic in the outline.
+           .h2 keeps the visual size. -->
+      <h3 class="h2">Everything you need on the first page load</h3>
       <p class="lede">One stylesheet, one link tag, and no dependencies. Every component
         on this page came out of the box.</p>
       <div class="jumbotron-actions">

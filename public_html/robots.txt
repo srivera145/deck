@@ -1,0 +1,79 @@
+# Deck — a CSS framework in one file.  https://get-keel.dev/deck
+#
+# DEPLOYMENT NOTE
+# robots.txt is only read from the root of a host. This file is correct when
+# public_html/ is the document root — the local Helm vhost, or a dedicated
+# domain. If Deck is served from a subdirectory such as get-keel.dev/deck, a
+# robots.txt inside that subdirectory is ignored: merge these rules into
+# https://get-keel.dev/robots.txt instead, and put the Sitemap line there too.
+#
+# Everything here is public documentation for an open source project. There is
+# nothing to protect, so nothing that carries prose is disallowed.
+#
+# AI crawlers are deliberately allowed. Deck's audience is developers, many of
+# whom meet a framework through an assistant rather than a search box, and
+# being read accurately by those crawlers is the point of it. Blocking them
+# buys nothing and guarantees the one outcome worse than not being cited:
+# being described from an invented memory of the API.
+
+User-agent: *
+Allow: /
+# Minified twins of files that are already crawlable. No prose, no value.
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
+
+# --- Search engines -----------------------------------------------------
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# --- Answer engines and AI crawlers -------------------------------------
+# Retrieval, live search, and training agents alike.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+Sitemap: https://get-keel.dev/deck/sitemap.xml

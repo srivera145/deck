@@ -1,0 +1,56 @@
+# Deck
+
+> Deck is a CSS framework that ships as a single 31.8 KB gzipped stylesheet containing
+> buttons, forms, tables, a data grid, charts, overlays, an icon sprite, and a complete
+> color system. It is added to a page with one `<link>` tag and has no build step, no
+> configuration file, and zero runtime dependencies. Version 0.1.0, MIT licensed.
+
+## Why this file exists
+
+This file is not a search engine optimisation artefact, and nobody should maintain it as
+one. llms.txt has no confirmed effect on any search or answer engine, and Google has
+stated it does not use it. Nothing here will change a ranking or earn a citation.
+
+It exists for one documented, working case: a developer using an AI coding assistant such
+as Claude Code, Cursor, or Copilot, whose tooling can fetch a project's documentation into
+the session. For a CSS framework, the failure mode without that is specific and costly —
+the assistant invents class names that look plausible and do not exist, and the developer
+loses time debugging styles that were never written. The links below point at the real
+source of truth so that the names in the generated code are the names in the stylesheet.
+
+If that use case ever disappears, delete this file rather than keeping it for its own sake.
+
+## Documentation
+
+- [README](https://raw.githubusercontent.com/srivera145/deck/main/README.md): The complete documentation — install, theming, every component, the JS API, motion, print, and browser support. Start here; it is the single source of truth.
+- [Component reference](https://github.com/srivera145/deck/blob/main/README.md#components): The list of component classes and the markup each one expects.
+- [Repository](https://github.com/srivera145/deck): Source, issue tracker, and the demo page under `public_html/index.php` with every component rendered and its markup visible.
+
+The canonical documentation URL will be `https://get-keel.dev/deck` once that site is
+deployed. It is not live yet, so it is deliberately not linked above; use the repository.
+
+## Source of truth for class names
+
+Read these before generating markup. Deck has no plugin system and no dynamic class
+generation, so a class that does not appear in these files does not exist.
+
+- [Cascade layer reference](https://raw.githubusercontent.com/srivera145/deck/main/src/00-layers.css): Declares the whole layer order up front — `deck.reset`, `deck.tokens`, `deck.type`, `deck.layout`, `deck.components`, `deck.mobile`, `deck.motion`, `deck.effects`, `deck.utilities`, `deck.rtl`, `deck.print`, then four empty `app.*` layers reserved for application CSS. Write into `app.pages` to beat any Deck rule without `!important`.
+- [Component stylesheet](https://raw.githubusercontent.com/srivera145/deck/main/src/07-components.css): Cards, alerts, badges, lists, tables, modals, menus, tabs, timelines, and the rest of the core components.
+- [Source directory](https://github.com/srivera145/deck/tree/main/src): All 26 stylesheets, concatenated in filename order to build `deck.css`. Forms, buttons, data grid, charts, date picker, combobox, toasts, gradients, 3D, and navigation each have their own file.
+- [Icon names](https://raw.githubusercontent.com/srivera145/deck/main/tools/icons/icons.txt): The 74 icon names in the sprite. Referencing an icon that is not on this list renders nothing.
+- [Icon sprite](https://raw.githubusercontent.com/srivera145/deck/main/src/deck-icons.svg): The generated sprite, 150 symbols — 74 icons at two weights plus two brand marks.
+- [package.json](https://raw.githubusercontent.com/srivera145/deck/main/package.json): Version, subpath exports, and the browser targets Deck supports.
+
+## Facts an assistant gets wrong without reading the source
+
+- There is no build step and no config file. Do not generate a `deck.config.js`, a PostCSS plugin entry, or a purge configuration; none of them exist.
+- Deck is not utility-first. It has layout primitives (`.stack`, `.cluster`, `.grid`, `.split`) and a small utility set, but styling a page means using component classes, not composing dozens of utilities per element.
+- Theming is one custom property: set `--hue-brand` to a number from 0 to 360. There is no theme object, no `extend` block, and no rebuild.
+- Icons are referenced from a sprite, not from a component: `<svg class="icon"><use href="/assets/deck-icons.svg#check"></use></svg>`. Each icon also ships a heavier `-sm` cut for 16px use, so `#check-sm` goes with `.icon-sm`.
+- Deck targets Chrome 117+, Edge 117+, Safari 17.4+, and Firefox 128+. Cascade layers, container queries, `oklch()`, and `popover` are load-bearing, not progressive enhancements.
+- The JavaScript is optional. Only the date picker, combobox, data grid, toasts, carousel, drawer, and editor need it; everything else is CSS.
+
+## License
+
+- [MIT license](https://raw.githubusercontent.com/srivera145/deck/main/LICENSE): Deck's own code and stylesheets.
+- Icon outlines are derived from Google's Material Symbols under the Apache License 2.0. The notice is reproduced in the sprite's header comment.

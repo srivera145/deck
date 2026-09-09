@@ -7,7 +7,7 @@
 # The sprite id is what markup references (`#check-circle`); the glyph name is
 # the Material Symbols name (`check_circle`). Names are the ones on
 # https://fonts.google.com/icons with spaces replaced by underscores. Any of
-# the 4,390 glyphs in the font can be added here — only the lines below are
+# the 4,025 glyphs in the font can be added here — only the lines below are
 # extracted, so the sprite stays small.
 #
 # Every entry produces two symbols: `#<id>` at wght 400 and `#<id>-sm` at
