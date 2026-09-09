@@ -68,10 +68,11 @@
   ],
   "scripts": {
     "build": "node build.mjs",
-    "demo": "node build.mjs && node bin/deck.mjs init public_html/assets/deck --force && node -e \"import('node:fs/promises').then(f=>Promise.all(['deck.min.css','deck.bundle.min.js'].map(n=>f.copyFile('dist/'+n,'public_html/assets/deck/'+n))))\"",
+    "demo": "node build.mjs && node bin/deck.mjs init public_html/assets/deck --force && node -e \"import('node:fs/promises').then(async f=>{await Promise.all(['deck.min.css','deck.bundle.min.js'].map(n=>f.copyFile('dist/'+n,'public_html/assets/deck/'+n)));await f.mkdir('public_html/assets/images',{recursive:true});for(const n of await f.readdir('dist/brand'))await f.copyFile('dist/brand/'+n,'public_html/assets/images/'+n)})\"",
     "start": "php -S localhost:4321 -t public_html",
     "clean": "node -e \"import('node:fs/promises').then(f=>f.rm('dist',{recursive:true,force:true}))\"",
-    "prepublishOnly": "node build.mjs"
+    "prepublishOnly": "node build.mjs",
+    "brand": "node tools/make-brand.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.28.0"

@@ -4,8 +4,9 @@
 composer.lock
 package-lock.json
 
-# Published copies of dist/. Regenerate with: npm run publish
+# Published copies of dist/. Regenerate with: npm run demo
 /public_html/assets/deck/
+/public_html/assets/images/
 
 # Editor and OS noise
 .DS_Store

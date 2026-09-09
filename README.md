@@ -6,7 +6,7 @@ The CSS framework for Keel. Mobile first, one file, no build step.
 - `deck.js` — optional behaviour, no dependencies (~11 KB gzipped)
 - `deck-extras.js` — behaviour for the extended set, including the QR encoder (~9 KB gzipped)
 - `deck-adapters.js` — optional library integrations, inert unless a library is present (~6 KB gzipped)
-- `deck-icons.svg` — 74-icon sprite
+- `deck-icons.svg` — 74-icon sprite, plus the two brand marks
 - `index.html` — kitchen sink demo, open it in a browser
 - `src/` — the twenty-six source files, concatenated to build `deck.css`
 - `dist/layers/` — one file per layer, if you only want part of Deck
@@ -19,21 +19,26 @@ The CSS framework for Keel. Mobile first, one file, no build step.
 deck/
 ├─ src/                    everything hand-written
 │  ├─ 00-layers.css …      26 stylesheets, concatenated in filename order
-│  ├─ deck-icons.svg       the sprite
+│  ├─ deck-icons.svg       the sprite, icons plus the brand marks
+│  ├─ brand/               the logo: one master, the rest derived from it
 │  └─ js/                  deck.js, deck-extras.js, deck-adapters.js
 ├─ dist/                   entirely generated — safe to delete, `npm run build` rebuilds it
 │  ├─ deck.css / .min.css
 │  ├─ deck.js / -extras / -adapters, plus .min.js of each
 │  ├─ deck.bundle.js / .min.js, deck.esm.js
 │  ├─ deck-icons.svg
+│  ├─ brand/               copy of src/brand/
 │  └─ layers/              one file per layer, for partial adoption
 ├─ php/                    Deck.php and Installer.php (PSR-4: EchoDial\Deck\)
 ├─ bin/deck.mjs            the `npx @echodial/deck` CLI
 ├─ public_html/            the Helm docroot — the demo site, not part of the package
 │  ├─ index.php            component demo
 │  ├─ php-helper.php       the PHP helper, demonstrated
-│  └─ assets/deck/         published copy of dist/, gitignored
+│  └─ assets/               published copies, both gitignored
+│     ├─ deck/              dist/
+│     └─ images/            dist/brand/
 ├─ build.mjs
+├─ tools/make-brand.mjs    regenerates the logo family from the master
 ├─ package.json            npm; `files` ships src, dist, bin, build.mjs
 ├─ composer.json           Packagist; PSR-4 points at php/
 └─ LICENSE
@@ -56,7 +61,8 @@ is a published copy, so it is gitignored; run `npm run demo` after a clone to fi
 
 ```bash
 npm run build     # src/ -> dist/
-npm run demo      # build, then publish dist/ into public_html/assets/deck
+npm run demo      # build, then publish dist/ into public_html/assets/
+npm run brand     # regenerate the logo family after changing the mark
 npm run clean     # delete dist/
 npm start         # php -S localhost:4321 -t public_html
 ```
@@ -251,6 +257,89 @@ download, upload, trash, edit, copy, link, external, tag, image, camera, eye,
 eye-off, lock, unlock, shield, star, heart, bookmark, info, alert-circle,
 alert-triangle, check-circle, x-circle, help, credit-card, dollar, receipt, car,
 truck, wrench, gauge, sun, moon, map-pin, send, sparkle.
+
+## Logo
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="src/brand/deck-logo-dark.svg">
+  <img alt="Deck" src="src/brand/deck-logo-light.svg" width="300">
+</picture>
+
+The mark is three planks in perspective — a deck of cards, a deck of layers, the thing
+the framework is named after. It is drawn on the same 24×24 grid as the icons and it
+lives in the same sprite.
+
+### Which copy to use
+
+This is the one rule that matters, and it is easy to get wrong:
+
+| You want | Use | Because |
+| --- | --- | --- |
+| A logo that follows `--hue-brand` | `<use href="deck-icons.svg#deck-mark">` | A `<use>` against a sprite in the same document inherits `color` |
+| A logo in an `<img>`, a `<link>`, or `og:image` | a file from `src/brand/` | An externally referenced SVG has no colour context, so `currentColor` resolves to black |
+
+```html
+<!-- retunes with the palette -->
+<svg class="icon icon-lg icon-fill" style="color: var(--brand)">
+  <use href="/assets/deck-icons.svg#deck-mark"></use>
+</svg>
+
+<!-- static, for a favicon or a social card -->
+<link rel="icon" href="/assets/images/deck-mark.svg" type="image/svg+xml">
+```
+
+Note `.icon-fill`. The brand marks are filled, not stroked, so the `.icon` stroke
+defaults draw them as hollow outlines without it. `#deck-wordmark` is the lettering on
+its own, at `0 0 91.81 24`, for when you are setting the lockup yourself.
+
+### The favicon is a different drawing
+
+`deck-mark.svg` is the mark alone, never the lockup — a 124×24 lockup is a smear at
+16px. It carries its own `prefers-color-scheme` block, so it follows the browser chrome
+instead of picking a side and disappearing in the other one.
+
+### Family
+
+Two files are drawn by hand; `tools/make-brand.mjs` derives the rest from them.
+
+| File | Drawn or derived | What it is |
+| --- | --- | --- |
+| `deck-logo.svg` | drawn | Horizontal lockup, `currentColor`, `0 0 123.81 24` |
+| `deck-logo-stacked.svg` | drawn | Mark over wordmark, `currentColor`, `0 0 91.81 54` |
+| `deck-logo-light.svg` | from the lockup | Explicit dark fill, for light backgrounds |
+| `deck-logo-dark.svg` | from the lockup | Explicit light fill, for dark backgrounds |
+| `deck-mark.svg` | from `#deck-mark` | Mark only, theme-aware, for `rel="icon"` |
+| `deck-og.png` | from the lockup | 1200×630 social card, white on the brand teal |
+| `deck-apple-touch-icon.png` | from `#deck-mark` | 180×180, for `rel="apple-touch-icon"` |
+
+`npm run demo` publishes all of them to `public_html/assets/images/`, which is
+gitignored for the same reason `assets/deck/` is: it is a copy, not a source.
+
+### Regenerating
+
+```bash
+npm run brand     # after changing the mark
+```
+
+The two PNGs cannot be produced in-process — rasterising needs a renderer — so the
+generator shells out to headless Chrome or Edge via its `--screenshot` flag, and the
+results are committed. Deck itself stays dependency-free; the browser is only needed
+when the drawing changes, not to build or use the framework.
+
+Because those rasters are committed, they can go stale. `tools/make-brand.mjs` records
+a hash of every master it read in `src/brand/sources.json`, and `build.mjs` recomputes
+them and **fails the build** if one has moved:
+
+```
+Brand assets are stale. These masters have changed since
+tools/make-brand.mjs last ran:
+
+  src/brand/deck-logo.svg  recorded b44a710d0269aada, now a81ac26bc87ec010
+
+Run: node tools/make-brand.mjs
+```
+
+Hashes rather than timestamps, because a fresh clone gives every file the same mtime.
 
 ## Emoji
 

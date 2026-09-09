@@ -14,6 +14,7 @@
  */
 
 import { readdir, readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -21,6 +22,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.join(root, 'src');
 const JS = path.join(SRC, 'js');
+const BRAND = path.join(SRC, 'brand');
 const DIST = path.join(root, 'dist');
 
 const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
@@ -181,6 +183,36 @@ async function build() {
   // The sprite is a source file, not a generated one, so it is copied rather
   // than transformed. dist/ stays entirely disposable.
   await copyFile(path.join(SRC, 'deck-icons.svg'), path.join(DIST, 'deck-icons.svg'));
+
+  // ---- Brand --------------------------------------------------------------
+  // src/brand/ owns the logo. public_html/assets/images/ is a published copy of
+  // it and nothing else, so there is one drawing on disk and no second sprite.
+  //
+  // Most of src/brand/ is itself derived from the master lockup by
+  // tools/make-brand.mjs, which records the hash of every master it read. The
+  // rasters cannot be regenerated in-process without a renderer, so rather
+  // than silently shipping stale artwork the build stops when a master moves.
+  await mkdir(path.join(DIST, 'brand'), { recursive: true });
+  const brandFiles = (await readdir(BRAND)).filter(f => f !== 'sources.json').sort();
+  for (const f of brandFiles) {
+    await copyFile(path.join(BRAND, f), path.join(DIST, 'brand', f));
+  }
+  console.log(`  ${'brand/'.padEnd(22)} ${brandFiles.length} files`);
+
+  const sha = t => createHash('sha256').update(t, 'utf8').digest('hex').slice(0, 16);
+  const manifest = JSON.parse(await readFile(path.join(BRAND, 'sources.json'), 'utf8'));
+  const stale = [];
+  for (const [rel, recorded] of Object.entries(manifest.masters)) {
+    const actual = sha(await readFile(path.join(root, rel), 'utf8'));
+    if (actual !== recorded) stale.push(`${rel}  recorded ${recorded}, now ${actual}`);
+  }
+  if (stale.length) {
+    console.error('\n  Brand assets are stale. These masters have changed since');
+    console.error('  tools/make-brand.mjs last ran:\n');
+    for (const line of stale) console.error(`    ${line}`);
+    console.error('\n  Run: node tools/make-brand.mjs\n');
+    process.exit(1);
+  }
 
   // ---- JS -----------------------------------------------------------------
   const scripts = ['deck.js', 'deck-extras.js', 'deck-adapters.js'];

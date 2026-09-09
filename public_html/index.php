@@ -4,6 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Deck — the CSS framework for Keel</title>
+
+<!-- Brand marks. These are the static ones: an <img> or a <link> gets no colour
+     context, so currentColor would resolve to black. Everything on the page
+     that should follow --hue-brand uses <use> against the sprite instead.
+     Published from src/brand/ by npm run demo. -->
+<link rel="icon" href="assets/images/deck-mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/images/deck-apple-touch-icon.png">
+
+<meta name="description" content="Deck is one stylesheet: a full component set, an icon system, and a palette that recolors from a single number. No build step, no config file, no dependencies.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Deck — the CSS framework for Keel">
+<meta property="og:description" content="One stylesheet. Retheme the entire app from one number.">
+<meta property="og:image" content="assets/images/deck-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Deck logo, white on the brand teal.">
+<meta name="twitter:card" content="summary_large_image">
+
 <link rel="stylesheet" href="assets/deck/deck.css">
 <script src="assets/deck/deck.js" defer></script>
 <script src="assets/deck/deck-extras.js" defer></script>
@@ -81,8 +99,8 @@
       <span class="badge">No build step</span>
       <span class="badge">One file</span>
     </div>
-    <h1 class="display">Drag the slider. Watch the whole page change its mind.</h1>
-    <p class="lede">
+    <h1 class="display mb-3">Drag the slider. Watch the whole page change its mind.</h1>
+    <p class="lede mb-2">
       Deck is one stylesheet. Drop it in a Keel view and you have a full component
       set, an icon system, and a palette that recolors from a single number — no
       config file, no purge step, no rebuild to change a brand color.
@@ -121,12 +139,12 @@
 
   <!-- ===================== Buttons ===================== -->
   <section class="container section stack-6">
-    <div class="stack-2">
+    <div class="stack-4">
       <h2>Buttons</h2>
-      <p class="text-muted">Seven variants, three sizes, groups, and a loading state.</p>
+      <p class="text-muted mb-1">Seven variants, three sizes, groups, and a loading state.</p>
     </div>
 
-    <div class="cluster">
+    <div class="cluster mb-2">
       <button class="btn btn-primary">Save changes</button>
       <button class="btn">Cancel</button>
       <button class="btn btn-soft">Duplicate</button>
@@ -160,9 +178,9 @@
 
   <!-- ===================== Cards + stats ===================== -->
   <section class="container section stack-6">
-    <h2>Cards and stats</h2>
+    <h2 class="mb-2">Cards and stats</h2>
 
-    <div class="grid">
+    <div class="grid mb-3">
       <article class="card">
         <div class="card-body">
           <div class="stat">
@@ -194,7 +212,7 @@
           <div class="cluster cluster-tight">
             <span class="icon-tile"><svg class="icon"><use href="assets/deck/deck-icons.svg#wrench"></use></svg></span>
             <div class="grow">
-              <h3 class="card-title"><a class="link-quiet stretch" href="#main">Open repairs</a></h3>
+              <h3 class="card-title"><a class="link-quiet stretch" href="#main">Open repair orders</a></h3>
               <p class="text-sm text-muted">17 waiting on parts</p>
             </div>
             <svg class="icon icon-muted"><use href="assets/deck/deck-icons.svg#chevron-right"></use></svg>
@@ -230,28 +248,28 @@
       </article>
 
       <div class="stack-4">
-        <div class="alert alert-info">
+        <div class="alert alert-info mb-2">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#info"></use></svg>
           <div>
             <div class="alert-title">Policy update</div>
             <p class="alert-body">Labor time allowances changed for 2024 model year Broncos.</p>
           </div>
         </div>
-        <div class="alert alert-good">
+        <div class="alert alert-good mb-2">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#check-circle"></use></svg>
           <div>
             <div class="alert-title">Claim 88214 approved</div>
             <p class="alert-body">Paid at $842.16 on the next statement.</p>
           </div>
         </div>
-        <div class="alert alert-warn">
+        <div class="alert alert-warn mb-2">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#alert-triangle"></use></svg>
           <div>
             <div class="alert-title">Missing documentation</div>
             <p class="alert-body">Three claims need a technician story before Friday.</p>
           </div>
         </div>
-        <div class="alert alert-bad">
+        <div class="alert alert-bad mb-2">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#x-circle"></use></svg>
           <div>
             <div class="alert-title">Claim 88109 denied</div>

@@ -1,0 +1,7 @@
+{
+  "note": "Written by tools/make-brand.mjs. build.mjs checks these hashes.",
+  "masters": {
+    "src/brand/deck-logo.svg": "b44a710d0269aada",
+    "src/deck-icons.svg": "c2a5c987ec791843"
+  }
+}
