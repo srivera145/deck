@@ -42,6 +42,8 @@ const DOCS = path.join(ROOT, 'public_html', 'docs');
 const AUTHORED = path.join(ROOT, 'public_html');
 const SKIP_DIRS = new Set(['assets', 'node_modules', 'vendor']);
 const BASELINE = path.join(HERE, 'undocumented.txt');
+const BUCKETS = path.join(ROOT, 'dist', 'api-buckets.json');
+const API_MD = path.join(ROOT, 'API.md');
 
 const DOCS_PREFIX = 'dx-';
 
@@ -100,6 +102,24 @@ export function verifyDocs() {
   }
   const api = JSON.parse(fs.readFileSync(API, 'utf8'));
   const real = new Set(api.classes.map((c) => c.name));
+
+  /* Things that start with a dot and are not classes. `.gitattributes` in the
+     README is a filename, and no amount of pattern matching will tell it apart
+     from a class name, so it is listed. */
+  const NOT_A_CLASS = new Set([
+    'gitattributes', 'gitignore', 'gitkeep', 'npmrc', 'npmignore', 'nvmrc',
+    'editorconfig', 'env', 'htaccess', 'mjs', 'js', 'cjs', 'css', 'html', 'php',
+    'json', 'md', 'svg', 'txt', 'map', 'lock', 'ts', 'woff2',
+  ]);
+
+  /* FINDINGS.md names removed classes deliberately — it is the record of what
+     went and why. Naming one is not a claim that you can still use it. */
+  const editsFile = path.join(ROOT, 'tools', 'docs', 'removed.json');
+  const REMOVED_OK = new Set(
+    fs.existsSync(editsFile)
+      ? JSON.parse(fs.readFileSync(editsFile, 'utf8')).removed.map((r) => r.name)
+      : []
+  );
   const pages = walk(AUTHORED);
 
   const claimed = new Map();   // class -> [pages]
@@ -107,6 +127,40 @@ export function verifyDocs() {
   const staleClaims = [];
   const unrealUses = [];
   const componentPages = [];
+
+  /* Prose drifts too, and nothing was checking it. The freeze removed .is-full,
+     .bs-full, .mbs-* and .mbe-*, and README.md went on listing all of them as
+     logical utilities — a reader would have typed a class that does not exist.
+     Backticked `.name` in the Markdown is specific enough to check without
+     catching ordinary prose; a trailing -* is a family, so it passes if any
+     class starts with that stem.
+
+     README.md only. FINDINGS.md names .stack-depth, .row-cq and .p-5 on
+     purpose — it is the record of what was renamed and what never existed, and
+     a history that cannot mention anything that has gone is not a history. */
+  const proseGhosts = [];
+  for (const rel of ['README.md']) {
+    const file = path.join(ROOT, rel);
+    if (!fs.existsSync(file)) continue;
+    const text = fs.readFileSync(file, 'utf8');
+    let line = 1;
+    for (let i = 0; i < text.length; i++) {
+      if (text[i] === '\n') { line++; continue; }
+      if (text[i] !== '`') continue;
+      const end = text.indexOf('`', i + 1);
+      if (end < 0) break;
+      const token = text.slice(i + 1, end);
+      i = end;
+      const m = /^\.([a-z][\w-]*?)(-\*)?$/.exec(token);
+      if (!m) continue;
+      const [, name, family] = m;
+      if (NOT_A_CLASS.has(name)) continue;
+      const ok = family
+        ? [...real].some((r) => r.startsWith(`${name}-`))
+        : real.has(name) || REMOVED_OK.has(name);
+      if (!ok) proseGhosts.push({ name: token, page: rel, line });
+    }
+  }
 
   for (const file of pages) {
     const rel = path.relative(ROOT, file).replace(/\\/g, '/');
@@ -192,6 +246,28 @@ export function verifyDocs() {
     }
   }
 
+  /* ---- The public API freeze ----------------------------------------------
+     Every class must be in a bucket, and every public class must appear in
+     API.md. A class added to src/ without a decision fails the build, which is
+     the whole point: public is something you choose, not something you get by
+     forgetting. */
+  const unclassified = [];
+  const missingFromApi = [];
+  const strayInApi = [];
+  if (fs.existsSync(BUCKETS)) {
+    const bk = JSON.parse(fs.readFileSync(BUCKETS, 'utf8'));
+    const decided = new Set(Object.keys(bk.decisions));
+    for (const name of real) if (!decided.has(name)) unclassified.push(name);
+
+    const md = fs.existsSync(API_MD) ? fs.readFileSync(API_MD, 'utf8') : '';
+    const listed = new Set([...md.matchAll(/^\| `\.([A-Za-z0-9_-]+)` \|/gm)].map((m) => m[1]));
+    for (const name of bk.buckets.public) if (!listed.has(name)) missingFromApi.push(name);
+    for (const name of listed) {
+      if (!real.has(name)) continue;
+      if (!bk.buckets.public.includes(name)) strayInApi.push(name);
+    }
+  }
+
   /* ---- State attribution -------------------------------------------------- */
   const unattributed = (api.unattributedStates || []).filter((n) => !NOT_STATES.has(n));
 
@@ -230,6 +306,12 @@ export function verifyDocs() {
       uniq.map((u) => `    .${u.name}  in ${u.page}:${u.line}`),
     ]);
   }
+  if (proseGhosts.length) {
+    problems.push([
+      `${proseGhosts.length} class name${proseGhosts.length === 1 ? '' : 's'} in prose that no longer exist${proseGhosts.length === 1 ? 's' : ''} in src/`,
+      proseGhosts.map((g) => `    ${g.name}  in ${g.page}:${g.line}`),
+    ]);
+  }
   if (newlyUndocumented.length) {
     problems.push([
       `${newlyUndocumented.length} class${newlyUndocumented.length === 1 ? '' : 'es'} exist in src/ with no docs entry and are not in the known backlog`,
@@ -252,6 +334,27 @@ export function verifyDocs() {
       'Add it to a component selector, or record it in NOT_STATES with a reason.',
     ]);
   }
+  if (unclassified.length) {
+    problems.push([
+      `${unclassified.length} class${unclassified.length === 1 ? '' : 'es'} in src/ are in no API bucket`,
+      unclassified.slice(0, 20).map((c) => `    .${c}`)
+        .concat(unclassified.length > 20 ? [`    … and ${unclassified.length - 20} more`] : []),
+      'Run `node tools/docs/classify.mjs`, and add a rule for it if none matches.',
+    ]);
+  }
+  if (missingFromApi.length) {
+    problems.push([
+      `${missingFromApi.length} public class${missingFromApi.length === 1 ? ' is' : 'es are'} missing from API.md`,
+      missingFromApi.slice(0, 20).map((c) => `    .${c}`),
+      'API.md is generated; run `node tools/docs/classify.mjs`.',
+    ]);
+  }
+  if (strayInApi.length) {
+    problems.push([
+      `${strayInApi.length} class${strayInApi.length === 1 ? '' : 'es'} in API.md are not in the public bucket`,
+      strayInApi.slice(0, 20).map((c) => `    .${c}`),
+    ]);
+  }
   if (staleBaseline.length) {
     problems.push([
       `${staleBaseline.length} backlog entr${staleBaseline.length === 1 ? 'y is' : 'ies are'} stale — the class is gone from src/`,
@@ -269,10 +372,12 @@ export function verifyDocs() {
   ${pad(used.size)} distinct classes used in docs markup and examples
   ${pad(staleClaims.length)} stale claims
   ${pad(new Set(unrealUses.map((u) => u.name)).size)} classes used that do not exist
+  ${pad(proseGhosts.length)} class names in prose that do not exist
   ${pad(newlyUndocumented.length)} undocumented and unrecorded
   ${pad(staleBaseline.length)} stale backlog entries
   ${pad(componentPages.length)} component page(s), ${incomplete.length} completeness gap(s)
-  ${pad((api.counts?.states) || 0)} state classes, ${unattributed.length} unattributed (${NOT_STATES.size} exempt: ${[...NOT_STATES.keys()].join(', ')})`);
+  ${pad((api.counts?.states) || 0)} state classes, ${unattributed.length} unattributed
+  ${pad(unclassified.length)} unclassified, ${missingFromApi.length} missing from API.md, ${strayInApi.length} stray in API.md`);
 
   if (!problems.length) {
     console.log('\n  No drift.\n');

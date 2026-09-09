@@ -1,6 +1,6 @@
 # Deck
 
-**Deck is a CSS framework that ships as one 26.8 KB Brotli (32.9 KB gzip) stylesheet: buttons, forms,
+**Deck is a CSS framework that ships as one 26.7 KB Brotli (32.7 KB gzip) stylesheet: buttons, forms,
 tables, a data grid, charts, overlays, an icon sprite, and a full color system. You add it
 with one `<link>` tag. There is no build step, no config file, and zero dependencies.**
 
@@ -23,21 +23,21 @@ Version 0.1.0 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
 ## What Deck weighs
 
-A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **62.9 KB** Brotli, or **76.4 KB** gzip. Every browser Deck supports sends `br` in
+A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **62.7 KB** Brotli, or **76.2 KB** gzip. Every browser Deck supports sends `br` in
 `Accept-Encoding`, and Cloudflare, Vercel, Netlify, and nginx with `ngx_brotli` negotiate
 it for text by default, so Brotli is what most users actually receive.
 
 | File | Brotli | gzip |
 | --- | --- | --- |
-| `deck.min.css` | **26.8 KB** | 32.9 KB |
+| `deck.min.css` | **26.7 KB** | 32.7 KB |
 | `deck-icons.svg` | **27.1 KB** | 33.6 KB |
 | `deck.min.js` | **8.9 KB** | 10.0 KB |
-| **All three** | **62.9 KB** | **76.4 KB** |
+| **All three** | **62.7 KB** | **76.2 KB** |
 
 The sprite is the largest single file, slightly bigger than the stylesheet — worth stating
 plainly rather than leaving you to find it in devtools. Swapping `deck.min.js` for the full
 `deck.bundle.min.js` (adds the date picker, combobox, data grid, toasts, QR encoder)
-makes the JavaScript 17.3 KB and the total 71.3 KB Brotli (85.9 KB gzip).
+makes the JavaScript 17.3 KB and the total 71.1 KB Brotli (85.7 KB gzip).
 
 ### The sprite is a manifest, not a fixed cost
 
@@ -70,7 +70,7 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 
 | File | Brotli | gzip | What it is |
 | --- | --- | --- | --- |
-| `deck.min.css` | 26.8 KB | 32.9 KB | The whole framework |
+| `deck.min.css` | 26.7 KB | 32.7 KB | The whole framework |
 | `deck.min.js` | 8.9 KB | 10.0 KB | Optional behaviour, no dependencies |
 | `deck-extras.min.js` | 5.7 KB | 6.5 KB | Date picker, combobox, data grid, toasts, QR encoder |
 | `deck-adapters.min.js` | 4.0 KB | 4.5 KB | Optional library integrations, inert unless one is loaded |
@@ -828,7 +828,7 @@ without either one knowing where it was placed.
   `.cq-row` `.cq-shell`.
 - **Container units:** `.text-cq` `.display-cq` `.pad-cq` `.gap-cq` scale with `cqi`,
   so a heading in a sidebar stays small on a 32-inch monitor.
-- **Adaptive components:** `.card-flex` `.stat-cq` `.row-cq` `.field-row-cq`
+- **Adaptive components:** `.card-flex` `.stat-cq` `.metarow` `.field-row-cq`
   `.actions-cq` `.dg-cq`.
 - **Breakpoint utilities:** `.cq-sm\:row` `.cq-md\:hidden` `.cq-lg\:grid-2` and so on.
 
@@ -868,9 +868,13 @@ breadcrumb separator swaps.
   a commit hash or an order number reads left to right in every language and must not
   scramble the text around it. Reach for `.code-ltr` when you need to force the direction
   on something that is not already monospace.
-- **Mirroring control:** `.flip-rtl` to mirror, `.no-flip` to never mirror.
-- **Logical utilities:** `.mis-*` `.mie-*` `.mbs-*` `.mbe-*` `.pis-*` `.pie-*`
-  `.bis` `.bie` `.is-full` `.bs-full` `.inset-is-0` `.r-start` `.r-end`.
+- **Mirroring control:** `.mirror-rtl` to mirror, `.no-flip` to never mirror.
+- **Logical utilities:** `.mis-*` `.mie-*` `.pis-*` `.pie-*` `.bis` `.bie`
+  `.inset-is-0` `.r-start` `.r-end`. For the block axis reach for `.mt-*` and `.mb-*`,
+  which are named after the physical edge but declare `margin-block-start` and
+  `margin-block-end`, and for full sizes `.w-full` and `.h-full`, which declare
+  `inline-size` and `block-size`. Deck used to ship logically-named spellings of those
+  as well; two names for one declaration is worse than one name that needs a sentence.
 - **Writing modes:** `.writing-vertical` `.writing-upright` `.writing-sideways`, and
   `.th-vertical` for a rotated column header that still measures correctly.
 
@@ -905,7 +909,7 @@ broken gradient.
 
 ## 3D transforms
 
-Depth when it carries meaning: a card with two sides, a pile you're working down
+Depth when it carries meaning: a card with two sides, a stack-depth you're working down
 through, a control that physically depresses.
 
 Everything uses `rotate`, `translate`, and `scale` as **individual properties** rather
@@ -919,7 +923,7 @@ overwriting each other.
   wires it up and marks the hidden face `inert` so it's off the keyboard path.
 - **Tilt:** `.tilt` with `data-tilt="10"`. deck.js writes a single rotation about a
   computed axis. `.tilt-lift` floats content above the face on Z.
-- **Depth stack:** `.stack-depth` for a pile of records, `.is-fanned` to spread it,
+- **Depth stack:** `.pile` for a stack-depth of records, `.is-fanned` to spread it,
   `Deck.advance(stack)` to dismiss the top card.
 - **Coverflow:** `.coverflow` — scroll snap does the mechanics, 3D only does the read.
 - **Cube:** `.cube` with six faces and `data-face="front|back|start|end|top|bottom"`,

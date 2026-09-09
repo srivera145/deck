@@ -1,0 +1,3421 @@
+{
+  "generated": "tools/docs/usage.mjs — do not edit",
+  "filesScanned": 16,
+  "counts": {
+    "classes": 931,
+    "used": 647,
+    "unused": 284
+  },
+  "uses": {
+    "icon": 310,
+    "btn": 268,
+    "text-muted": 188,
+    "card": 136,
+    "card-body": 122,
+    "text-sm": 122,
+    "icon-sm": 119,
+    "stack-3": 95,
+    "btn-sm": 91,
+    "cluster": 90,
+    "badge": 76,
+    "fw-semi": 74,
+    "stack-2": 72,
+    "container": 72,
+    "label": 66,
+    "section": 62,
+    "dg-num": 61,
+    "field": 58,
+    "btn-primary": 55,
+    "stack-6": 51,
+    "icon-lg": 49,
+    "input": 49,
+    "grid": 47,
+    "btn-icon": 43,
+    "num": 42,
+    "icon-tile": 41,
+    "card-title": 40,
+    "cluster-tight": 39,
+    "nums": 39,
+    "check": 37,
+    "btn-ghost": 36,
+    "s1": 31,
+    "nav-link": 30,
+    "push": 29,
+    "grid-tight": 27,
+    "range": 26,
+    "emoji": 24,
+    "dg-pin-start": 23,
+    "check-text": 22,
+    "grow": 20,
+    "icon-tile-lg": 20,
+    "btn-lg": 19,
+    "sidebar-link": 19,
+    "tab": 19,
+    "lede": 18,
+    "alert": 18,
+    "table-wrap": 18,
+    "table": 18,
+    "table-stack": 18,
+    "stack-4": 18,
+    "datefield": 18,
+    "dg-check": 17,
+    "dg-pin-start-2": 17,
+    "dg-pin-end": 17,
+    "mono": 17,
+    "alert-title": 16,
+    "alert-body": 16,
+    "sr-only": 16,
+    "mb-2": 16,
+    "chart-col": 16,
+    "lazy": 15,
+    "btn-soft": 14,
+    "search": 14,
+    "stat-value": 14,
+    "split": 14,
+    "dg-actions": 14,
+    "chart-bar": 14,
+    "chart-bar-label": 14,
+    "chart-bar-track": 14,
+    "chart-bar-fill": 14,
+    "chart-bar-value": 14,
+    "stack": 13,
+    "select": 13,
+    "enter-rise": 13,
+    "indicator": 13,
+    "help": 12,
+    "tooltip": 12,
+    "dg": 12,
+    "editor-tool": 12,
+    "is-open": 12,
+    "copy": 11,
+    "panel": 11,
+    "sidebar-group": 11,
+    "bar": 11,
+    "carousel-slide": 11,
+    "tip": 11,
+    "drag-handle": 11,
+    "fab": 10,
+    "alert-info": 10,
+    "icon-muted": 10,
+    "badge-good": 10,
+    "badge-warn": 10,
+    "list": 10,
+    "list-row": 10,
+    "list-main": 10,
+    "list-title": 10,
+    "list-sub": 10,
+    "list-trail": 10,
+    "combo": 10,
+    "tip-arrow": 10,
+    "kanban-card": 10,
+    "combo-option": 10,
+    "btn-3d": 9,
+    "navbar": 9,
+    "icon-fill": 9,
+    "stack-8": 9,
+    "segmented": 9,
+    "is-done": 9,
+    "mega-item": 9,
+    "step": 9,
+    "step-marker": 9,
+    "step-label": 9,
+    "step-note": 9,
+    "msg": 9,
+    "bubble": 9,
+    "toast": 9,
+    "is-loading": 8,
+    "btn-danger": 8,
+    "badge-brand": 8,
+    "file": 8,
+    "copy-value": 8,
+    "copy-btn": 8,
+    "navbar-brand": 8,
+    "avatar": 8,
+    "reaction": 8,
+    "menu-item": 8,
+    "dg-wrap": 8,
+    "chart-title": 8,
+    "chart-line": 8,
+    "cq-tone": 8,
+    "tone-surface": 8,
+    "tone-text": 8,
+    "pile": 8,
+    "carousel-arrow": 8,
+    "indicator-warn": 8,
+    "mega-item-title": 8,
+    "mega-item-note": 8,
+    "kanban-col": 8,
+    "kanban-card-title": 8,
+    "kanban-card-meta": 8,
+    "tabbar-item": 8,
+    "btn-round": 7,
+    "btn-group": 7,
+    "copy-done": 7,
+    "sticky-top": 7,
+    "sidebar": 7,
+    "grid-wide": 7,
+    "spinner": 7,
+    "skeleton": 7,
+    "emoji-tile": 7,
+    "dg-zebra": 7,
+    "chart-gridline": 7,
+    "marquee-track": 7,
+    "card-flex": 7,
+    "no-flip": 7,
+    "scene": 7,
+    "kanban-head": 7,
+    "kanban-count": 7,
+    "kanban-body": 7,
+    "kanban-empty": 7,
+    "actions-cq": 6,
+    "card-link": 6,
+    "link-quiet": 6,
+    "stretch": 6,
+    "copy-idle": 6,
+    "skip-link": 6,
+    "mb-3": 6,
+    "stat": 6,
+    "stat-label": 6,
+    "stat-delta": 6,
+    "check-note": 6,
+    "icon-xl": 6,
+    "truncate": 6,
+    "accordion-body": 6,
+    "timeline-item": 6,
+    "timeline-dot": 6,
+    "chart": 6,
+    "chart-note": 6,
+    "reveal": 6,
+    "ping": 6,
+    "cq": 6,
+    "tone-icon": 6,
+    "writing-vertical": 6,
+    "flip": 6,
+    "carousel": 6,
+    "editor-sep": 6,
+    "editor-content": 6,
+    "avatar-xs": 6,
+    "gallery": 6,
+    "cq-shell": 6,
+    "speed-dial-action": 6,
+    "speed-dial-label": 6,
+    "speed-dial-button": 6,
+    "back-to-top": 6,
+    "sortable-chosen": 6,
+    "combo-option-main": 6,
+    "btn-block": 5,
+    "field-row": 5,
+    "scroll-progress": 5,
+    "textarea": 5,
+    "chart-legend": 5,
+    "g-border": 5,
+    "carousel-peek": 5,
+    "carousel-prev": 5,
+    "carousel-track": 5,
+    "carousel-next": 5,
+    "carousel-dots": 5,
+    "status-line": 5,
+    "range-pair": 5,
+    "mega-col": 5,
+    "float": 5,
+    "number": 5,
+    "editor": 5,
+    "editor-select": 5,
+    "bubble-meta": 5,
+    "qr": 5,
+    "span-2": 5,
+    "span-wide": 5,
+    "dg-compact": 5,
+    "speed-dial": 5,
+    "is-active": 5,
+    "breadcrumb": 4,
+    "is-disabled": 4,
+    "btn-accent": 4,
+    "btn-outline": 4,
+    "form-actions": 4,
+    "banner": 4,
+    "theme-dock": 4,
+    "navbar-links": 4,
+    "display": 4,
+    "menu": 4,
+    "menu-label": 4,
+    "stat-delta-up": 4,
+    "error": 4,
+    "addon": 4,
+    "switch": 4,
+    "check-card": 4,
+    "text-inherit": 4,
+    "icon-tile-good": 4,
+    "icon-tile-bad": 4,
+    "skeleton-text": 4,
+    "badge-bad": 4,
+    "mt-1": 4,
+    "chart-head": 4,
+    "chart-columns": 4,
+    "s2": 4,
+    "chart-svg": 4,
+    "chart-area": 4,
+    "s-muted": 4,
+    "donut": 4,
+    "s3": 4,
+    "s4": 4,
+    "reveal-fade": 4,
+    "reveal-pop": 4,
+    "ripple": 4,
+    "expand": 4,
+    "card-media": 4,
+    "code-ltr": 4,
+    "flip-front": 4,
+    "flip-back": 4,
+    "tilt": 4,
+    "space": 4,
+    "coverflow": 4,
+    "drawer": 4,
+    "range-readout": 4,
+    "mega-heading": 4,
+    "phone": 4,
+    "rating": 4,
+    "editor-count": 4,
+    "masonry": 4,
+    "dg-virtual": 4,
+    "toast-region": 4,
+    "is-fanned": 4,
+    "shake": 4,
+    "is-over": 4,
+    "is-copied": 4,
+    "datefield-clear": 4,
+    "datepicker-grid": 4,
+    "datepicker-nav": 4,
+    "combo-empty": 4,
+    "dg-sort": 4,
+    "has-value": 4,
+    "is-resizing": 4,
+    "is-dragging": 4,
+    "was-shaken": 4,
+    "is-up": 4,
+    "is-down": 4,
+    "is-tilting": 4,
+    "is-flipped": 4,
+    "is-dismissed": 4,
+    "is-animating": 4,
+    "datepicker-day": 4,
+    "input-group": 3,
+    "card-footer": 3,
+    "banner-close": 3,
+    "mt-4": 3,
+    "tabs": 3,
+    "scroller": 3,
+    "emoji-grid": 3,
+    "dg-cards": 3,
+    "chart-x": 3,
+    "sparkline": 3,
+    "chart-meter": 3,
+    "chart-heat": 3,
+    "stagger": 3,
+    "lift": 3,
+    "press": 3,
+    "icon-follow": 3,
+    "sweep": 3,
+    "pulse": 3,
+    "marquee": 3,
+    "writing-upright": 3,
+    "g-mesh": 3,
+    "g-mesh-drift": 3,
+    "center": 3,
+    "display-cq": 3,
+    "g-text": 3,
+    "g-border-spin": 3,
+    "g-text-shine": 3,
+    "g-sheen": 3,
+    "g-good": 3,
+    "g-warn": 3,
+    "g-bad": 3,
+    "g-ring": 3,
+    "g-ring-spin": 3,
+    "g-grid-lines": 3,
+    "g-dots": 3,
+    "g-hatch": 3,
+    "g-scrim": 3,
+    "g-brand-soft": 3,
+    "scene-near": 3,
+    "tilt-lift": 3,
+    "cube": 3,
+    "cube-spin": 3,
+    "with-indicator": 3,
+    "indicator-badge": 3,
+    "mega": 3,
+    "mega-grid": 3,
+    "mega-feature": 3,
+    "mega-footer": 3,
+    "stepper": 3,
+    "stepper-auto": 3,
+    "is-current": 3,
+    "float-outline": 3,
+    "number-unit": 3,
+    "phone-flag": 3,
+    "phone-code": 3,
+    "editor-toolbar": 3,
+    "editor-footer": 3,
+    "chat": 3,
+    "bubble-name": 3,
+    "msg-out": 3,
+    "bubble-typing": 3,
+    "chat-composer": 3,
+    "qr-sm": 3,
+    "video": 3,
+    "video-poster": 3,
+    "video-play": 3,
+    "jumbotron": 3,
+    "jumbotron-center": 3,
+    "g-mesh-subtle": 3,
+    "pop": 3,
+    "kanban": 3,
+    "print-only": 3,
+    "flash-good": 3,
+    "combo-list": 3,
+    "carousel-dot": 3,
+    "copy-inline": 3,
+    "datepicker-title": 3,
+    "combo-tokens": 3,
+    "combo-input": 3,
+    "combo-toggle": 3,
+    "combo-token": 3,
+    "toast-icon": 3,
+    "toast-action": 3,
+    "toast-close": 3,
+    "is-invalid": 3,
+    "is-visible": 3,
+    "defer": 3,
+    "footer": 3,
+    "footer-bottom": 3,
+    "relative": 3,
+    "prose": 3,
+    "btn-link": 2,
+    "badge-dot": 2,
+    "mb-1": 2,
+    "stat-delta-down": 2,
+    "card-header": 2,
+    "alert-good": 2,
+    "alert-warn": 2,
+    "alert-bad": 2,
+    "required": 2,
+    "optional": 2,
+    "list-header": 2,
+    "icon-tile-warn": 2,
+    "progress": 2,
+    "ring-wrap": 2,
+    "ring": 2,
+    "ring-label": 2,
+    "skeleton-circle": 2,
+    "stack-1": 2,
+    "pagination": 2,
+    "accordion": 2,
+    "timeline": 2,
+    "emoji-tile-round": 2,
+    "menu-sep": 2,
+    "menu-item-danger": 2,
+    "modal": 2,
+    "modal-header": 2,
+    "modal-title": 2,
+    "modal-body": 2,
+    "modal-footer": 2,
+    "sheet": 2,
+    "sheet-grip": 2,
+    "sheet-header": 2,
+    "sheet-title": 2,
+    "sheet-body": 2,
+    "empty": 2,
+    "empty-art": 2,
+    "empty-title": 2,
+    "dg-toolbar": 2,
+    "dg-selection": 2,
+    "dg-cards-wrap": 2,
+    "dg-statusbar": 2,
+    "chart-line-dashed": 2,
+    "chart-baseline": 2,
+    "donut-wrap": 2,
+    "donut-center": 2,
+    "donut-value": 2,
+    "donut-label": 2,
+    "chart-bars": 2,
+    "s5": 2,
+    "sparkline-good": 2,
+    "tilt-lift-sm": 2,
+    "face-front": 2,
+    "face-back": 2,
+    "face-end": 2,
+    "face-start": 2,
+    "face-top": 2,
+    "face-bottom": 2,
+    "indicator-good": 2,
+    "drawer-header": 2,
+    "drawer-title": 2,
+    "drawer-body": 2,
+    "drawer-footer": 2,
+    "phone-country": 2,
+    "phone-status": 2,
+    "text-good": 2,
+    "chat-day": 2,
+    "video-meta": 2,
+    "video-duration": 2,
+    "masonry-3": 2,
+    "jumbotron-actions": 2,
+    "mt-2": 2,
+    "pop-title": 2,
+    "pop-body": 2,
+    "pop-actions": 2,
+    "indicator-brand": 2,
+    "cluster-between": 2,
+    "speed-dial-actions": 2,
+    "tabbar": 2,
+    "flash": 2,
+    "rating-static": 2,
+    "menu-match": 2,
+    "fixed": 2,
+    "sortable-ghost": 2,
+    "sortable-drag": 2,
+    "qr-caption": 2,
+    "is-valid": 2,
+    "is-loaded": 2,
+    "datepicker-month": 2,
+    "datepicker-dow": 2,
+    "datepicker-presets": 2,
+    "datepicker-preset": 2,
+    "datepicker-jump": 2,
+    "datepicker-months": 2,
+    "datepicker-layout": 2,
+    "datepicker-main": 2,
+    "datepicker-head": 2,
+    "datepicker-foot": 2,
+    "datepicker-readout": 2,
+    "combo-group": 2,
+    "combo-option-sub": 2,
+    "combo-check": 2,
+    "combo-create": 2,
+    "combo-hint": 2,
+    "combo-count": 2,
+    "combo-loading": 2,
+    "dg-sort-icon": 2,
+    "toast-main": 2,
+    "toast-title": 2,
+    "toast-text": 2,
+    "toast-actions": 2,
+    "toast-timer": 2,
+    "is-selected": 2,
+    "is-range-start": 2,
+    "is-range-end": 2,
+    "is-in-range": 2,
+    "is-above": 2,
+    "is-scrolled-x": 2,
+    "is-scrolled-end": 2,
+    "toast-region-stacked": 2,
+    "is-leaving": 2,
+    "is-revealed": 2,
+    "tick": 2,
+    "is-front": 2,
+    "is-behind-start": 2,
+    "is-behind-end": 2,
+    "anchor": 2,
+    "dg-resize": 2,
+    "flip-x": 2,
+    "transition": 2,
+    "field-row-cq": 2,
+    "dg-cq": 2,
+    "w-full": 2,
+    "gap-2": 2,
+    "h2": 1,
+    "datepicker": 1,
+    "is-outside": 1,
+    "is-today": 1,
+    "is-blocked": 1,
+    "combo-control": 1,
+    "sticky": 1,
+    "ripple-ink": 1,
+    "emoji-lg": 1,
+    "emoji-xl": 1,
+    "emoji-hero": 1,
+    "app-shell": 1,
+    "toast-region-start": 1,
+    "toast-region-center": 1,
+    "toast-region-top": 1,
+    "chart-col-stack": 1,
+    "chart-group": 1,
+    "chart-y": 1,
+    "page-break": 1,
+    "page-break-after": 1,
+    "keep-together": 1,
+    "no-print": 1,
+    "print-keep": 1,
+    "no-print-url": 1,
+    "print-header": 1,
+    "print-footer": 1,
+    "transition-colors": 1,
+    "transition-move": 1,
+    "transition-size": 1,
+    "transition-opacity": 1,
+    "dur-1": 1,
+    "dur-5": 1,
+    "ease-out": 1,
+    "ease-in": 1,
+    "ease-spring": 1,
+    "ease-bounce": 1,
+    "ease-overshoot": 1,
+    "ease-linear": 1,
+    "delay-1": 1,
+    "delay-2": 1,
+    "delay-3": 1,
+    "no-motion": 1,
+    "enter": 1,
+    "enter-drop": 1,
+    "enter-start": 1,
+    "enter-end": 1,
+    "enter-pop": 1,
+    "enter-blur": 1,
+    "shrink-on-scroll": 1,
+    "nudge": 1,
+    "vt-header": 1,
+    "vt-main": 1,
+    "vt-tabbar": 1,
+    "vt-hold": 1,
+    "cq-size": 1,
+    "cq-panel": 1,
+    "cq-pane": 1,
+    "cq-row": 1,
+    "text-cq": 1,
+    "pad-cq": 1,
+    "gap-cq": 1,
+    "stat-cq": 1,
+    "metarow": 1,
+    "cq-sm": 1,
+    "cq-md": 1,
+    "cq-lg": 1,
+    "dir-ltr": 1,
+    "dir-rtl": 1,
+    "bidi-isolate": 1,
+    "bidi-plaintext": 1,
+    "mirror-rtl": 1,
+    "bis": 1,
+    "bie": 1,
+    "inset-is-0": 1,
+    "r-start": 1,
+    "r-end": 1,
+    "h-full": 1,
+    "writing-sideways": 1,
+    "th-vertical": 1,
+    "g-surface": 1,
+    "g-sunken": 1,
+    "g-brand": 1,
+    "g-dark": 1,
+    "g-border-soft": 1,
+    "g-scrim-top": 1,
+    "g-fade-inline": 1,
+    "g-fade-end": 1,
+    "g-fade-block": 1,
+    "g-fade-more": 1,
+    "g-stripes": 1,
+    "g-conic": 1,
+    "g-shimmer": 1,
+    "g-bar-fill": 1,
+    "chart-area-g": 1,
+    "scene-far": 1,
+    "parallax": 1,
+    "parallax-back": 1,
+    "parallax-mid": 1,
+    "parallax-front": 1,
+    "turn-out": 1,
+    "turn-in": 1,
+    "carousel-multi": 1,
+    "drawer-end": 1,
+    "banner-bottom": 1,
+    "stepper-vertical": 1,
+    "video-square": 1,
+    "video-portrait": 1,
+    "video-wide": 1,
+    "bubble-attachment": 1,
+    "bubble-system": 1,
+    "qr-lg": 1,
+    "qr-logo": 1,
+    "indicator-badge-dot": 1,
+    "jumbotron-media": 1,
+    "footer-grid": 1,
+    "footer-brand": 1,
+    "footer-col": 1,
+    "footer-heading": 1,
+    "footer-social": 1,
+    "list-virtual": 1,
+    "virtual": 1,
+    "contain": 1,
+    "contain-paint": 1,
+    "dg-comfy": 1,
+    "md": 1,
+    "min-is-0": 1,
+    "grid-2": 1,
+    "icon-spin": 1,
+    "range-ticks": 1,
+    "stack-0": 1,
+    "chip": 1
+  },
+  "where": {
+    "breadcrumb": [
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "cluster": [
+      "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/button.php",
+      "public_html/index.php",
+      "public_html/llms.txt"
+    ],
+    "cluster-tight": [
+      "FINDINGS.md",
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "stack-3": [
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "lede": [
+      "bin/deck.mjs",
+      "public_html/docs/components/button.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "text-muted": [
+      "FINDINGS.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-extras.js"
+    ],
+    "stack-6": [
+      "public_html/docs/components/button.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "stack-2": [
+      "FINDINGS.md",
+      "public_html/docs/components/button.php",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "btn": [
+      "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck.js"
+    ],
+    "btn-sm": [
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "btn-lg": [
+      "bin/deck.mjs",
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "btn-icon": [
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/components/button.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "icon": [
+      "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "php/Deck.php",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "public_html/llms.txt",
+      "public_html/php-helper.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck.js"
+    ],
+    "btn-round": [
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "btn-primary": [
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "btn-ghost": [
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/button.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "icon-sm": [
+      "README.md",
+      "public_html/docs/components/button.php",
+      "public_html/index.php",
+      "public_html/llms.txt",
+      "public_html/php-helper.php",
+      "src/js/deck.js"
+    ],
+    "btn-block": [
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "btn-3d": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "btn-group": [
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "is-loading": [
+      "FINDINGS.md",
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "is-disabled": [
+      "FINDINGS.md",
+      "public_html/docs/components/button.php"
+    ],
+    "fab": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/button.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "icon-lg": [
+      "README.md",
+      "php/Deck.php",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/button.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "field-row": [
+      "public_html/docs/components/button.php",
+      "public_html/docs/search.php",
+      "public_html/index.php"
+    ],
+    "input-group": [
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "card-footer": [
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "alert": [
+      "public_html/docs/components/button.php",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "actions-cq": [
+      "README.md",
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "navbar": [
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/button.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "btn-accent": [
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "btn-danger": [
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "btn-soft": [
+      "bin/deck.mjs",
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "btn-outline": [
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "btn-link": [
+      "public_html/docs/components/button.php"
+    ],
+    "stack": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/button.php",
+      "public_html/llms.txt"
+    ],
+    "grid": [
+      "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "public_html/llms.txt",
+      "public_html/php-helper.php"
+    ],
+    "card": [
+      "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "card-link": [
+      "public_html/docs/index.php",
+      "public_html/index.php"
+    ],
+    "card-body": [
+      "bin/deck.mjs",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "card-title": [
+      "bin/deck.mjs",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "link-quiet": [
+      "public_html/docs/index.php",
+      "public_html/index.php"
+    ],
+    "stretch": [
+      "public_html/docs/index.php",
+      "public_html/index.php"
+    ],
+    "text-sm": [
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-extras.js"
+    ],
+    "badge": [
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "badge-brand": [
+      "public_html/docs/index.php",
+      "public_html/index.php"
+    ],
+    "table-wrap": [
+      "public_html/docs/_layout.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php"
+    ],
+    "table": [
+      "public_html/docs/_layout.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php"
+    ],
+    "table-stack": [
+      "public_html/docs/_layout.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php"
+    ],
+    "alert-info": [
+      "public_html/docs/index.php",
+      "public_html/index.php"
+    ],
+    "alert-title": [
+      "public_html/docs/index.php",
+      "public_html/index.php"
+    ],
+    "alert-body": [
+      "public_html/docs/index.php",
+      "public_html/index.php"
+    ],
+    "field": [
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "label": [
+      "bin/deck.mjs",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck.js"
+    ],
+    "search": [
+      "public_html/docs/_layout.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "input": [
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js",
+      "src/js/deck.js"
+    ],
+    "select": [
+      "FINDINGS.md",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js",
+      "src/js/deck.js"
+    ],
+    "form-actions": [
+      "public_html/docs/search.php",
+      "public_html/index.php"
+    ],
+    "sr-only": [
+      "public_html/docs/_layout.php",
+      "public_html/docs/search.php",
+      "public_html/index.php"
+    ],
+    "file": [
+      "public_html/docs/_layout.php",
+      "public_html/docs/search.php",
+      "public_html/index.php"
+    ],
+    "copy": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-extras.js"
+    ],
+    "copy-value": [
+      "FINDINGS.md",
+      "public_html/docs/_layout.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-extras.js"
+    ],
+    "copy-btn": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "copy-idle": [
+      "public_html/docs/_layout.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "copy-done": [
+      "public_html/docs/_layout.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-extras.js"
+    ],
+    "skip-link": [
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/index.php"
+    ],
+    "sticky-top": [
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/php-helper.php"
+    ],
+    "container": [
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "navbar-brand": [
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "icon-fill": [
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/index.php"
+    ],
+    "push": [
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "section": [
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "panel": [
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/index.php"
+    ],
+    "sidebar": [
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/index.php"
+    ],
+    "sidebar-group": [
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/index.php"
+    ],
+    "sidebar-link": [
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/index.php"
+    ],
+    "stack-8": [
+      "FINDINGS.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/index.php"
+    ],
+    "banner": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "banner-close": [
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "scroll-progress": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "theme-dock": [
+      "FINDINGS.md",
+      "public_html/index.php"
+    ],
+    "navbar-links": [
+      "bin/deck.mjs",
+      "public_html/index.php"
+    ],
+    "nav-link": [
+      "bin/deck.mjs",
+      "public_html/index.php"
+    ],
+    "range": [
+      "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/index.php",
+      "src/js/deck-extras.js",
+      "src/js/deck.js"
+    ],
+    "badge-dot": [
+      "public_html/index.php"
+    ],
+    "display": [
+      "bin/deck.mjs",
+      "public_html/index.php"
+    ],
+    "mb-3": [
+      "public_html/index.php"
+    ],
+    "mb-2": [
+      "public_html/index.php"
+    ],
+    "menu": [
+      "public_html/index.php"
+    ],
+    "menu-label": [
+      "public_html/index.php"
+    ],
+    "mt-4": [
+      "FINDINGS.md",
+      "public_html/index.php"
+    ],
+    "num": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "nums": [
+      "README.md",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "stack-4": [
+      "bin/deck.mjs",
+      "public_html/index.php"
+    ],
+    "mb-1": [
+      "public_html/index.php"
+    ],
+    "stat": [
+      "public_html/index.php"
+    ],
+    "stat-label": [
+      "public_html/index.php"
+    ],
+    "stat-value": [
+      "public_html/index.php"
+    ],
+    "stat-delta": [
+      "public_html/index.php"
+    ],
+    "stat-delta-up": [
+      "public_html/index.php"
+    ],
+    "stat-delta-down": [
+      "public_html/index.php"
+    ],
+    "icon-tile": [
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "grow": [
+      "public_html/index.php"
+    ],
+    "icon-muted": [
+      "public_html/index.php"
+    ],
+    "grid-wide": [
+      "FINDINGS.md",
+      "public_html/index.php"
+    ],
+    "card-header": [
+      "public_html/index.php"
+    ],
+    "avatar": [
+      "public_html/index.php"
+    ],
+    "fw-semi": [
+      "public_html/index.php"
+    ],
+    "badge-good": [
+      "public_html/index.php"
+    ],
+    "badge-warn": [
+      "public_html/index.php"
+    ],
+    "alert-good": [
+      "public_html/index.php"
+    ],
+    "alert-warn": [
+      "public_html/index.php"
+    ],
+    "alert-bad": [
+      "public_html/index.php"
+    ],
+    "split": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/index.php",
+      "public_html/llms.txt"
+    ],
+    "required": [
+      "public_html/index.php"
+    ],
+    "help": [
+      "public_html/index.php"
+    ],
+    "optional": [
+      "public_html/index.php"
+    ],
+    "error": [
+      "bin/deck.mjs",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "addon": [
+      "public_html/index.php"
+    ],
+    "textarea": [
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "check": [
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck.js"
+    ],
+    "check-text": [
+      "public_html/index.php"
+    ],
+    "check-note": [
+      "public_html/index.php"
+    ],
+    "switch": [
+      "public_html/index.php"
+    ],
+    "grid-tight": [
+      "FINDINGS.md",
+      "public_html/index.php"
+    ],
+    "check-card": [
+      "public_html/index.php"
+    ],
+    "icon-xl": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "text-inherit": [
+      "public_html/index.php"
+    ],
+    "segmented": [
+      "FINDINGS.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "list": [
+      "bin/deck.mjs",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck.js"
+    ],
+    "list-header": [
+      "public_html/index.php"
+    ],
+    "list-row": [
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "icon-tile-good": [
+      "public_html/index.php"
+    ],
+    "list-main": [
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "list-title": [
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "list-sub": [
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "truncate": [
+      "public_html/index.php"
+    ],
+    "list-trail": [
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "icon-tile-warn": [
+      "public_html/index.php"
+    ],
+    "icon-tile-bad": [
+      "public_html/index.php"
+    ],
+    "progress": [
+      "public_html/index.php"
+    ],
+    "ring-wrap": [
+      "public_html/index.php"
+    ],
+    "ring": [
+      "public_html/index.php"
+    ],
+    "ring-label": [
+      "public_html/index.php"
+    ],
+    "spinner": [
+      "FINDINGS.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "skeleton": [
+      "FINDINGS.md",
+      "public_html/index.php"
+    ],
+    "skeleton-circle": [
+      "public_html/index.php"
+    ],
+    "stack-1": [
+      "public_html/index.php"
+    ],
+    "skeleton-text": [
+      "public_html/index.php"
+    ],
+    "bar": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "badge-bad": [
+      "public_html/index.php"
+    ],
+    "pagination": [
+      "public_html/index.php"
+    ],
+    "tabs": [
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "tab": [
+      "FINDINGS.md",
+      "public_html/index.php"
+    ],
+    "accordion": [
+      "public_html/index.php"
+    ],
+    "accordion-body": [
+      "public_html/index.php"
+    ],
+    "timeline": [
+      "public_html/index.php"
+    ],
+    "timeline-item": [
+      "public_html/index.php"
+    ],
+    "is-done": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "timeline-dot": [
+      "public_html/index.php"
+    ],
+    "scroller": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "icon-tile-lg": [
+      "public_html/index.php"
+    ],
+    "emoji-tile": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "emoji-tile-round": [
+      "public_html/index.php"
+    ],
+    "reaction": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "emoji": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/index.php"
+    ],
+    "emoji-grid": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "tooltip": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "menu-item": [
+      "public_html/index.php"
+    ],
+    "menu-sep": [
+      "public_html/index.php"
+    ],
+    "menu-item-danger": [
+      "public_html/index.php"
+    ],
+    "modal": [
+      "public_html/index.php"
+    ],
+    "modal-header": [
+      "public_html/index.php"
+    ],
+    "modal-title": [
+      "public_html/index.php"
+    ],
+    "mt-1": [
+      "public_html/index.php"
+    ],
+    "modal-body": [
+      "public_html/index.php"
+    ],
+    "modal-footer": [
+      "public_html/index.php"
+    ],
+    "sheet": [
+      "public_html/index.php"
+    ],
+    "sheet-grip": [
+      "public_html/index.php"
+    ],
+    "sheet-header": [
+      "public_html/index.php"
+    ],
+    "sheet-title": [
+      "public_html/index.php"
+    ],
+    "sheet-body": [
+      "public_html/index.php"
+    ],
+    "empty": [
+      "public_html/index.php"
+    ],
+    "empty-art": [
+      "public_html/index.php"
+    ],
+    "empty-title": [
+      "public_html/index.php"
+    ],
+    "datefield": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "combo": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "dg-toolbar": [
+      "public_html/index.php"
+    ],
+    "dg-selection": [
+      "public_html/index.php"
+    ],
+    "dg-wrap": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "dg-cards-wrap": [
+      "public_html/index.php"
+    ],
+    "dg": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "dg-zebra": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "dg-cards": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "dg-check": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "dg-pin-start": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "dg-pin-start-2": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "dg-num": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/index.php"
+    ],
+    "dg-actions": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "dg-pin-end": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "mono": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "dg-statusbar": [
+      "public_html/index.php"
+    ],
+    "chart": [
+      "public_html/index.php"
+    ],
+    "chart-head": [
+      "public_html/index.php"
+    ],
+    "chart-title": [
+      "public_html/index.php"
+    ],
+    "chart-note": [
+      "public_html/index.php"
+    ],
+    "chart-columns": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "chart-col": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "s1": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "s2": [
+      "public_html/index.php"
+    ],
+    "chart-svg": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "chart-gridline": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "chart-area": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "chart-line": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "chart-line-dashed": [
+      "public_html/index.php"
+    ],
+    "s-muted": [
+      "public_html/index.php"
+    ],
+    "chart-baseline": [
+      "public_html/index.php"
+    ],
+    "chart-x": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "chart-legend": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "donut-wrap": [
+      "public_html/index.php"
+    ],
+    "donut": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "donut-center": [
+      "public_html/index.php"
+    ],
+    "donut-value": [
+      "public_html/index.php"
+    ],
+    "donut-label": [
+      "public_html/index.php"
+    ],
+    "s3": [
+      "public_html/index.php"
+    ],
+    "s4": [
+      "public_html/index.php"
+    ],
+    "chart-bars": [
+      "public_html/index.php"
+    ],
+    "chart-bar": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "chart-bar-label": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "chart-bar-track": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "chart-bar-fill": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "chart-bar-value": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "s5": [
+      "public_html/index.php"
+    ],
+    "sparkline": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "sparkline-good": [
+      "public_html/index.php"
+    ],
+    "chart-meter": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "chart-heat": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "stagger": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "enter-rise": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "reveal": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "reveal-fade": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "reveal-pop": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "lift": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "press": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "ripple": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "icon-follow": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "sweep": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "ping": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/index.php"
+    ],
+    "pulse": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "expand": [
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "marquee": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "marquee-track": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/index.php"
+    ],
+    "cq": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "card-flex": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "card-media": [
+      "public_html/index.php"
+    ],
+    "cq-tone": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "tone-surface": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "tone-icon": [
+      "public_html/index.php"
+    ],
+    "tone-text": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "code-ltr": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "no-flip": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "writing-vertical": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/index.php"
+    ],
+    "writing-upright": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-mesh": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-mesh-drift": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "center": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "display-cq": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-text": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-border": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-border-spin": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-text-shine": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-sheen": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-good": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-warn": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-bad": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-ring": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-ring-spin": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-grid-lines": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-dots": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-hatch": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-scrim": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "scene": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "flip": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "flip-front": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "flip-back": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "g-brand-soft": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "scene-near": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "tilt": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "space": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "tilt-lift": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "tilt-lift-sm": [
+      "public_html/index.php"
+    ],
+    "pile": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "cube": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "cube-spin": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "face-front": [
+      "public_html/index.php"
+    ],
+    "face-back": [
+      "public_html/index.php"
+    ],
+    "face-end": [
+      "public_html/index.php"
+    ],
+    "face-start": [
+      "public_html/index.php"
+    ],
+    "face-top": [
+      "public_html/index.php"
+    ],
+    "face-bottom": [
+      "public_html/index.php"
+    ],
+    "coverflow": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "carousel": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "carousel-peek": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "carousel-arrow": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "carousel-prev": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "carousel-track": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "carousel-slide": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "carousel-next": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "carousel-dots": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "with-indicator": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "indicator-badge": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "status-line": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "indicator": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "indicator-good": [
+      "public_html/index.php"
+    ],
+    "indicator-warn": [
+      "public_html/index.php"
+    ],
+    "drawer": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "drawer-header": [
+      "public_html/index.php"
+    ],
+    "drawer-title": [
+      "public_html/index.php"
+    ],
+    "drawer-body": [
+      "public_html/index.php"
+    ],
+    "range-pair": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "range-readout": [
+      "FINDINGS.md",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "drawer-footer": [
+      "public_html/index.php"
+    ],
+    "mega": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "mega-grid": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "mega-col": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "mega-heading": [
+      "public_html/index.php"
+    ],
+    "mega-item": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "mega-item-title": [
+      "public_html/index.php"
+    ],
+    "mega-item-note": [
+      "public_html/index.php"
+    ],
+    "mega-feature": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "mega-footer": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "stepper": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "stepper-auto": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "step": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "step-marker": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "step-label": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "step-note": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "is-current": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "float": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "float-outline": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "number": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "number-unit": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "phone": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "phone-country": [
+      "public_html/index.php"
+    ],
+    "phone-flag": [
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "phone-code": [
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "phone-status": [
+      "public_html/index.php"
+    ],
+    "text-good": [
+      "public_html/index.php"
+    ],
+    "rating": [
+      "README.md",
+      "public_html/index.php",
+      "public_html/llms.txt"
+    ],
+    "editor": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck-extras.js"
+    ],
+    "editor-toolbar": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "editor-select": [
+      "public_html/index.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck-extras.js"
+    ],
+    "editor-sep": [
+      "public_html/index.php"
+    ],
+    "editor-tool": [
+      "public_html/index.php"
+    ],
+    "editor-content": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck-extras.js"
+    ],
+    "editor-footer": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "editor-count": [
+      "public_html/index.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck-extras.js"
+    ],
+    "chat": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "chat-day": [
+      "public_html/index.php"
+    ],
+    "msg": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "avatar-xs": [
+      "public_html/index.php"
+    ],
+    "bubble": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "bubble-name": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "bubble-meta": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "msg-out": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "bubble-typing": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "chat-composer": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "qr": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "qr-sm": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "video": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "video-poster": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "video-play": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "video-meta": [
+      "public_html/index.php"
+    ],
+    "video-duration": [
+      "public_html/index.php"
+    ],
+    "masonry": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "masonry-3": [
+      "public_html/index.php"
+    ],
+    "lazy": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "jumbotron": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "jumbotron-center": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "g-mesh-subtle": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "h2": [
+      "public_html/index.php"
+    ],
+    "jumbotron-actions": [
+      "public_html/index.php"
+    ],
+    "gallery": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "span-2": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "span-wide": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "cq-shell": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "tip": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "tip-arrow": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-adapters.js"
+    ],
+    "mt-2": [
+      "public_html/index.php"
+    ],
+    "pop": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "pop-title": [
+      "public_html/index.php"
+    ],
+    "pop-body": [
+      "public_html/index.php"
+    ],
+    "pop-actions": [
+      "public_html/index.php"
+    ],
+    "kanban": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "kanban-col": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-adapters.js"
+    ],
+    "kanban-head": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "kanban-count": [
+      "public_html/index.php",
+      "src/js/deck-adapters.js"
+    ],
+    "kanban-body": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "kanban-card": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-adapters.js"
+    ],
+    "kanban-card-title": [
+      "public_html/index.php"
+    ],
+    "drag-handle": [
+      "public_html/index.php"
+    ],
+    "kanban-card-meta": [
+      "public_html/index.php"
+    ],
+    "kanban-empty": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "indicator-brand": [
+      "public_html/index.php"
+    ],
+    "dg-virtual": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "dg-compact": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "print-only": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "cluster-between": [
+      "public_html/index.php"
+    ],
+    "speed-dial": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "speed-dial-actions": [
+      "public_html/index.php"
+    ],
+    "speed-dial-action": [
+      "public_html/index.php"
+    ],
+    "speed-dial-label": [
+      "public_html/index.php"
+    ],
+    "speed-dial-button": [
+      "public_html/index.php"
+    ],
+    "back-to-top": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "tabbar": [
+      "public_html/index.php"
+    ],
+    "tabbar-item": [
+      "public_html/index.php"
+    ],
+    "toast-region": [
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "is-fanned": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/index.php"
+    ],
+    "toast": [
+      "bin/deck.mjs",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "shake": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "flash": [
+      "README.md",
+      "public_html/index.php"
+    ],
+    "flash-good": [
+      "README.md",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "rating-static": [
+      "README.md",
+      "public_html/llms.txt"
+    ],
+    "menu-match": [
+      "src/js/deck-adapters.js"
+    ],
+    "combo-list": [
+      "src/js/deck-adapters.js",
+      "src/js/deck.js"
+    ],
+    "is-over": [
+      "src/js/deck-adapters.js",
+      "src/js/deck-extras.js"
+    ],
+    "sortable-chosen": [
+      "README.md",
+      "src/js/deck-adapters.js"
+    ],
+    "fixed": [
+      "src/js/deck-adapters.js"
+    ],
+    "sortable-ghost": [
+      "README.md",
+      "src/js/deck-adapters.js"
+    ],
+    "sortable-drag": [
+      "README.md",
+      "src/js/deck-adapters.js"
+    ],
+    "carousel-dot": [
+      "src/js/deck-extras.js"
+    ],
+    "qr-caption": [
+      "src/js/deck-extras.js"
+    ],
+    "is-open": [
+      "src/js/deck-extras.js",
+      "src/js/deck.js"
+    ],
+    "is-valid": [
+      "src/js/deck-extras.js"
+    ],
+    "is-copied": [
+      "src/js/deck-extras.js"
+    ],
+    "copy-inline": [
+      "README.md",
+      "src/js/deck-extras.js"
+    ],
+    "is-loaded": [
+      "src/js/deck-extras.js"
+    ],
+    "datefield-clear": [
+      "src/js/deck.js"
+    ],
+    "datepicker-month": [
+      "src/js/deck.js"
+    ],
+    "datepicker-grid": [
+      "src/js/deck.js"
+    ],
+    "datepicker-dow": [
+      "src/js/deck.js"
+    ],
+    "datepicker-presets": [
+      "src/js/deck.js"
+    ],
+    "datepicker-preset": [
+      "src/js/deck.js"
+    ],
+    "datepicker-jump": [
+      "src/js/deck.js"
+    ],
+    "datepicker-months": [
+      "src/js/deck.js"
+    ],
+    "datepicker-layout": [
+      "src/js/deck.js"
+    ],
+    "datepicker-main": [
+      "src/js/deck.js"
+    ],
+    "datepicker-head": [
+      "src/js/deck.js"
+    ],
+    "datepicker-nav": [
+      "src/js/deck.js"
+    ],
+    "datepicker-title": [
+      "src/js/deck.js"
+    ],
+    "datepicker-foot": [
+      "src/js/deck.js"
+    ],
+    "datepicker-readout": [
+      "src/js/deck.js"
+    ],
+    "combo-tokens": [
+      "src/js/deck.js"
+    ],
+    "combo-input": [
+      "src/js/deck.js"
+    ],
+    "combo-toggle": [
+      "src/js/deck.js"
+    ],
+    "combo-option": [
+      "src/js/deck.js"
+    ],
+    "combo-option-main": [
+      "src/js/deck.js"
+    ],
+    "combo-empty": [
+      "src/js/deck.js"
+    ],
+    "combo-group": [
+      "src/js/deck.js"
+    ],
+    "combo-option-sub": [
+      "src/js/deck.js"
+    ],
+    "combo-check": [
+      "src/js/deck.js"
+    ],
+    "combo-create": [
+      "src/js/deck.js"
+    ],
+    "combo-hint": [
+      "src/js/deck.js"
+    ],
+    "combo-token": [
+      "src/js/deck.js"
+    ],
+    "combo-count": [
+      "src/js/deck.js"
+    ],
+    "combo-loading": [
+      "src/js/deck.js"
+    ],
+    "dg-sort": [
+      "src/js/deck.js"
+    ],
+    "dg-sort-icon": [
+      "src/js/deck.js"
+    ],
+    "toast-icon": [
+      "src/js/deck.js"
+    ],
+    "toast-main": [
+      "src/js/deck.js"
+    ],
+    "toast-title": [
+      "src/js/deck.js"
+    ],
+    "toast-text": [
+      "src/js/deck.js"
+    ],
+    "toast-actions": [
+      "src/js/deck.js"
+    ],
+    "toast-action": [
+      "src/js/deck.js"
+    ],
+    "toast-close": [
+      "src/js/deck.js"
+    ],
+    "toast-timer": [
+      "src/js/deck.js"
+    ],
+    "has-value": [
+      "src/js/deck.js"
+    ],
+    "is-selected": [
+      "src/js/deck.js"
+    ],
+    "is-range-start": [
+      "src/js/deck.js"
+    ],
+    "is-range-end": [
+      "src/js/deck.js"
+    ],
+    "is-in-range": [
+      "src/js/deck.js"
+    ],
+    "is-active": [
+      "FINDINGS.md",
+      "src/js/deck.js"
+    ],
+    "is-above": [
+      "src/js/deck.js"
+    ],
+    "is-scrolled-x": [
+      "src/js/deck.js"
+    ],
+    "is-scrolled-end": [
+      "src/js/deck.js"
+    ],
+    "is-resizing": [
+      "src/js/deck.js"
+    ],
+    "toast-region-stacked": [
+      "src/js/deck.js"
+    ],
+    "is-leaving": [
+      "src/js/deck.js"
+    ],
+    "is-dragging": [
+      "src/js/deck.js"
+    ],
+    "is-revealed": [
+      "src/js/deck.js"
+    ],
+    "was-shaken": [
+      "src/js/deck.js"
+    ],
+    "is-invalid": [
+      "README.md",
+      "src/js/deck.js"
+    ],
+    "tick": [
+      "src/js/deck.js"
+    ],
+    "is-up": [
+      "src/js/deck.js"
+    ],
+    "is-down": [
+      "src/js/deck.js"
+    ],
+    "is-tilting": [
+      "src/js/deck.js"
+    ],
+    "is-flipped": [
+      "src/js/deck.js"
+    ],
+    "is-front": [
+      "src/js/deck.js"
+    ],
+    "is-behind-start": [
+      "src/js/deck.js"
+    ],
+    "is-behind-end": [
+      "src/js/deck.js"
+    ],
+    "is-dismissed": [
+      "FINDINGS.md",
+      "src/js/deck.js"
+    ],
+    "anchor": [
+      "src/js/deck.js"
+    ],
+    "is-visible": [
+      "README.md",
+      "src/js/deck.js"
+    ],
+    "is-animating": [
+      "src/js/deck.js"
+    ],
+    "datepicker-day": [
+      "src/js/deck.js"
+    ],
+    "dg-resize": [
+      "src/js/deck.js"
+    ],
+    "flip-x": [
+      "README.md",
+      "src/js/deck.js"
+    ],
+    "datepicker": [
+      "src/js/deck.js"
+    ],
+    "is-outside": [
+      "src/js/deck.js"
+    ],
+    "is-today": [
+      "src/js/deck.js"
+    ],
+    "is-blocked": [
+      "src/js/deck.js"
+    ],
+    "combo-control": [
+      "src/js/deck.js"
+    ],
+    "sticky": [
+      "src/js/deck.js"
+    ],
+    "ripple-ink": [
+      "src/js/deck.js"
+    ],
+    "defer": [
+      "README.md",
+      "php/Deck.php"
+    ],
+    "footer": [
+      "README.md",
+      "bin/deck.mjs"
+    ],
+    "footer-bottom": [
+      "README.md",
+      "bin/deck.mjs"
+    ],
+    "relative": [
+      "bin/deck.mjs"
+    ],
+    "emoji-lg": [
+      "README.md"
+    ],
+    "emoji-xl": [
+      "README.md"
+    ],
+    "emoji-hero": [
+      "README.md"
+    ],
+    "app-shell": [
+      "README.md"
+    ],
+    "toast-region-start": [
+      "README.md"
+    ],
+    "toast-region-center": [
+      "README.md"
+    ],
+    "toast-region-top": [
+      "README.md"
+    ],
+    "chart-col-stack": [
+      "README.md"
+    ],
+    "chart-group": [
+      "README.md"
+    ],
+    "chart-y": [
+      "README.md"
+    ],
+    "page-break": [
+      "README.md"
+    ],
+    "page-break-after": [
+      "README.md"
+    ],
+    "keep-together": [
+      "README.md"
+    ],
+    "no-print": [
+      "README.md"
+    ],
+    "print-keep": [
+      "README.md"
+    ],
+    "no-print-url": [
+      "README.md"
+    ],
+    "print-header": [
+      "README.md"
+    ],
+    "print-footer": [
+      "README.md"
+    ],
+    "transition": [
+      "README.md"
+    ],
+    "transition-colors": [
+      "README.md"
+    ],
+    "transition-move": [
+      "README.md"
+    ],
+    "transition-size": [
+      "README.md"
+    ],
+    "transition-opacity": [
+      "README.md"
+    ],
+    "dur-1": [
+      "README.md"
+    ],
+    "dur-5": [
+      "README.md"
+    ],
+    "ease-out": [
+      "README.md"
+    ],
+    "ease-in": [
+      "README.md"
+    ],
+    "ease-spring": [
+      "README.md"
+    ],
+    "ease-bounce": [
+      "README.md"
+    ],
+    "ease-overshoot": [
+      "README.md"
+    ],
+    "ease-linear": [
+      "README.md"
+    ],
+    "delay-1": [
+      "README.md"
+    ],
+    "delay-2": [
+      "README.md"
+    ],
+    "delay-3": [
+      "README.md"
+    ],
+    "no-motion": [
+      "README.md"
+    ],
+    "enter": [
+      "README.md"
+    ],
+    "enter-drop": [
+      "README.md"
+    ],
+    "enter-start": [
+      "README.md"
+    ],
+    "enter-end": [
+      "README.md"
+    ],
+    "enter-pop": [
+      "README.md"
+    ],
+    "enter-blur": [
+      "README.md"
+    ],
+    "shrink-on-scroll": [
+      "README.md"
+    ],
+    "nudge": [
+      "README.md"
+    ],
+    "vt-header": [
+      "README.md"
+    ],
+    "vt-main": [
+      "README.md"
+    ],
+    "vt-tabbar": [
+      "README.md"
+    ],
+    "vt-hold": [
+      "README.md"
+    ],
+    "cq-size": [
+      "README.md"
+    ],
+    "cq-panel": [
+      "README.md"
+    ],
+    "cq-pane": [
+      "README.md"
+    ],
+    "cq-row": [
+      "README.md"
+    ],
+    "text-cq": [
+      "README.md"
+    ],
+    "pad-cq": [
+      "README.md"
+    ],
+    "gap-cq": [
+      "README.md"
+    ],
+    "stat-cq": [
+      "README.md"
+    ],
+    "metarow": [
+      "README.md"
+    ],
+    "field-row-cq": [
+      "README.md"
+    ],
+    "dg-cq": [
+      "README.md"
+    ],
+    "cq-sm": [
+      "README.md"
+    ],
+    "cq-md": [
+      "README.md"
+    ],
+    "cq-lg": [
+      "README.md"
+    ],
+    "dir-ltr": [
+      "README.md"
+    ],
+    "dir-rtl": [
+      "README.md"
+    ],
+    "bidi-isolate": [
+      "README.md"
+    ],
+    "bidi-plaintext": [
+      "README.md"
+    ],
+    "mirror-rtl": [
+      "README.md"
+    ],
+    "bis": [
+      "README.md"
+    ],
+    "bie": [
+      "README.md"
+    ],
+    "inset-is-0": [
+      "README.md"
+    ],
+    "r-start": [
+      "README.md"
+    ],
+    "r-end": [
+      "README.md"
+    ],
+    "w-full": [
+      "FINDINGS.md",
+      "README.md"
+    ],
+    "h-full": [
+      "README.md"
+    ],
+    "writing-sideways": [
+      "README.md"
+    ],
+    "th-vertical": [
+      "README.md"
+    ],
+    "g-surface": [
+      "README.md"
+    ],
+    "g-sunken": [
+      "README.md"
+    ],
+    "g-brand": [
+      "README.md"
+    ],
+    "g-dark": [
+      "README.md"
+    ],
+    "g-border-soft": [
+      "README.md"
+    ],
+    "g-scrim-top": [
+      "README.md"
+    ],
+    "g-fade-inline": [
+      "README.md"
+    ],
+    "g-fade-end": [
+      "README.md"
+    ],
+    "g-fade-block": [
+      "README.md"
+    ],
+    "g-fade-more": [
+      "README.md"
+    ],
+    "g-stripes": [
+      "README.md"
+    ],
+    "g-conic": [
+      "README.md"
+    ],
+    "g-shimmer": [
+      "README.md"
+    ],
+    "g-bar-fill": [
+      "README.md"
+    ],
+    "chart-area-g": [
+      "README.md"
+    ],
+    "scene-far": [
+      "README.md"
+    ],
+    "parallax": [
+      "README.md"
+    ],
+    "parallax-back": [
+      "README.md"
+    ],
+    "parallax-mid": [
+      "README.md"
+    ],
+    "parallax-front": [
+      "README.md"
+    ],
+    "turn-out": [
+      "README.md"
+    ],
+    "turn-in": [
+      "README.md"
+    ],
+    "carousel-multi": [
+      "README.md"
+    ],
+    "drawer-end": [
+      "README.md"
+    ],
+    "banner-bottom": [
+      "README.md"
+    ],
+    "stepper-vertical": [
+      "README.md"
+    ],
+    "video-square": [
+      "README.md"
+    ],
+    "video-portrait": [
+      "README.md"
+    ],
+    "video-wide": [
+      "README.md"
+    ],
+    "bubble-attachment": [
+      "README.md"
+    ],
+    "bubble-system": [
+      "README.md"
+    ],
+    "qr-lg": [
+      "README.md"
+    ],
+    "qr-logo": [
+      "README.md"
+    ],
+    "indicator-badge-dot": [
+      "README.md"
+    ],
+    "jumbotron-media": [
+      "README.md"
+    ],
+    "footer-grid": [
+      "README.md"
+    ],
+    "footer-brand": [
+      "README.md"
+    ],
+    "footer-col": [
+      "README.md"
+    ],
+    "footer-heading": [
+      "README.md"
+    ],
+    "footer-social": [
+      "README.md"
+    ],
+    "list-virtual": [
+      "README.md"
+    ],
+    "virtual": [
+      "README.md"
+    ],
+    "contain": [
+      "README.md"
+    ],
+    "contain-paint": [
+      "README.md"
+    ],
+    "dg-comfy": [
+      "README.md"
+    ],
+    "md": [
+      "FINDINGS.md"
+    ],
+    "prose": [
+      "FINDINGS.md"
+    ],
+    "min-is-0": [
+      "FINDINGS.md"
+    ],
+    "grid-2": [
+      "FINDINGS.md"
+    ],
+    "icon-spin": [
+      "FINDINGS.md"
+    ],
+    "range-ticks": [
+      "FINDINGS.md"
+    ],
+    "gap-2": [
+      "FINDINGS.md"
+    ],
+    "stack-0": [
+      "FINDINGS.md"
+    ],
+    "chip": [
+      "FINDINGS.md"
+    ]
+  },
+  "unused": [
+    "absolute",
+    "avatar-lg",
+    "avatar-sm",
+    "avatar-square",
+    "avatar-stack",
+    "avatar-xl",
+    "backface-hidden",
+    "badge-solid",
+    "banner-dark",
+    "banner-fixed",
+    "banner-warn",
+    "bg-brand",
+    "bg-none",
+    "bg-soft",
+    "bg-sunken",
+    "bg-surface",
+    "block",
+    "border",
+    "border-0",
+    "border-b",
+    "border-brand",
+    "border-t",
+    "capitalize",
+    "card-brand",
+    "card-flush",
+    "card-raised",
+    "carousel-caption",
+    "chart-dot",
+    "chart-dot-active",
+    "chart-lg",
+    "chart-plot",
+    "chart-sm",
+    "chip-remove",
+    "clamp-2",
+    "clamp-3",
+    "cluster-center",
+    "cluster-end",
+    "combo-clear",
+    "combo-option-trail",
+    "combo-sep",
+    "container-full",
+    "container-lg",
+    "container-md",
+    "container-sm",
+    "container-xl",
+    "contents",
+    "cq-normal",
+    "cursor-pointer",
+    "datepicker-time",
+    "dg-center",
+    "dg-empty",
+    "dg-tight",
+    "dg-wrap-text",
+    "disclosure",
+    "disclosure-body",
+    "drop-reject",
+    "drop-target",
+    "dur-2",
+    "dur-3",
+    "dur-4",
+    "editor-tool-wide",
+    "fade-swap",
+    "fieldset",
+    "flat",
+    "flex",
+    "flex-col",
+    "flex-row",
+    "flip-hover",
+    "form-actions-sticky",
+    "fw-bold",
+    "fw-medium",
+    "fw-normal",
+    "g-hairline",
+    "g-mesh-warm",
+    "gap-0",
+    "gap-1",
+    "gap-3",
+    "gap-4",
+    "gap-6",
+    "gap-8",
+    "grid-fixed-2",
+    "grid-fixed-3",
+    "grid-fixed-4",
+    "h1",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "hidden",
+    "indicator-bad",
+    "indicator-badge-brand",
+    "indicator-lg",
+    "indicator-ring",
+    "inline-block",
+    "inline-flex",
+    "inset-0",
+    "inset-be-0",
+    "inset-bs-0",
+    "inset-ie-0",
+    "is-lifted",
+    "is-new",
+    "is-preview",
+    "items-baseline",
+    "items-center",
+    "items-end",
+    "items-start",
+    "items-stretch",
+    "justify-between",
+    "justify-center",
+    "justify-end",
+    "justify-start",
+    "lazy-block",
+    "lazy-blur",
+    "lg",
+    "m-0",
+    "masonry-2",
+    "max-w-lg",
+    "max-w-md",
+    "max-w-prose",
+    "max-w-sm",
+    "mb-0",
+    "mb-4",
+    "mb-6",
+    "mb-8",
+    "mie-0",
+    "mie-1",
+    "mie-2",
+    "mie-3",
+    "mie-4",
+    "mie-6",
+    "mie-8",
+    "mie-auto",
+    "min-h-screen",
+    "mis-0",
+    "mis-1",
+    "mis-2",
+    "mis-3",
+    "mis-4",
+    "mis-6",
+    "mis-8",
+    "mis-auto",
+    "mouse-only",
+    "mt-0",
+    "mt-3",
+    "mt-6",
+    "mt-8",
+    "mx-auto",
+    "no-select",
+    "no-underline",
+    "nowrap",
+    "number-sm",
+    "opacity-60",
+    "overflow-auto",
+    "overflow-clip",
+    "overflow-hidden",
+    "p-0",
+    "p-1",
+    "p-2",
+    "p-3",
+    "p-4",
+    "p-6",
+    "p-8",
+    "parallax-layer",
+    "pbe-0",
+    "pbe-1",
+    "pbe-2",
+    "pbe-3",
+    "pbe-4",
+    "pbe-6",
+    "pbe-8",
+    "pbs-0",
+    "pbs-1",
+    "pbs-2",
+    "pbs-3",
+    "pbs-4",
+    "pbs-6",
+    "pbs-8",
+    "pie-0",
+    "pie-1",
+    "pie-2",
+    "pie-3",
+    "pie-4",
+    "pie-6",
+    "pie-8",
+    "pis-0",
+    "pis-1",
+    "pis-2",
+    "pis-3",
+    "pis-4",
+    "pis-6",
+    "pis-8",
+    "place-center",
+    "pointer-none",
+    "presence",
+    "presence-away",
+    "presence-off",
+    "px-0",
+    "px-1",
+    "px-2",
+    "px-3",
+    "px-4",
+    "px-6",
+    "px-8",
+    "py-0",
+    "py-1",
+    "py-2",
+    "py-3",
+    "py-4",
+    "py-6",
+    "py-8",
+    "qr-logo-mark",
+    "r-full",
+    "r-lg",
+    "r-md",
+    "r-sm",
+    "r-xs",
+    "rating-fill",
+    "rating-lg",
+    "rating-sm",
+    "ratio-16x9",
+    "ratio-1x1",
+    "ratio-4x3",
+    "reorder",
+    "reveal-late",
+    "row-meta",
+    "row-meta-wide",
+    "s-bad",
+    "s-good",
+    "s-warn",
+    "s6",
+    "safe-bottom",
+    "safe-top",
+    "safe-x",
+    "shadow-0",
+    "shadow-1",
+    "shadow-2",
+    "shadow-3",
+    "shadow-4",
+    "shrink-0",
+    "sm",
+    "sortable",
+    "sortable-fallback",
+    "sparkline-bad",
+    "spinner-lg",
+    "split-rail-start",
+    "square",
+    "stagger-fast",
+    "stagger-slow",
+    "table-compact",
+    "text-2xl",
+    "text-2xs",
+    "text-bad",
+    "text-base",
+    "text-brand",
+    "text-center",
+    "text-end",
+    "text-faint",
+    "text-lg",
+    "text-md",
+    "text-start",
+    "text-warn",
+    "text-xl",
+    "text-xs",
+    "toast-bad",
+    "toast-good",
+    "toast-info",
+    "toast-loading",
+    "toast-undo",
+    "toast-warn",
+    "touch-only",
+    "uppercase",
+    "video-cover",
+    "virtual-lg",
+    "virtual-sm",
+    "w-auto",
+    "will-move",
+    "wrap",
+    "writing-normal",
+    "writing-vertical-lr",
+    "z-1",
+    "z-lift-1",
+    "z-lift-2",
+    "z-lift-3",
+    "z-sink"
+  ]
+}

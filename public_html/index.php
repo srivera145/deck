@@ -1854,7 +1854,7 @@ $ npm run icons</code></pre>
       </div></div>
 
       <div class="card"><div class="card-body">
-        <span class="card-title mbe-2">Writing modes</span>
+        <span class="card-title mb-2">Writing modes</span>
         <div class="cluster">
           <span class="writing-vertical text-sm text-muted" style="block-size:6rem">Vertical column header</span>
           <span class="writing-vertical writing-upright text-sm text-muted" style="block-size:6rem">UPRIGHT</span>
@@ -1955,7 +1955,7 @@ $ npm run icons</code></pre>
       </div>
 
       <div class="stack-3">
-        <div class="stack-depth" id="pile" style="min-block-size:150px">
+        <div class="pile" id="pile" style="min-block-size:150px">
           <div class="card"><div class="card-body"><span class="fw-semi">PR #418</span><span class="text-sm text-muted">Awaiting review</span></div></div>
           <div class="card"><div class="card-body"><span class="fw-semi">PR #421</span><span class="text-sm text-muted">Awaiting review</span></div></div>
           <div class="card"><div class="card-body"><span class="fw-semi">PR #423</span><span class="text-sm text-muted">Awaiting review</span></div></div>

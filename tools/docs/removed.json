@@ -1,0 +1,313 @@
+{
+  "removed": [
+    {
+      "file": "19-logical.css",
+      "name": "is-full",
+      "reason": "duplicate of .w-full; `is-` collides with the state prefix",
+      "uses": 1,
+      "usedIn": [
+        "README.md:1"
+      ]
+    },
+    {
+      "file": "19-logical.css",
+      "name": "is-auto",
+      "reason": "duplicate of .w-auto; `is-` collides with the state prefix",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "bs-full",
+      "reason": "duplicate of .h-full",
+      "uses": 1,
+      "usedIn": [
+        "README.md:1"
+      ]
+    },
+    {
+      "file": "19-logical.css",
+      "name": "bbs",
+      "reason": "duplicate of .border-t",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "bbe",
+      "reason": "duplicate of .border-b",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mi-auto",
+      "reason": "duplicate of .mx-auto",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "max-is-prose",
+      "reason": "duplicate of .max-w-prose",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "dir-auto",
+      "reason": "duplicate of .bidi-isolate, and misnamed: it sets no direction",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbs-0",
+      "reason": "duplicate of .mt-0",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbs-1",
+      "reason": "duplicate of .mt-1",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbs-2",
+      "reason": "duplicate of .mt-2",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbs-3",
+      "reason": "duplicate of .mt-3",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbs-4",
+      "reason": "duplicate of .mt-4",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbs-6",
+      "reason": "duplicate of .mt-6",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbs-8",
+      "reason": "duplicate of .mt-8",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbe-0",
+      "reason": "duplicate of .mb-0",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbe-1",
+      "reason": "duplicate of .mb-1",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbe-2",
+      "reason": "duplicate of .mb-2",
+      "uses": 1,
+      "usedIn": [
+        "public_html/index.php:1"
+      ]
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbe-3",
+      "reason": "duplicate of .mb-3",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbe-4",
+      "reason": "duplicate of .mb-4",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbe-6",
+      "reason": "duplicate of .mb-6",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "19-logical.css",
+      "name": "mbe-8",
+      "reason": "duplicate of .mb-8",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "03-type.css",
+      "name": "text-tiny",
+      "reason": "duplicate of .text-xs, and off the scale naming",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "04-layout.css",
+      "name": "cluster-0",
+      "reason": "duplicate of .stack-0; both set --gap",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "04-layout.css",
+      "name": "cluster-1",
+      "reason": "duplicate of .stack-1; both set --gap",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "04-layout.css",
+      "name": "cluster-2",
+      "reason": "duplicate of .stack-2; both set --gap",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "04-layout.css",
+      "name": "cluster-3",
+      "reason": "duplicate of .stack-3; both set --gap",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "04-layout.css",
+      "name": "cluster-4",
+      "reason": "duplicate of .stack-4; both set --gap",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "04-layout.css",
+      "name": "cluster-6",
+      "reason": "duplicate of .stack-6; both set --gap",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "04-layout.css",
+      "name": "cluster-8",
+      "reason": "duplicate of .stack-8; both set --gap",
+      "uses": 0,
+      "usedIn": []
+    },
+    {
+      "file": "09-utilities.css",
+      "name": "grid-d",
+      "reason": "collides with the .grid primitive; display:grid with zero uses",
+      "uses": 0,
+      "usedIn": []
+    }
+  ],
+  "renamed": [
+    {
+      "from": "stack-depth",
+      "to": "pile",
+      "reason": "collided with .stack; it is a 3D card pile, not a vertical rhythm variant",
+      "hits": 20,
+      "files": [
+        "src/21-space3d.css",
+        "src/js/deck.js",
+        "public_html/index.php",
+        "README.md"
+      ]
+    },
+    {
+      "from": "flip-rtl",
+      "to": "mirror-rtl",
+      "reason": "collided with .flip, the 3D flip card; this one mirrors for RTL",
+      "hits": 2,
+      "files": [
+        "src/19-logical.css",
+        "README.md"
+      ]
+    },
+    {
+      "from": "select-none",
+      "to": "no-select",
+      "reason": "collided with .select, the form control; matches .no-print and .no-flip",
+      "hits": 1,
+      "files": [
+        "src/09-utilities.css"
+      ]
+    },
+    {
+      "from": "row",
+      "to": "flex-row",
+      "reason": "collided with the .row-* container component, and read like a grid system",
+      "hits": 85,
+      "files": [
+        "src/04-layout.css",
+        "src/06-forms.css",
+        "src/08-mobile.css",
+        "src/09-utilities.css",
+        "src/10-datepicker.css",
+        "src/11-combobox.css",
+        "src/16-motion.css",
+        "src/18-container.css",
+        "src/22-nav.css",
+        "src/24-media.css",
+        "src/26-perf.css",
+        "src/js/deck-extras.js",
+        "src/js/deck.js",
+        "public_html/docs/components/button.php",
+        "public_html/docs/index.php",
+        "public_html/docs/search.php",
+        "public_html/docs/_layout.php",
+        "public_html/index.php",
+        "README.md"
+      ]
+    },
+    {
+      "from": "col",
+      "to": "flex-col",
+      "reason": "pairs with .flex-row; matches the .flex display utility it modifies",
+      "hits": 33,
+      "files": [
+        "src/09-utilities.css",
+        "src/18-container.css",
+        "src/js/deck-adapters.js",
+        "src/js/deck.js",
+        "public_html/docs/index.php",
+        "public_html/docs/search.php",
+        "public_html/docs/_layout.php",
+        "public_html/index.php"
+      ]
+    },
+    {
+      "from": "row-cq",
+      "to": "metarow",
+      "reason": "the .row prefix now belongs to nothing else; names the component directly",
+      "hits": 6,
+      "files": [
+        "src/18-container.css",
+        "README.md"
+      ]
+    }
+  ]
+}

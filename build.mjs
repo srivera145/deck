@@ -314,6 +314,8 @@ async function build() {
       `  ${'api.json'.padEnd(22)} ${String(docsApi.counts.classes).padStart(6)} classes, ` +
       `${docsApi.counts.documented} documented, ${docsApi.counts.undocumented} outstanding`
     );
+    await import('./tools/docs/usage.mjs');
+    await import('./tools/docs/classify.mjs');
     const { verifyDocs } = await import('./tools/docs/verify.mjs');
     verifyDocs();
   } catch (err) {

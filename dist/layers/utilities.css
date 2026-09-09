@@ -12,12 +12,11 @@
   .inline-block { display: inline-block; }
   .flex { display: flex; }
   .inline-flex { display: inline-flex; }
-  .grid-d { display: grid; }
   .contents { display: contents; }
 
   /* --- Flex and grid ------------------------------------------------------ */
-  .row { flex-direction: row; }
-  .col { flex-direction: column; }
+  .flex-row { flex-direction: row; }
+  .flex-col { flex-direction: column; }
   .wrap { flex-wrap: wrap; }
   .nowrap { flex-wrap: nowrap; white-space: nowrap; }
   .items-start { align-items: flex-start; }
@@ -176,7 +175,7 @@
 
   .opacity-60 { opacity: .6; }
   .pointer-none { pointer-events: none; }
-  .select-none { user-select: none; }
+  .no-select { user-select: none; }
   .cursor-pointer { cursor: pointer; }
 
   /* --- Accessibility ------------------------------------------------------ */

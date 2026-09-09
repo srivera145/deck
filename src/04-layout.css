@@ -63,13 +63,6 @@
     align-items: center;
     gap: var(--gap, var(--space-3));
   }
-  .cluster-0 { --gap: 0; }
-  .cluster-1 { --gap: var(--space-1); }
-  .cluster-2 { --gap: var(--space-2); }
-  .cluster-3 { --gap: var(--space-3); }
-  .cluster-4 { --gap: var(--space-4); }
-  .cluster-6 { --gap: var(--space-6); }
-  .cluster-8 { --gap: var(--space-8); }
   /* Kept as the readable name for step 2, which is what most clusters want */
   .cluster-tight { --gap: var(--space-2); }
   .cluster-end { justify-content: flex-end; }

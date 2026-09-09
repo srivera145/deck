@@ -67,15 +67,15 @@
   }
 
   /* List rows that reveal their metadata as space allows */
-  .row-cq { display: flex; align-items: center; gap: var(--space-3); }
-  .row-cq .row-meta { display: none; }
+  .metarow { display: flex; align-items: center; gap: var(--space-3); }
+  .metarow .row-meta { display: none; }
   @container (min-width: 26rem) {
-    .row-cq .row-meta { display: block; color: var(--text-muted); font-size: var(--text-sm); }
+    .metarow .row-meta { display: block; color: var(--text-muted); font-size: var(--text-sm); }
   }
   @container (min-width: 38rem) {
-    .row-cq .row-meta-wide { display: block; }
+    .metarow .row-meta-wide { display: block; }
   }
-  .row-cq .row-meta-wide { display: none; }
+  .metarow .row-meta-wide { display: none; }
 
   /* Form fields that pair up inside their own container, not the viewport.
      This is the one that keeps biting people: a two-up field row inside a

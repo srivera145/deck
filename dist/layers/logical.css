@@ -18,7 +18,6 @@
      already logical underneath — .mt-4 sets margin-block-start. These are the
      explicitly named versions for when the distinction matters in review.
      ---------------------------------------------------------------------- */
-  .mi-auto { margin-inline: auto; }
   .mis-auto { margin-inline-start: auto; }
   .mie-auto { margin-inline-end: auto; }
 
@@ -38,20 +37,6 @@
   .mie-6 { margin-inline-end: var(--space-6); }
   .mie-8 { margin-inline-end: var(--space-8); }
 
-  .mbs-0 { margin-block-start: 0; }
-  .mbs-1 { margin-block-start: var(--space-1); }
-  .mbs-2 { margin-block-start: var(--space-2); }
-  .mbs-3 { margin-block-start: var(--space-3); }
-  .mbs-4 { margin-block-start: var(--space-4); }
-  .mbs-6 { margin-block-start: var(--space-6); }
-  .mbs-8 { margin-block-start: var(--space-8); }
-  .mbe-0 { margin-block-end: 0; }
-  .mbe-1 { margin-block-end: var(--space-1); }
-  .mbe-2 { margin-block-end: var(--space-2); }
-  .mbe-3 { margin-block-end: var(--space-3); }
-  .mbe-4 { margin-block-end: var(--space-4); }
-  .mbe-6 { margin-block-end: var(--space-6); }
-  .mbe-8 { margin-block-end: var(--space-8); }
 
   .pis-0 { padding-inline-start: 0; }
   .pis-1 { padding-inline-start: var(--space-1); }
@@ -85,14 +70,8 @@
 
   .bis { border-inline-start: 1px solid var(--line); }
   .bie { border-inline-end: 1px solid var(--line); }
-  .bbs { border-block-start: 1px solid var(--line); }
-  .bbe { border-block-end: 1px solid var(--line); }
 
-  .is-full { inline-size: 100%; }
-  .is-auto { inline-size: auto; }
-  .bs-full { block-size: 100%; }
   .min-is-0 { min-inline-size: 0; }
-  .max-is-prose { max-inline-size: var(--measure); }
 
   .inset-is-0 { inset-inline-start: 0; }
   .inset-ie-0 { inset-inline-end: 0; }
@@ -134,7 +113,6 @@
      ---------------------------------------------------------------------- */
   .dir-ltr { direction: ltr; unicode-bidi: isolate; }
   .dir-rtl { direction: rtl; unicode-bidi: isolate; }
-  .dir-auto { unicode-bidi: isolate; }
   .bidi-isolate { unicode-bidi: isolate; }
   .bidi-plaintext { unicode-bidi: plaintext; }
 
@@ -152,7 +130,7 @@
      direction of reading". They must mirror. A checkmark, a clock, a wrench,
      and a logo must not. Mark the ones that point.
      ---------------------------------------------------------------------- */
-  [dir="rtl"] .flip-rtl { scale: -1 1; }
+  [dir="rtl"] .mirror-rtl { scale: -1 1; }
 
   /* The pointing icons in Deck's own sprite, mirrored automatically */
   [dir="rtl"] :is(

@@ -462,8 +462,7 @@
     max-inline-size: var(--measure);
   }
 
-  small, .text-small { font-size: var(--text-sm); }
-  .text-tiny { font-size: var(--text-xs); }
+  small { font-size: var(--text-sm); }
 
   strong, b { font-weight: 640; }
 
@@ -608,13 +607,6 @@
     align-items: center;
     gap: var(--gap, var(--space-3));
   }
-  .cluster-0 { --gap: 0; }
-  .cluster-1 { --gap: var(--space-1); }
-  .cluster-2 { --gap: var(--space-2); }
-  .cluster-3 { --gap: var(--space-3); }
-  .cluster-4 { --gap: var(--space-4); }
-  .cluster-6 { --gap: var(--space-6); }
-  .cluster-8 { --gap: var(--space-8); }
   /* Kept as the readable name for step 2, which is what most clusters want */
   .cluster-tight { --gap: var(--space-2); }
   .cluster-end { justify-content: flex-end; }
@@ -2256,12 +2248,11 @@
   .inline-block { display: inline-block; }
   .flex { display: flex; }
   .inline-flex { display: inline-flex; }
-  .grid-d { display: grid; }
   .contents { display: contents; }
 
   /* --- Flex and grid ------------------------------------------------------ */
-  .row { flex-direction: row; }
-  .col { flex-direction: column; }
+  .flex-row { flex-direction: row; }
+  .flex-col { flex-direction: column; }
   .wrap { flex-wrap: wrap; }
   .nowrap { flex-wrap: nowrap; white-space: nowrap; }
   .items-start { align-items: flex-start; }
@@ -2420,7 +2411,7 @@
 
   .opacity-60 { opacity: .6; }
   .pointer-none { pointer-events: none; }
-  .select-none { user-select: none; }
+  .no-select { user-select: none; }
   .cursor-pointer { cursor: pointer; }
 
   /* --- Accessibility ------------------------------------------------------ */
@@ -4259,15 +4250,15 @@
   }
 
   /* List rows that reveal their metadata as space allows */
-  .row-cq { display: flex; align-items: center; gap: var(--space-3); }
-  .row-cq .row-meta { display: none; }
+  .metarow { display: flex; align-items: center; gap: var(--space-3); }
+  .metarow .row-meta { display: none; }
   @container (min-width: 26rem) {
-    .row-cq .row-meta { display: block; color: var(--text-muted); font-size: var(--text-sm); }
+    .metarow .row-meta { display: block; color: var(--text-muted); font-size: var(--text-sm); }
   }
   @container (min-width: 38rem) {
-    .row-cq .row-meta-wide { display: block; }
+    .metarow .row-meta-wide { display: block; }
   }
-  .row-cq .row-meta-wide { display: none; }
+  .metarow .row-meta-wide { display: none; }
 
   /* Form fields that pair up inside their own container, not the viewport.
      This is the one that keeps biting people: a two-up field row inside a
@@ -4400,7 +4391,6 @@
      already logical underneath — .mt-4 sets margin-block-start. These are the
      explicitly named versions for when the distinction matters in review.
      ---------------------------------------------------------------------- */
-  .mi-auto { margin-inline: auto; }
   .mis-auto { margin-inline-start: auto; }
   .mie-auto { margin-inline-end: auto; }
 
@@ -4420,20 +4410,6 @@
   .mie-6 { margin-inline-end: var(--space-6); }
   .mie-8 { margin-inline-end: var(--space-8); }
 
-  .mbs-0 { margin-block-start: 0; }
-  .mbs-1 { margin-block-start: var(--space-1); }
-  .mbs-2 { margin-block-start: var(--space-2); }
-  .mbs-3 { margin-block-start: var(--space-3); }
-  .mbs-4 { margin-block-start: var(--space-4); }
-  .mbs-6 { margin-block-start: var(--space-6); }
-  .mbs-8 { margin-block-start: var(--space-8); }
-  .mbe-0 { margin-block-end: 0; }
-  .mbe-1 { margin-block-end: var(--space-1); }
-  .mbe-2 { margin-block-end: var(--space-2); }
-  .mbe-3 { margin-block-end: var(--space-3); }
-  .mbe-4 { margin-block-end: var(--space-4); }
-  .mbe-6 { margin-block-end: var(--space-6); }
-  .mbe-8 { margin-block-end: var(--space-8); }
 
   .pis-0 { padding-inline-start: 0; }
   .pis-1 { padding-inline-start: var(--space-1); }
@@ -4467,14 +4443,8 @@
 
   .bis { border-inline-start: 1px solid var(--line); }
   .bie { border-inline-end: 1px solid var(--line); }
-  .bbs { border-block-start: 1px solid var(--line); }
-  .bbe { border-block-end: 1px solid var(--line); }
 
-  .is-full { inline-size: 100%; }
-  .is-auto { inline-size: auto; }
-  .bs-full { block-size: 100%; }
   .min-is-0 { min-inline-size: 0; }
-  .max-is-prose { max-inline-size: var(--measure); }
 
   .inset-is-0 { inset-inline-start: 0; }
   .inset-ie-0 { inset-inline-end: 0; }
@@ -4516,7 +4486,6 @@
      ---------------------------------------------------------------------- */
   .dir-ltr { direction: ltr; unicode-bidi: isolate; }
   .dir-rtl { direction: rtl; unicode-bidi: isolate; }
-  .dir-auto { unicode-bidi: isolate; }
   .bidi-isolate { unicode-bidi: isolate; }
   .bidi-plaintext { unicode-bidi: plaintext; }
 
@@ -4534,7 +4503,7 @@
      direction of reading". They must mirror. A checkmark, a clock, a wrench,
      and a logo must not. Mark the ones that point.
      ---------------------------------------------------------------------- */
-  [dir="rtl"] .flip-rtl { scale: -1 1; }
+  [dir="rtl"] .mirror-rtl { scale: -1 1; }
 
   /* The pointing icons in Deck's own sprite, mirrored automatically */
   [dir="rtl"] :is(
@@ -5000,24 +4969,24 @@
      card; deck.js parks a dismissed card at the end so the rest close up.
      ---------------------------------------------------------------------- */
   @supports (animation-delay: calc(sibling-index() * 1ms)) {
-    .stack-depth > * { --i: calc(sibling-index() - 1); }
+    .pile > * { --i: calc(sibling-index() - 1); }
   }
   @supports not (animation-delay: calc(sibling-index() * 1ms)) {
-    .stack-depth > :nth-child(1)   { --i: 0; }
-    .stack-depth > :nth-child(2)   { --i: 1; }
-    .stack-depth > :nth-child(3)   { --i: 2; }
-    .stack-depth > :nth-child(4)   { --i: 3; }
-    .stack-depth > :nth-child(5)   { --i: 4; }
-    .stack-depth > :nth-child(6)   { --i: 5; }
-    .stack-depth > :nth-child(7)   { --i: 6; }
-    .stack-depth > :nth-child(8)   { --i: 7; }
+    .pile > :nth-child(1)   { --i: 0; }
+    .pile > :nth-child(2)   { --i: 1; }
+    .pile > :nth-child(3)   { --i: 2; }
+    .pile > :nth-child(4)   { --i: 3; }
+    .pile > :nth-child(5)   { --i: 4; }
+    .pile > :nth-child(6)   { --i: 5; }
+    .pile > :nth-child(7)   { --i: 6; }
+    .pile > :nth-child(8)   { --i: 7; }
   }
-  .stack-depth {
+  .pile {
     display: grid;
     transform-style: preserve-3d;
     perspective: 1200px;
   }
-  .stack-depth > * {
+  .pile > * {
     grid-area: 1 / 1;
     translate: 0 calc(var(--i, 0) * 10px);
     scale: calc(1 - var(--i, 0) * .045);
@@ -5028,19 +4997,19 @@
                 rotate var(--dur-3) var(--ease-out),
                 opacity var(--dur-2) var(--ease-out);
   }
-  .stack-depth > :nth-child(n+4) { opacity: 0; pointer-events: none; }
+  .pile > :nth-child(n+4) { opacity: 0; pointer-events: none; }
 
   /* Fan the pile out to see what is in it */
-  .stack-depth.is-fanned > * {
+  .pile.is-fanned > * {
     translate: calc(var(--i, 0) * 14px) calc(var(--i, 0) * 22px);
     rotate: calc(var(--i, 0) * 2.5deg);
     scale: 1;
     filter: none;
   }
-  .stack-depth.is-fanned > :nth-child(n+4):not(.is-dismissed) { opacity: 1; pointer-events: auto; }
+  .pile.is-fanned > :nth-child(n+4):not(.is-dismissed) { opacity: 1; pointer-events: auto; }
 
   /* Dismiss the top card away from the pile */
-  .stack-depth > .is-dismissed {
+  .pile > .is-dismissed {
     translate: 120% -20px;
     rotate: 14deg;
     opacity: 0;
@@ -5189,14 +5158,14 @@
      3D forces layers onto the GPU. Promote only while something is actually
      moving, and hand the memory back when it stops.
      ---------------------------------------------------------------------- */
-  .tilt.is-tilting, .flip.is-flipped, .stack-depth.is-fanned > *,
+  .tilt.is-tilting, .flip.is-flipped, .pile.is-fanned > *,
   .coverflow > *, .cube {
     will-change: transform, rotate, scale;
   }
   .tilt:not(.is-tilting), .flip:not(.is-flipped) { will-change: auto; }
 
   @media (prefers-reduced-motion: reduce) {
-    .flip, .flip-x, .tilt, .cube, .stack-depth > *, .coverflow > * {
+    .flip, .flip-x, .tilt, .cube, .pile > *, .coverflow > * {
       transition-duration: 1ms;
       rotate: none;
     }

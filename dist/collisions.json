@@ -1,0 +1,223 @@
+{
+  "generated": "tools/docs/collisions.mjs",
+  "count": 31,
+  "rows": [
+    {
+      "name": "btn-3d",
+      "stem": "btn",
+      "child": "21-space3d.css:196 [deck.effects]",
+      "parent": "05-buttons.css:7 [deck.components]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "card-flex",
+      "stem": "card",
+      "child": "18-container.css:44 [deck.layout]",
+      "parent": "07-components.css:11 [deck.components]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "chart-area-g",
+      "stem": "chart",
+      "child": "20-gradients.css:287 [deck.effects]",
+      "parent": "14-charts.css:11 [deck.components]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "cq-lg",
+      "stem": "cq",
+      "child": "18-container.css:160 [deck.layout]",
+      "parent": "04-layout.css:188 [deck.layout]",
+      "why": "different file"
+    },
+    {
+      "name": "cq-md",
+      "stem": "cq",
+      "child": "18-container.css:150 [deck.layout]",
+      "parent": "04-layout.css:188 [deck.layout]",
+      "why": "different file"
+    },
+    {
+      "name": "cq-normal",
+      "stem": "cq",
+      "child": "18-container.css:17 [deck.layout]",
+      "parent": "04-layout.css:188 [deck.layout]",
+      "why": "different file"
+    },
+    {
+      "name": "cq-pane",
+      "stem": "cq",
+      "child": "18-container.css:20 [deck.layout]",
+      "parent": "04-layout.css:188 [deck.layout]",
+      "why": "different file"
+    },
+    {
+      "name": "cq-panel",
+      "stem": "cq",
+      "child": "18-container.css:19 [deck.layout]",
+      "parent": "04-layout.css:188 [deck.layout]",
+      "why": "different file"
+    },
+    {
+      "name": "cq-row",
+      "stem": "cq",
+      "child": "18-container.css:21 [deck.layout]",
+      "parent": "04-layout.css:188 [deck.layout]",
+      "why": "different file"
+    },
+    {
+      "name": "cq-shell",
+      "stem": "cq",
+      "child": "18-container.css:22 [deck.layout]",
+      "parent": "04-layout.css:188 [deck.layout]",
+      "why": "different file"
+    },
+    {
+      "name": "cq-size",
+      "stem": "cq",
+      "child": "18-container.css:16 [deck.layout]",
+      "parent": "04-layout.css:188 [deck.layout]",
+      "why": "different file"
+    },
+    {
+      "name": "cq-sm",
+      "stem": "cq",
+      "child": "18-container.css:143 [deck.layout]",
+      "parent": "04-layout.css:188 [deck.layout]",
+      "why": "different file"
+    },
+    {
+      "name": "cq-tone",
+      "stem": "cq",
+      "child": "18-container.css:172 [deck.layout]",
+      "parent": "04-layout.css:188 [deck.layout]",
+      "why": "different file"
+    },
+    {
+      "name": "dg-cq",
+      "stem": "dg",
+      "child": "18-container.css:101 [deck.layout]",
+      "parent": "12-datagrid.css:25 [deck.components]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "dg-virtual",
+      "stem": "dg",
+      "child": "26-perf.css:23 [deck.components]",
+      "parent": "12-datagrid.css:25 [deck.components]",
+      "why": "different file"
+    },
+    {
+      "name": "display-cq",
+      "stem": "display",
+      "child": "18-container.css:33 [deck.layout]",
+      "parent": "03-type.css:22 [deck.type]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "field-row-cq",
+      "stem": "field",
+      "child": "18-container.css:83 [deck.layout]",
+      "parent": "06-forms.css:11 [deck.components]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "icon-follow",
+      "stem": "icon",
+      "child": "16-motion.css:244 [deck.motion]",
+      "parent": "08-mobile.css:127 [deck.mobile]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "icon-spin",
+      "stem": "icon",
+      "child": "02-reset.css:92 [deck.reset]",
+      "parent": "08-mobile.css:127 [deck.mobile]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "list-virtual",
+      "stem": "list",
+      "child": "26-perf.css:30 [deck.components]",
+      "parent": "07-components.css:238 [deck.components]",
+      "why": "different file"
+    },
+    {
+      "name": "marquee-track",
+      "stem": "marquee",
+      "child": "02-reset.css:92 [deck.reset]",
+      "parent": "16-motion.css:291 [deck.motion]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "menu-match",
+      "stem": "menu",
+      "child": "25-anchor.css:50 [deck.components]",
+      "parent": "07-components.css:486 [deck.components]",
+      "why": "different file"
+    },
+    {
+      "name": "no-print-url",
+      "stem": "no-print",
+      "child": "99-print.css:125 [deck.print]",
+      "parent": "09-utilities.css:240 [deck.utilities]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "range-pair",
+      "stem": "range",
+      "child": "23-inputs.css:245 [deck.components]",
+      "parent": "06-forms.css:252 [deck.components]",
+      "why": "different file"
+    },
+    {
+      "name": "range-readout",
+      "stem": "range",
+      "child": "23-inputs.css:301 [deck.components]",
+      "parent": "06-forms.css:252 [deck.components]",
+      "why": "different file"
+    },
+    {
+      "name": "range-ticks",
+      "stem": "range",
+      "child": "23-inputs.css:310 [deck.components]",
+      "parent": "06-forms.css:252 [deck.components]",
+      "why": "different file"
+    },
+    {
+      "name": "skeleton-circle",
+      "stem": "skeleton",
+      "child": "07-components.css:456 [deck.components]",
+      "parent": "02-reset.css:92 [deck.reset]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "skeleton-text",
+      "stem": "skeleton",
+      "child": "07-components.css:455 [deck.components]",
+      "parent": "02-reset.css:92 [deck.reset]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "spinner-lg",
+      "stem": "spinner",
+      "child": "07-components.css:443 [deck.components]",
+      "parent": "02-reset.css:92 [deck.reset]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "stat-cq",
+      "stem": "stat",
+      "child": "18-container.css:55 [deck.layout]",
+      "parent": "07-components.css:609 [deck.components]",
+      "why": "different file and layer"
+    },
+    {
+      "name": "sticky-top",
+      "stem": "sticky",
+      "child": "04-layout.css:141 [deck.layout]",
+      "parent": "09-utilities.css:169 [deck.utilities]",
+      "why": "different file and layer"
+    }
+  ]
+}

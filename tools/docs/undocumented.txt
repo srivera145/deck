@@ -5,7 +5,7 @@
 # grow: a new class must be documented or added here on purpose, and the
 # build fails either way until someone decides which.
 #
-# 945 classes outstanding.
+# 913 classes outstanding.
 
 absolute
 accordion
@@ -44,8 +44,6 @@ banner-dark
 banner-fixed
 banner-warn
 bar
-bbe
-bbs
 bg-brand
 bg-none
 bg-soft
@@ -62,7 +60,6 @@ border-b
 border-brand
 border-t
 breadcrumb
-bs-full
 bubble
 bubble-attachment
 bubble-meta
@@ -136,19 +133,11 @@ chip-remove
 clamp-2
 clamp-3
 cluster
-cluster-0
-cluster-1
-cluster-2
-cluster-3
-cluster-4
-cluster-6
-cluster-8
 cluster-between
 cluster-center
 cluster-end
 cluster-tight
 code-ltr
-col
 combo
 combo-check
 combo-clear
@@ -247,7 +236,6 @@ dg-virtual
 dg-wrap
 dg-wrap-text
 dg-zebra
-dir-auto
 dir-ltr
 dir-rtl
 disclosure
@@ -324,11 +312,12 @@ flash
 flash-good
 flat
 flex
+flex-col
+flex-row
 flip
 flip-back
 flip-front
 flip-hover
-flip-rtl
 flip-x
 float
 float-outline
@@ -390,7 +379,6 @@ gap-8
 gap-cq
 grid
 grid-2
-grid-d
 grid-fixed-2
 grid-fixed-3
 grid-fixed-4
@@ -442,7 +430,6 @@ inset-is-0
 is-above
 is-active
 is-animating
-is-auto
 is-behind-end
 is-behind-start
 is-blocked
@@ -455,7 +442,6 @@ is-dragging
 is-fanned
 is-flipped
 is-front
-is-full
 is-in-range
 is-invalid
 is-leaving
@@ -523,7 +509,6 @@ marquee-track
 masonry
 masonry-2
 masonry-3
-max-is-prose
 max-w-lg
 max-w-md
 max-w-prose
@@ -535,20 +520,6 @@ mb-3
 mb-4
 mb-6
 mb-8
-mbe-0
-mbe-1
-mbe-2
-mbe-3
-mbe-4
-mbe-6
-mbe-8
-mbs-0
-mbs-1
-mbs-2
-mbs-3
-mbs-4
-mbs-6
-mbs-8
 md
 mega
 mega-col
@@ -565,7 +536,7 @@ menu-item-danger
 menu-label
 menu-match
 menu-sep
-mi-auto
+metarow
 mie-0
 mie-1
 mie-2
@@ -576,6 +547,7 @@ mie-8
 mie-auto
 min-h-screen
 min-is-0
+mirror-rtl
 mis-0
 mis-1
 mis-2
@@ -609,6 +581,7 @@ no-flip
 no-motion
 no-print
 no-print-url
+no-select
 no-underline
 nowrap
 nudge
@@ -665,6 +638,7 @@ pie-3
 pie-4
 pie-6
 pie-8
+pile
 ping
 pis-0
 pis-1
@@ -743,8 +717,6 @@ ring-label
 ring-wrap
 ripple
 ripple-ink
-row
-row-cq
 row-meta
 row-meta-wide
 s-bad
@@ -769,7 +741,6 @@ search
 section
 segmented
 select
-select-none
 shadow-0
 shadow-1
 shadow-2
@@ -821,7 +792,6 @@ stack-3
 stack-4
 stack-6
 stack-8
-stack-depth
 stagger
 stagger-fast
 stagger-slow
@@ -868,9 +838,7 @@ text-lg
 text-md
 text-muted
 text-sm
-text-small
 text-start
-text-tiny
 text-warn
 text-xl
 text-xs

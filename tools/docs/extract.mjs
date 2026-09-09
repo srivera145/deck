@@ -340,14 +340,39 @@ function main() {
            `.btn { … }` rather than `.btn:hover` or `.btn-group > .btn`. */
         /* The defining rule is the FIRST plain `.name { … }` in file order.
            Later ones are overrides — .btn is redefined in deck.print, and
-           pointing the docs at the print sheet would be actively misleading. */
+           pointing the docs at the print sheet would be actively misleading.
+
+           But a rule inside @media, @supports or @container is not where a
+           class is defined either; it is where it is adjusted. 02-reset.css
+           names .spinner and .skeleton inside a prefers-reduced-motion block,
+           and taking that as the definition put two public components in
+           deck.reset, which the freeze then filed as internal. So an
+           unconditional rule always wins, even if a conditional one was seen
+           first. */
         const simple = isSubject && sel === `.${name}`;
-        if (simple && !entry.defined) {
+        const unconditional = simple && (rule.conditions || []).length === 0;
+        /* Some classes only ever appear under a condition — .marquee-track is
+           declared inside @media (prefers-reduced-motion: no-preference) and
+           nowhere else. Between two conditional candidates, the one with more
+           declarations is the definition and the other is the adjustment: the
+           reset sheet sets two animation properties, 16-motion.css sets six. */
+        const fuller = simple && !unconditional && !entry.definedUnconditional &&
+          rule.declarations.length > entry.declarations.length;
+        if (simple && (!entry.defined || (unconditional && !entry.definedUnconditional) || fuller)) {
+          /* entry.file is seeded by the first selector that mentions the
+             class at all, which for .ping was `.ping::after` in the reset
+             sheet. So compare files, not whether a definition was already
+             settled, or the prose from that first sighting survives. */
+          const moving = entry.file !== rule.file;
           entry.defined = true;
+          entry.definedUnconditional = unconditional;
           entry.file = rule.file;
           entry.line = rule.line;
           entry.layer = rule.layer;
           entry.declarations = rule.declarations;
+          /* Prose taken from the file we are leaving described the adjustment,
+             not the class. .ping had picked up the reset block's comment. */
+          if (moving) { entry.doc = null; entry.section = null; }
         }
         /* Only take prose from the file the class is defined in. .fab is
            redefined in deck.print under a "should never print" divider, and

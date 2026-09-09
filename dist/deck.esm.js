@@ -1100,7 +1100,7 @@ const Deck = (() => {
   }
 
   function wireStack(root) {
-    $$('.stack-depth', root).forEach(stack => {
+    $$('.pile', root).forEach(stack => {
       if (stack.dataset.deckWired) return;
       stack.dataset.deckWired = '1';
       stack.addEventListener('deck:advance', () => {
