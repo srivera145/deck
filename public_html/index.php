@@ -61,7 +61,7 @@
   <div class="container">
     <div class="navbar" style="border:0">
       <a class="navbar-brand" href="#">
-        <svg class="icon icon-lg" style="color:var(--brand)"><use href="assets/deck/deck-icons.svg#gauge"></use></svg>
+        <svg class="icon icon-lg icon-fill" style="color:var(--brand)"><use href="assets/deck/deck-icons.svg#deck-mark"></use></svg>
         Deck
       </a>
       <nav class="navbar-links">
@@ -2152,7 +2152,7 @@
     <hr>
     <div class="cluster cluster-between">
       <div class="cluster cluster-tight">
-        <svg class="icon" style="color:var(--brand)"><use href="assets/deck/deck-icons.svg#gauge"></use></svg>
+        <svg class="icon icon-fill" style="color:var(--brand)"><use href="assets/deck/deck-icons.svg#deck-mark"></use></svg>
         <span class="fw-semi text-inherit">Deck</span>
         <span class="text-sm">for Keel and Helm</span>
       </div>
