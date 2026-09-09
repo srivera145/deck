@@ -72,10 +72,12 @@
     "start": "php -S localhost:4321 -t public_html",
     "clean": "node -e \"import('node:fs/promises').then(f=>f.rm('dist',{recursive:true,force:true}))\"",
     "prepublishOnly": "node build.mjs",
-    "brand": "node tools/make-brand.mjs"
+    "brand": "node tools/make-brand.mjs",
+    "icons": "node tools/icons/build-icons.mjs"
   },
   "devDependencies": {
-    "esbuild": "^0.28.0"
+    "esbuild": "^0.28.0",
+    "opentype.js": "^2.0.0"
   },
   "engines": {
     "node": ">=18"

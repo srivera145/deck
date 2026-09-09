@@ -50,9 +50,9 @@
 <span id="top" tabindex="-1"></span>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="banner" data-dismiss-key="demo">
-  <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#sparkle"></use></svg>
+  <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#sparkle-sm"></use></svg>
   <span>Deck v0.1 — one stylesheet, no build step, no dependencies.</span>
-  <button class="banner-close" aria-label="Dismiss"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#x"></use></svg></button>
+  <button class="banner-close" aria-label="Dismiss"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#x-sm"></use></svg></button>
 </div>
 <div class="scroll-progress" aria-hidden="true"></div>
 
@@ -108,10 +108,10 @@
     <div class="cluster">
       <a class="btn btn-primary btn-lg" href="#main">
         Get started
-        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#arrow-right"></use></svg>
+        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
       </a>
       <button class="btn btn-lg" popovertarget="installMenu">
-        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#copy"></use></svg>
+        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#copy-sm"></use></svg>
         Copy the link tag
       </button>
       <div class="menu" id="installMenu" popover style="position:fixed;inset-block-start:auto">
@@ -187,7 +187,7 @@
             <span class="stat-label">Claims submitted</span>
             <span class="stat-value">1,284</span>
             <span class="stat-delta stat-delta-up">
-              <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#trend-up"></use></svg>
+              <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#trend-up-sm"></use></svg>
               12.4% vs last month
             </span>
           </div>
@@ -200,7 +200,7 @@
             <span class="stat-label">Average approval time</span>
             <span class="stat-value">3.2 days</span>
             <span class="stat-delta stat-delta-down">
-              <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#trend-down"></use></svg>
+              <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#trend-down-sm"></use></svg>
               0.6 days faster
             </span>
           </div>
@@ -308,7 +308,7 @@
           <label class="label" for="email">Email</label>
           <input class="input" id="email" type="email" value="not-an-email" required>
           <span class="error">
-            <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#alert-circle"></use></svg>
+            <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#alert-circle-sm"></use></svg>
             Enter an address in the form name@shop.com
           </span>
         </div>
@@ -472,11 +472,11 @@
       <h2>Tables</h2>
       <div class="push cluster cluster-tight">
         <button class="btn btn-sm">
-          <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#filter"></use></svg>
+          <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#filter-sm"></use></svg>
           Filter
         </button>
         <button class="btn btn-sm">
-          <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#download"></use></svg>
+          <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#download-sm"></use></svg>
           Export
         </button>
       </div>
@@ -516,13 +516,13 @@
     </div>
 
     <nav class="pagination" aria-label="Pages">
-      <a href="#main" aria-label="Previous"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#chevron-left"></use></svg></a>
+      <a href="#main" aria-label="Previous"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#chevron-left-sm"></use></svg></a>
       <a href="#main" aria-current="page">1</a>
       <a href="#main">2</a>
       <a href="#main">3</a>
       <span>…</span>
       <a href="#main">18</a>
-      <a href="#main" aria-label="Next"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#chevron-right"></use></svg></a>
+      <a href="#main" aria-label="Next"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#chevron-right-sm"></use></svg></a>
     </nav>
   </section>
 
@@ -578,11 +578,11 @@
 
       <div class="timeline">
         <div class="timeline-item is-done">
-          <span class="timeline-dot"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check"></use></svg></span>
+          <span class="timeline-dot"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check-sm"></use></svg></span>
           <div><div class="fw-semi">Submitted</div><div class="text-sm text-muted">Mar 3, 8:14 AM</div></div>
         </div>
         <div class="timeline-item is-done">
-          <span class="timeline-dot"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check"></use></svg></span>
+          <span class="timeline-dot"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check-sm"></use></svg></span>
           <div><div class="fw-semi">In review</div><div class="text-sm text-muted">Mar 3, 2:40 PM</div></div>
         </div>
         <div class="timeline-item">
@@ -664,11 +664,11 @@
 
     <div class="menu" id="menu1" popover>
       <div class="menu-label">Claim actions</div>
-      <button class="menu-item"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#edit"></use></svg> Edit</button>
-      <button class="menu-item"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#copy"></use></svg> Duplicate <kbd class="push">⌘D</kbd></button>
-      <button class="menu-item"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#download"></use></svg> Export PDF</button>
+      <button class="menu-item"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#edit-sm"></use></svg> Edit</button>
+      <button class="menu-item"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#copy-sm"></use></svg> Duplicate <kbd class="push">⌘D</kbd></button>
+      <button class="menu-item"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#download-sm"></use></svg> Export PDF</button>
       <div class="menu-sep"></div>
-      <button class="menu-item menu-item-danger"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#trash"></use></svg> Withdraw claim</button>
+      <button class="menu-item menu-item-danger"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#trash-sm"></use></svg> Withdraw claim</button>
     </div>
 
     <dialog class="modal" id="m1">
@@ -835,13 +835,13 @@
         <button aria-selected="false">Compact</button>
       </div>
       <button class="btn btn-sm">
-        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#download"></use></svg>
+        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#download-sm"></use></svg>
         Export
       </button>
     </div>
 
     <div class="dg-selection" data-dg-selection hidden>
-      <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check-circle"></use></svg>
+      <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check-circle-sm"></use></svg>
       <span><span data-dg-count>0</span> selected</span>
       <button class="btn btn-sm push">Reassign</button>
       <button class="btn btn-sm btn-danger">Withdraw</button>
@@ -879,7 +879,7 @@
             <td data-label="Total" class="dg-num">$842.16</td>
             <td data-label="Submitted" class="dg-num">2026-09-03</td>
             <td class="dg-actions dg-pin-end">
-              <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal"></use></svg></button>
+              <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal-sm"></use></svg></button>
             </td>
           </tr>
           <tr>
@@ -895,7 +895,7 @@
             <td data-label="Total" class="dg-num">$318.00</td>
             <td data-label="Submitted" class="dg-num">2026-08-31</td>
             <td class="dg-actions dg-pin-end">
-              <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal"></use></svg></button>
+              <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal-sm"></use></svg></button>
             </td>
           </tr>
           <tr>
@@ -911,7 +911,7 @@
             <td data-label="Total" class="dg-num">$0.00</td>
             <td data-label="Submitted" class="dg-num">2026-08-27</td>
             <td class="dg-actions dg-pin-end">
-              <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal"></use></svg></button>
+              <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal-sm"></use></svg></button>
             </td>
           </tr>
           <tr>
@@ -927,7 +927,7 @@
             <td data-label="Total" class="dg-num">$321.40</td>
             <td data-label="Submitted" class="dg-num">2026-09-05</td>
             <td class="dg-actions dg-pin-end">
-              <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal"></use></svg></button>
+              <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal-sm"></use></svg></button>
             </td>
           </tr>
           <tr>
@@ -943,7 +943,7 @@
             <td data-label="Total" class="dg-num">$300.75</td>
             <td data-label="Submitted" class="dg-num">2026-09-06</td>
             <td class="dg-actions dg-pin-end">
-              <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal"></use></svg></button>
+              <button class="btn btn-icon btn-ghost btn-sm" aria-label="Actions"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-horizontal-sm"></use></svg></button>
             </td>
           </tr>
         </tbody>
@@ -1102,7 +1102,7 @@
             </svg>
           </div>
           <span class="stat-delta stat-delta-up">
-            <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#trend-up"></use></svg>
+            <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#trend-up-sm"></use></svg>
             8.1% vs last week
           </span>
         </div>
@@ -1175,7 +1175,7 @@
         <button class="btn btn-primary ripple">Ripple</button>
         <button class="btn btn-soft">
           Continue
-          <svg class="icon icon-sm icon-follow"><use href="assets/deck/deck-icons.svg#arrow-right"></use></svg>
+          <svg class="icon icon-sm icon-follow"><use href="assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
         </button>
         <a class="sweep" href="#motion">Underline sweep</a>
         <span class="badge badge-good"><span class="ping" style="display:inline-block;inline-size:6px;block-size:6px;border-radius:99px;background:currentColor"></span> Live</span>
@@ -1366,7 +1366,7 @@
 
     <div class="cluster">
       <button class="btn" onclick="Deck.dir(Deck.dir() === 'rtl' ? 'ltr' : 'rtl')">
-        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#refresh"></use></svg>
+        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#refresh-sm"></use></svg>
         Flip the whole page
       </button>
       <span class="badge">current: <span id="dirLabel">ltr</span></span>
@@ -1376,7 +1376,7 @@
       <div class="card"><div class="card-body stack-3">
         <span class="card-title">Mirrors</span>
         <div class="cluster cluster-tight">
-          <button class="btn btn-sm">Next <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#arrow-right"></use></svg></button>
+          <button class="btn btn-sm">Next <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></button>
           <label class="switch"><input type="checkbox" checked><span class="text-sm">Auto-submit</span></label>
         </div>
         <div class="chart-bar">
@@ -1566,10 +1566,10 @@
 
     <div class="cluster">
       <button class="btn" data-deck-drawer="#drawer1">
-        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#filter"></use></svg> Open drawer
+        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#filter-sm"></use></svg> Open drawer
       </button>
       <button class="btn" popovertarget="mega1" data-deck-mega="#mega1">Products
-        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#chevron-down"></use></svg>
+        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#chevron-down-sm"></use></svg>
       </button>
       <span class="with-indicator">
         <button class="btn btn-icon" aria-label="Notifications"><svg class="icon"><use href="assets/deck/deck-icons.svg#bell"></use></svg></button>
@@ -1650,9 +1650,9 @@
         <div class="field">
           <label class="label" for="n1">Labor hours</label>
           <div class="number">
-            <button type="button" data-step="-1" aria-label="Decrease"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#minus"></use></svg></button>
+            <button type="button" data-step="-1" aria-label="Decrease"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#minus-sm"></use></svg></button>
             <input id="n1" type="number" value="2.8" step="0.1" min="0" max="24">
-            <button type="button" data-step="1" aria-label="Increase"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#plus"></use></svg></button>
+            <button type="button" data-step="1" aria-label="Increase"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#plus-sm"></use></svg></button>
             <span class="number-unit">hrs</span>
           </div>
         </div>
@@ -1669,7 +1669,7 @@
               </select>
             </span>
             <input id="p1" type="tel" placeholder="(000) 000-0000">
-            <span class="phone-status"><svg class="icon icon-sm text-good"><use href="assets/deck/deck-icons.svg#check"></use></svg></span>
+            <span class="phone-status"><svg class="icon icon-sm text-good"><use href="assets/deck/deck-icons.svg#check-sm"></use></svg></span>
           </div>
         </div>
         <div class="field">
@@ -1687,8 +1687,8 @@
           <div class="copy">
             <code class="copy-value">88214-2026-0331</code>
             <button class="copy-btn" data-deck-copy>
-              <span class="copy-idle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#copy"></use></svg> Copy</span>
-              <span class="copy-done"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check"></use></svg> Copied</span>
+              <span class="copy-idle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy</span>
+              <span class="copy-done"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check-sm"></use></svg> Copied</span>
             </button>
           </div>
         </div>
@@ -1709,10 +1709,10 @@
           <button class="editor-tool" data-cmd="italic" aria-label="Italic" style="font-style:italic">I</button>
           <button class="editor-tool" data-cmd="underline" aria-label="Underline" style="text-decoration:underline">U</button>
           <span class="editor-sep"></span>
-          <button class="editor-tool" data-cmd="insertUnorderedList" aria-label="Bullet list"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#list"></use></svg></button>
-          <button class="editor-tool" data-cmd="createLink" aria-label="Link"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#link"></use></svg></button>
+          <button class="editor-tool" data-cmd="insertUnorderedList" aria-label="Bullet list"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#list-sm"></use></svg></button>
+          <button class="editor-tool" data-cmd="createLink" aria-label="Link"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#link-sm"></use></svg></button>
           <span class="editor-sep"></span>
-          <button class="editor-tool" data-cmd="undo" aria-label="Undo"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#refresh"></use></svg></button>
+          <button class="editor-tool" data-cmd="undo" aria-label="Undo"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#refresh-sm"></use></svg></button>
         </div>
         <div class="editor-content" data-placeholder="Cause, correction, and what was verified."></div>
         <div class="editor-footer"><span>Pastes arrive as plain text</span><span class="editor-count">0 / 600</span></div>
@@ -1734,7 +1734,7 @@
               <div><div class="bubble">Can you add what the tech verified before the line was replaced?<div class="bubble-meta">8:14 AM</div></div></div>
             </div>
             <div class="msg msg-out">
-              <div><div class="bubble">On it. He pressure tested the cooler circuit first — I'll write it up.<div class="bubble-meta">8:16 AM <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check-double"></use></svg></div></div></div>
+              <div><div class="bubble">On it. He pressure tested the cooler circuit first — I'll write it up.<div class="bubble-meta">8:16 AM <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#check-double-sm"></use></svg></div></div></div>
             </div>
             <div class="msg">
               <span class="avatar avatar-xs">RM</span>
@@ -1916,7 +1916,7 @@
           <svg class="icon"><use href="assets/deck/deck-icons.svg#upload"></use></svg>
         </button>
         <span class="btn btn-ghost tooltip" data-tip="Labor allowance for operation 0331 is 2.8 hours" tabindex="0">
-          Operation 0331 <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#help"></use></svg>
+          Operation 0331 <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#help-sm"></use></svg>
         </span>
       </div>
     </div>
@@ -1977,7 +1977,7 @@
           </tr>
           <tr>
             <td data-label="Job">Icons</td>
-            <td data-label="Deck alone">56-icon sprite</td>
+            <td data-label="Deck alone">74-icon sprite</td>
             <td data-label="With a library">Lucide, 1500 icons</td>
             <td data-label="Verdict">Sprite is enough for Deck; Lucide for the rest</td>
           </tr>
@@ -2033,15 +2033,15 @@
           <div class="kanban-head">Submitted <span class="kanban-count">3</span></div>
           <div class="kanban-body" data-deck-sortable="claims" data-handle=".drag-handle">
             <div class="kanban-card" data-id="88214">
-              <div class="bar"><span class="kanban-card-title grow">88214 · Cooler line</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical"></use></svg></span></div>
+              <div class="bar"><span class="kanban-card-title grow">88214 · Cooler line</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical-sm"></use></svg></span></div>
               <div class="kanban-card-meta"><span class="indicator indicator-warn"></span> 2021 F-150 · $842.16</div>
             </div>
             <div class="kanban-card" data-id="88301">
-              <div class="bar"><span class="kanban-card-title grow">88301 · Liftgate strut</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical"></use></svg></span></div>
+              <div class="bar"><span class="kanban-card-title grow">88301 · Liftgate strut</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical-sm"></use></svg></span></div>
               <div class="kanban-card-meta"><span class="indicator indicator-warn"></span> 2023 Transit · $321.40</div>
             </div>
             <div class="kanban-card" data-id="88344">
-              <div class="bar"><span class="kanban-card-title grow">88344 · Battery cable</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical"></use></svg></span></div>
+              <div class="bar"><span class="kanban-card-title grow">88344 · Battery cable</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical-sm"></use></svg></span></div>
               <div class="kanban-card-meta"><span class="indicator indicator-warn"></span> 2022 Mach-E · $300.75</div>
             </div>
             <div class="kanban-empty">Drop a claim here</div>
@@ -2051,7 +2051,7 @@
           <div class="kanban-head">In review <span class="kanban-count">1</span></div>
           <div class="kanban-body" data-deck-sortable="claims" data-handle=".drag-handle">
             <div class="kanban-card" data-id="88220">
-              <div class="bar"><span class="kanban-card-title grow">88220 · BCM reprogram</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical"></use></svg></span></div>
+              <div class="bar"><span class="kanban-card-title grow">88220 · BCM reprogram</span><span class="drag-handle"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#more-vertical-sm"></use></svg></span></div>
               <div class="kanban-card-meta"><span class="indicator indicator-brand"></span> 2023 Explorer · $318.00</div>
             </div>
             <div class="kanban-empty">Drop a claim here</div>
@@ -2121,7 +2121,7 @@
 
     <div class="cluster">
       <button class="btn btn-primary" onclick="window.print()">
-        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#file"></use></svg>
+        <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#file-sm"></use></svg>
         Print preview
       </button>
       <span class="badge">.page-break</span>
@@ -2167,9 +2167,9 @@
 <!-- ===================== Mobile tab bar ===================== -->
 <div class="speed-dial">
   <div class="speed-dial-actions">
-    <div class="speed-dial-action"><span class="speed-dial-label">New claim</span><button class="speed-dial-button" aria-label="New claim"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#clipboard"></use></svg></button></div>
-    <div class="speed-dial-action"><span class="speed-dial-label">Look up VIN</span><button class="speed-dial-button" aria-label="Look up VIN"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#search"></use></svg></button></div>
-    <div class="speed-dial-action"><span class="speed-dial-label">Upload photos</span><button class="speed-dial-button" aria-label="Upload photos"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#camera"></use></svg></button></div>
+    <div class="speed-dial-action"><span class="speed-dial-label">New claim</span><button class="speed-dial-button" aria-label="New claim"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#clipboard-sm"></use></svg></button></div>
+    <div class="speed-dial-action"><span class="speed-dial-label">Look up VIN</span><button class="speed-dial-button" aria-label="Look up VIN"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#search-sm"></use></svg></button></div>
+    <div class="speed-dial-action"><span class="speed-dial-label">Upload photos</span><button class="speed-dial-button" aria-label="Upload photos"><svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#camera-sm"></use></svg></button></div>
   </div>
   <button class="fab" aria-label="Quick actions" aria-expanded="false"><svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#plus"></use></svg></button>
 </div>

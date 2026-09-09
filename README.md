@@ -6,7 +6,7 @@ The CSS framework for Keel. Mobile first, one file, no build step.
 - `deck.js` — optional behaviour, no dependencies (~11 KB gzipped)
 - `deck-extras.js` — behaviour for the extended set, including the QR encoder (~9 KB gzipped)
 - `deck-adapters.js` — optional library integrations, inert unless a library is present (~6 KB gzipped)
-- `deck-icons.svg` — 74-icon sprite, plus the two brand marks
+- `deck-icons.svg` — 74-icon sprite in two weights, plus the two brand marks
 - `index.html` — kitchen sink demo, open it in a browser
 - `src/` — the twenty-six source files, concatenated to build `deck.css`
 - `dist/layers/` — one file per layer, if you only want part of Deck
@@ -19,7 +19,7 @@ The CSS framework for Keel. Mobile first, one file, no build step.
 deck/
 ├─ src/                    everything hand-written
 │  ├─ 00-layers.css …      26 stylesheets, concatenated in filename order
-│  ├─ deck-icons.svg       the sprite, icons plus the brand marks
+│  ├─ deck-icons.svg       the sprite — GENERATED, see `npm run icons`
 │  ├─ brand/               the logo: one master, the rest derived from it
 │  └─ js/                  deck.js, deck-extras.js, deck-adapters.js
 ├─ dist/                   entirely generated — safe to delete, `npm run build` rebuilds it
@@ -38,8 +38,14 @@ deck/
 │     ├─ deck/              dist/
 │     └─ images/            dist/brand/
 ├─ build.mjs
-├─ tools/make-brand.mjs    regenerates the logo family from the master
+├─ tools/
+│  ├─ make-brand.mjs      regenerates the logo family from the master
+│  └─ icons/              the icon toolchain: `npm run icons`
+│     ├─ icons.txt        the list of icons to extract
+│     ├─ build-icons.mjs  writes src/deck-icons.svg from the font
+│     └─ Material_Symbols_Rounded/   build time source, never shipped
 ├─ package.json            npm; `files` ships src, dist, bin, build.mjs
+├─ .gitattributes         `export-ignore` keeps tools/ out of source archives
 ├─ composer.json           Packagist; PSR-4 points at php/
 └─ LICENSE
 ```
@@ -63,6 +69,7 @@ is a published copy, so it is gitignored; run `npm run demo` after a clone to fi
 npm run build     # src/ -> dist/
 npm run demo      # build, then publish dist/ into public_html/assets/
 npm run brand     # regenerate the logo family after changing the mark
+npm run icons     # regenerate src/deck-icons.svg from tools/icons/icons.txt
 npm run clean     # delete dist/
 npm start         # php -S localhost:4321 -t public_html
 ```
@@ -257,6 +264,74 @@ download, upload, trash, edit, copy, link, external, tag, image, camera, eye,
 eye-off, lock, unlock, shield, star, heart, bookmark, info, alert-circle,
 alert-triangle, check-circle, x-circle, help, credit-card, dollar, receipt, car,
 truck, wrench, gauge, sun, moon, map-pin, send, sparkle.
+
+### Two cuts, not one stroke width
+
+Every icon ships twice:
+
+| Symbol | Weight | Use with |
+| --- | --- | --- |
+| `#check` | wght 400 | `.icon`, `.icon-lg`, `.icon-xl` |
+| `#check-sm` | wght 500 | `.icon-sm` |
+
+```html
+<svg class="icon icon-sm"><use href="/assets/deck-icons.svg#check-sm"></use></svg>
+```
+
+The symbols are filled outlines, so `stroke-width` does nothing to them and `.icon-sm`
+cannot thicken its way to legibility at 16px. The heavier cut is a real second drawing
+instead. CSS cannot rewrite a `<use href>`, so the pairing has to live in the markup —
+`.icon-sm` goes with the `-sm` symbol. Everything else takes the plain name.
+
+Both cuts carry `fill="currentColor" stroke="none"`, which beats the `.icon` stroke
+defaults by inheritance, so icons follow `color` and retune with `--hue-brand` exactly
+as they always did.
+
+### Regenerating the sprite
+
+`src/deck-icons.svg` is **generated**. Editing it by hand loses the edit on the next run.
+
+```
+npm run icons
+```
+
+That reads `tools/icons/icons.txt` — one `sprite-id = material-glyph-name` per line —
+out of the Material Symbols Rounded variable font and writes both cuts of every listed
+icon. To add, drop or swap an icon, edit that list and rerun. Any of the 4,390 glyphs in
+the font is available; only the names on the list end up in the sprite, which is how a
+4,390 icon library ships as an 80 icon file.
+
+The font is a **build time source only**. It never reaches a browser: a webfont would be
+a 15 MB download or a subsetting step, and Deck's whole premise is not having a build
+step. It lives in `tools/`, which is excluded from the npm package (`files` in
+`package.json`) and from GitHub source archives (`export-ignore` in `.gitattributes`).
+Nobody installing Deck needs it — the generated sprite is committed.
+
+For the same reason `npm run icons` is deliberately **not** part of `npm run build`. It
+is a maintainer task, run on purpose:
+
+```
+npm run icons     # regenerate src/deck-icons.svg from the font
+npm run build     # everything else, needs no font
+```
+
+If the font is missing, the script says so and stops. Download Material Symbols Rounded
+from [fonts.google.com/icons](https://fonts.google.com/icons) and unzip it into
+`tools/icons/`.
+
+`#deck-mark` and `#deck-wordmark` are not in the font. They are Deck's own drawings,
+marked `@hand` in the list, read out of the existing sprite and carried through verbatim;
+the script fails rather than regenerate a sprite without them.
+
+### Attribution
+
+The icon outlines are derived from **Material Symbols** by Google, used under the
+[Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0). The full
+licence text is kept at `tools/icons/LICENSE.txt` and the notice is reproduced in the
+header comment of `src/deck-icons.svg`, which is the file that actually ships — keep it
+there. The two brand marks are not derived from the font and are not covered by it.
+
+Deck's own code and stylesheets remain MIT, per `LICENSE`.
 
 ## Logo
 
@@ -1159,6 +1234,11 @@ Deck.locale('es-MX')   // { months, monthsShort, days, weekStart, long, full }
 ### Icons
 
 The 74-icon sprite covers what the framework itself needs plus the automotive set it was
-built for. For anything past that, write `<span data-icon="briefcase" class="icon">` and
-the Lucide adapter swaps in the path data, keeping Deck's `.icon` sizing and stroke
-rules. No adapter, no swap, and the sprite still works.
+built for. Past that, the cheapest move is to add the name to `tools/icons/icons.txt` and
+run `npm run icons` — any of the 4,390 Material Symbols glyphs is one line away.
+
+If you would rather not regenerate, write `<span data-icon="briefcase" class="icon">` and
+the Lucide adapter swaps in the path data, keeping Deck's `.icon` sizing rules. No
+adapter, no swap, and the sprite still works. Be aware that Lucide draws real strokes
+while the sprite is filled outlines, so the two do not match at close range; use one or
+the other in a given screen.

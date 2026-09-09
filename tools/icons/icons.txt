@@ -1,0 +1,125 @@
+# Deck icon set — source list for `npm run icons`.
+#
+# One icon per line:
+#
+#     <sprite-id> = <material-symbols-glyph-name>
+#
+# The sprite id is what markup references (`#check-circle`); the glyph name is
+# the Material Symbols name (`check_circle`). Names are the ones on
+# https://fonts.google.com/icons with spaces replaced by underscores. Any of
+# the 4,390 glyphs in the font can be added here — only the lines below are
+# extracted, so the sprite stays small.
+#
+# Every entry produces two symbols: `#<id>` at wght 400 and `#<id>-sm` at
+# wght 500, the heavier cut for small sizes.
+#
+# `@hand <id>` marks a symbol that is NOT in the font. Those are read out of
+# the existing src/deck-icons.svg and carried through verbatim; the build
+# fails loudly if one is missing rather than silently dropping it.
+#
+# Blank lines and `#` comments are ignored.
+
+# --- Core actions --------------------------------------------------------
+check              = check
+check-double       = done_all
+x                  = close
+plus               = add
+minus              = remove
+
+# --- Direction -----------------------------------------------------------
+chevron-down       = keyboard_arrow_down
+chevron-up         = keyboard_arrow_up
+chevron-left       = chevron_left
+chevron-right      = chevron_right
+arrow-right        = arrow_forward
+arrow-left         = arrow_back
+arrow-up-right     = north_east
+
+# --- Navigation and controls ---------------------------------------------
+search             = search
+menu               = menu
+more-horizontal    = more_horiz
+more-vertical      = more_vert
+filter             = filter_alt
+sort               = sort
+refresh            = refresh
+
+# --- Views ---------------------------------------------------------------
+home               = home
+grid               = grid_view
+list               = format_list_bulleted
+chart              = bar_chart
+trend-up           = trending_up
+trend-down         = trending_down
+
+# --- People and account --------------------------------------------------
+user               = person
+users              = group
+settings           = settings
+log-out            = logout
+bell               = notifications
+
+# --- Communication -------------------------------------------------------
+mail               = mail
+phone              = call
+message            = chat_bubble
+calendar           = calendar_month
+clock              = schedule
+
+# --- Files and content ---------------------------------------------------
+file               = description
+folder             = folder
+clipboard          = content_paste
+download           = download
+upload             = upload
+trash              = delete
+edit               = edit
+copy               = content_copy
+link               = link
+external           = open_in_new
+tag                = sell
+image              = image
+camera             = photo_camera
+
+# --- Visibility and security ---------------------------------------------
+eye                = visibility
+eye-off            = visibility_off
+lock               = lock
+unlock             = lock_open
+shield             = verified_user
+
+# --- Favourites ----------------------------------------------------------
+star               = star
+heart              = favorite
+bookmark           = bookmark
+
+# --- Status --------------------------------------------------------------
+info               = info
+alert-circle       = error
+alert-triangle     = warning
+check-circle       = check_circle
+x-circle           = cancel
+help               = help
+
+# --- Commerce ------------------------------------------------------------
+credit-card        = credit_card
+dollar             = attach_money
+receipt            = receipt_long
+
+# --- Automotive ----------------------------------------------------------
+car                = directions_car
+truck              = local_shipping
+wrench             = build
+gauge              = speed
+
+# --- Misc ----------------------------------------------------------------
+sun                = light_mode
+moon               = dark_mode
+map-pin            = place
+send               = send
+sparkle            = auto_awesome
+
+# --- Hand-authored brand marks -------------------------------------------
+# Not in the font. Carried through from the existing sprite verbatim.
+@hand deck-mark
+@hand deck-wordmark

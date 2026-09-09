@@ -1,0 +1,6 @@
+# Keep the icon toolchain out of the source tarball GitHub builds for a
+# release. tools/icons/ holds the Material Symbols variable font, a ~15 MB
+# build time source that nobody consuming Deck needs: the generated sprite is
+# committed at src/deck-icons.svg. (npm packing is handled separately, by the
+# "files" allowlist in package.json.)
+/tools export-ignore

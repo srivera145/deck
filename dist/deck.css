@@ -2062,7 +2062,13 @@
     stroke-linejoin: round;
     vertical-align: -.22em;
   }
-  .icon-sm { inline-size: 1em; block-size: 1em; stroke-width: 2; }
+  /* Small icons reference the heavier cut of the sprite, not a thicker stroke:
+     the symbols are filled outlines, so stroke-width does nothing to them.
+     Every icon ships twice, #name at wght 400 and #name-sm at wght 500, and
+     .icon-sm goes with the -sm symbol. CSS cannot rewrite a <use href>, so the
+     pairing lives in the markup:
+       <svg class="icon icon-sm"><use href="deck-icons.svg#check-sm"></use></svg> */
+  .icon-sm { inline-size: 1em; block-size: 1em; }
   .icon-lg { inline-size: 1.6em; block-size: 1.6em; stroke-width: 1.6; }
   .icon-xl { inline-size: 2.25em; block-size: 2.25em; stroke-width: 1.4; }
   .icon-fill { fill: currentColor; stroke: none; }
