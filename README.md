@@ -1,6 +1,6 @@
 # Deck
 
-**Deck is a CSS framework that ships as one 31.8 KB gzipped stylesheet: buttons, forms,
+**Deck is a CSS framework that ships as one 32.4 KB gzipped stylesheet: buttons, forms,
 tables, a data grid, charts, overlays, an icon sprite, and a full color system. You add it
 with one `<link>` tag. There is no build step, no config file, and zero dependencies.**
 
@@ -21,22 +21,68 @@ That is the whole install. Nothing to compile, nothing to purge, nothing to conf
 
 Version 0.1.0 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
-### What is in the package
+## What Deck weighs
 
-| File | Size | What it is |
+A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers
+**76.1 KB** gzipped. The sprite is the largest single file and is slightly bigger than the
+stylesheet — worth stating plainly rather than leaving you to find it in devtools.
+
+| File | Gzipped | Notes |
 | --- | --- | --- |
-| `deck.min.css` | 168 KB raw, **31.8 KB gzipped** | The whole framework |
-| `deck.js` | 9.8 KB gzipped | Optional behaviour, no dependencies |
-| `deck-extras.js` | 6.3 KB gzipped | Date picker, combobox, data grid, toasts, QR encoder |
-| `deck-adapters.js` | 4.4 KB gzipped | Optional library integrations, inert unless one is loaded |
-| `deck.bundle.min.js` | 19.0 KB gzipped | All three scripts in one file |
-| `deck-icons.svg` | — | 150 symbols: 74 icons at two weights, plus two brand marks |
+| `deck.min.css` | **32.4 KB** | The whole framework. Fixed size. |
+| `deck-icons.svg` | **33.7 KB** | 75 icons at two weights, 152 symbols. Only if you use them. |
+| `deck.min.js` | **10.0 KB** | Optional. Only for components that need behaviour. |
+| **All three** | **76.1 KB** | The honest total for a page that uses everything. |
+
+Swapping `deck.min.js` for the full `deck.bundle.min.js` (adds the date picker, combobox,
+data grid, toasts, QR encoder) makes the JavaScript 19.4 KB and the total 85.5 KB.
+
+### The sprite is a manifest, not a fixed cost
+
+The 75 icons are a default so the demo works out of the box, not a floor. `tools/icons/icons.txt`
+lists what to extract — delete the lines you do not need and rebuild:
+
+```bash
+# keep only the icons you use
+$ cat > tools/icons/icons.txt <<'EOF'
+check    = check
+search   = search
+settings = settings
+@hand deck-mark
+@hand deck-wordmark
+EOF
+
+$ npm run icons
+```
+
+**A twelve-icon sprite measures 6.9 KB gzipped** — generated and measured, not estimated.
+Against 33.7 KB for the full set, trimming the manifest is the difference between the
+sprite dominating page weight and disappearing into it.
+
+This matters because an external sprite is all-or-nothing per request: the browser fetches
+the whole file to resolve a single `<use>`, so an unused icon is not free the way an unused
+CSS class is. That is why the manifest exists. Keep the two `@hand` lines — they carry the
+brand marks through from the previous sprite, and dropping them drops the marks.
+
+### Everything in the package
+
+| File | Gzipped | What it is |
+| --- | --- | --- |
+| `deck.min.css` | 32.4 KB | The whole framework |
+| `deck.min.js` | 10.0 KB | Optional behaviour, no dependencies |
+| `deck-extras.min.js` | 6.4 KB | Date picker, combobox, data grid, toasts, QR encoder |
+| `deck-adapters.min.js` | 4.6 KB | Optional library integrations, inert unless one is loaded |
+| `deck.bundle.min.js` | 19.4 KB | All three scripts in one file |
+| `deck-icons.svg` | 33.7 KB | 152 symbols: 75 icons at two weights, plus two brand marks |
 | `src/` | — | The 26 source stylesheets, concatenated to build `deck.css` |
 | `dist/layers/` | — | One file per layer, if you only want part of Deck |
 | `php/` | — | Optional PHP helper for Composer users |
 | `bin/deck.mjs` | — | The `npx @echodial/deck` CLI |
 
-Every figure above is measured, not estimated. Reproduce them with `npm run build`.
+Every size above is `gzip -c FILE | wc -c` divided by 1000, measured against `dist/` after
+`npm run build`. Note that `npm run build` prints its own figures from node's zlib in
+binary KB, so it reports 31.8 KB where gzip(1) reports 32.4 KB — same file, two
+conventions.
 
 The component demo is `public_html/index.php` — every component on one page. Run it with
 `npm run demo && npm start`.
@@ -327,7 +373,8 @@ That reads `tools/icons/icons.txt` — one `sprite-id = material-glyph-name` per
 out of the Material Symbols Rounded variable font and writes both cuts of every listed
 icon. To add, drop or swap an icon, edit that list and rerun. Any of the 4,025 glyphs in
 the font is available; only the names on the list end up in the sprite, which is how a
-4,025 icon library ships as an 80 icon file.
+4,025 icon library ships as a 75 icon file — or a twelve icon one at 6.9 KB gzipped, if
+that is all your project uses.
 
 The font is a **build time source only**. It never reaches a browser: a webfont would be
 a 15 MB download or a subsetting step, and Deck's whole premise is not having a build
@@ -817,9 +864,10 @@ grid pin shadows, chart fills, marquee, and entrance animations all flip; and th
 breadcrumb separator swaps.
 
 - **Explicit direction:** `.dir-ltr` `.dir-rtl` `.bidi-isolate` `.bidi-plaintext`.
-  `.code-ltr` (alias `.vin`), `.mono`, `code`, and `.nums` are isolated by default — an
-  identifier like a commit hash or an order number reads left to right in every
-  language and must not scramble the text around it.
+  `.code-ltr`, `.mono`, `code`, and `.nums` are isolated by default — an identifier like
+  a commit hash or an order number reads left to right in every language and must not
+  scramble the text around it. Reach for `.code-ltr` when you need to force the direction
+  on something that is not already monospace.
 - **Mirroring control:** `.flip-rtl` to mirror, `.no-flip` to never mirror.
 - **Logical utilities:** `.mis-*` `.mie-*` `.mbs-*` `.mbe-*` `.pis-*` `.pie-*`
   `.bis` `.bie` `.is-full` `.bs-full` `.inset-is-0` `.r-start` `.r-end`.
@@ -987,7 +1035,9 @@ for recording what already happened — they aren't the same component.
   formats as you type; `data-code` and `data-flag` drive the prefix. The number stays LTR
   and bidi-isolated even in an RTL document. Fires `deck:change` with `{ code, number, e164 }`.
 - **Rating** — `.rating` over real radio inputs, so it posts a value and works with the
-  keyboard. `.rating-static` with `--value` shows a partial fill for an average.
+  keyboard. `.rating-static` with `--value` shows a partial fill for an average. Use the
+  solid `#star-fill` symbol, not `#star`: both components tell a selected star from an
+  empty one by colour alone, so an outlined glyph leaves the two states identical.
 - **Range selector** — `.range-pair` with two native range inputs stacked. Real inputs
   mean real keyboard support and a real form post; `data-gap` keeps the handles apart.
   Fires `deck:change` with `{ min, max }`.

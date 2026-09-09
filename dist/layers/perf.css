@@ -32,7 +32,7 @@
     contain-intrinsic-size: auto 56px;
   }
 
-  /* Any long stack of cards: a claims feed, a chat log, search results */
+  /* Any long stack of cards: an activity feed, a chat log, search results */
   .virtual > * {
     content-visibility: auto;
     contain-intrinsic-size: auto var(--item-size, 120px);
@@ -115,7 +115,7 @@
   .drop-reject { outline-color: var(--bad-500); background: color-mix(in oklab, var(--bad-100) 55%, transparent); }
 
   /* --- Kanban --------------------------------------------------------------
-     The obvious thing to build once you have drag and drop. A claims queue by
+     The obvious thing to build once you have drag and drop. An issue queue by
      status is the same shape as a board.
      ---------------------------------------------------------------------- */
   .kanban {

@@ -366,7 +366,7 @@
   .copy-btn.is-copied .copy-done { display: inline-flex; }
   .copy-btn.is-copied .copy-idle { display: none; }
 
-  /* Inline icon-only variant, for a VIN or a claim number in a table */
+  /* Inline icon-only variant, for an order number or an API key in a table */
   .copy-inline {
     display: inline-flex;
     align-items: center;

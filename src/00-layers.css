@@ -13,7 +13,7 @@
    In a Keel view you can write:
 
      @layer app.pages {
-       .claim-header { padding-block: var(--space-8); }
+       .page-header { padding-block: var(--space-8); }
      }
 
    and it beats every deck rule without a single !important, while still being

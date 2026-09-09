@@ -30,7 +30,7 @@
    In a Keel view you can write:
 
      @layer app.pages {
-       .claim-header { padding-block: var(--space-8); }
+       .page-header { padding-block: var(--space-8); }
      }
 
    and it beats every deck rule without a single !important, while still being
@@ -4366,9 +4366,10 @@
   }
 
   /* --- Explicit direction --------------------------------------------------
-     Sometimes a value has one true direction regardless of the page. A VIN,
-     an account number, a URL, and a code block read left to right even on an
-     Arabic page. Isolate them so they do not scramble the surrounding text.
+     Sometimes a value has one true direction regardless of the page. An order
+     number, an account number, a URL, and a code block read left to right even
+     on an Arabic page. Isolate them so they do not scramble the text around
+     them.
      ---------------------------------------------------------------------- */
   .dir-ltr { direction: ltr; unicode-bidi: isolate; }
   .dir-rtl { direction: rtl; unicode-bidi: isolate; }
@@ -4376,9 +4377,11 @@
   .bidi-isolate { unicode-bidi: isolate; }
   .bidi-plaintext { unicode-bidi: plaintext; }
 
-  /* Identifiers Deck ships with: keep them LTR wherever they appear */
-  .mono, code, kbd, samp, .vin, .nums { unicode-bidi: isolate; }
-  .vin, .code-ltr { direction: ltr; unicode-bidi: isolate; text-align: start; }
+  /* Identifiers read left to right in every language: an order number, a commit
+     hash, an API key, a part code. Keep them LTR wherever they appear, and keep
+     them from scrambling the text around them. */
+  .mono, code, kbd, samp, .nums { unicode-bidi: isolate; }
+  .code-ltr { direction: ltr; unicode-bidi: isolate; text-align: start; }
 }
 
 @layer deck.rtl {
@@ -5143,7 +5146,7 @@
   /* --- Native carousel -----------------------------------------------------
      ::scroll-marker gives every slide its own dot and ::scroll-button gives the
      track its arrows, with the active state, the disabled state, the click
-     handling and the roving-tabindex keyboard order all done by the browser.
+     handling and the arrow-key focus order all done by the browser.
      Where these exist, deck-extras.js skips building and wiring the DIY ones
      and .carousel-dots / .carousel-arrow simply step aside -- the markup stays
      exactly as it was. The buttons take the logical keywords rather than left
@@ -6163,7 +6166,7 @@
   .copy-btn.is-copied .copy-done { display: inline-flex; }
   .copy-btn.is-copied .copy-idle { display: none; }
 
-  /* Inline icon-only variant, for a VIN or a claim number in a table */
+  /* Inline icon-only variant, for an order number or an API key in a table */
   .copy-inline {
     display: inline-flex;
     align-items: center;
@@ -6876,7 +6879,7 @@
     contain-intrinsic-size: auto 56px;
   }
 
-  /* Any long stack of cards: a claims feed, a chat log, search results */
+  /* Any long stack of cards: an activity feed, a chat log, search results */
   .virtual > * {
     content-visibility: auto;
     contain-intrinsic-size: auto var(--item-size, 120px);
@@ -6959,7 +6962,7 @@
   .drop-reject { outline-color: var(--bad-500); background: color-mix(in oklab, var(--bad-100) 55%, transparent); }
 
   /* --- Kanban --------------------------------------------------------------
-     The obvious thing to build once you have drag and drop. A claims queue by
+     The obvious thing to build once you have drag and drop. An issue queue by
      status is the same shape as a board.
      ---------------------------------------------------------------------- */
   .kanban {
@@ -7065,8 +7068,9 @@
 
 /* ==========================================================================
    Deck — 15 Print
-   Dealership work gets printed. Claims, ROs, invoices, and reports all end up
-   on paper or in a PDF, so this is a real stylesheet and not an afterthought.
+   Real work still gets printed. Invoices, packing slips, purchase orders, and
+   reports all end up on paper or in a PDF, so this is a real stylesheet and
+   not an afterthought.
    ========================================================================== */
 
 @layer deck.print {

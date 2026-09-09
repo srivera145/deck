@@ -82,7 +82,7 @@
   /* --- Native carousel -----------------------------------------------------
      ::scroll-marker gives every slide its own dot and ::scroll-button gives the
      track its arrows, with the active state, the disabled state, the click
-     handling and the roving-tabindex keyboard order all done by the browser.
+     handling and the arrow-key focus order all done by the browser.
      Where these exist, deck-extras.js skips building and wiring the DIY ones
      and .carousel-dots / .carousel-arrow simply step aside -- the markup stays
      exactly as it was. The buttons take the logical keywords rather than left

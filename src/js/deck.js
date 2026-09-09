@@ -43,7 +43,7 @@ const Deck = (() => {
      <div class="datefield" data-deck-datepicker
           data-mode="single|range" data-format="mdy|dmy|iso"
           data-min="2024-01-01" data-max="2026-12-31" data-presets>
-       <input class="input" name="claim_date" readonly>
+       <input class="input" name="ship_date" readonly>
      </div>
      ====================================================================== */
 
@@ -350,7 +350,7 @@ const Deck = (() => {
   /* ======================================================================
      Combobox / autocomplete
      <div class="combo" data-deck-combo data-multi data-create
-          data-placeholder="Search VINs">
+          data-placeholder="Search repositories">
        <select hidden multiple>… your real options …</select>
      </div>
      The <select> stays in the DOM and stays in sync, so normal form posts
@@ -779,8 +779,8 @@ const Deck = (() => {
 
   /* ======================================================================
      Toast queue
-       Deck.toast('Claim 88214 approved')
-       Deck.toast({ title: 'Claim withdrawn', text: 'You can undo this.',
+       Deck.toast('Order #1042 shipped')
+       Deck.toast({ title: 'Project archived', text: 'You can undo this.',
                     kind: 'warn', duration: 8000,
                     actions: [{ label: 'Undo', onClick: fn }] })
        const t = Deck.toast({ kind: 'loading', title: 'Submitting…', duration: 0 });

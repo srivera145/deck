@@ -12,12 +12,22 @@
 
        DECK_SITE_BASE=http://deck.local php -S 0.0.0.0:80 -t public_html
 
-   Numbers in this block are measured, not estimated. Reproduce them with:
-       npm run build                        -> css_gzip, css_min, js_gzip
-       ls src/*.css | wc -l                 -> source_files
-       grep -c '<symbol' src/deck-icons.svg  -> 150 symbols (74 icons x 2 + 2 marks)
-       grep -c '=' tools/icons/icons.txt     -> icons on the sprite list
+   Numbers in this block are measured, not estimated. Every size is the exact
+   output of `gzip -c FILE | wc -c`, expressed in decimal KB (bytes / 1000).
+   Reproduce them with:
+
+       npm run build
+       gzip -c dist/deck.min.css   | wc -c   -> 32448   css_gzip
+       gzip -c dist/deck-icons.svg | wc -c   -> 33679   sprite_gzip
+       gzip -c dist/deck.min.js    | wc -c   -> 10002   js_gzip
+       ls src/*.css | wc -l                  -> 26      source_files
+       grep -c '<symbol' src/deck-icons.svg   -> 152 symbols (75 x 2 + 2 marks)
+       grep -c '=' tools/icons/icons.txt      -> entries on the sprite list
        grep -rhoE '\.[a-zA-Z][\w-]*' src/*.css | sort -u | wc -l   -> classes
+
+   Note: `npm run build` prints its own figures from node's zlib in binary KB,
+   so it reports 31.8 KB where gzip(1) reports 32.4 KB. Same file, two
+   conventions. The page quotes gzip(1) because that is what a reader can check.
    ============================================================================= */
 
 $site = [
@@ -33,15 +43,20 @@ $site = [
     /* Title: 49 characters. Description: 153. Both carry "CSS framework",
        which is the term people actually search for. */
     'title'        => 'Deck — a CSS framework in one file, no build step',
-    'description'  => 'Deck is a CSS framework that ships as one 31.8 KB stylesheet with components, icons, and runtime theming. No build step, no config file, no dependencies.',
+    'description'  => 'Deck is a CSS framework that ships as one 32.4 KB stylesheet with components, icons, and runtime theming. No build step, no config file, no dependencies.',
 
     /* Measured facts, quoted throughout the page. */
-    'css_gzip'     => '31.8 KB',
+    'css_gzip'     => '32.4 KB',
     'css_min'      => '168 KB',
-    'js_gzip'      => '9.8 KB',
+    'sprite_gzip'  => '33.7 KB',
+    'js_gzip'      => '10.0 KB',
+    'bundle_gzip'  => '19.4 KB',
+    'total_gzip'   => '76.1 KB',
+    'sprite_12'    => '6.9 KB',
     'source_files' => 26,
     'classes'      => 927,
-    'icons'        => 74,
+    'icons'        => 75,
+    'symbols'      => 152,
     'icons_avail'  => '4,025',
     'deps'         => 0,
 ];
@@ -320,6 +335,80 @@ $ogImage = $url('assets/images/deck-og.png');
       <?= number_format($site['classes']) ?> classes. It is published under the
       <?= $e($site['license_name']) ?> license, and version
       <?= $e($site['version']) ?> is the release documented on this page.</p>
+
+    <h3>What does Deck actually weigh?</h3>
+    <p>A page that loads the stylesheet, the icon sprite, and the optional JavaScript
+      transfers <?= $e($site['total_gzip']) ?> gzipped. The sprite is the largest single
+      file and is slightly bigger than the stylesheet, which is worth saying plainly
+      rather than leaving for you to find in devtools.</p>
+
+    <div class="table-wrap">
+      <table class="table table-stack">
+        <caption class="sr-only">Transfer size of each Deck file, gzipped</caption>
+        <thead>
+          <tr><th scope="col">File</th><th scope="col" class="num">Gzipped</th><th scope="col">What it is</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" data-label="File"><code>deck.min.css</code></th>
+            <td data-label="Gzipped" class="num nums"><?= $e($site['css_gzip']) ?></td>
+            <td data-label="What it is">The whole framework. Fixed size.</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="File"><code>deck-icons.svg</code></th>
+            <td data-label="Gzipped" class="num nums"><?= $e($site['sprite_gzip']) ?></td>
+            <td data-label="What it is"><?= (int) $site['icons'] ?> icons at two weights,
+              <?= (int) $site['symbols'] ?> symbols. Only if you use the icons.</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="File"><code>deck.min.js</code></th>
+            <td data-label="Gzipped" class="num nums"><?= $e($site['js_gzip']) ?></td>
+            <td data-label="What it is">Optional. Only for components that need behaviour.</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="File"><strong>All three</strong></th>
+            <td data-label="Gzipped" class="num nums"><strong><?= $e($site['total_gzip']) ?></strong></td>
+            <td data-label="What it is">The honest total for a page that uses everything.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="text-muted">Swapping <code>deck.min.js</code> for the full
+      <code>deck.bundle.min.js</code>, which adds the date picker, combobox, data grid,
+      toasts, and QR encoder, makes the JavaScript <?= $e($site['bundle_gzip']) ?> and the
+      total 85.5 KB. Every figure here is <code>gzip -c FILE | wc -c</code> divided by
+      1000; run it yourself against <code>dist/</code>.</p>
+
+    <h3>The sprite is a manifest, not a fixed cost</h3>
+    <p>The <?= (int) $site['icons'] ?> icons in the sprite are a default so the demo works
+      out of the box, not a floor you have to pay. <code>tools/icons/icons.txt</code> is a
+      plain list of the icons to extract: delete the lines you do not need, run
+      <code>npm run icons</code>, and the sprite is rebuilt with only what is left.</p>
+
+    <pre><code># keep only the icons you use
+$ cat &gt; tools/icons/icons.txt &lt;&lt;'EOF'
+check    = check
+search   = search
+settings = settings
+@hand deck-mark
+@hand deck-wordmark
+EOF
+
+$ npm run icons</code></pre>
+
+    <p><strong>A twelve icon sprite measures <?= $e($site['sprite_12']) ?> gzipped</strong>
+      — that figure was generated and measured, not estimated. Against
+      <?= $e($site['sprite_gzip']) ?> for the full set, trimming the manifest to what a
+      project actually uses is the difference between the sprite dominating the page
+      weight and disappearing into it.</p>
+
+    <p class="text-muted">This matters because an external sprite is all or nothing per
+      request: the browser fetches the whole file to resolve one
+      <code>&lt;use&gt;</code>, so an unused icon is not free the way an unused CSS class
+      is. That is the reason the manifest exists. The two <code>@hand</code> lines carry
+      the brand marks through from the previous sprite; drop them and the marks are
+      dropped too.</p>
 
     <h3>Do I need a build step to use Deck?</h3>
     <p>No — Deck needs no build step, because it is distributed as a finished stylesheet
@@ -924,7 +1013,8 @@ $ogImage = $url('assets/images/deck-og.png');
     <div class="stack-2">
       <h2>Icons and emoji</h2>
       <p class="text-muted">Deck ships <?= (int) $site['icons'] ?> icons as a single SVG
-        sprite of 150 symbols — each icon at two weights, plus two brand marks — and they
+        sprite of <?= (int) $site['symbols'] ?> symbols — each icon at two weights, plus two
+        brand marks, <?= $e($site['sprite_gzip']) ?> gzipped — and they
         inherit color and font size, so they sit on the text baseline without nudging. The
         sprite is generated from the Material Symbols variable font, so any of its
         <?= $e($site['icons_avail']) ?> icons can be added by putting its name in
@@ -2006,11 +2096,11 @@ $ogImage = $url('assets/images/deck-og.png');
         <div class="field">
           <span class="label">Rate this release</span>
           <div class="rating">
-            <input type="radio" name="rate" id="r5" value="5"><label for="r5"><svg class="icon"><use href="assets/deck/deck-icons.svg#star"></use></svg></label>
-            <input type="radio" name="rate" id="r4" value="4"><label for="r4"><svg class="icon"><use href="assets/deck/deck-icons.svg#star"></use></svg></label>
-            <input type="radio" name="rate" id="r3" value="3" checked><label for="r3"><svg class="icon"><use href="assets/deck/deck-icons.svg#star"></use></svg></label>
-            <input type="radio" name="rate" id="r2" value="2"><label for="r2"><svg class="icon"><use href="assets/deck/deck-icons.svg#star"></use></svg></label>
-            <input type="radio" name="rate" id="r1" value="1"><label for="r1"><svg class="icon"><use href="assets/deck/deck-icons.svg#star"></use></svg></label>
+            <input type="radio" name="rate" id="r5" value="5"><label for="r5"><svg class="icon"><use href="assets/deck/deck-icons.svg#star-fill"></use></svg></label>
+            <input type="radio" name="rate" id="r4" value="4"><label for="r4"><svg class="icon"><use href="assets/deck/deck-icons.svg#star-fill"></use></svg></label>
+            <input type="radio" name="rate" id="r3" value="3" checked><label for="r3"><svg class="icon"><use href="assets/deck/deck-icons.svg#star-fill"></use></svg></label>
+            <input type="radio" name="rate" id="r2" value="2"><label for="r2"><svg class="icon"><use href="assets/deck/deck-icons.svg#star-fill"></use></svg></label>
+            <input type="radio" name="rate" id="r1" value="1"><label for="r1"><svg class="icon"><use href="assets/deck/deck-icons.svg#star-fill"></use></svg></label>
           </div>
         </div>
         <div class="field">
@@ -2311,7 +2401,7 @@ $ogImage = $url('assets/images/deck-og.png');
           </tr>
           <tr>
             <td data-label="Job">Icons</td>
-            <td data-label="Deck alone">74-icon sprite</td>
+            <td data-label="Deck alone">75-icon sprite, trimmable to what you use</td>
             <td data-label="With a library">Lucide, 1500 icons</td>
             <td data-label="Verdict">Sprite is enough for Deck; Lucide for the rest</td>
           </tr>

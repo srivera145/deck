@@ -89,9 +89,10 @@
   }
 
   /* --- Explicit direction --------------------------------------------------
-     Sometimes a value has one true direction regardless of the page. A VIN,
-     an account number, a URL, and a code block read left to right even on an
-     Arabic page. Isolate them so they do not scramble the surrounding text.
+     Sometimes a value has one true direction regardless of the page. An order
+     number, an account number, a URL, and a code block read left to right even
+     on an Arabic page. Isolate them so they do not scramble the text around
+     them.
      ---------------------------------------------------------------------- */
   .dir-ltr { direction: ltr; unicode-bidi: isolate; }
   .dir-rtl { direction: rtl; unicode-bidi: isolate; }
@@ -99,9 +100,11 @@
   .bidi-isolate { unicode-bidi: isolate; }
   .bidi-plaintext { unicode-bidi: plaintext; }
 
-  /* Identifiers Deck ships with: keep them LTR wherever they appear */
-  .mono, code, kbd, samp, .vin, .nums { unicode-bidi: isolate; }
-  .vin, .code-ltr { direction: ltr; unicode-bidi: isolate; text-align: start; }
+  /* Identifiers read left to right in every language: an order number, a commit
+     hash, an API key, a part code. Keep them LTR wherever they appear, and keep
+     them from scrambling the text around them. */
+  .mono, code, kbd, samp, .nums { unicode-bidi: isolate; }
+  .code-ltr { direction: ltr; unicode-bidi: isolate; text-align: start; }
 }
 
 @layer deck.rtl {

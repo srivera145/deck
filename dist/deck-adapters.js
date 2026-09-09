@@ -118,7 +118,7 @@
       const limit = Number(ed.dataset.limit || 0);
       if (!content) return;
 
-      // Deck's own handler already claimed this node; take it back cleanly
+      // Deck's own handler already owns this node; take it back cleanly
       content.contentEditable = 'false';
       content.removeAttribute('role');
 

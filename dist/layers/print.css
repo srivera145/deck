@@ -1,7 +1,8 @@
 /* ==========================================================================
    Deck — 15 Print
-   Dealership work gets printed. Claims, ROs, invoices, and reports all end up
-   on paper or in a PDF, so this is a real stylesheet and not an afterthought.
+   Real work still gets printed. Invoices, packing slips, purchase orders, and
+   reports all end up on paper or in a PDF, so this is a real stylesheet and
+   not an afterthought.
    ========================================================================== */
 
 @layer deck.print {

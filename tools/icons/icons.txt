@@ -93,6 +93,16 @@ star               = star
 heart              = favorite
 bookmark           = bookmark
 
+# Solid star. .rating and .rating-static tell a selected star from an empty one
+# by colour alone, so both states need a filled glyph: with the outlined `star`
+# the two states are the same drawing in two colours, and the component stops
+# saying anything. Reach for `star-fill` inside .rating, and `star` everywhere
+# a star is just an icon.
+#
+# The font carries a `.fill` twin for most glyphs (favorite.fill, bookmark.fill,
+# and so on) if you build a toggle that needs one.
+star-fill          = star.fill
+
 # --- Status --------------------------------------------------------------
 info               = info
 alert-circle       = error
