@@ -1,6 +1,6 @@
 # Deck
 
-**Deck is a CSS framework that ships as one 32.4 KB gzipped stylesheet: buttons, forms,
+**Deck is a CSS framework that ships as one 32.5 KB gzipped stylesheet: buttons, forms,
 tables, a data grid, charts, overlays, an icon sprite, and a full color system. You add it
 with one `<link>` tag. There is no build step, no config file, and zero dependencies.**
 
@@ -29,13 +29,13 @@ stylesheet — worth stating plainly rather than leaving you to find it in devto
 
 | File | Gzipped | Notes |
 | --- | --- | --- |
-| `deck.min.css` | **32.4 KB** | The whole framework. Fixed size. |
-| `deck-icons.svg` | **33.7 KB** | 75 icons at two weights, 152 symbols. Only if you use them. |
+| `deck.min.css` | **32.5 KB** | The whole framework. Fixed size. |
+| `deck-icons.svg` | **33.6 KB** | 75 icons at two weights, 152 symbols. Only if you use them. |
 | `deck.min.js` | **10.0 KB** | Optional. Only for components that need behaviour. |
 | **All three** | **76.1 KB** | The honest total for a page that uses everything. |
 
 Swapping `deck.min.js` for the full `deck.bundle.min.js` (adds the date picker, combobox,
-data grid, toasts, QR encoder) makes the JavaScript 19.4 KB and the total 85.5 KB.
+data grid, toasts, QR encoder) makes the JavaScript 19.5 KB and the total 85.6 KB.
 
 ### The sprite is a manifest, not a fixed cost
 
@@ -56,7 +56,7 @@ $ npm run icons
 ```
 
 **A twelve-icon sprite measures 6.9 KB gzipped** — generated and measured, not estimated.
-Against 33.7 KB for the full set, trimming the manifest is the difference between the
+Against 33.6 KB for the full set, trimming the manifest is the difference between the
 sprite dominating page weight and disappearing into it.
 
 This matters because an external sprite is all-or-nothing per request: the browser fetches
@@ -68,21 +68,18 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 
 | File | Gzipped | What it is |
 | --- | --- | --- |
-| `deck.min.css` | 32.4 KB | The whole framework |
+| `deck.min.css` | 32.5 KB | The whole framework |
 | `deck.min.js` | 10.0 KB | Optional behaviour, no dependencies |
-| `deck-extras.min.js` | 6.4 KB | Date picker, combobox, data grid, toasts, QR encoder |
-| `deck-adapters.min.js` | 4.6 KB | Optional library integrations, inert unless one is loaded |
-| `deck.bundle.min.js` | 19.4 KB | All three scripts in one file |
-| `deck-icons.svg` | 33.7 KB | 152 symbols: 75 icons at two weights, plus two brand marks |
+| `deck-extras.min.js` | 6.5 KB | Date picker, combobox, data grid, toasts, QR encoder |
+| `deck-adapters.min.js` | 4.5 KB | Optional library integrations, inert unless one is loaded |
+| `deck.bundle.min.js` | 19.5 KB | All three scripts in one file |
+| `deck-icons.svg` | 33.6 KB | 152 symbols: 75 icons at two weights, plus two brand marks |
 | `src/` | — | The 26 source stylesheets, concatenated to build `deck.css` |
 | `dist/layers/` | — | One file per layer, if you only want part of Deck |
 | `php/` | — | Optional PHP helper for Composer users |
 | `bin/deck.mjs` | — | The `npx @echodial/deck` CLI |
 
-Every size above is `gzip -c FILE | wc -c` divided by 1000, measured against `dist/` after
-`npm run build`. Note that `npm run build` prints its own figures from node's zlib in
-binary KB, so it reports 31.8 KB where gzip(1) reports 32.4 KB — same file, two
-conventions.
+Every size above is what `npm run build` prints, in decimal KB.
 
 The component demo is `public_html/index.php` — every component on one page. Run it with
 `npm run demo && npm start`.

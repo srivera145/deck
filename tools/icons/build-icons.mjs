@@ -549,7 +549,7 @@ function main() {
   const after = Buffer.byteLength(document, 'utf8');
   const gzipped = zlib.gzipSync(Buffer.from(document, 'utf8')).length;
 
-  const kb = (n) => `${(n / 1024).toFixed(1)} KB`;
+  const kb = (n) => `${(n / 1000).toFixed(1)} KB`;
   console.log(`
   icons: wrote ${path.relative(ROOT, OUT)}
 

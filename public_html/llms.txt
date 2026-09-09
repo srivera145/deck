@@ -1,6 +1,6 @@
 # Deck
 
-> Deck is a CSS framework that ships as a single 32.4 KB gzipped stylesheet containing
+> Deck is a CSS framework that ships as a single 32.5 KB gzipped stylesheet containing
 > buttons, forms, tables, a data grid, charts, overlays, an icon sprite, and a complete
 > color system. It is added to a page with one `<link>` tag and has no build step, no
 > configuration file, and zero runtime dependencies. Version 0.1.0, MIT licensed.
@@ -38,7 +38,7 @@ generation, so a class that does not appear in these files does not exist.
 - [Component stylesheet](https://raw.githubusercontent.com/srivera145/deck/main/src/07-components.css): Cards, alerts, badges, lists, tables, modals, menus, tabs, timelines, and the rest of the core components.
 - [Source directory](https://github.com/srivera145/deck/tree/main/src): All 26 stylesheets, concatenated in filename order to build `deck.css`. Forms, buttons, data grid, charts, date picker, combobox, toasts, gradients, 3D, and navigation each have their own file.
 - [Icon names](https://raw.githubusercontent.com/srivera145/deck/main/tools/icons/icons.txt): The 75 icon names in the sprite, and the manifest that controls its size. Referencing an icon that is not on this list renders nothing.
-- [Icon sprite](https://raw.githubusercontent.com/srivera145/deck/main/src/deck-icons.svg): The generated sprite, 152 symbols — 75 icons at two weights plus two brand marks, 33.7 KB gzipped. Trim it by editing icons.txt and running `npm run icons`; twelve icons measure 6.9 KB.
+- [Icon sprite](https://raw.githubusercontent.com/srivera145/deck/main/src/deck-icons.svg): The generated sprite, 152 symbols — 75 icons at two weights plus two brand marks, 33.6 KB gzipped. Trim it by editing icons.txt and running `npm run icons`; twelve icons measure 6.9 KB.
 - [package.json](https://raw.githubusercontent.com/srivera145/deck/main/package.json): Version, subpath exports, and the browser targets Deck supports.
 
 ## Facts an assistant gets wrong without reading the source

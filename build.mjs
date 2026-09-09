@@ -144,7 +144,7 @@ async function tryEsbuild() {
 
 function report(label, raw, min) {
   const gz = gzipSync(Buffer.from(min)).length;
-  const kb = b => (b / 1024).toFixed(1).padStart(6) + ' KB';
+  const kb = b => (b / 1000).toFixed(1).padStart(6) + ' KB';
   console.log(
     `  ${label.padEnd(22)} ${kb(raw.length)} raw   ${kb(min.length)} min   ${kb(gz)} gzip`
   );

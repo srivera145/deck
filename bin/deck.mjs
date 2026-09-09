@@ -206,7 +206,7 @@ async function list() {
   for (const f of files) {
     const s = await stat(path.join(DIST, f));
     if (s.isDirectory()) { console.log(`  ${f}/`); continue; }
-    console.log(`  ${f.padEnd(26)} ${c.dim((s.size / 1024).toFixed(1) + ' KB')}`);
+    console.log(`  ${f.padEnd(26)} ${c.dim((s.size / 1000).toFixed(1) + ' KB')}`);
   }
   console.log();
 }

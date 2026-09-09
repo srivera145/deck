@@ -12,22 +12,14 @@
 
        DECK_SITE_BASE=http://deck.local php -S 0.0.0.0:80 -t public_html
 
-   Numbers in this block are measured, not estimated. Every size is the exact
-   output of `gzip -c FILE | wc -c`, expressed in decimal KB (bytes / 1000).
-   Reproduce them with:
+   Numbers in this block are measured, not estimated. Every gzipped size is
+   what `npm run build` prints, in decimal KB. Reproduce them with:
 
-       npm run build
-       gzip -c dist/deck.min.css   | wc -c   -> 32448   css_gzip
-       gzip -c dist/deck-icons.svg | wc -c   -> 33679   sprite_gzip
-       gzip -c dist/deck.min.js    | wc -c   -> 10002   js_gzip
-       ls src/*.css | wc -l                  -> 26      source_files
-       grep -c '<symbol' src/deck-icons.svg   -> 152 symbols (75 x 2 + 2 marks)
-       grep -c '=' tools/icons/icons.txt      -> entries on the sprite list
+       npm run build                          -> css_gzip, js_gzip, bundle_gzip
+       ls src/*.css | wc -l                   -> 26      source_files
+       grep -c '<symbol' src/deck-icons.svg    -> 152 symbols (75 x 2 + 2 marks)
+       grep -c '=' tools/icons/icons.txt       -> entries on the sprite list
        grep -rhoE '\.[a-zA-Z][\w-]*' src/*.css | sort -u | wc -l   -> classes
-
-   Note: `npm run build` prints its own figures from node's zlib in binary KB,
-   so it reports 31.8 KB where gzip(1) reports 32.4 KB. Same file, two
-   conventions. The page quotes gzip(1) because that is what a reader can check.
    ============================================================================= */
 
 $site = [
@@ -43,14 +35,14 @@ $site = [
     /* Title: 49 characters. Description: 153. Both carry "CSS framework",
        which is the term people actually search for. */
     'title'        => 'Deck — a CSS framework in one file, no build step',
-    'description'  => 'Deck is a CSS framework that ships as one 32.4 KB stylesheet with components, icons, and runtime theming. No build step, no config file, no dependencies.',
+    'description'  => 'Deck is a CSS framework that ships as one 32.5 KB stylesheet with components, icons, and runtime theming. No build step, no config file, no dependencies.',
 
     /* Measured facts, quoted throughout the page. */
-    'css_gzip'     => '32.4 KB',
+    'css_gzip'     => '32.5 KB',
     'css_min'      => '168 KB',
-    'sprite_gzip'  => '33.7 KB',
+    'sprite_gzip'  => '33.6 KB',
     'js_gzip'      => '10.0 KB',
-    'bundle_gzip'  => '19.4 KB',
+    'bundle_gzip'  => '19.5 KB',
     'total_gzip'   => '76.1 KB',
     'sprite_12'    => '6.9 KB',
     'source_files' => 26,
@@ -377,8 +369,8 @@ $ogImage = $url('assets/images/deck-og.png');
     <p class="text-muted">Swapping <code>deck.min.js</code> for the full
       <code>deck.bundle.min.js</code>, which adds the date picker, combobox, data grid,
       toasts, and QR encoder, makes the JavaScript <?= $e($site['bundle_gzip']) ?> and the
-      total 85.5 KB. Every figure here is <code>gzip -c FILE | wc -c</code> divided by
-      1000; run it yourself against <code>dist/</code>.</p>
+      total 85.6 KB. Every figure here is what <code>npm run build</code> prints; run it
+      yourself.</p>
 
     <h3>The sprite is a manifest, not a fixed cost</h3>
     <p>The <?= (int) $site['icons'] ?> icons in the sprite are a default so the demo works
