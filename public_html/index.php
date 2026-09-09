@@ -178,6 +178,28 @@ $ogImage = $url('assets/images/deck-og.png');
   .ramp { display: grid; grid-template-columns: repeat(11, 1fr); gap: 2px; }
   .ramp > div { block-size: 40px; border-radius: 3px; }
   .demo-label { font-size: var(--text-xs); font-weight: 620; color: var(--text-faint); }
+
+  /* This demo puts more links in the nav than a 1216px container comfortably
+     holds. Left alone, the row runs out of width and two things give: a
+     two-word .nav-link breaks mid-label, and the .cluster holding the hue
+     slider and the theme button wraps, dropping the button onto its own line.
+     .cluster is a wrapping primitive by design, so the fix belongs here on the
+     dock rather than in the framework.
+
+     Labels never break; the controls stay pinned to the end of the row; and if
+     the links ever outgrow the space again they scroll sideways instead of
+     pushing the controls off. */
+  .theme-dock .nav-link { white-space: nowrap; flex: 0 0 auto; }
+  .theme-dock .navbar-links {
+    min-inline-size: 0;          /* a flex item will not shrink below content without this */
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .theme-dock .navbar-links::-webkit-scrollbar { display: none; }
+  .theme-dock .navbar > .push {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+  }
 </style>
 </head>
 <body>
@@ -200,8 +222,9 @@ $ogImage = $url('assets/images/deck-og.png');
         Deck
       </a>
       <nav class="navbar-links">
-        <a class="nav-link" aria-current="page" href="#main">Overview</a>
-        <a class="nav-link" href="#about">What it is</a>
+        <!-- The brand mark to the left already links to the top, so a separate
+             "Overview" link was redundant and cost the row 83px it did not have. -->
+        <a class="nav-link" aria-current="page" href="#about">About</a>
         <a class="nav-link" href="#compare">Compare</a>
         <a class="nav-link" href="#forms">Forms</a>
         <a class="nav-link" href="#grid">Grid</a>
