@@ -735,7 +735,7 @@ $ npm run icons</code></pre>
     </div>
 
     <div class="split">
-      <form class="stack-5">
+      <form class="stack-4">
         <div class="field-row">
           <div class="field">
             <label class="label" for="wsname">Workspace name <span class="required">*</span></label>

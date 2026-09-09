@@ -32,6 +32,8 @@
   .place-center { place-items: center; }
   .grow { flex: 1 1 auto; min-inline-size: 0; }
   .shrink-0 { flex: 0 0 auto; }
+  /* Pushes this element and everything after it to the far end of a flex
+     row. The one-class replacement for a spacer div. */
   .push { margin-inline-start: auto; }
 
   .gap-0 { gap: 0; }
@@ -43,23 +45,32 @@
   .gap-8 { gap: var(--space-8); }
 
   /* --- Spacing ------------------------------------------------------------ */
-  .p-0 { padding: 0; }   .p-2 { padding: var(--space-2); }
-  .p-3 { padding: var(--space-3); }  .p-4 { padding: var(--space-4); }
-  .p-5 { padding: var(--space-5); }  .p-6 { padding: var(--space-6); }
+  /* The scale is 0 1 2 3 4 6 8, declared in 04-layout.css. Every family below
+     implements all seven, so a step that exists anywhere exists everywhere. */
+  .p-0 { padding: 0; }                       .p-1 { padding: var(--space-1); }
+  .p-2 { padding: var(--space-2); }          .p-3 { padding: var(--space-3); }
+  .p-4 { padding: var(--space-4); }          .p-6 { padding: var(--space-6); }
   .p-8 { padding: var(--space-8); }
-  .px-3 { padding-inline: var(--space-3); } .px-4 { padding-inline: var(--space-4); }
-  .px-5 { padding-inline: var(--space-5); } .px-6 { padding-inline: var(--space-6); }
-  .py-2 { padding-block: var(--space-2); }  .py-3 { padding-block: var(--space-3); }
-  .py-4 { padding-block: var(--space-4); }  .py-6 { padding-block: var(--space-6); }
-  .py-8 { padding-block: var(--space-8); }  .py-12 { padding-block: var(--space-12); }
+
+  .px-0 { padding-inline: 0; }               .px-1 { padding-inline: var(--space-1); }
+  .px-2 { padding-inline: var(--space-2); }  .px-3 { padding-inline: var(--space-3); }
+  .px-4 { padding-inline: var(--space-4); }  .px-6 { padding-inline: var(--space-6); }
+  .px-8 { padding-inline: var(--space-8); }
+
+  .py-0 { padding-block: 0; }                .py-1 { padding-block: var(--space-1); }
+  .py-2 { padding-block: var(--space-2); }   .py-3 { padding-block: var(--space-3); }
+  .py-4 { padding-block: var(--space-4); }   .py-6 { padding-block: var(--space-6); }
+  .py-8 { padding-block: var(--space-8); }
 
   .m-0 { margin: 0; }
-  .mt-1 { margin-block-start: var(--space-1); } .mt-2 { margin-block-start: var(--space-2); }
-  .mt-3 { margin-block-start: var(--space-3); } .mt-4 { margin-block-start: var(--space-4); }
-  .mt-6 { margin-block-start: var(--space-6); } .mt-8 { margin-block-start: var(--space-8); }
-  .mb-1 { margin-block-end: var(--space-1); }   .mb-2 { margin-block-end: var(--space-2); }
-  .mb-3 { margin-block-end: var(--space-3); }   .mb-4 { margin-block-end: var(--space-4); }
-  .mb-6 { margin-block-end: var(--space-6); }   .mb-8 { margin-block-end: var(--space-8); }
+  .mt-0 { margin-block-start: 0; }              .mt-1 { margin-block-start: var(--space-1); }
+  .mt-2 { margin-block-start: var(--space-2); } .mt-3 { margin-block-start: var(--space-3); }
+  .mt-4 { margin-block-start: var(--space-4); } .mt-6 { margin-block-start: var(--space-6); }
+  .mt-8 { margin-block-start: var(--space-8); }
+  .mb-0 { margin-block-end: 0; }                .mb-1 { margin-block-end: var(--space-1); }
+  .mb-2 { margin-block-end: var(--space-2); }   .mb-3 { margin-block-end: var(--space-3); }
+  .mb-4 { margin-block-end: var(--space-4); }   .mb-6 { margin-block-end: var(--space-6); }
+  .mb-8 { margin-block-end: var(--space-8); }
   .mx-auto { margin-inline: auto; }
 
   /* --- Sizing ------------------------------------------------------------- */
@@ -76,6 +87,7 @@
   /* --- Type --------------------------------------------------------------- */
   .text-2xs { font-size: var(--text-2xs); }
   .text-xs { font-size: var(--text-xs); }
+  /* One step down the type scale, for secondary text and dense rows. */
   .text-sm { font-size: var(--text-sm); }
   .text-base { font-size: var(--text-base); }
   .text-md { font-size: var(--text-md); }
@@ -85,6 +97,8 @@
 
   .fw-normal { font-weight: 400; }
   .fw-medium { font-weight: 540; }
+  /* Semibold. The weight for a label or a name that needs to lead without
+     becoming a heading. */
   .fw-semi { font-weight: 620; }
   .fw-bold { font-weight: 700; }
 
@@ -92,6 +106,8 @@
   .text-center { text-align: center; }
   .text-end { text-align: end; }
 
+  /* Secondary text colour. Still meets contrast against every surface Deck
+     defines, so it is safe for body copy rather than decoration only. */
   .text-muted { color: var(--text-muted); }
   .text-faint { color: var(--text-faint); }
   .text-brand { color: var(--brand); }
@@ -100,6 +116,8 @@
   .text-bad { color: var(--bad-700); }
   .text-inherit { color: inherit; }
 
+  /* Tabular figures, so numbers line up in a column and do not jitter when
+     they change. */
   .nums { font-variant-numeric: tabular-nums; }
   .mono { font-family: var(--font-mono); }
   .uppercase { text-transform: uppercase; letter-spacing: .04em; }

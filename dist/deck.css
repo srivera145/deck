@@ -550,6 +550,9 @@
 
 @layer deck.layout {
 
+  /* Centres content and caps it at --container, with the responsive page
+     gutter already applied. Nest one inside another and the inner one adds
+     a second gutter, so use .container-full instead. */
   .container {
     inline-size: 100%;
     max-inline-size: var(--container, 76rem);
@@ -562,15 +565,39 @@
   .container-xl { --container: 90rem; }
   .container-full { --container: none; }
 
+  /* --- The spacing scale ----------------------------------------------------
+     Every spacing utility in Deck uses the same seven steps:
+
+       0    1        2       3       4      6        8
+       0    .25rem   .5rem   .75rem  1rem   1.5rem   2rem
+
+     .stack, .cluster, .gap-*, the padding utilities and the margin utilities
+     all implement exactly these, so a step that exists in one family exists in
+     all of them. There is deliberately no 5: at 1.25rem it is indistinguishable
+     from 4 and 6 in a real layout, and a half step between two neighbours is
+     the step people reach for when they are not sure, which is how .stack-5
+     came to be used in the demo when no such class existed.
+
+     The --space-* tokens keep their full range (0 through 24). Tokens are the
+     palette a component composes from; the utilities are the smaller set you
+     author markup with. Those are different jobs, so they are different sizes.
+     ---------------------------------------------------------------------- */
+
   /* Vertical rhythm without margin collapse surprises */
   .stack {
     display: flex;
     flex-direction: column;
     gap: var(--gap, var(--space-4));
   }
+  .stack-0 { --gap: 0; }
   .stack-1 { --gap: var(--space-1); }
+  /* Tight vertical rhythm, for a label and its control or a title and its
+     subtitle. */
   .stack-2 { --gap: var(--space-2); }
+  /* The default rhythm for related blocks inside a card or a section. */
   .stack-3 { --gap: var(--space-3); }
+  .stack-4 { --gap: var(--space-4); }
+  /* Loose vertical rhythm, for separating whole sections of a page. */
   .stack-6 { --gap: var(--space-6); }
   .stack-8 { --gap: var(--space-8); }
 
@@ -581,6 +608,14 @@
     align-items: center;
     gap: var(--gap, var(--space-3));
   }
+  .cluster-0 { --gap: 0; }
+  .cluster-1 { --gap: var(--space-1); }
+  .cluster-2 { --gap: var(--space-2); }
+  .cluster-3 { --gap: var(--space-3); }
+  .cluster-4 { --gap: var(--space-4); }
+  .cluster-6 { --gap: var(--space-6); }
+  .cluster-8 { --gap: var(--space-8); }
+  /* Kept as the readable name for step 2, which is what most clusters want */
   .cluster-tight { --gap: var(--space-2); }
   .cluster-end { justify-content: flex-end; }
   .cluster-center { justify-content: center; }
@@ -601,6 +636,8 @@
     grid-template-columns: repeat(auto-fit, minmax(min(var(--min, 17rem), 100%), 1fr));
   }
   .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr)); }
+  /* Narrows the auto-fit column floor to 12rem, so the grid packs more
+     columns in before it wraps. */
   .grid-tight { --min: 12rem; }
   .grid-wide { --min: 24rem; }
   .grid-fixed-2 { grid-template-columns: 1fr 1fr; }
@@ -613,6 +650,12 @@
     gap: var(--gap, var(--space-6));
     grid-template-columns: 1fr;
   }
+  /* A grid item's min-inline-size is auto, so a child that cannot shrink — a
+     form row, a wide table, a long code block — makes the whole column wider
+     than its track and pushes the page sideways. This is the single most
+     common grid bug there is; the two-column form in the demo overflowed a
+     375px viewport by 16px until this line existed. */
+  .split > * { min-inline-size: 0; }
   @media (min-width: 64rem) {
     .split { grid-template-columns: minmax(0, 1fr) var(--rail, 20rem); }
     .split-rail-start { grid-template-columns: var(--rail, 20rem) minmax(0, 1fr); }
@@ -627,6 +670,9 @@
     gap: var(--gap, var(--space-4));
   }
 
+  /* Vertical page rhythm: a block of --space-section, which is a clamp that
+     grows with the viewport. For spacing inside a component reach for
+     .stack instead. */
   .section { padding-block: var(--space-section); }
 
   /* Everything stays on one line and scrolls sideways — cards, chips, dates */
@@ -760,6 +806,8 @@
   }
 
   /* --- Variants ----------------------------------------------------------- */
+  /* The one important action in a view. Solid brand fill; use exactly one
+     per screen so it keeps meaning something. */
   .btn-primary {
     --btn-bg: var(--brand-600);
     --btn-text: var(--text-on-brand);
@@ -792,6 +840,8 @@
   }
   .btn-soft:hover { background: color-mix(in oklab, var(--brand-soft) 80%, var(--brand-300)); border-color: transparent; }
 
+  /* No border or background until hover. For toolbars and dense rows where
+     seven bordered buttons would be noise. */
   .btn-ghost {
     --btn-bg: transparent;
     --btn-border: transparent;
@@ -818,6 +868,8 @@
   .btn-link:hover { background: none; border-color: transparent; text-decoration: underline; }
 
   /* --- Sizes -------------------------------------------------------------- */
+  /* The 34px size. Still clears the 44px touch target, because the target
+     is a pseudo-element rather than the box. */
   .btn-sm {
     block-size: var(--control-h-sm);
     padding-inline: var(--space-3);
@@ -833,6 +885,7 @@
   }
   .btn-block { inline-size: 100%; }
 
+  /* Square, icon-only button. It has no text, so it needs an aria-label. */
   .btn-icon { padding-inline: 0; inline-size: var(--control-h); }
   .btn-icon.btn-sm { inline-size: var(--control-h-sm); }
   .btn-icon.btn-lg { inline-size: var(--control-h-lg); }
@@ -890,6 +943,9 @@
 
 @layer deck.components {
 
+  /* One form control and everything attached to it: label, input, help
+     text, error. The vertical gap between them comes from here, so a field
+     never needs margins. */
   .field {
     display: flex;
     flex-direction: column;
@@ -897,6 +953,8 @@
     min-inline-size: 0;
   }
 
+  /* The label for a control. A flex row, so a "required" or "optional"
+     marker sits beside the text without extra markup. */
   .label {
     font-size: var(--text-sm);
     font-weight: 580;
@@ -1027,6 +1085,8 @@
   .search > .input { padding-inline-start: var(--space-10); border-radius: var(--r-full); }
 
   /* --- Checkbox and radio ------------------------------------------------- */
+  /* A checkbox or radio and its text, laid out as a row that clears the
+     44px touch target. Wrap the text in .check-text to add a second line. */
   .check {
     display: flex;
     align-items: flex-start;
@@ -1079,6 +1139,8 @@
     clip-path: polygon(10% 42%, 90% 42%, 90% 58%, 10% 58%);
   }
   .check input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  /* The text beside a checkbox or radio. A column, so a .check-note can sit
+     under the label as a second line. */
   .check .check-text { display: flex; flex-direction: column; gap: 2px; }
   .check .check-note { font-size: var(--text-sm); color: var(--text-muted); }
 
@@ -1237,6 +1299,9 @@
 @layer deck.components {
 
   /* --- Card --------------------------------------------------------------- */
+  /* A surface with a border, radius and shadow. It brings no padding of its
+     own — put .card-body inside so the header, body and footer can each own
+     their spacing. */
   .card {
     background: var(--surface);
     border: 1px solid var(--line);
@@ -1255,7 +1320,11 @@
   }
   .card-header { border-block-end: 1px solid var(--line); }
   .card-footer { border-block-start: 1px solid var(--line); background: var(--surface-2); margin-block-start: auto; }
+  /* The padded region of a card. A column with a gap, so children stack
+     without margins. */
   .card-body { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
+  /* The heading inside a card. Sized independently of h1-h6 so the same
+     card works at any heading level. */
   .card-title { font-size: var(--text-md); font-weight: 620; letter-spacing: -.012em; }
   .card-media { margin: 0; }
   .card-media img { inline-size: 100%; object-fit: cover; }
@@ -1286,6 +1355,8 @@
   }
 
   /* --- Badge and chip ----------------------------------------------------- */
+  /* A small inline status pill. Sized in em, so it tracks whatever text it
+     sits next to rather than needing a size variant per context. */
   .badge {
     display: inline-flex;
     align-items: center;
@@ -1425,6 +1496,8 @@
   }
   .table tbody tr + tr { border-block-start: 1px solid var(--line); }
   .table tbody tr:hover { background: var(--surface-hover); }
+  /* A numeric table cell: aligned to the end edge with tabular figures, so
+     digits line up down the column. */
   .table .num { text-align: end; font-variant-numeric: tabular-nums; }
   .table-compact :is(th, td) { padding: var(--space-2) var(--space-3); }
 
@@ -1890,6 +1963,8 @@
   }
   .navbar-links { display: none; gap: var(--space-1); align-items: center; }
   @media (min-width: 48rem) { .navbar-links { display: flex; } }
+  /* One destination in a .navbar. Carries the hover and current-page
+     states; use .btn only for actions, never for navigation. */
   .nav-link {
     padding: var(--space-2) var(--space-3);
     border-radius: var(--r-sm);
@@ -2051,6 +2126,9 @@
      <svg class="icon"><use href="deck-icons.svg#check"></use></svg>
      Icons inherit color and font-size, so they line up with text by default.
      ---------------------------------------------------------------------- */
+  /* An SVG icon sized in em, so it scales with the text it sits beside and
+     lands on the baseline. Icons are filled with currentColor and inherit
+     the surrounding colour. */
   .icon {
     inline-size: 1.25em;
     block-size: 1.25em;
@@ -2069,6 +2147,8 @@
      pairing lives in the markup:
        <svg class="icon icon-sm"><use href="deck-icons.svg#check-sm"></use></svg> */
   .icon-sm { inline-size: 1em; block-size: 1em; }
+  /* A 1.6em icon, for icon tiles and empty states where the default would
+     look undersized. */
   .icon-lg { inline-size: 1.6em; block-size: 1.6em; stroke-width: 1.6; }
   .icon-xl { inline-size: 2.25em; block-size: 2.25em; stroke-width: 1.4; }
   .icon-fill { fill: currentColor; stroke: none; }
@@ -2095,6 +2175,9 @@
      Emoji render at wildly different sizes and baselines across platforms.
      .emoji pins the font stack and the metrics so they sit on the line.
      ---------------------------------------------------------------------- */
+  /* Pins the emoji font stack and metrics so an emoji renders at the same
+     size and baseline on Windows, iOS and Android instead of jumping
+     between them. */
   .emoji {
     font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji",
                  "Twemoji Mozilla", "Android Emoji", sans-serif;
@@ -2193,6 +2276,8 @@
   .place-center { place-items: center; }
   .grow { flex: 1 1 auto; min-inline-size: 0; }
   .shrink-0 { flex: 0 0 auto; }
+  /* Pushes this element and everything after it to the far end of a flex
+     row. The one-class replacement for a spacer div. */
   .push { margin-inline-start: auto; }
 
   .gap-0 { gap: 0; }
@@ -2204,23 +2289,32 @@
   .gap-8 { gap: var(--space-8); }
 
   /* --- Spacing ------------------------------------------------------------ */
-  .p-0 { padding: 0; }   .p-2 { padding: var(--space-2); }
-  .p-3 { padding: var(--space-3); }  .p-4 { padding: var(--space-4); }
-  .p-5 { padding: var(--space-5); }  .p-6 { padding: var(--space-6); }
+  /* The scale is 0 1 2 3 4 6 8, declared in 04-layout.css. Every family below
+     implements all seven, so a step that exists anywhere exists everywhere. */
+  .p-0 { padding: 0; }                       .p-1 { padding: var(--space-1); }
+  .p-2 { padding: var(--space-2); }          .p-3 { padding: var(--space-3); }
+  .p-4 { padding: var(--space-4); }          .p-6 { padding: var(--space-6); }
   .p-8 { padding: var(--space-8); }
-  .px-3 { padding-inline: var(--space-3); } .px-4 { padding-inline: var(--space-4); }
-  .px-5 { padding-inline: var(--space-5); } .px-6 { padding-inline: var(--space-6); }
-  .py-2 { padding-block: var(--space-2); }  .py-3 { padding-block: var(--space-3); }
-  .py-4 { padding-block: var(--space-4); }  .py-6 { padding-block: var(--space-6); }
-  .py-8 { padding-block: var(--space-8); }  .py-12 { padding-block: var(--space-12); }
+
+  .px-0 { padding-inline: 0; }               .px-1 { padding-inline: var(--space-1); }
+  .px-2 { padding-inline: var(--space-2); }  .px-3 { padding-inline: var(--space-3); }
+  .px-4 { padding-inline: var(--space-4); }  .px-6 { padding-inline: var(--space-6); }
+  .px-8 { padding-inline: var(--space-8); }
+
+  .py-0 { padding-block: 0; }                .py-1 { padding-block: var(--space-1); }
+  .py-2 { padding-block: var(--space-2); }   .py-3 { padding-block: var(--space-3); }
+  .py-4 { padding-block: var(--space-4); }   .py-6 { padding-block: var(--space-6); }
+  .py-8 { padding-block: var(--space-8); }
 
   .m-0 { margin: 0; }
-  .mt-1 { margin-block-start: var(--space-1); } .mt-2 { margin-block-start: var(--space-2); }
-  .mt-3 { margin-block-start: var(--space-3); } .mt-4 { margin-block-start: var(--space-4); }
-  .mt-6 { margin-block-start: var(--space-6); } .mt-8 { margin-block-start: var(--space-8); }
-  .mb-1 { margin-block-end: var(--space-1); }   .mb-2 { margin-block-end: var(--space-2); }
-  .mb-3 { margin-block-end: var(--space-3); }   .mb-4 { margin-block-end: var(--space-4); }
-  .mb-6 { margin-block-end: var(--space-6); }   .mb-8 { margin-block-end: var(--space-8); }
+  .mt-0 { margin-block-start: 0; }              .mt-1 { margin-block-start: var(--space-1); }
+  .mt-2 { margin-block-start: var(--space-2); } .mt-3 { margin-block-start: var(--space-3); }
+  .mt-4 { margin-block-start: var(--space-4); } .mt-6 { margin-block-start: var(--space-6); }
+  .mt-8 { margin-block-start: var(--space-8); }
+  .mb-0 { margin-block-end: 0; }                .mb-1 { margin-block-end: var(--space-1); }
+  .mb-2 { margin-block-end: var(--space-2); }   .mb-3 { margin-block-end: var(--space-3); }
+  .mb-4 { margin-block-end: var(--space-4); }   .mb-6 { margin-block-end: var(--space-6); }
+  .mb-8 { margin-block-end: var(--space-8); }
   .mx-auto { margin-inline: auto; }
 
   /* --- Sizing ------------------------------------------------------------- */
@@ -2237,6 +2331,7 @@
   /* --- Type --------------------------------------------------------------- */
   .text-2xs { font-size: var(--text-2xs); }
   .text-xs { font-size: var(--text-xs); }
+  /* One step down the type scale, for secondary text and dense rows. */
   .text-sm { font-size: var(--text-sm); }
   .text-base { font-size: var(--text-base); }
   .text-md { font-size: var(--text-md); }
@@ -2246,6 +2341,8 @@
 
   .fw-normal { font-weight: 400; }
   .fw-medium { font-weight: 540; }
+  /* Semibold. The weight for a label or a name that needs to lead without
+     becoming a heading. */
   .fw-semi { font-weight: 620; }
   .fw-bold { font-weight: 700; }
 
@@ -2253,6 +2350,8 @@
   .text-center { text-align: center; }
   .text-end { text-align: end; }
 
+  /* Secondary text colour. Still meets contrast against every surface Deck
+     defines, so it is safe for body copy rather than decoration only. */
   .text-muted { color: var(--text-muted); }
   .text-faint { color: var(--text-faint); }
   .text-brand { color: var(--brand); }
@@ -2261,6 +2360,8 @@
   .text-bad { color: var(--bad-700); }
   .text-inherit { color: inherit; }
 
+  /* Tabular figures, so numbers line up in a column and do not jitter when
+     they change. */
   .nums { font-variant-numeric: tabular-nums; }
   .mono { font-family: var(--font-mono); }
   .uppercase { text-transform: uppercase; letter-spacing: .04em; }
@@ -3041,6 +3142,8 @@
   @keyframes dg-flash { from { background: var(--good-100); } }
 
   /* --- Cell variants ------------------------------------------------------- */
+  /* A numeric column in the data grid: aligned to the end edge, and sorted
+     numerically when the header carries data-sort="num". */
   .dg .dg-num { text-align: end; }
   .dg .dg-center { text-align: center; }
   .dg .dg-wrap-text { white-space: normal; min-inline-size: 16rem; }
@@ -3698,6 +3801,8 @@
   .chart-heat > *:hover { outline: 2px solid var(--brand); outline-offset: 1px; }
 
   /* --- Series color helpers ------------------------------------------------ */
+  /* Series 1. Every chart mark reads --series, so a colour is set once on
+     the element and the fill, stroke and legend swatch all follow. */
   .s1 { --series: var(--c1); }
   .s2 { --series: var(--c2); }
   .s3 { --series: var(--c3); }
@@ -4299,28 +4404,66 @@
   .mis-auto { margin-inline-start: auto; }
   .mie-auto { margin-inline-end: auto; }
 
+  /* Same seven steps as every other spacing family: 0 1 2 3 4 6 8. */
+  .mis-0 { margin-inline-start: 0; }
   .mis-1 { margin-inline-start: var(--space-1); }
   .mis-2 { margin-inline-start: var(--space-2); }
   .mis-3 { margin-inline-start: var(--space-3); }
   .mis-4 { margin-inline-start: var(--space-4); }
+  .mis-6 { margin-inline-start: var(--space-6); }
+  .mis-8 { margin-inline-start: var(--space-8); }
+  .mie-0 { margin-inline-end: 0; }
   .mie-1 { margin-inline-end: var(--space-1); }
   .mie-2 { margin-inline-end: var(--space-2); }
   .mie-3 { margin-inline-end: var(--space-3); }
   .mie-4 { margin-inline-end: var(--space-4); }
+  .mie-6 { margin-inline-end: var(--space-6); }
+  .mie-8 { margin-inline-end: var(--space-8); }
 
+  .mbs-0 { margin-block-start: 0; }
+  .mbs-1 { margin-block-start: var(--space-1); }
   .mbs-2 { margin-block-start: var(--space-2); }
+  .mbs-3 { margin-block-start: var(--space-3); }
   .mbs-4 { margin-block-start: var(--space-4); }
   .mbs-6 { margin-block-start: var(--space-6); }
+  .mbs-8 { margin-block-start: var(--space-8); }
+  .mbe-0 { margin-block-end: 0; }
+  .mbe-1 { margin-block-end: var(--space-1); }
   .mbe-2 { margin-block-end: var(--space-2); }
+  .mbe-3 { margin-block-end: var(--space-3); }
   .mbe-4 { margin-block-end: var(--space-4); }
   .mbe-6 { margin-block-end: var(--space-6); }
+  .mbe-8 { margin-block-end: var(--space-8); }
 
+  .pis-0 { padding-inline-start: 0; }
+  .pis-1 { padding-inline-start: var(--space-1); }
+  .pis-2 { padding-inline-start: var(--space-2); }
   .pis-3 { padding-inline-start: var(--space-3); }
   .pis-4 { padding-inline-start: var(--space-4); }
+  .pis-6 { padding-inline-start: var(--space-6); }
+  .pis-8 { padding-inline-start: var(--space-8); }
+  .pie-0 { padding-inline-end: 0; }
+  .pie-1 { padding-inline-end: var(--space-1); }
+  .pie-2 { padding-inline-end: var(--space-2); }
   .pie-3 { padding-inline-end: var(--space-3); }
   .pie-4 { padding-inline-end: var(--space-4); }
+  .pie-6 { padding-inline-end: var(--space-6); }
+  .pie-8 { padding-inline-end: var(--space-8); }
+
+  .pbs-0 { padding-block-start: 0; }
+  .pbs-1 { padding-block-start: var(--space-1); }
+  .pbs-2 { padding-block-start: var(--space-2); }
+  .pbs-3 { padding-block-start: var(--space-3); }
   .pbs-4 { padding-block-start: var(--space-4); }
+  .pbs-6 { padding-block-start: var(--space-6); }
+  .pbs-8 { padding-block-start: var(--space-8); }
+  .pbe-0 { padding-block-end: 0; }
+  .pbe-1 { padding-block-end: var(--space-1); }
+  .pbe-2 { padding-block-end: var(--space-2); }
+  .pbe-3 { padding-block-end: var(--space-3); }
   .pbe-4 { padding-block-end: var(--space-4); }
+  .pbe-6 { padding-block-end: var(--space-6); }
+  .pbe-8 { padding-block-end: var(--space-8); }
 
   .bis { border-inline-start: 1px solid var(--line); }
   .bie { border-inline-end: 1px solid var(--line); }

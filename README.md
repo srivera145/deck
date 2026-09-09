@@ -1,6 +1,6 @@
 # Deck
 
-**Deck is a CSS framework that ships as one 26.6 KB Brotli (32.5 KB gzip) stylesheet: buttons, forms,
+**Deck is a CSS framework that ships as one 26.8 KB Brotli (32.9 KB gzip) stylesheet: buttons, forms,
 tables, a data grid, charts, overlays, an icon sprite, and a full color system. You add it
 with one `<link>` tag. There is no build step, no config file, and zero dependencies.**
 
@@ -23,21 +23,21 @@ Version 0.1.0 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
 ## What Deck weighs
 
-A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **62.7 KB** Brotli, or **76.1 KB** gzip. Every browser Deck supports sends `br` in
+A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **62.9 KB** Brotli, or **76.4 KB** gzip. Every browser Deck supports sends `br` in
 `Accept-Encoding`, and Cloudflare, Vercel, Netlify, and nginx with `ngx_brotli` negotiate
 it for text by default, so Brotli is what most users actually receive.
 
 | File | Brotli | gzip |
 | --- | --- | --- |
-| `deck.min.css` | **26.6 KB** | 32.5 KB |
+| `deck.min.css` | **26.8 KB** | 32.9 KB |
 | `deck-icons.svg` | **27.1 KB** | 33.6 KB |
 | `deck.min.js` | **8.9 KB** | 10.0 KB |
-| **All three** | **62.7 KB** | **76.1 KB** |
+| **All three** | **62.9 KB** | **76.4 KB** |
 
 The sprite is the largest single file, slightly bigger than the stylesheet — worth stating
 plainly rather than leaving you to find it in devtools. Swapping `deck.min.js` for the full
 `deck.bundle.min.js` (adds the date picker, combobox, data grid, toasts, QR encoder)
-makes the JavaScript 17.3 KB and the total 71.1 KB Brotli (85.6 KB gzip).
+makes the JavaScript 17.3 KB and the total 71.3 KB Brotli (85.9 KB gzip).
 
 ### The sprite is a manifest, not a fixed cost
 
@@ -70,7 +70,7 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 
 | File | Brotli | gzip | What it is |
 | --- | --- | --- | --- |
-| `deck.min.css` | 26.6 KB | 32.5 KB | The whole framework |
+| `deck.min.css` | 26.8 KB | 32.9 KB | The whole framework |
 | `deck.min.js` | 8.9 KB | 10.0 KB | Optional behaviour, no dependencies |
 | `deck-extras.min.js` | 5.7 KB | 6.5 KB | Date picker, combobox, data grid, toasts, QR encoder |
 | `deck-adapters.min.js` | 4.0 KB | 4.5 KB | Optional library integrations, inert unless one is loaded |

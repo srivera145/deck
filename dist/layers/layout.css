@@ -5,6 +5,9 @@
 
 @layer deck.layout {
 
+  /* Centres content and caps it at --container, with the responsive page
+     gutter already applied. Nest one inside another and the inner one adds
+     a second gutter, so use .container-full instead. */
   .container {
     inline-size: 100%;
     max-inline-size: var(--container, 76rem);
@@ -17,15 +20,39 @@
   .container-xl { --container: 90rem; }
   .container-full { --container: none; }
 
+  /* --- The spacing scale ----------------------------------------------------
+     Every spacing utility in Deck uses the same seven steps:
+
+       0    1        2       3       4      6        8
+       0    .25rem   .5rem   .75rem  1rem   1.5rem   2rem
+
+     .stack, .cluster, .gap-*, the padding utilities and the margin utilities
+     all implement exactly these, so a step that exists in one family exists in
+     all of them. There is deliberately no 5: at 1.25rem it is indistinguishable
+     from 4 and 6 in a real layout, and a half step between two neighbours is
+     the step people reach for when they are not sure, which is how .stack-5
+     came to be used in the demo when no such class existed.
+
+     The --space-* tokens keep their full range (0 through 24). Tokens are the
+     palette a component composes from; the utilities are the smaller set you
+     author markup with. Those are different jobs, so they are different sizes.
+     ---------------------------------------------------------------------- */
+
   /* Vertical rhythm without margin collapse surprises */
   .stack {
     display: flex;
     flex-direction: column;
     gap: var(--gap, var(--space-4));
   }
+  .stack-0 { --gap: 0; }
   .stack-1 { --gap: var(--space-1); }
+  /* Tight vertical rhythm, for a label and its control or a title and its
+     subtitle. */
   .stack-2 { --gap: var(--space-2); }
+  /* The default rhythm for related blocks inside a card or a section. */
   .stack-3 { --gap: var(--space-3); }
+  .stack-4 { --gap: var(--space-4); }
+  /* Loose vertical rhythm, for separating whole sections of a page. */
   .stack-6 { --gap: var(--space-6); }
   .stack-8 { --gap: var(--space-8); }
 
@@ -36,6 +63,14 @@
     align-items: center;
     gap: var(--gap, var(--space-3));
   }
+  .cluster-0 { --gap: 0; }
+  .cluster-1 { --gap: var(--space-1); }
+  .cluster-2 { --gap: var(--space-2); }
+  .cluster-3 { --gap: var(--space-3); }
+  .cluster-4 { --gap: var(--space-4); }
+  .cluster-6 { --gap: var(--space-6); }
+  .cluster-8 { --gap: var(--space-8); }
+  /* Kept as the readable name for step 2, which is what most clusters want */
   .cluster-tight { --gap: var(--space-2); }
   .cluster-end { justify-content: flex-end; }
   .cluster-center { justify-content: center; }
@@ -56,6 +91,8 @@
     grid-template-columns: repeat(auto-fit, minmax(min(var(--min, 17rem), 100%), 1fr));
   }
   .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr)); }
+  /* Narrows the auto-fit column floor to 12rem, so the grid packs more
+     columns in before it wraps. */
   .grid-tight { --min: 12rem; }
   .grid-wide { --min: 24rem; }
   .grid-fixed-2 { grid-template-columns: 1fr 1fr; }
@@ -68,6 +105,12 @@
     gap: var(--gap, var(--space-6));
     grid-template-columns: 1fr;
   }
+  /* A grid item's min-inline-size is auto, so a child that cannot shrink — a
+     form row, a wide table, a long code block — makes the whole column wider
+     than its track and pushes the page sideways. This is the single most
+     common grid bug there is; the two-column form in the demo overflowed a
+     375px viewport by 16px until this line existed. */
+  .split > * { min-inline-size: 0; }
   @media (min-width: 64rem) {
     .split { grid-template-columns: minmax(0, 1fr) var(--rail, 20rem); }
     .split-rail-start { grid-template-columns: var(--rail, 20rem) minmax(0, 1fr); }
@@ -82,6 +125,9 @@
     gap: var(--gap, var(--space-4));
   }
 
+  /* Vertical page rhythm: a block of --space-section, which is a clamp that
+     grows with the viewport. For spacing inside a component reach for
+     .stack instead. */
   .section { padding-block: var(--space-section); }
 
   /* Everything stays on one line and scrolls sideways — cards, chips, dates */

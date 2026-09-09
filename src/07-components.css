@@ -5,6 +5,9 @@
 @layer deck.components {
 
   /* --- Card --------------------------------------------------------------- */
+  /* A surface with a border, radius and shadow. It brings no padding of its
+     own — put .card-body inside so the header, body and footer can each own
+     their spacing. */
   .card {
     background: var(--surface);
     border: 1px solid var(--line);
@@ -23,7 +26,11 @@
   }
   .card-header { border-block-end: 1px solid var(--line); }
   .card-footer { border-block-start: 1px solid var(--line); background: var(--surface-2); margin-block-start: auto; }
+  /* The padded region of a card. A column with a gap, so children stack
+     without margins. */
   .card-body { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
+  /* The heading inside a card. Sized independently of h1-h6 so the same
+     card works at any heading level. */
   .card-title { font-size: var(--text-md); font-weight: 620; letter-spacing: -.012em; }
   .card-media { margin: 0; }
   .card-media img { inline-size: 100%; object-fit: cover; }
@@ -54,6 +61,8 @@
   }
 
   /* --- Badge and chip ----------------------------------------------------- */
+  /* A small inline status pill. Sized in em, so it tracks whatever text it
+     sits next to rather than needing a size variant per context. */
   .badge {
     display: inline-flex;
     align-items: center;
@@ -193,6 +202,8 @@
   }
   .table tbody tr + tr { border-block-start: 1px solid var(--line); }
   .table tbody tr:hover { background: var(--surface-hover); }
+  /* A numeric table cell: aligned to the end edge with tabular figures, so
+     digits line up down the column. */
   .table .num { text-align: end; font-variant-numeric: tabular-nums; }
   .table-compact :is(th, td) { padding: var(--space-2) var(--space-3); }
 
@@ -658,6 +669,8 @@
   }
   .navbar-links { display: none; gap: var(--space-1); align-items: center; }
   @media (min-width: 48rem) { .navbar-links { display: flex; } }
+  /* One destination in a .navbar. Carries the hover and current-page
+     states; use .btn only for actions, never for navigation. */
   .nav-link {
     padding: var(--space-2) var(--space-3);
     border-radius: var(--r-sm);

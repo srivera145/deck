@@ -121,6 +121,9 @@
      <svg class="icon"><use href="deck-icons.svg#check"></use></svg>
      Icons inherit color and font-size, so they line up with text by default.
      ---------------------------------------------------------------------- */
+  /* An SVG icon sized in em, so it scales with the text it sits beside and
+     lands on the baseline. Icons are filled with currentColor and inherit
+     the surrounding colour. */
   .icon {
     inline-size: 1.25em;
     block-size: 1.25em;
@@ -139,6 +142,8 @@
      pairing lives in the markup:
        <svg class="icon icon-sm"><use href="deck-icons.svg#check-sm"></use></svg> */
   .icon-sm { inline-size: 1em; block-size: 1em; }
+  /* A 1.6em icon, for icon tiles and empty states where the default would
+     look undersized. */
   .icon-lg { inline-size: 1.6em; block-size: 1.6em; stroke-width: 1.6; }
   .icon-xl { inline-size: 2.25em; block-size: 2.25em; stroke-width: 1.4; }
   .icon-fill { fill: currentColor; stroke: none; }
@@ -165,6 +170,9 @@
      Emoji render at wildly different sizes and baselines across platforms.
      .emoji pins the font stack and the metrics so they sit on the line.
      ---------------------------------------------------------------------- */
+  /* Pins the emoji font stack and metrics so an emoji renders at the same
+     size and baseline on Windows, iOS and Android instead of jumping
+     between them. */
   .emoji {
     font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji",
                  "Twemoji Mozilla", "Android Emoji", sans-serif;

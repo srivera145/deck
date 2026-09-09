@@ -296,6 +296,8 @@
   .chart-heat > *:hover { outline: 2px solid var(--brand); outline-offset: 1px; }
 
   /* --- Series color helpers ------------------------------------------------ */
+  /* Series 1. Every chart mark reads --series, so a colour is set once on
+     the element and the fill, stroke and legend swatch all follow. */
   .s1 { --series: var(--c1); }
   .s2 { --series: var(--c2); }
   .s3 { --series: var(--c3); }

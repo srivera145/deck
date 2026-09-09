@@ -64,6 +64,8 @@
   }
 
   /* --- Variants ----------------------------------------------------------- */
+  /* The one important action in a view. Solid brand fill; use exactly one
+     per screen so it keeps meaning something. */
   .btn-primary {
     --btn-bg: var(--brand-600);
     --btn-text: var(--text-on-brand);
@@ -96,6 +98,8 @@
   }
   .btn-soft:hover { background: color-mix(in oklab, var(--brand-soft) 80%, var(--brand-300)); border-color: transparent; }
 
+  /* No border or background until hover. For toolbars and dense rows where
+     seven bordered buttons would be noise. */
   .btn-ghost {
     --btn-bg: transparent;
     --btn-border: transparent;
@@ -122,6 +126,8 @@
   .btn-link:hover { background: none; border-color: transparent; text-decoration: underline; }
 
   /* --- Sizes -------------------------------------------------------------- */
+  /* The 34px size. Still clears the 44px touch target, because the target
+     is a pseudo-element rather than the box. */
   .btn-sm {
     block-size: var(--control-h-sm);
     padding-inline: var(--space-3);
@@ -137,6 +143,7 @@
   }
   .btn-block { inline-size: 100%; }
 
+  /* Square, icon-only button. It has no text, so it needs an aria-label. */
   .btn-icon { padding-inline: 0; inline-size: var(--control-h); }
   .btn-icon.btn-sm { inline-size: var(--control-h-sm); }
   .btn-icon.btn-lg { inline-size: var(--control-h-lg); }

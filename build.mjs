@@ -304,6 +304,22 @@ async function build() {
   };
   await writeFile(path.join(DIST, 'sizes.json'), JSON.stringify(sizes, null, 2) + '\n');
 
+  // ---- Documentation --------------------------------------------------------
+  // The class inventory is generated from src/ and every docs page is checked
+  // against it, so a class that is added, renamed, or removed cannot silently
+  // leave the documentation describing something that no longer exists.
+  try {
+    const { default: docsApi } = await import('./tools/docs/extract.mjs');
+    console.log(
+      `  ${'api.json'.padEnd(22)} ${String(docsApi.counts.classes).padStart(6)} classes, ` +
+      `${docsApi.counts.documented} documented, ${docsApi.counts.undocumented} outstanding`
+    );
+    const { verifyDocs } = await import('./tools/docs/verify.mjs');
+    verifyDocs();
+  } catch (err) {
+    if (err.code !== 'ERR_MODULE_NOT_FOUND') throw err;
+  }
+
   try {
     const { syncDocs } = await import('./tools/sync-sizes.mjs');
     const touched = await syncDocs(sizes, root);

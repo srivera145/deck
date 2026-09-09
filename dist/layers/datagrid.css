@@ -137,6 +137,8 @@
   @keyframes dg-flash { from { background: var(--good-100); } }
 
   /* --- Cell variants ------------------------------------------------------- */
+  /* A numeric column in the data grid: aligned to the end edge, and sorted
+     numerically when the header carries data-sort="num". */
   .dg .dg-num { text-align: end; }
   .dg .dg-center { text-align: center; }
   .dg .dg-wrap-text { white-space: normal; min-inline-size: 16rem; }
