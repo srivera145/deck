@@ -26,7 +26,21 @@ const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..', '..');
 const SRC = path.join(ROOT, 'src');
 const OUT = path.join(ROOT, 'dist', 'api.json');
-const TOKENS_FILE = '01-tokens.css';
+
+/* A global token is one declared on the document root. Selecting them by
+   filename instead — `01-tokens.css` — silently dropped the thirteen motion
+   tokens that `16-motion.css` declares on :root, so `--dur-4`, `--travel` and
+   the whole easing set were in use across the stylesheet and absent from the
+   reference. `docs_token_table()` renders a missing token as an empty row
+   rather than failing, so nothing caught it for sixty pages. Recorded as
+   finding 68; this is that finding's first recommendation.
+
+   Scope, not filename, is the real test: `:root { --dur-4: 420ms }` declares a
+   token wherever it is written, and `.card { --gap: … }` does not, however
+   token-shaped the name looks. */
+const ROOT_SCOPE = /^(?::root|html)(?:[\s.:[]|$)/;
+const isRootScope = (rule) =>
+  rule.selectors.length > 0 && rule.selectors.every((s) => ROOT_SCOPE.test(s.trim()));
 
 /* A comment that is a rule of dashes with a label in it is a section divider,
    not documentation for whichever rule happens to follow. Deck writes them as
@@ -271,7 +285,7 @@ function extractTokens(rules) {
   const tokens = [];
   const seen = new Set();
   for (const rule of rules) {
-    if (rule.file !== TOKENS_FILE) continue;
+    if (!isRootScope(rule)) continue;
     for (const d of rule.declarations) {
       if (!d.prop.startsWith('--') || seen.has(d.prop)) continue;
       seen.add(d.prop);
@@ -389,6 +403,34 @@ function main() {
           }
         }
       });
+    }
+  }
+
+  /* ---- Classes with no rule of their own ---------------------------------
+     `.gap-cq` is only ever written as `.cq :is(.gap-cq)`, and `.virtual-sm`
+     only inside a @supports block, so neither has a `.name { … }` rule for the
+     definition pass to find and both came out of it with an empty declaration
+     list. That is not the same as declaring nothing, and a reference table that
+     renders it as an empty cell is worse than one that says where to look.
+
+     So: the first rule in file order where the class is the subject stands in,
+     recorded separately from `declarations` rather than merged into it. The
+     definition pass compares declaration counts to choose between candidates,
+     and feeding it a context rule would let a descendant selector outvote a
+     real definition. */
+  for (const entry of classes.values()) {
+    if (entry.declarations.length) continue;
+    for (const s of entry.selectors) {
+      const names = classesIn(s.selector);
+      if (names[names.length - 1] !== entry.name) continue;
+      const rule = rules.find(
+        (r) => r.file === s.file && r.line === s.line && r.selectors.includes(s.selector)
+      );
+      if (!rule || !rule.declarations.length) continue;
+      entry.contextSelector = s.selector;
+      entry.contextConditions = s.conditions;
+      entry.contextDeclarations = rule.declarations;
+      break;
     }
   }
 

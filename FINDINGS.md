@@ -1448,3 +1448,87 @@ assumption is invisible until something that lives in the second file is examine
 **How it was found:** writing the token table for `3d.php`, passing `--dur-5` through the
 same checker used for every other page, and getting `MISSING` for a token that is plainly
 in the source and plainly working.
+
+**Resolved.** `tools/docs/extract.mjs` now selects tokens by scope rather than by filename:
+a rule whose every selector targets `:root` or `html` contributes its custom properties,
+wherever the file sits. That is recommendation 1. The token count went from 131 to 144 —
+exactly the thirteen above, since the `:root` block inside `@media print` in
+`99-print.css` only redeclares names that `01-tokens.css` already owns and the extractor
+keeps the first sighting. `--dur-4`, `--travel` and the whole easing set are now in
+`dist/api.json`, in `docs_token_table()`, and on `reference/tokens.php`.
+
+Recommendation 2 is still worth doing and is not done. A name that is not in the API still
+renders as a row saying "not in the inventory" rather than failing the build, which is
+better than the silent empty row it used to be and is not the same as a hard error.
+
+## 69. Six classes in the inventory do not exist, and twenty-three that do are missing
+
+`extract.mjs` reads a class name with `/\.(-?[_a-zA-Z][\w-]*)/`, which stops at the first
+character that cannot appear in an identifier. In a responsive utility that character is
+the backslash escaping the colon:
+
+```css
+.sm\:hidden  { display: none; }      /* recorded as .sm  */
+.cq-md\:flex { display: flex; }      /* recorded as .cq-md */
+```
+
+So `dist/api.json` contains six classes — `.sm`, `.md`, `.lg`, `.cq-sm`, `.cq-md`,
+`.cq-lg` — that nobody can write, each carrying whichever declaration happened to come
+first in its block, and does **not** contain the twenty-three prefixed classes that people
+actually type. `API.md` lists the six as public API.
+
+The knock-on effects are quiet rather than loud. `verify.mjs` cannot check a page that
+uses `md:row`, because a class attribute containing a colon fails its "is this a plain
+list of class tokens" test and is skipped — so a typo in a responsive utility is exactly
+as silent today as `.stack-5` was before the verifier existed. And the six phantoms count
+toward the 931, so every coverage percentage on this project is computed against a
+denominator that is six too large.
+
+`reference/display.php` documents them as what they are and says so on the page, which is
+honest but is not a fix.
+
+**Recommended:** make `classesIn()` accept escaped characters — `/\.((?:\.|[-\w])+)/` —
+and unescape the result, so `.sm\:hidden` records `sm:hidden`. Then relax
+`STATIC_CLASS_LIST` in `verify.mjs` to allow a colon, and the responsive utilities become
+checkable like everything else. Both are one-line changes; the reason to be careful is
+that the class count moves, which moves `API.md`, the buckets file and the backlog with
+it, so it wants its own pass rather than being folded into a docs change.
+
+**How it was found:** writing the breakpoint section of `reference/display.php` and
+finding that `.sm` had no declarations to put in the table.
+
+## 70. The token table decided what a token was from its name, and the name lies
+
+`extract.mjs` labels every token with a `kind` guessed from the property name:
+
+```js
+kind: /color|hue|brand|ink|surface|text|line|good|warn|bad|accent|focus/.test(d.prop)
+  ? 'color' : …
+```
+
+`--text-sm` contains "text", so it was a colour. So were `--text-2xs` through
+`--text-4xl`, and so were `--hue-brand` and the five other hue angles, which are bare
+numbers. `docs_token_table()` rendered each of those as
+`<span style="background: var(--text-sm)">` — `background: .8125rem`, an invalid
+declaration, which paints nothing and reports nothing.
+
+Counted across the component pages, that was roughly fifty cells showing an empty box
+where a swatch was meant to be. Nobody noticed because an empty swatch and a swatch of a
+colour that happens to match the surface look identical.
+
+**Fixed** in `docs_token_table()` rather than in the extractor: `docs_token_kind()` in
+`_layout.php` now classifies from the *value*, which cannot lie about its own shape —
+`oklch(…)` and `light-dark(…)` are colours, `.8125rem` is a length, `420ms` is a duration,
+`cubic-bezier(…)` is an easing curve — and follows a one-level `var()` alias, which is what
+correctly files `--shadow-color` as the hue number it actually is rather than as a shadow.
+Durations and easings preview by animating with the token itself, held still under
+`prefers-reduced-motion`. All 144 tokens land in one of nine kinds, and
+`reference/tokens.php` prints an "Ungrouped" section that is empty only when every one of
+them has been accounted for.
+
+The generated `kind` field is left alone and is now unused by the docs. It should either be
+given the same value-based treatment or dropped, because a field that is wrong and ignored
+is worse than one that is absent.
+
+**How it was found:** building the swatch column of `reference/tokens.php` and noticing
+that `--text-sm` was being handed to the colour branch.

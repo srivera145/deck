@@ -80,6 +80,91 @@ function api_token(string $name): ?array
 }
 
 /**
+ * The freeze bucket for a class — public, internal, deprecated — from
+ * dist/api-buckets.json. The class reference filters on it, because "does this
+ * class exist" and "am I allowed to use it" are different questions and only
+ * the second one decides whether you should type it.
+ */
+function api_bucket(string $name): string
+{
+    static $index = null;
+    if ($index === null) {
+        $index = [];
+        $file = dirname(__DIR__, 2) . '/dist/api-buckets.json';
+        if (is_readable($file)) {
+            $bk = json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);
+            foreach ($bk['buckets'] as $bucket => $names) {
+                foreach ($names as $n) {
+                    $index[$n] = $bucket;
+                }
+            }
+        }
+    }
+    return $index[$name] ?? 'unclassified';
+}
+
+/**
+ * Which page documents which class, read from the pages' own `documents`
+ * claims.
+ *
+ * This is deliberately the same list tools/docs/verify.mjs reads to decide
+ * whether a class is documented. Keeping one source means the class reference
+ * cannot link to a page that does not really cover the class, and cannot miss
+ * a page that does: the moment a page adds a class to `documents`, the link
+ * appears here, and the moment it drops one, the link goes.
+ *
+ * @return array<string, array{path: string, title: string}>
+ */
+function docs_claims(): array
+{
+    static $map = null;
+    if ($map !== null) {
+        return $map;
+    }
+    $map = [];
+    $files = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator(__DIR__, FilesystemIterator::SKIP_DOTS)
+    );
+    foreach ($files as $file) {
+        if ($file->getExtension() !== 'php' || str_starts_with($file->getBasename(), '_')) {
+            continue;
+        }
+        $text = (string) file_get_contents($file->getPathname());
+        if (!preg_match("/'documents'\s*=>\s*\[((?:\s*'[A-Za-z0-9_-]+'\s*,?)+)\s*\]/", $text, $claim)) {
+            continue;
+        }
+        preg_match("/'path'\s*=>\s*'([^']*)'/", $text, $pathMatch);
+        preg_match("/'title'\s*=>\s*'([^']*)'/", $text, $titleMatch);
+        $path = $pathMatch[1] ?? '';
+        $title = ($titleMatch[1] ?? '') !== '' ? $titleMatch[1] : $path;
+        preg_match_all("/'([^']+)'/", $claim[1], $names);
+        foreach ($names[1] as $name) {
+            $map[$name] ??= ['path' => $path, 'title' => $title];
+        }
+    }
+    ksort($map);
+    return $map;
+}
+
+/**
+ * Where a class is documented, as a cell: a link to the page that claims it,
+ * or its file and line when nothing claims it yet.
+ *
+ * An honest "nowhere, but here is the source" beats a link to a page that does
+ * not mention the class, and it makes the backlog visible in the one place a
+ * reader is most likely to notice it.
+ */
+function docs_home_cell(array $c, string $up): void
+{
+    $claim = docs_claims()[$c['name']] ?? null;
+    if ($claim && $claim['path'] !== '') {
+        ?><a href="<?= e($up . $claim['path']) ?>"><?= e($claim['title']) ?></a><?php
+        return;
+    }
+    ?><code class="dx-dim"><?= e($c['file'] . ':' . $c['line']) ?></code><?php
+}
+
+/**
  * Render an example once and show its source beside it.
  *
  * The markup is passed in as a string and used twice — rendered into the page
@@ -151,6 +236,101 @@ function docs_class_table(array $names): void
     <?php
 }
 
+/**
+ * Substitute one level of var() from the token table.
+ *
+ * `.p-4` declares `padding: var(--space-4)`, and a reader looking up a spacing
+ * utility wants the rem. Resolving it here rather than typing it into the page
+ * means the column cannot drift from src/01-tokens.css when a token moves.
+ */
+function docs_resolve(string $value): string
+{
+    return (string) preg_replace_callback(
+        '/var\(\s*(--[\w-]+)\s*(?:,[^()]*)?\)/',
+        static function (array $m): string {
+            $t = api_token($m[1]);
+            return $t ? $t['value'] : $m[0];
+        },
+        $value
+    );
+}
+
+/**
+ * The table for a page of utilities: what the class declares, and what that
+ * comes out as.
+ *
+ * docs_class_table() is right for a component, where the useful column is prose
+ * about intent. A utility has no intent beyond its declaration, so prose there
+ * is padding — the reader is looking up a value, and the honest thing to show
+ * is the value.
+ *
+ * A class with no declarations of its own is not a mistake. `.gap-cq` and the
+ * `.cq-md` variants only exist inside a @container block, so the row shows the
+ * selector and the condition instead of an empty cell.
+ */
+function docs_utility_table(array $names, string $caption): void
+{
+    ?>
+    <div class="table-wrap">
+        <table class="table table-stack">
+            <caption class="sr-only"><?= e($caption) ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col">Class</th>
+                    <th scope="col">Declares</th>
+                    <th scope="col">Resolves to</th>
+                    <th scope="col">Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($names as $name): $c = api_class($name); ?>
+                    <?php if (!$c) { continue; } ?>
+                    <?php
+                    /* A class with no rule of its own is documented from the
+                       rule that does style it — `.cq :is(.gap-cq)` — with the
+                       selector shown, because "where does this apply" is then
+                       part of the answer. */
+                    $own = $c['declarations'] !== [];
+                    $decls = array_map(
+                        static fn(array $d): string => $d['prop'] . ': ' . $d['value'],
+                        $own ? $c['declarations'] : ($c['contextDeclarations'] ?? [])
+                    );
+                    $raw = implode('; ', $decls);
+                    $resolved = docs_resolve($raw);
+                    $context = $own ? null : ($c['contextSelector'] ?? ($c['selectors'][0]['selector'] ?? null));
+                    $conditions = $own ? [] : ($c['contextConditions'] ?? []);
+                    ?>
+                    <tr data-name="<?= e($name . ' ' . $raw . ' ' . $resolved) ?>">
+                        <th scope="row" data-label="Class"><code><?= e('.' . $name) ?></code></th>
+                        <td data-label="Declares">
+                            <?php if ($context !== null): ?>
+                                <code class="dx-dim"><?= e($context) ?></code><br>
+                            <?php endif; ?>
+                            <?php if ($conditions): ?>
+                                <code class="dx-dim"><?= e(implode(' ', $conditions)) ?></code><br>
+                            <?php endif; ?>
+                            <?php if ($raw !== ''): ?>
+                                <code class="dx-dim"><?= e($raw) ?></code>
+                            <?php elseif ($context === null): ?>
+                                <code class="dx-dim"><?= e('.' . $name) ?></code>
+                            <?php endif; ?>
+                        </td>
+                        <td data-label="Resolves to">
+                            <?php if ($raw !== '' && $resolved !== $raw): ?>
+                                <code><?= e($resolved) ?></code>
+                            <?php else: ?>
+                                <span class="dx-dim">—</span>
+                            <?php endif; ?>
+                        </td>
+                        <td data-label="Source"><code class="dx-dim"><?= e($c['file'] . ':' . $c['line']) ?></code></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php
+}
+
 /** A one-line description built from the declarations, for classes with no
  *  comment in the source. Honest filler: it says what the rule sets. */
 function docs_summarise(array $c): string
@@ -166,8 +346,97 @@ function docs_summarise(array $c): string
     return 'Sets ' . implode(', ', $shown) . ($more > 0 ? ", and {$more} more" : '') . '.';
 }
 
+/**
+ * What kind of thing a token is, decided from its value rather than its name.
+ *
+ * The generated `kind` field guesses from the name, and the name lies: it reads
+ * `--text-sm` as a colour because the word "text" is in it, so 23 component
+ * pages have been rendering `background: .8125rem` — an empty box where a
+ * swatch should be — and `--hue-brand` has been doing the same with a bare 196.
+ * A value cannot lie about its own shape, so this asks the value.
+ */
+function docs_token_kind(array $t): string
+{
+    $name = (string) $t['name'];
+    $v = trim((string) ($t['value'] ?? ''));
+    if ($v === '') {
+        return 'other';
+    }
+    /* An alias forwards to whatever it points at: --shadow-color is a hue
+       number, not a shadow, whatever its name suggests. */
+    if (preg_match('/^var\(\s*(--[\w-]+)\s*\)$/', $v, $m)) {
+        $ref = api_token($m[1]);
+        if ($ref && $ref['name'] !== $name) {
+            return docs_token_kind(['name' => $name, 'value' => $ref['value']]);
+        }
+    }
+    if ($v[0] === '#' || preg_match('/^(oklch|oklab|rgba?|hsla?|hwb|color|light-dark|color-mix)\(/i', $v)) {
+        return 'colour';
+    }
+    if (preg_match('/^(linear|radial|conic)-gradient\(/i', $v)) {
+        return 'gradient';
+    }
+    if (preg_match('/^(cubic-bezier|linear|steps)\(/', $v)) {
+        return 'easing';
+    }
+    if (preg_match('/^-?[\d.]+m?s$/', $v)) {
+        return 'duration';
+    }
+    if ($v === '0' || preg_match('/^-?[\d.]+(rem|px|ch|em|ex|vw|vh|dvh|svh|lvh|%)$/', $v)
+        || preg_match('/^(clamp|calc|min|max)\(/', $v)) {
+        return 'length';
+    }
+    if (preg_match('/^-?[\d.]+$/', $v)) {
+        return str_starts_with($name, '--hue-') ? 'hue' : 'number';
+    }
+    if (str_starts_with($name, '--font-')) {
+        return 'font';
+    }
+    if (str_starts_with($name, '--shadow-') || $name === '--ring') {
+        return 'shadow';
+    }
+    return 'other';
+}
+
+/**
+ * A live preview of a token: the token itself applied to something, never a
+ * picture of it. If the value in the stylesheet changes, the cell changes.
+ */
+function docs_token_preview(array $t): void
+{
+    $name = $t['name'];
+    switch (docs_token_kind($t)) {
+        case 'colour':
+        case 'gradient':
+            ?><span class="dx-swatch" style="background: var(<?= e($name) ?>)"></span><?php
+            break;
+        case 'hue':
+            /* The number is not a colour, but it is the hue of one, so build a
+               swatch from it the way the palette does. */
+            ?><span class="dx-swatch" style="background: oklch(62% .14 var(<?= e($name) ?>))"></span><?php
+            break;
+        case 'length':
+            ?><span class="dx-rule" style="inline-size: var(<?= e($name) ?>)"></span><?php
+            break;
+        case 'shadow':
+            ?><span class="dx-shadow" style="box-shadow: var(<?= e($name) ?>)"></span><?php
+            break;
+        case 'font':
+            ?><span class="dx-font" style="font-family: var(<?= e($name) ?>)">Ag 0123</span><?php
+            break;
+        case 'duration':
+            ?><span class="dx-motion"><span class="dx-motion-dot" style="animation-duration: var(<?= e($name) ?>)"></span></span><?php
+            break;
+        case 'easing':
+            ?><span class="dx-motion"><span class="dx-motion-dot" style="animation-timing-function: var(<?= e($name) ?>)"></span></span><?php
+            break;
+        default:
+            ?><span class="dx-dim">—</span><?php
+    }
+}
+
 /** Token rows with a live swatch, so the value shown is the value in effect. */
-function docs_token_table(array $names): void
+function docs_token_table(array $names, bool $source = false): void
 {
     ?>
     <div class="table-wrap">
@@ -178,6 +447,7 @@ function docs_token_table(array $names): void
                     <th scope="col">Token</th>
                     <th scope="col">Live</th>
                     <th scope="col">Declared value</th>
+                    <?php if ($source): ?><th scope="col">Declared in</th><?php endif; ?>
                 </tr>
             </thead>
             <tbody>
@@ -185,13 +455,14 @@ function docs_token_table(array $names): void
                     <tr>
                         <th scope="row" data-label="Token"><code><?= e($name) ?></code></th>
                         <td data-label="Live">
-                            <?php if ($t && $t['kind'] === 'color'): ?>
-                                <span class="dx-swatch" style="background: var(<?= e($name) ?>)"></span>
-                            <?php else: ?>
-                                <span class="dx-rule" style="inline-size: var(<?= e($name) ?>, 1rem)"></span>
+                            <?php if ($t): docs_token_preview($t); else: ?>
+                                <span class="dx-dim">not in the inventory</span>
                             <?php endif; ?>
                         </td>
                         <td data-label="Declared value"><code class="dx-dim"><?= e($t['value'] ?? 'inherited') ?></code></td>
+                        <?php if ($source): ?>
+                            <td data-label="Declared in"><code class="dx-dim"><?= e($t ? $t['file'] . ':' . $t['line'] : '—') ?></code></td>
+                        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -290,11 +561,16 @@ $DOCS_NAV = [
         ['components/video.php', 'Video', true],
     ],
     'Reference' => [
-        ['reference/classes.php', 'All classes', false],
-        ['reference/tokens.php', 'All tokens', false],
-        ['reference/javascript.php', 'JavaScript API', false],
-        ['reference/php.php', 'PHP helper', false],
-        ['reference/cli.php', 'CLI', false],
+        ['reference/classes.php', 'All classes', true],
+        ['reference/tokens.php', 'All tokens', true],
+        ['reference/spacing.php', 'Spacing', true],
+        ['reference/typography.php', 'Typography', true],
+        ['reference/display.php', 'Display and sizing', true],
+        ['reference/position.php', 'Position', true],
+        ['reference/color.php', 'Colour and surface', true],
+        ['reference/javascript.php', 'JavaScript API', true],
+        ['reference/php.php', 'PHP helper', true],
+        ['reference/cli.php', 'CLI', true],
     ],
     'Explanation' => [
         ['explain/why-no-build-step.php', 'Why no build step', false],
@@ -391,7 +667,16 @@ $canonical = $DOCS_BASE . '/' . ($here ?: 'index.php');
     .dx-code { margin: 0; border-radius: 0; max-block-size: 22rem; }
 
     .dx-swatch { display: inline-block; inline-size: 2.5rem; block-size: 1.25rem; border-radius: var(--r-xs); border: 1px solid var(--line); vertical-align: middle; }
-    .dx-rule { display: inline-block; block-size: .5rem; background: var(--brand); border-radius: var(--r-full); vertical-align: middle; }
+    .dx-rule { display: inline-block; block-size: .5rem; background: var(--brand); border-radius: var(--r-full); vertical-align: middle; max-inline-size: 100%; }
+    .dx-shadow { display: inline-block; inline-size: 2.5rem; block-size: 1.25rem; border-radius: var(--r-xs); background: var(--surface); vertical-align: middle; }
+    .dx-font { font-size: var(--text-md); }
+    /* A duration and an easing curve are only legible in motion, so the cell
+       animates with the token itself rather than describing it. Held still for
+       anyone who asked their system to calm things down. */
+    .dx-motion { display: inline-block; inline-size: 3.5rem; block-size: .75rem; background: var(--bg-sunken); border-radius: var(--r-full); position: relative; overflow: hidden; vertical-align: middle; }
+    .dx-motion-dot { position: absolute; inset-block-start: .125rem; inline-size: .5rem; block-size: .5rem; border-radius: var(--r-full); background: var(--brand); animation: dx-slide 1.2s var(--ease-out) infinite alternate; }
+    @keyframes dx-slide { from { inset-inline-start: .125rem; } to { inset-inline-start: 2.875rem; } }
+    @media (prefers-reduced-motion: reduce) { .dx-motion-dot { animation: none; inset-inline-start: .125rem; } }
     .dx-dim { color: var(--text-faint); font-size: var(--text-xs); }
     .dx-toc { font-size: var(--text-sm); }
     .dx-note { border-inline-start: 3px solid var(--brand); padding-inline-start: var(--space-4); }

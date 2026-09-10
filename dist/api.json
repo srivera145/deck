@@ -5,7 +5,7 @@
     "classes": 931,
     "documented": 309,
     "undocumented": 622,
-    "tokens": 131,
+    "tokens": 144,
     "rules": 1766,
     "components": 99,
     "states": 39,
@@ -11153,7 +11153,23 @@
         "--text-muted",
         "--text-sm"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".accordion .accordion-body",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "padding",
+          "value": "0 var(--space-4) var(--space-4)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text-muted)"
+        },
+        {
+          "prop": "font-size",
+          "value": "var(--text-sm)"
+        }
+      ]
     },
     {
       "name": "actions-cq",
@@ -11244,7 +11260,47 @@
         "--text-sm",
         "--line"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".input-group > .addon",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "display",
+          "value": "inline-flex"
+        },
+        {
+          "prop": "align-items",
+          "value": "center"
+        },
+        {
+          "prop": "gap",
+          "value": "var(--space-2)"
+        },
+        {
+          "prop": "padding-inline",
+          "value": "var(--space-3)"
+        },
+        {
+          "prop": "background",
+          "value": "var(--surface-2)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text-muted)"
+        },
+        {
+          "prop": "font-size",
+          "value": "var(--text-sm)"
+        },
+        {
+          "prop": "white-space",
+          "value": "nowrap"
+        },
+        {
+          "prop": "border-inline-end",
+          "value": "1px solid var(--line)"
+        }
+      ]
     },
     {
       "name": "alert",
@@ -12333,7 +12389,31 @@
       "tokensUsed": [
         "--r-full"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".badge-dot::before",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "content",
+          "value": "\"\""
+        },
+        {
+          "prop": "inline-size",
+          "value": "6px"
+        },
+        {
+          "prop": "block-size",
+          "value": "6px"
+        },
+        {
+          "prop": "border-radius",
+          "value": "var(--r-full)"
+        },
+        {
+          "prop": "background",
+          "value": "currentColor"
+        }
+      ]
     },
     {
       "name": "badge-good",
@@ -18177,7 +18257,19 @@
         "--text-sm",
         "--text-muted"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".check .check-note",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "font-size",
+          "value": "var(--text-sm)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text-muted)"
+        }
+      ]
     },
     {
       "name": "check-text",
@@ -18197,7 +18289,23 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".check .check-text",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "display",
+          "value": "flex"
+        },
+        {
+          "prop": "flex-direction",
+          "value": "column"
+        },
+        {
+          "prop": "gap",
+          "value": "2px"
+        }
+      ]
     },
     {
       "name": "chip",
@@ -18743,7 +18851,23 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".combo-option .combo-check",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "margin-inline-start",
+          "value": "auto"
+        },
+        {
+          "prop": "opacity",
+          "value": "0"
+        },
+        {
+          "prop": "flex",
+          "value": "0 0 auto"
+        }
+      ]
     },
     {
       "name": "combo-clear",
@@ -19647,7 +19771,31 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".combo-option .combo-option-main",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "flex",
+          "value": "1 1 auto"
+        },
+        {
+          "prop": "min-inline-size",
+          "value": "0"
+        },
+        {
+          "prop": "display",
+          "value": "flex"
+        },
+        {
+          "prop": "flex-direction",
+          "value": "column"
+        },
+        {
+          "prop": "gap",
+          "value": "1px"
+        }
+      ]
     },
     {
       "name": "combo-option-sub",
@@ -19670,7 +19818,19 @@
         "--text-xs",
         "--text-muted"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".combo-option .combo-option-sub",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "font-size",
+          "value": "var(--text-xs)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text-muted)"
+        }
+      ]
     },
     {
       "name": "combo-option-trail",
@@ -19693,7 +19853,23 @@
         "--text-faint",
         "--text-xs"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".combo-option .combo-option-trail",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "color",
+          "value": "var(--text-faint)"
+        },
+        {
+          "prop": "font-size",
+          "value": "var(--text-xs)"
+        },
+        {
+          "prop": "flex",
+          "value": "0 0 auto"
+        }
+      ]
     },
     {
       "name": "combo-sep",
@@ -20455,7 +20631,15 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".copy-btn .copy-done",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "display",
+          "value": "none"
+        }
+      ]
     },
     {
       "name": "copy-idle",
@@ -20475,7 +20659,15 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".copy-btn.is-copied .copy-idle",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "display",
+          "value": "none"
+        }
+      ]
     },
     {
       "name": "copy-inline",
@@ -20575,7 +20767,75 @@
         "--text-sm",
         "--text"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".copy > .copy-value",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "flex",
+          "value": "1 1 auto"
+        },
+        {
+          "prop": "min-inline-size",
+          "value": "0"
+        },
+        {
+          "prop": "padding",
+          "value": "var(--space-2) var(--space-3)"
+        },
+        {
+          "prop": "background",
+          "value": "none"
+        },
+        {
+          "prop": "border",
+          "value": "0"
+        },
+        {
+          "prop": "border-radius",
+          "value": "0"
+        },
+        {
+          "prop": "font-family",
+          "value": "var(--font-mono)"
+        },
+        {
+          "prop": "font-size",
+          "value": "var(--text-sm)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text)"
+        },
+        {
+          "prop": "overflow-x",
+          "value": "auto"
+        },
+        {
+          "prop": "white-space",
+          "value": "nowrap"
+        },
+        {
+          "prop": "scrollbar-width",
+          "value": "none"
+        },
+        {
+          "prop": "direction",
+          "value": "ltr"
+        },
+        {
+          "prop": "unicode-bidi",
+          "value": "isolate"
+        },
+        {
+          "prop": "display",
+          "value": "flex"
+        },
+        {
+          "prop": "align-items",
+          "value": "center"
+        }
+      ]
     },
     {
       "name": "coverflow",
@@ -20842,7 +21102,17 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".cq-lg\\:row",
+      "contextConditions": [
+        "@container (min-width: 44rem)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "flex-direction",
+          "value": "row"
+        }
+      ]
     },
     {
       "name": "cq-md",
@@ -20920,7 +21190,17 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".cq-md\\:row",
+      "contextConditions": [
+        "@container (min-width: 32rem)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "flex-direction",
+          "value": "row"
+        }
+      ]
     },
     {
       "name": "cq-normal",
@@ -21130,7 +21410,17 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".cq-sm\\:row",
+      "contextConditions": [
+        "@container (min-width: 24rem)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "flex-direction",
+          "value": "row"
+        }
+      ]
     },
     {
       "name": "cq-tone",
@@ -21460,7 +21750,47 @@
         "--surface-hover",
         "--text"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".datefield > .datefield-clear",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "position",
+          "value": "absolute"
+        },
+        {
+          "prop": "inset-inline-end",
+          "value": "var(--space-2)"
+        },
+        {
+          "prop": "inline-size",
+          "value": "28px"
+        },
+        {
+          "prop": "block-size",
+          "value": "28px"
+        },
+        {
+          "prop": "display",
+          "value": "grid"
+        },
+        {
+          "prop": "place-items",
+          "value": "center"
+        },
+        {
+          "prop": "border-radius",
+          "value": "var(--r-full)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text-faint)"
+        },
+        {
+          "prop": "cursor",
+          "value": "pointer"
+        }
+      ]
     },
     {
       "name": "datepicker",
@@ -23133,7 +23463,19 @@
       "tokensUsed": [
         "--space-2"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".dg .dg-actions",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "inline-size",
+          "value": "1%"
+        },
+        {
+          "prop": "padding-inline",
+          "value": "var(--space-2)"
+        }
+      ]
     },
     {
       "name": "dg-cards",
@@ -23365,7 +23707,15 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".dg .dg-center",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "text-align",
+          "value": "center"
+        }
+      ]
     },
     {
       "name": "dg-check",
@@ -23391,7 +23741,23 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".dg .dg-check",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "inline-size",
+          "value": "44px"
+        },
+        {
+          "prop": "padding-inline",
+          "value": "0"
+        },
+        {
+          "prop": "text-align",
+          "value": "center"
+        }
+      ]
     },
     {
       "name": "dg-comfy",
@@ -23593,7 +23959,19 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".dg-empty td",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "block-size",
+          "value": "auto"
+        },
+        {
+          "prop": "padding",
+          "value": "0"
+        }
+      ]
     },
     {
       "name": "dg-num",
@@ -23627,7 +24005,15 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".dg .dg-num",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "text-align",
+          "value": "end"
+        }
+      ]
     },
     {
       "name": "dg-pin-end",
@@ -23673,7 +24059,23 @@
         "--dg-pin-shadow-end",
         "--dg-pin-clip-end"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".dg :is(th, td).dg-pin-end",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "position",
+          "value": "sticky"
+        },
+        {
+          "prop": "inset-inline-end",
+          "value": "0"
+        },
+        {
+          "prop": "z-index",
+          "value": "2"
+        }
+      ]
     },
     {
       "name": "dg-pin-start",
@@ -23744,7 +24146,23 @@
         "--dg-pin-shadow-start",
         "--dg-pin-clip-start"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".dg :is(th, td).dg-pin-start",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "position",
+          "value": "sticky"
+        },
+        {
+          "prop": "inset-inline-start",
+          "value": "0"
+        },
+        {
+          "prop": "z-index",
+          "value": "2"
+        }
+      ]
     },
     {
       "name": "dg-pin-start-2",
@@ -23808,7 +24226,23 @@
         "--dg-pin-shadow-start",
         "--dg-pin-clip-start"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".dg :is(th, td).dg-pin-start-2",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "position",
+          "value": "sticky"
+        },
+        {
+          "prop": "inset-inline-start",
+          "value": "var(--dg-pin-start)"
+        },
+        {
+          "prop": "z-index",
+          "value": "2"
+        }
+      ]
     },
     {
       "name": "dg-resize",
@@ -24102,7 +24536,31 @@
         "--ease-out",
         "--dur-2"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".dg-sort .dg-sort-icon",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "inline-size",
+          "value": "14px"
+        },
+        {
+          "prop": "block-size",
+          "value": "14px"
+        },
+        {
+          "prop": "opacity",
+          "value": "0"
+        },
+        {
+          "prop": "flex",
+          "value": "0 0 auto"
+        },
+        {
+          "prop": "transition",
+          "value": "opacity var(--dur-1) var(--ease-out), rotate var(--dur-2) var(--ease-out)"
+        }
+      ]
     },
     {
       "name": "dg-statusbar",
@@ -24178,7 +24636,15 @@
       "tokensUsed": [
         "--space-2"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".dg .dg-tight",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "padding-inline",
+          "value": "var(--space-2)"
+        }
+      ]
     },
     {
       "name": "dg-toolbar",
@@ -24279,7 +24745,19 @@
       "tokensUsed": [
         "--dg-row-h"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".dg-virtual tbody tr",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "content-visibility",
+          "value": "auto"
+        },
+        {
+          "prop": "contain-intrinsic-size",
+          "value": "auto var(--dg-row-h, 44px)"
+        }
+      ]
     },
     {
       "name": "dg-wrap",
@@ -24483,7 +24961,19 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".dg .dg-wrap-text",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "white-space",
+          "value": "normal"
+        },
+        {
+          "prop": "min-inline-size",
+          "value": "16rem"
+        }
+      ]
     },
     {
       "name": "dg-zebra",
@@ -24512,7 +25002,15 @@
         "--surface-2",
         "--surface-hover"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".dg-zebra tbody tr:nth-child(even) td",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "background",
+          "value": "var(--surface-2)"
+        }
+      ]
     },
     {
       "name": "dir-ltr",
@@ -24646,7 +25144,47 @@
         "--dur-2",
         "--dur-3"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".disclosure summary",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "display",
+          "value": "flex"
+        },
+        {
+          "prop": "align-items",
+          "value": "center"
+        },
+        {
+          "prop": "gap",
+          "value": "var(--space-3)"
+        },
+        {
+          "prop": "padding",
+          "value": "var(--space-4)"
+        },
+        {
+          "prop": "min-block-size",
+          "value": "var(--tap)"
+        },
+        {
+          "prop": "font-weight",
+          "value": "560"
+        },
+        {
+          "prop": "cursor",
+          "value": "pointer"
+        },
+        {
+          "prop": "list-style",
+          "value": "none"
+        },
+        {
+          "prop": "transition",
+          "value": "background-color var(--dur-1) var(--ease-out)"
+        }
+      ]
     },
     {
       "name": "disclosure-body",
@@ -24670,7 +25208,23 @@
         "--text-muted",
         "--text-sm"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".disclosure .disclosure-body",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "padding",
+          "value": "0 var(--space-4) var(--space-4)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text-muted)"
+        },
+        {
+          "prop": "font-size",
+          "value": "var(--text-sm)"
+        }
+      ]
     },
     {
       "name": "display",
@@ -24740,7 +25294,23 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".cq :is(.display-cq)",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "font-size",
+          "value": "clamp(1.5rem, 8cqi, 3.25rem)"
+        },
+        {
+          "prop": "line-height",
+          "value": "1.05"
+        },
+        {
+          "prop": "letter-spacing",
+          "value": "-.03em"
+        }
+      ]
     },
     {
       "name": "donut",
@@ -24904,7 +25474,19 @@
         "--text-2xs",
         "--text-muted"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".donut-center .donut-label",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "font-size",
+          "value": "var(--text-2xs)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text-muted)"
+        }
+      ]
     },
     {
       "name": "donut-value",
@@ -24926,7 +25508,27 @@
       "tokensUsed": [
         "--text-xl"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".donut-center .donut-value",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "font-size",
+          "value": "var(--text-xl)"
+        },
+        {
+          "prop": "font-weight",
+          "value": "660"
+        },
+        {
+          "prop": "letter-spacing",
+          "value": "-.02em"
+        },
+        {
+          "prop": "font-variant-numeric",
+          "value": "tabular-nums"
+        }
+      ]
     },
     {
       "name": "donut-wrap",
@@ -27430,7 +28032,15 @@
       "tokensUsed": [
         "--size"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".cube > .face-back",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "transform",
+          "value": "rotateY(180deg) translateZ(calc(var(--size) / 2))"
+        }
+      ]
     },
     {
       "name": "face-bottom",
@@ -27452,7 +28062,15 @@
       "tokensUsed": [
         "--size"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".cube > .face-bottom",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "transform",
+          "value": "rotateX(-90deg) translateZ(calc(var(--size) / 2))"
+        }
+      ]
     },
     {
       "name": "face-end",
@@ -27474,7 +28092,15 @@
       "tokensUsed": [
         "--size"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".cube > .face-end",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "transform",
+          "value": "rotateY(90deg) translateZ(calc(var(--size) / 2))"
+        }
+      ]
     },
     {
       "name": "face-front",
@@ -27496,7 +28122,15 @@
       "tokensUsed": [
         "--size"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".cube > .face-front",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "transform",
+          "value": "translateZ(calc(var(--size) / 2))"
+        }
+      ]
     },
     {
       "name": "face-start",
@@ -27518,7 +28152,15 @@
       "tokensUsed": [
         "--size"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".cube > .face-start",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "transform",
+          "value": "rotateY(-90deg) translateZ(calc(var(--size) / 2))"
+        }
+      ]
     },
     {
       "name": "face-top",
@@ -27540,7 +28182,15 @@
       "tokensUsed": [
         "--size"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".cube > .face-top",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "transform",
+          "value": "rotateX(90deg) translateZ(calc(var(--size) / 2))"
+        }
+      ]
     },
     {
       "name": "fade-swap",
@@ -28228,7 +28878,23 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".flip > .flip-back",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "grid-area",
+          "value": "1 / 1"
+        },
+        {
+          "prop": "backface-visibility",
+          "value": "hidden"
+        },
+        {
+          "prop": "-webkit-backface-visibility",
+          "value": "hidden"
+        }
+      ]
     },
     {
       "name": "flip-front",
@@ -28248,7 +28914,23 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".flip > .flip-front",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "grid-area",
+          "value": "1 / 1"
+        },
+        {
+          "prop": "backface-visibility",
+          "value": "hidden"
+        },
+        {
+          "prop": "-webkit-backface-visibility",
+          "value": "hidden"
+        }
+      ]
     },
     {
       "name": "flip-hover",
@@ -28270,7 +28952,17 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".flip-hover:hover",
+      "contextConditions": [
+        "@media (hover: hover) and (prefers-reduced-motion: no-preference)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "rotate",
+          "value": "y 180deg"
+        }
+      ]
     },
     {
       "name": "flip-x",
@@ -28487,7 +29179,31 @@
         "--space-1",
         "--control-h-lg"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".float-outline > label",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "background",
+          "value": "var(--surface)"
+        },
+        {
+          "prop": "block-size",
+          "value": "auto"
+        },
+        {
+          "prop": "inset-block-start",
+          "value": "50%"
+        },
+        {
+          "prop": "translate",
+          "value": "0 -50%"
+        },
+        {
+          "prop": "padding-inline",
+          "value": "var(--space-1)"
+        }
+      ]
     },
     {
       "name": "footer",
@@ -29953,7 +30669,15 @@
       "tokensUsed": [
         "--hue-neutral"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".g-scrim-top::after",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "background",
+          "value": "linear-gradient(to bottom, oklch(12% .02 var(--hue-neutral) / .72), transparent 62%)"
+        }
+      ]
     },
     {
       "name": "g-sheen",
@@ -30580,7 +31304,15 @@
         "--space-2",
         "--space-6"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".cq :is(.gap-cq)",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "gap",
+          "value": "clamp(var(--space-2), 2.5cqi, var(--space-6))"
+        }
+      ]
     },
     {
       "name": "grid",
@@ -32120,7 +32852,71 @@
         "--text-2xs",
         "--surface"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".with-indicator > .indicator-badge",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "position",
+          "value": "absolute"
+        },
+        {
+          "prop": "inset-block-start",
+          "value": "-4px"
+        },
+        {
+          "prop": "inset-inline-end",
+          "value": "-6px"
+        },
+        {
+          "prop": "min-inline-size",
+          "value": "18px"
+        },
+        {
+          "prop": "block-size",
+          "value": "18px"
+        },
+        {
+          "prop": "padding-inline",
+          "value": "5px"
+        },
+        {
+          "prop": "border-radius",
+          "value": "var(--r-full)"
+        },
+        {
+          "prop": "background",
+          "value": "var(--bad-600)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text-on-bad)"
+        },
+        {
+          "prop": "font-size",
+          "value": "var(--text-2xs)"
+        },
+        {
+          "prop": "font-weight",
+          "value": "700"
+        },
+        {
+          "prop": "line-height",
+          "value": "18px"
+        },
+        {
+          "prop": "text-align",
+          "value": "center"
+        },
+        {
+          "prop": "box-shadow",
+          "value": "0 0 0 2px var(--surface)"
+        },
+        {
+          "prop": "font-variant-numeric",
+          "value": "tabular-nums"
+        }
+      ]
     },
     {
       "name": "indicator-badge-brand",
@@ -32143,7 +32939,19 @@
         "--brand-600",
         "--text-on-brand"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".with-indicator > .indicator-badge-brand",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "background",
+          "value": "var(--brand-600)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text-on-brand)"
+        }
+      ]
     },
     {
       "name": "indicator-badge-dot",
@@ -32163,7 +32971,35 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".with-indicator > .indicator-badge-dot",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "min-inline-size",
+          "value": "9px"
+        },
+        {
+          "prop": "inline-size",
+          "value": "9px"
+        },
+        {
+          "prop": "block-size",
+          "value": "9px"
+        },
+        {
+          "prop": "padding",
+          "value": "0"
+        },
+        {
+          "prop": "inset-block-start",
+          "value": "-1px"
+        },
+        {
+          "prop": "inset-inline-end",
+          "value": "-1px"
+        }
+      ]
     },
     {
       "name": "indicator-brand",
@@ -32836,6 +33672,14 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".combo-list.is-above",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "inset-block",
+          "value": "auto calc(100% + 4px)"
+        }
+      ],
       "owners": [
         "combo"
       ],
@@ -32897,6 +33741,22 @@
         "--brand-300"
       ],
       "defined": false,
+      "contextSelector": ".chip.is-active",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "background",
+          "value": "var(--brand-600)"
+        },
+        {
+          "prop": "border-color",
+          "value": "var(--brand-600)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text-on-brand)"
+        }
+      ],
       "owners": [
         "chip",
         "combo",
@@ -32930,6 +33790,14 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".will-move:is(:hover, :focus-within, .is-animating)",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "will-change",
+          "value": "translate, scale, opacity"
+        }
+      ],
       "owners": [
         "will-move"
       ],
@@ -32957,6 +33825,18 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".coverflow > .is-behind-end",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "rotate",
+          "value": "y -32deg"
+        },
+        {
+          "prop": "scale",
+          "value": ".88"
+        }
+      ],
       "owners": [
         "coverflow"
       ],
@@ -32984,6 +33864,18 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".coverflow > .is-behind-start",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "rotate",
+          "value": "y 32deg"
+        },
+        {
+          "prop": "scale",
+          "value": ".88"
+        }
+      ],
       "owners": [
         "coverflow"
       ],
@@ -33013,6 +33905,26 @@
         "--text-faint"
       ],
       "defined": false,
+      "contextSelector": ".datepicker-day.is-blocked",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "color",
+          "value": "var(--text-faint)"
+        },
+        {
+          "prop": "opacity",
+          "value": ".4"
+        },
+        {
+          "prop": "pointer-events",
+          "value": "none"
+        },
+        {
+          "prop": "text-decoration",
+          "value": "line-through"
+        }
+      ],
       "owners": [
         "datepicker"
       ],
@@ -33061,6 +33973,18 @@
         "--good-100"
       ],
       "defined": false,
+      "contextSelector": ".copy-btn.is-copied",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "color",
+          "value": "var(--good-700)"
+        },
+        {
+          "prop": "background",
+          "value": "var(--good-100)"
+        }
+      ],
       "owners": [
         "copy"
       ],
@@ -33132,6 +34056,22 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".btn.is-disabled",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "opacity",
+          "value": ".5"
+        },
+        {
+          "prop": "cursor",
+          "value": "not-allowed"
+        },
+        {
+          "prop": "pointer-events",
+          "value": "none"
+        }
+      ],
       "owners": [
         "btn",
         "combo"
@@ -33168,6 +34108,18 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".pile.is-fanned > :nth-child(n+4):not(.is-dismissed)",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "opacity",
+          "value": "1"
+        },
+        {
+          "prop": "pointer-events",
+          "value": "auto"
+        }
+      ],
       "owners": [
         "pile"
       ],
@@ -33250,6 +34202,16 @@
         "--ease-out"
       ],
       "defined": false,
+      "contextSelector": ".tick.is-down",
+      "contextConditions": [
+        "@media (prefers-reduced-motion: no-preference)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "animation",
+          "value": "dk-tick-down var(--dur-3) var(--ease-out)"
+        }
+      ],
       "owners": [
         "tick"
       ],
@@ -33277,6 +34239,22 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".toast.is-dragging",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "transition",
+          "value": "none"
+        },
+        {
+          "prop": "cursor",
+          "value": "grabbing"
+        },
+        {
+          "prop": "user-select",
+          "value": "none"
+        }
+      ],
       "owners": [
         "toast"
       ],
@@ -33318,6 +34296,26 @@
         "--i"
       ],
       "defined": false,
+      "contextSelector": ".pile.is-fanned > *",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "translate",
+          "value": "calc(var(--i, 0) * 14px) calc(var(--i, 0) * 22px)"
+        },
+        {
+          "prop": "rotate",
+          "value": "calc(var(--i, 0) * 2.5deg)"
+        },
+        {
+          "prop": "scale",
+          "value": "1"
+        },
+        {
+          "prop": "filter",
+          "value": "none"
+        }
+      ],
       "owners": [
         "pile"
       ],
@@ -33379,6 +34377,14 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".flip.is-flipped",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "rotate",
+          "value": "y 180deg"
+        }
+      ],
       "owners": [
         "flip"
       ],
@@ -33407,6 +34413,18 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".coverflow > .is-front",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "rotate",
+          "value": "y 0deg"
+        },
+        {
+          "prop": "scale",
+          "value": "1"
+        }
+      ],
       "owners": [
         "coverflow"
       ],
@@ -33462,6 +34480,22 @@
         "--r-sm"
       ],
       "defined": false,
+      "contextSelector": ".datepicker-day.is-in-range",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "background",
+          "value": "var(--brand-soft)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--brand-soft-text)"
+        },
+        {
+          "prop": "border-radius",
+          "value": "0"
+        }
+      ],
       "owners": [
         "datepicker"
       ],
@@ -33518,6 +34552,14 @@
         "--bad-700"
       ],
       "defined": false,
+      "contextSelector": ".float.is-invalid > label",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "color",
+          "value": "var(--bad-700)"
+        }
+      ],
       "owners": [
         "combo",
         "field",
@@ -33562,6 +34604,30 @@
         "--space-2"
       ],
       "defined": false,
+      "contextSelector": ".toast.is-leaving",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "opacity",
+          "value": "0"
+        },
+        {
+          "prop": "scale",
+          "value": ".94"
+        },
+        {
+          "prop": "translate",
+          "value": "var(--toast-exit-x, 0) 8px"
+        },
+        {
+          "prop": "margin-block-end",
+          "value": "calc((var(--toast-h, 60px) + var(--space-2)) * -1)"
+        },
+        {
+          "prop": "pointer-events",
+          "value": "none"
+        }
+      ],
       "owners": [
         "toast"
       ],
@@ -33593,6 +34659,30 @@
         "--r-sm"
       ],
       "defined": false,
+      "contextSelector": ".reorder .list-row.is-lifted",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "box-shadow",
+          "value": "var(--shadow-3)"
+        },
+        {
+          "prop": "background",
+          "value": "var(--surface)"
+        },
+        {
+          "prop": "border-radius",
+          "value": "var(--r-sm)"
+        },
+        {
+          "prop": "z-index",
+          "value": "2"
+        },
+        {
+          "prop": "position",
+          "value": "relative"
+        }
+      ],
       "owners": [
         "list",
         "reorder"
@@ -33634,6 +34724,14 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".lazy > img.is-loaded",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "opacity",
+          "value": "1"
+        }
+      ],
       "owners": [
         "lazy"
       ],
@@ -33707,6 +34805,20 @@
         "--ease-in-out"
       ],
       "defined": false,
+      "contextSelector": ".btn.is-loading::after",
+      "contextConditions": [
+        "@media (prefers-reduced-motion: reduce)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "animation-duration",
+          "value": "2.4s !important"
+        },
+        {
+          "prop": "animation-iteration-count",
+          "value": "infinite !important"
+        }
+      ],
       "owners": [
         "btn",
         "dg"
@@ -33739,6 +34851,14 @@
         "--ease-out"
       ],
       "defined": false,
+      "contextSelector": ".dg tbody tr.is-new td",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "animation",
+          "value": "dg-flash 1.4s var(--ease-out)"
+        }
+      ],
       "owners": [
         "dg"
       ],
@@ -33820,6 +34940,20 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".expand.is-open",
+      "contextConditions": [
+        "@media (prefers-reduced-motion: no-preference)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "block-size",
+          "value": "auto"
+        },
+        {
+          "prop": "opacity",
+          "value": "1"
+        }
+      ],
       "owners": [
         "back-to-top",
         "combo",
@@ -33865,6 +34999,18 @@
         "--text-faint"
       ],
       "defined": false,
+      "contextSelector": ".datepicker-day.is-outside",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "color",
+          "value": "var(--text-faint)"
+        },
+        {
+          "prop": "opacity",
+          "value": ".55"
+        }
+      ],
       "owners": [
         "datepicker"
       ],
@@ -33894,6 +35040,18 @@
         "--bad-700"
       ],
       "defined": false,
+      "contextSelector": ".editor-count.is-over",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "color",
+          "value": "var(--bad-700)"
+        },
+        {
+          "prop": "font-weight",
+          "value": "620"
+        }
+      ],
       "owners": [
         "editor"
       ],
@@ -33923,6 +35081,14 @@
         "--brand-soft"
       ],
       "defined": false,
+      "contextSelector": ".datepicker-day.is-preview",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "background",
+          "value": "color-mix(in oklab, var(--brand-soft) 60%, transparent)"
+        }
+      ],
       "owners": [
         "datepicker"
       ],
@@ -33958,6 +35124,18 @@
         "--r-sm"
       ],
       "defined": false,
+      "contextSelector": ".datepicker-day.is-range-end",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "border-start-start-radius",
+          "value": "0"
+        },
+        {
+          "prop": "border-end-start-radius",
+          "value": "0"
+        }
+      ],
       "owners": [
         "datepicker"
       ],
@@ -33991,6 +35169,18 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".datepicker-day.is-range-start",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "border-start-end-radius",
+          "value": "0"
+        },
+        {
+          "prop": "border-end-end-radius",
+          "value": "0"
+        }
+      ],
       "owners": [
         "datepicker"
       ],
@@ -34071,6 +35261,17 @@
         "--ease-spring"
       ],
       "defined": false,
+      "contextSelector": ".reveal.is-revealed",
+      "contextConditions": [
+        "@media (prefers-reduced-motion: no-preference)",
+        "@supports not (animation-timeline: view())"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "animation",
+          "value": "dk-rise var(--dur-4) var(--ease-out) both"
+        }
+      ],
       "owners": [
         "reveal"
       ],
@@ -34188,6 +35389,22 @@
         "--text-on-brand"
       ],
       "defined": false,
+      "contextSelector": ".datepicker-day.is-selected",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "background",
+          "value": "var(--brand-600)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text-on-brand)"
+        },
+        {
+          "prop": "font-weight",
+          "value": "620"
+        }
+      ],
       "owners": [
         "datepicker"
       ],
@@ -34229,6 +35446,16 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".tilt.is-tilting",
+      "contextConditions": [
+        "@media (hover: hover) and (prefers-reduced-motion: no-preference)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "transition",
+          "value": "rotate 80ms linear"
+        }
+      ],
       "owners": [
         "tilt"
       ],
@@ -34259,6 +35486,38 @@
         "--brand"
       ],
       "defined": false,
+      "contextSelector": ".datepicker-day.is-today::after",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "content",
+          "value": "\"\""
+        },
+        {
+          "prop": "position",
+          "value": "absolute"
+        },
+        {
+          "prop": "inset-block-end",
+          "value": "5px"
+        },
+        {
+          "prop": "inline-size",
+          "value": "4px"
+        },
+        {
+          "prop": "block-size",
+          "value": "4px"
+        },
+        {
+          "prop": "border-radius",
+          "value": "var(--r-full)"
+        },
+        {
+          "prop": "background",
+          "value": "var(--brand)"
+        }
+      ],
       "owners": [
         "datepicker"
       ],
@@ -34291,6 +35550,16 @@
         "--ease-out"
       ],
       "defined": false,
+      "contextSelector": ".tick.is-up",
+      "contextConditions": [
+        "@media (prefers-reduced-motion: no-preference)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "animation",
+          "value": "dk-tick-up var(--dur-3) var(--ease-out)"
+        }
+      ],
       "owners": [
         "tick"
       ],
@@ -34320,6 +35589,14 @@
         "--good-500"
       ],
       "defined": false,
+      "contextSelector": ".phone.is-valid",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "border-color",
+          "value": "color-mix(in oklab, var(--good-500) 55%, transparent)"
+        }
+      ],
       "owners": [
         "phone"
       ],
@@ -34350,6 +35627,21 @@
       "variants": [],
       "tokensUsed": [],
       "defined": false,
+      "contextSelector": ".back-to-top[data-deck-btt].is-visible",
+      "contextConditions": [
+        "@media (prefers-reduced-motion: no-preference)",
+        "@supports not (animation-timeline: scroll())"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "opacity",
+          "value": "1"
+        },
+        {
+          "prop": "visibility",
+          "value": "visible"
+        }
+      ],
       "owners": [
         "back-to-top"
       ],
@@ -35761,7 +37053,17 @@
       "tokensUsed": [
         "--space-8"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".lg\\:hidden",
+      "contextConditions": [
+        "@media (min-width: 64rem)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "display",
+          "value": "none"
+        }
+      ]
     },
     {
       "name": "lift",
@@ -36015,7 +37317,31 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".list-row .list-main",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "flex",
+          "value": "1 1 auto"
+        },
+        {
+          "prop": "min-inline-size",
+          "value": "0"
+        },
+        {
+          "prop": "display",
+          "value": "flex"
+        },
+        {
+          "prop": "flex-direction",
+          "value": "column"
+        },
+        {
+          "prop": "gap",
+          "value": "1px"
+        }
+      ]
     },
     {
       "name": "list-row",
@@ -36190,7 +37516,19 @@
         "--text-sm",
         "--text-muted"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".list-row .list-sub",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "font-size",
+          "value": "var(--text-sm)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text-muted)"
+        }
+      ]
     },
     {
       "name": "list-title",
@@ -36210,7 +37548,15 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".list-row .list-title",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "font-weight",
+          "value": "560"
+        }
+      ]
     },
     {
       "name": "list-trail",
@@ -36233,7 +37579,23 @@
         "--text-faint",
         "--text-sm"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".list-row .list-trail",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "color",
+          "value": "var(--text-faint)"
+        },
+        {
+          "prop": "flex",
+          "value": "0 0 auto"
+        },
+        {
+          "prop": "font-size",
+          "value": "var(--text-sm)"
+        }
+      ]
     },
     {
       "name": "list-virtual",
@@ -36981,7 +38343,17 @@
         "--space-8",
         "--space-6"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".md\\:hidden",
+      "contextConditions": [
+        "@media (min-width: 48rem)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "display",
+          "value": "none"
+        }
+      ]
     },
     {
       "name": "mega",
@@ -38228,7 +39600,15 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": "[dir=\"rtl\"] .mirror-rtl",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "scale",
+          "value": "-1 1"
+        }
+      ]
     },
     {
       "name": "mis-0",
@@ -39465,7 +40845,15 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": "[dir=\"rtl\"] .no-flip",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "scale",
+          "value": "1 1"
+        }
+      ]
     },
     {
       "name": "no-motion",
@@ -39555,7 +40943,17 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".no-print-url::after",
+      "contextConditions": [
+        "@media print"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "content",
+          "value": "\"\""
+        }
+      ]
     },
     {
       "name": "no-select",
@@ -39687,7 +41085,19 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".table .num",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "text-align",
+          "value": "end"
+        },
+        {
+          "prop": "font-variant-numeric",
+          "value": "tabular-nums"
+        }
+      ]
     },
     {
       "name": "number",
@@ -40016,7 +41426,19 @@
       "tokensUsed": [
         "--text-faint"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".label .optional",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "color",
+          "value": "var(--text-faint)"
+        },
+        {
+          "prop": "font-weight",
+          "value": "400"
+        }
+      ]
     },
     {
       "name": "overflow-auto",
@@ -40311,7 +41733,15 @@
         "--space-3",
         "--space-8"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".cq :is(.pad-cq)",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "padding",
+          "value": "clamp(var(--space-3), 4cqi, var(--space-8))"
+        }
+      ]
     },
     {
       "name": "page-break",
@@ -41276,7 +42706,55 @@
         "--text-muted",
         "--surface-hover"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".phone > .phone-country",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "display",
+          "value": "flex"
+        },
+        {
+          "prop": "align-items",
+          "value": "center"
+        },
+        {
+          "prop": "gap",
+          "value": "var(--space-2)"
+        },
+        {
+          "prop": "padding-inline",
+          "value": "var(--space-3)"
+        },
+        {
+          "prop": "background",
+          "value": "var(--surface-2)"
+        },
+        {
+          "prop": "border-inline-end",
+          "value": "1px solid var(--line)"
+        },
+        {
+          "prop": "cursor",
+          "value": "pointer"
+        },
+        {
+          "prop": "font-size",
+          "value": "var(--text-sm)"
+        },
+        {
+          "prop": "color",
+          "value": "var(--text-muted)"
+        },
+        {
+          "prop": "white-space",
+          "value": "nowrap"
+        },
+        {
+          "prop": "flex",
+          "value": "0 0 auto"
+        }
+      ]
     },
     {
       "name": "phone-flag",
@@ -42338,7 +43816,15 @@
       "tokensUsed": [
         "--warn-500"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".presence-away::after",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "background",
+          "value": "var(--warn-500)"
+        }
+      ]
     },
     {
       "name": "presence-off",
@@ -42360,7 +43846,15 @@
       "tokensUsed": [
         "--ink-400"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".presence-off::after",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "background",
+          "value": "var(--ink-400)"
+        }
+      ]
     },
     {
       "name": "press",
@@ -42501,7 +43995,21 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".btn.print-keep",
+      "contextConditions": [
+        "@media print"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "display",
+          "value": "inline-flex !important"
+        },
+        {
+          "prop": "border",
+          "value": "1px solid #999 !important"
+        }
+      ]
     },
     {
       "name": "print-only",
@@ -43394,7 +44902,51 @@
         "--qr-bg",
         "--r-xs"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".qr-logo > .qr-logo-mark",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "position",
+          "value": "absolute"
+        },
+        {
+          "prop": "inset",
+          "value": "50%"
+        },
+        {
+          "prop": "translate",
+          "value": "-50% -50%"
+        },
+        {
+          "prop": "inline-size",
+          "value": "22%"
+        },
+        {
+          "prop": "block-size",
+          "value": "22%"
+        },
+        {
+          "prop": "display",
+          "value": "grid"
+        },
+        {
+          "prop": "place-items",
+          "value": "center"
+        },
+        {
+          "prop": "background",
+          "value": "var(--qr-bg, #fff)"
+        },
+        {
+          "prop": "border-radius",
+          "value": "var(--r-xs)"
+        },
+        {
+          "prop": "padding",
+          "value": "4px"
+        }
+      ]
     },
     {
       "name": "qr-sm",
@@ -44017,7 +45569,47 @@
         "--value",
         "--accent-500"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".rating-static > .rating-fill",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "position",
+          "value": "absolute"
+        },
+        {
+          "prop": "inset-block",
+          "value": "0"
+        },
+        {
+          "prop": "inset-inline-start",
+          "value": "0"
+        },
+        {
+          "prop": "inline-size",
+          "value": "calc(var(--value) * 1%)"
+        },
+        {
+          "prop": "overflow",
+          "value": "hidden"
+        },
+        {
+          "prop": "display",
+          "value": "flex"
+        },
+        {
+          "prop": "gap",
+          "value": "2px"
+        },
+        {
+          "prop": "color",
+          "value": "var(--accent-500)"
+        },
+        {
+          "prop": "white-space",
+          "value": "nowrap"
+        }
+      ]
     },
     {
       "name": "rating-lg",
@@ -44384,7 +45976,15 @@
       "tokensUsed": [
         "--bad-500"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".label .required",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "color",
+          "value": "var(--bad-500)"
+        }
+      ]
     },
     {
       "name": "reveal",
@@ -44677,7 +46277,27 @@
       "tokensUsed": [
         "--text-xs"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".ring-wrap > .ring-label",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "position",
+          "value": "absolute"
+        },
+        {
+          "prop": "font-size",
+          "value": "var(--text-xs)"
+        },
+        {
+          "prop": "font-weight",
+          "value": "620"
+        },
+        {
+          "prop": "font-variant-numeric",
+          "value": "tabular-nums"
+        }
+      ]
     },
     {
       "name": "ring-wrap",
@@ -44786,7 +46406,57 @@
         "--r-full",
         "--ease-out"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".ripple > .ripple-ink",
+      "contextConditions": [
+        "@media (prefers-reduced-motion: no-preference)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "position",
+          "value": "absolute"
+        },
+        {
+          "prop": "inset-block-start",
+          "value": "var(--ry, 50%)"
+        },
+        {
+          "prop": "inset-inline-start",
+          "value": "var(--rx, 50%)"
+        },
+        {
+          "prop": "inline-size",
+          "value": "8px"
+        },
+        {
+          "prop": "block-size",
+          "value": "8px"
+        },
+        {
+          "prop": "margin",
+          "value": "-4px 0 0 -4px"
+        },
+        {
+          "prop": "border-radius",
+          "value": "var(--r-full)"
+        },
+        {
+          "prop": "background",
+          "value": "currentColor"
+        },
+        {
+          "prop": "opacity",
+          "value": ".28"
+        },
+        {
+          "prop": "pointer-events",
+          "value": "none"
+        },
+        {
+          "prop": "animation",
+          "value": "dk-ripple 520ms var(--ease-out) forwards"
+        }
+      ]
     },
     {
       "name": "row-meta",
@@ -44819,7 +46489,15 @@
         "--text-muted",
         "--text-sm"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".metarow .row-meta",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "display",
+          "value": "none"
+        }
+      ]
     },
     {
       "name": "row-meta-wide",
@@ -44847,7 +46525,17 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".metarow .row-meta-wide",
+      "contextConditions": [
+        "@container (min-width: 38rem)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "display",
+          "value": "block"
+        }
+      ]
     },
     {
       "name": "s-bad",
@@ -46867,7 +48555,17 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".sm\\:hidden",
+      "contextConditions": [
+        "@media (min-width: 40rem)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "display",
+          "value": "none"
+        }
+      ]
     },
     {
       "name": "sortable",
@@ -47109,7 +48807,23 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".gallery .span-2",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "grid-column",
+          "value": "span 2"
+        },
+        {
+          "prop": "grid-row",
+          "value": "span 2"
+        },
+        {
+          "prop": "aspect-ratio",
+          "value": "1"
+        }
+      ]
     },
     {
       "name": "span-wide",
@@ -47129,7 +48843,19 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".gallery .span-wide",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "grid-column",
+          "value": "span 2"
+        },
+        {
+          "prop": "aspect-ratio",
+          "value": "2"
+        }
+      ]
     },
     {
       "name": "sparkline",
@@ -48353,7 +50079,18 @@
         "--stagger-step",
         "--n"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".stagger > *",
+      "contextConditions": [
+        "@media (prefers-reduced-motion: no-preference)",
+        "@supports (animation-delay: calc(sibling-index() * 1ms))"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "animation-delay",
+          "value": "calc((sibling-index() - 1) * var(--stagger-step))"
+        }
+      ]
     },
     {
       "name": "stagger-fast",
@@ -49370,7 +51107,23 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".card-link .stretch::after",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "content",
+          "value": "\"\""
+        },
+        {
+          "prop": "position",
+          "value": "absolute"
+        },
+        {
+          "prop": "inset",
+          "value": "0"
+        }
+      ]
     },
     {
       "name": "sweep",
@@ -50066,7 +51819,15 @@
         "--space-2",
         "--space-3"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".table-compact :is(th, td)",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "padding",
+          "value": "var(--space-2) var(--space-3)"
+        }
+      ]
     },
     {
       "name": "table-stack",
@@ -50523,7 +52284,15 @@
         "--text-sm",
         "--text-lg"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".cq :is(.text-cq)",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "font-size",
+          "value": "clamp(var(--text-sm), 3.4cqi, var(--text-lg))"
+        }
+      ]
     },
     {
       "name": "text-end",
@@ -51305,7 +53074,17 @@
       "tokensUsed": [
         "--depth"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".tilt .tilt-lift",
+      "contextConditions": [
+        "@media (hover: hover) and (prefers-reduced-motion: no-preference)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "transform",
+          "value": "translateZ(var(--depth, 28px))"
+        }
+      ]
     },
     {
       "name": "tilt-lift-sm",
@@ -51327,7 +53106,17 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".tilt .tilt-lift-sm",
+      "contextConditions": [
+        "@media (hover: hover) and (prefers-reduced-motion: no-preference)"
+      ],
+      "contextDeclarations": [
+        {
+          "prop": "transform",
+          "value": "translateZ(12px)"
+        }
+      ]
     },
     {
       "name": "timeline",
@@ -53515,7 +55304,15 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".video-cover > video",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "object-fit",
+          "value": "cover"
+        }
+      ]
     },
     {
       "name": "video-duration",
@@ -53895,7 +55692,19 @@
       "tokensUsed": [
         "--item-size"
       ],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".virtual > *",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "content-visibility",
+          "value": "auto"
+        },
+        {
+          "prop": "contain-intrinsic-size",
+          "value": "auto var(--item-size, 120px)"
+        }
+      ]
     },
     {
       "name": "virtual-lg",
@@ -53915,7 +55724,15 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".virtual-lg > *",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "--item-size",
+          "value": "220px"
+        }
+      ]
     },
     {
       "name": "virtual-sm",
@@ -53935,7 +55752,15 @@
       ],
       "variants": [],
       "tokensUsed": [],
-      "defined": false
+      "defined": false,
+      "contextSelector": ".virtual-sm > *",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "--item-size",
+          "value": "64px"
+        }
+      ]
     },
     {
       "name": "vt-header",
@@ -55922,6 +57747,149 @@
       "conditions": [],
       "doc": null,
       "group": null,
+      "kind": "other"
+    },
+    {
+      "name": "--ease-in",
+      "value": "cubic-bezier(.55, 0, 1, .45)",
+      "file": "16-motion.css",
+      "line": 21,
+      "scope": ":root",
+      "conditions": [],
+      "doc": "The base set lives in tokens. These are the rest of the vocabulary.",
+      "group": "Extended motion tokens",
+      "kind": "motion"
+    },
+    {
+      "name": "--ease-emphasized",
+      "value": "cubic-bezier(.2, 0, 0, 1)",
+      "file": "16-motion.css",
+      "line": 21,
+      "scope": ":root",
+      "conditions": [],
+      "doc": "The base set lives in tokens. These are the rest of the vocabulary.",
+      "group": "Extended motion tokens",
+      "kind": "length"
+    },
+    {
+      "name": "--ease-decelerate",
+      "value": "cubic-bezier(0, 0, .2, 1)",
+      "file": "16-motion.css",
+      "line": 21,
+      "scope": ":root",
+      "conditions": [],
+      "doc": "The base set lives in tokens. These are the rest of the vocabulary.",
+      "group": "Extended motion tokens",
+      "kind": "motion"
+    },
+    {
+      "name": "--ease-accelerate",
+      "value": "cubic-bezier(.4, 0, 1, 1)",
+      "file": "16-motion.css",
+      "line": 21,
+      "scope": ":root",
+      "conditions": [],
+      "doc": "The base set lives in tokens. These are the rest of the vocabulary.",
+      "group": "Extended motion tokens",
+      "kind": "motion"
+    },
+    {
+      "name": "--ease-bounce",
+      "value": "linear(0, .004 2%, .016 4%, .062 8%, .137 12%, .5 24%, .68 28%, .824 32%, .93 36%, .995 40%, 1.02 44%, 1.01 52%, 1 60%)",
+      "file": "16-motion.css",
+      "line": 21,
+      "scope": ":root",
+      "conditions": [],
+      "doc": "The base set lives in tokens. These are the rest of the vocabulary.",
+      "group": "Extended motion tokens",
+      "kind": "motion"
+    },
+    {
+      "name": "--ease-overshoot",
+      "value": "linear(0, .22 8%, .58 16%, .87 24%, 1.06 32%, 1.11 38%, 1.08 46%, 1.02 58%, 1)",
+      "file": "16-motion.css",
+      "line": 21,
+      "scope": ":root",
+      "conditions": [],
+      "doc": "The base set lives in tokens. These are the rest of the vocabulary.",
+      "group": "Extended motion tokens",
+      "kind": "motion"
+    },
+    {
+      "name": "--ease-snap",
+      "value": "linear(0, .48 12%, .82 22%, .97 32%, 1.02 42%, 1)",
+      "file": "16-motion.css",
+      "line": 21,
+      "scope": ":root",
+      "conditions": [],
+      "doc": "The base set lives in tokens. These are the rest of the vocabulary.",
+      "group": "Extended motion tokens",
+      "kind": "motion"
+    },
+    {
+      "name": "--dur-0",
+      "value": "0ms",
+      "file": "16-motion.css",
+      "line": 21,
+      "scope": ":root",
+      "conditions": [],
+      "doc": "The base set lives in tokens. These are the rest of the vocabulary.",
+      "group": "Extended motion tokens",
+      "kind": "motion"
+    },
+    {
+      "name": "--dur-4",
+      "value": "420ms",
+      "file": "16-motion.css",
+      "line": 21,
+      "scope": ":root",
+      "conditions": [],
+      "doc": "The base set lives in tokens. These are the rest of the vocabulary.",
+      "group": "Extended motion tokens",
+      "kind": "motion"
+    },
+    {
+      "name": "--dur-5",
+      "value": "620ms",
+      "file": "16-motion.css",
+      "line": 21,
+      "scope": ":root",
+      "conditions": [],
+      "doc": "The base set lives in tokens. These are the rest of the vocabulary.",
+      "group": "Extended motion tokens",
+      "kind": "motion"
+    },
+    {
+      "name": "--dur-slow",
+      "value": "900ms",
+      "file": "16-motion.css",
+      "line": 21,
+      "scope": ":root",
+      "conditions": [],
+      "doc": "The base set lives in tokens. These are the rest of the vocabulary.",
+      "group": "Extended motion tokens",
+      "kind": "motion"
+    },
+    {
+      "name": "--stagger-step",
+      "value": "45ms",
+      "file": "16-motion.css",
+      "line": 21,
+      "scope": ":root",
+      "conditions": [],
+      "doc": "The base set lives in tokens. These are the rest of the vocabulary.",
+      "group": "Extended motion tokens",
+      "kind": "other"
+    },
+    {
+      "name": "--travel",
+      "value": "12px",
+      "file": "16-motion.css",
+      "line": 21,
+      "scope": ":root",
+      "conditions": [],
+      "doc": "The base set lives in tokens. These are the rest of the vocabulary.",
+      "group": "Extended motion tokens",
       "kind": "other"
     }
   ]
