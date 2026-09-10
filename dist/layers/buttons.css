@@ -57,6 +57,9 @@
   .btn:active { translate: 0 1px; box-shadow: none; }
   .btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
+  /* Styles a link or non-form element as disabled. It cannot stop a click
+     the way the disabled attribute does, so add aria-disabled="true" and
+     remove the href if it must not be followed. */
   .btn[disabled], .btn[aria-disabled="true"], .btn.is-disabled {
     opacity: .5;
     cursor: not-allowed;
@@ -74,6 +77,7 @@
   }
   .btn-primary:hover { --btn-bg: var(--brand-700); border-color: transparent; background: var(--brand-700); }
 
+  /* A secondary emphasis colour, for upsells and highlights. */
   .btn-accent {
     --btn-bg: var(--accent-500);
     --btn-text: var(--text-on-accent);
@@ -82,6 +86,7 @@
   }
   .btn-accent:hover { background: oklch(from var(--accent-500) calc(l - .05) c h); border-color: transparent; }
 
+  /* Destructive and irreversible. Pair it with a confirmation. */
   .btn-danger {
     --btn-bg: var(--bad-600);
     --btn-text: var(--text-on-bad);
@@ -90,6 +95,7 @@
   }
   .btn-danger:hover { background: var(--bad-700); border-color: transparent; }
 
+  /* Tinted, low weight. Good for an action repeated down a list. */
   .btn-soft {
     --btn-bg: var(--brand-soft);
     --btn-text: var(--brand-soft-text);
@@ -107,6 +113,7 @@
   }
   .btn-ghost:hover { background: var(--surface-hover); border-color: transparent; }
 
+  /* Brand-coloured border, transparent fill. */
   .btn-outline {
     --btn-bg: transparent;
     --btn-text: var(--brand);
@@ -115,6 +122,9 @@
   }
   .btn-outline:hover { background: var(--brand-soft); border-color: var(--brand); }
 
+  /* Looks like a link, behaves like a button. Only for a real <button>
+     that has to sit in a row of links — on an anchor it adds a touch
+     target, a ring offset and nowrap to something that wanted none of them. */
   .btn-link {
     --btn-bg: transparent;
     --btn-border: transparent;
@@ -135,21 +145,26 @@
     border-radius: var(--r-xs);
     gap: var(--space-1);
   }
+  /* The large size, from --control-h-lg. */
   .btn-lg {
     block-size: var(--control-h-lg);
     padding-inline: var(--space-6);
     font-size: var(--text-md);
     font-weight: 600;
   }
+  /* Full width. For a phone, or the primary action at the end of a form. */
   .btn-block { inline-size: 100%; }
 
   /* Square, icon-only button. It has no text, so it needs an aria-label. */
   .btn-icon { padding-inline: 0; inline-size: var(--control-h); }
   .btn-icon.btn-sm { inline-size: var(--control-h-sm); }
   .btn-icon.btn-lg { inline-size: var(--control-h-lg); }
+  /* A fully rounded button, usually paired with .btn-icon. */
   .btn-round { border-radius: var(--r-full); }
 
   /* --- Group -------------------------------------------------------------- */
+  /* Buttons joined into one control, with the inner radii and the doubled
+     border between them removed. Logical radii, so it mirrors under RTL. */
   .btn-group { display: inline-flex; }
   .btn-group > .btn { border-radius: 0; box-shadow: none; }
   .btn-group > .btn:first-child { border-start-start-radius: var(--r-sm); border-end-start-radius: var(--r-sm); }

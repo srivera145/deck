@@ -223,6 +223,16 @@ $DOCS_NAV = [
     ],
     'Components' => [
         ['components/button.php', 'Button', true],
+        ['components/card.php', 'Card', true],
+        ['components/badge.php', 'Badge', true],
+        ['components/alert.php', 'Alert', true],
+        ['components/avatar.php', 'Avatar', true],
+        ['components/list.php', 'List', true],
+        ['components/table.php', 'Table', true],
+        ['components/field.php', 'Field', true],
+        ['components/input.php', 'Input', true],
+        ['components/check.php', 'Checkbox and radio', true],
+        ['components/range.php', 'Range', true],
     ],
     'Reference' => [
         ['reference/classes.php', 'All classes', false],

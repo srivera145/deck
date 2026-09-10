@@ -27,6 +27,10 @@
   .dg-virtual.dg-compact tbody tr { contain-intrinsic-size: auto 34px; }
   .dg-virtual.dg-comfy tbody tr { contain-intrinsic-size: auto 56px; }
 
+  /* Skips layout, style and paint for offscreen rows with
+     content-visibility, using contain-intrinsic-size as the placeholder
+     height. One class, no windowing library. If your rows are not 56px,
+     override the intrinsic size or the scrollbar will jump. */
   .list-virtual > .list-row {
     content-visibility: auto;
     contain-intrinsic-size: auto 56px;

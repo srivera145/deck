@@ -63,6 +63,13 @@ const JS_GENERATED_PREFIXES = [
   'sortable', 'drop-', 'reorder',
 ];
 
+/* Runtime marks that are not states and do not start with is-. deck.js adds
+   .was-shaken after an invalid field has shaken once, so the animation does
+   not replay on every re-render. The layer rules called it a motion class an
+   author opts into, which is exactly backwards: writing it by hand suppresses
+   the effect rather than enabling it. Found by documenting it. */
+const JS_GENERATED_EXACT = new Set(['was-shaken']);
+
 const RULES = [
   /* ---- deliberate exclusions ------------------------------------------- */
   {
@@ -87,6 +94,12 @@ const RULES = [
   },
 
   /* ---- component internals ---------------------------------------------- */
+  {
+    id: 'js-runtime-mark',
+    match: (c) => JS_GENERATED_EXACT.has(c.name),
+    bucket: 'internal',
+    reason: 'A mark deck.js sets at runtime to remember that something has already happened. Not a class to write.',
+  },
   {
     id: 'js-generated',
     match: (c) => JS_GENERATED_PREFIXES.some((p) => c.name.startsWith(p)),

@@ -18,6 +18,12 @@
     min-inline-size: 0;
     overflow: clip;
   }
+  /* The bottom region. margin-block-start: auto pins it to the bottom of
+     the card, so a row of cards of unequal length still has its footers
+     level without anything being measured. */
+  /* The top region of a card. A flex row, so a title and a control sit
+     on one line; the divider below it belongs to the header, so a card
+     with no header has no stray line. */
   .card-header, .card-footer {
     padding: var(--space-4) var(--space-5);
     display: flex;
@@ -32,6 +38,9 @@
   /* The heading inside a card. Sized independently of h1-h6 so the same
      card works at any heading level. */
   .card-title { font-size: var(--text-md); font-weight: 620; letter-spacing: -.012em; }
+  /* An image region that reaches the card's edges. The card's own
+     overflow: clip does the rounding, so the image needs no radius.
+     Put it beside .card-body, never inside it. */
   .card-media { margin: 0; }
   .card-media img { inline-size: 100%; object-fit: cover; }
 
@@ -40,8 +49,14 @@
   .card-link:hover { box-shadow: var(--shadow-3); border-color: var(--line-strong); }
   .card-link .stretch::after { content: ""; position: absolute; inset: 0; }
 
+  /* A card with no border, shadow or background. Grouping without a box
+     drawn around it. */
   .card-flush { border: 0; box-shadow: none; background: none; }
+  /* A deeper shadow and no visible border, for a surface that should read
+     as floating above the page. */
   .card-raised { box-shadow: var(--shadow-3); border-color: transparent; }
+  /* Brand-tinted fill and border, for the one card on a page that is an
+     offer rather than a record. */
   .card-brand { border-color: var(--brand-200); background: var(--brand-soft); }
 
   /* --- Panel: a card that goes edge to edge on a phone --------------------- */
@@ -77,11 +92,20 @@
     line-height: 1.45;
     white-space: nowrap;
   }
+  /* Brand tint. For a label that names a category rather than a status. */
   .badge-brand { background: var(--brand-soft); color: var(--brand-soft-text); border-color: transparent; }
+  /* Paid, shipped, passing, active. */
   .badge-good  { background: var(--good-100); color: var(--good-700); border-color: transparent; }
+  /* Pending, expiring: needs attention, nothing is broken. */
   .badge-warn  { background: var(--warn-100); color: var(--warn-700); border-color: transparent; }
+  /* Failed, overdue, rejected. */
   .badge-bad   { background: var(--bad-100);  color: var(--bad-700);  border-color: transparent; }
+  /* Filled with the brand colour. The highest-emphasis badge; use one per
+     view or it stops meaning anything. */
   .badge-solid { background: var(--brand-600); color: var(--text-on-brand); border-color: transparent; }
+  /* Adds a leading dot in currentColor, so it takes the tone's text colour
+     without a second class. The dot is decoration — never ship one with no
+     text beside it, because colour alone is not a status. */
   .badge-dot::before {
     content: "";
     inline-size: 6px; block-size: 6px;
@@ -114,6 +138,11 @@
   .chip-remove:hover { opacity: 1; }
 
   /* --- Alert -------------------------------------------------------------- */
+  /* A block of prose the reader is meant to stop and read. The tone is a
+     three-pixel border-inline-start, so it moves to the right edge under
+     dir="rtl" with no second rule. Deck sets no ARIA role: role="alert" on
+     a message that is present at page load interrupts a screen reader
+     before it has read anything. */
   .alert {
     display: flex;
     gap: var(--space-3);
@@ -123,16 +152,27 @@
     background: var(--surface-2);
     border-inline-start: 3px solid var(--ink-400);
   }
+  /* The first line of an alert. A weight change, not a heading — if it
+     belongs in the document outline, put this class on a real h2-h4. */
   .alert-title { font-weight: 620; margin-block-end: 2px; }
+  /* The explanatory line. min-inline-size: 0 so a long unbroken string
+     cannot push the alert wider than its container. */
   .alert-body { font-size: var(--text-sm); color: var(--text-muted); min-inline-size: 0; }
   .alert > .icon { flex: 0 0 auto; margin-block-start: 1px; }
+  /* Something the reader should know before continuing. */
   .alert-info { background: var(--brand-soft); border-color: transparent; border-inline-start-color: var(--brand-500); color: var(--brand-soft-text); }
+  /* Confirmation that something worked. */
   .alert-good { background: var(--good-100); border-color: transparent; border-inline-start-color: var(--good-500); color: var(--good-700); }
+  /* A consequence the reader should understand first. */
   .alert-warn { background: var(--warn-100); border-color: transparent; border-inline-start-color: var(--warn-500); color: var(--warn-700); }
+  /* Something failed, or is about to. */
   .alert-bad  { background: var(--bad-100);  border-color: transparent; border-inline-start-color: var(--bad-500);  color: var(--bad-700); }
   .alert :is(.alert-body, p) { color: inherit; opacity: .9; }
 
   /* --- Avatar ------------------------------------------------------------- */
+  /* A round box holding an image or initials. --size drives the width, the
+     height and the font size together, so a size variant is one
+     declaration and the initials can never overflow the circle. */
   .avatar {
     --size: 40px;
     inline-size: var(--size);
@@ -149,12 +189,21 @@
     user-select: none;
   }
   .avatar img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  /* 24px. */
   .avatar-xs { --size: 24px; }
+  /* 32px. */
   .avatar-sm { --size: 32px; }
+  /* 56px. */
   .avatar-lg { --size: 56px; }
+  /* 80px. */
   .avatar-xl { --size: 80px; }
+  /* A square avatar, for anything that is not a person — an organisation,
+     a project, a repository. */
   .avatar-square { border-radius: var(--r-sm); }
 
+  /* Overlapping avatars. The offset is a fraction of --size, so it stays
+     proportional at every size, and the ring is the surface colour, which
+     is wrong on any other background. */
   .avatar-stack { display: flex; }
   .avatar-stack > .avatar + .avatar { margin-inline-start: calc(var(--size, 40px) * -.32); }
   .avatar-stack > .avatar { box-shadow: 0 0 0 2px var(--surface); }
@@ -175,6 +224,10 @@
   .presence-off::after { background: var(--ink-400); }
 
   /* --- Table -------------------------------------------------------------- */
+  /* The scroll container for a table, and not optional. It carries the
+     border, radius, background and overflow-x, without which a wide table
+     pushes the whole page sideways. Add tabindex="0" when the table
+     overflows, or a keyboard user cannot scroll it. */
   .table-wrap {
     inline-size: 100%;
     overflow-x: auto;
@@ -183,6 +236,8 @@
     border-radius: var(--r-md);
     background: var(--surface);
   }
+  /* A real table, kept a table at every width, because values in a column
+     are only comparable while the columns exist. */
   .table { inline-size: 100%; font-size: var(--text-sm); }
   .table :is(th, td) {
     padding: var(--space-3) var(--space-4);
@@ -205,12 +260,17 @@
   /* A numeric table cell: aligned to the end edge with tabular figures, so
      digits line up down the column. */
   .table .num { text-align: end; font-variant-numeric: tabular-nums; }
+  /* Tighter cell padding, for a table the reader scans rather than reads. */
   .table-compact :is(th, td) { padding: var(--space-2) var(--space-3); }
 
   /* Below 40rem the table restacks into labelled rows.
      Put the column name in data-label on each cell. */
   @media (max-width: 39.999rem) {
     .table-stack thead { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
+    /* Below 40rem, restacks each row into labelled lines, taking the label
+       from data-label on the cell. Every cell needs one. The thead is
+       clipped rather than removed, so header association survives; print
+       undoes the whole thing, because paper is never narrow. */
     .table-stack, .table-stack tbody, .table-stack tr, .table-stack td { display: block; inline-size: 100%; }
     .table-stack tr {
       border: 1px solid var(--line);
@@ -235,6 +295,8 @@
   }
 
   /* --- List rows ---------------------------------------------------------- */
+  /* A bordered, clipped column of rows. Use it when the reader reads one
+     row at a time; if they compare values down a column, that is a table. */
   .list {
     display: flex;
     flex-direction: column;
@@ -243,6 +305,9 @@
     border-radius: var(--r-md);
     overflow: clip;
   }
+  /* One row. min-block-size: var(--tap) puts every row at the touch
+     target, and the colour and text-decoration resets mean the row can be
+     an <a> directly — one element, one tab stop, the whole row clickable. */
   .list-row {
     display: flex;
     align-items: center;
@@ -255,10 +320,20 @@
   }
   .list-row + .list-row { border-block-start: 1px solid var(--line); }
   .list-row:hover { background: var(--surface-hover); }
+  /* The text column of a row. min-inline-size: 0 is the important half: a
+     flex item's minimum is its content by default, so without it a long
+     value pushes the trailing content off the end of the row. */
   .list-row .list-main { flex: 1 1 auto; min-inline-size: 0; display: flex; flex-direction: column; gap: 1px; }
+  /* The first line of a row. */
   .list-row .list-title { font-weight: 560; }
+  /* The second, muted line of a row. */
   .list-row .list-sub { font-size: var(--text-sm); color: var(--text-muted); }
+  /* What sits at the end of a row — a time, a count, a chevron. Faint and
+     never shrinking. Below 4.5:1 by design, so nothing load-bearing
+     belongs here. */
   .list-row .list-trail { color: var(--text-faint); flex: 0 0 auto; font-size: var(--text-sm); }
+  /* A group heading inside a list. Styling only: a screen reader hears
+     ordinary text, so if the grouping is meaningful use a real heading. */
   .list-header {
     padding: var(--space-2) var(--space-4);
     background: var(--surface-2);

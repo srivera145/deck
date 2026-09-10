@@ -298,6 +298,8 @@
     cursor: grab;
   }
   .range-pair > input[type="range"]:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--focus); outline-offset: 2px; }
+  /* The current value of a slider. Put it on an <output>, which is an
+     implicit live region, so the value is announced as the slider moves. */
   .range-readout {
     display: flex;
     justify-content: space-between;

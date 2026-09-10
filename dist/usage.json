@@ -1,75 +1,92 @@
 {
   "generated": "tools/docs/usage.mjs — do not edit",
-  "filesScanned": 16,
+  "filesScanned": 26,
   "counts": {
     "classes": 931,
-    "used": 647,
-    "unused": 284
+    "used": 663,
+    "unused": 268
   },
   "uses": {
-    "icon": 310,
-    "btn": 268,
-    "text-muted": 188,
-    "card": 136,
-    "card-body": 122,
-    "text-sm": 122,
+    "stack-3": 391,
+    "icon": 327,
+    "btn": 282,
+    "text-muted": 277,
+    "card": 159,
+    "card-body": 141,
+    "text-sm": 126,
+    "stack-2": 124,
     "icon-sm": 119,
-    "stack-3": 95,
-    "btn-sm": 91,
-    "cluster": 90,
-    "badge": 76,
+    "cluster": 115,
+    "badge": 108,
+    "input": 104,
+    "label": 103,
+    "btn-sm": 99,
+    "field": 95,
+    "stack": 74,
+    "check": 74,
     "fw-semi": 74,
-    "stack-2": 72,
     "container": 72,
-    "label": 66,
+    "stack-6": 67,
+    "cluster-tight": 63,
     "section": 62,
+    "avatar": 61,
+    "btn-primary": 61,
     "dg-num": 61,
-    "field": 58,
-    "btn-primary": 55,
-    "stack-6": 51,
-    "icon-lg": 49,
-    "input": 49,
-    "grid": 47,
+    "card-title": 59,
+    "num": 53,
+    "icon-lg": 51,
+    "grid": 51,
     "btn-icon": 43,
-    "num": 42,
+    "range": 43,
     "icon-tile": 41,
-    "card-title": 40,
-    "cluster-tight": 39,
+    "btn-ghost": 40,
+    "list-row": 40,
     "nums": 39,
-    "check": 37,
-    "btn-ghost": 36,
+    "lede": 38,
+    "push": 36,
+    "alert": 35,
+    "table": 32,
+    "table-wrap": 31,
+    "grid-tight": 31,
     "s1": 31,
+    "check-text": 30,
     "nav-link": 30,
-    "push": 29,
-    "grid-tight": 27,
-    "range": 26,
+    "list": 29,
+    "list-main": 29,
+    "list-title": 29,
+    "alert-title": 27,
+    "alert-body": 27,
+    "list-trail": 27,
+    "badge-good": 26,
+    "breadcrumb": 24,
+    "table-stack": 24,
     "emoji": 24,
     "dg-pin-start": 23,
-    "check-text": 22,
+    "sr-only": 22,
+    "stack-4": 20,
     "grow": 20,
     "icon-tile-lg": 20,
     "btn-lg": 19,
+    "search": 19,
+    "datefield": 19,
+    "list-sub": 19,
     "sidebar-link": 19,
     "tab": 19,
-    "lede": 18,
-    "alert": 18,
-    "table-wrap": 18,
-    "table": 18,
-    "table-stack": 18,
-    "stack-4": 18,
-    "datefield": 18,
+    "badge-warn": 18,
+    "help": 17,
+    "select": 17,
     "dg-check": 17,
     "dg-pin-start-2": 17,
     "dg-pin-end": 17,
     "mono": 17,
-    "alert-title": 16,
-    "alert-body": 16,
-    "sr-only": 16,
+    "avatar-sm": 16,
     "mb-2": 16,
     "chart-col": 16,
+    "file": 15,
     "lazy": 15,
+    "alert-info": 14,
     "btn-soft": 14,
-    "search": 14,
+    "check-note": 14,
     "stat-value": 14,
     "split": 14,
     "dg-actions": 14,
@@ -78,15 +95,24 @@
     "chart-bar-track": 14,
     "chart-bar-fill": 14,
     "chart-bar-value": 14,
-    "stack": 13,
-    "select": 13,
+    "msg": 13,
+    "bubble": 13,
+    "badge-dot": 13,
+    "input-group": 13,
+    "dg": 13,
     "enter-rise": 13,
     "indicator": 13,
-    "help": 12,
+    "avatar-lg": 12,
+    "required": 12,
+    "is-invalid": 12,
+    "addon": 12,
     "tooltip": 12,
-    "dg": 12,
     "editor-tool": 12,
     "is-open": 12,
+    "cq": 11,
+    "icon-follow": 11,
+    "switch": 11,
+    "truncate": 11,
     "copy": 11,
     "panel": 11,
     "sidebar-group": 11,
@@ -94,23 +120,28 @@
     "carousel-slide": 11,
     "tip": 11,
     "drag-handle": 11,
+    "avatar-xs": 10,
+    "badge-bad": 10,
+    "badge-brand": 10,
     "fab": 10,
-    "alert-info": 10,
+    "field-row": 10,
+    "card-footer": 10,
+    "card-flex": 10,
+    "check-card": 10,
+    "error": 10,
     "icon-muted": 10,
-    "badge-good": 10,
-    "badge-warn": 10,
-    "list": 10,
-    "list-row": 10,
-    "list-main": 10,
-    "list-title": 10,
-    "list-sub": 10,
-    "list-trail": 10,
     "combo": 10,
     "tip-arrow": 10,
     "kanban-card": 10,
     "combo-option": 10,
+    "was-shaken": 10,
     "btn-3d": 9,
     "navbar": 9,
+    "card-media": 9,
+    "card-link": 9,
+    "float": 9,
+    "range-pair": 9,
+    "range-readout": 9,
     "icon-fill": 9,
     "stack-8": 9,
     "segmented": 9,
@@ -120,17 +151,14 @@
     "step-marker": 9,
     "step-label": 9,
     "step-note": 9,
-    "msg": 9,
-    "bubble": 9,
     "toast": 9,
+    "alert-bad": 8,
     "is-loading": 8,
     "btn-danger": 8,
-    "badge-brand": 8,
-    "file": 8,
+    "stretch": 8,
     "copy-value": 8,
     "copy-btn": 8,
     "navbar-brand": 8,
-    "avatar": 8,
     "reaction": 8,
     "menu-item": 8,
     "dg-wrap": 8,
@@ -148,8 +176,13 @@
     "kanban-card-title": 8,
     "kanban-card-meta": 8,
     "tabbar-item": 8,
+    "avatar-stack": 7,
     "btn-round": 7,
     "btn-group": 7,
+    "card-header": 7,
+    "form-actions": 7,
+    "textarea": 7,
+    "list-header": 7,
     "copy-done": 7,
     "sticky-top": 7,
     "sidebar": 7,
@@ -160,26 +193,25 @@
     "dg-zebra": 7,
     "chart-gridline": 7,
     "marquee-track": 7,
-    "card-flex": 7,
     "no-flip": 7,
     "scene": 7,
     "kanban-head": 7,
     "kanban-count": 7,
     "kanban-body": 7,
     "kanban-empty": 7,
+    "alert-warn": 6,
+    "chat": 6,
     "actions-cq": 6,
-    "card-link": 6,
+    "field-row-cq": 6,
+    "number": 6,
     "link-quiet": 6,
-    "stretch": 6,
     "copy-idle": 6,
     "skip-link": 6,
     "mb-3": 6,
     "stat": 6,
     "stat-label": 6,
     "stat-delta": 6,
-    "check-note": 6,
     "icon-xl": 6,
-    "truncate": 6,
     "accordion-body": 6,
     "timeline-item": 6,
     "timeline-dot": 6,
@@ -187,14 +219,12 @@
     "chart-note": 6,
     "reveal": 6,
     "ping": 6,
-    "cq": 6,
     "tone-icon": 6,
     "writing-vertical": 6,
     "flip": 6,
     "carousel": 6,
     "editor-sep": 6,
     "editor-content": 6,
-    "avatar-xs": 6,
     "gallery": 6,
     "cq-shell": 6,
     "speed-dial-action": 6,
@@ -203,10 +233,12 @@
     "back-to-top": 6,
     "sortable-chosen": 6,
     "combo-option-main": 6,
+    "avatar-square": 5,
     "btn-block": 5,
-    "field-row": 5,
+    "fieldset": 5,
+    "optional": 5,
+    "menu": 5,
     "scroll-progress": 5,
-    "textarea": 5,
     "chart-legend": 5,
     "g-border": 5,
     "carousel-peek": 5,
@@ -215,10 +247,7 @@
     "carousel-next": 5,
     "carousel-dots": 5,
     "status-line": 5,
-    "range-pair": 5,
     "mega-col": 5,
-    "float": 5,
-    "number": 5,
     "editor": 5,
     "editor-select": 5,
     "bubble-meta": 5,
@@ -228,27 +257,25 @@
     "dg-compact": 5,
     "speed-dial": 5,
     "is-active": 5,
-    "breadcrumb": 4,
+    "alert-good": 4,
+    "avatar-xl": 4,
     "is-disabled": 4,
     "btn-accent": 4,
     "btn-outline": 4,
-    "form-actions": 4,
+    "float-outline": 4,
+    "list-virtual": 4,
+    "mirror-rtl": 4,
+    "range-ticks": 4,
     "banner": 4,
     "theme-dock": 4,
     "navbar-links": 4,
     "display": 4,
-    "menu": 4,
     "menu-label": 4,
     "stat-delta-up": 4,
-    "error": 4,
-    "addon": 4,
-    "switch": 4,
-    "check-card": 4,
     "text-inherit": 4,
     "icon-tile-good": 4,
     "icon-tile-bad": 4,
     "skeleton-text": 4,
-    "badge-bad": 4,
     "mt-1": 4,
     "chart-head": 4,
     "chart-columns": 4,
@@ -263,7 +290,6 @@
     "reveal-pop": 4,
     "ripple": 4,
     "expand": 4,
-    "card-media": 4,
     "code-ltr": 4,
     "flip-front": 4,
     "flip-back": 4,
@@ -271,7 +297,6 @@
     "space": 4,
     "coverflow": 4,
     "drawer": 4,
-    "range-readout": 4,
     "mega-heading": 4,
     "phone": 4,
     "rating": 4,
@@ -291,7 +316,6 @@
     "has-value": 4,
     "is-resizing": 4,
     "is-dragging": 4,
-    "was-shaken": 4,
     "is-up": 4,
     "is-down": 4,
     "is-tilting": 4,
@@ -299,8 +323,7 @@
     "is-dismissed": 4,
     "is-animating": 4,
     "datepicker-day": 4,
-    "input-group": 3,
-    "card-footer": 3,
+    "text-cq": 3,
     "banner-close": 3,
     "mt-4": 3,
     "tabs": 3,
@@ -314,7 +337,6 @@
     "stagger": 3,
     "lift": 3,
     "press": 3,
-    "icon-follow": 3,
     "sweep": 3,
     "pulse": 3,
     "marquee": 3,
@@ -350,13 +372,11 @@
     "stepper": 3,
     "stepper-auto": 3,
     "is-current": 3,
-    "float-outline": 3,
     "number-unit": 3,
     "phone-flag": 3,
     "phone-code": 3,
     "editor-toolbar": 3,
     "editor-footer": 3,
-    "chat": 3,
     "bubble-name": 3,
     "msg-out": 3,
     "bubble-typing": 3,
@@ -383,24 +403,23 @@
     "toast-icon": 3,
     "toast-action": 3,
     "toast-close": 3,
-    "is-invalid": 3,
     "is-visible": 3,
     "defer": 3,
     "footer": 3,
     "footer-bottom": 3,
     "relative": 3,
     "prose": 3,
+    "badge-solid": 2,
     "btn-link": 2,
-    "badge-dot": 2,
+    "ratio-16x9": 2,
+    "card-brand": 2,
+    "card-flush": 2,
+    "card-raised": 2,
+    "is-lifted": 2,
+    "reorder": 2,
+    "table-compact": 2,
     "mb-1": 2,
     "stat-delta-down": 2,
-    "card-header": 2,
-    "alert-good": 2,
-    "alert-warn": 2,
-    "alert-bad": 2,
-    "required": 2,
-    "optional": 2,
-    "list-header": 2,
     "icon-tile-warn": 2,
     "progress": 2,
     "ring-wrap": 2,
@@ -519,10 +538,11 @@
     "dg-resize": 2,
     "flip-x": 2,
     "transition": 2,
-    "field-row-cq": 2,
     "dg-cq": 2,
     "w-full": 2,
     "gap-2": 2,
+    "square": 1,
+    "form-actions-sticky": 1,
     "h2": 1,
     "datepicker": 1,
     "is-outside": 1,
@@ -581,7 +601,6 @@
     "cq-panel": 1,
     "cq-pane": 1,
     "cq-row": 1,
-    "text-cq": 1,
     "pad-cq": 1,
     "gap-cq": 1,
     "stat-cq": 1,
@@ -593,7 +612,6 @@
     "dir-rtl": 1,
     "bidi-isolate": 1,
     "bidi-plaintext": 1,
-    "mirror-rtl": 1,
     "bis": 1,
     "bie": 1,
     "inset-is-0": 1,
@@ -642,7 +660,6 @@
     "footer-col": 1,
     "footer-heading": 1,
     "footer-social": 1,
-    "list-virtual": 1,
     "virtual": 1,
     "contain": 1,
     "contain-paint": 1,
@@ -651,13 +668,22 @@
     "min-is-0": 1,
     "grid-2": 1,
     "icon-spin": 1,
-    "range-ticks": 1,
     "stack-0": 1,
     "chip": 1
   },
   "where": {
     "breadcrumb": [
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/table.php",
       "public_html/index.php"
     ],
     "cluster": [
@@ -665,18 +691,48 @@
       "README.md",
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/table.php",
       "public_html/index.php",
       "public_html/llms.txt"
     ],
     "cluster-tight": [
       "FINDINGS.md",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/table.php",
       "public_html/index.php"
     ],
     "stack-3": [
       "public_html/docs/_layout.php",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/table.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
       "public_html/index.php",
@@ -684,9 +740,69 @@
     ],
     "lede": [
       "bin/deck.mjs",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/table.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "alert": [
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "alert-warn": [
+      "public_html/docs/components/alert.php",
+      "public_html/index.php"
+    ],
+    "alert-title": [
+      "public_html/docs/components/alert.php",
+      "public_html/docs/index.php",
+      "public_html/index.php"
+    ],
+    "alert-body": [
+      "public_html/docs/components/alert.php",
+      "public_html/docs/index.php",
+      "public_html/index.php"
+    ],
+    "stack-6": [
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "stack-2": [
+      "FINDINGS.md",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/table.php",
+      "public_html/docs/index.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -694,24 +810,196 @@
       "FINDINGS.md",
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/table.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
       "public_html/index.php",
       "public_html/php-helper.php",
       "src/js/deck-extras.js"
     ],
-    "stack-6": [
-      "public_html/docs/components/button.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
+    "alert-bad": [
+      "public_html/docs/components/alert.php",
+      "public_html/index.php"
     ],
-    "stack-2": [
+    "icon": [
       "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "php/Deck.php",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/alert.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "public_html/llms.txt",
+      "public_html/php-helper.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck.js"
+    ],
+    "alert-info": [
+      "public_html/docs/components/alert.php",
+      "public_html/docs/index.php",
+      "public_html/index.php"
+    ],
+    "alert-good": [
+      "public_html/docs/components/alert.php",
+      "public_html/index.php"
+    ],
+    "stack": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/table.php",
+      "public_html/llms.txt"
+    ],
+    "avatar": [
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/list.php",
+      "public_html/index.php"
+    ],
+    "avatar-xs": [
+      "public_html/docs/components/avatar.php",
+      "public_html/index.php"
+    ],
+    "avatar-sm": [
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/list.php"
+    ],
+    "avatar-lg": [
+      "public_html/docs/components/avatar.php"
+    ],
+    "avatar-xl": [
+      "public_html/docs/components/avatar.php"
+    ],
+    "table-wrap": [
+      "FINDINGS.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/table.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php"
+    ],
+    "table": [
+      "FINDINGS.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/table.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php"
+    ],
+    "table-stack": [
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/table.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php"
+    ],
+    "sr-only": [
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/search.php",
+      "public_html/index.php"
+    ],
+    "avatar-square": [
+      "public_html/docs/components/avatar.php"
+    ],
+    "avatar-stack": [
+      "public_html/docs/components/avatar.php"
+    ],
+    "chat": [
+      "README.md",
+      "public_html/docs/components/avatar.php",
+      "public_html/index.php"
+    ],
+    "msg": [
+      "README.md",
+      "public_html/docs/components/avatar.php",
+      "public_html/index.php"
+    ],
+    "bubble": [
+      "README.md",
+      "public_html/docs/components/avatar.php",
+      "public_html/index.php"
+    ],
+    "square": [
+      "public_html/docs/components/avatar.php"
+    ],
+    "badge": [
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/table.php",
       "public_html/docs/index.php",
       "public_html/index.php",
       "public_html/php-helper.php"
+    ],
+    "badge-good": [
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/card.php",
+      "public_html/index.php"
+    ],
+    "text-sm": [
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-extras.js"
+    ],
+    "badge-dot": [
+      "public_html/docs/components/badge.php",
+      "public_html/index.php"
+    ],
+    "badge-warn": [
+      "public_html/docs/components/badge.php",
+      "public_html/index.php"
+    ],
+    "badge-bad": [
+      "public_html/docs/components/badge.php",
+      "public_html/index.php"
+    ],
+    "badge-brand": [
+      "public_html/docs/components/badge.php",
+      "public_html/docs/index.php",
+      "public_html/index.php"
+    ],
+    "badge-solid": [
+      "public_html/docs/components/badge.php"
     ],
     "btn": [
       "FINDINGS.md",
@@ -719,6 +1007,9 @@
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
       "public_html/index.php",
@@ -729,6 +1020,7 @@
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
       "public_html/docs/index.php",
       "public_html/index.php",
       "src/js/deck.js"
@@ -745,21 +1037,6 @@
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
-    "icon": [
-      "FINDINGS.md",
-      "README.md",
-      "bin/deck.mjs",
-      "php/Deck.php",
-      "public_html/docs/_layout.php",
-      "public_html/docs/components/button.php",
-      "public_html/docs/index.php",
-      "public_html/docs/search.php",
-      "public_html/index.php",
-      "public_html/llms.txt",
-      "public_html/php-helper.php",
-      "src/js/deck-adapters.js",
-      "src/js/deck.js"
-    ],
     "btn-round": [
       "public_html/docs/components/button.php",
       "public_html/index.php"
@@ -768,6 +1045,8 @@
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/field.php",
       "public_html/docs/search.php",
       "public_html/index.php",
       "src/js/deck.js"
@@ -776,6 +1055,8 @@
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/field.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -822,27 +1103,25 @@
       "php/Deck.php",
       "public_html/docs/_layout.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/field.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
     "field-row": [
       "public_html/docs/components/button.php",
+      "public_html/docs/components/field.php",
       "public_html/docs/search.php",
       "public_html/index.php"
     ],
     "input-group": [
       "public_html/docs/components/button.php",
+      "public_html/docs/components/input.php",
       "public_html/index.php"
     ],
     "card-footer": [
       "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
       "public_html/index.php"
-    ],
-    "alert": [
-      "public_html/docs/components/button.php",
-      "public_html/docs/index.php",
-      "public_html/index.php",
-      "src/js/deck.js"
     ],
     "actions-cq": [
       "README.md",
@@ -876,150 +1155,363 @@
     "btn-link": [
       "public_html/docs/components/button.php"
     ],
-    "stack": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/docs/components/button.php",
-      "public_html/llms.txt"
-    ],
-    "grid": [
-      "FINDINGS.md",
-      "README.md",
-      "bin/deck.mjs",
-      "public_html/docs/index.php",
-      "public_html/index.php",
-      "public_html/llms.txt",
-      "public_html/php-helper.php"
-    ],
     "card": [
       "FINDINGS.md",
       "README.md",
       "bin/deck.mjs",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
       "public_html/docs/index.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
-    "card-link": [
-      "public_html/docs/index.php",
-      "public_html/index.php"
-    ],
     "card-body": [
       "bin/deck.mjs",
+      "public_html/docs/components/card.php",
       "public_html/docs/index.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
     "card-title": [
       "bin/deck.mjs",
+      "public_html/docs/components/card.php",
       "public_html/docs/index.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
-    "link-quiet": [
+    "card-header": [
+      "public_html/docs/components/card.php",
+      "public_html/index.php"
+    ],
+    "push": [
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/card.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "grid": [
+      "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "public_html/llms.txt",
+      "public_html/php-helper.php"
+    ],
+    "grid-tight": [
+      "FINDINGS.md",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/index.php"
+    ],
+    "card-media": [
+      "public_html/docs/components/card.php",
+      "public_html/index.php"
+    ],
+    "ratio-16x9": [
+      "public_html/docs/components/card.php"
+    ],
+    "card-link": [
+      "public_html/docs/components/card.php",
       "public_html/docs/index.php",
       "public_html/index.php"
     ],
     "stretch": [
+      "public_html/docs/components/card.php",
       "public_html/docs/index.php",
       "public_html/index.php"
     ],
-    "text-sm": [
-      "bin/deck.mjs",
-      "public_html/docs/_layout.php",
-      "public_html/docs/index.php",
+    "cq": [
+      "README.md",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/list.php",
+      "public_html/index.php"
+    ],
+    "card-flex": [
+      "README.md",
+      "public_html/docs/components/card.php",
+      "public_html/index.php"
+    ],
+    "icon-follow": [
+      "README.md",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/list.php",
+      "public_html/index.php"
+    ],
+    "card-brand": [
+      "public_html/docs/components/card.php"
+    ],
+    "card-flush": [
+      "public_html/docs/components/card.php"
+    ],
+    "card-raised": [
+      "public_html/docs/components/card.php"
+    ],
+    "check": [
+      "FINDINGS.md",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/field.php",
       "public_html/index.php",
       "public_html/php-helper.php",
-      "src/js/deck-extras.js"
+      "src/js/deck.js"
     ],
-    "badge": [
-      "README.md",
-      "public_html/docs/_layout.php",
-      "public_html/docs/index.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
+    "fieldset": [
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/field.php"
     ],
-    "badge-brand": [
-      "public_html/docs/index.php",
+    "check-text": [
+      "public_html/docs/components/check.php",
       "public_html/index.php"
     ],
-    "table-wrap": [
-      "public_html/docs/_layout.php",
-      "public_html/docs/index.php",
-      "public_html/docs/search.php",
+    "check-note": [
+      "public_html/docs/components/check.php",
       "public_html/index.php"
     ],
-    "table": [
-      "public_html/docs/_layout.php",
-      "public_html/docs/index.php",
-      "public_html/docs/search.php",
+    "check-card": [
+      "public_html/docs/components/check.php",
       "public_html/index.php"
     ],
-    "table-stack": [
-      "public_html/docs/_layout.php",
-      "public_html/docs/index.php",
-      "public_html/docs/search.php",
-      "public_html/index.php"
-    ],
-    "alert-info": [
-      "public_html/docs/index.php",
-      "public_html/index.php"
-    ],
-    "alert-title": [
-      "public_html/docs/index.php",
-      "public_html/index.php"
-    ],
-    "alert-body": [
-      "public_html/docs/index.php",
+    "switch": [
+      "public_html/docs/components/check.php",
       "public_html/index.php"
     ],
     "field": [
+      "FINDINGS.md",
       "README.md",
       "bin/deck.mjs",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/range.php",
       "public_html/docs/search.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
     "label": [
       "bin/deck.mjs",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/range.php",
       "public_html/docs/search.php",
       "public_html/index.php",
       "public_html/php-helper.php",
-      "src/js/deck.js"
-    ],
-    "search": [
-      "public_html/docs/_layout.php",
-      "public_html/docs/search.php",
-      "public_html/index.php",
       "src/js/deck.js"
     ],
     "input": [
       "README.md",
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
       "public_html/docs/search.php",
       "public_html/index.php",
       "src/js/deck-extras.js",
       "src/js/deck.js"
+    ],
+    "help": [
+      "public_html/docs/components/field.php",
+      "public_html/index.php"
+    ],
+    "stack-4": [
+      "bin/deck.mjs",
+      "public_html/docs/components/field.php",
+      "public_html/index.php"
+    ],
+    "required": [
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/index.php"
+    ],
+    "optional": [
+      "public_html/docs/components/field.php",
+      "public_html/index.php"
+    ],
+    "is-invalid": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "src/js/deck.js"
+    ],
+    "error": [
+      "bin/deck.mjs",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "file": [
+      "FINDINGS.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/search.php",
+      "public_html/index.php"
+    ],
+    "field-row-cq": [
+      "README.md",
+      "public_html/docs/components/field.php"
+    ],
+    "form-actions": [
+      "public_html/docs/components/field.php",
+      "public_html/docs/search.php",
+      "public_html/index.php"
+    ],
+    "form-actions-sticky": [
+      "public_html/docs/components/field.php"
+    ],
+    "textarea": [
+      "public_html/docs/components/input.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
     ],
     "select": [
       "FINDINGS.md",
+      "public_html/docs/components/input.php",
       "public_html/docs/search.php",
       "public_html/index.php",
       "src/js/deck-extras.js",
       "src/js/deck.js"
     ],
-    "form-actions": [
-      "public_html/docs/search.php",
+    "addon": [
+      "public_html/docs/components/input.php",
       "public_html/index.php"
     ],
-    "sr-only": [
+    "search": [
       "public_html/docs/_layout.php",
+      "public_html/docs/components/input.php",
       "public_html/docs/search.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "float": [
+      "README.md",
+      "public_html/docs/components/input.php",
       "public_html/index.php"
     ],
-    "file": [
-      "public_html/docs/_layout.php",
-      "public_html/docs/search.php",
+    "float-outline": [
+      "README.md",
+      "public_html/docs/components/input.php",
+      "public_html/index.php"
+    ],
+    "datefield": [
+      "README.md",
+      "public_html/docs/components/input.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "number": [
+      "README.md",
+      "public_html/docs/components/input.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "list": [
+      "bin/deck.mjs",
+      "public_html/docs/components/list.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck.js"
+    ],
+    "list-row": [
+      "FINDINGS.md",
+      "public_html/docs/components/list.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "list-main": [
+      "public_html/docs/components/list.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "list-title": [
+      "public_html/docs/components/list.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "list-sub": [
+      "public_html/docs/components/list.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "list-trail": [
+      "public_html/docs/components/list.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "truncate": [
+      "public_html/docs/components/list.php",
+      "public_html/index.php"
+    ],
+    "list-header": [
+      "public_html/docs/components/list.php",
+      "public_html/index.php"
+    ],
+    "text-cq": [
+      "README.md",
+      "public_html/docs/components/list.php"
+    ],
+    "list-virtual": [
+      "README.md",
+      "public_html/docs/components/list.php"
+    ],
+    "mirror-rtl": [
+      "README.md",
+      "public_html/docs/components/list.php"
+    ],
+    "is-lifted": [
+      "FINDINGS.md",
+      "public_html/docs/components/list.php"
+    ],
+    "reorder": [
+      "FINDINGS.md",
+      "public_html/docs/components/list.php"
+    ],
+    "menu": [
+      "public_html/docs/components/list.php",
+      "public_html/index.php"
+    ],
+    "range": [
+      "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/components/range.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js",
+      "src/js/deck.js"
+    ],
+    "range-pair": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/range.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "range-readout": [
+      "FINDINGS.md",
+      "public_html/docs/components/range.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "range-ticks": [
+      "FINDINGS.md",
+      "public_html/docs/components/range.php"
+    ],
+    "num": [
+      "README.md",
+      "public_html/docs/components/table.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "table-compact": [
+      "public_html/docs/components/table.php"
+    ],
+    "link-quiet": [
+      "public_html/docs/index.php",
       "public_html/index.php"
     ],
     "copy": [
@@ -1084,13 +1576,6 @@
       "public_html/docs/_layout.php",
       "public_html/index.php"
     ],
-    "push": [
-      "README.md",
-      "bin/deck.mjs",
-      "public_html/docs/_layout.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
     "section": [
       "README.md",
       "bin/deck.mjs",
@@ -1149,17 +1634,6 @@
       "bin/deck.mjs",
       "public_html/index.php"
     ],
-    "range": [
-      "FINDINGS.md",
-      "README.md",
-      "bin/deck.mjs",
-      "public_html/index.php",
-      "src/js/deck-extras.js",
-      "src/js/deck.js"
-    ],
-    "badge-dot": [
-      "public_html/index.php"
-    ],
     "display": [
       "bin/deck.mjs",
       "public_html/index.php"
@@ -1170,9 +1644,6 @@
     "mb-2": [
       "public_html/index.php"
     ],
-    "menu": [
-      "public_html/index.php"
-    ],
     "menu-label": [
       "public_html/index.php"
     ],
@@ -1180,19 +1651,10 @@
       "FINDINGS.md",
       "public_html/index.php"
     ],
-    "num": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
     "nums": [
       "README.md",
       "public_html/index.php",
       "public_html/php-helper.php"
-    ],
-    "stack-4": [
-      "bin/deck.mjs",
-      "public_html/index.php"
     ],
     "mb-1": [
       "public_html/index.php"
@@ -1229,28 +1691,7 @@
       "FINDINGS.md",
       "public_html/index.php"
     ],
-    "card-header": [
-      "public_html/index.php"
-    ],
-    "avatar": [
-      "public_html/index.php"
-    ],
     "fw-semi": [
-      "public_html/index.php"
-    ],
-    "badge-good": [
-      "public_html/index.php"
-    ],
-    "badge-warn": [
-      "public_html/index.php"
-    ],
-    "alert-good": [
-      "public_html/index.php"
-    ],
-    "alert-warn": [
-      "public_html/index.php"
-    ],
-    "alert-bad": [
       "public_html/index.php"
     ],
     "split": [
@@ -1258,48 +1699,6 @@
       "README.md",
       "public_html/index.php",
       "public_html/llms.txt"
-    ],
-    "required": [
-      "public_html/index.php"
-    ],
-    "help": [
-      "public_html/index.php"
-    ],
-    "optional": [
-      "public_html/index.php"
-    ],
-    "error": [
-      "bin/deck.mjs",
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
-    "addon": [
-      "public_html/index.php"
-    ],
-    "textarea": [
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
-    "check": [
-      "public_html/index.php",
-      "public_html/php-helper.php",
-      "src/js/deck.js"
-    ],
-    "check-text": [
-      "public_html/index.php"
-    ],
-    "check-note": [
-      "public_html/index.php"
-    ],
-    "switch": [
-      "public_html/index.php"
-    ],
-    "grid-tight": [
-      "FINDINGS.md",
-      "public_html/index.php"
-    ],
-    "check-card": [
-      "public_html/index.php"
     ],
     "icon-xl": [
       "README.md",
@@ -1313,41 +1712,8 @@
       "public_html/index.php",
       "src/js/deck.js"
     ],
-    "list": [
-      "bin/deck.mjs",
-      "public_html/index.php",
-      "public_html/php-helper.php",
-      "src/js/deck-adapters.js",
-      "src/js/deck.js"
-    ],
-    "list-header": [
-      "public_html/index.php"
-    ],
-    "list-row": [
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
     "icon-tile-good": [
       "public_html/index.php"
-    ],
-    "list-main": [
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "list-title": [
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "list-sub": [
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "truncate": [
-      "public_html/index.php"
-    ],
-    "list-trail": [
-      "public_html/index.php",
-      "public_html/php-helper.php"
     ],
     "icon-tile-warn": [
       "public_html/index.php"
@@ -1387,9 +1753,6 @@
     ],
     "bar": [
       "README.md",
-      "public_html/index.php"
-    ],
-    "badge-bad": [
       "public_html/index.php"
     ],
     "pagination": [
@@ -1503,11 +1866,6 @@
     ],
     "empty-title": [
       "public_html/index.php"
-    ],
-    "datefield": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
     ],
     "combo": [
       "FINDINGS.md",
@@ -1737,10 +2095,6 @@
       "public_html/index.php",
       "src/js/deck.js"
     ],
-    "icon-follow": [
-      "README.md",
-      "public_html/index.php"
-    ],
     "sweep": [
       "README.md",
       "public_html/index.php"
@@ -1765,17 +2119,6 @@
     "marquee-track": [
       "FINDINGS.md",
       "README.md",
-      "public_html/index.php"
-    ],
-    "cq": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "card-flex": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "card-media": [
       "public_html/index.php"
     ],
     "cq-tone": [
@@ -2036,17 +2379,6 @@
     "drawer-body": [
       "public_html/index.php"
     ],
-    "range-pair": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
-    "range-readout": [
-      "FINDINGS.md",
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
     "drawer-footer": [
       "public_html/index.php"
     ],
@@ -2110,19 +2442,6 @@
     "is-current": [
       "README.md",
       "public_html/index.php"
-    ],
-    "float": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "float-outline": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "number": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-extras.js"
     ],
     "number-unit": [
       "README.md",
@@ -2191,22 +2510,7 @@
       "src/js/deck-adapters.js",
       "src/js/deck-extras.js"
     ],
-    "chat": [
-      "README.md",
-      "public_html/index.php"
-    ],
     "chat-day": [
-      "public_html/index.php"
-    ],
-    "msg": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "avatar-xs": [
-      "public_html/index.php"
-    ],
-    "bubble": [
-      "README.md",
       "public_html/index.php"
     ],
     "bubble-name": [
@@ -2653,10 +2957,7 @@
       "src/js/deck.js"
     ],
     "was-shaken": [
-      "src/js/deck.js"
-    ],
-    "is-invalid": [
-      "README.md",
+      "FINDINGS.md",
       "src/js/deck.js"
     ],
     "tick": [
@@ -2896,9 +3197,6 @@
     "cq-row": [
       "README.md"
     ],
-    "text-cq": [
-      "README.md"
-    ],
     "pad-cq": [
       "README.md"
     ],
@@ -2909,9 +3207,6 @@
       "README.md"
     ],
     "metarow": [
-      "README.md"
-    ],
-    "field-row-cq": [
       "README.md"
     ],
     "dg-cq": [
@@ -2936,9 +3231,6 @@
       "README.md"
     ],
     "bidi-plaintext": [
-      "README.md"
-    ],
-    "mirror-rtl": [
       "README.md"
     ],
     "bis": [
@@ -3089,9 +3381,6 @@
     "footer-social": [
       "README.md"
     ],
-    "list-virtual": [
-      "README.md"
-    ],
     "virtual": [
       "README.md"
     ],
@@ -3119,9 +3408,6 @@
     "icon-spin": [
       "FINDINGS.md"
     ],
-    "range-ticks": [
-      "FINDINGS.md"
-    ],
     "gap-2": [
       "FINDINGS.md"
     ],
@@ -3134,13 +3420,7 @@
   },
   "unused": [
     "absolute",
-    "avatar-lg",
-    "avatar-sm",
-    "avatar-square",
-    "avatar-stack",
-    "avatar-xl",
     "backface-hidden",
-    "badge-solid",
     "banner-dark",
     "banner-fixed",
     "banner-warn",
@@ -3156,9 +3436,6 @@
     "border-brand",
     "border-t",
     "capitalize",
-    "card-brand",
-    "card-flush",
-    "card-raised",
     "carousel-caption",
     "chart-dot",
     "chart-dot-active",
@@ -3195,13 +3472,11 @@
     "dur-4",
     "editor-tool-wide",
     "fade-swap",
-    "fieldset",
     "flat",
     "flex",
     "flex-col",
     "flex-row",
     "flip-hover",
-    "form-actions-sticky",
     "fw-bold",
     "fw-medium",
     "fw-normal",
@@ -3232,7 +3507,6 @@
     "inset-be-0",
     "inset-bs-0",
     "inset-ie-0",
-    "is-lifted",
     "is-new",
     "is-preview",
     "items-baseline",
@@ -3352,10 +3626,8 @@
     "rating-fill",
     "rating-lg",
     "rating-sm",
-    "ratio-16x9",
     "ratio-1x1",
     "ratio-4x3",
-    "reorder",
     "reveal-late",
     "row-meta",
     "row-meta-wide",
@@ -3378,10 +3650,8 @@
     "sparkline-bad",
     "spinner-lg",
     "split-rail-start",
-    "square",
     "stagger-fast",
     "stagger-slow",
-    "table-compact",
     "text-2xl",
     "text-2xs",
     "text-bad",

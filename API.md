@@ -15,8 +15,8 @@ fails the build if a public class is missing from this file, or if a class in
 
 | bucket | count | meaning |
 | --- | ---: | --- |
-| public | 829 | in the freeze, semver applies |
-| internal | 102 | Deck's own; may change any release |
+| public | 828 | in the freeze, semver applies |
+| internal | 103 | Deck's own; may change any release |
 | deprecated | 0 | works, warns, removed at v1 |
 | removed | 31 | already gone, before first publish |
 
@@ -24,7 +24,7 @@ Total classes in `src/`: **931**.
 
 ## How big this actually is
 
-829 is more names than anyone will learn, and this document should say
+828 is more names than anyone will learn, and this document should say
 so rather than let a reader discover it by scrolling. What makes it workable is
 that the surface is not flat:
 
@@ -34,7 +34,7 @@ that the surface is not flat:
 | `deck.utilities` | 211 | A grammar. Learn the pattern, get the family. |
 | `deck.effects` | 71 | Opt-in. Nothing runs unless you add the class. |
 | `deck.layout` | 63 | The eight or so primitives most pages actually use. |
-| `deck.motion` | 59 | Opt-in. Nothing runs unless you add the class. |
+| `deck.motion` | 58 | Opt-in. Nothing runs unless you add the class. |
 | `deck.mobile` | 30 | Only if you build the mobile shell. |
 | `deck.type` | 10 | Small, and mostly obvious from the name. |
 | `deck.print` | 8 | Four or five you reach for once. |
@@ -46,7 +46,7 @@ spacing steps and that `p`, `m` and `gap` take them, you know the whole family
 without reading it. The component layers are the opposite: 99 components,
 each a handful of names, and a page that uses six of them needs six.
 
-One number that is not comfortable: **265 of the 829 public classes are
+One number that is not comfortable: **251 of the 828 public classes are
 used nowhere in this repository** — not in the demo, not in the docs, not in
 Deck's own JavaScript. They are frozen on the strength of their source alone.
 
@@ -63,13 +63,13 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.alert` | deck.components | Sets display, gap, padding, border-radius, and 3 more. |
-| `.alert-bad` | deck.components | Sets background, border-color, border-inline-start-color, color. |
-| `.alert-body` | deck.components | Sets font-size, color, min-inline-size. |
-| `.alert-good` | deck.components | Sets background, border-color, border-inline-start-color, color. |
-| `.alert-info` | deck.components | Sets background, border-color, border-inline-start-color, color. |
-| `.alert-title` | deck.components | Sets font-weight, margin-block-end. |
-| `.alert-warn` | deck.components | Sets background, border-color, border-inline-start-color, color. |
+| `.alert` | deck.components | A block of prose the reader is meant to stop and read. The tone is a |
+| `.alert-bad` | deck.components | Something failed, or is about to. |
+| `.alert-body` | deck.components | The explanatory line. min-inline-size: 0 so a long unbroken string |
+| `.alert-good` | deck.components | Confirmation that something worked. |
+| `.alert-info` | deck.components | Something the reader should know before continuing. |
+| `.alert-title` | deck.components | The first line of an alert. A weight change, not a heading — if it |
+| `.alert-warn` | deck.components | A consequence the reader should understand first. |
 
 ## anchor
 
@@ -81,25 +81,25 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.avatar` | deck.components | Sets inline-size, block-size, border-radius, background, and 8 more. |
-| `.avatar-lg` | deck.components | Sets --size. |
-| `.avatar-sm` | deck.components | Sets --size. |
-| `.avatar-square` | deck.components | Sets border-radius. |
-| `.avatar-stack` | deck.components | Sets display. |
-| `.avatar-xl` | deck.components | Sets --size. |
-| `.avatar-xs` | deck.components | Sets --size. |
+| `.avatar` | deck.components | A round box holding an image or initials. --size drives the width, the |
+| `.avatar-lg` | deck.components | 56px. |
+| `.avatar-sm` | deck.components | 32px. |
+| `.avatar-square` | deck.components | A square avatar, for anything that is not a person — an organisation, |
+| `.avatar-stack` | deck.components | Overlapping avatars. The offset is a fraction of --size, so it stays |
+| `.avatar-xl` | deck.components | 80px. |
+| `.avatar-xs` | deck.components | 24px. |
 
 ## badge
 
 | class | layer | purpose |
 | --- | --- | --- |
 | `.badge` | deck.components | A small inline status pill. Sized in em, so it tracks whatever text it |
-| `.badge-bad` | deck.components | Sets background, color, border-color. |
-| `.badge-brand` | deck.components | Sets background, color, border-color. |
-| `.badge-dot` | deck.components | Modifier; see the component. |
-| `.badge-good` | deck.components | Sets background, color, border-color. |
-| `.badge-solid` | deck.components | Sets background, color, border-color. |
-| `.badge-warn` | deck.components | Sets background, color, border-color. |
+| `.badge-bad` | deck.components | Failed, overdue, rejected. |
+| `.badge-brand` | deck.components | Brand tint. For a label that names a category rather than a status. |
+| `.badge-dot` | deck.components | Adds a leading dot in currentColor, so it takes the tone's text colour |
+| `.badge-good` | deck.components | Paid, shipped, passing, active. |
+| `.badge-solid` | deck.components | Filled with the brand colour. The highest-emphasis badge; use one per |
+| `.badge-warn` | deck.components | Pending, expiring: needs attention, nothing is broken. |
 
 ## banner
 
@@ -128,19 +128,19 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | --- | --- | --- |
 | `.btn` | deck.components | Every button clears the 44px touch target even when it looks smaller |
 | `.btn-3d` | deck.effects | A button with real thickness. The face moves down into the shadow instead |
-| `.btn-accent` | deck.components | Sets --btn-bg, --btn-text, --btn-border. |
-| `.btn-block` | deck.components | Sets inline-size. |
-| `.btn-danger` | deck.components | Sets --btn-bg, --btn-text, --btn-border. |
+| `.btn-accent` | deck.components | A secondary emphasis colour, for upsells and highlights. |
+| `.btn-block` | deck.components | Full width. For a phone, or the primary action at the end of a form. |
+| `.btn-danger` | deck.components | Destructive and irreversible. Pair it with a confirmation. |
 | `.btn-ghost` | deck.components | No border or background until hover. For toolbars and dense rows where |
-| `.btn-group` | deck.components | Sets display. |
+| `.btn-group` | deck.components | Buttons joined into one control, with the inner radii and the doubled |
 | `.btn-icon` | deck.components | Square, icon-only button. It has no text, so it needs an aria-label. |
-| `.btn-lg` | deck.components | Sets block-size, padding-inline, font-size, font-weight. |
-| `.btn-link` | deck.components | Sets padding-inline, block-size. |
-| `.btn-outline` | deck.components | Sets --btn-bg, --btn-text, --btn-border. |
+| `.btn-lg` | deck.components | The large size, from --control-h-lg. |
+| `.btn-link` | deck.components | Looks like a link, behaves like a button. Only for a real <button> |
+| `.btn-outline` | deck.components | Brand-coloured border, transparent fill. |
 | `.btn-primary` | deck.components | The one important action in a view. Solid brand fill; use exactly one |
-| `.btn-round` | deck.components | Sets border-radius. |
+| `.btn-round` | deck.components | A fully rounded button, usually paired with .btn-icon. |
 | `.btn-sm` | deck.components | The 34px size. Still clears the 44px touch target, because the target |
-| `.btn-soft` | deck.components | Sets --btn-bg, --btn-text, --btn-border. |
+| `.btn-soft` | deck.components | Tinted, low weight. Good for an action repeated down a list. |
 
 ## bubble
 
@@ -166,14 +166,14 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | --- | --- | --- |
 | `.card` | deck.components | A surface with a border, radius and shadow. It brings no padding of its |
 | `.card-body` | deck.components | The padded region of a card. A column with a gap, so children stack |
-| `.card-brand` | deck.components | Sets border-color, background. |
+| `.card-brand` | deck.components | Brand-tinted fill and border, for the one card on a page that is an |
 | `.card-flex` | deck.layout | A card that turns into a horizontal media object once it has the room |
-| `.card-flush` | deck.components | Sets border, box-shadow, background. |
-| `.card-footer` | deck.components | Sets padding, display, align-items, gap. |
-| `.card-header` | deck.components | Sets padding, display, align-items, gap. |
+| `.card-flush` | deck.components | A card with no border, shadow or background. Grouping without a box |
+| `.card-footer` | deck.components | The top region of a card. A flex row, so a title and a control sit |
+| `.card-header` | deck.components | The top region of a card. A flex row, so a title and a control sit |
 | `.card-link` | deck.components | Whole card is the link, but nested links still work |
-| `.card-media` | deck.components | Sets margin. |
-| `.card-raised` | deck.components | Sets box-shadow, border-color. |
+| `.card-media` | deck.components | An image region that reaches the card's edges. The card's own |
+| `.card-raised` | deck.components | A deeper shadow and no visible border, for a surface that should read |
 | `.card-title` | deck.components | The heading inside a card. Sized independently of h1-h6 so the same |
 
 ## carousel
@@ -546,24 +546,24 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.form-actions` | deck.components | Sticky save bar for long forms on mobile |
-| `.form-actions-sticky` | deck.components | Sets position, inset-block-end, z-index, background, and 5 more. |
+| `.form-actions-sticky` | deck.components | Pins the action row to the bottom of the viewport with a blur behind |
 
 ## forms
 
 | class | layer | purpose |
 | --- | --- | --- |
 | `.addon` | deck.components | Modifier; see the component. |
-| `.error` | deck.components | Sets font-size, color, display, gap, and 1 more. |
-| `.fieldset` | deck.components | Sets border, border-radius, padding, display, and 3 more. |
-| `.file` | deck.components | Sets display, place-items, gap, padding, and 7 more. |
-| `.help` | deck.components | Sets font-size, color. |
+| `.error` | deck.components | A validation message below a control. Lightened for dark mode with |
+| `.fieldset` | deck.components | A bordered group of controls that answer one question. Its legend is |
+| `.file` | deck.components | A dashed drop zone wrapping a real file input. The input is 1px and |
+| `.help` | deck.components | A hint below a control. Needs aria-describedby on the control to reach |
 | `.is-invalid` | deck.components | Modifier; see the component. |
 | `.label` | deck.components | The label for a control. A flex row, so a "required" or "optional" |
 | `.optional` | deck.components | Modifier; see the component. |
 | `.required` | deck.components | Modifier; see the component. |
 | `.search` | deck.components | Sets position, display, align-items. |
-| `.select` | deck.components | Validation only after the user has actually interacted |
-| `.switch` | deck.components | Sets display, align-items, gap, min-block-size, and 1 more. |
+| `.select` | deck.components | Marks a field invalid from your own validation, producing the same |
+| `.switch` | deck.components | An on/off control that takes effect immediately, drawn over a real |
 | `.textarea` | deck.components | Grows with its content instead of scrolling in a 4-row box |
 
 ## g-border
@@ -684,8 +684,8 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.input` | deck.components | Validation only after the user has actually interacted |
-| `.input-group` | deck.components | Sets display, align-items, inline-size, border, and 4 more. |
+| `.input` | deck.components | Marks a field invalid from your own validation, producing the same |
+| `.input-group` | deck.components | A prefix, suffix or attached button joined to a control. The group |
 
 ## inputs
 
@@ -741,10 +741,10 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.list` | deck.components | Sets display, flex-direction, background, border, and 2 more. |
-| `.list-header` | deck.components | Sets padding, background, font-size, font-weight, and 4 more. |
+| `.list` | deck.components | A bordered, clipped column of rows. Use it when the reader reads one |
+| `.list-header` | deck.components | A group heading inside a list. Styling only: a screen reader hears |
 | `.list-main` | deck.components | Modifier; see the component. |
-| `.list-row` | deck.components | Sets display, align-items, gap, padding, and 4 more. |
+| `.list-row` | deck.components | One row. min-block-size: var(--tap) puts every row at the touch |
 | `.list-sub` | deck.components | Modifier; see the component. |
 | `.list-title` | deck.components | Modifier; see the component. |
 | `.list-trail` | deck.components | Modifier; see the component. |
@@ -921,7 +921,6 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.vt-hold` | deck.motion | Elements that persist across the navigation. Give the same |
 | `.vt-main` | deck.motion | Sets view-transition-name. |
 | `.vt-tabbar` | deck.motion | Sets view-transition-name. |
-| `.was-shaken` | deck.motion | Modifier; see the component. |
 | `.will-move` | deck.motion | Modifier; see the component. |
 
 ## msg
@@ -1034,9 +1033,9 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.range` | deck.components | Sets inline-size, appearance, background, block-size. |
+| `.range` | deck.components | A slider. The track and thumb are vendor pseudo-elements with |
 | `.range-pair` | deck.components | Two stacked native range inputs. Real inputs mean real keyboard support |
-| `.range-readout` | deck.components | Sets display, justify-content, font-size, font-variant-numeric, and 1 more. |
+| `.range-readout` | deck.components | The current value of a slider. Put it on an <output>, which is an |
 | `.range-ticks` | deck.components | Ticks under a single or paired range |
 
 ## rating
@@ -1242,10 +1241,10 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.table` | deck.components | Sets inline-size, font-size. |
-| `.table-compact` | deck.components | Modifier; see the component. |
-| `.table-stack` | deck.components | Sets display, inline-size. |
-| `.table-wrap` | deck.components | Sets inline-size, overflow-x, -webkit-overflow-scrolling, border, and 2 more. |
+| `.table` | deck.components | A real table, kept a table at every width, because values in a column |
+| `.table-compact` | deck.components | Tighter cell padding, for a table the reader scans rather than reads. |
+| `.table-stack` | deck.components | Below 40rem, restacks each row into labelled lines, taking the label |
+| `.table-wrap` | deck.components | The scroll container for a table, and not optional. It carries the |
 
 ## tilt
 
@@ -1515,13 +1514,13 @@ a major version.
 
 ## Internal classes
 
-102 classes are internal. They are real and they work, but
+103 classes are internal. They are real and they work, but
 they are Deck's own plumbing: states its JavaScript toggles, and the inside of
 components whose markup Deck generates. Style them if you need to; do not rely on
 the names.
 
-<details><summary>Show all 102</summary>
+<details><summary>Show all 103</summary>
 
-`.carousel-dot`, `.carousel-dots`, `.combo-check`, `.combo-clear`, `.combo-control`, `.combo-count`, `.combo-create`, `.combo-empty`, `.combo-group`, `.combo-hint`, `.combo-input`, `.combo-list`, `.combo-loading`, `.combo-option`, `.combo-option-main`, `.combo-option-sub`, `.combo-option-trail`, `.combo-sep`, `.combo-toggle`, `.combo-token`, `.combo-tokens`, `.datepicker-day`, `.datepicker-dow`, `.datepicker-foot`, `.datepicker-grid`, `.datepicker-head`, `.datepicker-jump`, `.datepicker-layout`, `.datepicker-main`, `.datepicker-month`, `.datepicker-months`, `.datepicker-nav`, `.datepicker-preset`, `.datepicker-presets`, `.datepicker-readout`, `.datepicker-time`, `.datepicker-title`, `.dg-sort`, `.dg-sort-icon`, `.drop-reject`, `.drop-target`, `.is-above`, `.is-animating`, `.is-behind-end`, `.is-behind-start`, `.is-blocked`, `.is-copied`, `.is-dismissed`, `.is-down`, `.is-dragging`, `.is-fanned`, `.is-flipped`, `.is-front`, `.is-in-range`, `.is-leaving`, `.is-lifted`, `.is-loaded`, `.is-new`, `.is-outside`, `.is-over`, `.is-preview`, `.is-range-end`, `.is-range-start`, `.is-resizing`, `.is-revealed`, `.is-scrolled-end`, `.is-scrolled-x`, `.is-tilting`, `.is-today`, `.is-up`, `.is-visible`, `.qr-caption`, `.qr-lg`, `.qr-logo`, `.qr-logo-mark`, `.qr-sm`, `.reorder`, `.sortable`, `.sortable-chosen`, `.sortable-drag`, `.sortable-fallback`, `.sortable-ghost`, `.theme-dock`, `.toast-action`, `.toast-actions`, `.toast-bad`, `.toast-close`, `.toast-good`, `.toast-icon`, `.toast-info`, `.toast-loading`, `.toast-main`, `.toast-region`, `.toast-region-center`, `.toast-region-stacked`, `.toast-region-start`, `.toast-region-top`, `.toast-text`, `.toast-timer`, `.toast-title`, `.toast-undo`, `.toast-warn`
+`.carousel-dot`, `.carousel-dots`, `.combo-check`, `.combo-clear`, `.combo-control`, `.combo-count`, `.combo-create`, `.combo-empty`, `.combo-group`, `.combo-hint`, `.combo-input`, `.combo-list`, `.combo-loading`, `.combo-option`, `.combo-option-main`, `.combo-option-sub`, `.combo-option-trail`, `.combo-sep`, `.combo-toggle`, `.combo-token`, `.combo-tokens`, `.datepicker-day`, `.datepicker-dow`, `.datepicker-foot`, `.datepicker-grid`, `.datepicker-head`, `.datepicker-jump`, `.datepicker-layout`, `.datepicker-main`, `.datepicker-month`, `.datepicker-months`, `.datepicker-nav`, `.datepicker-preset`, `.datepicker-presets`, `.datepicker-readout`, `.datepicker-time`, `.datepicker-title`, `.dg-sort`, `.dg-sort-icon`, `.drop-reject`, `.drop-target`, `.is-above`, `.is-animating`, `.is-behind-end`, `.is-behind-start`, `.is-blocked`, `.is-copied`, `.is-dismissed`, `.is-down`, `.is-dragging`, `.is-fanned`, `.is-flipped`, `.is-front`, `.is-in-range`, `.is-leaving`, `.is-lifted`, `.is-loaded`, `.is-new`, `.is-outside`, `.is-over`, `.is-preview`, `.is-range-end`, `.is-range-start`, `.is-resizing`, `.is-revealed`, `.is-scrolled-end`, `.is-scrolled-x`, `.is-tilting`, `.is-today`, `.is-up`, `.is-visible`, `.qr-caption`, `.qr-lg`, `.qr-logo`, `.qr-logo-mark`, `.qr-sm`, `.reorder`, `.sortable`, `.sortable-chosen`, `.sortable-drag`, `.sortable-fallback`, `.sortable-ghost`, `.theme-dock`, `.toast-action`, `.toast-actions`, `.toast-bad`, `.toast-close`, `.toast-good`, `.toast-icon`, `.toast-info`, `.toast-loading`, `.toast-main`, `.toast-region`, `.toast-region-center`, `.toast-region-stacked`, `.toast-region-start`, `.toast-region-top`, `.toast-text`, `.toast-timer`, `.toast-title`, `.toast-undo`, `.toast-warn`, `.was-shaken`
 
 </details>

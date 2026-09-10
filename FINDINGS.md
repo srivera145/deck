@@ -346,3 +346,110 @@ word where `.stack` has numbers.
 Not fixed. The clean answer is that `.gap-*` is the gap vocabulary and `.stack-*` should
 not exist, but that rewrites gap classes across the whole demo, and this pass was not
 allowed to change what the demo renders.
+
+
+<!-- Items 23 onward were found while writing the batch 1 component pages:
+     card, badge, alert, avatar, list, table, field, input, check, range. -->
+
+## 23. `.was-shaken` was frozen as public with a reason that was backwards — FIXED
+
+`deck-extras.js` adds `.was-shaken` to a field after its invalid-state shake has run
+once, and the selector `.field.is-invalid:not(.was-shaken)` is what stops the animation
+replaying on every re-render. The freeze classified it **public**, with the reason
+"Motion or effect class. Opt in by adding it; nothing runs unless you do."
+
+That is exactly inverted. Writing `.was-shaken` by hand does not enable anything — it
+*suppresses* the shake. The rule that matched it was the layer-level `effect` rule,
+which is right about `deck.motion` in general and wrong about this one class.
+
+Fixed with a `js-runtime-mark` rule ahead of the family rules, and the ledger line
+corrected by hand. Buckets are now 828 public / 103 internal. It was found because a
+docs check noticed the framework adding a class to an example, which is a roundabout way
+to audit a contract, and the only reason it surfaced at all.
+
+## 24. `.table-wrap` scrolls but cannot be reached by a keyboard — NOT FIXED
+
+`.table-wrap` sets `overflow-x: auto` and nothing else. A scroll container is only
+keyboard-scrollable if it is focusable, so a wide table can be scrolled with a pointer
+and not at all with a keyboard. Firefox gives such containers a tab stop automatically;
+Chromium does not.
+
+Documented on the table page as a defect with the fix — `tabindex="0"` and
+`role="region"` with an `aria-label` — rather than described as working. Not fixed in
+the stylesheet because CSS cannot add a tab stop, and adding one to every wrapper
+whether or not its table overflows creates a different problem: a tab stop that goes
+nowhere.
+
+## 25. Drag-to-reorder has no keyboard path — NOT FIXED
+
+`.reorder` and `.is-lifted` style a list whose rows can be dragged into a new order, and
+`deck-adapters.js` drives them with SortableJS or the native drag-and-drop API. Both are
+pointer-only. A keyboard user cannot reorder the list at all.
+
+This is a functional gap rather than a styling one, and it is the most serious
+accessibility problem found in this batch. Documented on the list page with the
+mitigation (ship move-up/move-down buttons as well). Fixing it properly means keyboard
+handlers in `deck-adapters.js`, which is out of scope for a documentation pass.
+
+## 26. The `.range` thumb has no focus indicator — NOT FIXED
+
+Every other Deck control has a `:focus-visible` rule. `.range` has none, so the focus
+indication for a slider is whatever the browser draws around the input as a whole, which
+is easy to miss on a control that is mostly transparent track.
+
+The fix is four lines and has to be written twice per engine, which is why it is
+suggested on the range page's *Overriding it* section rather than being left implied:
+
+```css
+.range:focus-visible::-webkit-slider-thumb { box-shadow: var(--ring); }
+.range:focus-visible::-moz-range-thumb { box-shadow: var(--ring); }
+```
+
+Not fixed here because this pass was not allowed to change rendering, and a focus ring
+is a rendering change.
+
+## 27. `.file` draws a drop zone that Deck does not implement — NOT FIXED
+
+`.file` is a dashed border, a hover state and a `:focus-within` state — the visual
+vocabulary of a drag-and-drop target. Deck ships no `drop` handler, so dragging a file
+onto it does nothing at all. Clicking works, because the label wraps a real file input.
+
+An affordance that does not do what it looks like it does is worse than no affordance.
+Documented on the field page; the honest fixes are either to ship the handler or to stop
+drawing a drop zone.
+
+## 28. `.list-row:hover` and `.table tbody tr:hover` have no focus counterpart
+
+Both change their background on hover and neither responds to `:focus-within`. A
+keyboard user moving through a list or a table of controls gets the focus ring on the
+control but no row highlight, so the row they are on is harder to place than it is for a
+mouse user.
+
+Not fixed for the same reason as item 26 — it is a visible change. Both pages document
+it and show the one-line override.
+
+## 29. `.check` inside `.dg` drops below the touch target — deliberate, now written down
+
+`src/12-datagrid.css` removes `.check`'s `min-block-size` for the data grid's selection
+column. It is the one place Deck knowingly ships a target under
+44px: a dense grid of 34px rows cannot also have 44px checkboxes, and a grid that scrolls
+twice as far is its own accessibility problem.
+
+Recorded rather than fixed, because it is a trade someone made on purpose. It belongs in
+the data grid page too when batch 4 reaches it.
+
+## 30. A docs check could not tell framework behaviour from an authoring mistake — FIXED
+
+The per-batch check re-parses each printed example and compares it with what was
+rendered, which is what stops a page showing one thing and claiming another. It reported
+13 mismatches across three pages, all false: Deck's own JavaScript stamps
+`data-deck-wired`, adds `.was-shaken`, and rewrites `--lo`/`--hi` to two decimals on a
+`.range-pair`.
+
+Two of those three were worth knowing — `.was-shaken` became item 23, and the `--lo`
+rewrite showed that three claims on the range page were wrong (the page said CSS does not
+update those properties, that clamping was the author's job, and that the readout was
+never populated; `deck-extras.js` does all three). The check now runs its equality test
+with JavaScript disabled, which is the only state in which the question "does the printed
+source match what was rendered" has a meaningful answer, and reports runtime rewrites
+separately instead of as faults.
