@@ -159,6 +159,16 @@
     transition: opacity var(--dur-3) var(--ease-out);
   }
   .lazy > img.is-loaded, .lazy > img[data-loaded] { opacity: 1; }
+  /* Two things about this shimmer are recorded in FINDINGS.md:
+
+     67: it runs the same dk-shimmer keyframes as .skeleton, for the same
+     purpose, but .lazy::after is NOT in 02-reset.css's reduced-motion
+     exemption list -- so it freezes where .skeleton slows to 2.4s. The
+     durations differ too (1.6s here, 1.4s there). One of the two is wrong.
+
+     66: deck-extras.js adds .is-error to the wrapper when an image fails to
+     load, and nothing in src/ styles that class. So the shimmer carries on
+     forever and a broken image is indistinguishable from a loading one. */
   .lazy::after {
     content: "";
     position: absolute;

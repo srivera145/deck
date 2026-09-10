@@ -1575,6 +1575,18 @@ if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
       };
       select?.addEventListener('change', () => { sync(); format(); });
 
+      /* FINDINGS 62: this destroys a digit when someone edits the middle of a
+         number. The loop stops at the end of the MASK, not the end of the
+         digits, so inserting a character shifts everything along and the last
+         digit falls off with no warning -- measured: caret at index 8 of
+         "(202) 555-0147", type 9, get "(202) 559-5014". The row still reports
+         itself .is-valid because it still holds ten digits.
+
+         Assigning input.value also collapses the caret to the end.
+
+         Fix: count digits before the caret, rebuild, restore the caret to the
+         same digit offset; and refuse the keystroke when the mask is full
+         rather than dropping data silently. */
       const format = () => {
         const mask = select?.selectedOptions[0]?.dataset.mask;
         const digits = input.value.replace(/\D/g, '');
@@ -1669,6 +1681,11 @@ if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
              ?? btn.previousElementSibling?.textContent ?? '');
         const ok = await writeClipboard(String(text).trim());
         btn.classList.toggle('is-copied', ok);
+        /* FINDINGS 63: this is set AFTER the subtree has already changed, so
+           the first press announces nothing -- a live region has to exist
+           before its content changes. Every press after that announces,
+           because the attribute is by then already there. Declare it in the
+           markup, or write into a separate role="status" element. */
         btn.setAttribute('aria-live', 'polite');
         if (ok && !btn.classList.contains('copy-inline') && !$('.copy-done', btn)) {
           Deck.toast({ kind: 'good', title: 'Copied', duration: 2000 });

@@ -46,7 +46,7 @@ spacing steps and that `p`, `m` and `gap` take them, you know the whole family
 without reading it. The component layers are the opposite: 99 components,
 each a handful of names, and a page that uses six of them needs six.
 
-One number that is not comfortable: **223 of the 828 public classes are
+One number that is not comfortable: **192 of the 828 public classes are
 used nowhere in this repository** — not in the demo, not in the docs, not in
 Deck's own JavaScript. They are frozen on the strength of their source alone.
 
@@ -298,7 +298,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.num` | deck.components | Modifier; see the component. |
 | `.pagination` | deck.components | Sets display, gap, align-items, flex-wrap. |
 | `.panel` | deck.components | Sets background, border-block, padding, margin-inline. |
-| `.progress` | deck.components | Sets inline-size, block-size, border-radius, background, and 3 more. |
+| `.progress` | deck.components | Three ways to say "something is happening", and the choice is only ever |
 | `.segmented` | deck.components | A one-of-N control: equal-width children in a sunken track with the |
 | `.stretch` | deck.components | Modifier; see the component. |
 | `.tab` | deck.components | One trigger. Styled from [aria-selected="true"], so the visual state and |
@@ -335,7 +335,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.copy` | deck.components | Sets display, align-items, inline-size, border, and 3 more. |
+| `.copy` | deck.components | The behaviour hangs off [data-deck-copy], not off .copy-btn. The class is |
 | `.copy-btn` | deck.components | Sets flex, display, align-items, gap, and 9 more. |
 | `.copy-done` | deck.components | Modifier; see the component. |
 | `.copy-idle` | deck.components | Modifier; see the component. |
@@ -526,7 +526,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.float` | deck.components | No JavaScript. :placeholder-shown tells us whether the field is empty, so |
+| `.float` | deck.components | Two things about the markup that this file cannot enforce and that fail |
 | `.float-outline` | deck.components | Outlined variant, where the label sits in a notch in the border |
 
 ## footer
@@ -1042,7 +1042,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.rating` | deck.components | Radio inputs underneath, so it posts a real value and works with the |
+| `.rating` | deck.components | The inputs are written HIGHEST value first -- 5, 4, 3, 2, 1 -- and |
 | `.rating-fill` | deck.components | Modifier; see the component. |
 | `.rating-lg` | deck.components | Sets --star. |
 | `.rating-sm` | deck.components | Sets --star. |
@@ -1067,7 +1067,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.ring` | deck.components | Sets inline-size, block-size, display, place-items, and 7 more. |
+| `.ring` | deck.components | A conic gradient for the fill, a radial mask for the hole. Three custom |
 | `.ring-label` | deck.components | Modifier; see the component. |
 | `.ring-wrap` | deck.components | Sets position, display, place-items. |
 
@@ -1163,7 +1163,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.spinner` | deck.components | Sets inline-size, block-size, border, border-block-start-color, and 2 more. |
+| `.spinner` | deck.components | Exempt from the reduced-motion reset in 02-reset.css: instead of freezing |
 | `.spinner-lg` | deck.components | Sets inline-size, block-size, border-width. |
 
 ## split

@@ -22,7 +22,7 @@ $page = [
     'component' => 'input',
     'accounts' => [
         '06-forms.css'      => 'documented: the shared control rule, every state, the textarea and select variants, .input-group and .search',
-        '23-inputs.css'     => 'documented: .float and .float-outline float the label over the control — the Floating labels section',
+        '23-inputs.css'     => 'cross-referenced: .float wraps .input to lift its label. Documented in full on float.php; this page covers only what the input itself has to supply',
         '10-datepicker.css' => 'documented: an .input inside .datefield and inside the picker\'s time row — the In other components section',
         '16-motion.css'     => 'documented: an invalid field shakes once, and only with motion allowed — the Reduced motion section',
         '99-print.css'      => 'documented: controls print as underlined values rather than boxes — the Printing section',
@@ -263,12 +263,11 @@ require __DIR__ . '/../_layout.php';
 <section class="stack-3">
   <h2 id="float">Floating labels</h2>
   <p>
-    <code>.float</code> from <code>src/23-inputs.css</code> overlays the label on the
-    control and lifts it once the field has content, using
-    <code>:not(:placeholder-shown)</code> — no JavaScript and no state class. The
-    control needs a <code>placeholder</code> for the selector to have anything to test,
-    and the label must come <em>after</em> the input in the markup so the sibling
-    combinator can reach it.
+    <code>.float</code> wraps an <code>.input</code> and lifts its label out of the field
+    once there is content in it, with no JavaScript. Two things about it are
+    <code>.input</code>'s business rather than the wrapper's, and both trip people up:
+    the control needs <code>placeholder=" "</code>, and the label must come
+    <strong>after</strong> it in the markup.
   </p>
   <?php
   docs_example(
@@ -281,9 +280,10 @@ require __DIR__ . '/../_layout.php';
   );
   ?>
   <p class="text-muted">
-    <code>placeholder=" "</code> — a single space — is the trick. It makes
-    <code>:placeholder-shown</code> match while the field is empty without showing any
-    placeholder text that would collide with the label.
+    The outlined variant, the invalid state, what happens with a
+    <code>&lt;select&gt;</code>, and the reasons to prefer a plain
+    <a href="field.php"><code>.field</code></a> most of the time are all on
+    <a href="float.php">the floating label page</a>.
   </p>
 </section>
 

@@ -197,7 +197,19 @@
   [dir="rtl"] .switch input::after { translate: 0 0; }
   [dir="rtl"] .switch input:checked::after { translate: -18px 0; }
 
-  /* Toast swipe, chart bars, and progress fills grow from the start edge */
+  /* Toast swipe and chart bars grow from the start edge, and transform-origin
+     has no logical form.
+
+     FINDINGS 59: .progress::-webkit-progress-value is also in this list and
+     does nothing. A pseudo-element is not valid inside :is(), and :is() parses
+     forgivingly -- the browser drops the invalid item and keeps the rest, so
+     this rule serialises as [dir="rtl"] :is(.chart-bar-fill, .toast-timer).
+     No warning, no failed rule, no visual difference. It is harmless here
+     because the progress fill animates inline-size rather than a transform,
+     and because the engine mirrors <progress> under dir="rtl" on its own.
+
+     Due for deletion. If a vendor pseudo-element ever does need a logical
+     flip, it has to be its own rule -- grouping it will fail silently. */
   [dir="rtl"] :is(.chart-bar-fill, .progress::-webkit-progress-value, .toast-timer) {
     transform-origin: right center;
   }

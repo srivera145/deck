@@ -7,6 +7,14 @@
 
 @layer deck.motion {
 
+  /* FINDINGS 68: these are real tokens and the documentation cannot see them.
+     tools/docs/extract.mjs takes tokens from 01-tokens.css only, so all
+     thirteen declared below are absent from dist/api.json, API.md and every
+     docs_token_table() -- including --dur-4 and --dur-5, which are used nine
+     and four times across the stylesheet. Passing one to docs_token_table()
+     renders an empty row rather than failing, which is why it went unnoticed.
+     Fix belongs in the extractor, not here. */
+
   /* --- Extended motion tokens ---------------------------------------------
      The base set lives in tokens. These are the rest of the vocabulary.
      ---------------------------------------------------------------------- */
@@ -118,7 +126,9 @@
       .stagger > :nth-child(11) { --n: 10; }
       .stagger > :nth-child(12) { --n: 11; }
       /* Past twelve everything holds the last step rather than snapping back
-         to zero. Without sibling-index() that is as far as CSS can count. */
+         to zero. Without sibling-index() that is as far as CSS can count.
+         .pile in 21-space3d.css has the same fallback and is MISSING this
+         line, so its ninth card stacks on top of the first. */
       .stagger > :nth-child(n+13) { --n: 11; }
     }
     .stagger-fast { --stagger-step: 28ms; }

@@ -1,114 +1,130 @@
 {
   "generated": "tools/docs/usage.mjs — do not edit",
-  "filesScanned": 58,
+  "filesScanned": 81,
   "counts": {
     "classes": 931,
-    "used": 703,
-    "unused": 228
+    "used": 735,
+    "unused": 196
   },
   "uses": {
-    "stack-3": 1329,
-    "text-muted": 601,
-    "btn": 439,
-    "icon": 371,
-    "stack-2": 315,
-    "cluster": 205,
-    "stack": 204,
-    "card": 197,
+    "stack-3": 1985,
+    "text-muted": 834,
+    "icon": 568,
+    "btn": 462,
+    "stack-2": 423,
+    "cluster": 296,
+    "stack": 284,
+    "card": 237,
+    "cluster-tight": 196,
     "card-body": 179,
-    "btn-sm": 145,
-    "label": 137,
-    "badge": 134,
-    "cluster-tight": 132,
+    "badge": 150,
+    "label": 149,
+    "lede": 148,
+    "btn-sm": 147,
+    "breadcrumb": 143,
+    "field": 139,
+    "icon-sm": 137,
+    "input": 134,
     "text-sm": 130,
-    "field": 126,
-    "icon-sm": 125,
-    "stack-6": 120,
-    "input": 119,
-    "check": 110,
-    "lede": 102,
-    "btn-primary": 89,
-    "breadcrumb": 88,
+    "stack-6": 124,
+    "check": 112,
+    "btn-primary": 97,
+    "btn-ghost": 87,
     "card-title": 87,
+    "grid": 85,
     "container": 84,
-    "btn-ghost": 78,
-    "grid": 77,
+    "push": 83,
+    "avatar": 77,
     "section": 77,
-    "avatar": 75,
-    "push": 74,
+    "icon-lg": 75,
+    "sr-only": 74,
     "dg-num": 74,
     "fw-semi": 74,
-    "sr-only": 69,
     "tab": 65,
-    "table-wrap": 57,
-    "btn-icon": 57,
-    "table": 56,
-    "icon-lg": 55,
+    "btn-icon": 64,
+    "table": 62,
+    "table-wrap": 61,
+    "emoji": 60,
+    "skeleton": 60,
     "num": 55,
-    "table-stack": 48,
-    "list-row": 44,
-    "range": 43,
-    "grid-tight": 42,
-    "icon-tile": 41,
+    "table-stack": 52,
+    "icon-tile": 52,
+    "nav-link": 51,
+    "grid-tight": 46,
+    "list-row": 46,
+    "range": 44,
+    "sidebar-link": 43,
+    "menu-item": 40,
     "switch": 39,
     "nums": 39,
     "alert": 37,
+    "list": 37,
     "split": 37,
     "s1": 36,
-    "menu-item": 36,
-    "list": 35,
-    "select": 34,
+    "textarea": 36,
+    "select": 36,
+    "stack-1": 35,
+    "list-main": 35,
+    "list-title": 35,
+    "badge-good": 34,
     "msg": 33,
-    "list-main": 33,
-    "list-title": 33,
     "bar": 32,
-    "textarea": 32,
     "file": 32,
+    "number": 32,
     "bubble": 31,
-    "badge-good": 30,
     "check-text": 30,
-    "nav-link": 30,
+    "list-trail": 29,
     "tooltip": 29,
-    "skeleton": 29,
     "chart-col": 28,
+    "float": 28,
+    "enter-rise": 28,
     "alert-title": 27,
     "alert-body": 27,
     "chip": 27,
-    "list-trail": 27,
     "toast": 27,
+    "lazy": 26,
     "tip": 26,
     "dg-check": 25,
+    "datefield": 25,
     "editor-tool": 25,
-    "segmented": 25,
+    "help": 25,
     "step": 25,
     "dg-pin-start": 24,
-    "datefield": 24,
-    "emoji": 24,
+    "segmented": 24,
     "accordion-body": 23,
+    "chart-bar-fill": 23,
+    "icon-tile-lg": 23,
+    "search": 23,
+    "indicator": 23,
     "list-sub": 23,
-    "chart-bar-fill": 22,
+    "menu": 23,
+    "skeleton-text": 23,
+    "is-done": 23,
     "panel": 22,
+    "copy": 22,
+    "emoji-lg": 22,
     "stack-4": 22,
-    "search": 22,
+    "scroller": 22,
     "step-marker": 22,
     "step-label": 22,
+    "timeline-item": 22,
     "chart-bar": 21,
     "chart-bar-label": 21,
     "chart-bar-track": 21,
     "chart-bar-value": 21,
-    "help": 21,
-    "menu": 21,
-    "scroller": 21,
+    "ring": 21,
+    "timeline-dot": 21,
+    "badge-warn": 20,
+    "is-invalid": 20,
+    "video": 20,
     "grow": 20,
-    "icon-tile-lg": 20,
     "btn-lg": 19,
     "btn-block": 19,
     "dg-wrap": 19,
     "dg": 19,
     "kanban-col": 19,
     "kanban-body": 19,
-    "sidebar-link": 19,
-    "badge-warn": 18,
+    "icon-follow": 18,
     "carousel-slide": 18,
     "chart": 18,
     "bubble-meta": 18,
@@ -117,8 +133,11 @@
     "dg-pin-start-2": 18,
     "kanban-head": 18,
     "kanban-count": 18,
+    "scene": 17,
+    "navbar": 17,
     "carousel": 17,
     "fieldset": 17,
+    "is-open": 17,
     "combo-option": 17,
     "drawer": 17,
     "toast-main": 17,
@@ -126,25 +145,32 @@
     "mono": 17,
     "avatar-sm": 16,
     "cq": 16,
+    "sidebar": 16,
     "mb-2": 16,
+    "btn-3d": 15,
     "truncate": 15,
-    "is-open": 15,
+    "copy-btn": 15,
     "dg-actions": 15,
     "grid-wide": 15,
     "addon": 15,
     "kanban-card": 15,
     "kanban": 15,
-    "lazy": 15,
+    "navbar-brand": 15,
+    "qr": 15,
+    "sidebar-group": 15,
     "alert-info": 14,
     "avatar-lg": 14,
     "chat": 14,
     "btn-soft": 14,
     "card-flex": 14,
     "check-note": 14,
+    "editor": 14,
+    "emoji-tile": 14,
+    "gallery": 14,
+    "progress": 14,
+    "spinner": 14,
     "pop": 14,
-    "is-done": 14,
     "step-note": 14,
-    "tabs": 14,
     "tip-arrow": 14,
     "stat-value": 14,
     "badge-dot": 13,
@@ -152,36 +178,46 @@
     "input-group": 13,
     "carousel-arrow": 13,
     "combo-option-main": 13,
-    "is-invalid": 13,
-    "editor": 13,
+    "copy-done": 13,
+    "error": 13,
+    "icon-muted": 13,
+    "with-indicator": 13,
     "kanban-card-title": 13,
     "menu-label": 13,
-    "enter-rise": 13,
-    "indicator": 13,
+    "phone": 13,
+    "tabs": 13,
+    "pile": 12,
     "accordion": 12,
+    "badge-bad": 12,
     "btn-danger": 12,
     "carousel-track": 12,
     "carousel-dots": 12,
+    "editor-content": 12,
     "required": 12,
+    "g-border": 12,
+    "icon-fill": 12,
+    "indicator-badge": 12,
     "kanban-empty": 12,
     "modal": 12,
-    "icon-follow": 11,
+    "navbar-links": 12,
+    "flip": 11,
     "chart-title": 11,
+    "copy-value": 11,
     "drawer-header": 11,
     "drawer-title": 11,
     "drawer-body": 11,
     "editor-sep": 11,
-    "editor-content": 11,
-    "stack-1": 11,
+    "footer": 11,
+    "footer-bottom": 11,
+    "indicator-warn": 11,
     "kanban-card-meta": 11,
     "stack-0": 11,
+    "was-shaken": 11,
+    "rating-static": 11,
     "sheet-grip": 11,
     "stack-8": 11,
-    "copy": 11,
-    "sidebar-group": 11,
     "drag-handle": 11,
     "avatar-xs": 10,
-    "badge-bad": 10,
     "badge-brand": 10,
     "card-header": 10,
     "fab": 10,
@@ -190,14 +226,15 @@
     "chart-line": 10,
     "bubble-name": 10,
     "check-card": 10,
-    "error": 10,
+    "copy-idle": 10,
+    "masonry": 10,
+    "icon-xl": 10,
+    "phone-flag": 10,
+    "phone-code": 10,
     "sheet": 10,
     "stepper": 10,
-    "icon-muted": 10,
-    "was-shaken": 10,
-    "btn-3d": 9,
+    "timeline": 10,
     "is-loading": 9,
-    "navbar": 9,
     "card-media": 9,
     "card-link": 9,
     "carousel-peek": 9,
@@ -209,14 +246,21 @@
     "has-value": 9,
     "editor-toolbar": 9,
     "editor-count": 9,
+    "form-actions": 9,
+    "footer-col": 9,
+    "span-2": 9,
+    "span-wide": 9,
+    "g-grid-lines": 9,
     "text-cq": 9,
-    "float": 9,
     "menu-sep": 9,
     "menu-item-danger": 9,
     "modal-header": 9,
     "modal-title": 9,
     "modal-body": 9,
     "modal-footer": 9,
+    "enter-start": 9,
+    "pagination": 9,
+    "phone-country": 9,
     "pop-title": 9,
     "pop-body": 9,
     "range-pair": 9,
@@ -224,10 +268,12 @@
     "sheet-header": 9,
     "sheet-title": 9,
     "sheet-body": 9,
+    "cq-shell": 9,
     "center": 9,
     "toast-close": 9,
-    "icon-fill": 9,
     "mega-item": 9,
+    "tilt": 8,
+    "cube": 8,
     "alert-bad": 8,
     "stretch": 8,
     "carousel-prev": 8,
@@ -238,47 +284,67 @@
     "msg-out": 8,
     "combo-token": 8,
     "anchor": 8,
+    "copy-inline": 8,
     "dg-compact": 8,
     "dg-zebra": 8,
+    "float-outline": 8,
+    "footer-heading": 8,
     "grid-2": 8,
+    "stagger": 8,
+    "reveal": 8,
+    "marquee-track": 8,
+    "number-unit": 8,
+    "ring-label": 8,
+    "rating": 8,
     "is-current": 8,
     "toast-icon": 8,
     "toast-action": 8,
-    "copy-value": 8,
-    "copy-btn": 8,
-    "navbar-brand": 8,
+    "video-poster": 8,
+    "video-play": 8,
     "reaction": 8,
     "cq-tone": 8,
     "tone-surface": 8,
     "tone-text": 8,
-    "pile": 8,
-    "indicator-warn": 8,
     "mega-item-title": 8,
     "mega-item-note": 8,
     "tabbar-item": 8,
+    "flip-front": 7,
+    "flip-back": 7,
+    "parallax-layer": 7,
     "avatar-stack": 7,
     "btn-round": 7,
     "btn-group": 7,
     "chart-head": 7,
     "chat-day": 7,
+    "is-copied": 7,
     "dg-sort": 7,
     "datefield-clear": 7,
     "drawer-end": 7,
     "editor-footer": 7,
     "field-row-cq": 7,
-    "form-actions": 7,
+    "g-scrim": 7,
+    "g-dots": 7,
+    "g-hatch": 7,
+    "g-good": 7,
+    "g-warn": 7,
+    "g-bad": 7,
+    "g-mesh": 7,
+    "icon-tile-good": 7,
+    "icon-tile-bad": 7,
     "list-header": 7,
+    "ping": 7,
     "pop-actions": 7,
+    "ring-wrap": 7,
+    "rating-fill": 7,
     "toast-good": 7,
     "toast-text": 7,
     "toast-actions": 7,
-    "copy-done": 7,
-    "sidebar": 7,
-    "spinner": 7,
-    "emoji-tile": 7,
-    "marquee-track": 7,
+    "video-meta": 7,
+    "video-duration": 7,
     "no-flip": 7,
-    "scene": 7,
+    "scene-near": 6,
+    "tilt-lift": 6,
+    "coverflow": 6,
     "alert-warn": 6,
     "actions-cq": 6,
     "s3": 6,
@@ -291,31 +357,48 @@
     "combo-list": 6,
     "dg-virtual": 6,
     "editor-select": 6,
-    "number": 6,
+    "emoji-grid": 6,
+    "footer-grid": 6,
+    "footer-brand": 6,
+    "footer-social": 6,
+    "masonry-3": 6,
+    "g-fade-block": 6,
+    "indicator-badge-dot": 6,
     "menu-match": 6,
+    "press": 6,
+    "sweep": 6,
+    "lift": 6,
+    "scroll-progress": 6,
+    "print-only": 6,
+    "qr-sm": 6,
+    "qr-lg": 6,
     "toast-region": 6,
     "link-quiet": 6,
-    "copy-idle": 6,
     "skip-link": 6,
     "mb-3": 6,
     "stat": 6,
     "stat-label": 6,
     "stat-delta": 6,
-    "icon-xl": 6,
-    "timeline-item": 6,
-    "timeline-dot": 6,
-    "reveal": 6,
-    "ping": 6,
     "tone-icon": 6,
     "writing-vertical": 6,
-    "flip": 6,
-    "gallery": 6,
-    "cq-shell": 6,
     "speed-dial-action": 6,
     "speed-dial-label": 6,
     "speed-dial-button": 6,
     "back-to-top": 6,
     "sortable-chosen": 6,
+    "tilt-lift-sm": 5,
+    "face-front": 5,
+    "face-end": 5,
+    "face-back": 5,
+    "face-start": 5,
+    "face-top": 5,
+    "face-bottom": 5,
+    "parallax": 5,
+    "space": 5,
+    "is-flipped": 5,
+    "is-tilting": 5,
+    "is-fanned": 5,
+    "is-dismissed": 5,
     "avatar-square": 5,
     "is-disabled": 5,
     "carousel-caption": 5,
@@ -342,22 +425,50 @@
     "datepicker-nav": 5,
     "drawer-footer": 5,
     "is-over": 5,
+    "emoji-tile-round": 5,
     "optional": 5,
+    "g-stripes": 5,
+    "g-brand": 5,
+    "g-brand-soft": 5,
+    "g-mesh-drift": 5,
+    "g-mesh-subtle": 5,
+    "g-text": 5,
+    "g-text-shine": 5,
+    "g-border-spin": 5,
+    "g-sheen": 5,
+    "g-ring": 5,
+    "g-ring-spin": 5,
+    "icon-tile-warn": 5,
+    "icon-spin": 5,
+    "indicator-good": 5,
+    "indicator-brand": 5,
+    "is-animating": 5,
+    "reveal-fade": 5,
+    "reveal-pop": 5,
+    "shake": 5,
+    "ripple": 5,
+    "expand": 5,
+    "is-up": 5,
+    "is-down": 5,
+    "number-sm": 5,
+    "phone-status": 5,
+    "is-valid": 5,
+    "skeleton-circle": 5,
     "toast-timer": 5,
     "is-dragging": 5,
-    "scroll-progress": 5,
-    "g-border": 5,
     "status-line": 5,
     "mega-col": 5,
-    "qr": 5,
-    "span-2": 5,
-    "span-wide": 5,
     "speed-dial": 5,
+    "parallax-back": 4,
+    "parallax-mid": 4,
+    "parallax-front": 4,
+    "cube-spin": 4,
     "alert-good": 4,
     "avatar-xl": 4,
     "btn-accent": 4,
     "btn-outline": 4,
     "carousel-dot": 4,
+    "chart-area-g": 4,
     "chart-meter": 4,
     "chart-x": 4,
     "sparkline": 4,
@@ -370,52 +481,43 @@
     "container-full": 4,
     "dg-cq": 4,
     "dg-cards-wrap": 4,
-    "dg-toolbar": 4,
     "datepicker": 4,
     "datepicker-title": 4,
-    "float-outline": 4,
+    "emoji-xl": 4,
+    "emoji-hero": 4,
+    "is-loaded": 4,
+    "g-shimmer": 4,
     "list-virtual": 4,
+    "flash-good": 4,
+    "pulse": 4,
+    "marquee": 4,
+    "text-good": 4,
+    "no-print": 4,
+    "keep-together": 4,
+    "qr-logo": 4,
     "range-ticks": 4,
     "stepper-vertical": 4,
     "stepper-auto": 4,
+    "video-square": 4,
+    "video-portrait": 4,
+    "video-wide": 4,
     "banner": 4,
     "theme-dock": 4,
-    "navbar-links": 4,
     "display": 4,
     "stat-delta-up": 4,
     "text-inherit": 4,
-    "icon-tile-good": 4,
-    "icon-tile-bad": 4,
-    "skeleton-text": 4,
     "mt-1": 4,
     "s4": 4,
-    "reveal-fade": 4,
-    "reveal-pop": 4,
-    "ripple": 4,
-    "expand": 4,
     "code-ltr": 4,
-    "flip-front": 4,
-    "flip-back": 4,
-    "tilt": 4,
-    "space": 4,
-    "coverflow": 4,
     "mega": 4,
     "mega-heading": 4,
-    "phone": 4,
-    "rating": 4,
-    "masonry": 4,
-    "is-fanned": 4,
-    "shake": 4,
-    "is-copied": 4,
-    "is-up": 4,
-    "is-down": 4,
-    "is-tilting": 4,
-    "is-flipped": 4,
-    "is-dismissed": 4,
-    "is-animating": 4,
+    "flip-hover": 3,
+    "flip-x": 3,
+    "is-front": 3,
+    "is-behind-start": 3,
+    "is-behind-end": 3,
     "disclosure": 3,
     "chart-sm": 3,
-    "chart-area-g": 3,
     "chart-col-stack": 3,
     "chart-baseline": 3,
     "chart-line-dashed": 3,
@@ -431,6 +533,7 @@
     "dg-selection": 3,
     "dg-sort-icon": 3,
     "dg-statusbar": 3,
+    "dg-toolbar": 3,
     "is-scrolled-end": 3,
     "is-scrolled-x": 3,
     "datepicker-dow": 3,
@@ -449,8 +552,28 @@
     "is-range-start": 3,
     "is-selected": 3,
     "editor-tool-wide": 3,
+    "g-surface": 3,
+    "g-sunken": 3,
+    "g-dark": 3,
+    "g-border-soft": 3,
+    "g-scrim-top": 3,
+    "g-fade-inline": 3,
+    "g-fade-end": 3,
+    "g-fade-more": 3,
+    "g-conic": 3,
+    "g-bar-fill": 3,
     "grid-fixed-3": 3,
     "fixed": 3,
+    "indicator-bad": 3,
+    "transition": 3,
+    "is-revealed": 3,
+    "flash": 3,
+    "tick": 3,
+    "print-keep": 3,
+    "spinner-lg": 3,
+    "qr-logo-mark": 3,
+    "qr-caption": 3,
+    "rating-sm": 3,
     "split-rail-start": 3,
     "toast-warn": 3,
     "toast-bad": 3,
@@ -460,59 +583,20 @@
     "is-leaving": 3,
     "banner-close": 3,
     "mt-4": 3,
-    "emoji-grid": 3,
-    "stagger": 3,
-    "lift": 3,
-    "press": 3,
-    "sweep": 3,
-    "pulse": 3,
-    "marquee": 3,
     "writing-upright": 3,
-    "g-mesh": 3,
-    "g-mesh-drift": 3,
     "display-cq": 3,
-    "g-text": 3,
-    "g-border-spin": 3,
-    "g-text-shine": 3,
-    "g-sheen": 3,
-    "g-good": 3,
-    "g-warn": 3,
-    "g-bad": 3,
-    "g-ring": 3,
-    "g-ring-spin": 3,
-    "g-grid-lines": 3,
-    "g-dots": 3,
-    "g-hatch": 3,
-    "g-scrim": 3,
-    "g-brand-soft": 3,
-    "scene-near": 3,
-    "tilt-lift": 3,
-    "cube": 3,
-    "cube-spin": 3,
-    "with-indicator": 3,
-    "indicator-badge": 3,
     "mega-grid": 3,
     "mega-feature": 3,
     "mega-footer": 3,
-    "number-unit": 3,
-    "phone-flag": 3,
-    "phone-code": 3,
-    "qr-sm": 3,
-    "video": 3,
-    "video-poster": 3,
-    "video-play": 3,
     "jumbotron": 3,
     "jumbotron-center": 3,
-    "g-mesh-subtle": 3,
-    "print-only": 3,
-    "flash-good": 3,
-    "copy-inline": 3,
     "is-visible": 3,
     "defer": 3,
-    "footer": 3,
-    "footer-bottom": 3,
     "relative": 3,
     "prose": 3,
+    "scene-far": 2,
+    "turn-in": 2,
+    "turn-out": 2,
     "badge-solid": 2,
     "btn-link": 2,
     "ratio-16x9": 2,
@@ -529,63 +613,68 @@
     "is-outside": 2,
     "is-today": 2,
     "form-actions-sticky": 2,
+    "g-mesh-warm": 2,
+    "g-hairline": 2,
     "is-lifted": 2,
     "reorder": 2,
+    "transition-colors": 2,
+    "transition-move": 2,
+    "transition-opacity": 2,
+    "transition-size": 2,
+    "dur-1": 2,
+    "dur-5": 2,
+    "ease-in": 2,
+    "ease-out": 2,
+    "ease-linear": 2,
+    "ease-spring": 2,
+    "ease-bounce": 2,
+    "ease-overshoot": 2,
+    "delay-1": 2,
+    "delay-2": 2,
+    "delay-3": 2,
+    "no-motion": 2,
+    "enter": 2,
+    "enter-blur": 2,
+    "enter-drop": 2,
+    "enter-end": 2,
+    "enter-pop": 2,
+    "shrink-on-scroll": 2,
+    "nudge": 2,
+    "ripple-ink": 2,
+    "vt-hold": 2,
+    "vt-header": 2,
+    "vt-main": 2,
+    "vt-tabbar": 2,
+    "page-break": 2,
+    "page-break-after": 2,
+    "print-header": 2,
+    "print-footer": 2,
+    "no-print-url": 2,
     "table-compact": 2,
     "toast-region-center": 2,
     "toast-region-start": 2,
     "toast-region-top": 2,
     "mb-1": 2,
     "stat-delta-down": 2,
-    "icon-tile-warn": 2,
-    "progress": 2,
-    "ring-wrap": 2,
-    "ring": 2,
-    "ring-label": 2,
-    "skeleton-circle": 2,
-    "pagination": 2,
-    "timeline": 2,
-    "emoji-tile-round": 2,
     "empty": 2,
     "empty-art": 2,
     "empty-title": 2,
     "s5": 2,
-    "tilt-lift-sm": 2,
-    "face-front": 2,
-    "face-back": 2,
-    "face-end": 2,
-    "face-start": 2,
-    "face-top": 2,
-    "face-bottom": 2,
-    "indicator-good": 2,
-    "phone-country": 2,
-    "phone-status": 2,
-    "text-good": 2,
-    "video-meta": 2,
-    "video-duration": 2,
-    "masonry-3": 2,
     "jumbotron-actions": 2,
     "mt-2": 2,
-    "indicator-brand": 2,
     "speed-dial-actions": 2,
     "tabbar": 2,
-    "flash": 2,
-    "rating-static": 2,
     "sortable-ghost": 2,
     "sortable-drag": 2,
-    "qr-caption": 2,
-    "is-valid": 2,
-    "is-loaded": 2,
-    "is-revealed": 2,
-    "tick": 2,
-    "is-front": 2,
-    "is-behind-start": 2,
-    "is-behind-end": 2,
-    "flip-x": 2,
-    "print-keep": 2,
-    "transition": 2,
     "w-full": 2,
+    "md": 2,
     "gap-2": 2,
+    "flat": 1,
+    "backface-hidden": 1,
+    "z-lift-1": 1,
+    "z-lift-2": 1,
+    "z-lift-3": 1,
+    "z-sink": 1,
     "square": 1,
     "chart-dot": 1,
     "chart-dot-active": 1,
@@ -603,50 +692,27 @@
     "datepicker-time": 1,
     "is-preview": 1,
     "hidden": 1,
+    "masonry-2": 1,
+    "lazy-blur": 1,
+    "lazy-block": 1,
     "grid-fixed-2": 1,
     "grid-fixed-4": 1,
+    "indicator-badge-brand": 1,
+    "indicator-lg": 1,
+    "indicator-ring": 1,
+    "dur-2": 1,
+    "dur-3": 1,
+    "dur-4": 1,
+    "will-move": 1,
+    "stagger-fast": 1,
+    "stagger-slow": 1,
+    "reveal-late": 1,
+    "fade-swap": 1,
+    "rating-lg": 1,
     "toast-loading": 1,
+    "video-cover": 1,
     "h2": 1,
     "sticky": 1,
-    "ripple-ink": 1,
-    "emoji-lg": 1,
-    "emoji-xl": 1,
-    "emoji-hero": 1,
-    "page-break": 1,
-    "page-break-after": 1,
-    "keep-together": 1,
-    "no-print": 1,
-    "no-print-url": 1,
-    "print-header": 1,
-    "print-footer": 1,
-    "transition-colors": 1,
-    "transition-move": 1,
-    "transition-size": 1,
-    "transition-opacity": 1,
-    "dur-1": 1,
-    "dur-5": 1,
-    "ease-out": 1,
-    "ease-in": 1,
-    "ease-spring": 1,
-    "ease-bounce": 1,
-    "ease-overshoot": 1,
-    "ease-linear": 1,
-    "delay-1": 1,
-    "delay-2": 1,
-    "delay-3": 1,
-    "no-motion": 1,
-    "enter": 1,
-    "enter-drop": 1,
-    "enter-start": 1,
-    "enter-end": 1,
-    "enter-pop": 1,
-    "enter-blur": 1,
-    "shrink-on-scroll": 1,
-    "nudge": 1,
-    "vt-header": 1,
-    "vt-main": 1,
-    "vt-tabbar": 1,
-    "vt-hold": 1,
     "cq-size": 1,
     "cq-panel": 1,
     "cq-pane": 1,
@@ -670,54 +736,22 @@
     "h-full": 1,
     "writing-sideways": 1,
     "th-vertical": 1,
-    "g-surface": 1,
-    "g-sunken": 1,
-    "g-brand": 1,
-    "g-dark": 1,
-    "g-border-soft": 1,
-    "g-scrim-top": 1,
-    "g-fade-inline": 1,
-    "g-fade-end": 1,
-    "g-fade-block": 1,
-    "g-fade-more": 1,
-    "g-stripes": 1,
-    "g-conic": 1,
-    "g-shimmer": 1,
-    "g-bar-fill": 1,
-    "scene-far": 1,
-    "parallax": 1,
-    "parallax-back": 1,
-    "parallax-mid": 1,
-    "parallax-front": 1,
-    "turn-out": 1,
-    "turn-in": 1,
     "banner-bottom": 1,
-    "video-square": 1,
-    "video-portrait": 1,
-    "video-wide": 1,
-    "qr-lg": 1,
-    "qr-logo": 1,
-    "indicator-badge-dot": 1,
     "jumbotron-media": 1,
-    "footer-grid": 1,
-    "footer-brand": 1,
-    "footer-col": 1,
-    "footer-heading": 1,
-    "footer-social": 1,
     "virtual": 1,
     "contain": 1,
     "contain-paint": 1,
-    "md": 1,
-    "min-is-0": 1,
-    "icon-spin": 1
+    "min-is-0": 1
   },
   "where": {
     "breadcrumb": [
+      "public_html/docs/components/3d.php",
       "public_html/docs/components/accordion.php",
       "public_html/docs/components/alert.php",
       "public_html/docs/components/avatar.php",
       "public_html/docs/components/badge.php",
       "public_html/docs/components/bar.php",
+      "public_html/docs/components/breadcrumb.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
       "public_html/docs/components/carousel.php",
@@ -727,26 +761,45 @@
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/copy.php",
       "public_html/docs/components/datagrid.php",
       "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/editor.php",
+      "public_html/docs/components/emoji.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
+      "public_html/docs/components/float.php",
+      "public_html/docs/components/footer.php",
+      "public_html/docs/components/gallery.php",
+      "public_html/docs/components/gradients.php",
       "public_html/docs/components/grid.php",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/indicator.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/kanban.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/modal.php",
+      "public_html/docs/components/motion.php",
+      "public_html/docs/components/nav.php",
+      "public_html/docs/components/number.php",
+      "public_html/docs/components/pagination.php",
+      "public_html/docs/components/phone.php",
       "public_html/docs/components/popover.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/progress.php",
+      "public_html/docs/components/qr.php",
       "public_html/docs/components/range.php",
+      "public_html/docs/components/rating.php",
       "public_html/docs/components/scroller.php",
       "public_html/docs/components/section.php",
       "public_html/docs/components/segmented.php",
       "public_html/docs/components/select.php",
       "public_html/docs/components/sheet.php",
+      "public_html/docs/components/sidebar.php",
+      "public_html/docs/components/skeleton.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/stepper.php",
@@ -754,8 +807,10 @@
       "public_html/docs/components/table.php",
       "public_html/docs/components/tabs.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/components/timeline.php",
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
+      "public_html/docs/components/video.php",
       "public_html/index.php"
     ],
     "cluster": [
@@ -763,11 +818,13 @@
       "README.md",
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
+      "public_html/docs/components/3d.php",
       "public_html/docs/components/accordion.php",
       "public_html/docs/components/alert.php",
       "public_html/docs/components/avatar.php",
       "public_html/docs/components/badge.php",
       "public_html/docs/components/bar.php",
+      "public_html/docs/components/breadcrumb.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
       "public_html/docs/components/carousel.php",
@@ -777,26 +834,45 @@
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/copy.php",
       "public_html/docs/components/datagrid.php",
       "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/editor.php",
+      "public_html/docs/components/emoji.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
+      "public_html/docs/components/float.php",
+      "public_html/docs/components/footer.php",
+      "public_html/docs/components/gallery.php",
+      "public_html/docs/components/gradients.php",
       "public_html/docs/components/grid.php",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/indicator.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/kanban.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/modal.php",
+      "public_html/docs/components/motion.php",
+      "public_html/docs/components/nav.php",
+      "public_html/docs/components/number.php",
+      "public_html/docs/components/pagination.php",
+      "public_html/docs/components/phone.php",
       "public_html/docs/components/popover.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/progress.php",
+      "public_html/docs/components/qr.php",
       "public_html/docs/components/range.php",
+      "public_html/docs/components/rating.php",
       "public_html/docs/components/scroller.php",
       "public_html/docs/components/section.php",
       "public_html/docs/components/segmented.php",
       "public_html/docs/components/select.php",
       "public_html/docs/components/sheet.php",
+      "public_html/docs/components/sidebar.php",
+      "public_html/docs/components/skeleton.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/stepper.php",
@@ -804,18 +880,22 @@
       "public_html/docs/components/table.php",
       "public_html/docs/components/tabs.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/components/timeline.php",
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
+      "public_html/docs/components/video.php",
       "public_html/index.php",
       "public_html/llms.txt"
     ],
     "cluster-tight": [
       "FINDINGS.md",
+      "public_html/docs/components/3d.php",
       "public_html/docs/components/accordion.php",
       "public_html/docs/components/alert.php",
       "public_html/docs/components/avatar.php",
       "public_html/docs/components/badge.php",
       "public_html/docs/components/bar.php",
+      "public_html/docs/components/breadcrumb.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
       "public_html/docs/components/carousel.php",
@@ -825,26 +905,45 @@
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/copy.php",
       "public_html/docs/components/datagrid.php",
       "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/editor.php",
+      "public_html/docs/components/emoji.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
+      "public_html/docs/components/float.php",
+      "public_html/docs/components/footer.php",
+      "public_html/docs/components/gallery.php",
+      "public_html/docs/components/gradients.php",
       "public_html/docs/components/grid.php",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/indicator.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/kanban.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/modal.php",
+      "public_html/docs/components/motion.php",
+      "public_html/docs/components/nav.php",
+      "public_html/docs/components/number.php",
+      "public_html/docs/components/pagination.php",
+      "public_html/docs/components/phone.php",
       "public_html/docs/components/popover.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/progress.php",
+      "public_html/docs/components/qr.php",
       "public_html/docs/components/range.php",
+      "public_html/docs/components/rating.php",
       "public_html/docs/components/scroller.php",
       "public_html/docs/components/section.php",
       "public_html/docs/components/segmented.php",
       "public_html/docs/components/select.php",
       "public_html/docs/components/sheet.php",
+      "public_html/docs/components/sidebar.php",
+      "public_html/docs/components/skeleton.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/stepper.php",
@@ -852,17 +951,21 @@
       "public_html/docs/components/table.php",
       "public_html/docs/components/tabs.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/components/timeline.php",
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
+      "public_html/docs/components/video.php",
       "public_html/index.php"
     ],
     "stack-3": [
       "public_html/docs/_layout.php",
+      "public_html/docs/components/3d.php",
       "public_html/docs/components/accordion.php",
       "public_html/docs/components/alert.php",
       "public_html/docs/components/avatar.php",
       "public_html/docs/components/badge.php",
       "public_html/docs/components/bar.php",
+      "public_html/docs/components/breadcrumb.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
       "public_html/docs/components/carousel.php",
@@ -872,26 +975,45 @@
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/copy.php",
       "public_html/docs/components/datagrid.php",
       "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/editor.php",
+      "public_html/docs/components/emoji.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
+      "public_html/docs/components/float.php",
+      "public_html/docs/components/footer.php",
+      "public_html/docs/components/gallery.php",
+      "public_html/docs/components/gradients.php",
       "public_html/docs/components/grid.php",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/indicator.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/kanban.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/modal.php",
+      "public_html/docs/components/motion.php",
+      "public_html/docs/components/nav.php",
+      "public_html/docs/components/number.php",
+      "public_html/docs/components/pagination.php",
+      "public_html/docs/components/phone.php",
       "public_html/docs/components/popover.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/progress.php",
+      "public_html/docs/components/qr.php",
       "public_html/docs/components/range.php",
+      "public_html/docs/components/rating.php",
       "public_html/docs/components/scroller.php",
       "public_html/docs/components/section.php",
       "public_html/docs/components/segmented.php",
       "public_html/docs/components/select.php",
       "public_html/docs/components/sheet.php",
+      "public_html/docs/components/sidebar.php",
+      "public_html/docs/components/skeleton.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/stepper.php",
@@ -899,8 +1021,10 @@
       "public_html/docs/components/table.php",
       "public_html/docs/components/tabs.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/components/timeline.php",
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
+      "public_html/docs/components/video.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
       "public_html/index.php",
@@ -908,11 +1032,13 @@
     ],
     "lede": [
       "bin/deck.mjs",
+      "public_html/docs/components/3d.php",
       "public_html/docs/components/accordion.php",
       "public_html/docs/components/alert.php",
       "public_html/docs/components/avatar.php",
       "public_html/docs/components/badge.php",
       "public_html/docs/components/bar.php",
+      "public_html/docs/components/breadcrumb.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
       "public_html/docs/components/carousel.php",
@@ -922,26 +1048,45 @@
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/copy.php",
       "public_html/docs/components/datagrid.php",
       "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/editor.php",
+      "public_html/docs/components/emoji.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
+      "public_html/docs/components/float.php",
+      "public_html/docs/components/footer.php",
+      "public_html/docs/components/gallery.php",
+      "public_html/docs/components/gradients.php",
       "public_html/docs/components/grid.php",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/indicator.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/kanban.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/modal.php",
+      "public_html/docs/components/motion.php",
+      "public_html/docs/components/nav.php",
+      "public_html/docs/components/number.php",
+      "public_html/docs/components/pagination.php",
+      "public_html/docs/components/phone.php",
       "public_html/docs/components/popover.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/progress.php",
+      "public_html/docs/components/qr.php",
       "public_html/docs/components/range.php",
+      "public_html/docs/components/rating.php",
       "public_html/docs/components/scroller.php",
       "public_html/docs/components/section.php",
       "public_html/docs/components/segmented.php",
       "public_html/docs/components/select.php",
       "public_html/docs/components/sheet.php",
+      "public_html/docs/components/sidebar.php",
+      "public_html/docs/components/skeleton.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/stepper.php",
@@ -949,12 +1094,508 @@
       "public_html/docs/components/table.php",
       "public_html/docs/components/tabs.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/components/timeline.php",
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
+      "public_html/docs/components/video.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
       "public_html/index.php",
       "public_html/php-helper.php"
+    ],
+    "text-muted": [
+      "FINDINGS.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/3d.php",
+      "public_html/docs/components/accordion.php",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/bar.php",
+      "public_html/docs/components/breadcrumb.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/chat.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
+      "public_html/docs/components/container.php",
+      "public_html/docs/components/copy.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/drawer.php",
+      "public_html/docs/components/editor.php",
+      "public_html/docs/components/emoji.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/fieldset.php",
+      "public_html/docs/components/file.php",
+      "public_html/docs/components/float.php",
+      "public_html/docs/components/footer.php",
+      "public_html/docs/components/gallery.php",
+      "public_html/docs/components/gradients.php",
+      "public_html/docs/components/grid.php",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/indicator.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/kanban.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/motion.php",
+      "public_html/docs/components/nav.php",
+      "public_html/docs/components/number.php",
+      "public_html/docs/components/pagination.php",
+      "public_html/docs/components/phone.php",
+      "public_html/docs/components/popover.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/progress.php",
+      "public_html/docs/components/qr.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/rating.php",
+      "public_html/docs/components/scroller.php",
+      "public_html/docs/components/section.php",
+      "public_html/docs/components/segmented.php",
+      "public_html/docs/components/select.php",
+      "public_html/docs/components/sheet.php",
+      "public_html/docs/components/sidebar.php",
+      "public_html/docs/components/skeleton.php",
+      "public_html/docs/components/split.php",
+      "public_html/docs/components/stack.php",
+      "public_html/docs/components/stepper.php",
+      "public_html/docs/components/switch.php",
+      "public_html/docs/components/table.php",
+      "public_html/docs/components/tabs.php",
+      "public_html/docs/components/textarea.php",
+      "public_html/docs/components/timeline.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
+      "public_html/docs/components/video.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-extras.js"
+    ],
+    "stack-2": [
+      "FINDINGS.md",
+      "public_html/docs/components/3d.php",
+      "public_html/docs/components/accordion.php",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/bar.php",
+      "public_html/docs/components/breadcrumb.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/chat.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
+      "public_html/docs/components/container.php",
+      "public_html/docs/components/copy.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/drawer.php",
+      "public_html/docs/components/editor.php",
+      "public_html/docs/components/emoji.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/fieldset.php",
+      "public_html/docs/components/file.php",
+      "public_html/docs/components/float.php",
+      "public_html/docs/components/footer.php",
+      "public_html/docs/components/gallery.php",
+      "public_html/docs/components/gradients.php",
+      "public_html/docs/components/grid.php",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/indicator.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/kanban.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/motion.php",
+      "public_html/docs/components/nav.php",
+      "public_html/docs/components/number.php",
+      "public_html/docs/components/pagination.php",
+      "public_html/docs/components/phone.php",
+      "public_html/docs/components/popover.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/progress.php",
+      "public_html/docs/components/qr.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/rating.php",
+      "public_html/docs/components/scroller.php",
+      "public_html/docs/components/section.php",
+      "public_html/docs/components/segmented.php",
+      "public_html/docs/components/select.php",
+      "public_html/docs/components/sheet.php",
+      "public_html/docs/components/sidebar.php",
+      "public_html/docs/components/skeleton.php",
+      "public_html/docs/components/split.php",
+      "public_html/docs/components/stack.php",
+      "public_html/docs/components/stepper.php",
+      "public_html/docs/components/switch.php",
+      "public_html/docs/components/table.php",
+      "public_html/docs/components/tabs.php",
+      "public_html/docs/components/textarea.php",
+      "public_html/docs/components/timeline.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
+      "public_html/docs/components/video.php",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "scene": [
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "flip": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "flip-hover": [
+      "public_html/docs/components/3d.php"
+    ],
+    "card": [
+      "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/components/3d.php",
+      "public_html/docs/components/bar.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/grid.php",
+      "public_html/docs/components/motion.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/scroller.php",
+      "public_html/docs/components/sidebar.php",
+      "public_html/docs/components/skeleton.php",
+      "public_html/docs/components/split.php",
+      "public_html/docs/components/stack.php",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "flip-front": [
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "stack-1": [
+      "public_html/docs/components/3d.php",
+      "public_html/docs/components/grid.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/scroller.php",
+      "public_html/docs/components/skeleton.php",
+      "public_html/docs/components/stack.php",
+      "public_html/docs/components/timeline.php",
+      "public_html/index.php"
+    ],
+    "flip-back": [
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "scene-near": [
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "tilt": [
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "tilt-lift": [
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "tilt-lift-sm": [
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "pile": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "cube": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "face-front": [
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "face-end": [
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "face-back": [
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "face-start": [
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "face-top": [
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "face-bottom": [
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "btn": [
+      "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/3d.php",
+      "public_html/docs/components/bar.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/chat.php",
+      "public_html/docs/components/cluster.php",
+      "public_html/docs/components/copy.php",
+      "public_html/docs/components/drawer.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/indicator.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/motion.php",
+      "public_html/docs/components/nav.php",
+      "public_html/docs/components/popover.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/segmented.php",
+      "public_html/docs/components/sheet.php",
+      "public_html/docs/components/stack.php",
+      "public_html/docs/components/tooltip.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck.js"
+    ],
+    "btn-primary": [
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/3d.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/chat.php",
+      "public_html/docs/components/cluster.php",
+      "public_html/docs/components/drawer.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/popover.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/sheet.php",
+      "public_html/docs/components/stack.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "btn-3d": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/docs/components/button.php",
+      "public_html/index.php"
+    ],
+    "parallax": [
+      "README.md",
+      "public_html/docs/components/3d.php"
+    ],
+    "parallax-layer": [
+      "public_html/docs/components/3d.php"
+    ],
+    "parallax-back": [
+      "README.md",
+      "public_html/docs/components/3d.php"
+    ],
+    "parallax-mid": [
+      "README.md",
+      "public_html/docs/components/3d.php"
+    ],
+    "parallax-front": [
+      "README.md",
+      "public_html/docs/components/3d.php"
+    ],
+    "scene-far": [
+      "README.md",
+      "public_html/docs/components/3d.php"
+    ],
+    "space": [
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "flat": [
+      "public_html/docs/components/3d.php"
+    ],
+    "backface-hidden": [
+      "public_html/docs/components/3d.php"
+    ],
+    "flip-x": [
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "src/js/deck.js"
+    ],
+    "is-flipped": [
+      "public_html/docs/components/3d.php",
+      "src/js/deck.js"
+    ],
+    "is-tilting": [
+      "public_html/docs/components/3d.php",
+      "src/js/deck.js"
+    ],
+    "is-fanned": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "is-dismissed": [
+      "FINDINGS.md",
+      "public_html/docs/components/3d.php",
+      "src/js/deck.js"
+    ],
+    "coverflow": [
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "is-front": [
+      "public_html/docs/components/3d.php",
+      "src/js/deck.js"
+    ],
+    "is-behind-start": [
+      "public_html/docs/components/3d.php",
+      "src/js/deck.js"
+    ],
+    "is-behind-end": [
+      "public_html/docs/components/3d.php",
+      "src/js/deck.js"
+    ],
+    "cube-spin": [
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/index.php"
+    ],
+    "turn-in": [
+      "README.md",
+      "public_html/docs/components/3d.php"
+    ],
+    "turn-out": [
+      "README.md",
+      "public_html/docs/components/3d.php"
+    ],
+    "z-lift-1": [
+      "public_html/docs/components/3d.php"
+    ],
+    "z-lift-2": [
+      "public_html/docs/components/3d.php"
+    ],
+    "z-lift-3": [
+      "public_html/docs/components/3d.php"
+    ],
+    "z-sink": [
+      "public_html/docs/components/3d.php"
+    ],
+    "stack": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/3d.php",
+      "public_html/docs/components/accordion.php",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/bar.php",
+      "public_html/docs/components/breadcrumb.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/chat.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
+      "public_html/docs/components/container.php",
+      "public_html/docs/components/copy.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/drawer.php",
+      "public_html/docs/components/editor.php",
+      "public_html/docs/components/emoji.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/fieldset.php",
+      "public_html/docs/components/file.php",
+      "public_html/docs/components/float.php",
+      "public_html/docs/components/footer.php",
+      "public_html/docs/components/gallery.php",
+      "public_html/docs/components/gradients.php",
+      "public_html/docs/components/grid.php",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/indicator.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/kanban.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/motion.php",
+      "public_html/docs/components/nav.php",
+      "public_html/docs/components/number.php",
+      "public_html/docs/components/pagination.php",
+      "public_html/docs/components/phone.php",
+      "public_html/docs/components/popover.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/progress.php",
+      "public_html/docs/components/qr.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/rating.php",
+      "public_html/docs/components/scroller.php",
+      "public_html/docs/components/section.php",
+      "public_html/docs/components/segmented.php",
+      "public_html/docs/components/select.php",
+      "public_html/docs/components/sheet.php",
+      "public_html/docs/components/sidebar.php",
+      "public_html/docs/components/skeleton.php",
+      "public_html/docs/components/split.php",
+      "public_html/docs/components/stack.php",
+      "public_html/docs/components/stepper.php",
+      "public_html/docs/components/switch.php",
+      "public_html/docs/components/table.php",
+      "public_html/docs/components/tabs.php",
+      "public_html/docs/components/textarea.php",
+      "public_html/docs/components/timeline.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
+      "public_html/docs/components/video.php",
+      "public_html/llms.txt"
     ],
     "accordion": [
       "FINDINGS.md",
@@ -979,6 +1620,7 @@
       "public_html/docs/components/editor.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/file.php",
+      "public_html/docs/components/gradients.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/list.php",
@@ -994,159 +1636,9 @@
       "public_html/docs/components/tooltip.php",
       "public_html/index.php",
       "public_html/php-helper.php"
-    ],
-    "stack-2": [
-      "FINDINGS.md",
-      "public_html/docs/components/accordion.php",
-      "public_html/docs/components/alert.php",
-      "public_html/docs/components/avatar.php",
-      "public_html/docs/components/badge.php",
-      "public_html/docs/components/bar.php",
-      "public_html/docs/components/button.php",
-      "public_html/docs/components/card.php",
-      "public_html/docs/components/carousel.php",
-      "public_html/docs/components/charts.php",
-      "public_html/docs/components/chat.php",
-      "public_html/docs/components/check.php",
-      "public_html/docs/components/cluster.php",
-      "public_html/docs/components/combobox.php",
-      "public_html/docs/components/container.php",
-      "public_html/docs/components/datagrid.php",
-      "public_html/docs/components/datepicker.php",
-      "public_html/docs/components/drawer.php",
-      "public_html/docs/components/editor.php",
-      "public_html/docs/components/field.php",
-      "public_html/docs/components/fieldset.php",
-      "public_html/docs/components/file.php",
-      "public_html/docs/components/grid.php",
-      "public_html/docs/components/input.php",
-      "public_html/docs/components/kanban.php",
-      "public_html/docs/components/list.php",
-      "public_html/docs/components/menu.php",
-      "public_html/docs/components/modal.php",
-      "public_html/docs/components/popover.php",
-      "public_html/docs/components/range.php",
-      "public_html/docs/components/scroller.php",
-      "public_html/docs/components/section.php",
-      "public_html/docs/components/segmented.php",
-      "public_html/docs/components/select.php",
-      "public_html/docs/components/sheet.php",
-      "public_html/docs/components/split.php",
-      "public_html/docs/components/stack.php",
-      "public_html/docs/components/stepper.php",
-      "public_html/docs/components/switch.php",
-      "public_html/docs/components/table.php",
-      "public_html/docs/components/tabs.php",
-      "public_html/docs/components/textarea.php",
-      "public_html/docs/components/toast.php",
-      "public_html/docs/components/tooltip.php",
-      "public_html/docs/index.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "text-muted": [
-      "FINDINGS.md",
-      "bin/deck.mjs",
-      "public_html/docs/_layout.php",
-      "public_html/docs/components/accordion.php",
-      "public_html/docs/components/alert.php",
-      "public_html/docs/components/avatar.php",
-      "public_html/docs/components/badge.php",
-      "public_html/docs/components/bar.php",
-      "public_html/docs/components/button.php",
-      "public_html/docs/components/card.php",
-      "public_html/docs/components/carousel.php",
-      "public_html/docs/components/charts.php",
-      "public_html/docs/components/chat.php",
-      "public_html/docs/components/check.php",
-      "public_html/docs/components/cluster.php",
-      "public_html/docs/components/combobox.php",
-      "public_html/docs/components/container.php",
-      "public_html/docs/components/datagrid.php",
-      "public_html/docs/components/datepicker.php",
-      "public_html/docs/components/drawer.php",
-      "public_html/docs/components/editor.php",
-      "public_html/docs/components/field.php",
-      "public_html/docs/components/fieldset.php",
-      "public_html/docs/components/file.php",
-      "public_html/docs/components/grid.php",
-      "public_html/docs/components/input.php",
-      "public_html/docs/components/kanban.php",
-      "public_html/docs/components/list.php",
-      "public_html/docs/components/menu.php",
-      "public_html/docs/components/modal.php",
-      "public_html/docs/components/popover.php",
-      "public_html/docs/components/range.php",
-      "public_html/docs/components/scroller.php",
-      "public_html/docs/components/section.php",
-      "public_html/docs/components/segmented.php",
-      "public_html/docs/components/select.php",
-      "public_html/docs/components/sheet.php",
-      "public_html/docs/components/split.php",
-      "public_html/docs/components/stack.php",
-      "public_html/docs/components/stepper.php",
-      "public_html/docs/components/switch.php",
-      "public_html/docs/components/table.php",
-      "public_html/docs/components/tabs.php",
-      "public_html/docs/components/textarea.php",
-      "public_html/docs/components/toast.php",
-      "public_html/docs/components/tooltip.php",
-      "public_html/docs/index.php",
-      "public_html/docs/search.php",
-      "public_html/index.php",
-      "public_html/php-helper.php",
-      "src/js/deck-extras.js"
     ],
     "disclosure": [
       "public_html/docs/components/accordion.php"
-    ],
-    "stack": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/docs/components/accordion.php",
-      "public_html/docs/components/alert.php",
-      "public_html/docs/components/avatar.php",
-      "public_html/docs/components/badge.php",
-      "public_html/docs/components/bar.php",
-      "public_html/docs/components/button.php",
-      "public_html/docs/components/card.php",
-      "public_html/docs/components/carousel.php",
-      "public_html/docs/components/charts.php",
-      "public_html/docs/components/chat.php",
-      "public_html/docs/components/check.php",
-      "public_html/docs/components/cluster.php",
-      "public_html/docs/components/combobox.php",
-      "public_html/docs/components/container.php",
-      "public_html/docs/components/datagrid.php",
-      "public_html/docs/components/datepicker.php",
-      "public_html/docs/components/drawer.php",
-      "public_html/docs/components/editor.php",
-      "public_html/docs/components/field.php",
-      "public_html/docs/components/fieldset.php",
-      "public_html/docs/components/file.php",
-      "public_html/docs/components/grid.php",
-      "public_html/docs/components/input.php",
-      "public_html/docs/components/kanban.php",
-      "public_html/docs/components/list.php",
-      "public_html/docs/components/menu.php",
-      "public_html/docs/components/modal.php",
-      "public_html/docs/components/popover.php",
-      "public_html/docs/components/range.php",
-      "public_html/docs/components/scroller.php",
-      "public_html/docs/components/section.php",
-      "public_html/docs/components/segmented.php",
-      "public_html/docs/components/select.php",
-      "public_html/docs/components/sheet.php",
-      "public_html/docs/components/split.php",
-      "public_html/docs/components/stack.php",
-      "public_html/docs/components/stepper.php",
-      "public_html/docs/components/switch.php",
-      "public_html/docs/components/table.php",
-      "public_html/docs/components/tabs.php",
-      "public_html/docs/components/textarea.php",
-      "public_html/docs/components/toast.php",
-      "public_html/docs/components/tooltip.php",
-      "public_html/llms.txt"
     ],
     "alert": [
       "public_html/docs/components/alert.php",
@@ -1188,16 +1680,30 @@
       "public_html/docs/components/chat.php",
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/combobox.php",
+      "public_html/docs/components/copy.php",
       "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/file.php",
+      "public_html/docs/components/float.php",
+      "public_html/docs/components/footer.php",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/indicator.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
+      "public_html/docs/components/motion.php",
+      "public_html/docs/components/nav.php",
+      "public_html/docs/components/pagination.php",
+      "public_html/docs/components/phone.php",
+      "public_html/docs/components/qr.php",
+      "public_html/docs/components/rating.php",
       "public_html/docs/components/sheet.php",
+      "public_html/docs/components/sidebar.php",
+      "public_html/docs/components/timeline.php",
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
+      "public_html/docs/components/video.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
       "public_html/index.php",
@@ -1219,6 +1725,7 @@
       "FINDINGS.md",
       "public_html/docs/components/avatar.php",
       "public_html/docs/components/chat.php",
+      "public_html/docs/components/indicator.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/stack.php",
       "public_html/index.php"
@@ -1249,6 +1756,8 @@
       "public_html/docs/components/container.php",
       "public_html/docs/components/datagrid.php",
       "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/gradients.php",
+      "public_html/docs/components/icon.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
@@ -1268,8 +1777,11 @@
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/copy.php",
       "public_html/docs/components/datagrid.php",
       "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/gradients.php",
+      "public_html/docs/components/icon.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
@@ -1289,6 +1801,8 @@
       "public_html/docs/components/container.php",
       "public_html/docs/components/datagrid.php",
       "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/gradients.php",
+      "public_html/docs/components/icon.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
@@ -1311,6 +1825,8 @@
       "public_html/docs/components/container.php",
       "public_html/docs/components/datagrid.php",
       "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/gradients.php",
+      "public_html/docs/components/icon.php",
       "public_html/docs/components/kanban.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/segmented.php",
@@ -1356,8 +1872,12 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/card.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/gradients.php",
+      "public_html/docs/components/indicator.php",
+      "public_html/docs/components/sidebar.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/table.php",
+      "public_html/docs/components/timeline.php",
       "public_html/docs/index.php",
       "public_html/index.php",
       "public_html/php-helper.php"
@@ -1367,6 +1887,8 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/card.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/gradients.php",
+      "public_html/docs/components/timeline.php",
       "public_html/index.php"
     ],
     "text-sm": [
@@ -1387,10 +1909,12 @@
     ],
     "badge-warn": [
       "public_html/docs/components/badge.php",
+      "public_html/docs/components/gradients.php",
       "public_html/index.php"
     ],
     "badge-bad": [
       "public_html/docs/components/badge.php",
+      "public_html/docs/components/gradients.php",
       "public_html/index.php"
     ],
     "badge-brand": [
@@ -1408,32 +1932,6 @@
       "public_html/docs/components/cluster.php",
       "public_html/index.php"
     ],
-    "btn": [
-      "FINDINGS.md",
-      "README.md",
-      "bin/deck.mjs",
-      "public_html/docs/_layout.php",
-      "public_html/docs/components/bar.php",
-      "public_html/docs/components/button.php",
-      "public_html/docs/components/card.php",
-      "public_html/docs/components/chat.php",
-      "public_html/docs/components/cluster.php",
-      "public_html/docs/components/drawer.php",
-      "public_html/docs/components/field.php",
-      "public_html/docs/components/input.php",
-      "public_html/docs/components/menu.php",
-      "public_html/docs/components/modal.php",
-      "public_html/docs/components/popover.php",
-      "public_html/docs/components/segmented.php",
-      "public_html/docs/components/sheet.php",
-      "public_html/docs/components/stack.php",
-      "public_html/docs/components/tooltip.php",
-      "public_html/docs/index.php",
-      "public_html/docs/search.php",
-      "public_html/index.php",
-      "public_html/php-helper.php",
-      "src/js/deck.js"
-    ],
     "btn-sm": [
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
@@ -1442,6 +1940,7 @@
       "public_html/docs/components/card.php",
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/drawer.php",
+      "public_html/docs/components/nav.php",
       "public_html/docs/components/popover.php",
       "public_html/docs/components/sheet.php",
       "public_html/docs/index.php",
@@ -1457,7 +1956,9 @@
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/menu.php",
+      "public_html/docs/components/nav.php",
       "public_html/docs/components/sheet.php",
+      "public_html/docs/components/sidebar.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1470,6 +1971,9 @@
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
+      "public_html/docs/components/indicator.php",
+      "public_html/docs/components/motion.php",
+      "public_html/docs/components/nav.php",
       "public_html/docs/components/segmented.php",
       "public_html/docs/components/sheet.php",
       "public_html/index.php",
@@ -1483,23 +1987,10 @@
       "public_html/docs/components/chat.php",
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/drawer.php",
+      "public_html/docs/components/indicator.php",
+      "public_html/docs/components/nav.php",
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/tooltip.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "card": [
-      "FINDINGS.md",
-      "README.md",
-      "bin/deck.mjs",
-      "public_html/docs/components/bar.php",
-      "public_html/docs/components/card.php",
-      "public_html/docs/components/check.php",
-      "public_html/docs/components/grid.php",
-      "public_html/docs/components/scroller.php",
-      "public_html/docs/components/split.php",
-      "public_html/docs/components/stack.php",
-      "public_html/docs/index.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1546,27 +2037,12 @@
       "public_html/docs/components/button.php",
       "public_html/index.php"
     ],
-    "btn-primary": [
-      "bin/deck.mjs",
-      "public_html/docs/_layout.php",
-      "public_html/docs/components/button.php",
-      "public_html/docs/components/card.php",
-      "public_html/docs/components/chat.php",
-      "public_html/docs/components/cluster.php",
-      "public_html/docs/components/drawer.php",
-      "public_html/docs/components/field.php",
-      "public_html/docs/components/modal.php",
-      "public_html/docs/components/popover.php",
-      "public_html/docs/components/sheet.php",
-      "public_html/docs/components/stack.php",
-      "public_html/docs/search.php",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
     "icon-sm": [
       "README.md",
       "public_html/docs/components/button.php",
       "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/timeline.php",
       "public_html/docs/components/toast.php",
       "public_html/index.php",
       "public_html/llms.txt",
@@ -1577,12 +2053,6 @@
       "public_html/docs/components/button.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/sheet.php",
-      "public_html/index.php"
-    ],
-    "btn-3d": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/docs/components/button.php",
       "public_html/index.php"
     ],
     "btn-group": [
@@ -1614,6 +2084,7 @@
       "public_html/docs/components/button.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/file.php",
+      "public_html/docs/components/icon.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1643,6 +2114,7 @@
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/nav.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1674,7 +2146,11 @@
       "public_html/docs/components/card.php",
       "public_html/docs/components/check.php",
       "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/emoji.php",
+      "public_html/docs/components/footer.php",
+      "public_html/docs/components/gradients.php",
       "public_html/docs/components/grid.php",
+      "public_html/docs/components/motion.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/index.php",
       "public_html/index.php",
@@ -1685,6 +2161,7 @@
       "FINDINGS.md",
       "public_html/docs/components/card.php",
       "public_html/docs/components/check.php",
+      "public_html/docs/components/gradients.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/stack.php",
       "public_html/index.php"
@@ -1724,7 +2201,9 @@
     "icon-follow": [
       "README.md",
       "public_html/docs/components/card.php",
+      "public_html/docs/components/icon.php",
       "public_html/docs/components/list.php",
+      "public_html/docs/components/motion.php",
       "public_html/index.php"
     ],
     "card-brand": [
@@ -1869,6 +2348,7 @@
     "chart-bar-fill": [
       "README.md",
       "public_html/docs/components/charts.php",
+      "public_html/docs/components/gradients.php",
       "public_html/index.php"
     ],
     "chart-bar-value": [
@@ -1908,7 +2388,8 @@
     ],
     "chart-area-g": [
       "README.md",
-      "public_html/docs/components/charts.php"
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/gradients.php"
     ],
     "chart-col-stack": [
       "README.md",
@@ -2034,6 +2515,8 @@
     "textarea": [
       "FINDINGS.md",
       "public_html/docs/components/chat.php",
+      "public_html/docs/components/copy.php",
+      "public_html/docs/components/float.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/textarea.php",
       "public_html/index.php",
@@ -2046,6 +2529,7 @@
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
+      "public_html/docs/components/print.php",
       "public_html/docs/components/sheet.php",
       "public_html/index.php",
       "public_html/php-helper.php",
@@ -2108,6 +2592,10 @@
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/menu.php",
+      "public_html/docs/components/number.php",
+      "public_html/docs/components/phone.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/progress.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/select.php",
       "public_html/docs/components/textarea.php",
@@ -2123,6 +2611,10 @@
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/menu.php",
+      "public_html/docs/components/number.php",
+      "public_html/docs/components/phone.php",
+      "public_html/docs/components/print.php",
+      "public_html/docs/components/progress.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/segmented.php",
       "public_html/docs/components/select.php",
@@ -2150,6 +2642,8 @@
     ],
     "is-open": [
       "public_html/docs/components/combobox.php",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/motion.php",
       "src/js/deck-extras.js",
       "src/js/deck.js"
     ],
@@ -2198,7 +2692,9 @@
       "public_html/docs/components/datepicker.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
+      "public_html/docs/components/float.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/components/print.php",
       "public_html/docs/search.php",
       "public_html/index.php",
       "src/js/deck-extras.js",
@@ -2240,12 +2736,14 @@
       "README.md",
       "public_html/docs/components/combobox.php",
       "public_html/docs/components/field.php",
+      "public_html/docs/components/float.php",
       "public_html/docs/components/input.php",
       "src/js/deck.js"
     ],
     "select": [
       "FINDINGS.md",
       "public_html/docs/components/combobox.php",
+      "public_html/docs/components/float.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/select.php",
       "public_html/docs/search.php",
@@ -2262,6 +2760,7 @@
       "FINDINGS.md",
       "bin/deck.mjs",
       "public_html/docs/components/combobox.php",
+      "public_html/docs/components/icon.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/switch.php",
@@ -2323,6 +2822,56 @@
       "public_html/docs/_layout.php",
       "public_html/docs/components/container.php",
       "public_html/php-helper.php"
+    ],
+    "copy": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/copy.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-extras.js"
+    ],
+    "copy-btn": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/copy.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "copy-value": [
+      "FINDINGS.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/copy.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-extras.js"
+    ],
+    "copy-idle": [
+      "FINDINGS.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/copy.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "copy-done": [
+      "FINDINGS.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/copy.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-extras.js"
+    ],
+    "copy-inline": [
+      "README.md",
+      "public_html/docs/components/copy.php",
+      "src/js/deck-extras.js"
+    ],
+    "is-copied": [
+      "FINDINGS.md",
+      "public_html/docs/components/copy.php",
+      "src/js/deck-extras.js"
     ],
     "dg-num": [
       "FINDINGS.md",
@@ -2430,7 +2979,6 @@
       "public_html/docs/components/datagrid.php"
     ],
     "dg-toolbar": [
-      "FINDINGS.md",
       "public_html/docs/components/datagrid.php",
       "public_html/index.php"
     ],
@@ -2467,6 +3015,7 @@
     "datefield": [
       "README.md",
       "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/icon.php",
       "public_html/docs/components/input.php",
       "public_html/index.php",
       "src/js/deck.js"
@@ -2632,6 +3181,7 @@
       "public_html/docs/components/editor.php"
     ],
     "editor-content": [
+      "FINDINGS.md",
       "README.md",
       "public_html/docs/components/editor.php",
       "public_html/index.php",
@@ -2664,8 +3214,42 @@
     "hidden": [
       "public_html/docs/components/editor.php"
     ],
+    "emoji": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/emoji.php",
+      "public_html/index.php"
+    ],
+    "emoji-lg": [
+      "README.md",
+      "public_html/docs/components/emoji.php"
+    ],
+    "emoji-xl": [
+      "README.md",
+      "public_html/docs/components/emoji.php"
+    ],
+    "emoji-hero": [
+      "README.md",
+      "public_html/docs/components/emoji.php"
+    ],
+    "emoji-tile": [
+      "README.md",
+      "public_html/docs/components/emoji.php",
+      "public_html/index.php"
+    ],
+    "emoji-tile-round": [
+      "public_html/docs/components/emoji.php",
+      "public_html/index.php"
+    ],
+    "emoji-grid": [
+      "README.md",
+      "public_html/docs/components/emoji.php",
+      "public_html/index.php"
+    ],
     "help": [
       "public_html/docs/components/field.php",
+      "public_html/docs/components/phone.php",
+      "public_html/docs/components/progress.php",
       "public_html/docs/components/textarea.php",
       "public_html/index.php"
     ],
@@ -2685,8 +3269,10 @@
       "public_html/index.php"
     ],
     "error": [
+      "FINDINGS.md",
       "bin/deck.mjs",
       "public_html/docs/components/field.php",
+      "public_html/docs/components/float.php",
       "public_html/docs/components/input.php",
       "public_html/index.php",
       "src/js/deck-extras.js"
@@ -2706,12 +3292,275 @@
     ],
     "form-actions": [
       "public_html/docs/components/field.php",
+      "public_html/docs/components/print.php",
       "public_html/docs/search.php",
       "public_html/index.php"
     ],
     "form-actions-sticky": [
       "FINDINGS.md",
       "public_html/docs/components/field.php"
+    ],
+    "float": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/float.php",
+      "public_html/docs/components/input.php",
+      "public_html/index.php"
+    ],
+    "float-outline": [
+      "README.md",
+      "public_html/docs/components/float.php",
+      "public_html/index.php"
+    ],
+    "footer": [
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/components/footer.php"
+    ],
+    "footer-grid": [
+      "README.md",
+      "public_html/docs/components/footer.php"
+    ],
+    "footer-brand": [
+      "README.md",
+      "public_html/docs/components/footer.php"
+    ],
+    "footer-col": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/footer.php"
+    ],
+    "footer-heading": [
+      "README.md",
+      "public_html/docs/components/footer.php"
+    ],
+    "footer-bottom": [
+      "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/components/footer.php"
+    ],
+    "footer-social": [
+      "README.md",
+      "public_html/docs/components/footer.php"
+    ],
+    "gallery": [
+      "README.md",
+      "public_html/docs/components/gallery.php",
+      "public_html/index.php"
+    ],
+    "span-2": [
+      "README.md",
+      "public_html/docs/components/gallery.php",
+      "public_html/index.php"
+    ],
+    "span-wide": [
+      "README.md",
+      "public_html/docs/components/gallery.php",
+      "public_html/index.php"
+    ],
+    "masonry": [
+      "README.md",
+      "public_html/docs/components/gallery.php",
+      "public_html/index.php"
+    ],
+    "masonry-3": [
+      "public_html/docs/components/gallery.php",
+      "public_html/index.php"
+    ],
+    "lazy": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/gallery.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "masonry-2": [
+      "public_html/docs/components/gallery.php"
+    ],
+    "lazy-blur": [
+      "public_html/docs/components/gallery.php"
+    ],
+    "lazy-block": [
+      "public_html/docs/components/gallery.php"
+    ],
+    "is-loaded": [
+      "FINDINGS.md",
+      "public_html/docs/components/gallery.php",
+      "src/js/deck-extras.js"
+    ],
+    "g-scrim": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-fade-block": [
+      "README.md",
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-grid-lines": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-dots": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-stripes": [
+      "README.md",
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-hatch": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-brand": [
+      "README.md",
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-good": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-warn": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-bad": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-border": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-mesh": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "scroller": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/docs/components/scroller.php",
+      "public_html/index.php"
+    ],
+    "progress": [
+      "FINDINGS.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/docs/components/progress.php",
+      "public_html/index.php"
+    ],
+    "spinner": [
+      "FINDINGS.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/docs/components/progress.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "g-surface": [
+      "README.md",
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-sunken": [
+      "README.md",
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-brand-soft": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-dark": [
+      "README.md",
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-mesh-drift": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-mesh-subtle": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-mesh-warm": [
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-text": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-text-shine": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-border-soft": [
+      "README.md",
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-border-spin": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-hairline": [
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-scrim-top": [
+      "README.md",
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-fade-inline": [
+      "README.md",
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-fade-end": [
+      "README.md",
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-fade-more": [
+      "README.md",
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-sheen": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-conic": [
+      "README.md",
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-ring": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-ring-spin": [
+      "README.md",
+      "public_html/docs/components/gradients.php",
+      "public_html/index.php"
+    ],
+    "g-shimmer": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/gradients.php"
+    ],
+    "g-bar-fill": [
+      "README.md",
+      "public_html/docs/components/gradients.php"
     ],
     "grid-wide": [
       "FINDINGS.md",
@@ -2720,12 +3569,6 @@
     ],
     "grid-fixed-3": [
       "public_html/docs/components/grid.php"
-    ],
-    "stack-1": [
-      "public_html/docs/components/grid.php",
-      "public_html/docs/components/scroller.php",
-      "public_html/docs/components/stack.php",
-      "public_html/index.php"
     ],
     "text-cq": [
       "README.md",
@@ -2747,32 +3590,135 @@
       "public_html/docs/components/grid.php",
       "src/js/deck-adapters.js"
     ],
-    "addon": [
-      "FINDINGS.md",
-      "public_html/docs/components/input.php",
+    "icon-xl": [
+      "README.md",
+      "public_html/docs/components/icon.php",
       "public_html/index.php"
+    ],
+    "icon-fill": [
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/icon.php",
+      "public_html/index.php"
+    ],
+    "icon-muted": [
+      "public_html/docs/components/icon.php",
+      "public_html/index.php"
+    ],
+    "icon-tile": [
+      "public_html/docs/components/icon.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "icon-tile-good": [
+      "public_html/docs/components/icon.php",
+      "public_html/index.php"
+    ],
+    "icon-tile-warn": [
+      "public_html/docs/components/icon.php",
+      "public_html/index.php"
+    ],
+    "icon-tile-bad": [
+      "public_html/docs/components/icon.php",
+      "public_html/index.php"
+    ],
+    "icon-tile-lg": [
+      "public_html/docs/components/icon.php",
+      "public_html/index.php"
+    ],
+    "list-row": [
+      "FINDINGS.md",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/switch.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "list-main": [
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/switch.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "list-title": [
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/switch.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "list-trail": [
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/list.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "icon-spin": [
+      "FINDINGS.md",
+      "public_html/docs/components/icon.php"
     ],
     "search": [
       "FINDINGS.md",
       "public_html/docs/_layout.php",
+      "public_html/docs/components/icon.php",
       "public_html/docs/components/input.php",
       "public_html/docs/search.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
-    "float": [
+    "indicator": [
       "README.md",
-      "public_html/docs/components/input.php",
+      "public_html/docs/components/indicator.php",
       "public_html/index.php"
     ],
-    "float-outline": [
+    "indicator-good": [
+      "public_html/docs/components/indicator.php",
+      "public_html/index.php"
+    ],
+    "indicator-warn": [
+      "public_html/docs/components/indicator.php",
+      "public_html/index.php"
+    ],
+    "indicator-bad": [
+      "public_html/docs/components/indicator.php"
+    ],
+    "indicator-brand": [
+      "public_html/docs/components/indicator.php",
+      "public_html/index.php"
+    ],
+    "with-indicator": [
       "README.md",
+      "public_html/docs/components/indicator.php",
+      "public_html/index.php"
+    ],
+    "indicator-badge": [
+      "README.md",
+      "public_html/docs/components/indicator.php",
+      "public_html/index.php"
+    ],
+    "indicator-badge-dot": [
+      "README.md",
+      "public_html/docs/components/indicator.php"
+    ],
+    "indicator-badge-brand": [
+      "public_html/docs/components/indicator.php"
+    ],
+    "indicator-lg": [
+      "public_html/docs/components/indicator.php"
+    ],
+    "indicator-ring": [
+      "public_html/docs/components/indicator.php"
+    ],
+    "addon": [
+      "FINDINGS.md",
       "public_html/docs/components/input.php",
       "public_html/index.php"
     ],
     "number": [
       "README.md",
       "public_html/docs/components/input.php",
+      "public_html/docs/components/number.php",
       "public_html/index.php",
       "src/js/deck-extras.js"
     ],
@@ -2823,33 +3769,9 @@
       "public_html/docs/components/kanban.php",
       "public_html/index.php"
     ],
-    "list-row": [
-      "FINDINGS.md",
-      "public_html/docs/components/list.php",
-      "public_html/docs/components/switch.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "list-main": [
-      "public_html/docs/components/list.php",
-      "public_html/docs/components/switch.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "list-title": [
-      "public_html/docs/components/list.php",
-      "public_html/docs/components/switch.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
     "list-sub": [
       "public_html/docs/components/list.php",
       "public_html/docs/components/switch.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "list-trail": [
-      "public_html/docs/components/list.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -2873,6 +3795,7 @@
       "FINDINGS.md",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
+      "public_html/docs/components/nav.php",
       "public_html/index.php"
     ],
     "menu-label": [
@@ -2882,6 +3805,7 @@
     "menu-item": [
       "FINDINGS.md",
       "public_html/docs/components/menu.php",
+      "public_html/docs/components/nav.php",
       "public_html/index.php"
     ],
     "menu-sep": [
@@ -2922,6 +3846,336 @@
       "public_html/docs/components/modal.php",
       "public_html/index.php"
     ],
+    "stagger": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php"
+    ],
+    "enter-rise": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php"
+    ],
+    "press": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php"
+    ],
+    "sweep": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php"
+    ],
+    "lift": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php"
+    ],
+    "enter-start": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "transition": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "transition-colors": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "transition-move": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "transition-opacity": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "transition-size": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "dur-1": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "dur-2": [
+      "public_html/docs/components/motion.php"
+    ],
+    "dur-3": [
+      "public_html/docs/components/motion.php"
+    ],
+    "dur-4": [
+      "public_html/docs/components/motion.php"
+    ],
+    "dur-5": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "ease-in": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "ease-out": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "ease-linear": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "ease-spring": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "ease-bounce": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "ease-overshoot": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "delay-1": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "delay-2": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "delay-3": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "no-motion": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "will-move": [
+      "public_html/docs/components/motion.php"
+    ],
+    "is-animating": [
+      "public_html/docs/components/motion.php",
+      "src/js/deck.js"
+    ],
+    "enter": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "enter-blur": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "enter-drop": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "enter-end": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "enter-pop": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "stagger-fast": [
+      "public_html/docs/components/motion.php"
+    ],
+    "stagger-slow": [
+      "public_html/docs/components/motion.php"
+    ],
+    "reveal": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "reveal-fade": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "reveal-late": [
+      "public_html/docs/components/motion.php"
+    ],
+    "reveal-pop": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "is-revealed": [
+      "public_html/docs/components/motion.php",
+      "src/js/deck.js"
+    ],
+    "scroll-progress": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php"
+    ],
+    "shrink-on-scroll": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "shake": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "was-shaken": [
+      "FINDINGS.md",
+      "public_html/docs/components/motion.php",
+      "src/js/deck.js"
+    ],
+    "flash": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php"
+    ],
+    "flash-good": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "pulse": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php"
+    ],
+    "ping": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php"
+    ],
+    "nudge": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "ripple": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "ripple-ink": [
+      "public_html/docs/components/motion.php",
+      "src/js/deck.js"
+    ],
+    "expand": [
+      "public_html/docs/components/motion.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "fade-swap": [
+      "public_html/docs/components/motion.php"
+    ],
+    "marquee": [
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php"
+    ],
+    "marquee-track": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/motion.php",
+      "public_html/index.php"
+    ],
+    "tick": [
+      "public_html/docs/components/motion.php",
+      "src/js/deck.js"
+    ],
+    "is-up": [
+      "public_html/docs/components/motion.php",
+      "src/js/deck.js"
+    ],
+    "is-down": [
+      "public_html/docs/components/motion.php",
+      "src/js/deck.js"
+    ],
+    "vt-hold": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "vt-header": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "vt-main": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "vt-tabbar": [
+      "README.md",
+      "public_html/docs/components/motion.php"
+    ],
+    "navbar-brand": [
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/nav.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "navbar-links": [
+      "bin/deck.mjs",
+      "public_html/docs/components/nav.php",
+      "public_html/index.php"
+    ],
+    "nav-link": [
+      "bin/deck.mjs",
+      "public_html/docs/components/nav.php",
+      "public_html/index.php"
+    ],
+    "number-sm": [
+      "public_html/docs/components/number.php"
+    ],
+    "number-unit": [
+      "README.md",
+      "public_html/docs/components/number.php",
+      "public_html/index.php"
+    ],
+    "pagination": [
+      "public_html/docs/components/pagination.php",
+      "public_html/index.php"
+    ],
+    "phone": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/phone.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "phone-country": [
+      "public_html/docs/components/phone.php",
+      "public_html/index.php"
+    ],
+    "phone-flag": [
+      "public_html/docs/components/phone.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "phone-code": [
+      "public_html/docs/components/phone.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "phone-status": [
+      "public_html/docs/components/phone.php",
+      "public_html/index.php"
+    ],
+    "text-good": [
+      "public_html/docs/components/phone.php",
+      "public_html/index.php"
+    ],
+    "is-valid": [
+      "FINDINGS.md",
+      "public_html/docs/components/phone.php",
+      "src/js/deck-extras.js"
+    ],
     "pop": [
       "README.md",
       "public_html/docs/components/popover.php",
@@ -2945,6 +4199,86 @@
       "public_html/docs/components/popover.php",
       "public_html/docs/components/tooltip.php",
       "public_html/index.php"
+    ],
+    "no-print": [
+      "README.md",
+      "public_html/docs/components/print.php"
+    ],
+    "print-only": [
+      "README.md",
+      "public_html/docs/components/print.php",
+      "public_html/index.php"
+    ],
+    "keep-together": [
+      "README.md",
+      "public_html/docs/components/print.php"
+    ],
+    "page-break": [
+      "README.md",
+      "public_html/docs/components/print.php"
+    ],
+    "page-break-after": [
+      "README.md",
+      "public_html/docs/components/print.php"
+    ],
+    "print-header": [
+      "README.md",
+      "public_html/docs/components/print.php"
+    ],
+    "print-footer": [
+      "README.md",
+      "public_html/docs/components/print.php"
+    ],
+    "print-keep": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/print.php"
+    ],
+    "no-print-url": [
+      "README.md",
+      "public_html/docs/components/print.php"
+    ],
+    "ring": [
+      "FINDINGS.md",
+      "public_html/docs/components/progress.php",
+      "public_html/index.php"
+    ],
+    "ring-wrap": [
+      "public_html/docs/components/progress.php",
+      "public_html/index.php"
+    ],
+    "ring-label": [
+      "FINDINGS.md",
+      "public_html/docs/components/progress.php",
+      "public_html/index.php"
+    ],
+    "spinner-lg": [
+      "public_html/docs/components/progress.php"
+    ],
+    "qr": [
+      "README.md",
+      "public_html/docs/components/qr.php",
+      "public_html/index.php"
+    ],
+    "qr-sm": [
+      "README.md",
+      "public_html/docs/components/qr.php",
+      "public_html/index.php"
+    ],
+    "qr-lg": [
+      "README.md",
+      "public_html/docs/components/qr.php"
+    ],
+    "qr-logo": [
+      "README.md",
+      "public_html/docs/components/qr.php"
+    ],
+    "qr-logo-mark": [
+      "public_html/docs/components/qr.php"
+    ],
+    "qr-caption": [
+      "public_html/docs/components/qr.php",
+      "src/js/deck-extras.js"
     ],
     "range": [
       "FINDINGS.md",
@@ -2972,11 +4306,25 @@
       "FINDINGS.md",
       "public_html/docs/components/range.php"
     ],
-    "scroller": [
-      "FINDINGS.md",
+    "rating": [
       "README.md",
-      "public_html/docs/components/scroller.php",
-      "public_html/index.php"
+      "public_html/docs/components/rating.php",
+      "public_html/index.php",
+      "public_html/llms.txt"
+    ],
+    "rating-static": [
+      "README.md",
+      "public_html/docs/components/rating.php",
+      "public_html/llms.txt"
+    ],
+    "rating-sm": [
+      "public_html/docs/components/rating.php"
+    ],
+    "rating-fill": [
+      "public_html/docs/components/rating.php"
+    ],
+    "rating-lg": [
+      "public_html/docs/components/rating.php"
     ],
     "segmented": [
       "FINDINGS.md",
@@ -3011,6 +4359,45 @@
       "public_html/docs/components/sheet.php",
       "public_html/index.php"
     ],
+    "sidebar": [
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/sidebar.php",
+      "public_html/index.php"
+    ],
+    "sidebar-link": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/sidebar.php",
+      "public_html/index.php"
+    ],
+    "sidebar-group": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/sidebar.php",
+      "public_html/index.php"
+    ],
+    "cq-shell": [
+      "README.md",
+      "public_html/docs/components/sidebar.php",
+      "public_html/index.php"
+    ],
+    "skeleton": [
+      "FINDINGS.md",
+      "public_html/docs/components/skeleton.php",
+      "public_html/docs/components/stack.php",
+      "public_html/index.php"
+    ],
+    "skeleton-circle": [
+      "public_html/docs/components/skeleton.php",
+      "public_html/index.php"
+    ],
+    "skeleton-text": [
+      "public_html/docs/components/skeleton.php",
+      "public_html/index.php"
+    ],
     "split": [
       "FINDINGS.md",
       "README.md",
@@ -3021,11 +4408,6 @@
     ],
     "split-rail-start": [
       "public_html/docs/components/split.php"
-    ],
-    "skeleton": [
-      "FINDINGS.md",
-      "public_html/docs/components/stack.php",
-      "public_html/index.php"
     ],
     "center": [
       "FINDINGS.md",
@@ -3054,6 +4436,7 @@
     "is-done": [
       "README.md",
       "public_html/docs/components/stepper.php",
+      "public_html/docs/components/timeline.php",
       "public_html/index.php"
     ],
     "step-marker": [
@@ -3093,6 +4476,18 @@
       "public_html/docs/components/tabs.php",
       "public_html/index.php",
       "src/js/deck.js"
+    ],
+    "timeline": [
+      "public_html/docs/components/timeline.php",
+      "public_html/index.php"
+    ],
+    "timeline-item": [
+      "public_html/docs/components/timeline.php",
+      "public_html/index.php"
+    ],
+    "timeline-dot": [
+      "public_html/docs/components/timeline.php",
+      "public_html/index.php"
     ],
     "toast": [
       "bin/deck.mjs",
@@ -3193,71 +4588,50 @@
       "public_html/index.php",
       "src/js/deck-adapters.js"
     ],
+    "video": [
+      "README.md",
+      "public_html/docs/components/video.php",
+      "public_html/index.php"
+    ],
+    "video-square": [
+      "README.md",
+      "public_html/docs/components/video.php"
+    ],
+    "video-portrait": [
+      "README.md",
+      "public_html/docs/components/video.php"
+    ],
+    "video-wide": [
+      "README.md",
+      "public_html/docs/components/video.php"
+    ],
+    "video-poster": [
+      "README.md",
+      "public_html/docs/components/video.php",
+      "public_html/index.php"
+    ],
+    "video-play": [
+      "README.md",
+      "public_html/docs/components/video.php",
+      "public_html/index.php"
+    ],
+    "video-meta": [
+      "public_html/docs/components/video.php",
+      "public_html/index.php"
+    ],
+    "video-duration": [
+      "public_html/docs/components/video.php",
+      "public_html/index.php"
+    ],
+    "video-cover": [
+      "public_html/docs/components/video.php"
+    ],
     "link-quiet": [
       "public_html/docs/index.php",
       "public_html/index.php"
     ],
-    "copy": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/docs/_layout.php",
-      "public_html/index.php",
-      "public_html/php-helper.php",
-      "src/js/deck-extras.js"
-    ],
-    "copy-value": [
-      "FINDINGS.md",
-      "public_html/docs/_layout.php",
-      "public_html/index.php",
-      "public_html/php-helper.php",
-      "src/js/deck-extras.js"
-    ],
-    "copy-btn": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/docs/_layout.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "copy-idle": [
-      "public_html/docs/_layout.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "copy-done": [
-      "public_html/docs/_layout.php",
-      "public_html/index.php",
-      "public_html/php-helper.php",
-      "src/js/deck-extras.js"
-    ],
     "skip-link": [
       "bin/deck.mjs",
-      "public_html/docs/_layout.php",
-      "public_html/index.php"
-    ],
-    "navbar-brand": [
-      "bin/deck.mjs",
-      "public_html/docs/_layout.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "icon-fill": [
-      "README.md",
-      "public_html/docs/_layout.php",
-      "public_html/index.php"
-    ],
-    "sidebar": [
-      "README.md",
-      "public_html/docs/_layout.php",
-      "public_html/index.php"
-    ],
-    "sidebar-group": [
-      "README.md",
-      "public_html/docs/_layout.php",
-      "public_html/index.php"
-    ],
-    "sidebar-link": [
-      "README.md",
       "public_html/docs/_layout.php",
       "public_html/index.php"
     ],
@@ -3270,20 +4644,8 @@
       "public_html/index.php",
       "src/js/deck-extras.js"
     ],
-    "scroll-progress": [
-      "README.md",
-      "public_html/index.php"
-    ],
     "theme-dock": [
       "FINDINGS.md",
-      "public_html/index.php"
-    ],
-    "navbar-links": [
-      "bin/deck.mjs",
-      "public_html/index.php"
-    ],
-    "nav-link": [
-      "bin/deck.mjs",
       "public_html/index.php"
     ],
     "display": [
@@ -3326,90 +4688,16 @@
     "stat-delta-down": [
       "public_html/index.php"
     ],
-    "icon-tile": [
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
     "grow": [
-      "public_html/index.php"
-    ],
-    "icon-muted": [
       "public_html/index.php"
     ],
     "fw-semi": [
       "public_html/index.php"
     ],
-    "icon-xl": [
-      "README.md",
-      "public_html/index.php"
-    ],
     "text-inherit": [
       "public_html/index.php"
     ],
-    "icon-tile-good": [
-      "public_html/index.php"
-    ],
-    "icon-tile-warn": [
-      "public_html/index.php"
-    ],
-    "icon-tile-bad": [
-      "public_html/index.php"
-    ],
-    "progress": [
-      "public_html/index.php"
-    ],
-    "ring-wrap": [
-      "public_html/index.php"
-    ],
-    "ring": [
-      "public_html/index.php"
-    ],
-    "ring-label": [
-      "public_html/index.php"
-    ],
-    "spinner": [
-      "FINDINGS.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "skeleton-circle": [
-      "public_html/index.php"
-    ],
-    "skeleton-text": [
-      "public_html/index.php"
-    ],
-    "pagination": [
-      "public_html/index.php"
-    ],
-    "timeline": [
-      "public_html/index.php"
-    ],
-    "timeline-item": [
-      "public_html/index.php"
-    ],
-    "timeline-dot": [
-      "public_html/index.php"
-    ],
-    "icon-tile-lg": [
-      "public_html/index.php"
-    ],
-    "emoji-tile": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "emoji-tile-round": [
-      "public_html/index.php"
-    ],
     "reaction": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "emoji": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/index.php"
-    ],
-    "emoji-grid": [
       "README.md",
       "public_html/index.php"
     ],
@@ -3433,68 +4721,6 @@
       "public_html/index.php"
     ],
     "s5": [
-      "public_html/index.php"
-    ],
-    "stagger": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "enter-rise": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "reveal": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "reveal-fade": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "reveal-pop": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "lift": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "press": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "ripple": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "sweep": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "ping": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/index.php"
-    ],
-    "pulse": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "expand": [
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "marquee": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "marquee-track": [
-      "FINDINGS.md",
-      "README.md",
       "public_html/index.php"
     ],
     "cq-tone": [
@@ -3529,175 +4755,12 @@
       "README.md",
       "public_html/index.php"
     ],
-    "g-mesh": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-mesh-drift": [
-      "README.md",
-      "public_html/index.php"
-    ],
     "display-cq": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-text": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-border": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-border-spin": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-text-shine": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-sheen": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-good": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-warn": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-bad": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-ring": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-ring-spin": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-grid-lines": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-dots": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-hatch": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-scrim": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "scene": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "flip": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "flip-front": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "flip-back": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "g-brand-soft": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "scene-near": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "tilt": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "space": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "tilt-lift": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "tilt-lift-sm": [
-      "public_html/index.php"
-    ],
-    "pile": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "cube": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "cube-spin": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "face-front": [
-      "public_html/index.php"
-    ],
-    "face-back": [
-      "public_html/index.php"
-    ],
-    "face-end": [
-      "public_html/index.php"
-    ],
-    "face-start": [
-      "public_html/index.php"
-    ],
-    "face-top": [
-      "public_html/index.php"
-    ],
-    "face-bottom": [
-      "public_html/index.php"
-    ],
-    "coverflow": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "with-indicator": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "indicator-badge": [
       "README.md",
       "public_html/index.php"
     ],
     "status-line": [
       "README.md",
-      "public_html/index.php"
-    ],
-    "indicator": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "indicator-good": [
-      "public_html/index.php"
-    ],
-    "indicator-warn": [
       "public_html/index.php"
     ],
     "mega": [
@@ -3734,84 +4797,11 @@
       "README.md",
       "public_html/index.php"
     ],
-    "number-unit": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "phone": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
-    "phone-country": [
-      "public_html/index.php"
-    ],
-    "phone-flag": [
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
-    "phone-code": [
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
-    "phone-status": [
-      "public_html/index.php"
-    ],
-    "text-good": [
-      "public_html/index.php"
-    ],
-    "rating": [
-      "README.md",
-      "public_html/index.php",
-      "public_html/llms.txt"
-    ],
-    "qr": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "qr-sm": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "video": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "video-poster": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "video-play": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "video-meta": [
-      "public_html/index.php"
-    ],
-    "video-duration": [
-      "public_html/index.php"
-    ],
-    "masonry": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "masonry-3": [
-      "public_html/index.php"
-    ],
-    "lazy": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
     "jumbotron": [
       "README.md",
       "public_html/index.php"
     ],
     "jumbotron-center": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "g-mesh-subtle": [
       "README.md",
       "public_html/index.php"
     ],
@@ -3821,33 +4811,10 @@
     "jumbotron-actions": [
       "public_html/index.php"
     ],
-    "gallery": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "span-2": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "span-wide": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "cq-shell": [
-      "README.md",
-      "public_html/index.php"
-    ],
     "mt-2": [
       "public_html/index.php"
     ],
     "drag-handle": [
-      "public_html/index.php"
-    ],
-    "indicator-brand": [
-      "public_html/index.php"
-    ],
-    "print-only": [
-      "README.md",
       "public_html/index.php"
     ],
     "speed-dial": [
@@ -3878,29 +4845,6 @@
     "tabbar-item": [
       "public_html/index.php"
     ],
-    "is-fanned": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/index.php"
-    ],
-    "shake": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "flash": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "flash-good": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "rating-static": [
-      "README.md",
-      "public_html/llms.txt"
-    ],
     "sortable-chosen": [
       "README.md",
       "src/js/deck-adapters.js"
@@ -3913,209 +4857,19 @@
       "README.md",
       "src/js/deck-adapters.js"
     ],
-    "qr-caption": [
-      "src/js/deck-extras.js"
-    ],
-    "is-valid": [
-      "src/js/deck-extras.js"
-    ],
-    "is-copied": [
-      "src/js/deck-extras.js"
-    ],
-    "copy-inline": [
-      "README.md",
-      "src/js/deck-extras.js"
-    ],
-    "is-loaded": [
-      "src/js/deck-extras.js"
-    ],
-    "is-revealed": [
-      "src/js/deck.js"
-    ],
-    "was-shaken": [
-      "FINDINGS.md",
-      "src/js/deck.js"
-    ],
-    "tick": [
-      "src/js/deck.js"
-    ],
-    "is-up": [
-      "src/js/deck.js"
-    ],
-    "is-down": [
-      "src/js/deck.js"
-    ],
-    "is-tilting": [
-      "src/js/deck.js"
-    ],
-    "is-flipped": [
-      "src/js/deck.js"
-    ],
-    "is-front": [
-      "src/js/deck.js"
-    ],
-    "is-behind-start": [
-      "src/js/deck.js"
-    ],
-    "is-behind-end": [
-      "src/js/deck.js"
-    ],
-    "is-dismissed": [
-      "FINDINGS.md",
-      "src/js/deck.js"
-    ],
     "is-visible": [
-      "README.md",
-      "src/js/deck.js"
-    ],
-    "is-animating": [
-      "src/js/deck.js"
-    ],
-    "flip-x": [
       "README.md",
       "src/js/deck.js"
     ],
     "sticky": [
       "src/js/deck.js"
     ],
-    "ripple-ink": [
-      "src/js/deck.js"
-    ],
     "defer": [
       "README.md",
       "php/Deck.php"
     ],
-    "footer": [
-      "README.md",
-      "bin/deck.mjs"
-    ],
-    "footer-bottom": [
-      "README.md",
-      "bin/deck.mjs"
-    ],
     "relative": [
       "bin/deck.mjs"
-    ],
-    "emoji-lg": [
-      "README.md"
-    ],
-    "emoji-xl": [
-      "README.md"
-    ],
-    "emoji-hero": [
-      "README.md"
-    ],
-    "page-break": [
-      "README.md"
-    ],
-    "page-break-after": [
-      "README.md"
-    ],
-    "keep-together": [
-      "README.md"
-    ],
-    "no-print": [
-      "README.md"
-    ],
-    "print-keep": [
-      "FINDINGS.md",
-      "README.md"
-    ],
-    "no-print-url": [
-      "README.md"
-    ],
-    "print-header": [
-      "README.md"
-    ],
-    "print-footer": [
-      "README.md"
-    ],
-    "transition": [
-      "README.md"
-    ],
-    "transition-colors": [
-      "README.md"
-    ],
-    "transition-move": [
-      "README.md"
-    ],
-    "transition-size": [
-      "README.md"
-    ],
-    "transition-opacity": [
-      "README.md"
-    ],
-    "dur-1": [
-      "README.md"
-    ],
-    "dur-5": [
-      "README.md"
-    ],
-    "ease-out": [
-      "README.md"
-    ],
-    "ease-in": [
-      "README.md"
-    ],
-    "ease-spring": [
-      "README.md"
-    ],
-    "ease-bounce": [
-      "README.md"
-    ],
-    "ease-overshoot": [
-      "README.md"
-    ],
-    "ease-linear": [
-      "README.md"
-    ],
-    "delay-1": [
-      "README.md"
-    ],
-    "delay-2": [
-      "README.md"
-    ],
-    "delay-3": [
-      "README.md"
-    ],
-    "no-motion": [
-      "README.md"
-    ],
-    "enter": [
-      "README.md"
-    ],
-    "enter-drop": [
-      "README.md"
-    ],
-    "enter-start": [
-      "README.md"
-    ],
-    "enter-end": [
-      "README.md"
-    ],
-    "enter-pop": [
-      "README.md"
-    ],
-    "enter-blur": [
-      "README.md"
-    ],
-    "shrink-on-scroll": [
-      "README.md"
-    ],
-    "nudge": [
-      "README.md"
-    ],
-    "vt-header": [
-      "README.md"
-    ],
-    "vt-main": [
-      "README.md"
-    ],
-    "vt-tabbar": [
-      "README.md"
-    ],
-    "vt-hold": [
-      "README.md"
     ],
     "cq-size": [
       "README.md"
@@ -4190,106 +4944,10 @@
     "th-vertical": [
       "README.md"
     ],
-    "g-surface": [
-      "README.md"
-    ],
-    "g-sunken": [
-      "README.md"
-    ],
-    "g-brand": [
-      "README.md"
-    ],
-    "g-dark": [
-      "README.md"
-    ],
-    "g-border-soft": [
-      "README.md"
-    ],
-    "g-scrim-top": [
-      "README.md"
-    ],
-    "g-fade-inline": [
-      "README.md"
-    ],
-    "g-fade-end": [
-      "README.md"
-    ],
-    "g-fade-block": [
-      "README.md"
-    ],
-    "g-fade-more": [
-      "README.md"
-    ],
-    "g-stripes": [
-      "README.md"
-    ],
-    "g-conic": [
-      "README.md"
-    ],
-    "g-shimmer": [
-      "README.md"
-    ],
-    "g-bar-fill": [
-      "README.md"
-    ],
-    "scene-far": [
-      "README.md"
-    ],
-    "parallax": [
-      "README.md"
-    ],
-    "parallax-back": [
-      "README.md"
-    ],
-    "parallax-mid": [
-      "README.md"
-    ],
-    "parallax-front": [
-      "README.md"
-    ],
-    "turn-out": [
-      "README.md"
-    ],
-    "turn-in": [
-      "README.md"
-    ],
     "banner-bottom": [
       "README.md"
     ],
-    "video-square": [
-      "README.md"
-    ],
-    "video-portrait": [
-      "README.md"
-    ],
-    "video-wide": [
-      "README.md"
-    ],
-    "qr-lg": [
-      "README.md"
-    ],
-    "qr-logo": [
-      "README.md"
-    ],
-    "indicator-badge-dot": [
-      "README.md"
-    ],
     "jumbotron-media": [
-      "README.md"
-    ],
-    "footer-grid": [
-      "README.md"
-    ],
-    "footer-brand": [
-      "README.md"
-    ],
-    "footer-col": [
-      "README.md"
-    ],
-    "footer-heading": [
-      "README.md"
-    ],
-    "footer-social": [
       "README.md"
     ],
     "virtual": [
@@ -4310,16 +4968,12 @@
     "min-is-0": [
       "FINDINGS.md"
     ],
-    "icon-spin": [
-      "FINDINGS.md"
-    ],
     "gap-2": [
       "FINDINGS.md"
     ]
   },
   "unused": [
     "absolute",
-    "backface-hidden",
     "banner-dark",
     "banner-fixed",
     "banner-warn",
@@ -4344,20 +4998,12 @@
     "disclosure-body",
     "drop-reject",
     "drop-target",
-    "dur-2",
-    "dur-3",
-    "dur-4",
-    "fade-swap",
-    "flat",
     "flex",
     "flex-col",
     "flex-row",
-    "flip-hover",
     "fw-bold",
     "fw-medium",
     "fw-normal",
-    "g-hairline",
-    "g-mesh-warm",
     "gap-0",
     "gap-1",
     "gap-3",
@@ -4369,10 +5015,6 @@
     "h4",
     "h5",
     "h6",
-    "indicator-bad",
-    "indicator-badge-brand",
-    "indicator-lg",
-    "indicator-ring",
     "inline-block",
     "inline-flex",
     "inset-0",
@@ -4388,11 +5030,8 @@
     "justify-center",
     "justify-end",
     "justify-start",
-    "lazy-block",
-    "lazy-blur",
     "lg",
     "m-0",
-    "masonry-2",
     "max-w-lg",
     "max-w-md",
     "max-w-prose",
@@ -4427,7 +5066,6 @@
     "no-select",
     "no-underline",
     "nowrap",
-    "number-sm",
     "opacity-60",
     "overflow-auto",
     "overflow-clip",
@@ -4439,7 +5077,6 @@
     "p-4",
     "p-6",
     "p-8",
-    "parallax-layer",
     "pbe-0",
     "pbe-1",
     "pbe-2",
@@ -4487,18 +5124,13 @@
     "py-4",
     "py-6",
     "py-8",
-    "qr-logo-mark",
     "r-full",
     "r-lg",
     "r-md",
     "r-sm",
     "r-xs",
-    "rating-fill",
-    "rating-lg",
-    "rating-sm",
     "ratio-1x1",
     "ratio-4x3",
-    "reveal-late",
     "row-meta",
     "row-meta-wide",
     "s6",
@@ -4514,9 +5146,6 @@
     "sm",
     "sortable",
     "sortable-fallback",
-    "spinner-lg",
-    "stagger-fast",
-    "stagger-slow",
     "text-2xl",
     "text-2xs",
     "text-bad",
@@ -4533,18 +5162,12 @@
     "text-xs",
     "touch-only",
     "uppercase",
-    "video-cover",
     "virtual-lg",
     "virtual-sm",
     "w-auto",
-    "will-move",
     "wrap",
     "writing-normal",
     "writing-vertical-lr",
-    "z-1",
-    "z-lift-1",
-    "z-lift-2",
-    "z-lift-3",
-    "z-sink"
+    "z-1"
   ]
 }

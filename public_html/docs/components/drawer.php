@@ -262,13 +262,17 @@ require __DIR__ . '/../_layout.php';
 <section class="stack-3">
   <h2 id="print">Printing</h2>
   <p>
-    There is no <code>.drawer</code> rule in <code>src/99-print.css</code>, but
-    <code>dialog::backdrop { display: none }</code> applies, so an open drawer does not
-    print a grey wash. The panel itself would print as a fixed-position box.
+    An open drawer does not print at all. There is no <code>.drawer</code> rule in
+    <code>src/99-print.css</code>, but there is a second <code>@layer deck.print</code> block at the end of <code>src/24-media.css</code>, and
+    <code>.drawer</code> is in its <code>display: none !important</code> list alongside
+    <code>.mega</code>, <code>.speed-dial</code> and <code>.banner</code>.
+    <code>dialog::backdrop { display: none }</code> from the main print sheet removes the
+    grey wash as well, so neither the panel nor its scrim reaches the page.
   </p>
   <p class="text-muted">
-    A drawer holds controls rather than content, so printing one is not a case worth
-    designing for. If the reader needs its contents on paper, they belong in the page.
+    That is the right default: a drawer holds controls rather than content, and a
+    fixed-position panel printed over the top of the document would obscure the thing the
+    reader actually wanted. If its contents need to be on paper, they belong in the page.
   </p>
 </section>
 

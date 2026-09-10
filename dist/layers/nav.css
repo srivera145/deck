@@ -689,6 +689,14 @@
     color: var(--text);
     margin-block-end: var(--space-1);
   }
+  /* FINDINGS 65: this is the same token .footer sets on itself, and the
+     underline is removed -- so a link inside a SENTENCE in the footer has no
+     colour difference, no weight difference and no underline. Nothing marks it
+     until hover, which does not help a keyboard or touch user.
+
+     It is fine in a .footer-col, which is a stack of links and nothing else.
+     It is a WCAG 1.4.1 failure in prose. Scope the underline removal to the
+     link containers rather than to every descendant. */
   .footer a { color: var(--text-muted); text-decoration: none; }
   .footer a:hover { color: var(--brand); text-decoration: underline; }
   .footer-bottom {

@@ -130,6 +130,16 @@
 
   /* Named-container example: a sidebar nav that collapses to icons when the
      shell is narrow, regardless of what is nested inside it. */
+  /* FINDINGS 64: display:none removes the label from the accessibility tree,
+     not just from the screen. The icon inside the link is aria-hidden by
+     convention, so a collapsed .sidebar-link has NO accessible name -- a
+     screen reader announces "link" for every destination in the app's primary
+     navigation.
+
+     Note that .sidebar-group two lines down gets it right: font-size: 0 hides
+     the heading visually and keeps it in the tree. The link rule should hide
+     the span the same way, or with an .sr-only clip. Until it does, authors
+     have to put aria-label on every .sidebar-link by hand. */
   @container shell (max-width: 15rem) {
     .sidebar-link span { display: none; }
     .sidebar-link { justify-content: center; }

@@ -292,10 +292,26 @@ require __DIR__ . '/../_layout.php';
 <section class="stack-3">
   <h2 id="print">Printing</h2>
   <p>
-    No print rule. A thread prints as bubbles, which reads acceptably — but
-    <code>.chat</code> is <code>overflow-y: auto</code>, so a printed thread shows only
-    what was scrolled into view. For a support conversation that has to be archived, render
-    the transcript as a page rather than printing the panel.
+    A thread prints in full, and more care has gone into this than into most of Deck's
+    print handling. A second <code>@layer deck.print</code> block at the end of <code>src/24-media.css</code> carries five rules for it:
+  </p>
+  <pre class="dx-code"><code><?= e('.chat { overflow: visible; max-block-size: none; }
+.chat-composer { display: none !important; }
+.msg { break-inside: avoid; }
+.bubble { border: 1px solid #bbb !important; background: #fff !important; color: #000 !important; }
+.msg-out .bubble { background: #f2f2f2 !important; }') ?></code></pre>
+  <p>
+    The first line is the important one: without it a printed thread would show only what
+    was scrolled into view. The composer is dropped because you cannot type on paper, no
+    message is split across a page boundary, and the bubbles are given explicit black-on-white
+    borders — because backgrounds are dropped when printing, and a bubble with no background
+    and no border is not a bubble at all.
+  </p>
+  <p class="text-muted">
+    The one thing left to you is the direction of the conversation: outgoing messages print
+    on a light grey rather than in the brand colour, so who said what is carried by the
+    alignment and the tail rather than by hue. On a long transcript, a name beside each run
+    is worth more than either.
   </p>
 </section>
 

@@ -495,7 +495,17 @@
   .pagination > a:hover { background: var(--surface-hover); color: var(--text); }
   .pagination > [aria-current="page"] { background: var(--brand-600); color: var(--text-on-brand); font-weight: 600; }
 
-  /* --- Progress, meter, spinner, skeleton --------------------------------- */
+  /* --- Progress, ring, spinner, skeleton ---------------------------------- */
+
+  /* Three ways to say "something is happening", and the choice is only ever
+     about one thing: whether you know how much is left. .progress and .ring
+     do, .spinner does not. There is no standalone meter -- a bar drawn from a
+     value rather than from an element is .chart-meter, in 14-charts.css.
+
+     .progress goes on a real <progress>, so the element carries the value, the
+     maximum and the role. The two vendor pseudo-elements have to be written as
+     separate rules: a vendor pseudo-element in a shared selector invalidates
+     the whole rule for the other engine. Same constraint as .range. */
   .progress {
     inline-size: 100%;
     block-size: 8px;
@@ -509,6 +519,20 @@
   .progress::-webkit-progress-value { background: var(--brand-600); border-radius: var(--r-full); transition: inline-size var(--dur-3) var(--ease-out); }
   .progress::-moz-progress-bar { background: var(--brand-600); border-radius: var(--r-full); }
 
+  /* A conic gradient for the fill, a radial mask for the hole. Three custom
+     properties shape it: --value, --size, --thickness.
+
+     The mask is the thing to understand. It applies to this element AND its
+     whole subtree, so a label centred inside a .ring is punched out along with
+     the middle -- it renders, it takes up space, it is in the accessibility
+     tree, and it is invisible. That is what .ring-wrap and .ring-label below
+     exist for: an unmasked wrapper that stacks the label over the ring as a
+     sibling rather than a child.
+
+     FINDINGS 60: place-items and the three font declarations here are the
+     fossil of the approach that does not work. They style a child nobody can
+     see -- .ring-label repeats all three on the sibling, which is the tell.
+     Due for removal; kept for now because the API is frozen. */
   .ring {
     --value: 0;
     --thickness: 6px;
@@ -528,6 +552,11 @@
   .ring-wrap { position: relative; display: inline-grid; place-items: center; }
   .ring-wrap > .ring-label { position: absolute; font-size: var(--text-xs); font-weight: 620; font-variant-numeric: tabular-nums; }
 
+  /* Exempt from the reduced-motion reset in 02-reset.css: instead of freezing
+     it slows to 2.4s. A frozen spinner reads as a hung page, which is worse
+     for everyone than a slow one. Note border-block-start-color rather than
+     border-top-color -- the lit segment starts at the block start in any
+     writing mode. */
   .spinner {
     inline-size: 20px;
     block-size: 20px;

@@ -9,6 +9,21 @@
      the label lifts on focus or on content and never gets out of sync.
      The input needs placeholder=" " for the selector to work.
      ---------------------------------------------------------------------- */
+  /* Two things about the markup that this file cannot enforce and that fail
+     silently when they are wrong:
+
+       1. The label must come AFTER the control. Every lift selector below is
+          `~ label`, and the general sibling combinator only looks forward.
+          Label first and it simply never moves.
+       2. The control needs placeholder=" " (one space). Without a placeholder
+          attribute :placeholder-shown never matches, so the label sits lifted
+          over an empty field.
+
+     FINDINGS 61: .float.is-invalid only colours the label. .field.is-invalid
+     in 06-forms.css also reddens the control's border; there is no equivalent
+     rule here, so the same class name does two different amounts of work
+     depending on which wrapper it is on. :user-invalid is unaffected -- it
+     matches the control directly through the 06-forms.css rule. */
   .float {
     position: relative;
     display: flex;
@@ -190,6 +205,18 @@
      Radio inputs underneath, so it posts a real value and works with the
      keyboard. Reversed flex order makes the CSS-only hover fill work.
      ---------------------------------------------------------------------- */
+  /* The inputs are written HIGHEST value first -- 5, 4, 3, 2, 1 -- and
+     row-reverse draws them 1 to 5. That is not a quirk, it is the whole
+     mechanism: to light a star and everything below it, the selector has to
+     reach forward from the chosen one, and CSS has no previous-sibling
+     combinator. Reversing the row turns "everything below" into "everything
+     after".
+
+     Get the order wrong and it fails recognisably: the stars fill from the
+     wrong end and the posted value is the mirror of the one clicked.
+
+     :focus-visible + label uses the ADJACENT sibling, so each label must come
+     immediately after its own input. */
   .rating {
     display: inline-flex;
     flex-direction: row-reverse;
@@ -318,7 +345,16 @@
     padding-inline: 11px;
   }
 
-  /* --- Copy to clipboard ---------------------------------------------------- */
+  /* --- Copy to clipboard ----------------------------------------------------
+     The behaviour hangs off [data-deck-copy], not off .copy-btn. The class is
+     the look and nothing else, so a button with the class and no attribute
+     looks exactly right and does nothing at all -- the single most common way
+     to get this component wrong.
+
+     Whether a successful copy raises a toast depends on what is inside the
+     button: a .copy-done element swaps in place and no toast fires; without
+     one, deck-extras.js toasts instead. .copy-inline never toasts.
+     ---------------------------------------------------------------------- */
   .copy {
     display: flex;
     align-items: stretch;

@@ -259,14 +259,22 @@ require __DIR__ . '/../_layout.php';
 <section class="stack-3">
   <h2 id="print">Printing</h2>
   <p>
-    There is no <code>.editor</code> rule in <code>src/99-print.css</code>, so the frame,
-    the toolbar and the footer all print — including a row of formatting buttons that
-    cannot be pressed on paper.
+    The editor prints as prose, and it is handled deliberately. There is no
+    <code>.editor</code> rule in <code>src/99-print.css</code> — but there is a second <code>@layer deck.print</code> block at the end of <code>src/24-media.css</code>,
+    and it covers all three parts:
   </p>
-  <p class="dx-note text-muted">
-    <code>.editor-toolbar</code> and <code>.editor-footer</code> belong in the never-print
-    list beside <code>.dg-toolbar</code>. Recorded in <code>FINDINGS.md</code>; the
-    content region itself should print as prose, which it already would.
+  <pre class="dx-code"><code><?= e('.editor-toolbar, .editor-footer { display: none !important; }
+.editor-content { max-block-size: none !important; overflow: visible !important; }') ?></code></pre>
+  <p>
+    So the formatting buttons and the character count are dropped, and the content region
+    loses both its height cap and its scrollbar — which means a long document prints in
+    full rather than being cut off at the visible height. That last line is the one that
+    matters, and it is easy to miss.
+  </p>
+  <p class="text-muted">
+    Deck keeps print rules for a component beside that component rather than gathering them
+    all in <code>src/99-print.css</code>, so checking only that file gives the wrong answer
+    for anything in <code>src/24-media.css</code>.
   </p>
 </section>
 

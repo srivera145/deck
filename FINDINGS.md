@@ -870,17 +870,33 @@ anywhere. The editor page now leads with it, says plainly that the stored HTML i
 inconsistent, and requires server-side sanitising rather than suggesting it. Anyone
 choosing the component should choose it knowing that.
 
-## 52. `.editor`'s toolbar and footer print
+## 52. ~~`.editor`'s toolbar and footer print~~ — WITHDRAWN, this was wrong
 
-`src/99-print.css` drops `.dg-toolbar`, `.tabs`, `.segmented` and the rest of the page
-chrome. `.editor-toolbar` and `.editor-footer` are not in that list, so a printed page
-containing an editor shows a row of formatting buttons that cannot be pressed and a
-character count that means nothing.
+**This finding was incorrect and is retracted.** `.editor-toolbar` and `.editor-footer` are
+already dropped when printing, and `.editor-content` already has its height cap and
+overflow removed so a long document prints in full:
 
-One line adds them to the existing never-print selector. The content region should keep
-printing, which it already would.
+```css
+/* src/24-media.css, at the end of the file */
+@layer deck.print {
+  @media print {
+    .editor-toolbar, .editor-footer { display: none !important; }
+    .editor-content { max-block-size: none !important; overflow: visible !important; }
+  }
+}
+```
 
-**Not fixed** — a rendering change in a documentation pass. Documented on the editor page.
+**How the mistake was made:** I searched `src/99-print.css` for `.editor`, found nothing,
+and concluded there was no print handling. Deck has **two** `@layer deck.print` blocks —
+the main sheet, and a second one at the end of `src/24-media.css` that keeps the media and
+messaging components' print rules beside the components themselves. Grepping one file
+answers the question for some components and not others.
+
+**The real lesson, which is worth more than the finding was:** "there is no rule for X"
+is a claim about the whole stylesheet, and it cannot be checked by reading one file. Four
+component pages — editor, chat, drawer and video — carried print claims built on the same
+incomplete search, and all four were wrong in the same direction: they described Deck as
+having neglected something it had actually handled deliberately. All are now corrected.
 
 ## 53. `.carousel` and `.kanban` print only what was scrolled into view
 
@@ -1020,3 +1036,415 @@ is no room, which is the `position-try-fallbacks` chain working as documented.
 component was complete, the example was live and wired. Nothing measures *where* a
 floating element lands relative to its trigger, and that is the one thing a positioning
 component exists to get right.
+
+## 59. A pseudo-element inside `:is()` is silently dropped, and one RTL rule relies on it
+
+`src/19-logical.css` flips three things that grow from the start edge:
+
+```css
+[dir="rtl"] :is(.chart-bar-fill, .progress::-webkit-progress-value, .toast-timer) {
+  transform-origin: right center;
+}
+```
+
+A pseudo-element is not a valid argument to `:is()`, and `:is()` uses forgiving selector
+parsing — an invalid item is dropped rather than invalidating the rule. So the browser
+keeps the other two and throws the progress fill away. Read back through `cssRules` in
+Chrome, the rule serialises as:
+
+```
+[dir="rtl"] :is(.chart-bar-fill, .toast-timer)
+```
+
+**Nothing is broken by it.** The fill is animated with `inline-size`, not a transform, so
+`transform-origin` would have been a no-op even if it had applied; and the engine mirrors
+`<progress>` under `dir="rtl"` on its own. Screenshotted at `value="30"` with the dropped
+rule and with a correctly-written `[dir="rtl"] .progress::-webkit-progress-value` rule
+beside it: the two fill from the right identically.
+
+The danger is not this line, it is the shape of it. Forgiving parsing means a mistake
+inside `:is()` never announces itself — no console warning, no failed rule, no visual
+change. The next person who adds a pseudo-element to a grouped selector will get the same
+silence with a component that *does* need the declaration.
+
+**Recommended:** delete `.progress::-webkit-progress-value` from the list. It is dead
+weight that reads as coverage. If a vendor pseudo-element ever does need a logical flip,
+it has to be its own rule — as `.progress` and `.range` already do for every other
+declaration, for the same reason.
+
+**How it was found:** writing the "Right to left" section of `progress.php` and checking
+the claim against the source instead of restating the comment above the rule.
+
+## 60. `.ring` styles a child that its own mask guarantees nobody will see
+
+`.ring` in `src/07-components.css` sets four declarations for a label in the middle:
+
+```css
+display: grid;
+place-items: center;
+font-size: var(--text-xs);
+font-weight: 620;
+font-variant-numeric: tabular-nums;
+```
+
+and then, four lines later:
+
+```css
+mask: radial-gradient(farthest-side, transparent calc(100% - var(--thickness)), #000 calc(100% - var(--thickness) + 1px));
+```
+
+A mask applies to an element **and its entire subtree**. The middle of the gradient is
+transparent, so a `<span>` centred inside a `.ring` is masked out along with the hole — it
+renders, it takes up space, it is in the accessibility tree, and it is completely
+invisible. Screenshotted side by side: `<div class="ring">68%</div>` shows an empty ring.
+
+This is already known in the source, because the fix is sitting right below it:
+
+```css
+.ring-wrap { position: relative; display: inline-grid; place-items: center; }
+.ring-wrap > .ring-label { position: absolute; font-size: var(--text-xs); font-weight: 620; font-variant-numeric: tabular-nums; }
+```
+
+`.ring-label` repeats all three typography declarations, which is the tell — the same
+three, on an unmasked sibling, because on the ring they never took effect.
+
+**Recommended:** drop `place-items`, `font-size`, `font-weight` and
+`font-variant-numeric` from `.ring`. They cost nothing at runtime and cost a reader real
+time: they are an invitation to put a number inside the ring, which is the one thing that
+cannot work. `display: grid` can stay or go — with no visible children it does nothing
+either way, but it is the least misleading of the five.
+
+**How it was found:** writing the ring section of `progress.php`, noticing that `.ring`
+was dressed for a label it could not show, and screenshotting both approaches rather than
+assuming which one worked.
+
+## 61. `.is-invalid` means two different things depending on the wrapper
+
+`src/06-forms.css` reaches into the control:
+
+```css
+.input:user-invalid, .textarea:user-invalid, .select:user-invalid,
+.field.is-invalid :is(.input, .textarea, .select) { /* red border, red ring */ }
+```
+
+`src/23-inputs.css` does not:
+
+```css
+.float.is-invalid > label,
+.float > :user-invalid ~ label { color: var(--bad-700); }
+```
+
+So `.field.is-invalid` reddens the border *and* whatever error text you supply, while
+`.float.is-invalid` colours the label and leaves the control looking untouched. Same class
+name, same position on the wrapper, different amount of work — and the weaker one is on the
+component where the label is the *only* thing that would have carried the signal, because a
+floating label sits inside the field.
+
+`:user-invalid` is not affected: it matches the control directly through the
+`06-forms.css` rule, so a genuinely-invalid `.float` does get its border. The gap is only
+in the manual override, which is exactly the path used for server-side errors — the errors
+the browser cannot detect and the reader most needs pointed out.
+
+**Recommended:** add the missing rule.
+
+```css
+.float.is-invalid :is(.input, .textarea, .select) { /* same treatment as .field */ }
+```
+
+Better still, write one rule that covers both wrappers, so the next wrapper Deck adds gets
+it for free rather than needing to remember.
+
+**How it was found:** writing the invalid section of `float.php` and checking what
+`.is-invalid` actually selects, rather than assuming the two wrappers behaved alike because
+they share a class name.
+
+## 62. `.phone` silently drops a digit when you edit the middle of a number
+
+`phones()` in `src/js/deck-extras.js` reformats on every `input` event by stripping the
+value to digits and re-laying them into the mask:
+
+```js
+const digits = input.value.replace(/\D/g, '');
+let out = '', d = 0;
+for (const ch of mask) {
+  if (d >= digits.length) break;
+  out += ch === '#' ? digits[d++] : ch;
+}
+input.value = out;
+```
+
+Two things follow, and the second is the serious one.
+
+**The caret moves.** Assigning `input.value` collapses the selection to the end of the
+field. Measured in Chrome: caret at index 8 of `(202) 555-0147`, type `9`, caret ends at
+14.
+
+**A digit is destroyed.** The loop stops at the end of the *mask*, not the end of the
+digits. Inserting a digit mid-number shifts every later digit one place along, and the
+eleventh digit has nowhere to go:
+
+```
+(202) 555-0147   caret between the second and third 5, type "9"
+(202) 559-5014   the 7 is gone
+```
+
+No warning, no visual cue that anything was lost, and the field still reports itself
+`.is-valid` because it still holds ten digits. Someone correcting a single typo in a stored
+number will save a different number than the one they think they typed.
+
+**Recommended:** count digits before the caret, rebuild, then restore the caret to the same
+digit offset — the standard approach for a masked input. And do not discard overflow
+silently: either refuse the keystroke when the mask is full, or let the value exceed the
+mask and mark it invalid. Dropping data quietly is the one option that should not be on the
+table.
+
+**How it was found:** writing the accessibility section of `phone.php`. The caret jump was
+predictable from reading the code; the dropped digit was not, and only showed up because
+the claim was checked in a browser rather than reasoned about.
+
+## 63. The copy button's first press is announced to nobody
+
+`copiers()` in `src/js/deck-extras.js`:
+
+```js
+btn.classList.toggle('is-copied', ok);
+btn.setAttribute('aria-live', 'polite');
+```
+
+The class toggle is what swaps `.copy-idle` for `.copy-done` inside the button. The
+`aria-live` attribute is added *after* that has already happened.
+
+A live region has to be present in the accessibility tree **before** its content changes
+for the change to be announced — adding the attribute and mutating the subtree in the same
+task gives assistive technology nothing to compare against. So:
+
+- **First press:** the label swaps, `aria-live` is added, nothing is announced.
+- **Every press after:** the attribute is already there from last time, so it announces.
+
+Inconsistent is worse than absent here. A reader who presses once and hears nothing learns
+the control is silent; the announcement then arrives unexpectedly on the second press.
+
+There is a second, smaller oddity: `aria-live` is being put on a `<button>`, so the
+button's own accessible name becomes a live region. That works, but the conventional place
+for this is a separate status element.
+
+**Recommended:** declare the live region in the markup rather than adding it at press time
+— either a visually hidden `<span role="status">` next to the button that the script writes
+into, or `aria-live="polite"` rendered on the button from the start. Note that the toast
+path is already correct: where no `.copy-done` exists, Deck raises a toast, and the toast
+region is a properly-declared live region that announces on the first press like any other.
+
+**How it was found:** writing the accessibility section of `copy.php` and reading the
+order of the two statements rather than the fact that `aria-live` appeared somewhere in the
+function.
+
+## 64. A collapsed `.sidebar-link` has no accessible name
+
+`src/18-container.css` collapses the rail to icons below 15rem:
+
+```css
+@container shell (max-width: 15rem) {
+  .sidebar-link span { display: none; }
+  .sidebar-link { justify-content: center; }
+  .sidebar-group { text-align: center; font-size: 0; }
+}
+```
+
+`display: none` removes the label from the accessibility tree, not merely from the screen.
+The icon inside the link is `aria-hidden="true"` by Deck's own convention, so a collapsed
+`.sidebar-link` contains nothing that contributes a name. A screen reader announces "link"
+and stops — for every destination in the application's primary navigation.
+
+The neighbouring rule shows the author knew the difference. `.sidebar-group` uses
+`font-size: 0`, which hides the heading visually and **keeps** it in the tree, so the
+grouping survives the collapse. The link rule reaches for `display: none` instead.
+
+**Recommended:** hide the label the way the group heading is hidden, or with Deck's own
+`.sr-only` treatment, so the name survives:
+
+```css
+@container shell (max-width: 15rem) {
+  .sidebar-link span {
+    position: absolute;
+    inline-size: 1px; block-size: 1px;
+    overflow: hidden; clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+```
+
+The documentation currently tells authors to put an `aria-label` on every `.sidebar-link`
+duplicating its visible text, which works and should keep working — but it is a workaround
+for a stylesheet defect, and every author has to know about it independently.
+
+**How it was found:** writing the collapse section of `sidebar.php` and asking what a
+collapsed link is actually called, rather than only what it looks like.
+
+## 65. A link in footer prose is indistinguishable from the text around it
+
+`src/22-nav.css`:
+
+```css
+.footer { color: var(--text-muted); font-size: var(--text-sm); }
+.footer a { color: var(--text-muted); text-decoration: none; }
+.footer a:hover { color: var(--brand); text-decoration: underline; }
+```
+
+The link colour and the body colour are **the same token**, and the underline is removed.
+So a link inside a sentence in the footer has no colour difference, no weight difference,
+no underline and no other mark. There is nothing to find it by.
+
+Hover reveals it, which does not help a keyboard user, a touch user, or anyone who does not
+happen to move the pointer over that exact word.
+
+This is WCAG 1.4.1 (Use of Colour) failed in the strongest possible way — normally that
+criterion is about relying on colour *alone*; here there is not even a colour.
+
+**Where it is fine:** a `.footer-col`, which is a stack of links and nothing else. A list
+where every item is a link needs no per-item marker, and this is the usual justification
+for unstyled footer links. The rule is only wrong for prose, and Deck's own footer markup
+puts a copyright sentence in `.footer-bottom` where prose is likely.
+
+**Recommended:** scope the underline removal to the places where it is justified rather than
+to every descendant.
+
+```css
+.footer a { color: var(--text-muted); }
+.footer :is(.footer-col, .footer-social, .footer-bottom) > a { text-decoration: none; }
+```
+
+That keeps the clean look for link columns and the bottom bar's own link row, and leaves a
+link inside a `<p>` underlined like any other.
+
+**How it was found:** writing the link section of `footer.php` and noticing that the
+declared link colour and the declared container colour were the same variable.
+
+## 66. `.is-error` is written by the script and styled by nothing
+
+`lazies()` in `src/js/deck-extras.js` handles a failed image:
+
+```js
+img.addEventListener('error', () => img.closest('.lazy')?.classList.add('is-error'), { once: true });
+```
+
+There is no `.is-error` rule anywhere in `src/`. Grepping the whole stylesheet returns
+nothing, and the class does not appear in `dist/api.json`.
+
+So the class is added, and the frame carries on exactly as before: `.lazy::after` is still
+painting its shimmer, the image is still `opacity: 0` because `.is-loaded` never arrived,
+and the result is a frame that shimmers forever. **A broken image is visually identical to
+one that is still loading**, with no time limit on the illusion.
+
+For a sighted reader that is a page that never finishes. For a screen reader user the
+`alt` text is still announced, so they are arguably better served than the sighted reader —
+an unusual inversion.
+
+**Recommended:** style the state, even minimally. Stopping the shimmer is the important
+half, because that is what removes the false "still working" signal:
+
+```css
+.lazy.is-error::after { content: none; }
+.lazy.is-error {
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--line);
+  color: var(--text-faint);
+}
+```
+
+Deck classifies `.is-error` nowhere because the extractor only sees CSS, and there is no CSS
+to see. A class the JavaScript writes and the stylesheet ignores is invisible to every check
+in the build — worth noting as a category, not just an instance.
+
+**How it was found:** writing the lazy-loading section of `gallery.php` and reading the
+error handler, then grepping for the class it sets.
+
+## 67. Two components share `dk-shimmer` and behave differently under reduced motion
+
+`src/02-reset.css` exempts seven selectors from the reduced-motion freeze so that loading
+feedback keeps moving slowly rather than stopping:
+
+```css
+.spinner, .icon-spin, .skeleton, .marquee-track, .btn.is-loading::after,
+.dg-wrap.is-loading::after, .ping::after { animation-duration: 2.4s !important; … }
+```
+
+`.lazy::after` is not in that list. It runs the same `dk-shimmer` keyframes as `.skeleton`
+— at 1.6s rather than 1.4s — for the same purpose, on the same kind of placeholder. Under
+`prefers-reduced-motion: reduce` it is caught by the blanket
+`*, *::before, *::after { animation-duration: .01ms !important }` rule and freezes.
+
+The reasoning written into the source is explicit: *"A frozen spinner reads as broken, and
+progress feedback is information, not decoration."* That argument applies to `.lazy`
+exactly as it applies to `.skeleton`. One of them follows it and one does not.
+
+Whichever way it is resolved, the two should match. Either both keep moving slowly, or both
+stop and the comment stops claiming otherwise.
+
+**Recommended:** add `.lazy::after` to the exemption list, and while there, reconcile the
+durations — 1.4s and 1.6s for the same effect on the same page is a difference nobody chose.
+(`.g-shimmer` is a third copy of this, already recommended for demotion in finding on the
+gradient audit.)
+
+**How it was found:** writing the reduced-motion section of `gallery.php` and checking
+whether `.lazy` was in the exemption list rather than assuming it was, because
+`.skeleton` is.
+
+## 68. Thirteen tokens are undocumented because the extractor reads one file
+
+`tools/docs/extract.mjs` collects tokens like this:
+
+```js
+const TOKENS_FILE = '01-tokens.css';
+…
+for (const rule of rules) {
+  if (rule.file !== TOKENS_FILE) continue;
+  …
+}
+```
+
+`src/16-motion.css` declares thirteen more custom properties on `:root`, and none of them
+reach `dist/api.json`, `API.md`, `docs_token_table()` or the tokens reference page:
+
+```
+--dur-0  --dur-4  --dur-5  --dur-slow  --stagger-step  --travel
+--ease-in  --ease-bounce  --ease-overshoot  --ease-snap
+--ease-accelerate  --ease-decelerate  --ease-emphasized
+```
+
+Eight are in active use across the stylesheet:
+
+| token | uses |
+|---|---|
+| `--ease-in` | 15 |
+| `--dur-4` | 9 |
+| `--travel` | 6 |
+| `--dur-5` | 4 |
+| `--ease-bounce` | 2 |
+| `--ease-overshoot` | 2 |
+| `--stagger-step` | 2 |
+| `--ease-emphasized` | 1 |
+
+So `.flip` transitions over `--dur-4` and `.cube` over `--dur-5`, and an author reading the
+documented token list would conclude Deck's duration scale stops at `--dur-3`. Passing
+either name to `docs_token_table()` renders an empty row rather than failing, so the
+documentation cannot even catch itself.
+
+**This is the same shape of mistake as finding 52.** There, I assumed one file held all the
+print rules; here, the tooling assumes one file holds all the tokens. In both cases the
+assumption is invisible until something that lives in the second file is examined closely.
+
+**Recommended, in order of preference:**
+
+1. Collect tokens from every `:root` rule in `src/`, not from one filename. The extractor
+   already has every rule parsed and already records which file each came from, so this is
+   a filter to delete rather than logic to add.
+2. Failing that, make `docs_token_table()` fail loudly on a name that is not in the API,
+   the way `verify.mjs` already fails on a class that does not exist. A silent empty row is
+   the reason this survived 60 pages.
+3. Move the motion tokens into `src/01-tokens.css`. Cheapest, but it treats the symptom —
+   the next file to declare a token will be invisible in the same way.
+
+**How it was found:** writing the token table for `3d.php`, passing `--dur-5` through the
+same checker used for every other page, and getting `MISSING` for a token that is plainly
+in the source and plainly working.
