@@ -199,10 +199,26 @@ export function verifyDocs() {
       }
     }
 
-    /* 2. every class this page puts in markup, including inside examples */
+    /* 2. every class this page puts in markup, including inside examples
+
+       Except where a page is deliberately showing somebody else's markup. The
+       Tailwind comparison prints the same component in both frameworks, and
+       class="text-gray-500" there is the point rather than a typo, and is
+       indistinguishable from one to a regex. So a page can fence a region with
+       a verify:foreign comment, closed by verify:/foreign.
+
+       A region rather than a per-file opt-out or a prefix allowlist, because
+       either of those would also switch the check off for the Deck examples on
+       the same page, and that page has forty of them. */
     const local = localClasses(text);
+    const foreign = [];
+    for (const open of text.matchAll(/verify:foreign/g)) {
+      const close = text.indexOf('verify:/foreign', open.index);
+      foreign.push([open.index, close === -1 ? text.length : close]);
+    }
+    const isForeign = (i) => foreign.some(([a, b]) => i > a && i < b);
     for (const m of text.matchAll(/class=(["'])([\s\S]*?)\1/g)) {
-      if (!isStatic(m[2])) continue;
+      if (!isStatic(m[2]) || isForeign(m.index)) continue;
       const at = text.slice(0, m.index).split('\n').length;
       for (const name of m[2].split(/\s+/).filter(Boolean)) {
         if (name.startsWith(DOCS_PREFIX) || local.has(name)) continue;

@@ -478,19 +478,22 @@ function docs_token_table(array $names, bool $source = false): void
 
 $DOCS_NAV = [
     'Start' => [
-        ['start/install.php', 'Install', false],
-        ['start/first-page.php', 'Your first page', false],
+        ['start/install.php', 'Install Deck', true],
+        ['start/first-page.php', 'Your first page', true],
     ],
+    /* Guides are named for the task, not the feature, because that is what a
+       person types into a search engine. "Theming" is what we call it; "change
+       your brand colour" is what they came to do. */
     'Guides' => [
-        ['guides/theming.php', 'Theming', false],
-        ['guides/layers.php', 'Cascade layers', false],
-        ['guides/dark-mode.php', 'Dark mode', false],
-        ['guides/rtl.php', 'Right to left', false],
-        ['guides/forms.php', 'Forms', false],
-        ['guides/layout.php', 'Layout', false],
-        ['guides/motion.php', 'Motion', false],
-        ['guides/printing.php', 'Printing', false],
-        ['guides/migrating-from-tailwind.php', 'Migrating from Tailwind', false],
+        ['guides/theming.php', 'Change your brand colour', true],
+        ['guides/layout.php', 'Stop writing margins', true],
+        ['guides/layers.php', 'Override without !important', true],
+        ['guides/dark-mode.php', 'Add dark mode', true],
+        ['guides/forms.php', 'Forms that validate', true],
+        ['guides/rtl.php', 'Right-to-left languages', true],
+        ['guides/motion.php', 'Animate without a library', true],
+        ['guides/printing.php', 'Print properly', true],
+        ['guides/migrating-from-tailwind.php', 'Move from Tailwind', true],
     ],
     'Components' => [
         ['components/3d.php', '3D space', true],

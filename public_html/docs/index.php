@@ -26,12 +26,23 @@ require __DIR__ . '/_layout.php';
   <div class="grid">
     <article class="card card-link">
       <div class="card-body stack-2">
+        <h3 class="card-title"><a class="link-quiet stretch" href="start/install.php">New to Deck</a></h3>
+        <p class="text-sm text-muted">
+          Install it in about a minute, then build a complete account settings page —
+          nav bar, rail layout, real form controls, a confirm dialog and a save bar — in
+          one sitting, typing every line.
+        </p>
+        <span class="badge badge-brand">Start here</span>
+      </div>
+    </article>
+    <article class="card card-link">
+      <div class="card-body stack-2">
         <h3 class="card-title"><a class="link-quiet stretch" href="components/button.php">Components</a></h3>
         <p class="text-sm text-muted">
           One page per component: every variant rendered, the class table generated from
           the stylesheet, the tokens it reads, and when not to reach for it.
         </p>
-        <span class="badge badge-brand">47 pages written</span>
+        <span class="badge">47 pages</span>
       </div>
     </article>
     <article class="card card-link">
