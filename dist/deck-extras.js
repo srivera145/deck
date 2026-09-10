@@ -127,6 +127,10 @@
       const panel = $(trigger.dataset.deckMega);
       if (!panel) return;
       const place = () => {
+        /* 25-anchor.css anchors .mega where the browser supports it, and these
+           inline insets would then be resolved against the anchored region and
+           double-offset the panel. */
+        if (CSS.supports('anchor-name: --a')) return;
         const r = trigger.getBoundingClientRect();
         panel.style.insetBlockStart = (r.bottom + 8) + 'px';
         const w = panel.offsetWidth;

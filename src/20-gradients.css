@@ -151,11 +151,7 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(to top,
-      oklch(12% .02 var(--hue-neutral) / .82) 0%,
-      oklch(12% .02 var(--hue-neutral) / .62) 22%,
-      oklch(12% .02 var(--hue-neutral) / .28) 48%,
-      transparent 78%);
+    background: var(--scrim);
     pointer-events: none;
   }
   .g-scrim-top::after {

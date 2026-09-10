@@ -207,6 +207,8 @@
     overflow-y: auto;
     overscroll-behavior: contain;
   }
+  /* A centred date pill between days. Styling, not structure — a screen
+     reader hears ordinary text. */
   .chat-day {
     align-self: center;
     margin-block: var(--space-4) var(--space-2);
@@ -218,6 +220,9 @@
     font-weight: 560;
   }
 
+  /* One message row. .msg-out flips it to the other edge and reverses the row
+     so the avatar swaps sides. The incoming/outgoing distinction is position
+     and colour only, so name the sender in text for anyone not seeing it. */
   .msg {
     display: flex;
     gap: var(--space-2);
@@ -227,6 +232,8 @@
   }
   .msg-out { align-self: flex-end; flex-direction: row-reverse; }
 
+  /* The message body. Its corner radii are logical, which is what lets the
+     grouping flatten the correct side in either writing direction. */
   .bubble {
     position: relative;
     padding: var(--space-2) var(--space-3);

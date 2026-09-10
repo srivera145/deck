@@ -10,6 +10,7 @@
      ---------------------------------------------------------------------- */
   .carousel { position: relative; }
 
+  /* The scroll-snap container holding the slides. */
   .carousel-track {
     display: flex;
     gap: var(--gap, var(--space-4));
@@ -21,11 +22,18 @@
     border-radius: var(--r-md);
   }
   .carousel-track::-webkit-scrollbar { display: none; }
+  /* One slide. flex-basis: 100% by default; .carousel-peek makes it 86% so
+     the next one is partly visible, which is the only persistent cue that the
+     track scrolls once the scrollbar is hidden. */
   .carousel-slide {
     flex: 0 0 100%;
     scroll-snap-align: center;
     scroll-snap-stop: always;
     min-inline-size: 0;
+    /* The slide is the containing block for its own .carousel-caption. Without
+       this the nearest positioned ancestor is .carousel, so every caption in
+       the track lands in the same place and they stack on top of each other. */
+    position: relative;
   }
   .carousel-peek .carousel-slide { flex-basis: 86%; }
   .carousel-multi .carousel-slide { flex-basis: calc((100% - var(--space-4) * 2) / 3); }
@@ -34,6 +42,8 @@
   }
   .carousel-slide img { inline-size: 100%; block-size: 100%; object-fit: cover; }
 
+  /* Previous and next. Hidden on a coarse pointer, where the reader swipes
+     instead — so do not also hide the dots. */
   .carousel-arrow {
     position: absolute;
     inset-block-start: 50%;
@@ -149,13 +159,19 @@
     }
   }
 
+  /* Text over a slide. The generous block-start padding is there to give the
+     scrim room to fade — without a background the near-white text sits
+     directly on the image and disappears over anything light. */
   .carousel-caption {
     position: absolute;
     inset-inline: 0;
     inset-block-end: 0;
     padding: var(--space-8) var(--space-5) var(--space-5);
     color: oklch(98% 0 0);
+    background: var(--scrim);
+    pointer-events: none;
   }
+  .carousel-caption :is(a, button) { pointer-events: auto; }
 
   /* --- Drawer --------------------------------------------------------------
      A side panel. The bottom sheet is in 08-mobile; this one comes in from an
@@ -579,6 +595,9 @@
   .stepper-vertical .step-marker { flex-direction: column; align-self: stretch; }
   .stepper-vertical .step-marker::after { inline-size: 2px; block-size: auto; flex: 1 1 auto; }
   @media (max-width: 40rem) {
+    /* Horizontal where there is room, vertical below a breakpoint. Prefer this
+       over .stepper-vertical: four steps with notes do not fit across a phone,
+       and a horizontal stepper that squashes is unreadable. */
     .stepper-auto { flex-direction: column; gap: var(--space-5); }
     .stepper-auto .step { flex-direction: row; gap: var(--space-3); min-inline-size: 0; }
     .stepper-auto .step-marker { flex-direction: column; align-self: stretch; }

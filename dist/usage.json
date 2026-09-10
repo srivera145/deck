@@ -1,155 +1,184 @@
 {
   "generated": "tools/docs/usage.mjs — do not edit",
-  "filesScanned": 49,
+  "filesScanned": 58,
   "counts": {
     "classes": 931,
-    "used": 681,
-    "unused": 250
+    "used": 703,
+    "unused": 228
   },
   "uses": {
-    "stack-3": 1063,
-    "text-muted": 512,
-    "btn": 437,
-    "icon": 357,
-    "stack-2": 263,
+    "stack-3": 1329,
+    "text-muted": 601,
+    "btn": 439,
+    "icon": 371,
+    "stack-2": 315,
+    "cluster": 205,
+    "stack": 204,
     "card": 197,
-    "cluster": 187,
     "card-body": 179,
-    "stack": 176,
     "btn-sm": 145,
+    "label": 137,
     "badge": 134,
-    "label": 131,
+    "cluster-tight": 132,
     "text-sm": 130,
-    "icon-sm": 123,
-    "field": 119,
-    "cluster-tight": 114,
-    "input": 114,
-    "stack-6": 110,
-    "check": 104,
+    "field": 126,
+    "icon-sm": 125,
+    "stack-6": 120,
+    "input": 119,
+    "check": 110,
+    "lede": 102,
+    "btn-primary": 89,
+    "breadcrumb": 88,
     "card-title": 87,
-    "btn-primary": 87,
-    "lede": 84,
     "container": 84,
     "btn-ghost": 78,
+    "grid": 77,
     "section": 77,
-    "grid": 76,
+    "avatar": 75,
     "push": 74,
+    "dg-num": 74,
     "fw-semi": 74,
-    "breadcrumb": 70,
+    "sr-only": 69,
     "tab": 65,
-    "avatar": 64,
-    "dg-num": 61,
-    "btn-icon": 55,
+    "table-wrap": 57,
+    "btn-icon": 57,
+    "table": 56,
     "icon-lg": 55,
-    "num": 53,
-    "table": 46,
-    "sr-only": 46,
-    "table-wrap": 45,
+    "num": 55,
+    "table-stack": 48,
     "list-row": 44,
     "range": 43,
     "grid-tight": 42,
     "icon-tile": 41,
     "switch": 39,
     "nums": 39,
-    "table-stack": 38,
     "alert": 37,
     "split": 37,
+    "s1": 36,
     "menu-item": 36,
-    "select": 33,
+    "list": 35,
+    "select": 34,
+    "msg": 33,
     "list-main": 33,
     "list-title": 33,
     "bar": 32,
+    "textarea": 32,
     "file": 32,
-    "list": 32,
-    "s1": 31,
+    "bubble": 31,
     "badge-good": 30,
     "check-text": 30,
-    "textarea": 30,
     "nav-link": 30,
     "tooltip": 29,
     "skeleton": 29,
+    "chart-col": 28,
     "alert-title": 27,
     "alert-body": 27,
     "chip": 27,
     "list-trail": 27,
     "toast": 27,
     "tip": 26,
-    "segmented": 24,
+    "dg-check": 25,
+    "editor-tool": 25,
+    "segmented": 25,
+    "step": 25,
+    "dg-pin-start": 24,
+    "datefield": 24,
     "emoji": 24,
     "accordion-body": 23,
     "list-sub": 23,
-    "dg-pin-start": 23,
+    "chart-bar-fill": 22,
     "panel": 22,
     "stack-4": 22,
     "search": 22,
+    "step-marker": 22,
+    "step-label": 22,
+    "chart-bar": 21,
+    "chart-bar-label": 21,
+    "chart-bar-track": 21,
+    "chart-bar-value": 21,
     "help": 21,
     "menu": 21,
+    "scroller": 21,
     "grow": 20,
     "icon-tile-lg": 20,
     "btn-lg": 19,
     "btn-block": 19,
-    "datefield": 19,
-    "scroller": 19,
+    "dg-wrap": 19,
+    "dg": 19,
+    "kanban-col": 19,
+    "kanban-body": 19,
     "sidebar-link": 19,
     "badge-warn": 18,
-    "dg-check": 18,
+    "carousel-slide": 18,
+    "chart": 18,
+    "bubble-meta": 18,
+    "combo": 18,
+    "dg-pin-end": 18,
+    "dg-pin-start-2": 18,
+    "kanban-head": 18,
+    "kanban-count": 18,
+    "carousel": 17,
     "fieldset": 17,
+    "combo-option": 17,
     "drawer": 17,
     "toast-main": 17,
     "toast-title": 17,
-    "dg-pin-start-2": 17,
-    "dg-pin-end": 17,
     "mono": 17,
     "avatar-sm": 16,
     "cq": 16,
     "mb-2": 16,
-    "chart-col": 16,
     "truncate": 15,
+    "is-open": 15,
+    "dg-actions": 15,
     "grid-wide": 15,
     "addon": 15,
+    "kanban-card": 15,
+    "kanban": 15,
     "lazy": 15,
     "alert-info": 14,
     "avatar-lg": 14,
+    "chat": 14,
     "btn-soft": 14,
     "card-flex": 14,
     "check-note": 14,
     "pop": 14,
+    "is-done": 14,
+    "step-note": 14,
+    "tabs": 14,
     "tip-arrow": 14,
     "stat-value": 14,
-    "dg": 14,
-    "dg-actions": 14,
-    "chart-bar": 14,
-    "chart-bar-label": 14,
-    "chart-bar-track": 14,
-    "chart-bar-fill": 14,
-    "chart-bar-value": 14,
-    "msg": 13,
-    "bubble": 13,
     "badge-dot": 13,
     "field-row": 13,
     "input-group": 13,
+    "carousel-arrow": 13,
+    "combo-option-main": 13,
+    "is-invalid": 13,
+    "editor": 13,
+    "kanban-card-title": 13,
     "menu-label": 13,
     "enter-rise": 13,
     "indicator": 13,
     "accordion": 12,
     "btn-danger": 12,
+    "carousel-track": 12,
+    "carousel-dots": 12,
     "required": 12,
-    "is-invalid": 12,
+    "kanban-empty": 12,
     "modal": 12,
-    "tabs": 12,
-    "editor-tool": 12,
-    "is-open": 12,
     "icon-follow": 11,
+    "chart-title": 11,
     "drawer-header": 11,
     "drawer-title": 11,
     "drawer-body": 11,
+    "editor-sep": 11,
+    "editor-content": 11,
     "stack-1": 11,
+    "kanban-card-meta": 11,
     "stack-0": 11,
     "sheet-grip": 11,
     "stack-8": 11,
     "copy": 11,
     "sidebar-group": 11,
-    "carousel-slide": 11,
     "drag-handle": 11,
     "avatar-xs": 10,
     "badge-bad": 10,
@@ -157,19 +186,29 @@
     "card-header": 10,
     "fab": 10,
     "card-footer": 10,
+    "mirror-rtl": 10,
+    "chart-line": 10,
+    "bubble-name": 10,
     "check-card": 10,
     "error": 10,
     "sheet": 10,
+    "stepper": 10,
     "icon-muted": 10,
-    "combo": 10,
-    "kanban-card": 10,
-    "combo-option": 10,
     "was-shaken": 10,
     "btn-3d": 9,
+    "is-loading": 9,
     "navbar": 9,
     "card-media": 9,
     "card-link": 9,
+    "carousel-peek": 9,
+    "chart-note": 9,
+    "chart-columns": 9,
+    "s2": 9,
+    "is-active": 9,
     "sticky-top": 9,
+    "has-value": 9,
+    "editor-toolbar": 9,
+    "editor-count": 9,
     "text-cq": 9,
     "float": 9,
     "menu-sep": 9,
@@ -188,46 +227,48 @@
     "center": 9,
     "toast-close": 9,
     "icon-fill": 9,
-    "is-done": 9,
     "mega-item": 9,
-    "step": 9,
-    "step-marker": 9,
-    "step-label": 9,
-    "step-note": 9,
     "alert-bad": 8,
-    "is-loading": 8,
     "stretch": 8,
+    "carousel-prev": 8,
+    "carousel-next": 8,
+    "chart-legend": 8,
+    "donut": 8,
+    "chart-gridline": 8,
+    "msg-out": 8,
+    "combo-token": 8,
+    "anchor": 8,
+    "dg-compact": 8,
+    "dg-zebra": 8,
     "grid-2": 8,
+    "is-current": 8,
     "toast-icon": 8,
     "toast-action": 8,
     "copy-value": 8,
     "copy-btn": 8,
     "navbar-brand": 8,
     "reaction": 8,
-    "dg-wrap": 8,
-    "chart-title": 8,
-    "chart-line": 8,
     "cq-tone": 8,
     "tone-surface": 8,
     "tone-text": 8,
     "pile": 8,
-    "carousel-arrow": 8,
     "indicator-warn": 8,
     "mega-item-title": 8,
     "mega-item-note": 8,
-    "kanban-col": 8,
-    "kanban-card-title": 8,
-    "kanban-card-meta": 8,
     "tabbar-item": 8,
     "avatar-stack": 7,
     "btn-round": 7,
     "btn-group": 7,
+    "chart-head": 7,
+    "chat-day": 7,
+    "dg-sort": 7,
+    "datefield-clear": 7,
     "drawer-end": 7,
+    "editor-footer": 7,
     "field-row-cq": 7,
     "form-actions": 7,
     "list-header": 7,
     "pop-actions": 7,
-    "anchor": 7,
     "toast-good": 7,
     "toast-text": 7,
     "toast-actions": 7,
@@ -235,18 +276,21 @@
     "sidebar": 7,
     "spinner": 7,
     "emoji-tile": 7,
-    "dg-zebra": 7,
-    "chart-gridline": 7,
     "marquee-track": 7,
     "no-flip": 7,
     "scene": 7,
-    "kanban-head": 7,
-    "kanban-count": 7,
-    "kanban-body": 7,
-    "kanban-empty": 7,
     "alert-warn": 6,
-    "chat": 6,
     "actions-cq": 6,
+    "s3": 6,
+    "chart-heat": 6,
+    "chart-area": 6,
+    "bubble-typing": 6,
+    "chat-composer": 6,
+    "combo-input": 6,
+    "combo-toggle": 6,
+    "combo-list": 6,
+    "dg-virtual": 6,
+    "editor-select": 6,
     "number": 6,
     "menu-match": 6,
     "toast-region": 6,
@@ -260,16 +304,11 @@
     "icon-xl": 6,
     "timeline-item": 6,
     "timeline-dot": 6,
-    "chart": 6,
-    "chart-note": 6,
     "reveal": 6,
     "ping": 6,
     "tone-icon": 6,
     "writing-vertical": 6,
     "flip": 6,
-    "carousel": 6,
-    "editor-sep": 6,
-    "editor-content": 6,
     "gallery": 6,
     "cq-shell": 6,
     "speed-dial-action": 6,
@@ -277,46 +316,68 @@
     "speed-dial-button": 6,
     "back-to-top": 6,
     "sortable-chosen": 6,
-    "combo-option-main": 6,
-    "is-active": 6,
     "avatar-square": 5,
+    "is-disabled": 5,
+    "carousel-caption": 5,
+    "s-bad": 5,
+    "chart-bars": 5,
+    "donut-wrap": 5,
+    "donut-center": 5,
+    "donut-value": 5,
+    "donut-label": 5,
+    "chart-svg": 5,
+    "s-muted": 5,
     "cluster-end": 5,
     "cluster-between": 5,
+    "combo-group": 5,
+    "combo-option-sub": 5,
+    "combo-option-trail": 5,
+    "combo-check": 5,
+    "combo-empty": 5,
     "app-shell": 5,
+    "dg-cards": 5,
+    "is-resizing": 5,
+    "datepicker-day": 5,
+    "datepicker-grid": 5,
+    "datepicker-nav": 5,
     "drawer-footer": 5,
+    "is-over": 5,
     "optional": 5,
     "toast-timer": 5,
     "is-dragging": 5,
     "scroll-progress": 5,
-    "chart-legend": 5,
     "g-border": 5,
-    "carousel-peek": 5,
-    "carousel-prev": 5,
-    "carousel-track": 5,
-    "carousel-next": 5,
-    "carousel-dots": 5,
     "status-line": 5,
     "mega-col": 5,
-    "editor": 5,
-    "editor-select": 5,
-    "bubble-meta": 5,
     "qr": 5,
     "span-2": 5,
     "span-wide": 5,
-    "dg-compact": 5,
     "speed-dial": 5,
     "alert-good": 4,
     "avatar-xl": 4,
-    "is-disabled": 4,
     "btn-accent": 4,
     "btn-outline": 4,
+    "carousel-dot": 4,
+    "chart-meter": 4,
+    "chart-x": 4,
+    "sparkline": 4,
+    "bubble-system": 4,
+    "bubble-attachment": 4,
+    "combo-control": 4,
+    "combo-tokens": 4,
     "container-sm": 4,
     "container-md": 4,
     "container-full": 4,
+    "dg-cq": 4,
+    "dg-cards-wrap": 4,
+    "dg-toolbar": 4,
+    "datepicker": 4,
+    "datepicker-title": 4,
     "float-outline": 4,
     "list-virtual": 4,
-    "mirror-rtl": 4,
     "range-ticks": 4,
+    "stepper-vertical": 4,
+    "stepper-auto": 4,
     "banner": 4,
     "theme-dock": 4,
     "navbar-links": 4,
@@ -327,14 +388,6 @@
     "icon-tile-bad": 4,
     "skeleton-text": 4,
     "mt-1": 4,
-    "chart-head": 4,
-    "chart-columns": 4,
-    "s2": 4,
-    "chart-svg": 4,
-    "chart-area": 4,
-    "s-muted": 4,
-    "donut": 4,
-    "s3": 4,
     "s4": 4,
     "reveal-fade": 4,
     "reveal-pop": 4,
@@ -346,32 +399,56 @@
     "tilt": 4,
     "space": 4,
     "coverflow": 4,
+    "mega": 4,
     "mega-heading": 4,
     "phone": 4,
     "rating": 4,
-    "editor-count": 4,
     "masonry": 4,
-    "dg-virtual": 4,
     "is-fanned": 4,
     "shake": 4,
-    "is-over": 4,
     "is-copied": 4,
-    "datefield-clear": 4,
-    "datepicker-grid": 4,
-    "datepicker-nav": 4,
-    "combo-empty": 4,
-    "dg-sort": 4,
-    "has-value": 4,
-    "is-resizing": 4,
     "is-up": 4,
     "is-down": 4,
     "is-tilting": 4,
     "is-flipped": 4,
     "is-dismissed": 4,
     "is-animating": 4,
-    "datepicker-day": 4,
     "disclosure": 3,
+    "chart-sm": 3,
+    "chart-area-g": 3,
+    "chart-col-stack": 3,
+    "chart-baseline": 3,
+    "chart-line-dashed": 3,
+    "sparkline-good": 3,
     "cluster-center": 3,
+    "combo-sep": 3,
+    "combo-count": 3,
+    "combo-create": 3,
+    "combo-hint": 3,
+    "combo-loading": 3,
+    "is-above": 3,
+    "dg-resize": 3,
+    "dg-selection": 3,
+    "dg-sort-icon": 3,
+    "dg-statusbar": 3,
+    "is-scrolled-end": 3,
+    "is-scrolled-x": 3,
+    "datepicker-dow": 3,
+    "datepicker-foot": 3,
+    "datepicker-head": 3,
+    "datepicker-jump": 3,
+    "datepicker-layout": 3,
+    "datepicker-main": 3,
+    "datepicker-month": 3,
+    "datepicker-months": 3,
+    "datepicker-preset": 3,
+    "datepicker-presets": 3,
+    "datepicker-readout": 3,
+    "is-in-range": 3,
+    "is-range-end": 3,
+    "is-range-start": 3,
+    "is-selected": 3,
+    "editor-tool-wide": 3,
     "grid-fixed-3": 3,
     "fixed": 3,
     "split-rail-start": 3,
@@ -384,11 +461,6 @@
     "banner-close": 3,
     "mt-4": 3,
     "emoji-grid": 3,
-    "dg-cards": 3,
-    "chart-x": 3,
-    "sparkline": 3,
-    "chart-meter": 3,
-    "chart-heat": 3,
     "stagger": 3,
     "lift": 3,
     "press": 3,
@@ -419,22 +491,12 @@
     "cube-spin": 3,
     "with-indicator": 3,
     "indicator-badge": 3,
-    "mega": 3,
     "mega-grid": 3,
     "mega-feature": 3,
     "mega-footer": 3,
-    "stepper": 3,
-    "stepper-auto": 3,
-    "is-current": 3,
     "number-unit": 3,
     "phone-flag": 3,
     "phone-code": 3,
-    "editor-toolbar": 3,
-    "editor-footer": 3,
-    "bubble-name": 3,
-    "msg-out": 3,
-    "bubble-typing": 3,
-    "chat-composer": 3,
     "qr-sm": 3,
     "video": 3,
     "video-poster": 3,
@@ -442,17 +504,9 @@
     "jumbotron": 3,
     "jumbotron-center": 3,
     "g-mesh-subtle": 3,
-    "kanban": 3,
     "print-only": 3,
     "flash-good": 3,
-    "combo-list": 3,
-    "carousel-dot": 3,
     "copy-inline": 3,
-    "datepicker-title": 3,
-    "combo-tokens": 3,
-    "combo-input": 3,
-    "combo-toggle": 3,
-    "combo-token": 3,
     "is-visible": 3,
     "defer": 3,
     "footer": 3,
@@ -465,8 +519,15 @@
     "card-brand": 2,
     "card-flush": 2,
     "card-raised": 2,
+    "carousel-multi": 2,
+    "chart-group": 2,
+    "chart-y": 2,
     "container-lg": 2,
     "container-xl": 2,
+    "dg-comfy": 2,
+    "is-blocked": 2,
+    "is-outside": 2,
+    "is-today": 2,
     "form-actions-sticky": 2,
     "is-lifted": 2,
     "reorder": 2,
@@ -488,19 +549,7 @@
     "empty": 2,
     "empty-art": 2,
     "empty-title": 2,
-    "dg-toolbar": 2,
-    "dg-selection": 2,
-    "dg-cards-wrap": 2,
-    "dg-statusbar": 2,
-    "chart-line-dashed": 2,
-    "chart-baseline": 2,
-    "donut-wrap": 2,
-    "donut-center": 2,
-    "donut-value": 2,
-    "donut-label": 2,
-    "chart-bars": 2,
     "s5": 2,
-    "sparkline-good": 2,
     "tilt-lift-sm": 2,
     "face-front": 2,
     "face-back": 2,
@@ -512,7 +561,6 @@
     "phone-country": 2,
     "phone-status": 2,
     "text-good": 2,
-    "chat-day": 2,
     "video-meta": 2,
     "video-duration": 2,
     "masonry-3": 2,
@@ -528,62 +576,42 @@
     "qr-caption": 2,
     "is-valid": 2,
     "is-loaded": 2,
-    "datepicker-month": 2,
-    "datepicker-dow": 2,
-    "datepicker-presets": 2,
-    "datepicker-preset": 2,
-    "datepicker-jump": 2,
-    "datepicker-months": 2,
-    "datepicker-layout": 2,
-    "datepicker-main": 2,
-    "datepicker-head": 2,
-    "datepicker-foot": 2,
-    "datepicker-readout": 2,
-    "combo-group": 2,
-    "combo-option-sub": 2,
-    "combo-check": 2,
-    "combo-create": 2,
-    "combo-hint": 2,
-    "combo-count": 2,
-    "combo-loading": 2,
-    "dg-sort-icon": 2,
-    "is-selected": 2,
-    "is-range-start": 2,
-    "is-range-end": 2,
-    "is-in-range": 2,
-    "is-above": 2,
-    "is-scrolled-x": 2,
-    "is-scrolled-end": 2,
     "is-revealed": 2,
     "tick": 2,
     "is-front": 2,
     "is-behind-start": 2,
     "is-behind-end": 2,
-    "dg-resize": 2,
     "flip-x": 2,
     "print-keep": 2,
     "transition": 2,
-    "dg-cq": 2,
     "w-full": 2,
     "gap-2": 2,
     "square": 1,
+    "chart-dot": 1,
+    "chart-dot-active": 1,
+    "chart-lg": 1,
+    "chart-plot": 1,
+    "sparkline-bad": 1,
+    "s-good": 1,
+    "s-warn": 1,
+    "combo-clear": 1,
+    "dg-center": 1,
+    "dg-empty": 1,
+    "dg-tight": 1,
+    "dg-wrap-text": 1,
+    "is-new": 1,
+    "datepicker-time": 1,
+    "is-preview": 1,
+    "hidden": 1,
     "grid-fixed-2": 1,
     "grid-fixed-4": 1,
     "toast-loading": 1,
     "h2": 1,
-    "datepicker": 1,
-    "is-outside": 1,
-    "is-today": 1,
-    "is-blocked": 1,
-    "combo-control": 1,
     "sticky": 1,
     "ripple-ink": 1,
     "emoji-lg": 1,
     "emoji-xl": 1,
     "emoji-hero": 1,
-    "chart-col-stack": 1,
-    "chart-group": 1,
-    "chart-y": 1,
     "page-break": 1,
     "page-break-after": 1,
     "keep-together": 1,
@@ -656,7 +684,6 @@
     "g-conic": 1,
     "g-shimmer": 1,
     "g-bar-fill": 1,
-    "chart-area-g": 1,
     "scene-far": 1,
     "parallax": 1,
     "parallax-back": 1,
@@ -664,14 +691,10 @@
     "parallax-front": 1,
     "turn-out": 1,
     "turn-in": 1,
-    "carousel-multi": 1,
     "banner-bottom": 1,
-    "stepper-vertical": 1,
     "video-square": 1,
     "video-portrait": 1,
     "video-wide": 1,
-    "bubble-attachment": 1,
-    "bubble-system": 1,
     "qr-lg": 1,
     "qr-logo": 1,
     "indicator-badge-dot": 1,
@@ -684,7 +707,6 @@
     "virtual": 1,
     "contain": 1,
     "contain-paint": 1,
-    "dg-comfy": 1,
     "md": 1,
     "min-is-0": 1,
     "icon-spin": 1
@@ -698,15 +720,23 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/check.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
+      "public_html/docs/components/editor.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/components/kanban.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/modal.php",
@@ -719,6 +749,7 @@
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/components/stepper.php",
       "public_html/docs/components/switch.php",
       "public_html/docs/components/table.php",
       "public_html/docs/components/tabs.php",
@@ -739,15 +770,23 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/check.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
+      "public_html/docs/components/editor.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/components/kanban.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/modal.php",
@@ -760,6 +799,7 @@
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/components/stepper.php",
       "public_html/docs/components/switch.php",
       "public_html/docs/components/table.php",
       "public_html/docs/components/tabs.php",
@@ -778,15 +818,23 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/check.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
+      "public_html/docs/components/editor.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/components/kanban.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/modal.php",
@@ -799,6 +847,7 @@
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/components/stepper.php",
       "public_html/docs/components/switch.php",
       "public_html/docs/components/table.php",
       "public_html/docs/components/tabs.php",
@@ -816,15 +865,23 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/check.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
+      "public_html/docs/components/editor.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/components/kanban.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/modal.php",
@@ -837,6 +894,7 @@
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/components/stepper.php",
       "public_html/docs/components/switch.php",
       "public_html/docs/components/table.php",
       "public_html/docs/components/tabs.php",
@@ -857,15 +915,23 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/check.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
+      "public_html/docs/components/editor.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/components/kanban.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/modal.php",
@@ -878,6 +944,7 @@
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/components/stepper.php",
       "public_html/docs/components/switch.php",
       "public_html/docs/components/table.php",
       "public_html/docs/components/tabs.php",
@@ -904,7 +971,12 @@
       "public_html/docs/components/badge.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/editor.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
@@ -932,15 +1004,23 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/check.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
+      "public_html/docs/components/editor.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/components/kanban.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/modal.php",
@@ -953,6 +1033,7 @@
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/components/stepper.php",
       "public_html/docs/components/switch.php",
       "public_html/docs/components/table.php",
       "public_html/docs/components/tabs.php",
@@ -974,15 +1055,23 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/check.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
+      "public_html/docs/components/editor.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/components/kanban.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/modal.php",
@@ -995,6 +1084,7 @@
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/components/stepper.php",
       "public_html/docs/components/switch.php",
       "public_html/docs/components/table.php",
       "public_html/docs/components/tabs.php",
@@ -1020,15 +1110,23 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/check.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
+      "public_html/docs/components/editor.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/components/kanban.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/modal.php",
@@ -1041,6 +1139,7 @@
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/components/stepper.php",
       "public_html/docs/components/switch.php",
       "public_html/docs/components/table.php",
       "public_html/docs/components/tabs.php",
@@ -1085,7 +1184,11 @@
       "public_html/docs/components/alert.php",
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
+      "public_html/docs/components/datepicker.php",
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/file.php",
@@ -1115,6 +1218,7 @@
     "avatar": [
       "FINDINGS.md",
       "public_html/docs/components/avatar.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/stack.php",
       "public_html/index.php"
@@ -1141,7 +1245,10 @@
       "public_html/docs/components/badge.php",
       "public_html/docs/components/bar.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
@@ -1159,7 +1266,10 @@
       "public_html/docs/components/badge.php",
       "public_html/docs/components/bar.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
@@ -1175,7 +1285,10 @@
       "public_html/docs/components/avatar.php",
       "public_html/docs/components/bar.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
@@ -1187,11 +1300,18 @@
       "public_html/index.php"
     ],
     "sr-only": [
+      "FINDINGS.md",
       "public_html/docs/_layout.php",
       "public_html/docs/components/avatar.php",
       "public_html/docs/components/bar.php",
+      "public_html/docs/components/charts.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/combobox.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/kanban.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/segmented.php",
       "public_html/docs/components/sheet.php",
@@ -1211,16 +1331,19 @@
     "chat": [
       "README.md",
       "public_html/docs/components/avatar.php",
+      "public_html/docs/components/chat.php",
       "public_html/index.php"
     ],
     "msg": [
       "README.md",
       "public_html/docs/components/avatar.php",
+      "public_html/docs/components/chat.php",
       "public_html/index.php"
     ],
     "bubble": [
       "README.md",
       "public_html/docs/components/avatar.php",
+      "public_html/docs/components/chat.php",
       "public_html/index.php"
     ],
     "square": [
@@ -1293,6 +1416,7 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
@@ -1356,6 +1480,7 @@
       "bin/deck.mjs",
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/sheet.php",
@@ -1426,6 +1551,7 @@
       "public_html/docs/_layout.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
+      "public_html/docs/components/chat.php",
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
@@ -1440,6 +1566,7 @@
     "icon-sm": [
       "README.md",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/datepicker.php",
       "public_html/docs/components/toast.php",
       "public_html/index.php",
       "public_html/llms.txt",
@@ -1465,11 +1592,13 @@
     "is-loading": [
       "FINDINGS.md",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/datagrid.php",
       "public_html/index.php"
     ],
     "is-disabled": [
       "FINDINGS.md",
-      "public_html/docs/components/button.php"
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/combobox.php"
     ],
     "fab": [
       "FINDINGS.md",
@@ -1544,6 +1673,7 @@
       "bin/deck.mjs",
       "public_html/docs/components/card.php",
       "public_html/docs/components/check.php",
+      "public_html/docs/components/datagrid.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/index.php",
@@ -1606,9 +1736,313 @@
     "card-raised": [
       "public_html/docs/components/card.php"
     ],
+    "carousel-slide": [
+      "README.md",
+      "public_html/docs/components/carousel.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "carousel": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/carousel.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "carousel-track": [
+      "README.md",
+      "public_html/docs/components/carousel.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "carousel-arrow": [
+      "README.md",
+      "public_html/docs/components/carousel.php",
+      "public_html/index.php"
+    ],
+    "carousel-prev": [
+      "README.md",
+      "public_html/docs/components/carousel.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "mirror-rtl": [
+      "README.md",
+      "public_html/docs/components/carousel.php",
+      "public_html/docs/components/chat.php",
+      "public_html/docs/components/list.php"
+    ],
+    "carousel-next": [
+      "README.md",
+      "public_html/docs/components/carousel.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "carousel-dots": [
+      "README.md",
+      "public_html/docs/components/carousel.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
+    "carousel-peek": [
+      "README.md",
+      "public_html/docs/components/carousel.php",
+      "public_html/index.php"
+    ],
+    "carousel-caption": [
+      "public_html/docs/components/carousel.php"
+    ],
+    "carousel-dot": [
+      "public_html/docs/components/carousel.php",
+      "src/js/deck-extras.js"
+    ],
+    "carousel-multi": [
+      "README.md",
+      "public_html/docs/components/carousel.php"
+    ],
+    "chart-col": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart": [
+      "FINDINGS.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-head": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-title": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-note": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-columns": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-sm": [
+      "public_html/docs/components/charts.php"
+    ],
+    "chart-legend": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "s1": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "s2": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "s-bad": [
+      "public_html/docs/components/charts.php"
+    ],
+    "chart-bars": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-bar": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-bar-label": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-bar-track": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-bar-fill": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-bar-value": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "s3": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "donut-wrap": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "donut": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "donut-center": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "donut-value": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "donut-label": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-heat": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-area-g": [
+      "README.md",
+      "public_html/docs/components/charts.php"
+    ],
+    "chart-col-stack": [
+      "README.md",
+      "public_html/docs/components/charts.php"
+    ],
+    "chart-line": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-area": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-baseline": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-dot": [
+      "public_html/docs/components/charts.php"
+    ],
+    "chart-dot-active": [
+      "public_html/docs/components/charts.php"
+    ],
+    "chart-gridline": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-group": [
+      "README.md",
+      "public_html/docs/components/charts.php"
+    ],
+    "chart-lg": [
+      "public_html/docs/components/charts.php"
+    ],
+    "chart-line-dashed": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-meter": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-plot": [
+      "public_html/docs/components/charts.php"
+    ],
+    "chart-svg": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-x": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chart-y": [
+      "README.md",
+      "public_html/docs/components/charts.php"
+    ],
+    "sparkline": [
+      "README.md",
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "sparkline-bad": [
+      "public_html/docs/components/charts.php"
+    ],
+    "sparkline-good": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "s-good": [
+      "public_html/docs/components/charts.php"
+    ],
+    "s-warn": [
+      "public_html/docs/components/charts.php"
+    ],
+    "s-muted": [
+      "public_html/docs/components/charts.php",
+      "public_html/index.php"
+    ],
+    "chat-day": [
+      "public_html/docs/components/chat.php",
+      "public_html/index.php"
+    ],
+    "bubble-name": [
+      "README.md",
+      "public_html/docs/components/chat.php",
+      "public_html/index.php"
+    ],
+    "bubble-meta": [
+      "README.md",
+      "public_html/docs/components/chat.php",
+      "public_html/index.php"
+    ],
+    "msg-out": [
+      "README.md",
+      "public_html/docs/components/chat.php",
+      "public_html/index.php"
+    ],
+    "bubble-system": [
+      "README.md",
+      "public_html/docs/components/chat.php"
+    ],
+    "bubble-attachment": [
+      "README.md",
+      "public_html/docs/components/chat.php"
+    ],
+    "bubble-typing": [
+      "README.md",
+      "public_html/docs/components/chat.php",
+      "public_html/index.php"
+    ],
+    "chat-composer": [
+      "README.md",
+      "public_html/docs/components/chat.php",
+      "public_html/index.php"
+    ],
+    "textarea": [
+      "FINDINGS.md",
+      "public_html/docs/components/chat.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/textarea.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js"
+    ],
     "check": [
       "FINDINGS.md",
       "public_html/docs/components/check.php",
+      "public_html/docs/components/datagrid.php",
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
@@ -1656,6 +2090,185 @@
       "FINDINGS.md",
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/scroller.php"
+    ],
+    "combo": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/combobox.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "field": [
+      "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/components/combobox.php",
+      "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/fieldset.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/select.php",
+      "public_html/docs/components/textarea.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "label": [
+      "bin/deck.mjs",
+      "public_html/docs/components/combobox.php",
+      "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/fieldset.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/segmented.php",
+      "public_html/docs/components/select.php",
+      "public_html/docs/components/textarea.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck.js"
+    ],
+    "combo-control": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "combo-token": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "combo-input": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "combo-toggle": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "is-open": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck-extras.js",
+      "src/js/deck.js"
+    ],
+    "combo-list": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck.js"
+    ],
+    "combo-group": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "combo-option": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "is-active": [
+      "FINDINGS.md",
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "combo-option-main": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "combo-option-sub": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "combo-option-trail": [
+      "public_html/docs/components/combobox.php"
+    ],
+    "combo-check": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "combo-sep": [
+      "public_html/docs/components/combobox.php"
+    ],
+    "input": [
+      "FINDINGS.md",
+      "README.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/combobox.php",
+      "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/fieldset.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js",
+      "src/js/deck.js"
+    ],
+    "combo-clear": [
+      "public_html/docs/components/combobox.php"
+    ],
+    "combo-count": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "combo-create": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "combo-empty": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "combo-hint": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "combo-loading": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "combo-tokens": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "is-above": [
+      "public_html/docs/components/combobox.php",
+      "src/js/deck.js"
+    ],
+    "is-invalid": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/combobox.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/input.php",
+      "src/js/deck.js"
+    ],
+    "select": [
+      "FINDINGS.md",
+      "public_html/docs/components/combobox.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/select.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "src/js/deck-extras.js",
+      "src/js/deck.js"
+    ],
+    "anchor": [
+      "public_html/docs/components/combobox.php",
+      "public_html/docs/components/popover.php",
+      "src/js/deck.js"
+    ],
+    "list": [
+      "FINDINGS.md",
+      "bin/deck.mjs",
+      "public_html/docs/components/combobox.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/stack.php",
+      "public_html/docs/components/switch.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck.js"
     ],
     "section": [
       "FINDINGS.md",
@@ -1711,6 +2324,261 @@
       "public_html/docs/components/container.php",
       "public_html/php-helper.php"
     ],
+    "dg-num": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php"
+    ],
+    "dg-sort": [
+      "public_html/docs/components/datagrid.php",
+      "src/js/deck.js"
+    ],
+    "dg-wrap": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "dg": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "dg-check": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "dg-cq": [
+      "README.md",
+      "public_html/docs/components/datagrid.php"
+    ],
+    "dg-virtual": [
+      "README.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php"
+    ],
+    "dg-compact": [
+      "README.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php"
+    ],
+    "dg-actions": [
+      "README.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php"
+    ],
+    "dg-cards": [
+      "README.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php"
+    ],
+    "dg-cards-wrap": [
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php"
+    ],
+    "dg-center": [
+      "public_html/docs/components/datagrid.php"
+    ],
+    "dg-comfy": [
+      "README.md",
+      "public_html/docs/components/datagrid.php"
+    ],
+    "dg-empty": [
+      "public_html/docs/components/datagrid.php"
+    ],
+    "dg-pin-end": [
+      "README.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php"
+    ],
+    "dg-pin-start": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "dg-pin-start-2": [
+      "README.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php"
+    ],
+    "dg-resize": [
+      "public_html/docs/components/datagrid.php",
+      "src/js/deck.js"
+    ],
+    "dg-selection": [
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php"
+    ],
+    "dg-sort-icon": [
+      "public_html/docs/components/datagrid.php",
+      "src/js/deck.js"
+    ],
+    "dg-statusbar": [
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php"
+    ],
+    "dg-tight": [
+      "public_html/docs/components/datagrid.php"
+    ],
+    "dg-toolbar": [
+      "FINDINGS.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php"
+    ],
+    "dg-wrap-text": [
+      "public_html/docs/components/datagrid.php"
+    ],
+    "dg-zebra": [
+      "README.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/index.php"
+    ],
+    "is-new": [
+      "public_html/docs/components/datagrid.php"
+    ],
+    "is-resizing": [
+      "public_html/docs/components/datagrid.php",
+      "src/js/deck.js"
+    ],
+    "is-scrolled-end": [
+      "public_html/docs/components/datagrid.php",
+      "src/js/deck.js"
+    ],
+    "is-scrolled-x": [
+      "public_html/docs/components/datagrid.php",
+      "src/js/deck.js"
+    ],
+    "num": [
+      "README.md",
+      "public_html/docs/components/datagrid.php",
+      "public_html/docs/components/table.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "datefield": [
+      "README.md",
+      "public_html/docs/components/datepicker.php",
+      "public_html/docs/components/input.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "has-value": [
+      "FINDINGS.md",
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datefield-clear": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker": [
+      "FINDINGS.md",
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-day": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-dow": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-foot": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-grid": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-head": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-jump": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-layout": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-main": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-month": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-months": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-nav": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-preset": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-presets": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-readout": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "datepicker-time": [
+      "public_html/docs/components/datepicker.php"
+    ],
+    "datepicker-title": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "is-blocked": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "is-in-range": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "is-outside": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "is-preview": [
+      "public_html/docs/components/datepicker.php"
+    ],
+    "is-range-end": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "is-range-start": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "is-selected": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
+    "is-today": [
+      "public_html/docs/components/datepicker.php",
+      "src/js/deck.js"
+    ],
     "drawer": [
       "FINDINGS.md",
       "README.md",
@@ -1738,48 +2606,63 @@
       "README.md",
       "public_html/docs/components/drawer.php"
     ],
-    "field": [
+    "editor": [
       "FINDINGS.md",
       "README.md",
-      "bin/deck.mjs",
-      "public_html/docs/components/field.php",
-      "public_html/docs/components/fieldset.php",
-      "public_html/docs/components/input.php",
-      "public_html/docs/components/menu.php",
-      "public_html/docs/components/range.php",
-      "public_html/docs/components/select.php",
-      "public_html/docs/components/textarea.php",
-      "public_html/docs/search.php",
+      "public_html/docs/components/editor.php",
       "public_html/index.php",
-      "src/js/deck.js"
+      "src/js/deck-adapters.js",
+      "src/js/deck-extras.js"
     ],
-    "label": [
-      "bin/deck.mjs",
-      "public_html/docs/components/field.php",
-      "public_html/docs/components/fieldset.php",
-      "public_html/docs/components/input.php",
-      "public_html/docs/components/menu.php",
-      "public_html/docs/components/range.php",
-      "public_html/docs/components/segmented.php",
-      "public_html/docs/components/select.php",
-      "public_html/docs/components/textarea.php",
-      "public_html/docs/search.php",
-      "public_html/index.php",
-      "public_html/php-helper.php",
-      "src/js/deck.js"
-    ],
-    "input": [
+    "editor-toolbar": [
       "FINDINGS.md",
       "README.md",
-      "bin/deck.mjs",
-      "public_html/docs/_layout.php",
-      "public_html/docs/components/field.php",
-      "public_html/docs/components/fieldset.php",
-      "public_html/docs/components/input.php",
-      "public_html/docs/search.php",
+      "public_html/docs/components/editor.php",
+      "public_html/index.php"
+    ],
+    "editor-tool": [
+      "public_html/docs/components/editor.php",
+      "public_html/index.php"
+    ],
+    "editor-sep": [
+      "public_html/docs/components/editor.php",
+      "public_html/index.php"
+    ],
+    "editor-tool-wide": [
+      "public_html/docs/components/editor.php"
+    ],
+    "editor-content": [
+      "README.md",
+      "public_html/docs/components/editor.php",
       "public_html/index.php",
-      "src/js/deck-extras.js",
-      "src/js/deck.js"
+      "src/js/deck-adapters.js",
+      "src/js/deck-extras.js"
+    ],
+    "editor-footer": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/editor.php",
+      "public_html/index.php"
+    ],
+    "editor-count": [
+      "public_html/docs/components/editor.php",
+      "public_html/index.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck-extras.js"
+    ],
+    "editor-select": [
+      "public_html/docs/components/editor.php",
+      "public_html/index.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck-extras.js"
+    ],
+    "is-over": [
+      "public_html/docs/components/editor.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck-extras.js"
+    ],
+    "hidden": [
+      "public_html/docs/components/editor.php"
     ],
     "help": [
       "public_html/docs/components/field.php",
@@ -1800,13 +2683,6 @@
     "optional": [
       "public_html/docs/components/field.php",
       "public_html/index.php"
-    ],
-    "is-invalid": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/docs/components/field.php",
-      "public_html/docs/components/input.php",
-      "src/js/deck.js"
     ],
     "error": [
       "bin/deck.mjs",
@@ -1871,22 +2747,6 @@
       "public_html/docs/components/grid.php",
       "src/js/deck-adapters.js"
     ],
-    "textarea": [
-      "FINDINGS.md",
-      "public_html/docs/components/input.php",
-      "public_html/docs/components/textarea.php",
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
-    "select": [
-      "FINDINGS.md",
-      "public_html/docs/components/input.php",
-      "public_html/docs/components/select.php",
-      "public_html/docs/search.php",
-      "public_html/index.php",
-      "src/js/deck-extras.js",
-      "src/js/deck.js"
-    ],
     "addon": [
       "FINDINGS.md",
       "public_html/docs/components/input.php",
@@ -1910,27 +2770,58 @@
       "public_html/docs/components/input.php",
       "public_html/index.php"
     ],
-    "datefield": [
-      "README.md",
-      "public_html/docs/components/input.php",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
     "number": [
       "README.md",
       "public_html/docs/components/input.php",
       "public_html/index.php",
       "src/js/deck-extras.js"
     ],
-    "list": [
-      "bin/deck.mjs",
-      "public_html/docs/components/list.php",
-      "public_html/docs/components/stack.php",
-      "public_html/docs/components/switch.php",
+    "kanban-card": [
+      "README.md",
+      "public_html/docs/components/kanban.php",
       "public_html/index.php",
-      "public_html/php-helper.php",
-      "src/js/deck-adapters.js",
-      "src/js/deck.js"
+      "src/js/deck-adapters.js"
+    ],
+    "kanban-card-title": [
+      "public_html/docs/components/kanban.php",
+      "public_html/index.php"
+    ],
+    "kanban-card-meta": [
+      "public_html/docs/components/kanban.php",
+      "public_html/index.php"
+    ],
+    "kanban": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/kanban.php",
+      "public_html/index.php"
+    ],
+    "kanban-col": [
+      "README.md",
+      "public_html/docs/components/kanban.php",
+      "public_html/index.php",
+      "src/js/deck-adapters.js"
+    ],
+    "kanban-head": [
+      "README.md",
+      "public_html/docs/components/kanban.php",
+      "public_html/index.php"
+    ],
+    "kanban-count": [
+      "public_html/docs/components/kanban.php",
+      "public_html/index.php",
+      "src/js/deck-adapters.js"
+    ],
+    "kanban-body": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/kanban.php",
+      "public_html/index.php"
+    ],
+    "kanban-empty": [
+      "README.md",
+      "public_html/docs/components/kanban.php",
+      "public_html/index.php"
     ],
     "list-row": [
       "FINDINGS.md",
@@ -1967,10 +2858,6 @@
       "public_html/index.php"
     ],
     "list-virtual": [
-      "README.md",
-      "public_html/docs/components/list.php"
-    ],
-    "mirror-rtl": [
       "README.md",
       "public_html/docs/components/list.php"
     ],
@@ -2051,10 +2938,6 @@
     "pop-actions": [
       "public_html/docs/components/popover.php",
       "public_html/index.php"
-    ],
-    "anchor": [
-      "public_html/docs/components/popover.php",
-      "src/js/deck.js"
     ],
     "tooltip": [
       "FINDINGS.md",
@@ -2157,11 +3040,50 @@
       "public_html/docs/components/stack.php",
       "public_html/index.php"
     ],
-    "num": [
+    "stepper": [
+      "FINDINGS.md",
       "README.md",
-      "public_html/docs/components/table.php",
-      "public_html/index.php",
-      "src/js/deck.js"
+      "public_html/docs/components/stepper.php",
+      "public_html/index.php"
+    ],
+    "step": [
+      "README.md",
+      "public_html/docs/components/stepper.php",
+      "public_html/index.php"
+    ],
+    "is-done": [
+      "README.md",
+      "public_html/docs/components/stepper.php",
+      "public_html/index.php"
+    ],
+    "step-marker": [
+      "README.md",
+      "public_html/docs/components/stepper.php",
+      "public_html/index.php"
+    ],
+    "step-label": [
+      "README.md",
+      "public_html/docs/components/stepper.php",
+      "public_html/index.php"
+    ],
+    "step-note": [
+      "README.md",
+      "public_html/docs/components/stepper.php",
+      "public_html/index.php"
+    ],
+    "is-current": [
+      "README.md",
+      "public_html/docs/components/stepper.php",
+      "public_html/index.php"
+    ],
+    "stepper-vertical": [
+      "README.md",
+      "public_html/docs/components/stepper.php"
+    ],
+    "stepper-auto": [
+      "README.md",
+      "public_html/docs/components/stepper.php",
+      "public_html/index.php"
     ],
     "table-compact": [
       "public_html/docs/components/table.php"
@@ -2465,10 +3387,6 @@
     "timeline-item": [
       "public_html/index.php"
     ],
-    "is-done": [
-      "README.md",
-      "public_html/index.php"
-    ],
     "timeline-dot": [
       "public_html/index.php"
     ],
@@ -2507,197 +3425,14 @@
     "empty-title": [
       "public_html/index.php"
     ],
-    "combo": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "dg-toolbar": [
-      "public_html/index.php"
-    ],
-    "dg-selection": [
-      "public_html/index.php"
-    ],
-    "dg-wrap": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "dg-cards-wrap": [
-      "public_html/index.php"
-    ],
-    "dg": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "dg-zebra": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "dg-cards": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "dg-check": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "dg-pin-start": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "dg-pin-start-2": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "dg-num": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/index.php"
-    ],
-    "dg-actions": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "dg-pin-end": [
-      "README.md",
-      "public_html/index.php"
-    ],
     "mono": [
       "README.md",
-      "public_html/index.php"
-    ],
-    "dg-statusbar": [
-      "public_html/index.php"
-    ],
-    "chart": [
-      "public_html/index.php"
-    ],
-    "chart-head": [
-      "public_html/index.php"
-    ],
-    "chart-title": [
-      "public_html/index.php"
-    ],
-    "chart-note": [
-      "public_html/index.php"
-    ],
-    "chart-columns": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "chart-col": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "s1": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "s2": [
-      "public_html/index.php"
-    ],
-    "chart-svg": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "chart-gridline": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "chart-area": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "chart-line": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "chart-line-dashed": [
-      "public_html/index.php"
-    ],
-    "s-muted": [
-      "public_html/index.php"
-    ],
-    "chart-baseline": [
-      "public_html/index.php"
-    ],
-    "chart-x": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "chart-legend": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "donut-wrap": [
-      "public_html/index.php"
-    ],
-    "donut": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "donut-center": [
-      "public_html/index.php"
-    ],
-    "donut-value": [
-      "public_html/index.php"
-    ],
-    "donut-label": [
-      "public_html/index.php"
-    ],
-    "s3": [
       "public_html/index.php"
     ],
     "s4": [
       "public_html/index.php"
     ],
-    "chart-bars": [
-      "public_html/index.php"
-    ],
-    "chart-bar": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "chart-bar-label": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "chart-bar-track": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "chart-bar-fill": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "chart-bar-value": [
-      "README.md",
-      "public_html/index.php"
-    ],
     "s5": [
-      "public_html/index.php"
-    ],
-    "sparkline": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "sparkline-good": [
-      "public_html/index.php"
-    ],
-    "chart-meter": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "chart-heat": [
-      "README.md",
       "public_html/index.php"
     ],
     "stagger": [
@@ -2943,44 +3678,6 @@
       "public_html/index.php",
       "src/js/deck.js"
     ],
-    "carousel": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
-    "carousel-peek": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "carousel-arrow": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "carousel-prev": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
-    "carousel-track": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
-    "carousel-slide": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
-    "carousel-next": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
-    "carousel-dots": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-extras.js"
-    ],
     "with-indicator": [
       "README.md",
       "public_html/index.php"
@@ -3004,6 +3701,7 @@
       "public_html/index.php"
     ],
     "mega": [
+      "FINDINGS.md",
       "README.md",
       "public_html/index.php"
     ],
@@ -3033,34 +3731,6 @@
       "public_html/index.php"
     ],
     "mega-footer": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "stepper": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "stepper-auto": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "step": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "step-marker": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "step-label": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "step-note": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "is-current": [
       "README.md",
       "public_html/index.php"
     ],
@@ -3094,65 +3764,6 @@
       "README.md",
       "public_html/index.php",
       "public_html/llms.txt"
-    ],
-    "editor": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-adapters.js",
-      "src/js/deck-extras.js"
-    ],
-    "editor-toolbar": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "editor-select": [
-      "public_html/index.php",
-      "src/js/deck-adapters.js",
-      "src/js/deck-extras.js"
-    ],
-    "editor-sep": [
-      "public_html/index.php"
-    ],
-    "editor-tool": [
-      "public_html/index.php"
-    ],
-    "editor-content": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-adapters.js",
-      "src/js/deck-extras.js"
-    ],
-    "editor-footer": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "editor-count": [
-      "public_html/index.php",
-      "src/js/deck-adapters.js",
-      "src/js/deck-extras.js"
-    ],
-    "chat-day": [
-      "public_html/index.php"
-    ],
-    "bubble-name": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "bubble-meta": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "msg-out": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "bubble-typing": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "chat-composer": [
-      "README.md",
-      "public_html/index.php"
     ],
     "qr": [
       "README.md",
@@ -3229,54 +3840,10 @@
     "mt-2": [
       "public_html/index.php"
     ],
-    "kanban": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "kanban-col": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-adapters.js"
-    ],
-    "kanban-head": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "kanban-count": [
-      "public_html/index.php",
-      "src/js/deck-adapters.js"
-    ],
-    "kanban-body": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "kanban-card": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-adapters.js"
-    ],
-    "kanban-card-title": [
-      "public_html/index.php"
-    ],
     "drag-handle": [
       "public_html/index.php"
     ],
-    "kanban-card-meta": [
-      "public_html/index.php"
-    ],
-    "kanban-empty": [
-      "README.md",
-      "public_html/index.php"
-    ],
     "indicator-brand": [
-      "public_html/index.php"
-    ],
-    "dg-virtual": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "dg-compact": [
-      "README.md",
       "public_html/index.php"
     ],
     "print-only": [
@@ -3334,14 +3901,6 @@
       "README.md",
       "public_html/llms.txt"
     ],
-    "combo-list": [
-      "src/js/deck-adapters.js",
-      "src/js/deck.js"
-    ],
-    "is-over": [
-      "src/js/deck-adapters.js",
-      "src/js/deck-extras.js"
-    ],
     "sortable-chosen": [
       "README.md",
       "src/js/deck-adapters.js"
@@ -3354,15 +3913,8 @@
       "README.md",
       "src/js/deck-adapters.js"
     ],
-    "carousel-dot": [
-      "src/js/deck-extras.js"
-    ],
     "qr-caption": [
       "src/js/deck-extras.js"
-    ],
-    "is-open": [
-      "src/js/deck-extras.js",
-      "src/js/deck.js"
     ],
     "is-valid": [
       "src/js/deck-extras.js"
@@ -3376,130 +3928,6 @@
     ],
     "is-loaded": [
       "src/js/deck-extras.js"
-    ],
-    "datefield-clear": [
-      "src/js/deck.js"
-    ],
-    "datepicker-month": [
-      "src/js/deck.js"
-    ],
-    "datepicker-grid": [
-      "src/js/deck.js"
-    ],
-    "datepicker-dow": [
-      "src/js/deck.js"
-    ],
-    "datepicker-presets": [
-      "src/js/deck.js"
-    ],
-    "datepicker-preset": [
-      "src/js/deck.js"
-    ],
-    "datepicker-jump": [
-      "src/js/deck.js"
-    ],
-    "datepicker-months": [
-      "src/js/deck.js"
-    ],
-    "datepicker-layout": [
-      "src/js/deck.js"
-    ],
-    "datepicker-main": [
-      "src/js/deck.js"
-    ],
-    "datepicker-head": [
-      "src/js/deck.js"
-    ],
-    "datepicker-nav": [
-      "src/js/deck.js"
-    ],
-    "datepicker-title": [
-      "src/js/deck.js"
-    ],
-    "datepicker-foot": [
-      "src/js/deck.js"
-    ],
-    "datepicker-readout": [
-      "src/js/deck.js"
-    ],
-    "combo-tokens": [
-      "src/js/deck.js"
-    ],
-    "combo-input": [
-      "src/js/deck.js"
-    ],
-    "combo-toggle": [
-      "src/js/deck.js"
-    ],
-    "combo-option": [
-      "src/js/deck.js"
-    ],
-    "combo-option-main": [
-      "src/js/deck.js"
-    ],
-    "combo-empty": [
-      "src/js/deck.js"
-    ],
-    "combo-group": [
-      "src/js/deck.js"
-    ],
-    "combo-option-sub": [
-      "src/js/deck.js"
-    ],
-    "combo-check": [
-      "src/js/deck.js"
-    ],
-    "combo-create": [
-      "src/js/deck.js"
-    ],
-    "combo-hint": [
-      "src/js/deck.js"
-    ],
-    "combo-token": [
-      "src/js/deck.js"
-    ],
-    "combo-count": [
-      "src/js/deck.js"
-    ],
-    "combo-loading": [
-      "src/js/deck.js"
-    ],
-    "dg-sort": [
-      "src/js/deck.js"
-    ],
-    "dg-sort-icon": [
-      "src/js/deck.js"
-    ],
-    "has-value": [
-      "src/js/deck.js"
-    ],
-    "is-selected": [
-      "src/js/deck.js"
-    ],
-    "is-range-start": [
-      "src/js/deck.js"
-    ],
-    "is-range-end": [
-      "src/js/deck.js"
-    ],
-    "is-in-range": [
-      "src/js/deck.js"
-    ],
-    "is-active": [
-      "FINDINGS.md",
-      "src/js/deck.js"
-    ],
-    "is-above": [
-      "src/js/deck.js"
-    ],
-    "is-scrolled-x": [
-      "src/js/deck.js"
-    ],
-    "is-scrolled-end": [
-      "src/js/deck.js"
-    ],
-    "is-resizing": [
-      "src/js/deck.js"
     ],
     "is-revealed": [
       "src/js/deck.js"
@@ -3543,29 +3971,8 @@
     "is-animating": [
       "src/js/deck.js"
     ],
-    "datepicker-day": [
-      "src/js/deck.js"
-    ],
-    "dg-resize": [
-      "src/js/deck.js"
-    ],
     "flip-x": [
       "README.md",
-      "src/js/deck.js"
-    ],
-    "datepicker": [
-      "src/js/deck.js"
-    ],
-    "is-outside": [
-      "src/js/deck.js"
-    ],
-    "is-today": [
-      "src/js/deck.js"
-    ],
-    "is-blocked": [
-      "src/js/deck.js"
-    ],
-    "combo-control": [
       "src/js/deck.js"
     ],
     "sticky": [
@@ -3596,15 +4003,6 @@
       "README.md"
     ],
     "emoji-hero": [
-      "README.md"
-    ],
-    "chart-col-stack": [
-      "README.md"
-    ],
-    "chart-group": [
-      "README.md"
-    ],
-    "chart-y": [
       "README.md"
     ],
     "page-break": [
@@ -3743,9 +4141,6 @@
     "metarow": [
       "README.md"
     ],
-    "dg-cq": [
-      "README.md"
-    ],
     "cq-sm": [
       "README.md"
     ],
@@ -3837,9 +4232,6 @@
     "g-bar-fill": [
       "README.md"
     ],
-    "chart-area-g": [
-      "README.md"
-    ],
     "scene-far": [
       "README.md"
     ],
@@ -3861,13 +4253,7 @@
     "turn-in": [
       "README.md"
     ],
-    "carousel-multi": [
-      "README.md"
-    ],
     "banner-bottom": [
-      "README.md"
-    ],
-    "stepper-vertical": [
       "README.md"
     ],
     "video-square": [
@@ -3877,12 +4263,6 @@
       "README.md"
     ],
     "video-wide": [
-      "README.md"
-    ],
-    "bubble-attachment": [
-      "README.md"
-    ],
-    "bubble-system": [
       "README.md"
     ],
     "qr-lg": [
@@ -3921,9 +4301,6 @@
     "contain-paint": [
       "README.md"
     ],
-    "dg-comfy": [
-      "README.md"
-    ],
     "md": [
       "FINDINGS.md"
     ],
@@ -3958,33 +4335,18 @@
     "border-brand",
     "border-t",
     "capitalize",
-    "carousel-caption",
-    "chart-dot",
-    "chart-dot-active",
-    "chart-lg",
-    "chart-plot",
-    "chart-sm",
     "chip-remove",
     "clamp-2",
     "clamp-3",
-    "combo-clear",
-    "combo-option-trail",
-    "combo-sep",
     "contents",
     "cq-normal",
     "cursor-pointer",
-    "datepicker-time",
-    "dg-center",
-    "dg-empty",
-    "dg-tight",
-    "dg-wrap-text",
     "disclosure-body",
     "drop-reject",
     "drop-target",
     "dur-2",
     "dur-3",
     "dur-4",
-    "editor-tool-wide",
     "fade-swap",
     "flat",
     "flex",
@@ -4007,7 +4369,6 @@
     "h4",
     "h5",
     "h6",
-    "hidden",
     "indicator-bad",
     "indicator-badge-brand",
     "indicator-lg",
@@ -4018,8 +4379,6 @@
     "inset-be-0",
     "inset-bs-0",
     "inset-ie-0",
-    "is-new",
-    "is-preview",
     "items-baseline",
     "items-center",
     "items-end",
@@ -4142,9 +4501,6 @@
     "reveal-late",
     "row-meta",
     "row-meta-wide",
-    "s-bad",
-    "s-good",
-    "s-warn",
     "s6",
     "safe-bottom",
     "safe-top",
@@ -4158,7 +4514,6 @@
     "sm",
     "sortable",
     "sortable-fallback",
-    "sparkline-bad",
     "spinner-lg",
     "stagger-fast",
     "stagger-slow",

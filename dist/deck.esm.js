@@ -181,6 +181,12 @@ const Deck = (() => {
     }
 
     position() {
+      /* Where the browser has anchor positioning, 25-anchor.css places the
+         panel and these inline insets would be measured from the anchored
+         region rather than from the viewport — offsetting it a second time by
+         its own distance down the page. Same shape as Grid.shadows(), which
+         only runs where scroll-state queries are missing. */
+      if (CSS.supports('anchor-name: --a')) return;
       if (window.innerWidth <= 480) return; // becomes a sheet in CSS
       const r = this.root.getBoundingClientRect();
       const p = this.panel;
@@ -1452,6 +1458,10 @@ if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
       const panel = $(trigger.dataset.deckMega);
       if (!panel) return;
       const place = () => {
+        /* 25-anchor.css anchors .mega where the browser supports it, and these
+           inline insets would then be resolved against the anchored region and
+           double-offset the panel. */
+        if (CSS.supports('anchor-name: --a')) return;
         const r = trigger.getBoundingClientRect();
         panel.style.insetBlockStart = (r.bottom + 8) + 'px';
         const w = panel.offsetWidth;

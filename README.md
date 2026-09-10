@@ -23,7 +23,7 @@ Version 0.1.0 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
 ## What Deck weighs
 
-A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **62.7 KB** Brotli, or **76.2 KB** gzip. Every browser Deck supports sends `br` in
+A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **62.7 KB** Brotli, or **76.3 KB** gzip. Every browser Deck supports sends `br` in
 `Accept-Encoding`, and Cloudflare, Vercel, Netlify, and nginx with `ngx_brotli` negotiate
 it for text by default, so Brotli is what most users actually receive.
 
@@ -32,12 +32,12 @@ it for text by default, so Brotli is what most users actually receive.
 | `deck.min.css` | **26.7 KB** | 32.7 KB |
 | `deck-icons.svg` | **27.1 KB** | 33.6 KB |
 | `deck.min.js` | **8.9 KB** | 10.0 KB |
-| **All three** | **62.7 KB** | **76.2 KB** |
+| **All three** | **62.7 KB** | **76.3 KB** |
 
 The sprite is the largest single file, slightly bigger than the stylesheet — worth stating
 plainly rather than leaving you to find it in devtools. Swapping `deck.min.js` for the full
 `deck.bundle.min.js` (adds the date picker, combobox, data grid, toasts, QR encoder)
-makes the JavaScript 17.3 KB and the total 71.1 KB Brotli (85.7 KB gzip).
+makes the JavaScript 17.3 KB and the total 71.1 KB Brotli (85.8 KB gzip).
 
 ### The sprite is a manifest, not a fixed cost
 

@@ -5,9 +5,16 @@
 
 @layer deck.components {
 
+  /* A filtering select. It wraps a real <select> that stays in the DOM and
+     stays in sync, so an ordinary form post works with no server-side
+     handling, server-side rendering is just marking options selected, and
+     without JavaScript the reader still gets a working control. */
   .combo { position: relative; display: flex; flex-direction: column; }
 
   /* --- Control ------------------------------------------------------------ */
+  /* The box, styled to match .input so a combobox in a form does not look
+     like a different species. Focus is handled twice — :has(.combo-input:focus)
+     and :focus-within — so a token's remove button lights the box too. */
   .combo-control {
     display: flex;
     align-items: center;
@@ -35,6 +42,9 @@
     pointer-events: none;
   }
 
+  /* The text field. deck.js gives it role="combobox" and keeps aria-expanded
+     in step; arrow keys move .is-active rather than focus, so the reader can
+     keep typing while the highlight moves. */
   .combo-input {
     flex: 1 1 6rem;
     min-inline-size: 4rem;
@@ -104,6 +114,10 @@
   }
 
   /* --- Listbox ------------------------------------------------------------- */
+  /* The option list. A positioned sibling by default, which a clipping
+     ancestor can cut off; 25-anchor.css moves it to the top layer where
+     anchor positioning exists, which is the fix for the combobox-inside-a-modal
+     bug. */
   .combo-list {
     position: absolute;
     inset-block-start: calc(100% + 4px);
@@ -140,6 +154,8 @@
     cursor: pointer;
     scroll-margin-block: var(--space-1);
   }
+  /* The text column of an option. min-inline-size: 0 so a long value cannot
+     push the tick off the end. */
   .combo-option .combo-option-main { flex: 1 1 auto; min-inline-size: 0; display: flex; flex-direction: column; gap: 1px; }
   .combo-option .combo-option-sub { font-size: var(--text-xs); color: var(--text-muted); }
   .combo-option .combo-option-trail { color: var(--text-faint); font-size: var(--text-xs); flex: 0 0 auto; }
@@ -153,6 +169,7 @@
   }
   .combo-option[aria-selected="true"].is-active { background: color-mix(in oklab, var(--brand-soft) 78%, var(--brand-300)); }
   .combo-option[aria-disabled="true"] { opacity: .45; pointer-events: none; }
+  /* The tick on a selected option, revealed by [aria-selected="true"]. */
   .combo-option .combo-check { margin-inline-start: auto; opacity: 0; flex: 0 0 auto; }
   .combo-option[aria-selected="true"] .combo-check { opacity: 1; }
 
@@ -167,6 +184,7 @@
     text-underline-offset: .16em;
   }
 
+  /* A sticky heading above a group of options. */
   .combo-group {
     padding: var(--space-3) var(--space-3) var(--space-1);
     font-size: var(--text-2xs);
@@ -178,6 +196,8 @@
   }
   .combo-sep { block-size: 1px; background: var(--line); margin: var(--space-1) 0; }
 
+  /* The no-matches row. Name what was searched for — "No repositories match
+     'deckk'" tells a reader who mistyped what they actually typed. */
   .combo-empty, .combo-loading {
     display: flex;
     align-items: center;

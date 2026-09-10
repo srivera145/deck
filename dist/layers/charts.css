@@ -8,6 +8,10 @@
 
 @layer deck.components {
 
+  /* The frame, and the palette. Six series colours are computed by rotating
+     --hue-brand, so charts retheme with the rest of the app and stay in one
+     family. That also makes them hard to tell apart for a colour-blind
+     reader — label the marks directly rather than relying on hue. */
   .chart {
     --c1: var(--brand-500);
     --c2: oklch(64% .13 calc(var(--hue-brand) + 48));
@@ -30,6 +34,8 @@
   .chart-note { font-size: var(--text-xs); color: var(--text-muted); }
 
   /* --- Legend -------------------------------------------------------------- */
+  /* The key. Built from real buttons it gets a working toggle state for free,
+     because the faded style keys off [aria-pressed="false"]. */
   .chart-legend { display: flex; flex-wrap: wrap; gap: var(--space-3); font-size: var(--text-xs); color: var(--text-muted); }
   .chart-legend > * { display: inline-flex; align-items: center; gap: var(--space-2); }
   .chart-legend > *::before {
@@ -62,6 +68,9 @@
     background-size: 100% calc(100% - 22px);
     background-repeat: no-repeat;
   }
+  /* A column. Its height is calc(var(--value) * 1%), so rendering a chart is
+     writing numbers into style attributes. data-label and data-value are drawn
+     as generated content, which means they are for sighted readers only. */
   .chart-col {
     flex: 1 1 0;
     min-inline-size: 6px;
@@ -156,6 +165,9 @@
     background: var(--bg-sunken);
     overflow: hidden;
   }
+  /* The filled part of a horizontal bar, sized from --value. It grows from
+     the starting edge, which needs transform-origin — a physical property —
+     flipped for RTL in 19-logical.css. */
   .chart-bar-fill {
     display: block;
     block-size: 100%;
@@ -165,6 +177,9 @@
     transform-origin: left;
     animation: chart-grow var(--dur-3) var(--ease-out);
   }
+  /* The value printed beside a bar rather than inside it. Prefer this over
+     text on the fill: contrast-color() raises the floor for text on a series
+     colour but does not guarantee AA. */
   .chart-bar-value { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--text); }
   @keyframes chart-grow { from { scale: 0 1; } }
 
@@ -237,6 +252,7 @@
   .chart-plot { display: grid; grid-template-columns: auto 1fr; }
 
   /* --- Sparkline ----------------------------------------------------------- */
+  /* A tiny inline chart for a table cell or a stat block. */
   .sparkline {
     inline-size: var(--spark-w, 88px);
     block-size: var(--spark-h, 28px);
@@ -248,6 +264,9 @@
   .sparkline-bad .chart-line { stroke: var(--bad-500); }
 
   /* --- Donut --------------------------------------------------------------- */
+  /* A conic gradient driven by --value, with .donut-center holding a figure
+     in the hole. One element, no SVG. Give it role="img" and a label — the
+     shape carries the meaning and nothing else conveys it. */
   .donut {
     --size: 128px;
     --thickness: 18px;
@@ -287,6 +306,8 @@
   .chart-meter > span + span { border-inline-start: 1px solid var(--surface); }
 
   /* --- Heat cells ---------------------------------------------------------- */
+  /* A grid of --cols columns whose cells mix the series colour with the
+     sunken background by --value, interpolated in oklab. */
   .chart-heat { display: grid; grid-template-columns: repeat(var(--cols, 7), 1fr); gap: 3px; }
   .chart-heat > * {
     aspect-ratio: 1;

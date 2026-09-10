@@ -131,6 +131,8 @@
     align-items: flex-start;
     scroll-snap-type: x proximity;
   }
+  /* One column: a fixed width with a viewport cap so a phone still shows a
+     sliver of the next, capped in height by --kanban-height. */
   .kanban-col {
     flex: 0 0 min(19rem, 82vw);
     scroll-snap-align: start;
@@ -141,6 +143,8 @@
     border: 1px solid var(--line);
     border-radius: var(--r-md);
   }
+  /* The column title and count, outside the scrolling area so they stay
+     visible while cards scroll. */
   .kanban-head {
     display: flex;
     align-items: center;
@@ -167,6 +171,8 @@
     padding: 1px 7px;
     font-variant-numeric: tabular-nums;
   }
+  /* The scrolling card region, with a 5rem floor so an empty column is still
+     something you can drop onto. */
   .kanban-body {
     flex: 1 1 auto;
     overflow-y: auto;
@@ -177,6 +183,8 @@
     gap: var(--space-3);
     min-block-size: 5rem;
   }
+  /* One card. .kanban-card-title is styling, not a heading — if the card
+     opens something, make the title a link. */
   .kanban-card {
     background: var(--surface);
     border: 1px solid var(--line);
@@ -198,6 +206,8 @@
     font-size: var(--text-xs);
     color: var(--text-muted);
   }
+  /* Shown in an empty column and hidden by :has(.kanban-card) as soon as one
+     arrives, so nothing has to remember to toggle it. */
   .kanban-empty {
     border: 1px dashed var(--line-strong);
     border-radius: var(--r-sm);

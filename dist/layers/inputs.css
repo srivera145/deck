@@ -397,6 +397,9 @@
   }
   .editor:focus-within { border-color: var(--focus); box-shadow: var(--ring); }
 
+  /* The tool row. Pressed state is [aria-pressed="true"], which deck-extras.js
+     rewrites from queryCommandState after every command and selection change,
+     so the toolbar reflects the caret rather than the last button pressed. */
   .editor-toolbar {
     display: flex;
     align-items: center;
@@ -437,6 +440,8 @@
   }
   .editor-select:hover { background: var(--surface-hover); }
 
+  /* The editable region. Its placeholder comes from data-placeholder through
+     :empty::before, so it needs no element and no script to hide it. */
   .editor-content {
     min-block-size: var(--editor-height, 12rem);
     max-block-size: var(--editor-max, 30rem);
@@ -473,6 +478,9 @@
     font-size: var(--text-xs);
     color: var(--text-faint);
   }
+  /* The character count. .is-over turns it red past data-limit — a soft
+     limit, since silently refusing keystrokes reads as a broken keyboard. The
+     server has to enforce it, and role="status" makes it audible. */
   .editor-count { margin-inline-start: auto; font-variant-numeric: tabular-nums; }
   .editor-count.is-over { color: var(--bad-700); font-weight: 620; }
 }

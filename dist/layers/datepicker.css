@@ -7,6 +7,10 @@
 @layer deck.components {
 
   /* --- Trigger field ------------------------------------------------------ */
+  /* The trigger for a date picker: an input with a calendar icon inside its
+     starting edge and a clear button at the end. The input is readonly and
+     cursor: pointer, because the value comes from the calendar — which also
+     means a reader who knows the date cannot type it. */
   .datefield { position: relative; display: flex; align-items: center; }
   .datefield > .icon {
     position: absolute;
@@ -15,6 +19,7 @@
     pointer-events: none;
   }
   .datefield > .input { padding-inline-start: var(--space-10); cursor: pointer; }
+  /* Clears the field. Hidden until .has-value is set by deck.js. */
   .datefield > .datefield-clear {
     position: absolute;
     inset-inline-end: var(--space-2);
@@ -30,6 +35,11 @@
   .datefield:not(.has-value) .datefield-clear { display: none; }
 
   /* --- Panel -------------------------------------------------------------- */
+  /* The calendar panel: a native popover, anchored to its field by
+     25-anchor.css with the same fallback chain as a menu. Where there is no
+     room below it opens upward, and position-try-order: most-block-size picks
+     the direction with the most room rather than the first that fits — which
+     matters more for a calendar than for a menu. */
   .datepicker {
     position: absolute;
     margin: 0;
@@ -59,6 +69,8 @@
   }
 
   /* --- Preset rail --------------------------------------------------------- */
+  /* The shortcut rail — "Last 7 days", "This month". A horizontal scroller
+     below 40rem and a column beside the calendar above it. */
   .datepicker-presets {
     display: flex;
     gap: var(--space-1);
@@ -145,6 +157,9 @@
     padding-block: var(--space-2);
   }
 
+  /* One day cell. 38px, raised to 42px on a coarse pointer so it approaches
+     the touch target. Eight is- states compose on it, and the range band is
+     built from is-in-range plus logical corner radii on the two ends. */
   .datepicker-day {
     position: relative;
     inline-size: 38px;
@@ -213,6 +228,8 @@
   .datepicker-day:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; z-index: 1; }
 
   /* --- Month and year jump grid ------------------------------------------- */
+  /* Opens the month and year grid. A picker without one makes a reader press
+     the next-month arrow twenty-four times to reach a date two years out. */
   .datepicker-jump {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

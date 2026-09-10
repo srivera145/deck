@@ -140,6 +140,16 @@
                 0 24px 56px oklch(20% .03 var(--shadow-color) / .14);
     --shadow-inset: inset 0 1px 0 oklch(100% 0 0 / .6);
 
+    /* A legible floor for text over a photo. Eased rather than a flat wash: a
+       50% black overlay dulls the whole image, while this only darkens where
+       the text actually sits. Shared by .g-scrim and .carousel-caption so the
+       two cannot drift apart. */
+    --scrim: linear-gradient(to top,
+             oklch(12% .02 var(--hue-neutral) / .82) 0%,
+             oklch(12% .02 var(--hue-neutral) / .62) 22%,
+             oklch(12% .02 var(--hue-neutral) / .28) 48%,
+             transparent 78%);
+
     /* --- Type -------------------------------------------------------------- */
     --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI Variable Text",
                  "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

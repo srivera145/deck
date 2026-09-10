@@ -22,6 +22,10 @@
     border-radius: var(--r-md);
   }
 
+  /* A real table with a frozen header and pinned columns. Use it when the
+     reader operates on data — sorts, selects, scans — rather than reads it;
+     .table is lighter for presentation. Must sit inside .dg-wrap, which
+     carries the scroll container and every custom property these rules read. */
   .dg {
     inline-size: 100%;
     border-collapse: separate;
@@ -139,20 +143,32 @@
   /* --- Cell variants ------------------------------------------------------- */
   /* A numeric column in the data grid: aligned to the end edge, and sorted
      numerically when the header carries data-sort="num". */
+  /* A numeric column: aligned to the end edge, and sorted numerically when
+     the header carries data-sort="num". */
   .dg .dg-num { text-align: end; }
+  /* A centred column. */
   .dg .dg-center { text-align: center; }
   .dg .dg-wrap-text { white-space: normal; min-inline-size: 16rem; }
   .dg .dg-tight { padding-inline: var(--space-2); }
+  /* The selection column. 44px wide, and the one place Deck strips .check of
+     its min-block-size — a dense grid of 34px rows cannot also have 44px
+     checkboxes. The checkbox still needs its own accessible name. */
   .dg .dg-check { inline-size: 44px; padding-inline: 0; text-align: center; }
   .dg .dg-check .check { justify-content: center; min-block-size: auto; padding: 0; }
+  /* A column shrunk to its content, for a row menu or a pair of buttons. */
   .dg .dg-actions { inline-size: 1%; padding-inline: var(--space-2); }
 
   /* --- Density ------------------------------------------------------------- */
+  /* 34px rows and smaller text, for scanning many rows at once. */
   .dg-compact { --dg-row-h: 34px; font-size: var(--text-xs); }
   .dg-compact :is(th, td) { padding-inline: var(--space-3); }
+  /* 56px rows, for a grid with two lines of content per cell. */
   .dg-comfy { --dg-row-h: 56px; }
 
   /* --- Sortable headers ---------------------------------------------------- */
+  /* The button deck.js builds inside a th[data-sort]. The styling keys off
+     th[aria-sort], so the arrow direction and the announced sort state are
+     the same value and cannot drift apart. */
   .dg-sort {
     display: inline-flex;
     align-items: center;
@@ -269,6 +285,8 @@
     to   { background-position: 140% 0; }
   }
 
+  /* The row that holds an empty state, with its height and padding released
+     so the state can be any size. */
   .dg-empty td { block-size: auto; padding: 0; }
 
   /* --- Phone: swap to cards ------------------------------------------------
@@ -277,6 +295,10 @@
   @media (max-width: 44rem) {
     .dg-cards-wrap { max-block-size: none; overflow: visible; border: 0; background: none; }
     .dg-cards thead, .dg-cards tfoot { display: none; }
+    /* Below a breakpoint, restacks each row into a labelled card, taking the
+       column name from data-label on the cell. Costs the column alignment that
+       makes a grid comparable; prefer .dg-cq, which asks the container rather
+       than the viewport. */
     .dg-cards, .dg-cards tbody, .dg-cards tr, .dg-cards td { display: block; inline-size: 100%; }
     .dg-cards tr {
       background: var(--surface);

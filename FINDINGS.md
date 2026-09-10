@@ -811,3 +811,212 @@ and it breaks only for readers of Arabic and Hebrew — the least likely case to
 all four numbers including the RTL one. A `--switch-size` with derived values would remove
 the magic numbers; a linter rule that flags a `translate` on the inline axis without a
 matching `[dir="rtl"]` rule would catch the class of bug.
+
+
+<!-- Items 49 onward were found while writing the batch 4 pages: datagrid,
+     datepicker, combobox, carousel, kanban, editor, chat, stepper, charts. -->
+
+## 49. Drag-to-reorder is the only interaction in Deck with no keyboard path — and kanban makes it critical
+
+Item 25 recorded this for `.list`, where the order is usually cosmetic. On a kanban board
+it is not cosmetic: moving a card between columns **is the data**, and it is the entire
+purpose of the component. A keyboard-only user cannot use a Deck kanban board at all.
+
+`.kanban`, `.list` and `.dg` all share the drag styling in `src/26-perf.css` and all are
+driven by `deck-adapters.js` through SortableJS or the native drag-and-drop API. Both are
+pointer-only.
+
+**Not fixed.** The kanban page documents it as the component's headline problem and
+recommends a per-card move menu — which is also faster than dragging on a large board.
+The general fix is keyboard handlers in `deck-adapters.js`: pick up with Space, move with
+arrows, drop with Space, cancel with Escape, and announce each move in a live region.
+
+Of everything found across four batches, this is the item I would fix first.
+
+## 50. Six scroll containers ship without a keyboard path
+
+Item 24 started with `.table-wrap` and item 34's note widened it to `.scroller`. Batch 4
+makes it six:
+
+| Container | Consequence |
+| --- | --- |
+| `.table-wrap` | A wide table cannot be scrolled by keyboard in Chromium |
+| `.scroller` | Same, when the items are not focusable |
+| `.dg-wrap` | Same, and it is the component most likely to be wide |
+| `.kanban` | The board axis |
+| `.kanban-body` | Each column |
+| `.stepper` | A strip of more than about five steps |
+| `.tabs` | Mitigated: tabs are focusable, so focus drags the strip |
+
+Firefox gives scroll containers a tab stop automatically; Chromium does not. Every one of
+these needs `tabindex="0"` and a labelled `role="region"` when its contents are not
+focusable — and Deck cannot add it from CSS.
+
+**Not fixed**, but it has crossed from "a defect in one component" to "a convention Deck
+is missing". The right answer is probably a documented `.scroll-region` utility that pairs
+the overflow with the guidance, so the decision is made once rather than seven times.
+
+## 51. `.editor` uses `document.execCommand`, which is deprecated
+
+Formatting in the rich-text editor is applied with `document.execCommand`. It is
+deprecated, unmaintained, and produces different markup per engine — bold may be `<b>`,
+`<strong>` or a `<span style>` depending on the browser and what was already applied.
+
+There is no replacement: the standards work that would have superseded it stalled, and
+real editors reimplement editing over their own document model instead.
+
+**Not a defect to fix so much as a limit to state**, and until now it was not stated
+anywhere. The editor page now leads with it, says plainly that the stored HTML is
+inconsistent, and requires server-side sanitising rather than suggesting it. Anyone
+choosing the component should choose it knowing that.
+
+## 52. `.editor`'s toolbar and footer print
+
+`src/99-print.css` drops `.dg-toolbar`, `.tabs`, `.segmented` and the rest of the page
+chrome. `.editor-toolbar` and `.editor-footer` are not in that list, so a printed page
+containing an editor shows a row of formatting buttons that cannot be pressed and a
+character count that means nothing.
+
+One line adds them to the existing never-print selector. The content region should keep
+printing, which it already would.
+
+**Not fixed** — a rendering change in a documentation pass. Documented on the editor page.
+
+## 53. `.carousel` and `.kanban` print only what was scrolled into view
+
+Item 32 recorded this for `.scroller`. It is the same rule and the same fix for
+`.carousel` — a printed carousel shows one slide — and worse for `.kanban`, which nests
+two scroll containers, so a printed board loses both the columns that were off-screen and
+the cards that were scrolled past inside the visible ones.
+
+```css
+@media print {
+  .scroller, .carousel-track, .kanban, .kanban-body {
+    display: block; overflow: visible; margin-inline: 0;
+  }
+  .carousel-slide + .carousel-slide, .kanban-col + .kanban-col { margin-block-start: 4mm; }
+}
+```
+
+**Not fixed.** Recorded together because one rule covers all three, and because the
+pattern — "an overflow container silently truncates on paper" — is now the single most
+common print defect in the framework.
+
+## 54. The chart palette is hue-rotated, which is the axis colour-blind readers lose
+
+`.chart` computes five of its six series colours by rotating `--hue-brand` and holding
+lightness and chroma roughly steady. That is a genuinely good decision for coherence: the
+palette rethemes with the brand and every series obviously belongs to the same family.
+
+It is also close to the worst possible choice for discriminability. Holding lightness
+constant and varying only hue produces colours that a reader with deuteranopia or
+protanopia may not be able to tell apart at all — and a six-series chart is exactly where
+telling them apart matters.
+
+The source is already candid about a related limit, in the `contrast-color()` comment:
+*"Series colours are chosen for discriminability and some sit in the 55-65% band, so this
+raises the floor rather than guaranteeing AA."*
+
+**Not fixed**, and arguably not a bug — the trade is real and coherence has value. But it
+should be a stated trade rather than an implicit one. The charts page now says so, and
+recommends labelling marks directly or using a hand-picked categorical palette when a
+chart has more than three series. A shipped `.chart-categorical` with varied lightness
+would make the accessible choice the easy one.
+
+## 55. A CSS chart is invisible to a screen reader, and nothing in Deck says so — FIXED in documentation
+
+Every chart in `src/14-charts.css` is `<div>`s and custom properties. There is no role, no
+label, no table, and no text alternative. A screen-reader user gets *nothing at all* from a
+Deck chart unless the author supplies it.
+
+That is not unusual — it is true of most CSS charting techniques — but it was undocumented,
+and a framework that ships forty-eight chart classes without mentioning it is inviting an
+inaccessible dashboard.
+
+**Documented rather than fixed**, because the fix is markup the author has to write. The
+charts page now leads its accessibility section with it and gives the hierarchy: a
+`sr-only` table beside the chart is best, `role="img"` with a real summary is acceptable
+for a single-value chart, and nothing is not an option.
+
+
+## 56. The date field opens the calendar but never closes it, and carries an inert attribute
+
+Two small things in `DatePicker`, both found by a reader asking whether clicking the date
+was supposed to open the calendar. It is — and the docs page only showed static markup, so
+there was no way to tell.
+
+**The field is open-only.** `bind()` does:
+
+```js
+this.input.addEventListener('click', () => this.panel.showPopover());
+```
+
+`showPopover()`, not `togglePopover()`. So clicking the field opens the panel and clicking
+it again does nothing. Escape and an outside click both close it, so nothing is
+unreachable — but a reader who clicks the field to dismiss it is left wondering. Measured:
+first click opens, second click leaves it open, Escape closes.
+
+**`popovertarget` on the input is inert.** `build()` sets it, but the attribute is only
+honoured on `<button>` and button-type inputs — on a text input the browser ignores it.
+It is dead markup that misleads anyone reading the DOM, and it is why the click handler
+exists at all. (`aria-haspopup="dialog"`, set beside it, *is* meaningful and should stay.)
+
+**Not fixed** — a behaviour change in a documentation pass. One word fixes the first
+(`togglePopover`) and one deletion fixes the second. Both documented on the datepicker
+page, which now also carries a live picker rather than only static markup.
+
+## 57. A page can show only static markup and nobody notices
+
+The datepicker page had one example, and it was deliberately static — written that way so
+the clear button would be visible without JavaScript setting `.has-value`. Every automated
+check passed: the example rendered, matched its printed source, used real classes, and the
+component's completeness was satisfied.
+
+None of that could tell that the page never demonstrated the component *working*. A reader
+clicked the field, nothing happened, and reasonably concluded the component was broken.
+
+The checks verify that an example is **live** in the sense of being rendered rather than
+screenshotted. They cannot verify it is **wired**. For components whose behaviour comes
+from `deck.js`, a page needs at least one example carrying the `data-deck-*` attribute
+that switches the behaviour on — and that is now a rule worth applying to every page in
+batch 4, where nearly every component has a script behind it.
+
+**Partly fixed:** the datepicker page now leads with a live picker and labels the static
+one as not wired. A check that flags a page documenting a `data-deck-*` component without
+using that attribute in any example would catch the rest.
+
+
+## 58. JavaScript placement fought CSS anchor positioning and double-offset two panels — FIXED
+
+`src/25-anchor.css` gives `.datepicker` and `.mega` a `position-anchor` and a
+`position-area`, which changes what their inset properties mean: they are resolved
+against the anchored region rather than against the viewport.
+
+Both components also computed viewport coordinates in JavaScript and wrote them as inline
+insets — `DatePicker.position()` and `megaMenus.place()`. The region then applied that
+offset a second time. Measured on a field at `y=454`: the panel landed at `y=512` instead
+of `y=462`, and the further down the page the field sat, the further away the panel
+drifted. On a long page it ended up in the opposite corner.
+
+The stylesheet already tried to prevent this — it sets `inset: auto` on those selectors
+for exactly this reason — but an inline style beats a stylesheet, so the guard has to be
+in the script.
+
+**Fixed.** Both now bail out where the platform does the work:
+
+```js
+if (CSS.supports('anchor-name: --a')) return;
+```
+
+That is the pattern `Grid` already used for scroll-state queries, where the JavaScript
+fallback only runs if the CSS feature is missing. Two of the three progressive-enhancement
+pairs in Deck had the guard; these two did not.
+
+Verified: no inline insets are written, and a field at `x=50, bottom=454` now anchors its
+panel at `x=50, y=462` — edge-aligned, eight pixels below, and flipping above when there
+is no room, which is the `position-try-fallbacks` chain working as documented.
+
+**What made it hard to see:** every automated check passed. The panel opened, the
+component was complete, the example was live and wired. Nothing measures *where* a
+floating element lands relative to its trigger, and that is the one thing a positioning
+component exists to get right.

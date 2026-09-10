@@ -46,7 +46,7 @@ spacing steps and that `p`, `m` and `gap` take them, you know the whole family
 without reading it. The component layers are the opposite: 99 components,
 each a handful of names, and a page that uses six of them needs six.
 
-One number that is not comfortable: **239 of the 828 public classes are
+One number that is not comfortable: **223 of the 828 public classes are
 used nowhere in this repository** — not in the demo, not in the docs, not in
 Deck's own JavaScript. They are frozen on the strength of their source alone.
 
@@ -146,7 +146,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.bubble` | deck.components | Sets position, padding, border-radius, background, and 5 more. |
+| `.bubble` | deck.components | The message body. Its corner radii are logical, which is what lets the |
 | `.bubble-attachment` | deck.components | Sets margin, border-start-start-radius, border-start-end-radius, overflow. |
 | `.bubble-meta` | deck.components | Sets display, align-items, gap, margin-block-start, and 4 more. |
 | `.bubble-name` | deck.components | Sets font-weight, font-size, margin-block-end, color. |
@@ -181,30 +181,30 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.carousel` | deck.components | Scroll snap does the work. Arrows and dots are progressive enhancement, |
-| `.carousel-arrow` | deck.components | Sets position, inset-block-start, translate, z-index, and 13 more. |
-| `.carousel-caption` | deck.components | Sets position, inset-inline, inset-block-end, padding, and 1 more. |
+| `.carousel-arrow` | deck.components | Previous and next. Hidden on a coarse pointer, where the reader swipes |
+| `.carousel-caption` | deck.components | Text over a slide. The generous block-start padding is there to give the |
 | `.carousel-multi` | deck.components | Modifier; see the component. |
 | `.carousel-next` | deck.components | Sets inset-inline-end. |
 | `.carousel-peek` | deck.components | Modifier; see the component. |
 | `.carousel-prev` | deck.components | Sets inset-inline-start. |
-| `.carousel-slide` | deck.components | Sets flex, scroll-snap-align, scroll-snap-stop, min-inline-size. |
-| `.carousel-track` | deck.components | Sets display, gap, overflow-x, scroll-snap-type, and 4 more. |
+| `.carousel-slide` | deck.components | One slide. flex-basis: 100% by default; .carousel-peek makes it 86% so |
+| `.carousel-track` | deck.components | The scroll-snap container holding the slides. |
 
 ## chart
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.chart` | deck.components | Sets display, flex-direction, gap, min-inline-size. |
+| `.chart` | deck.components | The frame, and the palette. Six series colours are computed by rotating |
 | `.chart-area` | deck.components | Sets fill, opacity, stroke, animation. |
 | `.chart-area-g` | deck.effects | Area charts read better with a gradient falling off to nothing. |
 | `.chart-bar` | deck.components | Sets display, grid-template-columns, align-items, gap, and 1 more. |
-| `.chart-bar-fill` | deck.components | Sets display, block-size, inline-size, border-radius, and 3 more. |
+| `.chart-bar-fill` | deck.components | The filled part of a horizontal bar, sized from --value. It grows from |
 | `.chart-bar-label` | deck.components | Sets color, overflow, text-overflow, white-space. |
 | `.chart-bar-track` | deck.components | Sets block-size, border-radius, background, overflow. |
-| `.chart-bar-value` | deck.components | Sets font-variant-numeric, font-weight, color. |
+| `.chart-bar-value` | deck.components | The value printed beside a bar rather than inside it. Prefer this over |
 | `.chart-bars` | deck.components | Sets display, flex-direction, gap. |
 | `.chart-baseline` | deck.components | Sets stroke, stroke-width, vector-effect. |
-| `.chart-col` | deck.components | Sets flex, min-inline-size, block-size, background, and 5 more. |
+| `.chart-col` | deck.components | A column. Its height is calc(var(--value) * 1%), so rendering a chart is |
 | `.chart-col-stack` | deck.components | Stacked columns: nest segments inside a .chart-col-stack |
 | `.chart-columns` | deck.components | <div class="chart-columns"> |
 | `.chart-dot` | deck.components | Sets fill, stroke, stroke-width, vector-effect. |
@@ -212,8 +212,8 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.chart-gridline` | deck.components | Sets stroke, stroke-width, vector-effect. |
 | `.chart-group` | deck.components | Grouped columns |
 | `.chart-head` | deck.components | Sets display, align-items, gap, flex-wrap. |
-| `.chart-heat` | deck.components | Sets display, grid-template-columns, gap. |
-| `.chart-legend` | deck.components | Sets display, flex-wrap, gap, font-size, and 1 more. |
+| `.chart-heat` | deck.components | A grid of --cols columns whose cells mix the series colour with the |
+| `.chart-legend` | deck.components | The key. Built from real buttons it gets a working toggle state for free, |
 | `.chart-lg` | deck.components | Sets --chart-h. |
 | `.chart-line` | deck.components | Sets fill, stroke, stroke-width, stroke-linecap, and 5 more. |
 | `.chart-line-dashed` | deck.components | Sets stroke-dasharray, animation, stroke-dashoffset, opacity. |
@@ -247,7 +247,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | --- | --- | --- |
 | `.chat` | deck.components | Conversation view. Consecutive messages from one side group together and |
 | `.chat-composer` | deck.components | Composer pinned to the bottom |
-| `.chat-day` | deck.components | Sets align-self, margin-block, padding, border-radius, and 4 more. |
+| `.chat-day` | deck.components | A centred date pill between days. Styling, not structure — a screen |
 
 ## check
 
@@ -279,7 +279,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.combo` | deck.components | Sets position, display, flex-direction. |
+| `.combo` | deck.components | A filtering select. It wraps a real <select> that stays in the DOM and |
 
 ## combobox
 
@@ -369,14 +369,14 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.datefield` | deck.components | Sets position, display, align-items. |
+| `.datefield` | deck.components | The trigger for a date picker: an input with a calendar icon inside its |
 | `.datefield-clear` | deck.components | Modifier; see the component. |
 
 ## datepicker
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.datepicker` | deck.components | Sets position, margin, inset, padding, and 10 more. |
+| `.datepicker` | deck.components | The calendar panel: a native popover, anchored to its field by |
 | `.has-value` | deck.components | Modifier; see the component. |
 | `.is-selected` | deck.components | Modifier; see the component. |
 
@@ -384,16 +384,16 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.dg` | deck.components | Sets inline-size, border-collapse, border-spacing, font-size, and 1 more. |
+| `.dg` | deck.components | A real table with a frozen header and pinned columns. Use it when the |
 | `.dg-actions` | deck.components | Modifier; see the component. |
-| `.dg-cards` | deck.components | Sets display, inline-size. |
+| `.dg-cards` | deck.components | Below a breakpoint, restacks each row into a labelled card, taking the |
 | `.dg-cards-wrap` | deck.components | Sets max-block-size, overflow, border, background. |
 | `.dg-center` | deck.components | Modifier; see the component. |
 | `.dg-check` | deck.components | Modifier; see the component. |
-| `.dg-comfy` | deck.components | Sets --dg-row-h. |
-| `.dg-compact` | deck.components | Sets font-size. |
+| `.dg-comfy` | deck.components | 56px rows, for a grid with two lines of content per cell. |
+| `.dg-compact` | deck.components | 34px rows and smaller text, for scanning many rows at once. |
 | `.dg-cq` | deck.layout | Sets display, inline-size. |
-| `.dg-empty` | deck.components | Modifier; see the component. |
+| `.dg-empty` | deck.components | The row that holds an empty state, with its height and padding released |
 | `.dg-num` | deck.components | Modifier; see the component. |
 | `.dg-pin-end` | deck.components | Modifier; see the component. |
 | `.dg-pin-start` | deck.components | Modifier; see the component. |
@@ -426,7 +426,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.donut` | deck.components | Sets inline-size, block-size, border-radius, background, and 3 more. |
+| `.donut` | deck.components | A conic gradient driven by --value, with .donut-center holding a figure |
 | `.donut-center` | deck.components | Sets position, display, place-items, text-align, and 1 more. |
 | `.donut-label` | deck.components | Modifier; see the component. |
 | `.donut-value` | deck.components | Modifier; see the component. |
@@ -448,14 +448,14 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.editor` | deck.components | A toolbar over a contenteditable region. Deck styles the chrome; deck.js |
-| `.editor-content` | deck.components | Sets min-block-size, max-block-size, overflow-y, padding, and 2 more. |
-| `.editor-count` | deck.components | Sets margin-inline-start, font-variant-numeric. |
+| `.editor-content` | deck.components | The editable region. Its placeholder comes from data-placeholder through |
+| `.editor-count` | deck.components | The character count. .is-over turns it red past data-limit — a soft |
 | `.editor-footer` | deck.components | Sets display, align-items, gap, padding, and 4 more. |
 | `.editor-select` | deck.components | Sets block-size, padding-inline, border, border-radius, and 4 more. |
 | `.editor-sep` | deck.components | Sets inline-size, block-size, background, margin-inline. |
 | `.editor-tool` | deck.components | Sets inline-size, block-size, display, place-items, and 6 more. |
 | `.editor-tool-wide` | deck.components | Sets inline-size, padding-inline. |
-| `.editor-toolbar` | deck.components | Sets display, align-items, gap, flex-wrap, and 6 more. |
+| `.editor-toolbar` | deck.components | The tool row. Pressed state is [aria-pressed="true"], which deck-extras.js |
 
 ## emoji
 
@@ -707,14 +707,14 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.kanban` | deck.components | The obvious thing to build once you have drag and drop. An issue queue by |
-| `.kanban-body` | deck.components | Sets flex, overflow-y, overscroll-behavior, padding, and 4 more. |
-| `.kanban-card` | deck.components | Sets background, border, border-radius, padding, and 6 more. |
+| `.kanban-body` | deck.components | The scrolling card region, with a 5rem floor so an empty column is still |
+| `.kanban-card` | deck.components | One card. .kanban-card-title is styling, not a heading — if the card |
 | `.kanban-card-meta` | deck.components | Sets display, align-items, gap, font-size, and 1 more. |
 | `.kanban-card-title` | deck.components | Sets font-size, font-weight. |
-| `.kanban-col` | deck.components | Sets flex, scroll-snap-align, display, flex-direction, and 4 more. |
+| `.kanban-col` | deck.components | One column: a fixed width with a viewport cap so a phone still shows a |
 | `.kanban-count` | deck.components | Sets margin-inline-start, font-size, font-weight, color, and 5 more. |
-| `.kanban-empty` | deck.components | Sets border, border-radius, padding, text-align, and 2 more. |
-| `.kanban-head` | deck.components | Sets display, align-items, gap, padding, and 9 more. |
+| `.kanban-empty` | deck.components | Shown in an empty column and hidden by :has(.kanban-card) as soon as one |
+| `.kanban-head` | deck.components | The column title and count, outside the scrolling area so they stay |
 
 ## layout
 
@@ -927,7 +927,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.msg` | deck.components | Sets display, gap, align-items, max-inline-size, and 1 more. |
+| `.msg` | deck.components | One message row. .msg-out flips it to the other edge and reverses the row |
 | `.msg-out` | deck.components | Sets align-self, flex-direction. |
 
 ## nav
@@ -1145,7 +1145,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.sparkline` | deck.components | Sets inline-size, block-size, overflow, vertical-align. |
+| `.sparkline` | deck.components | A tiny inline chart for a table cell or a stat block. |
 | `.sparkline-bad` | deck.components | Modifier; see the component. |
 | `.sparkline-good` | deck.components | Modifier; see the component. |
 
@@ -1220,7 +1220,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.stepper` | deck.components | A wizard. The timeline in 07 records what happened; this one shows where |
-| `.stepper-auto` | deck.components | Sets flex-direction, gap. |
+| `.stepper-auto` | deck.components | Horizontal where there is room, vertical below a breakpoint. Prefer this |
 | `.stepper-vertical` | deck.components | Vertical on a phone, where five steps side by side never fits |
 
 ## sticky
