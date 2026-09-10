@@ -3,8 +3,8 @@
   "stylesheets": 26,
   "counts": {
     "classes": 931,
-    "documented": 209,
-    "undocumented": 722,
+    "documented": 230,
+    "undocumented": 701,
     "tokens": 130,
     "rules": 1765,
     "components": 99,
@@ -737,19 +737,19 @@
         {
           "selector": ".input-group > .btn",
           "file": "06-forms.css",
-          "line": 153,
+          "line": 157,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 390,
+          "line": 397,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 392,
+          "line": 399,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -2020,97 +2020,97 @@
         {
           "selector": ".check",
           "file": "06-forms.css",
-          "line": 168,
+          "line": 175,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"checkbox\"]",
           "file": "06-forms.css",
-          "line": 177,
+          "line": 184,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"radio\"]",
           "file": "06-forms.css",
-          "line": 177,
+          "line": 184,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"radio\"]",
           "file": "06-forms.css",
-          "line": 192,
+          "line": 199,
           "conditions": []
         },
         {
           "selector": ".check input:hover",
           "file": "06-forms.css",
-          "line": 193,
+          "line": 200,
           "conditions": []
         },
         {
           "selector": ".check input:checked",
           "file": "06-forms.css",
-          "line": 194,
+          "line": 201,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"checkbox\"]::before",
           "file": "06-forms.css",
-          "line": 195,
+          "line": 202,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"radio\"]::before",
           "file": "06-forms.css",
-          "line": 204,
+          "line": 211,
           "conditions": []
         },
         {
           "selector": ".check input:checked::before",
           "file": "06-forms.css",
-          "line": 213,
+          "line": 220,
           "conditions": []
         },
         {
           "selector": ".check input:indeterminate",
           "file": "06-forms.css",
-          "line": 214,
+          "line": 221,
           "conditions": []
         },
         {
           "selector": ".check input:indeterminate::before",
           "file": "06-forms.css",
-          "line": 215,
+          "line": 222,
           "conditions": []
         },
         {
           "selector": ".check input:focus-visible",
           "file": "06-forms.css",
-          "line": 219,
+          "line": 226,
           "conditions": []
         },
         {
           "selector": ".check .check-text",
           "file": "06-forms.css",
-          "line": 224,
+          "line": 231,
           "conditions": []
         },
         {
           "selector": ".check .check-note",
           "file": "06-forms.css",
-          "line": 228,
+          "line": 235,
           "conditions": []
         },
         {
           "selector": ".check-card",
           "file": "06-forms.css",
-          "line": 231,
+          "line": 238,
           "conditions": []
         },
         {
           "selector": ".check-card:has(input:checked)",
           "file": "06-forms.css",
-          "line": 238,
+          "line": 245,
           "conditions": []
         },
         {
@@ -2222,31 +2222,31 @@
         {
           "selector": ".cluster",
           "file": "04-layout.css",
-          "line": 60,
+          "line": 74,
           "conditions": []
         },
         {
           "selector": ".cluster-tight",
           "file": "04-layout.css",
-          "line": 67,
+          "line": 81,
           "conditions": []
         },
         {
           "selector": ".cluster-end",
           "file": "04-layout.css",
-          "line": 68,
+          "line": 84,
           "conditions": []
         },
         {
           "selector": ".cluster-center",
           "file": "04-layout.css",
-          "line": 69,
+          "line": 86,
           "conditions": []
         },
         {
           "selector": ".cluster-between",
           "file": "04-layout.css",
-          "line": 70,
+          "line": 91,
           "conditions": []
         }
       ]
@@ -2675,31 +2675,31 @@
         {
           "selector": ".container-sm",
           "file": "04-layout.css",
-          "line": 17,
+          "line": 19,
           "conditions": []
         },
         {
           "selector": ".container-md",
           "file": "04-layout.css",
-          "line": 18,
+          "line": 21,
           "conditions": []
         },
         {
           "selector": ".container-lg",
           "file": "04-layout.css",
-          "line": 19,
+          "line": 24,
           "conditions": []
         },
         {
           "selector": ".container-xl",
           "file": "04-layout.css",
-          "line": 20,
+          "line": 26,
           "conditions": []
         },
         {
           "selector": ".container-full",
           "file": "04-layout.css",
-          "line": 21,
+          "line": 30,
           "conditions": []
         },
         {
@@ -2865,7 +2865,7 @@
         {
           "selector": ".cq",
           "file": "04-layout.css",
-          "line": 188,
+          "line": 234,
           "conditions": []
         },
         {
@@ -5166,13 +5166,13 @@
         {
           "selector": ".field-row",
           "file": "06-forms.css",
-          "line": 361,
+          "line": 368,
           "conditions": []
         },
         {
           "selector": ".field-row",
           "file": "06-forms.css",
-          "line": 367,
+          "line": 374,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -5596,25 +5596,25 @@
         {
           "selector": ".form-actions",
           "file": "06-forms.css",
-          "line": 371,
+          "line": 378,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky",
           "file": "06-forms.css",
-          "line": 379,
+          "line": 386,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 390,
+          "line": 397,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 392,
+          "line": 399,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -5879,43 +5879,43 @@
         {
           "selector": ".grid",
           "file": "04-layout.css",
-          "line": 81,
+          "line": 102,
           "conditions": []
         },
         {
           "selector": ".grid-2",
           "file": "04-layout.css",
-          "line": 86,
+          "line": 111,
           "conditions": []
         },
         {
           "selector": ".grid-tight",
           "file": "04-layout.css",
-          "line": 89,
+          "line": 114,
           "conditions": []
         },
         {
           "selector": ".grid-wide",
           "file": "04-layout.css",
-          "line": 90,
+          "line": 117,
           "conditions": []
         },
         {
           "selector": ".grid-fixed-2",
           "file": "04-layout.css",
-          "line": 91,
+          "line": 121,
           "conditions": []
         },
         {
           "selector": ".grid-fixed-3",
           "file": "04-layout.css",
-          "line": 92,
+          "line": 123,
           "conditions": []
         },
         {
           "selector": ".grid-fixed-4",
           "file": "04-layout.css",
-          "line": 93,
+          "line": 126,
           "conditions": []
         },
         {
@@ -5987,7 +5987,7 @@
         {
           "selector": ".search > .icon",
           "file": "06-forms.css",
-          "line": 157,
+          "line": 164,
           "conditions": []
         },
         {
@@ -6407,25 +6407,25 @@
         {
           "selector": ".input-group > .addon",
           "file": "06-forms.css",
-          "line": 141,
+          "line": 145,
           "conditions": []
         },
         {
           "selector": ".input-group > .addon:last-child",
           "file": "06-forms.css",
-          "line": 152,
+          "line": 156,
           "conditions": []
         },
         {
           "selector": ".input-group > .btn",
           "file": "06-forms.css",
-          "line": 153,
+          "line": 157,
           "conditions": []
         },
         {
           "selector": ".search > .input",
           "file": "06-forms.css",
-          "line": 163,
+          "line": 170,
           "conditions": []
         },
         {
@@ -8101,37 +8101,37 @@
         {
           "selector": ".range",
           "file": "06-forms.css",
-          "line": 281,
+          "line": 288,
           "conditions": []
         },
         {
           "selector": ".range::-webkit-slider-runnable-track",
           "file": "06-forms.css",
-          "line": 287,
+          "line": 294,
           "conditions": []
         },
         {
           "selector": ".range::-moz-range-track",
           "file": "06-forms.css",
-          "line": 292,
+          "line": 299,
           "conditions": []
         },
         {
           "selector": ".range::-webkit-slider-thumb",
           "file": "06-forms.css",
-          "line": 297,
+          "line": 304,
           "conditions": []
         },
         {
           "selector": ".range::-moz-range-thumb",
           "file": "06-forms.css",
-          "line": 308,
+          "line": 315,
           "conditions": []
         },
         {
           "selector": ".range:active::-webkit-slider-thumb",
           "file": "06-forms.css",
-          "line": 317,
+          "line": 324,
           "conditions": []
         },
         {
@@ -9145,19 +9145,19 @@
         {
           "selector": ".split",
           "file": "04-layout.css",
-          "line": 96,
+          "line": 129,
           "conditions": []
         },
         {
           "selector": ".split > *",
           "file": "04-layout.css",
-          "line": 106,
+          "line": 139,
           "conditions": []
         },
         {
           "selector": ".split",
           "file": "04-layout.css",
-          "line": 108,
+          "line": 141,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -9165,7 +9165,7 @@
         {
           "selector": ".split-rail-start",
           "file": "04-layout.css",
-          "line": 109,
+          "line": 146,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -9206,49 +9206,49 @@
         {
           "selector": ".stack",
           "file": "04-layout.css",
-          "line": 42,
+          "line": 51,
           "conditions": []
         },
         {
           "selector": ".stack-0",
           "file": "04-layout.css",
-          "line": 47,
+          "line": 57,
           "conditions": []
         },
         {
           "selector": ".stack-1",
           "file": "04-layout.css",
-          "line": 48,
+          "line": 60,
           "conditions": []
         },
         {
           "selector": ".stack-2",
           "file": "04-layout.css",
-          "line": 51,
+          "line": 63,
           "conditions": []
         },
         {
           "selector": ".stack-3",
           "file": "04-layout.css",
-          "line": 53,
+          "line": 65,
           "conditions": []
         },
         {
           "selector": ".stack-4",
           "file": "04-layout.css",
-          "line": 54,
+          "line": 67,
           "conditions": []
         },
         {
           "selector": ".stack-6",
           "file": "04-layout.css",
-          "line": 56,
+          "line": 69,
           "conditions": []
         },
         {
           "selector": ".stack-8",
           "file": "04-layout.css",
-          "line": 57,
+          "line": 71,
           "conditions": []
         }
       ]
@@ -9742,13 +9742,13 @@
         {
           "selector": ".sticky-top",
           "file": "04-layout.css",
-          "line": 141,
+          "line": 183,
           "conditions": []
         },
         {
           "selector": ".sticky-top",
           "file": "04-layout.css",
-          "line": 154,
+          "line": 196,
           "conditions": [
             "@supports (container-type: scroll-state)"
           ]
@@ -9756,7 +9756,7 @@
         {
           "selector": ".sticky-top::after",
           "file": "04-layout.css",
-          "line": 160,
+          "line": 202,
           "conditions": [
             "@supports (container-type: scroll-state)"
           ]
@@ -9764,7 +9764,7 @@
         {
           "selector": ".sticky-top::after",
           "file": "04-layout.css",
-          "line": 172,
+          "line": 214,
           "conditions": [
             "@supports (container-type: scroll-state)",
             "@container scroll-state(stuck: block-start)"
@@ -11210,7 +11210,7 @@
     {
       "name": "addon",
       "file": "06-forms.css",
-      "line": 141,
+      "line": 145,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -11219,13 +11219,13 @@
         {
           "selector": ".input-group > .addon",
           "file": "06-forms.css",
-          "line": 141,
+          "line": 145,
           "conditions": []
         },
         {
           "selector": ".input-group > .addon:last-child",
           "file": "06-forms.css",
-          "line": 152,
+          "line": 156,
           "conditions": []
         }
       ],
@@ -11598,10 +11598,10 @@
     {
       "name": "app-shell",
       "file": "04-layout.css",
-      "line": 176,
+      "line": 222,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "Header, content, footer in a 100dvh grid whose middle row takes the\nremaining height — the sticky footer, without the hacks. dvh rather\nthan vh so it tracks a phone browser hiding its chrome. It expects\nexactly three children.",
       "declarations": [
         {
           "prop": "display",
@@ -11620,7 +11620,7 @@
         {
           "selector": ".app-shell",
           "file": "04-layout.css",
-          "line": 176,
+          "line": 222,
           "conditions": []
         }
       ],
@@ -12734,7 +12734,7 @@
     {
       "name": "bar",
       "file": "04-layout.css",
-      "line": 73,
+      "line": 94,
       "layer": "deck.layout",
       "section": null,
       "doc": "Push the last child away from the rest",
@@ -12756,13 +12756,13 @@
         {
           "selector": ".bar",
           "file": "04-layout.css",
-          "line": 73,
+          "line": 94,
           "conditions": []
         },
         {
           "selector": ".bar > .push",
           "file": "04-layout.css",
-          "line": 78,
+          "line": 99,
           "conditions": []
         }
       ],
@@ -13520,19 +13520,19 @@
         {
           "selector": ".input-group > .btn",
           "file": "06-forms.css",
-          "line": 153,
+          "line": 157,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 390,
+          "line": 397,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 392,
+          "line": 399,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -15973,7 +15973,7 @@
     {
       "name": "center",
       "file": "04-layout.css",
-      "line": 113,
+      "line": 150,
       "layer": "deck.layout",
       "section": null,
       "doc": "Center a thing with a max width and no side effects",
@@ -16003,7 +16003,7 @@
         {
           "selector": ".center",
           "file": "04-layout.css",
-          "line": 113,
+          "line": 150,
           "conditions": []
         }
       ],
@@ -17899,7 +17899,7 @@
     {
       "name": "check",
       "file": "06-forms.css",
-      "line": 168,
+      "line": 175,
       "layer": "deck.components",
       "section": null,
       "doc": "A checkbox or radio and its text, laid out as a row that clears the\n44px touch target. Wrap the text in .check-text to add a second line.",
@@ -17937,85 +17937,85 @@
         {
           "selector": ".check",
           "file": "06-forms.css",
-          "line": 168,
+          "line": 175,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"checkbox\"]",
           "file": "06-forms.css",
-          "line": 177,
+          "line": 184,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"radio\"]",
           "file": "06-forms.css",
-          "line": 177,
+          "line": 184,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"radio\"]",
           "file": "06-forms.css",
-          "line": 192,
+          "line": 199,
           "conditions": []
         },
         {
           "selector": ".check input:hover",
           "file": "06-forms.css",
-          "line": 193,
+          "line": 200,
           "conditions": []
         },
         {
           "selector": ".check input:checked",
           "file": "06-forms.css",
-          "line": 194,
+          "line": 201,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"checkbox\"]::before",
           "file": "06-forms.css",
-          "line": 195,
+          "line": 202,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"radio\"]::before",
           "file": "06-forms.css",
-          "line": 204,
+          "line": 211,
           "conditions": []
         },
         {
           "selector": ".check input:checked::before",
           "file": "06-forms.css",
-          "line": 213,
+          "line": 220,
           "conditions": []
         },
         {
           "selector": ".check input:indeterminate",
           "file": "06-forms.css",
-          "line": 214,
+          "line": 221,
           "conditions": []
         },
         {
           "selector": ".check input:indeterminate::before",
           "file": "06-forms.css",
-          "line": 215,
+          "line": 222,
           "conditions": []
         },
         {
           "selector": ".check input:focus-visible",
           "file": "06-forms.css",
-          "line": 219,
+          "line": 226,
           "conditions": []
         },
         {
           "selector": ".check .check-text",
           "file": "06-forms.css",
-          "line": 224,
+          "line": 231,
           "conditions": []
         },
         {
           "selector": ".check .check-note",
           "file": "06-forms.css",
-          "line": 228,
+          "line": 235,
           "conditions": []
         },
         {
@@ -18077,7 +18077,7 @@
     {
       "name": "check-card",
       "file": "06-forms.css",
-      "line": 231,
+      "line": 238,
       "layer": "deck.components",
       "section": null,
       "doc": "Card-style choice, good for pricing and plan pickers",
@@ -18107,13 +18107,13 @@
         {
           "selector": ".check-card",
           "file": "06-forms.css",
-          "line": 231,
+          "line": 238,
           "conditions": []
         },
         {
           "selector": ".check-card:has(input:checked)",
           "file": "06-forms.css",
-          "line": 238,
+          "line": 245,
           "conditions": []
         }
       ],
@@ -18134,7 +18134,7 @@
     {
       "name": "check-note",
       "file": "06-forms.css",
-      "line": 228,
+      "line": 235,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -18143,7 +18143,7 @@
         {
           "selector": ".check .check-note",
           "file": "06-forms.css",
-          "line": 228,
+          "line": 235,
           "conditions": []
         }
       ],
@@ -18157,7 +18157,7 @@
     {
       "name": "check-text",
       "file": "06-forms.css",
-      "line": 224,
+      "line": 231,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -18166,7 +18166,7 @@
         {
           "selector": ".check .check-text",
           "file": "06-forms.css",
-          "line": 224,
+          "line": 231,
           "conditions": []
         }
       ],
@@ -18411,7 +18411,7 @@
     {
       "name": "cluster",
       "file": "04-layout.css",
-      "line": 60,
+      "line": 74,
       "layer": "deck.layout",
       "section": null,
       "doc": "Horizontal group that wraps instead of overflowing on a phone",
@@ -18437,7 +18437,7 @@
         {
           "selector": ".cluster",
           "file": "04-layout.css",
-          "line": 60,
+          "line": 74,
           "conditions": []
         }
       ],
@@ -18457,10 +18457,10 @@
     {
       "name": "cluster-between",
       "file": "04-layout.css",
-      "line": 70,
+      "line": 91,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "First item to one end, last to the other. Beware of combining it\nwith wrapping: each line is justified separately, so a lone item on\nthe second line jumps to the far end and looks stranded. .bar with\n.push is the predictable version.",
       "declarations": [
         {
           "prop": "justify-content",
@@ -18471,7 +18471,7 @@
         {
           "selector": ".cluster-between",
           "file": "04-layout.css",
-          "line": 70,
+          "line": 91,
           "conditions": []
         }
       ],
@@ -18483,10 +18483,10 @@
     {
       "name": "cluster-center",
       "file": "04-layout.css",
-      "line": 69,
+      "line": 86,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "Centres the row.",
       "declarations": [
         {
           "prop": "justify-content",
@@ -18497,7 +18497,7 @@
         {
           "selector": ".cluster-center",
           "file": "04-layout.css",
-          "line": 69,
+          "line": 86,
           "conditions": []
         }
       ],
@@ -18509,10 +18509,10 @@
     {
       "name": "cluster-end",
       "file": "04-layout.css",
-      "line": 68,
+      "line": 84,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "Packs the row against the end edge, which follows the writing\ndirection rather than always being the right.",
       "declarations": [
         {
           "prop": "justify-content",
@@ -18523,7 +18523,7 @@
         {
           "selector": ".cluster-end",
           "file": "04-layout.css",
-          "line": 68,
+          "line": 84,
           "conditions": []
         }
       ],
@@ -18535,7 +18535,7 @@
     {
       "name": "cluster-tight",
       "file": "04-layout.css",
-      "line": 67,
+      "line": 81,
       "layer": "deck.layout",
       "section": null,
       "doc": "Kept as the readable name for step 2, which is what most clusters want",
@@ -18549,7 +18549,7 @@
         {
           "selector": ".cluster-tight",
           "file": "04-layout.css",
-          "line": 67,
+          "line": 81,
           "conditions": []
         }
       ],
@@ -20022,10 +20022,10 @@
     {
       "name": "container-full",
       "file": "04-layout.css",
-      "line": 21,
+      "line": 30,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "Keeps the page gutter, drops the max width. This is what to nest\ninside another container — a second .container would apply the\ngutter twice.",
       "declarations": [
         {
           "prop": "--container",
@@ -20036,7 +20036,7 @@
         {
           "selector": ".container-full",
           "file": "04-layout.css",
-          "line": 21,
+          "line": 30,
           "conditions": []
         }
       ],
@@ -20048,10 +20048,10 @@
     {
       "name": "container-lg",
       "file": "04-layout.css",
-      "line": 19,
+      "line": 24,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "The same 76rem as the bare .container, named. Use it when a page\nshould say which width it means rather than rely on the default.",
       "declarations": [
         {
           "prop": "--container",
@@ -20062,7 +20062,7 @@
         {
           "selector": ".container-lg",
           "file": "04-layout.css",
-          "line": 19,
+          "line": 24,
           "conditions": []
         },
         {
@@ -20082,10 +20082,10 @@
     {
       "name": "container-md",
       "file": "04-layout.css",
-      "line": 18,
+      "line": 21,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "An article with a rail, or a form.",
       "declarations": [
         {
           "prop": "--container",
@@ -20096,7 +20096,7 @@
         {
           "selector": ".container-md",
           "file": "04-layout.css",
-          "line": 18,
+          "line": 21,
           "conditions": []
         },
         {
@@ -20116,10 +20116,10 @@
     {
       "name": "container-sm",
       "file": "04-layout.css",
-      "line": 17,
+      "line": 19,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "A single column of prose: about 70 characters at the body size,\nwhich is inside the maximum line length WCAG recommends.",
       "declarations": [
         {
           "prop": "--container",
@@ -20130,7 +20130,7 @@
         {
           "selector": ".container-sm",
           "file": "04-layout.css",
-          "line": 17,
+          "line": 19,
           "conditions": []
         },
         {
@@ -20150,10 +20150,10 @@
     {
       "name": "container-xl",
       "file": "04-layout.css",
-      "line": 20,
+      "line": 26,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "A wide dashboard or a data grid.",
       "declarations": [
         {
           "prop": "--container",
@@ -20164,7 +20164,7 @@
         {
           "selector": ".container-xl",
           "file": "04-layout.css",
-          "line": 20,
+          "line": 26,
           "conditions": []
         },
         {
@@ -20671,7 +20671,7 @@
     {
       "name": "cq",
       "file": "04-layout.css",
-      "line": 188,
+      "line": 234,
       "layer": "deck.layout",
       "section": null,
       "doc": "Container queries: components respond to their slot, not the viewport",
@@ -20685,7 +20685,7 @@
         {
           "selector": ".cq",
           "file": "04-layout.css",
-          "line": 188,
+          "line": 234,
           "conditions": []
         },
         {
@@ -27630,7 +27630,7 @@
     {
       "name": "field-row",
       "file": "06-forms.css",
-      "line": 361,
+      "line": 368,
       "layer": "deck.components",
       "section": null,
       "doc": "Two fields side by side on anything wider than a phone",
@@ -27652,13 +27652,13 @@
         {
           "selector": ".field-row",
           "file": "06-forms.css",
-          "line": 361,
+          "line": 368,
           "conditions": []
         },
         {
           "selector": ".field-row",
           "file": "06-forms.css",
-          "line": 367,
+          "line": 374,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -27720,7 +27720,7 @@
     {
       "name": "fieldset",
       "file": "06-forms.css",
-      "line": 344,
+      "line": 351,
       "layer": "deck.components",
       "section": null,
       "doc": "A bordered group of controls that answer one question. Its legend is\nthe group's accessible name, which is what a radio group needs and\nwhat a .label above one does not provide.",
@@ -27758,13 +27758,13 @@
         {
           "selector": ".fieldset",
           "file": "06-forms.css",
-          "line": 344,
+          "line": 351,
           "conditions": []
         },
         {
           "selector": ".fieldset > legend",
           "file": "06-forms.css",
-          "line": 353,
+          "line": 360,
           "conditions": []
         },
         {
@@ -27792,7 +27792,7 @@
     {
       "name": "file",
       "file": "06-forms.css",
-      "line": 324,
+      "line": 331,
       "layer": "deck.components",
       "section": null,
       "doc": "A dashed drop zone wrapping a real file input. The input is 1px and\ntransparent rather than display: none, so it keeps its place in the\ntab order, and :focus-within is what makes that focus visible. Deck\nstyles the zone; dropping needs a handler of your own.",
@@ -27846,25 +27846,25 @@
         {
           "selector": ".file",
           "file": "06-forms.css",
-          "line": 324,
+          "line": 331,
           "conditions": []
         },
         {
           "selector": ".file:hover",
           "file": "06-forms.css",
-          "line": 337,
+          "line": 344,
           "conditions": []
         },
         {
           "selector": ".file:focus-within",
           "file": "06-forms.css",
-          "line": 337,
+          "line": 344,
           "conditions": []
         },
         {
           "selector": ".file input[type=\"file\"]",
           "file": "06-forms.css",
-          "line": 338,
+          "line": 345,
           "conditions": []
         }
       ],
@@ -28794,7 +28794,7 @@
     {
       "name": "form-actions",
       "file": "06-forms.css",
-      "line": 371,
+      "line": 378,
       "layer": "deck.components",
       "section": null,
       "doc": "Sticky save bar for long forms on mobile",
@@ -28816,7 +28816,7 @@
         {
           "selector": ".form-actions",
           "file": "06-forms.css",
-          "line": 371,
+          "line": 378,
           "conditions": []
         },
         {
@@ -28840,7 +28840,7 @@
     {
       "name": "form-actions-sticky",
       "file": "06-forms.css",
-      "line": 379,
+      "line": 386,
       "layer": "deck.components",
       "section": null,
       "doc": "Pins the action row to the bottom of the viewport with a blur behind\nit and a safe-area inset for the home indicator. Add matching bottom\npadding to the form, or the last field sits underneath it.",
@@ -28886,19 +28886,19 @@
         {
           "selector": ".form-actions-sticky",
           "file": "06-forms.css",
-          "line": 379,
+          "line": 386,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 390,
+          "line": 397,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 392,
+          "line": 399,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -30560,7 +30560,7 @@
     {
       "name": "grid",
       "file": "04-layout.css",
-      "line": 81,
+      "line": 102,
       "layer": "deck.layout",
       "section": null,
       "doc": "Auto-fitting grid: no breakpoints needed, it responds to its own width",
@@ -30582,7 +30582,7 @@
         {
           "selector": ".grid",
           "file": "04-layout.css",
-          "line": 81,
+          "line": 102,
           "conditions": []
         },
         {
@@ -30627,10 +30627,10 @@
     {
       "name": "grid-2",
       "file": "04-layout.css",
-      "line": 86,
+      "line": 111,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "Two-ish columns: an auto-fit grid with a 24rem floor. Identical in\neffect to .grid-wide, but it writes grid-template-columns directly\nrather than setting --min, so --min cannot adjust it afterwards.\nPrefer .grid-wide.",
       "declarations": [
         {
           "prop": "grid-template-columns",
@@ -30641,7 +30641,7 @@
         {
           "selector": ".grid-2",
           "file": "04-layout.css",
-          "line": 86,
+          "line": 111,
           "conditions": []
         }
       ],
@@ -30653,10 +30653,10 @@
     {
       "name": "grid-fixed-2",
       "file": "04-layout.css",
-      "line": 91,
+      "line": 121,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "Exactly two equal columns at every width, including a phone. Only\nfor a count that is part of the meaning — a 2x2 comparison. It does\nnot reflow, so it does not satisfy the reflow criterion on its own.",
       "declarations": [
         {
           "prop": "grid-template-columns",
@@ -30667,7 +30667,7 @@
         {
           "selector": ".grid-fixed-2",
           "file": "04-layout.css",
-          "line": 91,
+          "line": 121,
           "conditions": []
         }
       ],
@@ -30679,10 +30679,10 @@
     {
       "name": "grid-fixed-3",
       "file": "04-layout.css",
-      "line": 92,
+      "line": 123,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "Exactly three equal columns at every width. See .grid-fixed-2.",
       "declarations": [
         {
           "prop": "grid-template-columns",
@@ -30693,7 +30693,7 @@
         {
           "selector": ".grid-fixed-3",
           "file": "04-layout.css",
-          "line": 92,
+          "line": 123,
           "conditions": []
         }
       ],
@@ -30705,10 +30705,10 @@
     {
       "name": "grid-fixed-4",
       "file": "04-layout.css",
-      "line": 93,
+      "line": 126,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "Exactly four equal columns at every width. On a phone that is four\n70px columns; reach for .grid with a --min instead.",
       "declarations": [
         {
           "prop": "grid-template-columns",
@@ -30719,7 +30719,7 @@
         {
           "selector": ".grid-fixed-4",
           "file": "04-layout.css",
-          "line": 93,
+          "line": 126,
           "conditions": []
         }
       ],
@@ -30731,7 +30731,7 @@
     {
       "name": "grid-tight",
       "file": "04-layout.css",
-      "line": 89,
+      "line": 114,
       "layer": "deck.layout",
       "section": null,
       "doc": "Narrows the auto-fit column floor to 12rem, so the grid packs more\ncolumns in before it wraps.",
@@ -30745,7 +30745,7 @@
         {
           "selector": ".grid-tight",
           "file": "04-layout.css",
-          "line": 89,
+          "line": 114,
           "conditions": []
         }
       ],
@@ -30757,10 +30757,10 @@
     {
       "name": "grid-wide",
       "file": "04-layout.css",
-      "line": 90,
+      "line": 117,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "Widens the auto-fit column floor to 24rem, so the grid packs fewer,\nwider columns before it wraps. For cards with a paragraph in them.",
       "declarations": [
         {
           "prop": "--min",
@@ -30771,7 +30771,7 @@
         {
           "selector": ".grid-wide",
           "file": "04-layout.css",
-          "line": 90,
+          "line": 117,
           "conditions": []
         }
       ],
@@ -31330,7 +31330,7 @@
         {
           "selector": ".search > .icon",
           "file": "06-forms.css",
-          "line": 157,
+          "line": 164,
           "conditions": []
         },
         {
@@ -32471,7 +32471,7 @@
         {
           "selector": ".search > .input",
           "file": "06-forms.css",
-          "line": 163,
+          "line": 170,
           "conditions": []
         },
         {
@@ -32626,19 +32626,19 @@
         {
           "selector": ".input-group > .addon",
           "file": "06-forms.css",
-          "line": 141,
+          "line": 145,
           "conditions": []
         },
         {
           "selector": ".input-group > .addon:last-child",
           "file": "06-forms.css",
-          "line": 152,
+          "line": 156,
           "conditions": []
         },
         {
           "selector": ".input-group > .btn",
           "file": "06-forms.css",
-          "line": 153,
+          "line": 157,
           "conditions": []
         }
       ],
@@ -42729,7 +42729,7 @@
         {
           "selector": ".bar > .push",
           "file": "04-layout.css",
-          "line": 78,
+          "line": 99,
           "conditions": []
         },
         {
@@ -43604,7 +43604,7 @@
     {
       "name": "range",
       "file": "06-forms.css",
-      "line": 281,
+      "line": 288,
       "layer": "deck.components",
       "section": null,
       "doc": "A slider. The track and thumb are vendor pseudo-elements with\ndifferent names and different box models per engine, so every\ndeclaration is written twice — WebKit needs a negative block-start\nmargin to centre the thumb and Firefox does not.",
@@ -43630,37 +43630,37 @@
         {
           "selector": ".range",
           "file": "06-forms.css",
-          "line": 281,
+          "line": 288,
           "conditions": []
         },
         {
           "selector": ".range::-webkit-slider-runnable-track",
           "file": "06-forms.css",
-          "line": 287,
+          "line": 294,
           "conditions": []
         },
         {
           "selector": ".range::-moz-range-track",
           "file": "06-forms.css",
-          "line": 292,
+          "line": 299,
           "conditions": []
         },
         {
           "selector": ".range::-webkit-slider-thumb",
           "file": "06-forms.css",
-          "line": 297,
+          "line": 304,
           "conditions": []
         },
         {
           "selector": ".range::-moz-range-thumb",
           "file": "06-forms.css",
-          "line": 308,
+          "line": 315,
           "conditions": []
         },
         {
           "selector": ".range:active::-webkit-slider-thumb",
           "file": "06-forms.css",
-          "line": 317,
+          "line": 324,
           "conditions": []
         }
       ],
@@ -44101,7 +44101,7 @@
     {
       "name": "ratio-16x9",
       "file": "04-layout.css",
-      "line": 183,
+      "line": 229,
       "layer": "deck.layout",
       "section": null,
       "doc": "Aspect boxes for media",
@@ -44123,7 +44123,7 @@
         {
           "selector": ".ratio-16x9",
           "file": "04-layout.css",
-          "line": 183,
+          "line": 229,
           "conditions": []
         }
       ],
@@ -44135,7 +44135,7 @@
     {
       "name": "ratio-1x1",
       "file": "04-layout.css",
-      "line": 185,
+      "line": 231,
       "layer": "deck.layout",
       "section": null,
       "doc": null,
@@ -44157,7 +44157,7 @@
         {
           "selector": ".ratio-1x1",
           "file": "04-layout.css",
-          "line": 185,
+          "line": 231,
           "conditions": []
         }
       ],
@@ -44169,7 +44169,7 @@
     {
       "name": "ratio-4x3",
       "file": "04-layout.css",
-      "line": 184,
+      "line": 230,
       "layer": "deck.layout",
       "section": null,
       "doc": null,
@@ -44191,7 +44191,7 @@
         {
           "selector": ".ratio-4x3",
           "file": "04-layout.css",
-          "line": 184,
+          "line": 230,
           "conditions": []
         }
       ],
@@ -45345,7 +45345,7 @@
     {
       "name": "scroller",
       "file": "04-layout.css",
-      "line": 127,
+      "line": 164,
       "layer": "deck.layout",
       "section": null,
       "doc": "Everything stays on one line and scrolls sideways — cards, chips, dates",
@@ -45391,19 +45391,19 @@
         {
           "selector": ".scroller",
           "file": "04-layout.css",
-          "line": 127,
+          "line": 164,
           "conditions": []
         },
         {
           "selector": ".scroller::-webkit-scrollbar",
           "file": "04-layout.css",
-          "line": 138,
+          "line": 175,
           "conditions": []
         },
         {
           "selector": ".scroller > *",
           "file": "04-layout.css",
-          "line": 139,
+          "line": 176,
           "conditions": []
         },
         {
@@ -45434,10 +45434,10 @@
     {
       "name": "search",
       "file": "06-forms.css",
-      "line": 156,
+      "line": 163,
       "layer": "deck.components",
-      "section": "Search field",
-      "doc": null,
+      "section": null,
+      "doc": "A control with an icon inside its starting edge. The icon is\npointer-events: none, so clicking it focuses the field underneath\nrather than doing nothing.",
       "declarations": [
         {
           "prop": "position",
@@ -45456,19 +45456,19 @@
         {
           "selector": ".search",
           "file": "06-forms.css",
-          "line": 156,
+          "line": 163,
           "conditions": []
         },
         {
           "selector": ".search > .icon",
           "file": "06-forms.css",
-          "line": 157,
+          "line": 164,
           "conditions": []
         },
         {
           "selector": ".search > .input",
           "file": "06-forms.css",
-          "line": 163,
+          "line": 170,
           "conditions": []
         },
         {
@@ -45492,7 +45492,7 @@
     {
       "name": "section",
       "file": "04-layout.css",
-      "line": 124,
+      "line": 161,
       "layer": "deck.layout",
       "section": null,
       "doc": "Vertical page rhythm: a block of --space-section, which is a clamp that\ngrows with the viewport. For spacing inside a component reach for\n.stack instead.",
@@ -45506,7 +45506,7 @@
         {
           "selector": ".section",
           "file": "04-layout.css",
-          "line": 124,
+          "line": 161,
           "conditions": []
         },
         {
@@ -47757,7 +47757,7 @@
     {
       "name": "split",
       "file": "04-layout.css",
-      "line": 96,
+      "line": 129,
       "layer": "deck.layout",
       "section": null,
       "doc": "Content + rail. Collapses to one column below the width it needs.",
@@ -47779,19 +47779,19 @@
         {
           "selector": ".split",
           "file": "04-layout.css",
-          "line": 96,
+          "line": 129,
           "conditions": []
         },
         {
           "selector": ".split > *",
           "file": "04-layout.css",
-          "line": 106,
+          "line": 139,
           "conditions": []
         },
         {
           "selector": ".split",
           "file": "04-layout.css",
-          "line": 108,
+          "line": 141,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -47825,10 +47825,10 @@
     {
       "name": "split-rail-start",
       "file": "04-layout.css",
-      "line": 109,
+      "line": 146,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "Puts the rail on the starting edge without touching markup order, so\nthe main column stays first for a screen reader and for the keyboard.\nUse it for supplementary navigation; not for a rail holding the first\nthing a reader needs.",
       "declarations": [
         {
           "prop": "grid-template-columns",
@@ -47839,7 +47839,7 @@
         {
           "selector": ".split-rail-start",
           "file": "04-layout.css",
-          "line": 109,
+          "line": 146,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -47939,7 +47939,7 @@
     {
       "name": "stack",
       "file": "04-layout.css",
-      "line": 42,
+      "line": 51,
       "layer": "deck.layout",
       "section": null,
       "doc": "Vertical rhythm without margin collapse surprises",
@@ -47961,7 +47961,7 @@
         {
           "selector": ".stack",
           "file": "04-layout.css",
-          "line": 42,
+          "line": 51,
           "conditions": []
         }
       ],
@@ -47984,10 +47984,10 @@
     {
       "name": "stack-0",
       "file": "04-layout.css",
-      "line": 47,
+      "line": 57,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "No gap. For two elements that must touch.",
       "declarations": [
         {
           "prop": "--gap",
@@ -47998,7 +47998,7 @@
         {
           "selector": ".stack-0",
           "file": "04-layout.css",
-          "line": 47,
+          "line": 57,
           "conditions": []
         }
       ],
@@ -48010,10 +48010,10 @@
     {
       "name": "stack-1",
       "file": "04-layout.css",
-      "line": 48,
+      "line": 60,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "A hairline. A label and the control it names, when the two read as\none thing.",
       "declarations": [
         {
           "prop": "--gap",
@@ -48024,7 +48024,7 @@
         {
           "selector": ".stack-1",
           "file": "04-layout.css",
-          "line": 48,
+          "line": 60,
           "conditions": []
         }
       ],
@@ -48038,7 +48038,7 @@
     {
       "name": "stack-2",
       "file": "04-layout.css",
-      "line": 51,
+      "line": 63,
       "layer": "deck.layout",
       "section": null,
       "doc": "Tight vertical rhythm, for a label and its control or a title and its\nsubtitle.",
@@ -48052,7 +48052,7 @@
         {
           "selector": ".stack-2",
           "file": "04-layout.css",
-          "line": 51,
+          "line": 63,
           "conditions": []
         }
       ],
@@ -48066,7 +48066,7 @@
     {
       "name": "stack-3",
       "file": "04-layout.css",
-      "line": 53,
+      "line": 65,
       "layer": "deck.layout",
       "section": null,
       "doc": "The default rhythm for related blocks inside a card or a section.",
@@ -48080,7 +48080,7 @@
         {
           "selector": ".stack-3",
           "file": "04-layout.css",
-          "line": 53,
+          "line": 65,
           "conditions": []
         }
       ],
@@ -48094,10 +48094,10 @@
     {
       "name": "stack-4",
       "file": "04-layout.css",
-      "line": 54,
+      "line": 67,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "The default, named. Same as .stack with no step class.",
       "declarations": [
         {
           "prop": "--gap",
@@ -48108,7 +48108,7 @@
         {
           "selector": ".stack-4",
           "file": "04-layout.css",
-          "line": 54,
+          "line": 67,
           "conditions": []
         }
       ],
@@ -48122,7 +48122,7 @@
     {
       "name": "stack-6",
       "file": "04-layout.css",
-      "line": 56,
+      "line": 69,
       "layer": "deck.layout",
       "section": null,
       "doc": "Loose vertical rhythm, for separating whole sections of a page.",
@@ -48136,7 +48136,7 @@
         {
           "selector": ".stack-6",
           "file": "04-layout.css",
-          "line": 56,
+          "line": 69,
           "conditions": []
         }
       ],
@@ -48150,10 +48150,10 @@
     {
       "name": "stack-8",
       "file": "04-layout.css",
-      "line": 57,
+      "line": 71,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "Very loose, for whole sections of a page where .section is too much.",
       "declarations": [
         {
           "prop": "--gap",
@@ -48164,7 +48164,7 @@
         {
           "selector": ".stack-8",
           "file": "04-layout.css",
-          "line": 57,
+          "line": 71,
           "conditions": []
         }
       ],
@@ -49245,10 +49245,10 @@
     {
       "name": "sticky-top",
       "file": "04-layout.css",
-      "line": 141,
+      "line": 183,
       "layer": "deck.layout",
       "section": null,
-      "doc": null,
+      "doc": "A sticky header. Where scroll-state container queries are supported\nthe blur and shadow live on an ::after that is transparent until the\nheader actually sticks, so in flow it looks like part of the page.\nThe treatment rides on a pseudo-element because a scroll-state\ncontainer can style its descendants but not itself.",
       "declarations": [
         {
           "prop": "position",
@@ -49279,13 +49279,13 @@
         {
           "selector": ".sticky-top",
           "file": "04-layout.css",
-          "line": 141,
+          "line": 183,
           "conditions": []
         },
         {
           "selector": ".sticky-top",
           "file": "04-layout.css",
-          "line": 154,
+          "line": 196,
           "conditions": [
             "@supports (container-type: scroll-state)"
           ]
@@ -49293,7 +49293,7 @@
         {
           "selector": ".sticky-top::after",
           "file": "04-layout.css",
-          "line": 160,
+          "line": 202,
           "conditions": [
             "@supports (container-type: scroll-state)"
           ]
@@ -49301,7 +49301,7 @@
         {
           "selector": ".sticky-top::after",
           "file": "04-layout.css",
-          "line": 172,
+          "line": 214,
           "conditions": [
             "@supports (container-type: scroll-state)",
             "@container scroll-state(stuck: block-start)"
@@ -49433,7 +49433,7 @@
     {
       "name": "switch",
       "file": "06-forms.css",
-      "line": 248,
+      "line": 255,
       "layer": "deck.components",
       "section": null,
       "doc": "An on/off control that takes effect immediately, drawn over a real\ncheckbox. If the reader has to press Save afterwards, use .check\ninstead. Add role=\"switch\" when \"on\"/\"off\" reads better than\n\"checked\"/\"unchecked\".",
@@ -49463,37 +49463,37 @@
         {
           "selector": ".switch",
           "file": "06-forms.css",
-          "line": 248,
+          "line": 255,
           "conditions": []
         },
         {
           "selector": ".switch input",
           "file": "06-forms.css",
-          "line": 249,
+          "line": 256,
           "conditions": []
         },
         {
           "selector": ".switch input::after",
           "file": "06-forms.css",
-          "line": 260,
+          "line": 267,
           "conditions": []
         },
         {
           "selector": ".switch input:checked",
           "file": "06-forms.css",
-          "line": 272,
+          "line": 279,
           "conditions": []
         },
         {
           "selector": ".switch input:checked::after",
           "file": "06-forms.css",
-          "line": 273,
+          "line": 280,
           "conditions": []
         },
         {
           "selector": ".switch input:focus-visible",
           "file": "06-forms.css",
-          "line": 274,
+          "line": 281,
           "conditions": []
         },
         {

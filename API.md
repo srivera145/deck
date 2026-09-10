@@ -46,7 +46,7 @@ spacing steps and that `p`, `m` and `gap` take them, you know the whole family
 without reading it. The component layers are the opposite: 99 components,
 each a handful of names, and a page that uses six of them needs six.
 
-One number that is not comfortable: **251 of the 828 public classes are
+One number that is not comfortable: **240 of the 828 public classes are
 used nowhere in this repository** — not in the demo, not in the docs, not in
 Deck's own JavaScript. They are frozen on the strength of their source alone.
 
@@ -270,9 +270,9 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.cluster` | deck.layout | Horizontal group that wraps instead of overflowing on a phone |
-| `.cluster-between` | deck.layout | Sets justify-content. |
-| `.cluster-center` | deck.layout | Sets justify-content. |
-| `.cluster-end` | deck.layout | Sets justify-content. |
+| `.cluster-between` | deck.layout | First item to one end, last to the other. Beware of combining it |
+| `.cluster-center` | deck.layout | Centres the row. |
+| `.cluster-end` | deck.layout | Packs the row against the end edge, which follows the writing |
 | `.cluster-tight` | deck.layout | Kept as the readable name for step 2, which is what most clusters want |
 
 ## combo
@@ -318,11 +318,11 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | --- | --- | --- |
 | `.actions-cq` | deck.layout | Button rows that go full width when cramped |
 | `.container` | deck.layout | Centres content and caps it at --container, with the responsive page |
-| `.container-full` | deck.layout | Sets --container. |
-| `.container-lg` | deck.layout | Sets --container. |
-| `.container-md` | deck.layout | Sets --container. |
-| `.container-sm` | deck.layout | Sets --container. |
-| `.container-xl` | deck.layout | Sets --container. |
+| `.container-full` | deck.layout | Keeps the page gutter, drops the max width. This is what to nest |
+| `.container-lg` | deck.layout | The same 76rem as the bare .container, named. Use it when a page |
+| `.container-md` | deck.layout | An article with a rail, or a form. |
+| `.container-sm` | deck.layout | A single column of prose: about 70 characters at the body size, |
+| `.container-xl` | deck.layout | A wide dashboard or a data grid. |
 | `.gap-cq` | deck.layout | Modifier; see the component. |
 | `.metarow` | deck.layout | List rows that reveal their metadata as space allows |
 | `.pad-cq` | deck.layout | Modifier; see the component. |
@@ -561,7 +561,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.label` | deck.components | The label for a control. A flex row, so a "required" or "optional" |
 | `.optional` | deck.components | Modifier; see the component. |
 | `.required` | deck.components | Modifier; see the component. |
-| `.search` | deck.components | Sets position, display, align-items. |
+| `.search` | deck.components | A control with an icon inside its starting edge. The icon is |
 | `.select` | deck.components | Marks a field invalid from your own validation, producing the same |
 | `.switch` | deck.components | An on/off control that takes effect immediately, drawn over a real |
 | `.textarea` | deck.components | Grows with its content instead of scrolling in a 4-row box |
@@ -640,12 +640,12 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.grid` | deck.layout | Auto-fitting grid: no breakpoints needed, it responds to its own width |
-| `.grid-2` | deck.layout | Sets grid-template-columns. |
-| `.grid-fixed-2` | deck.layout | Sets grid-template-columns. |
-| `.grid-fixed-3` | deck.layout | Sets grid-template-columns. |
-| `.grid-fixed-4` | deck.layout | Sets grid-template-columns. |
+| `.grid-2` | deck.layout | Two-ish columns: an auto-fit grid with a 24rem floor. Identical in |
+| `.grid-fixed-2` | deck.layout | Exactly two equal columns at every width, including a phone. Only |
+| `.grid-fixed-3` | deck.layout | Exactly three equal columns at every width. See .grid-fixed-2. |
+| `.grid-fixed-4` | deck.layout | Exactly four equal columns at every width. On a phone that is four |
 | `.grid-tight` | deck.layout | Narrows the auto-fit column floor to 12rem, so the grid packs more |
-| `.grid-wide` | deck.layout | Sets --min. |
+| `.grid-wide` | deck.layout | Widens the auto-fit column floor to 24rem, so the grid packs fewer, |
 
 ## icon
 
@@ -720,7 +720,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.app-shell` | deck.layout | Sets display, min-block-size, grid-template-rows. |
+| `.app-shell` | deck.layout | Header, content, footer in a 100dvh grid whose middle row takes the |
 | `.bar` | deck.layout | Push the last child away from the rest |
 | `.center` | deck.layout | Center a thing with a max width and no side effects |
 | `.ratio-16x9` | deck.layout | Aspect boxes for media |
@@ -1171,20 +1171,20 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.split` | deck.layout | Content + rail. Collapses to one column below the width it needs. |
-| `.split-rail-start` | deck.layout | Sets grid-template-columns. |
+| `.split-rail-start` | deck.layout | Puts the rail on the starting edge without touching markup order, so |
 
 ## stack
 
 | class | layer | purpose |
 | --- | --- | --- |
 | `.stack` | deck.layout | Vertical rhythm without margin collapse surprises |
-| `.stack-0` | deck.layout | Sets --gap. |
-| `.stack-1` | deck.layout | Sets --gap. |
+| `.stack-0` | deck.layout | No gap. For two elements that must touch. |
+| `.stack-1` | deck.layout | A hairline. A label and the control it names, when the two read as |
 | `.stack-2` | deck.layout | Tight vertical rhythm, for a label and its control or a title and its |
 | `.stack-3` | deck.layout | The default rhythm for related blocks inside a card or a section. |
-| `.stack-4` | deck.layout | Sets --gap. |
+| `.stack-4` | deck.layout | The default, named. Same as .stack with no step class. |
 | `.stack-6` | deck.layout | Loose vertical rhythm, for separating whole sections of a page. |
-| `.stack-8` | deck.layout | Sets --gap. |
+| `.stack-8` | deck.layout | Very loose, for whole sections of a page where .section is too much. |
 
 ## stagger
 
@@ -1228,7 +1228,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.sticky` | deck.utilities | Sets position. |
-| `.sticky-top` | deck.layout | Sets position, inset-block-start, z-index, background, and 2 more. |
+| `.sticky-top` | deck.layout | A sticky header. Where scroll-state container queries are supported |
 
 ## tabbar
 

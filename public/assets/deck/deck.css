@@ -558,19 +558,10 @@
     margin-inline: auto;
     padding-inline: var(--space-gutter);
   }
-  /* A single column of prose: about 70 characters at the body size,
-     which is inside the maximum line length WCAG recommends. */
   .container-sm { --container: 40rem; }
-  /* An article with a rail, or a form. */
   .container-md { --container: 56rem; }
-  /* The same 76rem as the bare .container, named. Use it when a page
-     should say which width it means rather than rely on the default. */
   .container-lg { --container: 76rem; }
-  /* A wide dashboard or a data grid. */
   .container-xl { --container: 90rem; }
-  /* Keeps the page gutter, drops the max width. This is what to nest
-     inside another container — a second .container would apply the
-     gutter twice. */
   .container-full { --container: none; }
 
   /* --- The spacing scale ----------------------------------------------------
@@ -597,21 +588,16 @@
     flex-direction: column;
     gap: var(--gap, var(--space-4));
   }
-  /* No gap. For two elements that must touch. */
   .stack-0 { --gap: 0; }
-  /* A hairline. A label and the control it names, when the two read as
-     one thing. */
   .stack-1 { --gap: var(--space-1); }
   /* Tight vertical rhythm, for a label and its control or a title and its
      subtitle. */
   .stack-2 { --gap: var(--space-2); }
   /* The default rhythm for related blocks inside a card or a section. */
   .stack-3 { --gap: var(--space-3); }
-  /* The default, named. Same as .stack with no step class. */
   .stack-4 { --gap: var(--space-4); }
   /* Loose vertical rhythm, for separating whole sections of a page. */
   .stack-6 { --gap: var(--space-6); }
-  /* Very loose, for whole sections of a page where .section is too much. */
   .stack-8 { --gap: var(--space-8); }
 
   /* Horizontal group that wraps instead of overflowing on a phone */
@@ -623,15 +609,8 @@
   }
   /* Kept as the readable name for step 2, which is what most clusters want */
   .cluster-tight { --gap: var(--space-2); }
-  /* Packs the row against the end edge, which follows the writing
-     direction rather than always being the right. */
   .cluster-end { justify-content: flex-end; }
-  /* Centres the row. */
   .cluster-center { justify-content: center; }
-  /* First item to one end, last to the other. Beware of combining it
-     with wrapping: each line is justified separately, so a lone item on
-     the second line jumps to the far end and looks stranded. .bar with
-     .push is the predictable version. */
   .cluster-between { justify-content: space-between; }
 
   /* Push the last child away from the rest */
@@ -648,25 +627,13 @@
     gap: var(--gap, var(--space-4));
     grid-template-columns: repeat(auto-fit, minmax(min(var(--min, 17rem), 100%), 1fr));
   }
-  /* Two-ish columns: an auto-fit grid with a 24rem floor. Identical in
-     effect to .grid-wide, but it writes grid-template-columns directly
-     rather than setting --min, so --min cannot adjust it afterwards.
-     Prefer .grid-wide. */
   .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr)); }
   /* Narrows the auto-fit column floor to 12rem, so the grid packs more
      columns in before it wraps. */
   .grid-tight { --min: 12rem; }
-  /* Widens the auto-fit column floor to 24rem, so the grid packs fewer,
-     wider columns before it wraps. For cards with a paragraph in them. */
   .grid-wide { --min: 24rem; }
-  /* Exactly two equal columns at every width, including a phone. Only
-     for a count that is part of the meaning — a 2x2 comparison. It does
-     not reflow, so it does not satisfy the reflow criterion on its own. */
   .grid-fixed-2 { grid-template-columns: 1fr 1fr; }
-  /* Exactly three equal columns at every width. See .grid-fixed-2. */
   .grid-fixed-3 { grid-template-columns: repeat(3, 1fr); }
-  /* Exactly four equal columns at every width. On a phone that is four
-     70px columns; reach for .grid with a --min instead. */
   .grid-fixed-4 { grid-template-columns: repeat(4, 1fr); }
 
   /* Content + rail. Collapses to one column below the width it needs. */
@@ -683,10 +650,6 @@
   .split > * { min-inline-size: 0; }
   @media (min-width: 64rem) {
     .split { grid-template-columns: minmax(0, 1fr) var(--rail, 20rem); }
-    /* Puts the rail on the starting edge without touching markup order, so
-       the main column stays first for a screen reader and for the keyboard.
-       Use it for supplementary navigation; not for a rail holding the first
-       thing a reader needs. */
     .split-rail-start { grid-template-columns: var(--rail, 20rem) minmax(0, 1fr); }
   }
 
@@ -719,11 +682,6 @@
   .scroller::-webkit-scrollbar { display: none; }
   .scroller > * { scroll-snap-align: start; flex: 0 0 auto; }
 
-  /* A sticky header. Where scroll-state container queries are supported
-     the blur and shadow live on an ::after that is transparent until the
-     header actually sticks, so in flow it looks like part of the page.
-     The treatment rides on a pseudo-element because a scroll-state
-     container can style its descendants but not itself. */
   .sticky-top {
     position: sticky;
     inset-block-start: 0;
@@ -759,10 +717,6 @@
     }
   }
 
-  /* Header, content, footer in a 100dvh grid whose middle row takes the
-     remaining height — the sticky footer, without the hacks. dvh rather
-     than vh so it tracks a phone browser hiding its chrome. It expects
-     exactly three children. */
   .app-shell {
     display: grid;
     min-block-size: 100dvh;
@@ -1129,10 +1083,6 @@
     background: transparent;
   }
   .input-group > .input:focus { box-shadow: none; }
-  /* A prefix or suffix attached to a control inside .input-group. Its
-     divider is border-inline-end normally and border-inline-start on
-     :last-child, so a leading and a trailing addon each get their rule on
-     the correct side in both writing directions. */
   .input-group > .addon {
     display: inline-flex;
     align-items: center;
@@ -1148,9 +1098,6 @@
   .input-group > .btn { border-radius: 0; border-block: 0; border-inline-end: 0; box-shadow: none; }
 
   /* --- Search field ------------------------------------------------------- */
-  /* A control with an icon inside its starting edge. The icon is
-     pointer-events: none, so clicking it focuses the field underneath
-     rather than doing nothing. */
   .search { position: relative; display: flex; align-items: center; }
   .search > .icon {
     position: absolute;

@@ -138,6 +138,10 @@
     background: transparent;
   }
   .input-group > .input:focus { box-shadow: none; }
+  /* A prefix or suffix attached to a control inside .input-group. Its
+     divider is border-inline-end normally and border-inline-start on
+     :last-child, so a leading and a trailing addon each get their rule on
+     the correct side in both writing directions. */
   .input-group > .addon {
     display: inline-flex;
     align-items: center;
@@ -153,6 +157,9 @@
   .input-group > .btn { border-radius: 0; border-block: 0; border-inline-end: 0; box-shadow: none; }
 
   /* --- Search field ------------------------------------------------------- */
+  /* A control with an icon inside its starting edge. The icon is
+     pointer-events: none, so clicking it focuses the field underneath
+     rather than doing nothing. */
   .search { position: relative; display: flex; align-items: center; }
   .search > .icon {
     position: absolute;

@@ -380,6 +380,14 @@ the stylesheet because CSS cannot add a tab stop, and adding one to every wrappe
 whether or not its table overflows creates a different problem: a tab stop that goes
 nowhere.
 
+**Wider than one class.** Writing the scroller page in batch 2 found the same hole in
+`.scroller`, and the same reasoning applies to any `overflow: auto` container Deck ships.
+`.scroller` is the milder case, because its children are usually links or cards that take
+focus and drag the row along with them — but a scroller of plain content is unreachable
+by keyboard in Chromium exactly as a wide table is. Both pages now document it; the
+general fix is a convention, not a rule: any scroll container whose contents are not
+focusable needs `tabindex="0"` and a labelled `role="region"`.
+
 ## 25. Drag-to-reorder has no keyboard path — NOT FIXED
 
 `.reorder` and `.is-lifted` style a list whose rows can be dragged into a new order, and
@@ -453,3 +461,203 @@ never populated; `deck-extras.js` does all three). The check now runs its equali
 with JavaScript disabled, which is the only state in which the question "does the printed
 source match what was rendered" has a meaningful answer, and reports runtime rewrites
 separately instead of as faults.
+
+
+<!-- Items 31 onward were found while writing the batch 2 layout pages:
+     stack, cluster, grid, split, container, scroller. -->
+
+## 31. `.grid-2` and `.grid-wide` are the same grid, and one of them does not compose
+
+`.grid` sizes its columns with `minmax(min(var(--min, 17rem), 100%), 1fr)`, so
+`.grid-wide` — which sets `--min: 24rem` and nothing else — produces
+`minmax(min(24rem, 100%), 1fr)`.
+
+`.grid-2` writes that same value straight into `grid-template-columns`. The two are
+identical in effect, and it is not obvious from the names that they are: `.grid-2` reads
+as "two columns" and is not — it is a 24rem floor, which gives two columns at some widths
+and three at others.
+
+The difference that matters is that `.grid-wide` composes and `.grid-2` does not. Setting
+`--min` afterwards adjusts `.grid-wide` and has no effect on `.grid-2`, because the
+latter has already resolved the property away.
+
+**Not fixed.** Removing `.grid-2` is a deletion after the freeze, and the freeze pass
+happened one task ago; it should have been caught then and was not, because nothing
+compares two classes for equivalent computed output. Documented on the grid page with a
+recommendation to prefer `.grid-wide`, and a source comment now says so above the rule.
+A check that flags two public classes with identical effective declarations would have
+found this and is worth writing.
+
+## 32. `.scroller` has no print rule, so a printed scroller loses most of its content
+
+Every other layout primitive is accounted for in `src/99-print.css`: `.grid` and
+`.split` are unwound to `display: block`, `.container` loses its cap and gutter,
+`.section` loses its top padding. `.scroller` is not mentioned, which means it prints as
+an overflow container — showing whatever happened to be scrolled into view and silently
+dropping the rest.
+
+A row of eight date tiles prints as three. Nothing warns anybody, on screen or on paper.
+
+**Not fixed**, because this pass was not allowed to change rendering and a print rule is
+a rendering change. The fix is small and belongs with the next `src/` pass:
+
+```css
+@media print {
+  .scroller { display: block; overflow: visible; margin-inline: 0; padding-inline: 0; }
+  .scroller > * + * { margin-block-start: 4mm; }
+}
+```
+
+Documented on the scroller page as a gap rather than described as working.
+
+## 33. Hiding the scrollbar on `.scroller` trades an affordance for an appearance
+
+`.scroller` sets `scrollbar-width: none` and hides the WebKit scrollbar. A scrollbar is
+the only persistent, platform-standard signal that a region scrolls; with it hidden, the
+affordance is a partially-visible item at the edge — which works when the items are wide
+and disappears entirely when they happen to fit the container exactly.
+
+This is an aesthetic decision overriding a usability one. It is defensible — a native
+scrollbar under a row of cards does look like a mistake on desktop, and the pattern is
+near-universal — but it is a decision, and until now it was not written down anywhere.
+
+**Not fixed**, deliberately. Recorded so that it is a choice rather than an accident, and
+documented on the scroller page under Accessibility with the override that gives the
+scrollbar back.
+
+## 34. `.split`'s breakpoint is the right answer to the wrong question inside a container
+
+`.split` carries a `@media (min-width: 64rem)`, one of very few media queries left in
+Deck. That is correct when the split is the outermost layout on a page, which is what it
+is designed for.
+
+Inside a modal, a drawer or another rail it is wrong in the way container queries exist to
+fix: the viewport says there is room for two columns and the actual container has room
+for one. Deck already ships the container-query answer for the equivalent form problem —
+`.field-row-cq`, whose source comment calls it "the one that keeps biting people" — but
+there is no `.split-cq`.
+
+**Not fixed.** Adding one is a new public class after the freeze, which is a bigger
+decision than a documentation pass should make. Documented on the split page under both
+*The one breakpoint* and *When not to use it*.
+
+
+<!-- Items 35 onward were found while splitting six topics out of their host
+     pages into their own: bar, section, textarea, select, switch, file,
+     fieldset. -->
+
+## 35. Folding a component into a host page made it unfindable — FIXED
+
+`.bar`, `.section`, `.textarea`, `.switch`, `.file` and `.fieldset` were all documented,
+all correct, and none of them were in the sidebar. Each had been folded into the page for
+a larger neighbour on the grounds that a reader choosing between a cluster and a bar wants
+both explanations in one place.
+
+That reasoning is fine for the reader who is already on the cluster page. It is no help
+at all to the reader who knows the word "switch" and is looking for it, which is the more
+common way somebody arrives at reference documentation. A topic that is not in the
+navigation does not exist.
+
+Fixed by giving each of the six its own page, moving the `documents` claim with it, and
+leaving a short cross-reference where the section used to be — so the comparison is still
+on the page a reader was reading, and the topic is still findable on its own. The
+Components navigation is now sorted alphabetically for the same reason.
+
+**The rule this suggests:** if a class is worth a section heading, it is worth a page. The
+cost of a short page is much lower than the cost of a reader not finding it.
+
+## 36. Four classes were documented in prose but claimed by no page — FIXED
+
+`.textarea`, `.select`, `.addon` and `.search` were all explained at length on the input
+page, and none of them appeared in any page's `documents` array. They were therefore still
+counted as undocumented in the coverage figures, and `verify.mjs` had nothing to check
+them against — a rename would not have been caught.
+
+This was a reporting error on my part in batch 1: I said they were "documented in prose
+but belong to no component root, so they are not in the table", which was a decision about
+the generated *table* that I let become a decision about the *claim*. The two are separate,
+and only the claim is load-bearing.
+
+Fixed: `.textarea` and `.select` now have their own pages, and `.addon` and `.search` are
+claimed by the input page with a comment saying why they are there.
+
+## 37. `.bar` is the only layout primitive that ignores `--gap` — NOT FIXED
+
+`.stack`, `.cluster`, `.grid`, `.split`, `.scroller` and `.center` all declare
+`gap: var(--gap, …)`, which is what lets the spacing scale classes work on any of them.
+`.bar` declares `gap: var(--space-3)` with no custom property, so `.stack-2` on a bar does
+nothing and the gap can only be changed by setting `gap` directly.
+
+Nothing about `.bar` makes it different in kind; it looks like an omission rather than a
+decision. The fix is one word — wrap the value in `var(--gap, …)` — and it is
+backward-compatible, since the fallback keeps the current default.
+
+**Not fixed** because it is a rendering change on a public class and this pass was
+documentation. Documented on the bar page under *Gap*.
+
+## 38. `.select[multiple]` paints a chevron with nothing to drop down — NOT FIXED
+
+`.select` sets `appearance: none` and paints a chevron in the top-right with two
+gradients. With `multiple` or `size="4"` the element renders as a list box rather than a
+dropdown, and the chevron is painted over the first option — pointing at a dropdown that
+does not exist, and overlapping the text.
+
+One rule fixes it:
+
+```css
+.select[multiple], .select[size]:not([size="1"]) {
+  background-image: none;
+  padding-inline-end: var(--space-3);
+}
+```
+
+**Not fixed** for the same reason as item 37. Documented on the select page, alongside the
+larger point that a multi-select is usually the wrong control anyway.
+
+## 39. `.switch` has three numbers that must agree and nothing that keeps them agreeing
+
+The track is `46px × 28px`, the knob is `22px`, its inset is `3px`, and the checked state
+translates it `18px`. Those numbers are related — `18 = 46 − 22 − 3 − 3` — and every one
+of them is written separately. Changing the switch's size means getting four
+declarations right by hand, and a wrong one shows up as a knob that stops short of the
+end or slides past it.
+
+A single `--switch-size` with the rest derived by `calc()` would make the component
+resizable the way `.avatar` is resizable by `--size`.
+
+**Not fixed**, and recorded because it is the kind of thing that is obvious while writing
+the override example and invisible otherwise. Documented on the switch page under
+*Overriding it*.
+
+## 40. A disabled `<fieldset>` does not look disabled
+
+`<fieldset disabled>` is a genuinely useful HTML feature: it disables every control
+inside, including ones added later, and removes them from the tab order properly. Deck
+styles the controls — they get their own disabled treatment — but nothing styles the
+group. The border and the legend look exactly as they did, so the reader sees a normal
+box full of greyed-out controls rather than a group that is off.
+
+`.fieldset[disabled] { opacity: .6; }` is the whole fix.
+
+**Not fixed**, same reason. Documented on the fieldset page under *Disabling a whole
+group*.
+
+## 41. Three print sections described behaviour the print stylesheet does not have — FIXED
+
+Writing the textarea page, I asserted that `.textarea` was missing from
+`src/99-print.css` and that the fix was to clear `max-block-size`. Checking before
+publishing the claim found the opposite: `.textarea` is in the shared control rule *and*
+has a dedicated line doing exactly that.
+
+Checking that turned up two more of my own errors from the same wrong assumption:
+
+- The input page said `.input` prints as "an underlined value" with the box removed. It
+  does not; it gets a `#999` border on white with `min-block-size: auto`.
+- The field page said `.form-actions-sticky` is un-stickied "so the buttons print where
+  the form ends". They do not print at all — `.btn, .form-actions { display: none }`,
+  with `.btn.print-keep` as the escape hatch.
+
+All three corrected. The lesson is narrow and worth stating: **a print rule is the
+easiest thing in a stylesheet to describe from memory and the least likely to be checked
+by a reader**, because almost nobody prints a page to verify the documentation. Print
+claims need reading the source every time, not recalling it.

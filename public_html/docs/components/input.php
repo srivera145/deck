@@ -6,8 +6,12 @@ $page = [
     'title' => 'Input',
     'level' => 'Beginner',
     'description' => 'Deck\'s .input, .textarea and .select share one rule: 16px on touch so iOS never zooms, validation that waits for :user-invalid, a self-sizing textarea, and .input-group for prefixes and attached buttons.',
+    /* .addon and .search are not members of the `input` component as the
+       extractor sees it, but they only ever appear wrapped around one and this
+       page is where they are explained. Claiming them here is what keeps them
+       out of the undocumented backlog. */
     'documents' => [
-        'input', 'input-group', 'is-invalid',
+        'input', 'input-group', 'is-invalid', 'addon', 'search',
     ],
 
     /* 19-logical.css is deliberately absent. It mirrors .select and .search
@@ -452,10 +456,19 @@ require __DIR__ . '/../_layout.php';
 <section class="stack-3">
   <h2 id="print">Printing</h2>
   <p>
-    <code>src/99-print.css</code> turns <code>.input</code> into an underlined value: the
-    box, the shadow and the fill go, and what remains is the text the reader entered with
-    a rule beneath it. A printed form should read as a filled-in document, not as a
-    screenshot of a web form.
+    <code>src/99-print.css</code> gives <code>.input</code>, <code>.textarea</code>,
+    <code>.select</code> and <code>.combo-control</code> the same treatment: a plain
+    <code>#999</code> border, a white background, and
+    <code>min-block-size: auto</code> so a control is only as tall as what is in it.
+    Deck's own border colours are near-invisible on paper and its shadows print as grey
+    smudges, so both are replaced rather than removed — a printed form should still look
+    like a form.
+  </p>
+  <p>
+    Two things are dropped entirely: <code>.btn</code> and
+    <code>.form-actions</code> are <code>display: none</code>, because a printed Save
+    button is a button nobody can press. <code>.btn.print-keep</code> is the escape
+    hatch for the rare button that should appear — a reference code, a QR link.
   </p>
 </section>
 

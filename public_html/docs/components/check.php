@@ -5,14 +5,9 @@ $page = [
     'path' => 'components/check.php',
     'title' => 'Checkbox and radio',
     'level' => 'Beginner',
-    'description' => 'Deck\'s .check styles a real checkbox or radio with appearance: none, draws the tick with clip-path so it needs no icon, handles the indeterminate state, and keeps the whole row a 44px label. Plus .switch, and when to choose which.',
-    /* .switch is not part of the `check` component as the extractor sees it —
-       it shares no selector with .check — but it is the same idea wearing a
-       different affordance, and splitting them across two pages would make a
-       reader read both to choose between them. Claiming it here documents it
-       without pretending it is a member. */
+    'description' => 'Deck\'s .check styles a real checkbox or radio with appearance: none, draws the tick with clip-path so it needs no icon, handles the indeterminate state, and keeps the whole row a 44px label.',
     'documents' => [
-        'check', 'check-card', 'check-note', 'check-text', 'switch',
+        'check', 'check-card', 'check-note', 'check-text',
     ],
 
     'component' => 'check',
@@ -268,11 +263,7 @@ require __DIR__ . '/../_layout.php';
 
 <section class="stack-3">
   <h2 id="classes">Classes</h2>
-  <p>
-    Generated from <code>src/06-forms.css</code>. <code>.switch</code> appears here
-    because this page documents it, not because the extractor considers it part of the
-    <code>check</code> component — it shares no selector with <code>.check</code>.
-  </p>
+  <p>Generated from <code>src/06-forms.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 

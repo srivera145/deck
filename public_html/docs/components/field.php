@@ -9,12 +9,12 @@ $page = [
     'documents' => [
         'field', 'field-row', 'field-row-cq', 'is-invalid',
         'label', 'help', 'error', 'required', 'optional',
-        'fieldset', 'file', 'form-actions', 'form-actions-sticky',
+        'form-actions', 'form-actions-sticky',
     ],
 
     'component' => 'field',
     'accounts' => [
-        '06-forms.css'     => 'documented: the field column, the invalid state, and .field-row — plus the label, help, error, fieldset, file and form-actions parts this page also covers',
+        '06-forms.css'     => 'documented: the field column, the invalid state and .field-row, plus the label, help, error and form-actions parts this page also covers. .fieldset and .file are in the same file and have their own pages.',
         '18-container.css' => 'documented: .field-row-cq pairs on its own container\'s width instead of the viewport\'s — the Pairing on the container section',
         '16-motion.css'    => 'documented: an invalid field shakes once, and only when motion is allowed — the Reduced motion section',
     ],
@@ -383,9 +383,20 @@ require __DIR__ . '/../_layout.php';
   <h2 id="print">Printing</h2>
   <p>
     <code>.fieldset</code> gets the same surface treatment as a card — a hairline, no
-    radius, <code>break-inside: avoid</code>. <code>.form-actions-sticky</code> is forced
-    back to <code>position: static</code>, so the buttons print where the form ends
-    rather than floating over the last page.
+    radius, <code>break-inside: avoid</code> — so a group of controls is not split across
+    two sheets.
+  </p>
+  <p>
+    <code>.form-actions</code> is <code>display: none</code>. The buttons do not print at
+    all, which is right: a printed Save button is a control nobody can operate.
+    <code>.form-actions-sticky</code> is <em>also</em> forced to
+    <code>position: static</code> — belt and braces, since a fixed element that did
+    somehow print would be stamped across every page.
+  </p>
+  <p class="text-muted">
+    If a form is meant to be filled in on paper, that is a different document: the
+    controls print as empty boxes, and the submit button is replaced by whatever the
+    reader is supposed to do with the sheet.
   </p>
 </section>
 
