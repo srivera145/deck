@@ -576,9 +576,9 @@ $DOCS_NAV = [
         ['reference/cli.php', 'CLI', true],
     ],
     'Explanation' => [
-        ['explain/why-no-build-step.php', 'Why no build step', false],
-        ['explain/why-cascade-layers.php', 'Why cascade layers', false],
-        ['explain/why-one-hue.php', 'Why one hue', false],
+        ['explain/why-no-build-step.php', 'Why no build step', true],
+        ['explain/why-cascade-layers.php', 'Why cascade layers', true],
+        ['explain/why-one-hue.php', 'Why one hue', true],
     ],
 ];
 

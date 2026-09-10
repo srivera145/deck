@@ -341,7 +341,7 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
   <ol class="stack-3">
     <li>
       <strong>No build step, at all.</strong> Not a faster one — none. No PostCSS, no Vite
-      plugin, no content globs, no watcher, no CI step that regenerates CSS. Tailwind's own
+      plugin, no scan of your source files for class names, no watcher, no CI step that regenerates CSS. Tailwind's own
       docs are clear that the Play CDN is "designed for development purposes only, and is
       not intended for production", so a build is not optional there. Deck is a
       <code>&lt;link&gt;</code> tag in any stack that can serve a file.

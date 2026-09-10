@@ -201,10 +201,12 @@ $LAYERS = [
       <em>earlier</em> layer wins, so importance in <code>deck.reset</code> beats importance
       in <code>app.overrides</code>. Deck's source contains 101 of them, and they are not
       scattered: 84 are inside <code>@media print</code>, 7 inside
-      <code>prefers-reduced-motion</code>, and the remaining 10 are state hooks that have to
-      beat inline styles written by a drag library. If one of those is beating you, you are
-      printing, the reader has asked for less motion, or you are restyling a dragging
-      element — and in all three cases the rule is meant to win.
+      <code>prefers-reduced-motion</code>, and of the remaining 10, six reset positioning, shadows and clipping on table
+      cells when the data grid restacks into cards on a narrow screen, two implement the
+      <code>.no-motion</code> opt-out, and two style an item being dragged and the gap it
+      leaves. If one of those is beating you, you are printing, the reader has asked for
+      less motion, you are inside a restacked data grid, or you are restyling a drag —
+      and in each case the rule is meant to win.
     </li>
     <li>
       <strong>You are setting a property the element does not have.</strong>

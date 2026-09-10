@@ -294,8 +294,10 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
   </p>
   <p>
     The ramps are built to keep that promise honest: every surface that carries text is
-    kept out of the 55–65% lightness band, because that is the band where neither black nor
-    white reaches 4.5:1 and no function can rescue you. If you set a custom
+    kept out of a middle band of lightness, roughly 54–62% depending on the hue. In
+    that band neither of Deck's static fallback text colours — the near-white and the
+    near-black used where <code>contrast-color()</code> is missing — reaches 4.5:1, and
+    even the better of pure black and pure white only just clears it. If you set a custom
     <code>--chroma-brand</code> above <code>.15</code> and use
     <code>.btn-primary</code> heavily, check one button with a contrast tool. It is a
     two-minute check and it is the only part of this that a number cannot guarantee.
@@ -349,8 +351,8 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
     </li>
     <li>
       <strong>Not the lightness of a surface that carries text.</strong> The steps avoid
-      the 55–65% band deliberately. Moving one into it breaks the contrast guarantee for
-      every hue at once.
+      the middle lightness band deliberately. Moving one into it means neither of Deck's
+      static fallback text colours reaches 4.5:1 on that surface, at the hues Deck ships.
     </li>
     <li>
       <strong>Not <code>--hue-brand</code> on a component.</strong> Covered
