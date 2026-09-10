@@ -1162,7 +1162,11 @@ const Deck = (() => {
       if (btn.dataset.deckWired) return;
       btn.dataset.deckWired = '1';
       btn.addEventListener('click', () => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        /* The theme in effect, not just the attribute. With no saved choice there
+           is no attribute and the OS decides, so reading the attribute alone made
+           the first press on a dark machine set "dark" on a page already dark. */
+        const set = document.documentElement.getAttribute('data-theme');
+        const dark = set ? set === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
         Deck.theme(dark ? 'light' : 'dark');
       });
     });

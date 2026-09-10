@@ -63,7 +63,7 @@ require __DIR__ . '/_layout.php';
           Every component on one page, in context. It shows what Deck looks like; these
           pages explain how it works.
         </p>
-        <a class="btn btn-sm" href="../index.php">Open the demo</a>
+        <a class="btn btn-sm" href="../index.php#demo">Open the demo</a>
       </div>
     </article>
   </div>

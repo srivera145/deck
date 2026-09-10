@@ -1,206 +1,222 @@
 {
   "generated": "tools/docs/usage.mjs — do not edit",
-  "filesScanned": 81,
+  "filesScanned": 105,
   "counts": {
     "classes": 931,
-    "used": 735,
-    "unused": 196
+    "used": 914,
+    "unused": 17
   },
   "uses": {
-    "stack-3": 1985,
-    "text-muted": 834,
-    "icon": 568,
-    "btn": 462,
-    "stack-2": 423,
-    "cluster": 296,
-    "stack": 284,
-    "card": 237,
-    "cluster-tight": 196,
-    "card-body": 179,
-    "badge": 150,
-    "label": 149,
-    "lede": 148,
-    "btn-sm": 147,
-    "breadcrumb": 143,
-    "field": 139,
+    "stack-3": 2144,
+    "text-muted": 858,
+    "icon": 612,
+    "btn": 563,
+    "stack-2": 485,
+    "cluster": 367,
+    "stack-4": 312,
+    "stack": 303,
+    "card": 265,
+    "cluster-tight": 246,
+    "lede": 210,
+    "badge": 204,
+    "card-body": 201,
+    "breadcrumb": 191,
+    "label": 189,
+    "btn-sm": 183,
+    "field": 177,
+    "text-sm": 169,
+    "input": 164,
+    "stack-6": 140,
     "icon-sm": 137,
-    "input": 134,
-    "text-sm": 130,
-    "stack-6": 124,
-    "check": 112,
-    "btn-primary": 97,
-    "btn-ghost": 87,
-    "card-title": 87,
-    "grid": 85,
-    "container": 84,
-    "push": 83,
-    "avatar": 77,
-    "section": 77,
-    "icon-lg": 75,
-    "sr-only": 74,
+    "check": 128,
+    "sr-only": 127,
+    "btn-primary": 121,
+    "table": 114,
+    "table-wrap": 111,
+    "btn-ghost": 108,
+    "table-stack": 102,
+    "container": 99,
+    "card-title": 95,
+    "grid": 95,
+    "push": 94,
+    "fw-semi": 88,
+    "section": 86,
+    "icon-lg": 85,
+    "avatar": 81,
+    "btn-icon": 77,
     "dg-num": 74,
-    "fw-semi": 74,
     "tab": 65,
-    "btn-icon": 64,
-    "table": 62,
-    "table-wrap": 61,
     "emoji": 60,
     "skeleton": 60,
+    "alert": 56,
     "num": 55,
-    "table-stack": 52,
+    "sidebar-link": 55,
     "icon-tile": 52,
     "nav-link": 51,
-    "grid-tight": 46,
+    "grid-tight": 50,
+    "range": 50,
+    "badge-good": 48,
+    "switch": 48,
+    "split": 48,
     "list-row": 46,
-    "range": 44,
-    "sidebar-link": 43,
+    "alert-title": 45,
+    "alert-body": 45,
+    "select": 44,
+    "check-text": 42,
+    "bar": 41,
+    "help": 41,
+    "nums": 41,
     "menu-item": 40,
-    "switch": 39,
-    "nums": 39,
-    "alert": 37,
-    "list": 37,
-    "split": 37,
+    "stack-1": 39,
+    "file": 39,
+    "textarea": 38,
+    "list": 38,
     "s1": 36,
-    "textarea": 36,
-    "select": 36,
-    "stack-1": 35,
+    "enter-rise": 36,
+    "toast": 36,
     "list-main": 35,
     "list-title": 35,
-    "badge-good": 34,
+    "number": 35,
     "msg": 33,
-    "bar": 32,
-    "file": 32,
-    "number": 32,
     "bubble": 31,
-    "check-text": 30,
     "list-trail": 29,
     "tooltip": 29,
+    "badge-warn": 28,
     "chart-col": 28,
     "float": 28,
-    "enter-rise": 28,
-    "alert-title": 27,
-    "alert-body": 27,
+    "search": 28,
     "chip": 27,
-    "toast": 27,
+    "check-note": 26,
+    "panel": 26,
+    "copy": 26,
+    "datefield": 26,
     "lazy": 26,
+    "segmented": 26,
     "tip": 26,
+    "chart": 25,
     "dg-check": 25,
-    "datefield": 25,
     "editor-tool": 25,
-    "help": 25,
     "step": 25,
+    "is-invalid": 24,
     "dg-pin-start": 24,
-    "segmented": 24,
     "accordion-body": 23,
+    "navbar": 23,
     "chart-bar-fill": 23,
     "icon-tile-lg": 23,
-    "search": 23,
     "indicator": 23,
     "list-sub": 23,
     "menu": 23,
     "skeleton-text": 23,
     "is-done": 23,
-    "panel": 22,
-    "copy": 22,
+    "check-card": 22,
     "emoji-lg": 22,
-    "stack-4": 22,
     "scroller": 22,
     "step-marker": 22,
     "step-label": 22,
     "timeline-item": 22,
+    "mb-2": 22,
+    "grow": 22,
     "chart-bar": 21,
     "chart-bar-label": 21,
     "chart-bar-track": 21,
     "chart-bar-value": 21,
+    "navbar-brand": 21,
     "ring": 21,
     "timeline-dot": 21,
-    "badge-warn": 20,
-    "is-invalid": 20,
+    "dg-wrap": 20,
+    "sidebar": 20,
     "video": 20,
-    "grow": 20,
     "btn-lg": 19,
     "btn-block": 19,
-    "dg-wrap": 19,
+    "field-row": 19,
+    "fieldset": 19,
+    "combo": 19,
     "dg": 19,
     "kanban-col": 19,
     "kanban-body": 19,
+    "sidebar-group": 19,
+    "stack-8": 19,
+    "mono": 19,
     "icon-follow": 18,
     "carousel-slide": 18,
-    "chart": 18,
+    "carousel": 18,
     "bubble-meta": 18,
-    "combo": 18,
+    "is-open": 18,
     "dg-pin-end": 18,
     "dg-pin-start-2": 18,
     "kanban-head": 18,
     "kanban-count": 18,
     "scene": 17,
-    "navbar": 17,
-    "carousel": 17,
-    "fieldset": 17,
-    "is-open": 17,
+    "truncate": 17,
+    "cq": 17,
     "combo-option": 17,
     "drawer": 17,
+    "error": 17,
+    "qr": 17,
     "toast-main": 17,
     "toast-title": 17,
-    "mono": 17,
+    "alert-warn": 16,
+    "alert-info": 16,
     "avatar-sm": 16,
-    "cq": 16,
-    "sidebar": 16,
-    "mb-2": 16,
+    "btn-danger": 16,
+    "btn-soft": 16,
+    "copy-btn": 16,
+    "bg-surface": 16,
+    "r-sm": 16,
+    "flip": 15,
     "btn-3d": 15,
-    "truncate": 15,
-    "copy-btn": 15,
     "dg-actions": 15,
     "grid-wide": 15,
     "addon": 15,
     "kanban-card": 15,
     "kanban": 15,
-    "navbar-brand": 15,
-    "qr": 15,
-    "sidebar-group": 15,
-    "alert-info": 14,
     "avatar-lg": 14,
     "chat": 14,
-    "btn-soft": 14,
+    "badge-bad": 14,
     "card-flex": 14,
-    "check-note": 14,
     "editor": 14,
     "emoji-tile": 14,
+    "required": 14,
     "gallery": 14,
     "progress": 14,
     "spinner": 14,
+    "modal": 14,
     "pop": 14,
     "step-note": 14,
     "tip-arrow": 14,
+    "p-2": 14,
     "stat-value": 14,
     "badge-dot": 13,
-    "field-row": 13,
     "input-group": 13,
     "carousel-arrow": 13,
+    "mirror-rtl": 13,
     "combo-option-main": 13,
+    "sticky-top": 13,
     "copy-done": 13,
-    "error": 13,
+    "form-actions": 13,
     "icon-muted": 13,
     "with-indicator": 13,
     "kanban-card-title": 13,
     "menu-label": 13,
+    "stack-0": 13,
     "phone": 13,
     "tabs": 13,
     "pile": 12,
     "accordion": 12,
-    "badge-bad": 12,
-    "btn-danger": 12,
+    "badge-brand": 12,
     "carousel-track": 12,
     "carousel-dots": 12,
     "editor-content": 12,
-    "required": 12,
     "g-border": 12,
     "icon-fill": 12,
     "indicator-badge": 12,
     "kanban-empty": 12,
-    "modal": 12,
     "navbar-links": 12,
-    "flip": 11,
+    "r-md": 12,
+    "cq-tone": 12,
+    "tone-surface": 12,
+    "tone-text": 12,
+    "card-link": 11,
     "chart-title": 11,
     "copy-value": 11,
     "drawer-header": 11,
@@ -209,73 +225,76 @@
     "editor-sep": 11,
     "footer": 11,
     "footer-bottom": 11,
+    "text-cq": 11,
     "indicator-warn": 11,
     "kanban-card-meta": 11,
-    "stack-0": 11,
+    "modal-header": 11,
+    "modal-title": 11,
+    "modal-body": 11,
+    "modal-footer": 11,
+    "stagger": 11,
+    "reveal": 11,
     "was-shaken": 11,
     "rating-static": 11,
     "sheet-grip": 11,
-    "stack-8": 11,
+    "cq-shell": 11,
     "drag-handle": 11,
+    "cube": 10,
+    "alert-bad": 10,
     "avatar-xs": 10,
-    "badge-brand": 10,
     "card-header": 10,
     "fab": 10,
     "card-footer": 10,
-    "mirror-rtl": 10,
+    "stretch": 10,
     "chart-line": 10,
     "bubble-name": 10,
-    "check-card": 10,
     "copy-idle": 10,
     "masonry": 10,
     "icon-xl": 10,
     "phone-flag": 10,
     "phone-code": 10,
+    "text-good": 10,
     "sheet": 10,
+    "center": 10,
     "stepper": 10,
     "timeline": 10,
+    "no-flip": 10,
+    "link-quiet": 10,
+    "skip-link": 10,
     "is-loading": 9,
     "card-media": 9,
-    "card-link": 9,
     "carousel-peek": 9,
     "chart-note": 9,
     "chart-columns": 9,
     "s2": 9,
     "is-active": 9,
-    "sticky-top": 9,
     "has-value": 9,
     "editor-toolbar": 9,
     "editor-count": 9,
-    "form-actions": 9,
     "footer-col": 9,
     "span-2": 9,
     "span-wide": 9,
     "g-grid-lines": 9,
-    "text-cq": 9,
     "menu-sep": 9,
     "menu-item-danger": 9,
-    "modal-header": 9,
-    "modal-title": 9,
-    "modal-body": 9,
-    "modal-footer": 9,
     "enter-start": 9,
     "pagination": 9,
     "phone-country": 9,
     "pop-title": 9,
     "pop-body": 9,
+    "print-only": 9,
     "range-pair": 9,
     "range-readout": 9,
     "sheet-header": 9,
     "sheet-title": 9,
     "sheet-body": 9,
-    "cq-shell": 9,
-    "center": 9,
     "toast-close": 9,
     "mega-item": 9,
     "tilt": 8,
-    "cube": 8,
-    "alert-bad": 8,
-    "stretch": 8,
+    "alert-good": 8,
+    "avatar-xl": 8,
+    "actions-cq": 8,
+    "btn-outline": 8,
     "carousel-prev": 8,
     "carousel-next": 8,
     "chart-legend": 8,
@@ -287,11 +306,13 @@
     "copy-inline": 8,
     "dg-compact": 8,
     "dg-zebra": 8,
+    "optional": 8,
     "float-outline": 8,
     "footer-heading": 8,
     "grid-2": 8,
-    "stagger": 8,
-    "reveal": 8,
+    "lift": 8,
+    "transition": 8,
+    "shake": 8,
     "marquee-track": 8,
     "number-unit": 8,
     "ring-label": 8,
@@ -301,10 +322,12 @@
     "toast-action": 8,
     "video-poster": 8,
     "video-play": 8,
+    "bg-sunken": 8,
+    "p-3": 8,
+    "tone-icon": 8,
+    "mb-3": 8,
+    "writing-vertical": 8,
     "reaction": 8,
-    "cq-tone": 8,
-    "tone-surface": 8,
-    "tone-text": 8,
     "mega-item-title": 8,
     "mega-item-note": 8,
     "tabbar-item": 8,
@@ -332,21 +355,31 @@
     "icon-tile-good": 7,
     "icon-tile-bad": 7,
     "list-header": 7,
+    "reveal-fade": 7,
     "ping": 7,
     "pop-actions": 7,
+    "no-print": 7,
+    "keep-together": 7,
     "ring-wrap": 7,
     "rating-fill": 7,
+    "split-rail-start": 7,
     "toast-good": 7,
     "toast-text": 7,
     "toast-actions": 7,
+    "toast-region": 7,
     "video-meta": 7,
     "video-duration": 7,
-    "no-flip": 7,
+    "mt-2": 7,
+    "code-ltr": 7,
+    "display": 7,
+    "back-to-top": 7,
+    "relative": 7,
     "scene-near": 6,
     "tilt-lift": 6,
+    "space": 6,
+    "is-flipped": 6,
     "coverflow": 6,
-    "alert-warn": 6,
-    "actions-cq": 6,
+    "square": 6,
     "s3": 6,
     "chart-heat": 6,
     "chart-area": 6,
@@ -367,24 +400,22 @@
     "menu-match": 6,
     "press": 6,
     "sweep": 6,
-    "lift": 6,
     "scroll-progress": 6,
-    "print-only": 6,
+    "flash-good": 6,
+    "expand": 6,
     "qr-sm": 6,
     "qr-lg": 6,
-    "toast-region": 6,
-    "link-quiet": 6,
-    "skip-link": 6,
-    "mb-3": 6,
+    "text-bad": 6,
+    "text-inherit": 6,
+    "defer": 6,
+    "mt-1": 6,
+    "gap-cq": 6,
     "stat": 6,
     "stat-label": 6,
     "stat-delta": 6,
-    "tone-icon": 6,
-    "writing-vertical": 6,
     "speed-dial-action": 6,
     "speed-dial-label": 6,
     "speed-dial-button": 6,
-    "back-to-top": 6,
     "sortable-chosen": 6,
     "tilt-lift-sm": 5,
     "face-front": 5,
@@ -394,8 +425,6 @@
     "face-top": 5,
     "face-bottom": 5,
     "parallax": 5,
-    "space": 5,
-    "is-flipped": 5,
     "is-tilting": 5,
     "is-fanned": 5,
     "is-dismissed": 5,
@@ -426,7 +455,6 @@
     "drawer-footer": 5,
     "is-over": 5,
     "emoji-tile-round": 5,
-    "optional": 5,
     "g-stripes": 5,
     "g-brand": 5,
     "g-brand-soft": 5,
@@ -438,35 +466,41 @@
     "g-sheen": 5,
     "g-ring": 5,
     "g-ring-spin": 5,
+    "fixed": 5,
     "icon-tile-warn": 5,
     "icon-spin": 5,
     "indicator-good": 5,
     "indicator-brand": 5,
     "is-animating": 5,
-    "reveal-fade": 5,
     "reveal-pop": 5,
-    "shake": 5,
     "ripple": 5,
-    "expand": 5,
     "is-up": 5,
     "is-down": 5,
     "number-sm": 5,
     "phone-status": 5,
     "is-valid": 5,
+    "page-break": 5,
     "skeleton-circle": 5,
     "toast-timer": 5,
     "is-dragging": 5,
+    "gap-2": 5,
+    "w-full": 5,
+    "cq-md": 5,
+    "mt-4": 5,
+    "prose": 5,
+    "display-cq": 5,
+    "writing-upright": 5,
     "status-line": 5,
     "mega-col": 5,
     "speed-dial": 5,
+    "md": 5,
     "parallax-back": 4,
     "parallax-mid": 4,
     "parallax-front": 4,
     "cube-spin": 4,
-    "alert-good": 4,
-    "avatar-xl": 4,
+    "badge-solid": 4,
     "btn-accent": 4,
-    "btn-outline": 4,
+    "ratio-16x9": 4,
     "carousel-dot": 4,
     "chart-area-g": 4,
     "chart-meter": 4,
@@ -485,15 +519,16 @@
     "datepicker-title": 4,
     "emoji-xl": 4,
     "emoji-hero": 4,
+    "form-actions-sticky": 4,
     "is-loaded": 4,
     "g-shimmer": 4,
     "list-virtual": 4,
-    "flash-good": 4,
+    "enter-blur": 4,
+    "enter-drop": 4,
+    "enter-pop": 4,
     "pulse": 4,
     "marquee": 4,
-    "text-good": 4,
-    "no-print": 4,
-    "keep-together": 4,
+    "print-header": 4,
     "qr-logo": 4,
     "range-ticks": 4,
     "stepper-vertical": 4,
@@ -501,14 +536,34 @@
     "video-square": 4,
     "video-portrait": 4,
     "video-wide": 4,
+    "mb-4": 4,
+    "border": 4,
+    "block": 4,
+    "text-brand": 4,
+    "dir-ltr": 4,
+    "dir-rtl": 4,
+    "bidi-isolate": 4,
+    "bidi-plaintext": 4,
+    "empty": 4,
+    "empty-title": 4,
+    "r-xs": 4,
+    "r-lg": 4,
+    "r-full": 4,
+    "bg-soft": 4,
+    "ratio-1x1": 4,
+    "cq-sm": 4,
+    "cq-lg": 4,
+    "absolute": 4,
+    "inset-be-0": 4,
+    "inset-ie-0": 4,
+    "mie-2": 4,
+    "mis-auto": 4,
+    "mb-1": 4,
+    "mb-8": 4,
     "banner": 4,
     "theme-dock": 4,
-    "display": 4,
     "stat-delta-up": 4,
-    "text-inherit": 4,
-    "mt-1": 4,
     "s4": 4,
-    "code-ltr": 4,
     "mega": 4,
     "mega-heading": 4,
     "flip-hover": 3,
@@ -552,6 +607,7 @@
     "is-range-start": 3,
     "is-selected": 3,
     "editor-tool-wide": 3,
+    "hidden": 3,
     "g-surface": 3,
     "g-sunken": 3,
     "g-dark": 3,
@@ -563,43 +619,66 @@
     "g-conic": 3,
     "g-bar-fill": 3,
     "grid-fixed-3": 3,
-    "fixed": 3,
     "indicator-bad": 3,
-    "transition": 3,
+    "reveal-late": 3,
     "is-revealed": 3,
     "flash": 3,
     "tick": 3,
     "print-keep": 3,
+    "no-print-url": 3,
     "spinner-lg": 3,
     "qr-logo-mark": 3,
     "qr-caption": 3,
     "rating-sm": 3,
-    "split-rail-start": 3,
     "toast-warn": 3,
     "toast-bad": 3,
     "toast-info": 3,
     "toast-undo": 3,
     "toast-region-stacked": 3,
     "is-leaving": 3,
+    "p-6": 3,
+    "text-lg": 3,
+    "inline-flex": 3,
+    "items-center": 3,
+    "border-0": 3,
+    "px-3": 3,
+    "text-start": 3,
+    "bis": 3,
+    "bie": 3,
+    "r-start": 3,
+    "r-end": 3,
+    "flex": 3,
+    "h-full": 3,
+    "min-is-0": 3,
+    "cq-size": 3,
+    "cq-panel": 3,
+    "cq-pane": 3,
+    "cq-row": 3,
+    "metarow": 3,
+    "stat-cq": 3,
+    "contain": 3,
+    "contain-paint": 3,
+    "virtual": 3,
+    "safe-top": 3,
+    "safe-bottom": 3,
+    "sticky": 3,
+    "inset-is-0": 3,
+    "p-4": 3,
+    "pad-cq": 3,
+    "writing-sideways": 3,
+    "th-vertical": 3,
     "banner-close": 3,
-    "mt-4": 3,
-    "writing-upright": 3,
-    "display-cq": 3,
     "mega-grid": 3,
     "mega-feature": 3,
     "mega-footer": 3,
     "jumbotron": 3,
     "jumbotron-center": 3,
     "is-visible": 3,
-    "defer": 3,
-    "relative": 3,
-    "prose": 3,
+    "sm": 3,
     "scene-far": 2,
     "turn-in": 2,
     "turn-out": 2,
-    "badge-solid": 2,
     "btn-link": 2,
-    "ratio-16x9": 2,
     "card-brand": 2,
     "card-flush": 2,
     "card-raised": 2,
@@ -612,7 +691,6 @@
     "is-blocked": 2,
     "is-outside": 2,
     "is-today": 2,
-    "form-actions-sticky": 2,
     "g-mesh-warm": 2,
     "g-hairline": 2,
     "is-lifted": 2,
@@ -634,10 +712,7 @@
     "delay-3": 2,
     "no-motion": 2,
     "enter": 2,
-    "enter-blur": 2,
-    "enter-drop": 2,
     "enter-end": 2,
-    "enter-pop": 2,
     "shrink-on-scroll": 2,
     "nudge": 2,
     "ripple-ink": 2,
@@ -645,37 +720,170 @@
     "vt-header": 2,
     "vt-main": 2,
     "vt-tabbar": 2,
-    "page-break": 2,
     "page-break-after": 2,
-    "print-header": 2,
     "print-footer": 2,
-    "no-print-url": 2,
     "table-compact": 2,
     "toast-region-center": 2,
     "toast-region-start": 2,
     "toast-region-top": 2,
-    "mb-1": 2,
+    "h2": 2,
+    "bg-brand": 2,
+    "bg-none": 2,
+    "text-faint": 2,
+    "text-warn": 2,
+    "border-t": 2,
+    "border-b": 2,
+    "border-brand": 2,
+    "shadow-0": 2,
+    "shadow-1": 2,
+    "shadow-2": 2,
+    "shadow-3": 2,
+    "shadow-4": 2,
+    "inline-block": 2,
+    "contents": 2,
+    "flex-row": 2,
+    "flex-col": 2,
+    "wrap": 2,
+    "nowrap": 2,
+    "shrink-0": 2,
+    "items-start": 2,
+    "items-end": 2,
+    "items-baseline": 2,
+    "items-stretch": 2,
+    "justify-start": 2,
+    "justify-center": 2,
+    "justify-end": 2,
+    "justify-between": 2,
+    "place-center": 2,
+    "w-auto": 2,
+    "min-h-screen": 2,
+    "max-w-sm": 2,
+    "max-w-md": 2,
+    "max-w-lg": 2,
+    "max-w-prose": 2,
+    "ratio-4x3": 2,
+    "overflow-auto": 2,
+    "overflow-clip": 2,
+    "overflow-hidden": 2,
+    "touch-only": 2,
+    "mouse-only": 2,
+    "cursor-pointer": 2,
+    "no-select": 2,
+    "pointer-none": 2,
+    "opacity-60": 2,
+    "cq-normal": 2,
+    "row-meta": 2,
+    "row-meta-wide": 2,
+    "virtual-sm": 2,
+    "virtual-lg": 2,
+    "inset-0": 2,
+    "inset-bs-0": 2,
+    "z-1": 2,
+    "p-0": 2,
+    "p-1": 2,
+    "p-8": 2,
+    "px-0": 2,
+    "px-1": 2,
+    "px-2": 2,
+    "px-4": 2,
+    "px-6": 2,
+    "px-8": 2,
+    "py-0": 2,
+    "py-1": 2,
+    "py-2": 2,
+    "py-3": 2,
+    "py-4": 2,
+    "py-6": 2,
+    "py-8": 2,
+    "pis-0": 2,
+    "pis-1": 2,
+    "pis-2": 2,
+    "pis-3": 2,
+    "pis-4": 2,
+    "pis-6": 2,
+    "pis-8": 2,
+    "pie-0": 2,
+    "pie-1": 2,
+    "pie-2": 2,
+    "pie-3": 2,
+    "pie-4": 2,
+    "pie-6": 2,
+    "pie-8": 2,
+    "pbs-0": 2,
+    "pbs-1": 2,
+    "pbs-2": 2,
+    "pbs-3": 2,
+    "pbs-4": 2,
+    "pbs-6": 2,
+    "pbs-8": 2,
+    "pbe-0": 2,
+    "pbe-1": 2,
+    "pbe-2": 2,
+    "pbe-3": 2,
+    "pbe-4": 2,
+    "pbe-6": 2,
+    "pbe-8": 2,
+    "m-0": 2,
+    "mx-auto": 2,
+    "mt-0": 2,
+    "mt-3": 2,
+    "mt-6": 2,
+    "mt-8": 2,
+    "mb-0": 2,
+    "mb-6": 2,
+    "mis-0": 2,
+    "mis-1": 2,
+    "mis-2": 2,
+    "mis-3": 2,
+    "mis-4": 2,
+    "mis-6": 2,
+    "mis-8": 2,
+    "mie-0": 2,
+    "mie-1": 2,
+    "mie-3": 2,
+    "mie-4": 2,
+    "mie-6": 2,
+    "mie-8": 2,
+    "mie-auto": 2,
+    "gap-0": 2,
+    "gap-1": 2,
+    "gap-3": 2,
+    "gap-4": 2,
+    "gap-6": 2,
+    "gap-8": 2,
+    "safe-x": 2,
+    "text-2xs": 2,
+    "text-xs": 2,
+    "text-base": 2,
+    "text-md": 2,
+    "text-xl": 2,
+    "text-2xl": 2,
+    "fw-normal": 2,
+    "fw-medium": 2,
+    "fw-bold": 2,
+    "text-center": 2,
+    "text-end": 2,
+    "uppercase": 2,
+    "capitalize": 2,
+    "no-underline": 2,
+    "clamp-2": 2,
+    "clamp-3": 2,
+    "writing-vertical-lr": 2,
+    "writing-normal": 2,
     "stat-delta-down": 2,
-    "empty": 2,
     "empty-art": 2,
-    "empty-title": 2,
     "s5": 2,
     "jumbotron-actions": 2,
-    "mt-2": 2,
     "speed-dial-actions": 2,
     "tabbar": 2,
     "sortable-ghost": 2,
     "sortable-drag": 2,
-    "w-full": 2,
-    "md": 2,
-    "gap-2": 2,
     "flat": 1,
     "backface-hidden": 1,
     "z-lift-1": 1,
     "z-lift-2": 1,
     "z-lift-3": 1,
     "z-sink": 1,
-    "square": 1,
     "chart-dot": 1,
     "chart-dot-active": 1,
     "chart-lg": 1,
@@ -691,7 +899,6 @@
     "is-new": 1,
     "datepicker-time": 1,
     "is-preview": 1,
-    "hidden": 1,
     "masonry-2": 1,
     "lazy-blur": 1,
     "lazy-block": 1,
@@ -706,42 +913,14 @@
     "will-move": 1,
     "stagger-fast": 1,
     "stagger-slow": 1,
-    "reveal-late": 1,
     "fade-swap": 1,
     "rating-lg": 1,
     "toast-loading": 1,
     "video-cover": 1,
-    "h2": 1,
-    "sticky": 1,
-    "cq-size": 1,
-    "cq-panel": 1,
-    "cq-pane": 1,
-    "cq-row": 1,
-    "pad-cq": 1,
-    "gap-cq": 1,
-    "stat-cq": 1,
-    "metarow": 1,
-    "cq-sm": 1,
-    "cq-md": 1,
-    "cq-lg": 1,
-    "dir-ltr": 1,
-    "dir-rtl": 1,
-    "bidi-isolate": 1,
-    "bidi-plaintext": 1,
-    "bis": 1,
-    "bie": 1,
-    "inset-is-0": 1,
-    "r-start": 1,
-    "r-end": 1,
-    "h-full": 1,
-    "writing-sideways": 1,
-    "th-vertical": 1,
+    "h5": 1,
     "banner-bottom": 1,
     "jumbotron-media": 1,
-    "virtual": 1,
-    "contain": 1,
-    "contain-paint": 1,
-    "min-is-0": 1
+    "lg": 1
   },
   "where": {
     "breadcrumb": [
@@ -811,6 +990,30 @@
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
       "public_html/docs/components/video.php",
+      "public_html/docs/explain/why-cascade-layers.php",
+      "public_html/docs/explain/why-no-build-step.php",
+      "public_html/docs/explain/why-one-hue.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/layers.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/printing.php",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/guides/theming.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/cli.php",
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/position.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/tokens.php",
+      "public_html/docs/reference/typography.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php"
     ],
     "cluster": [
@@ -884,6 +1087,30 @@
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
       "public_html/docs/components/video.php",
+      "public_html/docs/explain/why-cascade-layers.php",
+      "public_html/docs/explain/why-no-build-step.php",
+      "public_html/docs/explain/why-one-hue.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/layers.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/printing.php",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/guides/theming.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/cli.php",
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/position.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/tokens.php",
+      "public_html/docs/reference/typography.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php",
       "public_html/llms.txt"
     ],
@@ -955,6 +1182,30 @@
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
       "public_html/docs/components/video.php",
+      "public_html/docs/explain/why-cascade-layers.php",
+      "public_html/docs/explain/why-no-build-step.php",
+      "public_html/docs/explain/why-one-hue.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/layers.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/printing.php",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/guides/theming.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/cli.php",
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/position.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/tokens.php",
+      "public_html/docs/reference/typography.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php"
     ],
     "stack-3": [
@@ -1025,8 +1276,32 @@
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
       "public_html/docs/components/video.php",
+      "public_html/docs/explain/why-cascade-layers.php",
+      "public_html/docs/explain/why-no-build-step.php",
+      "public_html/docs/explain/why-one-hue.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/layers.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/printing.php",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/guides/theming.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/cli.php",
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/position.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/tokens.php",
+      "public_html/docs/reference/typography.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1098,8 +1373,32 @@
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
       "public_html/docs/components/video.php",
+      "public_html/docs/explain/why-cascade-layers.php",
+      "public_html/docs/explain/why-no-build-step.php",
+      "public_html/docs/explain/why-one-hue.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/layers.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/printing.php",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/guides/theming.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/cli.php",
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/position.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/tokens.php",
+      "public_html/docs/reference/typography.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1173,7 +1472,15 @@
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
       "public_html/docs/components/video.php",
+      "public_html/docs/explain/why-cascade-layers.php",
+      "public_html/docs/explain/why-no-build-step.php",
+      "public_html/docs/explain/why-one-hue.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/docs/search.php",
       "public_html/index.php",
       "public_html/php-helper.php",
@@ -1247,7 +1554,18 @@
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
       "public_html/docs/components/video.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/printing.php",
+      "public_html/docs/guides/rtl.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/cli.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1260,6 +1578,7 @@
       "FINDINGS.md",
       "README.md",
       "public_html/docs/components/3d.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
@@ -1282,7 +1601,13 @@
       "public_html/docs/components/skeleton.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/theming.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/tokens.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1300,6 +1625,8 @@
       "public_html/docs/components/skeleton.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/timeline.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/cli.php",
       "public_html/index.php"
     ],
     "flip-back": [
@@ -1339,6 +1666,7 @@
       "FINDINGS.md",
       "README.md",
       "public_html/docs/components/3d.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php"
     ],
     "face-front": [
@@ -1392,8 +1720,20 @@
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/tooltip.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/printing.php",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/guides/theming.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php",
       "public_html/php-helper.php",
       "src/js/deck.js"
@@ -1414,7 +1754,15 @@
       "public_html/docs/components/print.php",
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/printing.php",
+      "public_html/docs/guides/theming.php",
+      "public_html/docs/reference/classes.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
@@ -1451,6 +1799,7 @@
     "space": [
       "README.md",
       "public_html/docs/components/3d.php",
+      "public_html/docs/reference/tokens.php",
       "public_html/index.php"
     ],
     "flat": [
@@ -1466,6 +1815,7 @@
     ],
     "is-flipped": [
       "public_html/docs/components/3d.php",
+      "public_html/docs/reference/javascript.php",
       "src/js/deck.js"
     ],
     "is-tilting": [
@@ -1595,6 +1945,15 @@
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
       "public_html/docs/components/video.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/theming.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/position.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/typography.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/llms.txt"
     ],
     "accordion": [
@@ -1634,6 +1993,12 @@
       "public_html/docs/components/tabs.php",
       "public_html/docs/components/textarea.php",
       "public_html/docs/components/tooltip.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/cli.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1645,26 +2010,50 @@
       "public_html/docs/components/button.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/toast.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/theming.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/tokens.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
     "alert-warn": [
       "public_html/docs/components/alert.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/theming.php",
+      "public_html/docs/reference/tokens.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php"
     ],
     "alert-title": [
       "public_html/docs/components/alert.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/theming.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/tokens.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php"
     ],
     "alert-body": [
       "public_html/docs/components/alert.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/theming.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/tokens.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php"
     ],
     "alert-bad": [
       "public_html/docs/components/alert.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "icon": [
@@ -1704,8 +2093,17 @@
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
       "public_html/docs/components/video.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/theming.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/tokens.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php",
       "public_html/llms.txt",
       "public_html/php-helper.php",
@@ -1714,11 +2112,14 @@
     ],
     "alert-info": [
       "public_html/docs/components/alert.php",
+      "public_html/docs/guides/dark-mode.php",
       "public_html/docs/index.php",
       "public_html/index.php"
     ],
     "alert-good": [
       "public_html/docs/components/alert.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/tokens.php",
       "public_html/index.php"
     ],
     "avatar": [
@@ -1728,6 +2129,7 @@
       "public_html/docs/components/indicator.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "avatar-xs": [
@@ -1743,7 +2145,8 @@
       "public_html/docs/components/stack.php"
     ],
     "avatar-xl": [
-      "public_html/docs/components/avatar.php"
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/start/first-page.php"
     ],
     "table-wrap": [
       "FINDINGS.md",
@@ -1764,8 +2167,23 @@
       "public_html/docs/components/table.php",
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/layers.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/rtl.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/cli.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/tokens.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php"
     ],
     "table": [
@@ -1788,8 +2206,24 @@
       "public_html/docs/components/table.php",
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/layers.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/printing.php",
+      "public_html/docs/guides/rtl.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/cli.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/tokens.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php"
     ],
     "table-stack": [
@@ -1809,8 +2243,23 @@
       "public_html/docs/components/table.php",
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/layers.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/rtl.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/cli.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/tokens.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php"
     ],
     "sr-only": [
@@ -1835,7 +2284,22 @@
       "public_html/docs/components/switch.php",
       "public_html/docs/components/toast.php",
       "public_html/docs/components/tooltip.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/layers.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/cli.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/tokens.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php"
     ],
     "avatar-square": [
@@ -1863,7 +2327,9 @@
       "public_html/index.php"
     ],
     "square": [
-      "public_html/docs/components/avatar.php"
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/position.php"
     ],
     "badge": [
       "README.md",
@@ -1878,7 +2344,16 @@
       "public_html/docs/components/stack.php",
       "public_html/docs/components/table.php",
       "public_html/docs/components/timeline.php",
+      "public_html/docs/guides/layers.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/theming.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/position.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1889,6 +2364,10 @@
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/gradients.php",
       "public_html/docs/components/timeline.php",
+      "public_html/docs/guides/layers.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php"
     ],
     "text-sm": [
@@ -1898,7 +2377,18 @@
       "public_html/docs/components/card.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/scroller.php",
+      "public_html/docs/explain/why-cascade-layers.php",
+      "public_html/docs/explain/why-no-build-step.php",
+      "public_html/docs/explain/why-one-hue.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/printing.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/typography.php",
       "public_html/index.php",
       "public_html/php-helper.php",
       "src/js/deck-extras.js"
@@ -1910,26 +2400,34 @@
     "badge-warn": [
       "public_html/docs/components/badge.php",
       "public_html/docs/components/gradients.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php"
     ],
     "badge-bad": [
       "public_html/docs/components/badge.php",
       "public_html/docs/components/gradients.php",
+      "public_html/docs/reference/classes.php",
       "public_html/index.php"
     ],
     "badge-brand": [
       "public_html/docs/components/badge.php",
+      "public_html/docs/guides/theming.php",
       "public_html/docs/index.php",
       "public_html/index.php"
     ],
     "badge-solid": [
-      "public_html/docs/components/badge.php"
+      "public_html/docs/components/badge.php",
+      "public_html/docs/reference/position.php"
     ],
     "bar": [
       "FINDINGS.md",
       "README.md",
       "public_html/docs/components/bar.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/printing.php",
+      "public_html/docs/reference/spacing.php",
       "public_html/index.php"
     ],
     "btn-sm": [
@@ -1943,7 +2441,12 @@
       "public_html/docs/components/nav.php",
       "public_html/docs/components/popover.php",
       "public_html/docs/components/sheet.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/guides/theming.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
@@ -1959,6 +2462,10 @@
       "public_html/docs/components/nav.php",
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/sidebar.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1976,12 +2483,20 @@
       "public_html/docs/components/nav.php",
       "public_html/docs/components/segmented.php",
       "public_html/docs/components/sheet.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/guides/theming.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
     "btn-icon": [
       "README.md",
       "bin/deck.mjs",
+      "public_html/docs/_layout.php",
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/chat.php",
@@ -1991,6 +2506,10 @@
       "public_html/docs/components/nav.php",
       "public_html/docs/components/sheet.php",
       "public_html/docs/components/tooltip.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -2006,6 +2525,8 @@
       "public_html/docs/components/grid.php",
       "public_html/docs/components/scroller.php",
       "public_html/docs/components/split.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
       "public_html/docs/index.php",
       "public_html/index.php",
       "public_html/php-helper.php"
@@ -2018,7 +2539,12 @@
       "public_html/docs/components/scroller.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/theming.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/spacing.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -2026,6 +2552,7 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/list.php",
       "public_html/docs/components/split.php",
+      "public_html/docs/reference/typography.php",
       "public_html/index.php"
     ],
     "btn-lg": [
@@ -2085,6 +2612,9 @@
       "public_html/docs/components/field.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/icon.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -2092,7 +2622,9 @@
       "public_html/docs/components/button.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
+      "public_html/docs/reference/classes.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "input-group": [
@@ -2108,6 +2640,7 @@
     "actions-cq": [
       "README.md",
       "public_html/docs/components/button.php",
+      "public_html/docs/reference/display.php",
       "public_html/index.php"
     ],
     "navbar": [
@@ -2115,6 +2648,8 @@
       "public_html/docs/_layout.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/nav.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -2125,15 +2660,19 @@
     "btn-danger": [
       "public_html/docs/components/button.php",
       "public_html/docs/components/modal.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "btn-soft": [
       "bin/deck.mjs",
       "public_html/docs/components/button.php",
+      "public_html/docs/guides/theming.php",
       "public_html/index.php"
     ],
     "btn-outline": [
       "public_html/docs/components/button.php",
+      "public_html/docs/guides/theming.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "btn-link": [
@@ -2152,7 +2691,10 @@
       "public_html/docs/components/grid.php",
       "public_html/docs/components/motion.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/guides/layout.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "public_html/llms.txt",
       "public_html/php-helper.php"
@@ -2164,6 +2706,7 @@
       "public_html/docs/components/gradients.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "card-media": [
@@ -2171,7 +2714,8 @@
       "public_html/index.php"
     ],
     "ratio-16x9": [
-      "public_html/docs/components/card.php"
+      "public_html/docs/components/card.php",
+      "public_html/docs/reference/display.php"
     ],
     "card-link": [
       "public_html/docs/components/card.php",
@@ -2185,6 +2729,7 @@
     ],
     "cq": [
       "README.md",
+      "public_html/docs/_layout.php",
       "public_html/docs/components/card.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/grid.php",
@@ -2225,6 +2770,7 @@
       "FINDINGS.md",
       "README.md",
       "public_html/docs/components/carousel.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php",
       "src/js/deck-extras.js"
     ],
@@ -2249,7 +2795,9 @@
       "README.md",
       "public_html/docs/components/carousel.php",
       "public_html/docs/components/chat.php",
-      "public_html/docs/components/list.php"
+      "public_html/docs/components/list.php",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/reference/display.php"
     ],
     "carousel-next": [
       "README.md",
@@ -2287,6 +2835,7 @@
     "chart": [
       "FINDINGS.md",
       "public_html/docs/components/charts.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php"
     ],
     "chart-head": [
@@ -2519,6 +3068,7 @@
       "public_html/docs/components/float.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "src/js/deck-extras.js"
     ],
@@ -2531,6 +3081,9 @@
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/print.php",
       "public_html/docs/components/sheet.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "public_html/php-helper.php",
       "src/js/deck.js"
@@ -2540,24 +3093,34 @@
       "public_html/docs/components/check.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
-      "public_html/docs/components/segmented.php"
+      "public_html/docs/components/segmented.php",
+      "public_html/docs/start/first-page.php"
     ],
     "check-text": [
       "public_html/docs/components/check.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "check-note": [
       "public_html/docs/components/check.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "check-card": [
       "public_html/docs/components/check.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "switch": [
       "FINDINGS.md",
       "public_html/docs/components/check.php",
       "public_html/docs/components/switch.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "cluster-end": [
@@ -2579,6 +3142,7 @@
       "FINDINGS.md",
       "README.md",
       "public_html/docs/components/combobox.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
@@ -2599,7 +3163,12 @@
       "public_html/docs/components/range.php",
       "public_html/docs/components/select.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/theming.php",
+      "public_html/docs/reference/classes.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
@@ -2619,7 +3188,12 @@
       "public_html/docs/components/segmented.php",
       "public_html/docs/components/select.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/theming.php",
+      "public_html/docs/reference/classes.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "public_html/php-helper.php",
       "src/js/deck.js"
@@ -2644,6 +3218,7 @@
       "public_html/docs/components/combobox.php",
       "public_html/docs/components/icon.php",
       "public_html/docs/components/motion.php",
+      "public_html/docs/reference/javascript.php",
       "src/js/deck-extras.js",
       "src/js/deck.js"
     ],
@@ -2695,7 +3270,13 @@
       "public_html/docs/components/float.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/print.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "src/js/deck-extras.js",
       "src/js/deck.js"
@@ -2738,6 +3319,7 @@
       "public_html/docs/components/field.php",
       "public_html/docs/components/float.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/guides/forms.php",
       "src/js/deck.js"
     ],
     "select": [
@@ -2746,7 +3328,9 @@
       "public_html/docs/components/float.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/select.php",
+      "public_html/docs/reference/classes.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "src/js/deck-extras.js",
       "src/js/deck.js"
@@ -2764,6 +3348,7 @@
       "public_html/docs/components/list.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/switch.php",
+      "public_html/docs/reference/cli.php",
       "public_html/index.php",
       "public_html/php-helper.php",
       "src/js/deck-adapters.js",
@@ -2777,6 +3362,10 @@
       "public_html/docs/components/container.php",
       "public_html/docs/components/section.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -2787,6 +3376,12 @@
       "public_html/docs/_layout.php",
       "public_html/docs/components/container.php",
       "public_html/docs/components/section.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -2808,6 +3403,7 @@
       "public_html/docs/_layout.php",
       "public_html/docs/components/container.php",
       "public_html/docs/components/split.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "container-lg": [
@@ -2821,6 +3417,8 @@
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/start/first-page.php",
       "public_html/php-helper.php"
     ],
     "copy": [
@@ -2828,6 +3426,7 @@
       "README.md",
       "public_html/docs/_layout.php",
       "public_html/docs/components/copy.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php",
       "public_html/php-helper.php",
       "src/js/deck-extras.js"
@@ -2837,6 +3436,7 @@
       "README.md",
       "public_html/docs/_layout.php",
       "public_html/docs/components/copy.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -2887,6 +3487,7 @@
       "FINDINGS.md",
       "README.md",
       "public_html/docs/components/datagrid.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
@@ -3017,6 +3618,7 @@
       "public_html/docs/components/datepicker.php",
       "public_html/docs/components/icon.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
@@ -3212,7 +3814,8 @@
       "src/js/deck-extras.js"
     ],
     "hidden": [
-      "public_html/docs/components/editor.php"
+      "public_html/docs/components/editor.php",
+      "public_html/docs/reference/display.php"
     ],
     "emoji": [
       "FINDINGS.md",
@@ -3251,21 +3854,52 @@
       "public_html/docs/components/phone.php",
       "public_html/docs/components/progress.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "stack-4": [
       "bin/deck.mjs",
       "public_html/docs/components/field.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/explain/why-cascade-layers.php",
+      "public_html/docs/explain/why-no-build-step.php",
+      "public_html/docs/explain/why-one-hue.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/guides/layers.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/guides/printing.php",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/guides/theming.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/cli.php",
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/position.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/tokens.php",
+      "public_html/docs/reference/typography.php",
+      "public_html/docs/start/first-page.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php"
     ],
     "required": [
       "public_html/docs/components/field.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/guides/forms.php",
       "public_html/index.php"
     ],
     "optional": [
       "public_html/docs/components/field.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "error": [
@@ -3274,6 +3908,7 @@
       "public_html/docs/components/field.php",
       "public_html/docs/components/float.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/guides/forms.php",
       "public_html/index.php",
       "src/js/deck-extras.js"
     ],
@@ -3282,6 +3917,8 @@
       "public_html/docs/_layout.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/file.php",
+      "public_html/docs/reference/classes.php",
+      "public_html/docs/reference/tokens.php",
       "public_html/docs/search.php",
       "public_html/index.php"
     ],
@@ -3293,12 +3930,15 @@
     "form-actions": [
       "public_html/docs/components/field.php",
       "public_html/docs/components/print.php",
+      "public_html/docs/reference/classes.php",
       "public_html/docs/search.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "form-actions-sticky": [
       "FINDINGS.md",
-      "public_html/docs/components/field.php"
+      "public_html/docs/components/field.php",
+      "public_html/docs/start/first-page.php"
     ],
     "float": [
       "FINDINGS.md",
@@ -3574,7 +4214,8 @@
       "README.md",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/list.php",
-      "public_html/docs/components/split.php"
+      "public_html/docs/components/split.php",
+      "public_html/docs/reference/typography.php"
     ],
     "grid-2": [
       "FINDINGS.md",
@@ -3588,6 +4229,7 @@
     ],
     "fixed": [
       "public_html/docs/components/grid.php",
+      "public_html/docs/reference/position.php",
       "src/js/deck-adapters.js"
     ],
     "icon-xl": [
@@ -3663,6 +4305,8 @@
       "public_html/docs/_layout.php",
       "public_html/docs/components/icon.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/classes.php",
       "public_html/docs/search.php",
       "public_html/index.php",
       "src/js/deck.js"
@@ -3717,8 +4361,11 @@
     ],
     "number": [
       "README.md",
+      "public_html/docs/_layout.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/number.php",
+      "public_html/docs/guides/forms.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php",
       "src/js/deck-extras.js"
     ],
@@ -3822,38 +4469,46 @@
     ],
     "modal": [
       "public_html/docs/components/modal.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "stack-0": [
       "FINDINGS.md",
       "public_html/docs/components/modal.php",
       "public_html/docs/components/section.php",
-      "public_html/docs/components/stack.php"
+      "public_html/docs/components/stack.php",
+      "public_html/docs/start/first-page.php"
     ],
     "modal-header": [
       "public_html/docs/components/modal.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "modal-title": [
       "public_html/docs/components/modal.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "modal-body": [
       "public_html/docs/components/modal.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "modal-footer": [
       "public_html/docs/components/modal.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "stagger": [
       "README.md",
       "public_html/docs/components/motion.php",
+      "public_html/docs/guides/motion.php",
       "public_html/index.php"
     ],
     "enter-rise": [
       "README.md",
       "public_html/docs/components/motion.php",
+      "public_html/docs/guides/motion.php",
       "public_html/index.php"
     ],
     "press": [
@@ -3869,6 +4524,7 @@
     "lift": [
       "README.md",
       "public_html/docs/components/motion.php",
+      "public_html/docs/guides/motion.php",
       "public_html/index.php"
     ],
     "enter-start": [
@@ -3877,7 +4533,8 @@
     ],
     "transition": [
       "README.md",
-      "public_html/docs/components/motion.php"
+      "public_html/docs/components/motion.php",
+      "public_html/docs/reference/javascript.php"
     ],
     "transition-colors": [
       "README.md",
@@ -3965,11 +4622,13 @@
     ],
     "enter-blur": [
       "README.md",
-      "public_html/docs/components/motion.php"
+      "public_html/docs/components/motion.php",
+      "public_html/docs/guides/motion.php"
     ],
     "enter-drop": [
       "README.md",
-      "public_html/docs/components/motion.php"
+      "public_html/docs/components/motion.php",
+      "public_html/docs/guides/motion.php"
     ],
     "enter-end": [
       "README.md",
@@ -3977,7 +4636,8 @@
     ],
     "enter-pop": [
       "README.md",
-      "public_html/docs/components/motion.php"
+      "public_html/docs/components/motion.php",
+      "public_html/docs/guides/motion.php"
     ],
     "stagger-fast": [
       "public_html/docs/components/motion.php"
@@ -3988,17 +4648,20 @@
     "reveal": [
       "README.md",
       "public_html/docs/components/motion.php",
+      "public_html/docs/guides/motion.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
     "reveal-fade": [
       "README.md",
       "public_html/docs/components/motion.php",
+      "public_html/docs/guides/motion.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
     "reveal-late": [
-      "public_html/docs/components/motion.php"
+      "public_html/docs/components/motion.php",
+      "public_html/docs/guides/motion.php"
     ],
     "reveal-pop": [
       "README.md",
@@ -4022,6 +4685,8 @@
     "shake": [
       "README.md",
       "public_html/docs/components/motion.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
@@ -4038,6 +4703,8 @@
     "flash-good": [
       "README.md",
       "public_html/docs/components/motion.php",
+      "public_html/docs/guides/motion.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
@@ -4068,6 +4735,7 @@
     ],
     "expand": [
       "public_html/docs/components/motion.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
@@ -4117,6 +4785,8 @@
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
       "public_html/docs/components/nav.php",
+      "public_html/docs/reference/php.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -4169,6 +4839,9 @@
     ],
     "text-good": [
       "public_html/docs/components/phone.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/color.php",
       "public_html/index.php"
     ],
     "is-valid": [
@@ -4202,20 +4875,24 @@
     ],
     "no-print": [
       "README.md",
-      "public_html/docs/components/print.php"
+      "public_html/docs/components/print.php",
+      "public_html/docs/guides/printing.php"
     ],
     "print-only": [
       "README.md",
       "public_html/docs/components/print.php",
+      "public_html/docs/guides/printing.php",
       "public_html/index.php"
     ],
     "keep-together": [
       "README.md",
-      "public_html/docs/components/print.php"
+      "public_html/docs/components/print.php",
+      "public_html/docs/guides/printing.php"
     ],
     "page-break": [
       "README.md",
-      "public_html/docs/components/print.php"
+      "public_html/docs/components/print.php",
+      "public_html/docs/guides/printing.php"
     ],
     "page-break-after": [
       "README.md",
@@ -4223,7 +4900,8 @@
     ],
     "print-header": [
       "README.md",
-      "public_html/docs/components/print.php"
+      "public_html/docs/components/print.php",
+      "public_html/docs/guides/printing.php"
     ],
     "print-footer": [
       "README.md",
@@ -4236,7 +4914,8 @@
     ],
     "no-print-url": [
       "README.md",
-      "public_html/docs/components/print.php"
+      "public_html/docs/components/print.php",
+      "public_html/docs/guides/printing.php"
     ],
     "ring": [
       "FINDINGS.md",
@@ -4258,6 +4937,7 @@
     "qr": [
       "README.md",
       "public_html/docs/components/qr.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php"
     ],
     "qr-sm": [
@@ -4285,6 +4965,7 @@
       "README.md",
       "bin/deck.mjs",
       "public_html/docs/components/range.php",
+      "public_html/docs/guides/theming.php",
       "public_html/index.php",
       "src/js/deck-extras.js",
       "src/js/deck.js"
@@ -4329,6 +5010,7 @@
     "segmented": [
       "FINDINGS.md",
       "public_html/docs/components/segmented.php",
+      "public_html/docs/guides/dark-mode.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
@@ -4363,6 +5045,7 @@
       "README.md",
       "public_html/docs/_layout.php",
       "public_html/docs/components/sidebar.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "sidebar-link": [
@@ -4370,6 +5053,7 @@
       "README.md",
       "public_html/docs/_layout.php",
       "public_html/docs/components/sidebar.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "sidebar-group": [
@@ -4377,11 +5061,13 @@
       "README.md",
       "public_html/docs/_layout.php",
       "public_html/docs/components/sidebar.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "cq-shell": [
       "README.md",
       "public_html/docs/components/sidebar.php",
+      "public_html/docs/reference/display.php",
       "public_html/index.php"
     ],
     "skeleton": [
@@ -4403,16 +5089,22 @@
       "README.md",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php",
       "public_html/llms.txt"
     ],
     "split-rail-start": [
-      "public_html/docs/components/split.php"
+      "public_html/docs/components/split.php",
+      "public_html/docs/start/first-page.php"
     ],
     "center": [
       "FINDINGS.md",
       "README.md",
       "public_html/docs/components/stack.php",
+      "public_html/docs/guides/layout.php",
       "public_html/index.php"
     ],
     "stack-8": [
@@ -4420,6 +5112,8 @@
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
     ],
     "stepper": [
@@ -4492,6 +5186,8 @@
     "toast": [
       "bin/deck.mjs",
       "public_html/docs/components/toast.php",
+      "public_html/docs/reference/javascript.php",
+      "public_html/docs/start/install.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
@@ -4541,6 +5237,7 @@
     ],
     "toast-region": [
       "public_html/docs/components/toast.php",
+      "public_html/docs/reference/javascript.php",
       "public_html/index.php",
       "src/js/deck.js"
     ],
@@ -4626,14 +5323,847 @@
     "video-cover": [
       "public_html/docs/components/video.php"
     ],
+    "fw-semi": [
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/typography.php",
+      "public_html/index.php"
+    ],
+    "text-bad": [
+      "public_html/docs/guides/dark-mode.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/color.php"
+    ],
+    "mb-2": [
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/position.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/index.php"
+    ],
+    "mb-4": [
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/spacing.php"
+    ],
+    "bg-sunken": [
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/color.php"
+    ],
+    "p-3": [
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/spacing.php"
+    ],
+    "r-md": [
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/position.php"
+    ],
+    "bg-surface": [
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/color.php"
+    ],
+    "p-2": [
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/spacing.php"
+    ],
+    "r-sm": [
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/color.php"
+    ],
+    "border": [
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/color.php"
+    ],
+    "p-6": [
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/spacing.php"
+    ],
+    "text-lg": [
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/typography.php"
+    ],
+    "mt-2": [
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/index.php"
+    ],
+    "inline-flex": [
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/display.php"
+    ],
+    "items-center": [
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/display.php"
+    ],
+    "gap-2": [
+      "FINDINGS.md",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/spacing.php"
+    ],
+    "block": [
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/display.php"
+    ],
+    "w-full": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/display.php"
+    ],
+    "border-0": [
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/color.php"
+    ],
+    "px-3": [
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/spacing.php"
+    ],
+    "text-start": [
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/typography.php"
+    ],
+    "text-brand": [
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/color.php"
+    ],
+    "h2": [
+      "public_html/docs/guides/printing.php",
+      "public_html/index.php"
+    ],
+    "no-flip": [
+      "README.md",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/reference/display.php",
+      "public_html/index.php"
+    ],
+    "dir-ltr": [
+      "README.md",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/reference/typography.php"
+    ],
+    "dir-rtl": [
+      "README.md",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/reference/typography.php"
+    ],
+    "bidi-isolate": [
+      "README.md",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/reference/typography.php"
+    ],
+    "bidi-plaintext": [
+      "README.md",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/reference/typography.php"
+    ],
+    "code-ltr": [
+      "README.md",
+      "public_html/docs/guides/rtl.php",
+      "public_html/docs/reference/typography.php",
+      "public_html/index.php"
+    ],
     "link-quiet": [
       "public_html/docs/index.php",
+      "public_html/docs/reference/typography.php",
       "public_html/index.php"
+    ],
+    "empty": [
+      "public_html/docs/reference/classes.php",
+      "public_html/index.php"
+    ],
+    "empty-title": [
+      "public_html/docs/reference/classes.php",
+      "public_html/index.php"
+    ],
+    "r-xs": [
+      "public_html/docs/reference/color.php"
+    ],
+    "r-lg": [
+      "public_html/docs/reference/color.php"
+    ],
+    "r-full": [
+      "public_html/docs/reference/color.php"
+    ],
+    "cq-tone": [
+      "README.md",
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/display.php",
+      "public_html/index.php"
+    ],
+    "tone-surface": [
+      "README.md",
+      "public_html/docs/reference/color.php",
+      "public_html/index.php"
+    ],
+    "tone-text": [
+      "README.md",
+      "public_html/docs/reference/color.php",
+      "public_html/index.php"
+    ],
+    "bg-soft": [
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/position.php"
+    ],
+    "bg-brand": [
+      "public_html/docs/reference/color.php"
+    ],
+    "bg-none": [
+      "public_html/docs/reference/color.php"
+    ],
+    "text-faint": [
+      "public_html/docs/reference/color.php"
+    ],
+    "text-warn": [
+      "public_html/docs/reference/color.php"
+    ],
+    "text-inherit": [
+      "public_html/docs/reference/color.php",
+      "public_html/index.php"
+    ],
+    "border-t": [
+      "public_html/docs/reference/color.php"
+    ],
+    "border-b": [
+      "public_html/docs/reference/color.php"
+    ],
+    "border-brand": [
+      "public_html/docs/reference/color.php"
+    ],
+    "bis": [
+      "README.md",
+      "public_html/docs/reference/color.php"
+    ],
+    "bie": [
+      "README.md",
+      "public_html/docs/reference/color.php"
+    ],
+    "r-start": [
+      "README.md",
+      "public_html/docs/reference/color.php"
+    ],
+    "r-end": [
+      "README.md",
+      "public_html/docs/reference/color.php"
+    ],
+    "shadow-0": [
+      "public_html/docs/reference/color.php"
+    ],
+    "shadow-1": [
+      "public_html/docs/reference/color.php"
+    ],
+    "shadow-2": [
+      "public_html/docs/reference/color.php"
+    ],
+    "shadow-3": [
+      "public_html/docs/reference/color.php"
+    ],
+    "shadow-4": [
+      "public_html/docs/reference/color.php"
+    ],
+    "tone-icon": [
+      "public_html/docs/reference/color.php",
+      "public_html/index.php"
+    ],
+    "ratio-1x1": [
+      "public_html/docs/reference/display.php"
+    ],
+    "inline-block": [
+      "public_html/docs/reference/display.php"
+    ],
+    "flex": [
+      "public_html/docs/reference/display.php"
+    ],
+    "contents": [
+      "public_html/docs/reference/display.php"
+    ],
+    "flex-row": [
+      "public_html/docs/reference/display.php"
+    ],
+    "flex-col": [
+      "public_html/docs/reference/display.php"
+    ],
+    "wrap": [
+      "public_html/docs/reference/display.php"
+    ],
+    "nowrap": [
+      "public_html/docs/reference/display.php"
+    ],
+    "grow": [
+      "public_html/docs/reference/display.php",
+      "public_html/index.php"
+    ],
+    "shrink-0": [
+      "public_html/docs/reference/display.php"
+    ],
+    "items-start": [
+      "public_html/docs/reference/display.php"
+    ],
+    "items-end": [
+      "public_html/docs/reference/display.php"
+    ],
+    "items-baseline": [
+      "public_html/docs/reference/display.php"
+    ],
+    "items-stretch": [
+      "public_html/docs/reference/display.php"
+    ],
+    "justify-start": [
+      "public_html/docs/reference/display.php"
+    ],
+    "justify-center": [
+      "public_html/docs/reference/display.php"
+    ],
+    "justify-end": [
+      "public_html/docs/reference/display.php"
+    ],
+    "justify-between": [
+      "public_html/docs/reference/display.php"
+    ],
+    "place-center": [
+      "public_html/docs/reference/display.php"
+    ],
+    "w-auto": [
+      "public_html/docs/reference/display.php"
+    ],
+    "h-full": [
+      "README.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "min-h-screen": [
+      "public_html/docs/reference/display.php"
+    ],
+    "min-is-0": [
+      "FINDINGS.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "max-w-sm": [
+      "public_html/docs/reference/display.php"
+    ],
+    "max-w-md": [
+      "public_html/docs/reference/display.php"
+    ],
+    "max-w-lg": [
+      "public_html/docs/reference/display.php"
+    ],
+    "max-w-prose": [
+      "public_html/docs/reference/display.php"
+    ],
+    "ratio-4x3": [
+      "public_html/docs/reference/display.php"
+    ],
+    "overflow-auto": [
+      "public_html/docs/reference/display.php"
+    ],
+    "overflow-clip": [
+      "public_html/docs/reference/display.php"
+    ],
+    "overflow-hidden": [
+      "public_html/docs/reference/display.php"
     ],
     "skip-link": [
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/start/first-page.php",
       "public_html/index.php"
+    ],
+    "touch-only": [
+      "public_html/docs/reference/display.php"
+    ],
+    "mouse-only": [
+      "public_html/docs/reference/display.php"
+    ],
+    "cursor-pointer": [
+      "public_html/docs/reference/display.php"
+    ],
+    "no-select": [
+      "public_html/docs/reference/display.php"
+    ],
+    "pointer-none": [
+      "public_html/docs/reference/display.php"
+    ],
+    "opacity-60": [
+      "public_html/docs/reference/display.php"
+    ],
+    "cq-size": [
+      "README.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "cq-normal": [
+      "public_html/docs/reference/display.php"
+    ],
+    "cq-panel": [
+      "README.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "cq-pane": [
+      "README.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "cq-row": [
+      "README.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "cq-sm": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "cq-md": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/reference/display.php"
+    ],
+    "cq-lg": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "metarow": [
+      "README.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "row-meta": [
+      "public_html/docs/reference/display.php"
+    ],
+    "row-meta-wide": [
+      "public_html/docs/reference/display.php"
+    ],
+    "stat-cq": [
+      "README.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "contain": [
+      "README.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "contain-paint": [
+      "README.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "defer": [
+      "README.md",
+      "php/Deck.php",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/php.php"
+    ],
+    "virtual": [
+      "README.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "virtual-sm": [
+      "public_html/docs/reference/display.php"
+    ],
+    "virtual-lg": [
+      "public_html/docs/reference/display.php"
+    ],
+    "display": [
+      "bin/deck.mjs",
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/typography.php",
+      "public_html/index.php"
+    ],
+    "back-to-top": [
+      "README.md",
+      "public_html/docs/reference/javascript.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "safe-top": [
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/spacing.php"
+    ],
+    "safe-bottom": [
+      "public_html/docs/reference/php.php",
+      "public_html/docs/reference/spacing.php"
+    ],
+    "relative": [
+      "bin/deck.mjs",
+      "public_html/docs/reference/position.php"
+    ],
+    "absolute": [
+      "public_html/docs/reference/position.php"
+    ],
+    "inset-be-0": [
+      "public_html/docs/reference/position.php"
+    ],
+    "inset-ie-0": [
+      "public_html/docs/reference/position.php"
+    ],
+    "mie-2": [
+      "public_html/docs/reference/position.php",
+      "public_html/docs/reference/spacing.php"
+    ],
+    "sticky": [
+      "public_html/docs/reference/position.php",
+      "src/js/deck.js"
+    ],
+    "inset-0": [
+      "public_html/docs/reference/position.php"
+    ],
+    "inset-is-0": [
+      "README.md",
+      "public_html/docs/reference/position.php"
+    ],
+    "inset-bs-0": [
+      "public_html/docs/reference/position.php"
+    ],
+    "z-1": [
+      "public_html/docs/reference/position.php"
+    ],
+    "mis-auto": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "p-0": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "p-1": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "p-4": [
+      "public_html/docs/_layout.php",
+      "public_html/docs/reference/spacing.php"
+    ],
+    "p-8": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "px-0": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "px-1": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "px-2": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "px-4": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "px-6": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "px-8": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "py-0": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "py-1": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "py-2": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "py-3": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "py-4": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "py-6": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "py-8": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pis-0": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pis-1": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pis-2": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pis-3": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pis-4": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pis-6": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pis-8": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pie-0": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pie-1": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pie-2": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pie-3": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pie-4": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pie-6": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pie-8": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbs-0": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbs-1": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbs-2": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbs-3": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbs-4": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbs-6": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbs-8": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbe-0": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbe-1": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbe-2": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbe-3": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbe-4": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbe-6": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pbe-8": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "pad-cq": [
+      "README.md",
+      "public_html/docs/reference/spacing.php"
+    ],
+    "m-0": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mx-auto": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mt-0": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mt-1": [
+      "public_html/docs/reference/spacing.php",
+      "public_html/index.php"
+    ],
+    "mt-3": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mt-4": [
+      "FINDINGS.md",
+      "public_html/docs/reference/spacing.php",
+      "public_html/index.php"
+    ],
+    "mt-6": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mt-8": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mb-0": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mb-1": [
+      "public_html/docs/reference/spacing.php",
+      "public_html/index.php"
+    ],
+    "mb-3": [
+      "public_html/docs/reference/spacing.php",
+      "public_html/index.php"
+    ],
+    "mb-6": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mb-8": [
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/start/first-page.php"
+    ],
+    "mis-0": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mis-1": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mis-2": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mis-3": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mis-4": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mis-6": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mis-8": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mie-0": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mie-1": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mie-3": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mie-4": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mie-6": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mie-8": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "mie-auto": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "gap-0": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "gap-1": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "gap-3": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "gap-4": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "gap-6": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "gap-8": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "gap-cq": [
+      "README.md",
+      "public_html/docs/_layout.php",
+      "public_html/docs/reference/spacing.php"
+    ],
+    "safe-x": [
+      "public_html/docs/reference/spacing.php"
+    ],
+    "h5": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "prose": [
+      "FINDINGS.md",
+      "public_html/docs/reference/typography.php"
+    ],
+    "text-2xs": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "text-xs": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "text-base": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "text-md": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "text-xl": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "text-2xl": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "display-cq": [
+      "README.md",
+      "public_html/docs/reference/typography.php",
+      "public_html/index.php"
+    ],
+    "fw-normal": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "fw-medium": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "fw-bold": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "text-center": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "text-end": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "mono": [
+      "README.md",
+      "public_html/docs/reference/typography.php",
+      "public_html/index.php"
+    ],
+    "nums": [
+      "README.md",
+      "public_html/docs/reference/typography.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "uppercase": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "capitalize": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "no-underline": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "clamp-2": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "clamp-3": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "writing-vertical": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/reference/typography.php",
+      "public_html/index.php"
+    ],
+    "writing-vertical-lr": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "writing-normal": [
+      "public_html/docs/reference/typography.php"
+    ],
+    "writing-sideways": [
+      "README.md",
+      "public_html/docs/reference/typography.php"
+    ],
+    "writing-upright": [
+      "README.md",
+      "public_html/docs/reference/typography.php",
+      "public_html/index.php"
+    ],
+    "th-vertical": [
+      "README.md",
+      "public_html/docs/reference/typography.php"
     ],
     "banner": [
       "README.md",
@@ -4646,28 +6176,6 @@
     ],
     "theme-dock": [
       "FINDINGS.md",
-      "public_html/index.php"
-    ],
-    "display": [
-      "bin/deck.mjs",
-      "public_html/index.php"
-    ],
-    "mb-3": [
-      "public_html/index.php"
-    ],
-    "mb-2": [
-      "public_html/index.php"
-    ],
-    "mt-4": [
-      "FINDINGS.md",
-      "public_html/index.php"
-    ],
-    "nums": [
-      "README.md",
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "mb-1": [
       "public_html/index.php"
     ],
     "stat": [
@@ -4688,75 +6196,17 @@
     "stat-delta-down": [
       "public_html/index.php"
     ],
-    "grow": [
-      "public_html/index.php"
-    ],
-    "fw-semi": [
-      "public_html/index.php"
-    ],
-    "text-inherit": [
-      "public_html/index.php"
-    ],
     "reaction": [
       "README.md",
       "public_html/index.php"
     ],
-    "mt-1": [
-      "public_html/index.php"
-    ],
-    "empty": [
-      "public_html/index.php"
-    ],
     "empty-art": [
-      "public_html/index.php"
-    ],
-    "empty-title": [
-      "public_html/index.php"
-    ],
-    "mono": [
-      "README.md",
       "public_html/index.php"
     ],
     "s4": [
       "public_html/index.php"
     ],
     "s5": [
-      "public_html/index.php"
-    ],
-    "cq-tone": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "tone-surface": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "tone-icon": [
-      "public_html/index.php"
-    ],
-    "tone-text": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "code-ltr": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "no-flip": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "writing-vertical": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/index.php"
-    ],
-    "writing-upright": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "display-cq": [
-      "README.md",
       "public_html/index.php"
     ],
     "status-line": [
@@ -4805,13 +6255,7 @@
       "README.md",
       "public_html/index.php"
     ],
-    "h2": [
-      "public_html/index.php"
-    ],
     "jumbotron-actions": [
-      "public_html/index.php"
-    ],
-    "mt-2": [
       "public_html/index.php"
     ],
     "drag-handle": [
@@ -4833,11 +6277,6 @@
     ],
     "speed-dial-button": [
       "public_html/index.php"
-    ],
-    "back-to-top": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck.js"
     ],
     "tabbar": [
       "public_html/index.php"
@@ -4861,313 +6300,39 @@
       "README.md",
       "src/js/deck.js"
     ],
-    "sticky": [
-      "src/js/deck.js"
-    ],
-    "defer": [
-      "README.md",
-      "php/Deck.php"
-    ],
-    "relative": [
-      "bin/deck.mjs"
-    ],
-    "cq-size": [
-      "README.md"
-    ],
-    "cq-panel": [
-      "README.md"
-    ],
-    "cq-pane": [
-      "README.md"
-    ],
-    "cq-row": [
-      "README.md"
-    ],
-    "pad-cq": [
-      "README.md"
-    ],
-    "gap-cq": [
-      "README.md"
-    ],
-    "stat-cq": [
-      "README.md"
-    ],
-    "metarow": [
-      "README.md"
-    ],
-    "cq-sm": [
-      "README.md"
-    ],
-    "cq-md": [
-      "README.md"
-    ],
-    "cq-lg": [
-      "README.md"
-    ],
-    "dir-ltr": [
-      "README.md"
-    ],
-    "dir-rtl": [
-      "README.md"
-    ],
-    "bidi-isolate": [
-      "README.md"
-    ],
-    "bidi-plaintext": [
-      "README.md"
-    ],
-    "bis": [
-      "README.md"
-    ],
-    "bie": [
-      "README.md"
-    ],
-    "inset-is-0": [
-      "README.md"
-    ],
-    "r-start": [
-      "README.md"
-    ],
-    "r-end": [
-      "README.md"
-    ],
-    "w-full": [
-      "FINDINGS.md",
-      "README.md"
-    ],
-    "h-full": [
-      "README.md"
-    ],
-    "writing-sideways": [
-      "README.md"
-    ],
-    "th-vertical": [
-      "README.md"
-    ],
     "banner-bottom": [
       "README.md"
     ],
     "jumbotron-media": [
       "README.md"
     ],
-    "virtual": [
-      "README.md"
-    ],
-    "contain": [
-      "README.md"
-    ],
-    "contain-paint": [
-      "README.md"
-    ],
     "md": [
       "FINDINGS.md"
     ],
-    "prose": [
+    "sm": [
       "FINDINGS.md"
     ],
-    "min-is-0": [
-      "FINDINGS.md"
-    ],
-    "gap-2": [
+    "lg": [
       "FINDINGS.md"
     ]
   },
   "unused": [
-    "absolute",
     "banner-dark",
     "banner-fixed",
     "banner-warn",
-    "bg-brand",
-    "bg-none",
-    "bg-soft",
-    "bg-sunken",
-    "bg-surface",
-    "block",
-    "border",
-    "border-0",
-    "border-b",
-    "border-brand",
-    "border-t",
-    "capitalize",
     "chip-remove",
-    "clamp-2",
-    "clamp-3",
-    "contents",
-    "cq-normal",
-    "cursor-pointer",
     "disclosure-body",
     "drop-reject",
     "drop-target",
-    "flex",
-    "flex-col",
-    "flex-row",
-    "fw-bold",
-    "fw-medium",
-    "fw-normal",
-    "gap-0",
-    "gap-1",
-    "gap-3",
-    "gap-4",
-    "gap-6",
-    "gap-8",
     "h1",
     "h3",
     "h4",
-    "h5",
     "h6",
-    "inline-block",
-    "inline-flex",
-    "inset-0",
-    "inset-be-0",
-    "inset-bs-0",
-    "inset-ie-0",
-    "items-baseline",
-    "items-center",
-    "items-end",
-    "items-start",
-    "items-stretch",
-    "justify-between",
-    "justify-center",
-    "justify-end",
-    "justify-start",
-    "lg",
-    "m-0",
-    "max-w-lg",
-    "max-w-md",
-    "max-w-prose",
-    "max-w-sm",
-    "mb-0",
-    "mb-4",
-    "mb-6",
-    "mb-8",
-    "mie-0",
-    "mie-1",
-    "mie-2",
-    "mie-3",
-    "mie-4",
-    "mie-6",
-    "mie-8",
-    "mie-auto",
-    "min-h-screen",
-    "mis-0",
-    "mis-1",
-    "mis-2",
-    "mis-3",
-    "mis-4",
-    "mis-6",
-    "mis-8",
-    "mis-auto",
-    "mouse-only",
-    "mt-0",
-    "mt-3",
-    "mt-6",
-    "mt-8",
-    "mx-auto",
-    "no-select",
-    "no-underline",
-    "nowrap",
-    "opacity-60",
-    "overflow-auto",
-    "overflow-clip",
-    "overflow-hidden",
-    "p-0",
-    "p-1",
-    "p-2",
-    "p-3",
-    "p-4",
-    "p-6",
-    "p-8",
-    "pbe-0",
-    "pbe-1",
-    "pbe-2",
-    "pbe-3",
-    "pbe-4",
-    "pbe-6",
-    "pbe-8",
-    "pbs-0",
-    "pbs-1",
-    "pbs-2",
-    "pbs-3",
-    "pbs-4",
-    "pbs-6",
-    "pbs-8",
-    "pie-0",
-    "pie-1",
-    "pie-2",
-    "pie-3",
-    "pie-4",
-    "pie-6",
-    "pie-8",
-    "pis-0",
-    "pis-1",
-    "pis-2",
-    "pis-3",
-    "pis-4",
-    "pis-6",
-    "pis-8",
-    "place-center",
-    "pointer-none",
     "presence",
     "presence-away",
     "presence-off",
-    "px-0",
-    "px-1",
-    "px-2",
-    "px-3",
-    "px-4",
-    "px-6",
-    "px-8",
-    "py-0",
-    "py-1",
-    "py-2",
-    "py-3",
-    "py-4",
-    "py-6",
-    "py-8",
-    "r-full",
-    "r-lg",
-    "r-md",
-    "r-sm",
-    "r-xs",
-    "ratio-1x1",
-    "ratio-4x3",
-    "row-meta",
-    "row-meta-wide",
     "s6",
-    "safe-bottom",
-    "safe-top",
-    "safe-x",
-    "shadow-0",
-    "shadow-1",
-    "shadow-2",
-    "shadow-3",
-    "shadow-4",
-    "shrink-0",
-    "sm",
     "sortable",
-    "sortable-fallback",
-    "text-2xl",
-    "text-2xs",
-    "text-bad",
-    "text-base",
-    "text-brand",
-    "text-center",
-    "text-end",
-    "text-faint",
-    "text-lg",
-    "text-md",
-    "text-start",
-    "text-warn",
-    "text-xl",
-    "text-xs",
-    "touch-only",
-    "uppercase",
-    "virtual-lg",
-    "virtual-sm",
-    "w-auto",
-    "wrap",
-    "writing-normal",
-    "writing-vertical-lr",
-    "z-1"
+    "sortable-fallback"
   ]
 }

@@ -1532,3 +1532,36 @@ is worse than one that is absent.
 
 **How it was found:** building the swatch column of `reference/tokens.php` and noticing
 that `--text-sm` was being handed to the colour branch.
+
+## 71. The theme switch does nothing on its first press on a dark machine
+
+`data-deck-theme` decided which way to toggle by reading the `data-theme` attribute:
+
+```js
+const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+Deck.theme(dark ? 'light' : 'dark');
+```
+
+With no saved choice there is no attribute, because the operating system is deciding.
+On a machine set to dark, the page is dark, `dark` is false, and the first press sets
+`data-theme="dark"` on a page that is already dark. Nothing visibly happens; the second
+press works. The demo page's own `#themeBtn` handler had the same logic through
+`Deck.theme() === 'dark'`, and also showed a moon on a dark page until it was pressed.
+
+Measured in Chrome with the colour-scheme preference emulated, before the fix:
+
+| OS preference | before | first press | second press |
+|---|---|---|---|
+| dark  | no attribute, page dark  | `dark`, page **still dark** | `light`, page light |
+| light | no attribute, page light | `dark`, page dark | `light`, page light |
+
+It hides from anyone testing on a light machine, which is how the first tutorial's
+checklist passed: that run emulated light.
+
+**Fixed** in `src/js/deck.js` (`wireTheme`) and in the demo page's handler: both now read
+the theme in effect, which is the attribute when one is set and
+`matchMedia('(prefers-color-scheme: dark)')` when it is not. `Deck.theme()` is unchanged
+and still returns `'auto'` when nothing is saved.
+
+**How it was found:** adding a theme switch to the documentation site, and testing the
+first press on both colour schemes before copying the pattern.

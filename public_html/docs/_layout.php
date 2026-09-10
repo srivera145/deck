@@ -633,6 +633,11 @@ $canonical = $DOCS_BASE . '/' . ($here ?: 'index.php');
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
 </script>
 
+<script>
+  /* Apply a saved theme before first paint. deck.js restores it too, but it is
+     deferred, and a long page can paint before a deferred script runs. */
+  try { var dxTheme = localStorage.getItem('deck-theme'); if (dxTheme) document.documentElement.setAttribute('data-theme', dxTheme); } catch (e) {}
+</script>
 <link rel="stylesheet" href="<?= e($assets) ?>/deck/deck.css">
 <script src="<?= e($assets) ?>/deck/deck.js" defer></script>
 <script src="<?= e($assets) ?>/deck/deck-extras.js" defer></script>
@@ -683,6 +688,16 @@ $canonical = $DOCS_BASE . '/' . ($here ?: 'index.php');
     .dx-dim { color: var(--text-faint); font-size: var(--text-xs); }
     .dx-toc { font-size: var(--text-sm); }
     .dx-note { border-inline-start: 3px solid var(--brand); padding-inline-start: var(--space-4); }
+
+    /* The theme switch shows where a press will take you: a moon on a light
+       page, a sun on a dark one. With nothing saved there is no data-theme
+       attribute and the OS decides, so the media queries cover that case and
+       the icon is right before the first press. Only hiding rules, so the
+       visible icon keeps whatever display .icon gives it. */
+    :root[data-theme="light"] .dx-theme .dx-sun,
+    :root[data-theme="dark"] .dx-theme .dx-moon { display: none; }
+    @media (prefers-color-scheme: light) { :root:not([data-theme]) .dx-theme .dx-sun { display: none; } }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme]) .dx-theme .dx-moon { display: none; } }
   }
 </style>
 </head>
@@ -703,7 +718,11 @@ $canonical = $DOCS_BASE . '/' . ($here ?: 'index.php');
           <input class="input" type="search" id="dx-q" name="q" placeholder="Search <?= (int) $api['counts']['classes'] ?> classes" value="<?= e($_GET['q'] ?? '') ?>">
         </div>
       </form>
-      <a class="btn btn-sm btn-ghost" href="<?= e($up) ?>../index.php">Demo</a>
+      <a class="btn btn-sm btn-ghost" href="<?= e($up) ?>../index.php#demo">Demo</a>
+      <button class="btn btn-icon btn-ghost dx-theme" type="button" data-deck-theme aria-label="Switch between light and dark theme">
+        <svg class="icon dx-moon" aria-hidden="true"><use href="<?= e($assets) ?>/deck/deck-icons.svg#moon"></use></svg>
+        <svg class="icon dx-sun" aria-hidden="true"><use href="<?= e($assets) ?>/deck/deck-icons.svg#sun"></use></svg>
+      </button>
     </nav>
   </div>
 </header>

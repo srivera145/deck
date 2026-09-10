@@ -270,6 +270,7 @@ $ogImage = $url('assets/images/deck-og.png');
         <a class="nav-link" href="#libs">Libraries</a>
       </nav>
       <div class="push cluster cluster-tight">
+        <a class="btn btn-sm" href="docs/index.php">Docs</a>
         <label class="sr-only" for="hue">Brand hue</label>
         <input id="hue" class="range" type="range" min="0" max="360" value="196"
                style="inline-size:104px" oninput="document.documentElement.style.setProperty('--hue-brand', this.value)">
@@ -582,7 +583,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Buttons ===================== -->
-  <section class="container section stack-6">
+  <!-- id="demo" marks where the component showcase begins; the docs link here. -->
+  <section class="container section stack-6" id="demo">
     <div class="stack-4">
       <h2>Buttons</h2>
       <p class="text-muted mb-1">Seven variants, three sizes, groups, and a loading state.</p>
@@ -2664,10 +2666,19 @@ $ npm run icons</code></pre>
 
     // Theme switch
     const btn = document.getElementById('themeBtn');
+    /* The theme in effect, not just the attribute: with no saved choice the
+       attribute is absent and the OS decides, so reading the attribute alone
+       made the first click on a dark machine set "dark" on a dark page. */
+    const isDark = () => {
+      const t = Deck.theme();
+      return t === 'auto' ? matchMedia('(prefers-color-scheme: dark)').matches : t === 'dark';
+    };
+    const paintIcon = () => btn.querySelector('use')
+      .setAttribute('href', 'assets/deck/deck-icons.svg#' + (isDark() ? 'sun' : 'moon'));
+    paintIcon();
     btn.addEventListener('click', () => {
-      const dark = Deck.theme() === 'dark';
-      Deck.theme(dark ? 'light' : 'dark');
-      btn.querySelector('use').setAttribute('href', 'assets/deck/deck-icons.svg#' + (dark ? 'moon' : 'sun'));
+      Deck.theme(isDark() ? 'light' : 'dark');
+      paintIcon();
     });
 
     // Indeterminate checkbox demo

@@ -13,9 +13,9 @@
       "brotli": 27148
     },
     "deck.min.js": {
-      "raw": 32499,
-      "gzip": 9983,
-      "brotli": 8883
+      "raw": 32556,
+      "gzip": 10003,
+      "brotli": 8897
     },
     "deck-extras.min.js": {
       "raw": 15854,
@@ -28,19 +28,19 @@
       "brotli": 3974
     },
     "deck.bundle.min.js": {
-      "raw": 59671,
-      "gzip": 19505,
-      "brotli": 17276
+      "raw": 59728,
+      "gzip": 19515,
+      "brotli": 17297
     }
   },
   "totals": {
     "core": {
-      "gzip": 76252,
-      "brotli": 62724
+      "gzip": 76272,
+      "brotli": 62738
     },
     "bundle": {
-      "gzip": 85774,
-      "brotli": 71117
+      "gzip": 85784,
+      "brotli": 71138
     }
   },
   "sample": {

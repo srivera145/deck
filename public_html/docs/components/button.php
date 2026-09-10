@@ -222,7 +222,7 @@ $variants = [
   </p>
   <p class="text-muted">
     It is fixed to the viewport, so it is described rather than rendered here — see it
-    in the bottom corner of the <a href="../../index.php">component demo</a>.
+    in the bottom corner of the <a href="../../index.php#demo">component demo</a>.
   </p>
   <pre class="dx-code"><code><?= e('<button class="fab" aria-label="New item">
   <svg class="icon icon-lg"><use href="/assets/deck/deck-icons.svg#plus"></use></svg>
