@@ -1,61 +1,63 @@
 {
   "generated": "tools/docs/usage.mjs — do not edit",
-  "filesScanned": 39,
+  "filesScanned": 49,
   "counts": {
     "classes": 931,
-    "used": 674,
-    "unused": 257
+    "used": 681,
+    "unused": 250
   },
   "uses": {
-    "stack-3": 787,
-    "text-muted": 410,
-    "icon": 339,
-    "btn": 325,
-    "stack-2": 215,
+    "stack-3": 1063,
+    "text-muted": 512,
+    "btn": 437,
+    "icon": 357,
+    "stack-2": 263,
     "card": 197,
+    "cluster": 187,
     "card-body": 179,
-    "cluster": 164,
-    "stack": 143,
+    "stack": 176,
+    "btn-sm": 145,
     "badge": 134,
-    "btn-sm": 131,
+    "label": 131,
     "text-sm": 130,
-    "label": 127,
-    "icon-sm": 119,
-    "field": 117,
+    "icon-sm": 123,
+    "field": 119,
+    "cluster-tight": 114,
     "input": 114,
-    "stack-6": 96,
-    "cluster-tight": 94,
+    "stack-6": 110,
+    "check": 104,
     "card-title": 87,
+    "btn-primary": 87,
+    "lede": 84,
     "container": 84,
-    "check": 83,
+    "btn-ghost": 78,
     "section": 77,
     "grid": 76,
+    "push": 74,
     "fw-semi": 74,
-    "btn-primary": 73,
-    "lede": 64,
+    "breadcrumb": 70,
+    "tab": 65,
     "avatar": 64,
     "dg-num": 61,
-    "push": 56,
+    "btn-icon": 55,
     "icon-lg": 55,
     "num": 53,
-    "breadcrumb": 50,
-    "btn-icon": 47,
-    "btn-ghost": 46,
+    "table": 46,
+    "sr-only": 46,
+    "table-wrap": 45,
     "list-row": 44,
     "range": 43,
     "grid-tight": 42,
     "icon-tile": 41,
-    "table": 40,
-    "table-wrap": 39,
+    "switch": 39,
     "nums": 39,
-    "switch": 37,
+    "table-stack": 38,
+    "alert": 37,
     "split": 37,
-    "alert": 35,
-    "sr-only": 34,
+    "menu-item": 36,
     "select": 33,
     "list-main": 33,
     "list-title": 33,
-    "table-stack": 32,
     "bar": 32,
     "file": 32,
     "list": 32,
@@ -64,27 +66,37 @@
     "check-text": 30,
     "textarea": 30,
     "nav-link": 30,
+    "tooltip": 29,
     "skeleton": 29,
     "alert-title": 27,
     "alert-body": 27,
     "chip": 27,
     "list-trail": 27,
+    "toast": 27,
+    "tip": 26,
+    "segmented": 24,
     "emoji": 24,
+    "accordion-body": 23,
     "list-sub": 23,
     "dg-pin-start": 23,
     "panel": 22,
     "stack-4": 22,
     "search": 22,
     "help": 21,
+    "menu": 21,
     "grow": 20,
     "icon-tile-lg": 20,
     "btn-lg": 19,
+    "btn-block": 19,
     "datefield": 19,
     "scroller": 19,
     "sidebar-link": 19,
-    "tab": 19,
     "badge-warn": 18,
-    "dg-check": 17,
+    "dg-check": 18,
+    "fieldset": 17,
+    "drawer": 17,
+    "toast-main": 17,
+    "toast-title": 17,
     "dg-pin-start-2": 17,
     "dg-pin-end": 17,
     "mono": 17,
@@ -93,7 +105,6 @@
     "mb-2": 16,
     "chart-col": 16,
     "truncate": 15,
-    "fieldset": 15,
     "grid-wide": 15,
     "addon": 15,
     "lazy": 15,
@@ -102,7 +113,10 @@
     "btn-soft": 14,
     "card-flex": 14,
     "check-note": 14,
+    "pop": 14,
+    "tip-arrow": 14,
     "stat-value": 14,
+    "dg": 14,
     "dg-actions": 14,
     "chart-bar": 14,
     "chart-bar-label": 14,
@@ -114,21 +128,28 @@
     "badge-dot": 13,
     "field-row": 13,
     "input-group": 13,
-    "dg": 13,
+    "menu-label": 13,
     "enter-rise": 13,
     "indicator": 13,
+    "accordion": 12,
+    "btn-danger": 12,
     "required": 12,
     "is-invalid": 12,
-    "tooltip": 12,
+    "modal": 12,
+    "tabs": 12,
     "editor-tool": 12,
     "is-open": 12,
     "icon-follow": 11,
+    "drawer-header": 11,
+    "drawer-title": 11,
+    "drawer-body": 11,
     "stack-1": 11,
+    "stack-0": 11,
+    "sheet-grip": 11,
     "stack-8": 11,
     "copy": 11,
     "sidebar-group": 11,
     "carousel-slide": 11,
-    "tip": 11,
     "drag-handle": 11,
     "avatar-xs": 10,
     "badge-bad": 10,
@@ -138,9 +159,9 @@
     "card-footer": 10,
     "check-card": 10,
     "error": 10,
+    "sheet": 10,
     "icon-muted": 10,
     "combo": 10,
-    "tip-arrow": 10,
     "kanban-card": 10,
     "combo-option": 10,
     "was-shaken": 10,
@@ -151,28 +172,38 @@
     "sticky-top": 9,
     "text-cq": 9,
     "float": 9,
+    "menu-sep": 9,
+    "menu-item-danger": 9,
+    "modal-header": 9,
+    "modal-title": 9,
+    "modal-body": 9,
+    "modal-footer": 9,
+    "pop-title": 9,
+    "pop-body": 9,
     "range-pair": 9,
     "range-readout": 9,
+    "sheet-header": 9,
+    "sheet-title": 9,
+    "sheet-body": 9,
     "center": 9,
+    "toast-close": 9,
     "icon-fill": 9,
-    "segmented": 9,
     "is-done": 9,
     "mega-item": 9,
     "step": 9,
     "step-marker": 9,
     "step-label": 9,
     "step-note": 9,
-    "toast": 9,
     "alert-bad": 8,
     "is-loading": 8,
-    "btn-danger": 8,
     "stretch": 8,
     "grid-2": 8,
+    "toast-icon": 8,
+    "toast-action": 8,
     "copy-value": 8,
     "copy-btn": 8,
     "navbar-brand": 8,
     "reaction": 8,
-    "menu-item": 8,
     "dg-wrap": 8,
     "chart-title": 8,
     "chart-line": 8,
@@ -191,9 +222,15 @@
     "avatar-stack": 7,
     "btn-round": 7,
     "btn-group": 7,
+    "drawer-end": 7,
     "field-row-cq": 7,
     "form-actions": 7,
     "list-header": 7,
+    "pop-actions": 7,
+    "anchor": 7,
+    "toast-good": 7,
+    "toast-text": 7,
+    "toast-actions": 7,
     "copy-done": 7,
     "sidebar": 7,
     "spinner": 7,
@@ -211,6 +248,8 @@
     "chat": 6,
     "actions-cq": 6,
     "number": 6,
+    "menu-match": 6,
+    "toast-region": 6,
     "link-quiet": 6,
     "copy-idle": 6,
     "skip-link": 6,
@@ -219,7 +258,6 @@
     "stat-label": 6,
     "stat-delta": 6,
     "icon-xl": 6,
-    "accordion-body": 6,
     "timeline-item": 6,
     "timeline-dot": 6,
     "chart": 6,
@@ -240,14 +278,15 @@
     "back-to-top": 6,
     "sortable-chosen": 6,
     "combo-option-main": 6,
+    "is-active": 6,
     "avatar-square": 5,
-    "btn-block": 5,
     "cluster-end": 5,
     "cluster-between": 5,
     "app-shell": 5,
+    "drawer-footer": 5,
     "optional": 5,
-    "menu": 5,
-    "stack-0": 5,
+    "toast-timer": 5,
+    "is-dragging": 5,
     "scroll-progress": 5,
     "chart-legend": 5,
     "g-border": 5,
@@ -266,7 +305,6 @@
     "span-wide": 5,
     "dg-compact": 5,
     "speed-dial": 5,
-    "is-active": 5,
     "alert-good": 4,
     "avatar-xl": 4,
     "is-disabled": 4,
@@ -283,7 +321,6 @@
     "theme-dock": 4,
     "navbar-links": 4,
     "display": 4,
-    "menu-label": 4,
     "stat-delta-up": 4,
     "text-inherit": 4,
     "icon-tile-good": 4,
@@ -309,14 +346,12 @@
     "tilt": 4,
     "space": 4,
     "coverflow": 4,
-    "drawer": 4,
     "mega-heading": 4,
     "phone": 4,
     "rating": 4,
     "editor-count": 4,
     "masonry": 4,
     "dg-virtual": 4,
-    "toast-region": 4,
     "is-fanned": 4,
     "shake": 4,
     "is-over": 4,
@@ -328,7 +363,6 @@
     "dg-sort": 4,
     "has-value": 4,
     "is-resizing": 4,
-    "is-dragging": 4,
     "is-up": 4,
     "is-down": 4,
     "is-tilting": 4,
@@ -336,13 +370,19 @@
     "is-dismissed": 4,
     "is-animating": 4,
     "datepicker-day": 4,
+    "disclosure": 3,
     "cluster-center": 3,
     "grid-fixed-3": 3,
     "fixed": 3,
     "split-rail-start": 3,
+    "toast-warn": 3,
+    "toast-bad": 3,
+    "toast-info": 3,
+    "toast-undo": 3,
+    "toast-region-stacked": 3,
+    "is-leaving": 3,
     "banner-close": 3,
     "mt-4": 3,
-    "tabs": 3,
     "emoji-grid": 3,
     "dg-cards": 3,
     "chart-x": 3,
@@ -402,7 +442,6 @@
     "jumbotron": 3,
     "jumbotron-center": 3,
     "g-mesh-subtle": 3,
-    "pop": 3,
     "kanban": 3,
     "print-only": 3,
     "flash-good": 3,
@@ -414,9 +453,6 @@
     "combo-input": 3,
     "combo-toggle": 3,
     "combo-token": 3,
-    "toast-icon": 3,
-    "toast-action": 3,
-    "toast-close": 3,
     "is-visible": 3,
     "defer": 3,
     "footer": 3,
@@ -435,6 +471,9 @@
     "is-lifted": 2,
     "reorder": 2,
     "table-compact": 2,
+    "toast-region-center": 2,
+    "toast-region-start": 2,
+    "toast-region-top": 2,
     "mb-1": 2,
     "stat-delta-down": 2,
     "icon-tile-warn": 2,
@@ -444,21 +483,8 @@
     "ring-label": 2,
     "skeleton-circle": 2,
     "pagination": 2,
-    "accordion": 2,
     "timeline": 2,
     "emoji-tile-round": 2,
-    "menu-sep": 2,
-    "menu-item-danger": 2,
-    "modal": 2,
-    "modal-header": 2,
-    "modal-title": 2,
-    "modal-body": 2,
-    "modal-footer": 2,
-    "sheet": 2,
-    "sheet-grip": 2,
-    "sheet-header": 2,
-    "sheet-title": 2,
-    "sheet-body": 2,
     "empty": 2,
     "empty-art": 2,
     "empty-title": 2,
@@ -483,10 +509,6 @@
     "face-top": 2,
     "face-bottom": 2,
     "indicator-good": 2,
-    "drawer-header": 2,
-    "drawer-title": 2,
-    "drawer-body": 2,
-    "drawer-footer": 2,
     "phone-country": 2,
     "phone-status": 2,
     "text-good": 2,
@@ -496,15 +518,11 @@
     "masonry-3": 2,
     "jumbotron-actions": 2,
     "mt-2": 2,
-    "pop-title": 2,
-    "pop-body": 2,
-    "pop-actions": 2,
     "indicator-brand": 2,
     "speed-dial-actions": 2,
     "tabbar": 2,
     "flash": 2,
     "rating-static": 2,
-    "menu-match": 2,
     "sortable-ghost": 2,
     "sortable-drag": 2,
     "qr-caption": 2,
@@ -529,11 +547,6 @@
     "combo-count": 2,
     "combo-loading": 2,
     "dg-sort-icon": 2,
-    "toast-main": 2,
-    "toast-title": 2,
-    "toast-text": 2,
-    "toast-actions": 2,
-    "toast-timer": 2,
     "is-selected": 2,
     "is-range-start": 2,
     "is-range-end": 2,
@@ -541,14 +554,11 @@
     "is-above": 2,
     "is-scrolled-x": 2,
     "is-scrolled-end": 2,
-    "toast-region-stacked": 2,
-    "is-leaving": 2,
     "is-revealed": 2,
     "tick": 2,
     "is-front": 2,
     "is-behind-start": 2,
     "is-behind-end": 2,
-    "anchor": 2,
     "dg-resize": 2,
     "flip-x": 2,
     "print-keep": 2,
@@ -559,6 +569,7 @@
     "square": 1,
     "grid-fixed-2": 1,
     "grid-fixed-4": 1,
+    "toast-loading": 1,
     "h2": 1,
     "datepicker": 1,
     "is-outside": 1,
@@ -570,9 +581,6 @@
     "emoji-lg": 1,
     "emoji-xl": 1,
     "emoji-hero": 1,
-    "toast-region-start": 1,
-    "toast-region-center": 1,
-    "toast-region-top": 1,
     "chart-col-stack": 1,
     "chart-group": 1,
     "chart-y": 1,
@@ -657,7 +665,6 @@
     "turn-out": 1,
     "turn-in": 1,
     "carousel-multi": 1,
-    "drawer-end": 1,
     "banner-bottom": 1,
     "stepper-vertical": 1,
     "video-square": 1,
@@ -684,6 +691,7 @@
   },
   "where": {
     "breadcrumb": [
+      "public_html/docs/components/accordion.php",
       "public_html/docs/components/alert.php",
       "public_html/docs/components/avatar.php",
       "public_html/docs/components/badge.php",
@@ -693,21 +701,30 @@
       "public_html/docs/components/check.php",
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/popover.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/scroller.php",
       "public_html/docs/components/section.php",
+      "public_html/docs/components/segmented.php",
       "public_html/docs/components/select.php",
+      "public_html/docs/components/sheet.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/switch.php",
       "public_html/docs/components/table.php",
+      "public_html/docs/components/tabs.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
       "public_html/index.php"
     ],
     "cluster": [
@@ -715,6 +732,7 @@
       "README.md",
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
+      "public_html/docs/components/accordion.php",
       "public_html/docs/components/alert.php",
       "public_html/docs/components/avatar.php",
       "public_html/docs/components/badge.php",
@@ -724,26 +742,36 @@
       "public_html/docs/components/check.php",
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/popover.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/scroller.php",
       "public_html/docs/components/section.php",
+      "public_html/docs/components/segmented.php",
       "public_html/docs/components/select.php",
+      "public_html/docs/components/sheet.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/switch.php",
       "public_html/docs/components/table.php",
+      "public_html/docs/components/tabs.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
       "public_html/index.php",
       "public_html/llms.txt"
     ],
     "cluster-tight": [
       "FINDINGS.md",
+      "public_html/docs/components/accordion.php",
       "public_html/docs/components/alert.php",
       "public_html/docs/components/avatar.php",
       "public_html/docs/components/badge.php",
@@ -753,25 +781,35 @@
       "public_html/docs/components/check.php",
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/popover.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/scroller.php",
       "public_html/docs/components/section.php",
+      "public_html/docs/components/segmented.php",
       "public_html/docs/components/select.php",
+      "public_html/docs/components/sheet.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/switch.php",
       "public_html/docs/components/table.php",
+      "public_html/docs/components/tabs.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
       "public_html/index.php"
     ],
     "stack-3": [
       "public_html/docs/_layout.php",
+      "public_html/docs/components/accordion.php",
       "public_html/docs/components/alert.php",
       "public_html/docs/components/avatar.php",
       "public_html/docs/components/badge.php",
@@ -781,21 +819,30 @@
       "public_html/docs/components/check.php",
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/popover.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/scroller.php",
       "public_html/docs/components/section.php",
+      "public_html/docs/components/segmented.php",
       "public_html/docs/components/select.php",
+      "public_html/docs/components/sheet.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/switch.php",
       "public_html/docs/components/table.php",
+      "public_html/docs/components/tabs.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
       "public_html/index.php",
@@ -803,6 +850,7 @@
     ],
     "lede": [
       "bin/deck.mjs",
+      "public_html/docs/components/accordion.php",
       "public_html/docs/components/alert.php",
       "public_html/docs/components/avatar.php",
       "public_html/docs/components/badge.php",
@@ -812,30 +860,200 @@
       "public_html/docs/components/check.php",
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/container.php",
+      "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/grid.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/popover.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/scroller.php",
       "public_html/docs/components/section.php",
+      "public_html/docs/components/segmented.php",
       "public_html/docs/components/select.php",
+      "public_html/docs/components/sheet.php",
       "public_html/docs/components/split.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/switch.php",
       "public_html/docs/components/table.php",
+      "public_html/docs/components/tabs.php",
       "public_html/docs/components/textarea.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
+    "accordion": [
+      "FINDINGS.md",
+      "public_html/docs/components/accordion.php",
+      "public_html/index.php"
+    ],
+    "accordion-body": [
+      "public_html/docs/components/accordion.php",
+      "public_html/index.php"
+    ],
+    "stack-6": [
+      "public_html/docs/components/accordion.php",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/cluster.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/file.php",
+      "public_html/docs/components/grid.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/scroller.php",
+      "public_html/docs/components/select.php",
+      "public_html/docs/components/sheet.php",
+      "public_html/docs/components/split.php",
+      "public_html/docs/components/stack.php",
+      "public_html/docs/components/tabs.php",
+      "public_html/docs/components/textarea.php",
+      "public_html/docs/components/tooltip.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "stack-2": [
+      "FINDINGS.md",
+      "public_html/docs/components/accordion.php",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/bar.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/cluster.php",
+      "public_html/docs/components/container.php",
+      "public_html/docs/components/drawer.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/fieldset.php",
+      "public_html/docs/components/file.php",
+      "public_html/docs/components/grid.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/popover.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/scroller.php",
+      "public_html/docs/components/section.php",
+      "public_html/docs/components/segmented.php",
+      "public_html/docs/components/select.php",
+      "public_html/docs/components/sheet.php",
+      "public_html/docs/components/split.php",
+      "public_html/docs/components/stack.php",
+      "public_html/docs/components/switch.php",
+      "public_html/docs/components/table.php",
+      "public_html/docs/components/tabs.php",
+      "public_html/docs/components/textarea.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
+      "public_html/docs/index.php",
+      "public_html/index.php",
+      "public_html/php-helper.php"
+    ],
+    "text-muted": [
+      "FINDINGS.md",
+      "bin/deck.mjs",
+      "public_html/docs/_layout.php",
+      "public_html/docs/components/accordion.php",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/bar.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/cluster.php",
+      "public_html/docs/components/container.php",
+      "public_html/docs/components/drawer.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/fieldset.php",
+      "public_html/docs/components/file.php",
+      "public_html/docs/components/grid.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/popover.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/scroller.php",
+      "public_html/docs/components/section.php",
+      "public_html/docs/components/segmented.php",
+      "public_html/docs/components/select.php",
+      "public_html/docs/components/sheet.php",
+      "public_html/docs/components/split.php",
+      "public_html/docs/components/stack.php",
+      "public_html/docs/components/switch.php",
+      "public_html/docs/components/table.php",
+      "public_html/docs/components/tabs.php",
+      "public_html/docs/components/textarea.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
+      "public_html/docs/index.php",
+      "public_html/docs/search.php",
+      "public_html/index.php",
+      "public_html/php-helper.php",
+      "src/js/deck-extras.js"
+    ],
+    "disclosure": [
+      "public_html/docs/components/accordion.php"
+    ],
+    "stack": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/accordion.php",
+      "public_html/docs/components/alert.php",
+      "public_html/docs/components/avatar.php",
+      "public_html/docs/components/badge.php",
+      "public_html/docs/components/bar.php",
+      "public_html/docs/components/button.php",
+      "public_html/docs/components/card.php",
+      "public_html/docs/components/check.php",
+      "public_html/docs/components/cluster.php",
+      "public_html/docs/components/container.php",
+      "public_html/docs/components/drawer.php",
+      "public_html/docs/components/field.php",
+      "public_html/docs/components/fieldset.php",
+      "public_html/docs/components/file.php",
+      "public_html/docs/components/grid.php",
+      "public_html/docs/components/input.php",
+      "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/popover.php",
+      "public_html/docs/components/range.php",
+      "public_html/docs/components/scroller.php",
+      "public_html/docs/components/section.php",
+      "public_html/docs/components/segmented.php",
+      "public_html/docs/components/select.php",
+      "public_html/docs/components/sheet.php",
+      "public_html/docs/components/split.php",
+      "public_html/docs/components/stack.php",
+      "public_html/docs/components/switch.php",
+      "public_html/docs/components/table.php",
+      "public_html/docs/components/tabs.php",
+      "public_html/docs/components/textarea.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
+      "public_html/llms.txt"
+    ],
     "alert": [
       "public_html/docs/components/alert.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/field.php",
+      "public_html/docs/components/toast.php",
       "public_html/docs/index.php",
       "public_html/index.php",
       "src/js/deck.js"
@@ -854,89 +1072,6 @@
       "public_html/docs/index.php",
       "public_html/index.php"
     ],
-    "stack-6": [
-      "public_html/docs/components/alert.php",
-      "public_html/docs/components/badge.php",
-      "public_html/docs/components/button.php",
-      "public_html/docs/components/card.php",
-      "public_html/docs/components/cluster.php",
-      "public_html/docs/components/field.php",
-      "public_html/docs/components/file.php",
-      "public_html/docs/components/grid.php",
-      "public_html/docs/components/input.php",
-      "public_html/docs/components/list.php",
-      "public_html/docs/components/scroller.php",
-      "public_html/docs/components/select.php",
-      "public_html/docs/components/split.php",
-      "public_html/docs/components/stack.php",
-      "public_html/docs/components/textarea.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "stack-2": [
-      "FINDINGS.md",
-      "public_html/docs/components/alert.php",
-      "public_html/docs/components/avatar.php",
-      "public_html/docs/components/badge.php",
-      "public_html/docs/components/bar.php",
-      "public_html/docs/components/button.php",
-      "public_html/docs/components/card.php",
-      "public_html/docs/components/check.php",
-      "public_html/docs/components/cluster.php",
-      "public_html/docs/components/container.php",
-      "public_html/docs/components/field.php",
-      "public_html/docs/components/fieldset.php",
-      "public_html/docs/components/file.php",
-      "public_html/docs/components/grid.php",
-      "public_html/docs/components/input.php",
-      "public_html/docs/components/list.php",
-      "public_html/docs/components/range.php",
-      "public_html/docs/components/scroller.php",
-      "public_html/docs/components/section.php",
-      "public_html/docs/components/select.php",
-      "public_html/docs/components/split.php",
-      "public_html/docs/components/stack.php",
-      "public_html/docs/components/switch.php",
-      "public_html/docs/components/table.php",
-      "public_html/docs/components/textarea.php",
-      "public_html/docs/index.php",
-      "public_html/index.php",
-      "public_html/php-helper.php"
-    ],
-    "text-muted": [
-      "FINDINGS.md",
-      "bin/deck.mjs",
-      "public_html/docs/_layout.php",
-      "public_html/docs/components/alert.php",
-      "public_html/docs/components/avatar.php",
-      "public_html/docs/components/badge.php",
-      "public_html/docs/components/bar.php",
-      "public_html/docs/components/button.php",
-      "public_html/docs/components/card.php",
-      "public_html/docs/components/check.php",
-      "public_html/docs/components/cluster.php",
-      "public_html/docs/components/container.php",
-      "public_html/docs/components/field.php",
-      "public_html/docs/components/fieldset.php",
-      "public_html/docs/components/file.php",
-      "public_html/docs/components/grid.php",
-      "public_html/docs/components/input.php",
-      "public_html/docs/components/list.php",
-      "public_html/docs/components/range.php",
-      "public_html/docs/components/scroller.php",
-      "public_html/docs/components/section.php",
-      "public_html/docs/components/select.php",
-      "public_html/docs/components/split.php",
-      "public_html/docs/components/stack.php",
-      "public_html/docs/components/switch.php",
-      "public_html/docs/components/table.php",
-      "public_html/docs/components/textarea.php",
-      "public_html/docs/index.php",
-      "public_html/docs/search.php",
-      "public_html/index.php",
-      "public_html/php-helper.php",
-      "src/js/deck-extras.js"
-    ],
     "alert-bad": [
       "public_html/docs/components/alert.php",
       "public_html/index.php"
@@ -951,10 +1086,15 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/file.php",
       "public_html/docs/components/input.php",
       "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/sheet.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
       "public_html/index.php",
@@ -971,35 +1111,6 @@
     "alert-good": [
       "public_html/docs/components/alert.php",
       "public_html/index.php"
-    ],
-    "stack": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/docs/components/alert.php",
-      "public_html/docs/components/avatar.php",
-      "public_html/docs/components/badge.php",
-      "public_html/docs/components/bar.php",
-      "public_html/docs/components/button.php",
-      "public_html/docs/components/card.php",
-      "public_html/docs/components/check.php",
-      "public_html/docs/components/cluster.php",
-      "public_html/docs/components/container.php",
-      "public_html/docs/components/field.php",
-      "public_html/docs/components/fieldset.php",
-      "public_html/docs/components/file.php",
-      "public_html/docs/components/grid.php",
-      "public_html/docs/components/input.php",
-      "public_html/docs/components/list.php",
-      "public_html/docs/components/range.php",
-      "public_html/docs/components/scroller.php",
-      "public_html/docs/components/section.php",
-      "public_html/docs/components/select.php",
-      "public_html/docs/components/split.php",
-      "public_html/docs/components/stack.php",
-      "public_html/docs/components/switch.php",
-      "public_html/docs/components/table.php",
-      "public_html/docs/components/textarea.php",
-      "public_html/llms.txt"
     ],
     "avatar": [
       "FINDINGS.md",
@@ -1032,8 +1143,11 @@
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/container.php",
       "public_html/docs/components/range.php",
+      "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/table.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
       "public_html/index.php"
@@ -1047,8 +1161,11 @@
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/container.php",
       "public_html/docs/components/range.php",
+      "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/table.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
       "public_html/index.php"
@@ -1060,8 +1177,11 @@
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/container.php",
       "public_html/docs/components/range.php",
+      "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/table.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
       "public_html/index.php"
@@ -1073,8 +1193,12 @@
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/container.php",
       "public_html/docs/components/range.php",
+      "public_html/docs/components/segmented.php",
+      "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/components/switch.php",
+      "public_html/docs/components/toast.php",
+      "public_html/docs/components/tooltip.php",
       "public_html/docs/search.php",
       "public_html/index.php"
     ],
@@ -1170,9 +1294,16 @@
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/popover.php",
+      "public_html/docs/components/segmented.php",
+      "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
+      "public_html/docs/components/tooltip.php",
       "public_html/docs/index.php",
       "public_html/docs/search.php",
       "public_html/index.php",
@@ -1186,6 +1317,9 @@
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/drawer.php",
+      "public_html/docs/components/popover.php",
+      "public_html/docs/components/sheet.php",
       "public_html/docs/index.php",
       "public_html/index.php",
       "src/js/deck.js"
@@ -1197,6 +1331,9 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/card.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/drawer.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/sheet.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1207,7 +1344,10 @@
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
+      "public_html/docs/components/segmented.php",
+      "public_html/docs/components/sheet.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1217,6 +1357,9 @@
       "public_html/docs/components/bar.php",
       "public_html/docs/components/button.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/drawer.php",
+      "public_html/docs/components/sheet.php",
+      "public_html/docs/components/tooltip.php",
       "public_html/index.php",
       "public_html/php-helper.php"
     ],
@@ -1284,7 +1427,11 @@
       "public_html/docs/components/button.php",
       "public_html/docs/components/card.php",
       "public_html/docs/components/cluster.php",
+      "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/popover.php",
+      "public_html/docs/components/sheet.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/search.php",
       "public_html/index.php",
@@ -1293,6 +1440,7 @@
     "icon-sm": [
       "README.md",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/toast.php",
       "public_html/index.php",
       "public_html/llms.txt",
       "public_html/php-helper.php",
@@ -1300,6 +1448,8 @@
     ],
     "btn-block": [
       "public_html/docs/components/button.php",
+      "public_html/docs/components/menu.php",
+      "public_html/docs/components/sheet.php",
       "public_html/index.php"
     ],
     "btn-3d": [
@@ -1373,6 +1523,7 @@
     ],
     "btn-danger": [
       "public_html/docs/components/button.php",
+      "public_html/docs/components/modal.php",
       "public_html/index.php"
     ],
     "btn-soft": [
@@ -1458,8 +1609,10 @@
     "check": [
       "FINDINGS.md",
       "public_html/docs/components/check.php",
+      "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
+      "public_html/docs/components/sheet.php",
       "public_html/index.php",
       "public_html/php-helper.php",
       "src/js/deck.js"
@@ -1468,7 +1621,8 @@
       "FINDINGS.md",
       "public_html/docs/components/check.php",
       "public_html/docs/components/field.php",
-      "public_html/docs/components/fieldset.php"
+      "public_html/docs/components/fieldset.php",
+      "public_html/docs/components/segmented.php"
     ],
     "check-text": [
       "public_html/docs/components/check.php",
@@ -1557,6 +1711,33 @@
       "public_html/docs/components/container.php",
       "public_html/php-helper.php"
     ],
+    "drawer": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/drawer.php",
+      "public_html/index.php"
+    ],
+    "drawer-header": [
+      "public_html/docs/components/drawer.php",
+      "public_html/index.php"
+    ],
+    "drawer-title": [
+      "public_html/docs/components/drawer.php",
+      "public_html/index.php"
+    ],
+    "drawer-body": [
+      "public_html/docs/components/drawer.php",
+      "public_html/index.php"
+    ],
+    "drawer-footer": [
+      "public_html/docs/components/drawer.php",
+      "public_html/index.php"
+    ],
+    "drawer-end": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/drawer.php"
+    ],
     "field": [
       "FINDINGS.md",
       "README.md",
@@ -1564,6 +1745,7 @@
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/components/menu.php",
       "public_html/docs/components/range.php",
       "public_html/docs/components/select.php",
       "public_html/docs/components/textarea.php",
@@ -1576,7 +1758,9 @@
       "public_html/docs/components/field.php",
       "public_html/docs/components/fieldset.php",
       "public_html/docs/components/input.php",
+      "public_html/docs/components/menu.php",
       "public_html/docs/components/range.php",
+      "public_html/docs/components/segmented.php",
       "public_html/docs/components/select.php",
       "public_html/docs/components/textarea.php",
       "public_html/docs/search.php",
@@ -1799,7 +1983,84 @@
       "public_html/docs/components/list.php"
     ],
     "menu": [
+      "FINDINGS.md",
       "public_html/docs/components/list.php",
+      "public_html/docs/components/menu.php",
+      "public_html/index.php"
+    ],
+    "menu-label": [
+      "public_html/docs/components/menu.php",
+      "public_html/index.php"
+    ],
+    "menu-item": [
+      "FINDINGS.md",
+      "public_html/docs/components/menu.php",
+      "public_html/index.php"
+    ],
+    "menu-sep": [
+      "public_html/docs/components/menu.php",
+      "public_html/index.php"
+    ],
+    "menu-item-danger": [
+      "public_html/docs/components/menu.php",
+      "public_html/index.php"
+    ],
+    "menu-match": [
+      "public_html/docs/components/menu.php",
+      "src/js/deck-adapters.js"
+    ],
+    "modal": [
+      "public_html/docs/components/modal.php",
+      "public_html/index.php"
+    ],
+    "stack-0": [
+      "FINDINGS.md",
+      "public_html/docs/components/modal.php",
+      "public_html/docs/components/section.php",
+      "public_html/docs/components/stack.php"
+    ],
+    "modal-header": [
+      "public_html/docs/components/modal.php",
+      "public_html/index.php"
+    ],
+    "modal-title": [
+      "public_html/docs/components/modal.php",
+      "public_html/index.php"
+    ],
+    "modal-body": [
+      "public_html/docs/components/modal.php",
+      "public_html/index.php"
+    ],
+    "modal-footer": [
+      "public_html/docs/components/modal.php",
+      "public_html/index.php"
+    ],
+    "pop": [
+      "README.md",
+      "public_html/docs/components/popover.php",
+      "public_html/index.php"
+    ],
+    "pop-title": [
+      "public_html/docs/components/popover.php",
+      "public_html/index.php"
+    ],
+    "pop-body": [
+      "public_html/docs/components/popover.php",
+      "public_html/index.php"
+    ],
+    "pop-actions": [
+      "public_html/docs/components/popover.php",
+      "public_html/index.php"
+    ],
+    "anchor": [
+      "public_html/docs/components/popover.php",
+      "src/js/deck.js"
+    ],
+    "tooltip": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/popover.php",
+      "public_html/docs/components/tooltip.php",
       "public_html/index.php"
     ],
     "range": [
@@ -1834,10 +2095,38 @@
       "public_html/docs/components/scroller.php",
       "public_html/index.php"
     ],
-    "stack-0": [
+    "segmented": [
       "FINDINGS.md",
-      "public_html/docs/components/section.php",
-      "public_html/docs/components/stack.php"
+      "public_html/docs/components/segmented.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "tab": [
+      "FINDINGS.md",
+      "public_html/docs/components/segmented.php",
+      "public_html/docs/components/tabs.php",
+      "public_html/index.php"
+    ],
+    "sheet": [
+      "public_html/docs/components/sheet.php",
+      "public_html/index.php"
+    ],
+    "sheet-grip": [
+      "FINDINGS.md",
+      "public_html/docs/components/sheet.php",
+      "public_html/index.php"
+    ],
+    "sheet-header": [
+      "public_html/docs/components/sheet.php",
+      "public_html/index.php"
+    ],
+    "sheet-title": [
+      "public_html/docs/components/sheet.php",
+      "public_html/index.php"
+    ],
+    "sheet-body": [
+      "public_html/docs/components/sheet.php",
+      "public_html/index.php"
     ],
     "split": [
       "FINDINGS.md",
@@ -1876,6 +2165,111 @@
     ],
     "table-compact": [
       "public_html/docs/components/table.php"
+    ],
+    "tabs": [
+      "FINDINGS.md",
+      "public_html/docs/components/tabs.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "toast": [
+      "bin/deck.mjs",
+      "public_html/docs/components/toast.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "toast-good": [
+      "public_html/docs/components/toast.php"
+    ],
+    "toast-icon": [
+      "public_html/docs/components/toast.php",
+      "src/js/deck.js"
+    ],
+    "toast-main": [
+      "public_html/docs/components/toast.php",
+      "src/js/deck.js"
+    ],
+    "toast-title": [
+      "public_html/docs/components/toast.php",
+      "src/js/deck.js"
+    ],
+    "toast-text": [
+      "public_html/docs/components/toast.php",
+      "src/js/deck.js"
+    ],
+    "toast-actions": [
+      "public_html/docs/components/toast.php",
+      "src/js/deck.js"
+    ],
+    "toast-action": [
+      "public_html/docs/components/toast.php",
+      "src/js/deck.js"
+    ],
+    "toast-close": [
+      "FINDINGS.md",
+      "public_html/docs/components/toast.php",
+      "src/js/deck.js"
+    ],
+    "toast-warn": [
+      "public_html/docs/components/toast.php"
+    ],
+    "toast-bad": [
+      "public_html/docs/components/toast.php"
+    ],
+    "toast-info": [
+      "public_html/docs/components/toast.php"
+    ],
+    "toast-undo": [
+      "public_html/docs/components/toast.php"
+    ],
+    "toast-region": [
+      "public_html/docs/components/toast.php",
+      "public_html/index.php",
+      "src/js/deck.js"
+    ],
+    "toast-timer": [
+      "FINDINGS.md",
+      "public_html/docs/components/toast.php",
+      "src/js/deck.js"
+    ],
+    "toast-loading": [
+      "public_html/docs/components/toast.php"
+    ],
+    "toast-region-center": [
+      "README.md",
+      "public_html/docs/components/toast.php"
+    ],
+    "toast-region-stacked": [
+      "public_html/docs/components/toast.php",
+      "src/js/deck.js"
+    ],
+    "toast-region-start": [
+      "README.md",
+      "public_html/docs/components/toast.php"
+    ],
+    "toast-region-top": [
+      "README.md",
+      "public_html/docs/components/toast.php"
+    ],
+    "is-dragging": [
+      "public_html/docs/components/toast.php",
+      "src/js/deck.js"
+    ],
+    "is-leaving": [
+      "public_html/docs/components/toast.php",
+      "src/js/deck.js"
+    ],
+    "tip": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/tooltip.php",
+      "public_html/index.php"
+    ],
+    "tip-arrow": [
+      "README.md",
+      "public_html/docs/components/tooltip.php",
+      "public_html/index.php",
+      "src/js/deck-adapters.js"
     ],
     "link-quiet": [
       "public_html/docs/index.php",
@@ -1980,9 +2374,6 @@
     "mb-2": [
       "public_html/index.php"
     ],
-    "menu-label": [
-      "public_html/index.php"
-    ],
     "mt-4": [
       "FINDINGS.md",
       "public_html/index.php"
@@ -2033,11 +2424,6 @@
     "text-inherit": [
       "public_html/index.php"
     ],
-    "segmented": [
-      "FINDINGS.md",
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
     "icon-tile-good": [
       "public_html/index.php"
     ],
@@ -2071,20 +2457,6 @@
       "public_html/index.php"
     ],
     "pagination": [
-      "public_html/index.php"
-    ],
-    "tabs": [
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
-    "tab": [
-      "FINDINGS.md",
-      "public_html/index.php"
-    ],
-    "accordion": [
-      "public_html/index.php"
-    ],
-    "accordion-body": [
       "public_html/index.php"
     ],
     "timeline": [
@@ -2123,50 +2495,7 @@
       "README.md",
       "public_html/index.php"
     ],
-    "tooltip": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "menu-item": [
-      "public_html/index.php"
-    ],
-    "menu-sep": [
-      "public_html/index.php"
-    ],
-    "menu-item-danger": [
-      "public_html/index.php"
-    ],
-    "modal": [
-      "public_html/index.php"
-    ],
-    "modal-header": [
-      "public_html/index.php"
-    ],
-    "modal-title": [
-      "public_html/index.php"
-    ],
     "mt-1": [
-      "public_html/index.php"
-    ],
-    "modal-body": [
-      "public_html/index.php"
-    ],
-    "modal-footer": [
-      "public_html/index.php"
-    ],
-    "sheet": [
-      "public_html/index.php"
-    ],
-    "sheet-grip": [
-      "public_html/index.php"
-    ],
-    "sheet-header": [
-      "public_html/index.php"
-    ],
-    "sheet-title": [
-      "public_html/index.php"
-    ],
-    "sheet-body": [
       "public_html/index.php"
     ],
     "empty": [
@@ -2213,6 +2542,7 @@
       "public_html/index.php"
     ],
     "dg-check": [
+      "FINDINGS.md",
       "README.md",
       "public_html/index.php",
       "src/js/deck.js"
@@ -2673,22 +3003,6 @@
     "indicator-warn": [
       "public_html/index.php"
     ],
-    "drawer": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "drawer-header": [
-      "public_html/index.php"
-    ],
-    "drawer-title": [
-      "public_html/index.php"
-    ],
-    "drawer-body": [
-      "public_html/index.php"
-    ],
-    "drawer-footer": [
-      "public_html/index.php"
-    ],
     "mega": [
       "README.md",
       "public_html/index.php"
@@ -2912,29 +3226,7 @@
       "README.md",
       "public_html/index.php"
     ],
-    "tip": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "tip-arrow": [
-      "README.md",
-      "public_html/index.php",
-      "src/js/deck-adapters.js"
-    ],
     "mt-2": [
-      "public_html/index.php"
-    ],
-    "pop": [
-      "README.md",
-      "public_html/index.php"
-    ],
-    "pop-title": [
-      "public_html/index.php"
-    ],
-    "pop-body": [
-      "public_html/index.php"
-    ],
-    "pop-actions": [
       "public_html/index.php"
     ],
     "kanban": [
@@ -3019,19 +3311,10 @@
     "tabbar-item": [
       "public_html/index.php"
     ],
-    "toast-region": [
-      "public_html/index.php",
-      "src/js/deck.js"
-    ],
     "is-fanned": [
       "FINDINGS.md",
       "README.md",
       "public_html/index.php"
-    ],
-    "toast": [
-      "bin/deck.mjs",
-      "public_html/index.php",
-      "src/js/deck.js"
     ],
     "shake": [
       "README.md",
@@ -3050,9 +3333,6 @@
     "rating-static": [
       "README.md",
       "public_html/llms.txt"
-    ],
-    "menu-match": [
-      "src/js/deck-adapters.js"
     ],
     "combo-list": [
       "src/js/deck-adapters.js",
@@ -3190,30 +3470,6 @@
     "dg-sort-icon": [
       "src/js/deck.js"
     ],
-    "toast-icon": [
-      "src/js/deck.js"
-    ],
-    "toast-main": [
-      "src/js/deck.js"
-    ],
-    "toast-title": [
-      "src/js/deck.js"
-    ],
-    "toast-text": [
-      "src/js/deck.js"
-    ],
-    "toast-actions": [
-      "src/js/deck.js"
-    ],
-    "toast-action": [
-      "src/js/deck.js"
-    ],
-    "toast-close": [
-      "src/js/deck.js"
-    ],
-    "toast-timer": [
-      "src/js/deck.js"
-    ],
     "has-value": [
       "src/js/deck.js"
     ],
@@ -3243,15 +3499,6 @@
       "src/js/deck.js"
     ],
     "is-resizing": [
-      "src/js/deck.js"
-    ],
-    "toast-region-stacked": [
-      "src/js/deck.js"
-    ],
-    "is-leaving": [
-      "src/js/deck.js"
-    ],
-    "is-dragging": [
       "src/js/deck.js"
     ],
     "is-revealed": [
@@ -3287,9 +3534,6 @@
     ],
     "is-dismissed": [
       "FINDINGS.md",
-      "src/js/deck.js"
-    ],
-    "anchor": [
       "src/js/deck.js"
     ],
     "is-visible": [
@@ -3352,15 +3596,6 @@
       "README.md"
     ],
     "emoji-hero": [
-      "README.md"
-    ],
-    "toast-region-start": [
-      "README.md"
-    ],
-    "toast-region-center": [
-      "README.md"
-    ],
-    "toast-region-top": [
       "README.md"
     ],
     "chart-col-stack": [
@@ -3629,9 +3864,6 @@
     "carousel-multi": [
       "README.md"
     ],
-    "drawer-end": [
-      "README.md"
-    ],
     "banner-bottom": [
       "README.md"
     ],
@@ -3746,7 +3978,6 @@
     "dg-empty",
     "dg-tight",
     "dg-wrap-text",
-    "disclosure",
     "disclosure-body",
     "drop-reject",
     "drop-target",
@@ -3945,12 +4176,6 @@
     "text-warn",
     "text-xl",
     "text-xs",
-    "toast-bad",
-    "toast-good",
-    "toast-info",
-    "toast-loading",
-    "toast-undo",
-    "toast-warn",
     "touch-only",
     "uppercase",
     "video-cover",

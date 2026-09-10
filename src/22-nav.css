@@ -188,6 +188,9 @@
   .drawer[open] { translate: 0; }
   @starting-style { .drawer[open] { translate: -100% 0; } }
 
+  /* Pins the drawer to the ending edge instead of the starting one. The inset
+     is logical and mirrors for free; the translate is not, which is why this
+     rule declares its own. */
   .drawer-end {
     inset-inline: auto 0;
     border-inline: 1px solid var(--line) 0;
@@ -207,6 +210,7 @@
   .drawer[open]::backdrop { opacity: 1; }
   @starting-style { .drawer[open]::backdrop { opacity: 0; } }
 
+  /* The title row. Pads for a notch with max(--space-4, safe-area-inset-top). */
   .drawer-header {
     display: flex;
     align-items: center;
@@ -216,7 +220,10 @@
     border-block-end: 1px solid var(--line);
     flex: 0 0 auto;
   }
+  /* The drawer's heading. Point aria-labelledby at it. */
   .drawer-title { font-size: var(--text-md); font-weight: 640; }
+  /* The scrolling region. overscroll-behavior: contain stops a scroll that
+     reaches the end from chaining to the page behind. */
   .drawer-body {
     flex: 1 1 auto;
     overflow-y: auto;
@@ -226,6 +233,8 @@
     flex-direction: column;
     gap: var(--space-4);
   }
+  /* The action row, pinned to the bottom. Pads for the home indicator with
+     max(--space-4, safe-area-inset-bottom). */
   .drawer-footer {
     flex: 0 0 auto;
     display: flex;

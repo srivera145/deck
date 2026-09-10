@@ -661,3 +661,153 @@ All three corrected. The lesson is narrow and worth stating: **a print rule is t
 easiest thing in a stylesheet to describe from memory and the least likely to be checked
 by a reader**, because almost nobody prints a page to verify the documentation. Print
 claims need reading the source every time, not recalling it.
+
+
+<!-- Items 42 onward were found while writing the batch 3 interactive pages:
+     modal, drawer, sheet, menu, tooltip, popover, tabs, accordion, segmented,
+     toast. -->
+
+## 42. Three components ship an ARIA role's appearance without its behaviour
+
+`.tabs` and `.segmented` are both styled from `[aria-selected="true"]`, which is the
+right way round — the visual state and the accessible state are one attribute and cannot
+drift. But `aria-selected` only means anything inside a `role="tablist"`, and a tablist
+carries obligations Deck does not meet:
+
+- one tab stop for the whole strip, via a roving `tabindex`
+- arrow keys between tabs, following the writing direction
+- Home and End
+- `aria-controls` and `role="tabpanel"` wiring
+
+Deck ships none of it, and no JavaScript for any of it. A page that uses the roles
+without adding the keys has a control that *announces* itself as a tablist and then
+behaves like a row of separate buttons — which is worse than no role at all, because a
+screen-reader user is told to expect arrow keys that do nothing.
+
+**Not fixed.** Both pages now document the full keyboard pattern with working code, and
+both say plainly that the alternative — links with `aria-current`, or radio inputs — is
+often the better choice because the platform supplies the behaviour. But a framework that
+styles `[aria-selected]` is inviting the roles, and it should either ship the script or
+not style the attribute.
+
+The same shape appears a third time in `.menu`, which deliberately does *not* use
+`role="menu"` for exactly this reason. That is the right call, and it is worth noting the
+inconsistency: the menu page refuses the role it cannot support, while tabs and segmented
+style for a role they cannot support either.
+
+## 43. `.segmented` does not style its own no-JavaScript version
+
+A segmented control built from radio inputs is strictly better than one built from
+buttons: arrow keys, group labelling from a `<legend>`, and form submission all come free
+from the platform. The source comment calls it "iOS-style, good on a phone", and the
+markup is obvious.
+
+It does not work, because the selected-state rule keys off `[aria-selected="true"]` and
+`.is-active` only. A radio version renders with every option looking unselected.
+
+```css
+/* the missing rule */
+.segmented > label:has(:checked) {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-1);
+}
+```
+
+**Not fixed** — a rendering change on a public class, in a documentation pass. Documented
+on the segmented page with the rule to paste, and flagged as the version to prefer
+despite the gap.
+
+## 44. `.sheet-grip` promises a gesture that does not exist
+
+The grip is the platform convention for "drag this panel down to dismiss". Deck draws it
+and implements no drag: swiping a sheet down does nothing, and `touch-action` is not set
+on the sheet either, so there is nothing to build one on.
+
+Same shape as item 27, the file drop zone. Milder, because a grip also reads as a
+decorative handle and a close button is usually present — but a reader who tries the
+gesture gets no feedback at all.
+
+**Not fixed.** Documented on the sheet page, which also says what implementing it would
+take.
+
+## 45. `.accordion` content that is closed does not print
+
+A closed `<details>` renders nothing, so it prints nothing. For a page whose accordions
+*are* the content — an FAQ, a policy, a terms page — most of the page is missing from the
+printed copy, and nothing indicates that anything was omitted.
+
+`src/99-print.css` has no `.accordion` rule. The closest fix is forcing the content
+region open for print:
+
+```css
+@media print {
+  .accordion details::details-content {
+    block-size: auto !important;
+    content-visibility: visible !important;
+  }
+}
+```
+
+That reveals the content but leaves every chevron pointing "closed", so the chevron should
+be hidden in the same block.
+
+**Not fixed**, and worth prioritising over the other print gaps: unlike a scroller, an
+accordion routinely holds the substance of a page rather than a row of tiles.
+
+## 46. Four components ship touch targets under 44px
+
+Documenting the interactive set turned this into a pattern rather than a series of
+one-offs:
+
+| Component | Target | Why |
+| --- | ---: | --- |
+| `.menu-item` | 40px | A menu of eight items would otherwise be very tall |
+| `.segmented > *` | 36px | Full-width control; the horizontal target is generous |
+| `.dg .dg-check .check` | ~34px | A dense grid cannot have 44px checkboxes |
+| `.toast-close` | 26px | Mitigated by the whole toast being swipeable |
+
+Each is defensible on its own and each is now documented on its page. What was not
+visible before is that there are four of them, which makes it a house style rather than
+four exceptions. Whether that is the right house style is a question worth answering
+deliberately — the alternative is a `--tap-dense` token that names the smaller value, so
+the decision is made once and visible.
+
+**Not fixed.** Recorded so the pattern is at least legible.
+
+## 47. `.tip` is a tooltip that opens on click — FIXED in the documentation only
+
+`.tip` is a popover, and a popover opens on click. A tooltip that requires a click is not
+a tooltip; the pattern readers expect is hover and focus.
+
+Deck ships no script to open it on `pointerenter`, so out of the box `.tip` behaves as a
+small popover. The CSS-only `.tooltip` has the opposite problem — it opens on hover and
+focus for free, and cannot flip, escape an overflow, or appear on touch at all.
+
+Neither is wrong; between them they cover the cases. But a reader arriving at "tooltip"
+needs to be told which one they are getting, and until now nothing said so.
+
+**Documented rather than fixed:** the tooltip page now leads with the comparison and a
+table of what each can do. A few lines of JavaScript would give `.tip` hover-and-focus
+behaviour and make it the better default for both.
+
+## 48. `translate` and `transform-origin` have no logical form, and three components pay for it
+
+Deck's RTL story is that logical properties handle almost everything and the exceptions
+are collected in `src/19-logical.css`. Batch 3 found how many of those exceptions are the
+same two properties:
+
+- `.drawer` slides with `translate: -100% 0`; `.drawer-end` declares `translate: 100% 0`
+  separately so the pair is correct by construction.
+- `.switch` moves its knob with `translate: 18px 0`, negated for RTL in `19-logical.css`.
+- `.toast-timer` drains from `transform-origin: left center`, flipped for RTL in the same
+  file alongside chart bars and progress fills.
+
+The switch is the one that bites: the travel distance is a magic number written **twice**,
+once in the component and once negated. Change the switch's size and forget the RTL copy,
+and it breaks only for readers of Arabic and Hebrew — the least likely case to be tested.
+
+**Not fixed.** Both pages now say so explicitly, and the switch's override example shows
+all four numbers including the RTL one. A `--switch-size` with derived values would remove
+the magic numbers; a linter rule that flags a `translate` on the inline axis without a
+matching `[dir="rtl"]` rule would catch the class of bug.

@@ -6,6 +6,9 @@
 
 @layer deck.components {
 
+  /* The fixed container. pointer-events: none on the region and auto on each
+     toast, so the empty area does not swallow clicks on the page beneath. Sits
+     above a .tabbar when the page has one, and clears the home indicator. */
   .toast-region {
     position: fixed;
     z-index: var(--z-toast);
@@ -38,6 +41,11 @@
   }
 
   /* --- The toast ----------------------------------------------------------- */
+  /* One notification. The accent colour is a single custom property,
+     --toast-accent, which paints the edge, the icon and the timer together, so
+     a kind is one declaration. Built by Deck.toast() rather than written by
+     hand; touch-action: pan-y lets a horizontal swipe dismiss it while a
+     vertical drag still scrolls the page. */
   .toast {
     --toast-accent: var(--ink-400);
     position: relative;
@@ -69,7 +77,11 @@
     background: var(--toast-accent);
   }
 
+  /* The leading glyph, coloured by --toast-accent so it matches the kind
+     without a rule of its own. */
   .toast-icon { color: var(--toast-accent); margin-block-start: 1px; flex: 0 0 auto; }
+  /* The text column of a toast. min-inline-size: 0 so a long unbroken string
+     cannot push the close button off the end. */
   .toast-main { flex: 1 1 auto; min-inline-size: 0; display: flex; flex-direction: column; gap: 2px; }
   .toast-title { font-weight: 620; }
   .toast-text { color: var(--text-muted); }
@@ -104,6 +116,10 @@
   .toast-loading { --toast-accent: var(--brand-500); }
 
   /* --- Auto-dismiss timer -------------------------------------------------- */
+  /* The auto-dismiss bar. A CSS animation rather than a JavaScript countdown,
+     which is what allows hovering or focusing the region to pause every timer
+     in it with one declaration — so a reader moving toward an Undo button does
+     not have it vanish as they arrive. */
   .toast-timer {
     position: absolute;
     inset-block-end: 0;

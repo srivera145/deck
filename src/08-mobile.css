@@ -40,6 +40,9 @@
   .sheet[open]::backdrop { opacity: 1; }
   @starting-style { .sheet[open]::backdrop { opacity: 0; } }
 
+  /* The drag handle at the top of a bottom sheet. Deck draws it and does not
+     implement the drag — swiping down does nothing — so always ship a real
+     close button as well. */
   .sheet-grip {
     inline-size: 38px;
     block-size: 4px;
@@ -47,8 +50,12 @@
     background: var(--ink-300);
     margin: var(--space-3) auto var(--space-1);
   }
+  /* The title row of a sheet. */
   .sheet-header { padding: var(--space-3) var(--space-5); display: flex; align-items: center; gap: var(--space-3); }
+  /* The sheet's heading. Point aria-labelledby at it. */
   .sheet-title { font-size: var(--text-md); font-weight: 640; }
+  /* The scrolling region. Pads for the home indicator, and contains its
+     overscroll so reaching the end does not scroll the page behind. */
   .sheet-body {
     padding: var(--space-2) var(--space-5) calc(var(--space-6) + env(safe-area-inset-bottom));
     overflow-y: auto;

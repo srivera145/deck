@@ -3,8 +3,8 @@
   "stylesheets": 26,
   "counts": {
     "classes": 931,
-    "documented": 230,
-    "undocumented": 701,
+    "documented": 263,
+    "undocumented": 668,
     "tokens": 130,
     "rules": 1765,
     "components": 99,
@@ -27,61 +27,61 @@
         {
           "selector": ".accordion",
           "file": "07-components.css",
-          "line": 412,
+          "line": 431,
           "conditions": []
         },
         {
           "selector": ".accordion > details + details",
           "file": "07-components.css",
-          "line": 413,
+          "line": 432,
           "conditions": []
         },
         {
           "selector": ".accordion summary",
           "file": "07-components.css",
-          "line": 414,
+          "line": 433,
           "conditions": []
         },
         {
           "selector": ".accordion summary::-webkit-details-marker",
           "file": "07-components.css",
-          "line": 425,
+          "line": 444,
           "conditions": []
         },
         {
           "selector": ".accordion summary:hover",
           "file": "07-components.css",
-          "line": 426,
+          "line": 445,
           "conditions": []
         },
         {
           "selector": ".accordion summary::after",
           "file": "07-components.css",
-          "line": 427,
+          "line": 446,
           "conditions": []
         },
         {
           "selector": ".accordion details[open] summary::after",
           "file": "07-components.css",
-          "line": 438,
+          "line": 457,
           "conditions": []
         },
         {
           "selector": ".accordion .accordion-body",
           "file": "07-components.css",
-          "line": 439,
+          "line": 460,
           "conditions": []
         },
         {
           "selector": ".accordion details::details-content",
           "file": "07-components.css",
-          "line": 444,
+          "line": 465,
           "conditions": []
         },
         {
           "selector": ".accordion details[open]::details-content",
           "file": "07-components.css",
-          "line": 449,
+          "line": 470,
           "conditions": []
         }
       ]
@@ -355,49 +355,49 @@
         {
           "selector": ".banner",
           "file": "22-nav.css",
-          "line": 582,
+          "line": 591,
           "conditions": []
         },
         {
           "selector": ".banner-bottom",
           "file": "22-nav.css",
-          "line": 596,
+          "line": 605,
           "conditions": []
         },
         {
           "selector": ".banner-fixed",
           "file": "22-nav.css",
-          "line": 603,
+          "line": 612,
           "conditions": []
         },
         {
           "selector": ".banner-dark",
           "file": "22-nav.css",
-          "line": 604,
+          "line": 613,
           "conditions": []
         },
         {
           "selector": ".banner-warn",
           "file": "22-nav.css",
-          "line": 605,
+          "line": 614,
           "conditions": []
         },
         {
           "selector": ".banner-close",
           "file": "22-nav.css",
-          "line": 606,
+          "line": 615,
           "conditions": []
         },
         {
           "selector": ".banner-close:hover",
           "file": "22-nav.css",
-          "line": 607,
+          "line": 616,
           "conditions": []
         },
         {
           "selector": ".banner[hidden]",
           "file": "22-nav.css",
-          "line": 608,
+          "line": 617,
           "conditions": []
         },
         {
@@ -757,7 +757,7 @@
         {
           "selector": ".modal-footer > .btn",
           "file": "07-components.css",
-          "line": 658,
+          "line": 712,
           "conditions": [
             "@media (max-width: 32rem)"
           ]
@@ -807,13 +807,13 @@
         {
           "selector": ".drawer-footer > .btn",
           "file": "22-nav.css",
-          "line": 238,
+          "line": 247,
           "conditions": []
         },
         {
           "selector": ".jumbotron-actions > .btn",
           "file": "22-nav.css",
-          "line": 638,
+          "line": 647,
           "conditions": [
             "@media (max-width: 30rem)"
           ]
@@ -2602,7 +2602,7 @@
         {
           "selector": ".combo-list",
           "file": "25-anchor.css",
-          "line": 141,
+          "line": 148,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -3682,7 +3682,7 @@
         {
           "selector": ".datepicker",
           "file": "25-anchor.css",
-          "line": 141,
+          "line": 148,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -4494,49 +4494,49 @@
         {
           "selector": ".disclosure summary",
           "file": "07-components.css",
-          "line": 414,
+          "line": 433,
           "conditions": []
         },
         {
           "selector": ".disclosure summary::-webkit-details-marker",
           "file": "07-components.css",
-          "line": 425,
+          "line": 444,
           "conditions": []
         },
         {
           "selector": ".disclosure summary:hover",
           "file": "07-components.css",
-          "line": 426,
+          "line": 445,
           "conditions": []
         },
         {
           "selector": ".disclosure summary::after",
           "file": "07-components.css",
-          "line": 427,
+          "line": 446,
           "conditions": []
         },
         {
           "selector": ".disclosure[open] summary::after",
           "file": "07-components.css",
-          "line": 438,
+          "line": 457,
           "conditions": []
         },
         {
           "selector": ".disclosure .disclosure-body",
           "file": "07-components.css",
-          "line": 439,
+          "line": 460,
           "conditions": []
         },
         {
           "selector": ".disclosure::details-content",
           "file": "07-components.css",
-          "line": 444,
+          "line": 465,
           "conditions": []
         },
         {
           "selector": ".disclosure[open]::details-content",
           "file": "07-components.css",
-          "line": 449,
+          "line": 470,
           "conditions": []
         }
       ]
@@ -4676,61 +4676,61 @@
         {
           "selector": ".drawer-end",
           "file": "22-nav.css",
-          "line": 191,
+          "line": 194,
           "conditions": []
         },
         {
           "selector": ".drawer-end[open]",
           "file": "22-nav.css",
-          "line": 198,
+          "line": 201,
           "conditions": []
         },
         {
           "selector": ".drawer::backdrop",
           "file": "22-nav.css",
-          "line": 200,
+          "line": 203,
           "conditions": []
         },
         {
           "selector": ".drawer[open]::backdrop",
-          "file": "22-nav.css",
-          "line": 207,
-          "conditions": []
-        },
-        {
-          "selector": ".drawer[open]::backdrop",
-          "file": "22-nav.css",
-          "line": 208,
-          "conditions": []
-        },
-        {
-          "selector": ".drawer-header",
           "file": "22-nav.css",
           "line": 210,
           "conditions": []
         },
         {
+          "selector": ".drawer[open]::backdrop",
+          "file": "22-nav.css",
+          "line": 211,
+          "conditions": []
+        },
+        {
+          "selector": ".drawer-header",
+          "file": "22-nav.css",
+          "line": 214,
+          "conditions": []
+        },
+        {
           "selector": ".drawer-title",
           "file": "22-nav.css",
-          "line": 219,
+          "line": 224,
           "conditions": []
         },
         {
           "selector": ".drawer-body",
           "file": "22-nav.css",
-          "line": 220,
+          "line": 227,
           "conditions": []
         },
         {
           "selector": ".drawer-footer",
           "file": "22-nav.css",
-          "line": 229,
+          "line": 238,
           "conditions": []
         },
         {
           "selector": ".drawer-footer > .btn",
           "file": "22-nav.css",
-          "line": 238,
+          "line": 247,
           "conditions": []
         },
         {
@@ -4947,55 +4947,55 @@
         {
           "selector": ".emoji",
           "file": "08-mobile.css",
-          "line": 176,
+          "line": 183,
           "conditions": []
         },
         {
           "selector": ".emoji-lg",
           "file": "08-mobile.css",
-          "line": 188,
+          "line": 195,
           "conditions": []
         },
         {
           "selector": ".emoji-xl",
           "file": "08-mobile.css",
-          "line": 189,
+          "line": 196,
           "conditions": []
         },
         {
           "selector": ".emoji-hero",
           "file": "08-mobile.css",
-          "line": 190,
+          "line": 197,
           "conditions": []
         },
         {
           "selector": ".emoji-tile",
           "file": "08-mobile.css",
-          "line": 193,
+          "line": 200,
           "conditions": []
         },
         {
           "selector": ".emoji-tile-round",
           "file": "08-mobile.css",
-          "line": 204,
+          "line": 211,
           "conditions": []
         },
         {
           "selector": ".emoji-grid",
           "file": "08-mobile.css",
-          "line": 207,
+          "line": 214,
           "conditions": []
         },
         {
           "selector": ".emoji-grid > button",
           "file": "08-mobile.css",
-          "line": 212,
+          "line": 219,
           "conditions": []
         },
         {
           "selector": ".emoji-grid > button:hover",
           "file": "08-mobile.css",
-          "line": 220,
+          "line": 227,
           "conditions": []
         }
       ]
@@ -5015,25 +5015,25 @@
         {
           "selector": ".empty",
           "file": "07-components.css",
-          "line": 662,
+          "line": 716,
           "conditions": []
         },
         {
           "selector": ".empty-art",
           "file": "07-components.css",
-          "line": 670,
+          "line": 724,
           "conditions": []
         },
         {
           "selector": ".empty-title",
           "file": "07-components.css",
-          "line": 680,
+          "line": 734,
           "conditions": []
         },
         {
           "selector": ".empty p",
           "file": "07-components.css",
-          "line": 681,
+          "line": 735,
           "conditions": []
         }
       ]
@@ -5516,67 +5516,67 @@
         {
           "selector": ".footer",
           "file": "22-nav.css",
-          "line": 644,
+          "line": 653,
           "conditions": []
         },
         {
           "selector": ".footer-grid",
           "file": "22-nav.css",
-          "line": 650,
+          "line": 659,
           "conditions": []
         },
         {
           "selector": ".footer-brand",
           "file": "22-nav.css",
-          "line": 656,
+          "line": 665,
           "conditions": []
         },
         {
           "selector": ".footer-col",
           "file": "22-nav.css",
-          "line": 657,
+          "line": 666,
           "conditions": []
         },
         {
           "selector": ".footer-heading",
           "file": "22-nav.css",
-          "line": 658,
+          "line": 667,
           "conditions": []
         },
         {
           "selector": ".footer a",
           "file": "22-nav.css",
-          "line": 664,
+          "line": 673,
           "conditions": []
         },
         {
           "selector": ".footer a:hover",
           "file": "22-nav.css",
-          "line": 665,
+          "line": 674,
           "conditions": []
         },
         {
           "selector": ".footer-bottom",
           "file": "22-nav.css",
-          "line": 666,
+          "line": 675,
           "conditions": []
         },
         {
           "selector": ".footer-social",
           "file": "22-nav.css",
-          "line": 675,
+          "line": 684,
           "conditions": []
         },
         {
           "selector": ".footer-social a",
           "file": "22-nav.css",
-          "line": 676,
+          "line": 685,
           "conditions": []
         },
         {
           "selector": ".footer-social a:hover",
           "file": "22-nav.css",
-          "line": 683,
+          "line": 692,
           "conditions": []
         }
       ]
@@ -5999,85 +5999,85 @@
         {
           "selector": ".tabbar-item[aria-current] .icon",
           "file": "08-mobile.css",
-          "line": 108,
+          "line": 115,
           "conditions": []
         },
         {
           "selector": ".tabbar-item .icon",
           "file": "08-mobile.css",
-          "line": 109,
+          "line": 116,
           "conditions": []
         },
         {
           "selector": ".icon",
           "file": "08-mobile.css",
-          "line": 127,
+          "line": 134,
           "conditions": []
         },
         {
           "selector": ".icon-sm",
           "file": "08-mobile.css",
-          "line": 144,
+          "line": 151,
           "conditions": []
         },
         {
           "selector": ".icon-lg",
           "file": "08-mobile.css",
-          "line": 147,
+          "line": 154,
           "conditions": []
         },
         {
           "selector": ".icon-xl",
           "file": "08-mobile.css",
-          "line": 148,
+          "line": 155,
           "conditions": []
         },
         {
           "selector": ".icon-fill",
           "file": "08-mobile.css",
-          "line": 149,
+          "line": 156,
           "conditions": []
         },
         {
           "selector": ".icon-muted",
           "file": "08-mobile.css",
-          "line": 150,
+          "line": 157,
           "conditions": []
         },
         {
           "selector": ".icon-spin",
           "file": "08-mobile.css",
-          "line": 151,
+          "line": 158,
           "conditions": []
         },
         {
           "selector": ".icon-tile",
           "file": "08-mobile.css",
-          "line": 154,
+          "line": 161,
           "conditions": []
         },
         {
           "selector": ".icon-tile-good",
           "file": "08-mobile.css",
-          "line": 164,
+          "line": 171,
           "conditions": []
         },
         {
           "selector": ".icon-tile-warn",
           "file": "08-mobile.css",
-          "line": 165,
+          "line": 172,
           "conditions": []
         },
         {
           "selector": ".icon-tile-bad",
           "file": "08-mobile.css",
-          "line": 166,
+          "line": 173,
           "conditions": []
         },
         {
           "selector": ".icon-tile-lg",
           "file": "08-mobile.css",
-          "line": 167,
+          "line": 174,
           "conditions": []
         },
         {
@@ -6177,13 +6177,13 @@
         {
           "selector": ".speed-dial > .fab .icon",
           "file": "22-nav.css",
-          "line": 389,
+          "line": 398,
           "conditions": []
         },
         {
           "selector": ".speed-dial.is-open > .fab .icon",
           "file": "22-nav.css",
-          "line": 390,
+          "line": 399,
           "conditions": []
         },
         {
@@ -6230,67 +6230,67 @@
         {
           "selector": ".indicator",
           "file": "22-nav.css",
-          "line": 688,
+          "line": 697,
           "conditions": []
         },
         {
           "selector": ".indicator-good",
           "file": "22-nav.css",
-          "line": 696,
+          "line": 705,
           "conditions": []
         },
         {
           "selector": ".indicator-warn",
           "file": "22-nav.css",
-          "line": 697,
+          "line": 706,
           "conditions": []
         },
         {
           "selector": ".indicator-bad",
           "file": "22-nav.css",
-          "line": 698,
+          "line": 707,
           "conditions": []
         },
         {
           "selector": ".indicator-brand",
           "file": "22-nav.css",
-          "line": 699,
+          "line": 708,
           "conditions": []
         },
         {
           "selector": ".indicator-lg",
           "file": "22-nav.css",
-          "line": 700,
+          "line": 709,
           "conditions": []
         },
         {
           "selector": ".indicator-ring",
           "file": "22-nav.css",
-          "line": 701,
+          "line": 710,
           "conditions": []
         },
         {
           "selector": ".with-indicator > .indicator-badge",
           "file": "22-nav.css",
-          "line": 705,
+          "line": 714,
           "conditions": []
         },
         {
           "selector": ".with-indicator > .indicator-badge-dot",
           "file": "22-nav.css",
-          "line": 722,
+          "line": 731,
           "conditions": []
         },
         {
           "selector": ".with-indicator > .indicator-badge-brand",
           "file": "22-nav.css",
-          "line": 730,
+          "line": 739,
           "conditions": []
         },
         {
           "selector": ".status-line .indicator",
           "file": "22-nav.css",
-          "line": 734,
+          "line": 743,
           "conditions": []
         }
       ]
@@ -6498,31 +6498,31 @@
         {
           "selector": ".jumbotron",
           "file": "22-nav.css",
-          "line": 613,
+          "line": 622,
           "conditions": []
         },
         {
           "selector": ".jumbotron-center",
           "file": "22-nav.css",
-          "line": 623,
+          "line": 632,
           "conditions": []
         },
         {
           "selector": ".jumbotron-center .lede",
           "file": "22-nav.css",
-          "line": 624,
+          "line": 633,
           "conditions": []
         },
         {
           "selector": ".jumbotron-media",
           "file": "22-nav.css",
-          "line": 625,
+          "line": 634,
           "conditions": []
         },
         {
           "selector": ".jumbotron-media",
           "file": "22-nav.css",
-          "line": 632,
+          "line": 641,
           "conditions": [
             "@media (min-width: 56rem)"
           ]
@@ -6530,25 +6530,25 @@
         {
           "selector": ".jumbotron h1",
           "file": "22-nav.css",
-          "line": 634,
+          "line": 643,
           "conditions": []
         },
         {
           "selector": ".jumbotron-center h1",
           "file": "22-nav.css",
-          "line": 635,
+          "line": 644,
           "conditions": []
         },
         {
           "selector": ".jumbotron-actions",
           "file": "22-nav.css",
-          "line": 636,
+          "line": 645,
           "conditions": []
         },
         {
           "selector": ".jumbotron-actions > .btn",
           "file": "22-nav.css",
-          "line": 638,
+          "line": 647,
           "conditions": [
             "@media (max-width: 30rem)"
           ]
@@ -7063,79 +7063,79 @@
         {
           "selector": ".mega",
           "file": "22-nav.css",
-          "line": 244,
+          "line": 253,
           "conditions": []
         },
         {
           "selector": ".mega:popover-open",
-          "file": "22-nav.css",
-          "line": 261,
-          "conditions": []
-        },
-        {
-          "selector": ".mega:popover-open",
-          "file": "22-nav.css",
-          "line": 262,
-          "conditions": []
-        },
-        {
-          "selector": ".mega::backdrop",
-          "file": "22-nav.css",
-          "line": 263,
-          "conditions": []
-        },
-        {
-          "selector": ".mega-grid",
-          "file": "22-nav.css",
-          "line": 265,
-          "conditions": []
-        },
-        {
-          "selector": ".mega-col",
           "file": "22-nav.css",
           "line": 270,
           "conditions": []
         },
         {
-          "selector": ".mega-heading",
+          "selector": ".mega:popover-open",
           "file": "22-nav.css",
           "line": 271,
           "conditions": []
         },
         {
+          "selector": ".mega::backdrop",
+          "file": "22-nav.css",
+          "line": 272,
+          "conditions": []
+        },
+        {
+          "selector": ".mega-grid",
+          "file": "22-nav.css",
+          "line": 274,
+          "conditions": []
+        },
+        {
+          "selector": ".mega-col",
+          "file": "22-nav.css",
+          "line": 279,
+          "conditions": []
+        },
+        {
+          "selector": ".mega-heading",
+          "file": "22-nav.css",
+          "line": 280,
+          "conditions": []
+        },
+        {
           "selector": ".mega-item",
           "file": "22-nav.css",
-          "line": 277,
+          "line": 286,
           "conditions": []
         },
         {
           "selector": ".mega-item:hover",
           "file": "22-nav.css",
-          "line": 287,
+          "line": 296,
           "conditions": []
         },
         {
           "selector": ".mega-item-title",
           "file": "22-nav.css",
-          "line": 288,
+          "line": 297,
           "conditions": []
         },
         {
           "selector": ".mega-item-note",
           "file": "22-nav.css",
-          "line": 289,
+          "line": 298,
           "conditions": []
         },
         {
           "selector": ".mega-feature",
           "file": "22-nav.css",
-          "line": 290,
+          "line": 299,
           "conditions": []
         },
         {
           "selector": ".mega-footer",
           "file": "22-nav.css",
-          "line": 297,
+          "line": 306,
           "conditions": []
         },
         {
@@ -7165,7 +7165,7 @@
         {
           "selector": ".mega",
           "file": "25-anchor.css",
-          "line": 141,
+          "line": 148,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -7192,73 +7192,73 @@
         {
           "selector": ".menu",
           "file": "07-components.css",
-          "line": 561,
+          "line": 591,
           "conditions": []
         },
         {
           "selector": ".menu:popover-open",
           "file": "07-components.css",
-          "line": 580,
+          "line": 610,
           "conditions": []
         },
         {
           "selector": ".menu:popover-open",
           "file": "07-components.css",
-          "line": 581,
+          "line": 611,
           "conditions": []
         },
         {
           "selector": ".menu::backdrop",
           "file": "07-components.css",
-          "line": 582,
+          "line": 612,
           "conditions": []
         },
         {
           "selector": ".menu-item",
           "file": "07-components.css",
-          "line": 584,
+          "line": 618,
           "conditions": []
         },
         {
           "selector": ".menu-item:hover",
           "file": "07-components.css",
-          "line": 599,
+          "line": 633,
           "conditions": []
         },
         {
           "selector": ".menu-item:focus-visible",
           "file": "07-components.css",
-          "line": 599,
+          "line": 633,
           "conditions": []
         },
         {
           "selector": ".menu-item-danger",
           "file": "07-components.css",
-          "line": 600,
+          "line": 636,
           "conditions": []
         },
         {
           "selector": ".menu-item-danger:hover",
           "file": "07-components.css",
-          "line": 601,
+          "line": 637,
           "conditions": []
         },
         {
           "selector": ".menu-item .push",
           "file": "07-components.css",
-          "line": 602,
+          "line": 638,
           "conditions": []
         },
         {
           "selector": ".menu-sep",
           "file": "07-components.css",
-          "line": 603,
+          "line": 640,
           "conditions": []
         },
         {
           "selector": ".menu-label",
           "file": "07-components.css",
-          "line": 604,
+          "line": 643,
           "conditions": []
         },
         {
@@ -7288,7 +7288,7 @@
         {
           "selector": ".menu",
           "file": "25-anchor.css",
-          "line": 141,
+          "line": 148,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -7320,67 +7320,67 @@
         {
           "selector": ".modal",
           "file": "07-components.css",
-          "line": 607,
+          "line": 651,
           "conditions": []
         },
         {
           "selector": ".modal[open]",
           "file": "07-components.css",
-          "line": 626,
+          "line": 670,
           "conditions": []
         },
         {
           "selector": ".modal[open]",
           "file": "07-components.css",
-          "line": 627,
+          "line": 671,
           "conditions": []
         },
         {
           "selector": ".modal::backdrop",
           "file": "07-components.css",
-          "line": 628,
+          "line": 672,
           "conditions": []
         },
         {
           "selector": ".modal[open]::backdrop",
           "file": "07-components.css",
-          "line": 635,
+          "line": 679,
           "conditions": []
         },
         {
           "selector": ".modal[open]::backdrop",
           "file": "07-components.css",
-          "line": 636,
+          "line": 680,
           "conditions": []
         },
         {
           "selector": ".modal-header",
           "file": "07-components.css",
-          "line": 638,
+          "line": 684,
           "conditions": []
         },
         {
           "selector": ".modal-title",
           "file": "07-components.css",
-          "line": 645,
+          "line": 693,
           "conditions": []
         },
         {
           "selector": ".modal-body",
           "file": "07-components.css",
-          "line": 646,
+          "line": 697,
           "conditions": []
         },
         {
           "selector": ".modal-footer",
           "file": "07-components.css",
-          "line": 647,
+          "line": 701,
           "conditions": []
         },
         {
           "selector": ".modal-footer",
           "file": "07-components.css",
-          "line": 657,
+          "line": 711,
           "conditions": [
             "@media (max-width: 32rem)"
           ]
@@ -7388,7 +7388,7 @@
         {
           "selector": ".modal-footer > .btn",
           "file": "07-components.css",
-          "line": 658,
+          "line": 712,
           "conditions": [
             "@media (max-width: 32rem)"
           ]
@@ -7494,25 +7494,25 @@
         {
           "selector": ".navbar",
           "file": "07-components.css",
-          "line": 727,
+          "line": 781,
           "conditions": []
         },
         {
           "selector": ".navbar-brand",
           "file": "07-components.css",
-          "line": 735,
+          "line": 789,
           "conditions": []
         },
         {
           "selector": ".navbar-links",
           "file": "07-components.css",
-          "line": 745,
+          "line": 799,
           "conditions": []
         },
         {
           "selector": ".navbar-links",
           "file": "07-components.css",
-          "line": 746,
+          "line": 800,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -7870,37 +7870,13 @@
         {
           "selector": ".pop",
           "file": "25-anchor.css",
-          "line": 112,
+          "line": 115,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
         },
         {
           "selector": ".pop:popover-open",
-          "file": "25-anchor.css",
-          "line": 133,
-          "conditions": [
-            "@supports (anchor-name: --a)"
-          ]
-        },
-        {
-          "selector": ".pop:popover-open",
-          "file": "25-anchor.css",
-          "line": 134,
-          "conditions": [
-            "@supports (anchor-name: --a)"
-          ]
-        },
-        {
-          "selector": ".pop::backdrop",
-          "file": "25-anchor.css",
-          "line": 135,
-          "conditions": [
-            "@supports (anchor-name: --a)"
-          ]
-        },
-        {
-          "selector": ".pop-title",
           "file": "25-anchor.css",
           "line": 136,
           "conditions": [
@@ -7908,7 +7884,7 @@
           ]
         },
         {
-          "selector": ".pop-body",
+          "selector": ".pop:popover-open",
           "file": "25-anchor.css",
           "line": 137,
           "conditions": [
@@ -7916,7 +7892,7 @@
           ]
         },
         {
-          "selector": ".pop-actions",
+          "selector": ".pop::backdrop",
           "file": "25-anchor.css",
           "line": 138,
           "conditions": [
@@ -7924,9 +7900,25 @@
           ]
         },
         {
-          "selector": ".pop",
+          "selector": ".pop-title",
           "file": "25-anchor.css",
-          "line": 141,
+          "line": 140,
+          "conditions": [
+            "@supports (anchor-name: --a)"
+          ]
+        },
+        {
+          "selector": ".pop-body",
+          "file": "25-anchor.css",
+          "line": 142,
+          "conditions": [
+            "@supports (anchor-name: --a)"
+          ]
+        },
+        {
+          "selector": ".pop-actions",
+          "file": "25-anchor.css",
+          "line": 145,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -7934,7 +7926,15 @@
         {
           "selector": ".pop",
           "file": "25-anchor.css",
-          "line": 152,
+          "line": 148,
+          "conditions": [
+            "@supports (anchor-name: --a)"
+          ]
+        },
+        {
+          "selector": ".pop",
+          "file": "25-anchor.css",
+          "line": 159,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -7942,7 +7942,7 @@
         {
           "selector": ".pop",
           "file": "25-anchor.css",
-          "line": 170,
+          "line": 177,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -7950,7 +7950,7 @@
         {
           "selector": ".pop:popover-open",
           "file": "25-anchor.css",
-          "line": 180,
+          "line": 187,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -7958,7 +7958,7 @@
         {
           "selector": ".pop:popover-open",
           "file": "25-anchor.css",
-          "line": 181,
+          "line": 188,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -7966,7 +7966,7 @@
         {
           "selector": ".pop::backdrop",
           "file": "25-anchor.css",
-          "line": 182,
+          "line": 189,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -8424,19 +8424,19 @@
         {
           "selector": ".ring",
           "file": "07-components.css",
-          "line": 491,
+          "line": 512,
           "conditions": []
         },
         {
           "selector": ".ring-wrap",
           "file": "07-components.css",
-          "line": 507,
+          "line": 528,
           "conditions": []
         },
         {
           "selector": ".ring-wrap > .ring-label",
           "file": "07-components.css",
-          "line": 508,
+          "line": 529,
           "conditions": []
         }
       ]
@@ -8597,31 +8597,31 @@
         {
           "selector": ".sheet-grip",
           "file": "08-mobile.css",
-          "line": 43,
+          "line": 46,
           "conditions": []
         },
         {
           "selector": ".sheet-header",
           "file": "08-mobile.css",
-          "line": 50,
+          "line": 54,
           "conditions": []
         },
         {
           "selector": ".sheet-title",
           "file": "08-mobile.css",
-          "line": 51,
+          "line": 56,
           "conditions": []
         },
         {
           "selector": ".sheet-body",
           "file": "08-mobile.css",
-          "line": 52,
+          "line": 59,
           "conditions": []
         },
         {
           "selector": ".sheet",
           "file": "08-mobile.css",
-          "line": 62,
+          "line": 69,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -8629,7 +8629,7 @@
         {
           "selector": ".sheet[open]",
           "file": "08-mobile.css",
-          "line": 72,
+          "line": 79,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -8637,7 +8637,7 @@
         {
           "selector": ".sheet[open]",
           "file": "08-mobile.css",
-          "line": 73,
+          "line": 80,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -8669,37 +8669,37 @@
         {
           "selector": ".sidebar",
           "file": "07-components.css",
-          "line": 762,
+          "line": 816,
           "conditions": []
         },
         {
           "selector": ".sidebar-group",
           "file": "07-components.css",
-          "line": 768,
+          "line": 822,
           "conditions": []
         },
         {
           "selector": ".sidebar-link",
           "file": "07-components.css",
-          "line": 769,
+          "line": 823,
           "conditions": []
         },
         {
           "selector": ".sidebar-link:hover",
           "file": "07-components.css",
-          "line": 782,
+          "line": 836,
           "conditions": []
         },
         {
           "selector": ".sidebar-link[aria-current]",
           "file": "07-components.css",
-          "line": 783,
+          "line": 837,
           "conditions": []
         },
         {
           "selector": ".sidebar-link .push",
           "file": "07-components.css",
-          "line": 784,
+          "line": 838,
           "conditions": []
         },
         {
@@ -8760,19 +8760,19 @@
         {
           "selector": ".skeleton",
           "file": "07-components.css",
-          "line": 520,
+          "line": 541,
           "conditions": []
         },
         {
           "selector": ".skeleton-text",
           "file": "07-components.css",
-          "line": 530,
+          "line": 551,
           "conditions": []
         },
         {
           "selector": ".skeleton-circle",
           "file": "07-components.css",
-          "line": 531,
+          "line": 552,
           "conditions": []
         }
       ]
@@ -8908,19 +8908,19 @@
         {
           "selector": ".speed-dial",
           "file": "22-nav.css",
-          "line": 310,
+          "line": 319,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .speed-dial",
           "file": "22-nav.css",
-          "line": 320,
+          "line": 329,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .speed-dial",
           "file": "22-nav.css",
-          "line": 324,
+          "line": 333,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -8928,13 +8928,13 @@
         {
           "selector": ".speed-dial-actions",
           "file": "22-nav.css",
-          "line": 327,
+          "line": 336,
           "conditions": []
         },
         {
           "selector": ".speed-dial-action",
           "file": "22-nav.css",
-          "line": 334,
+          "line": 343,
           "conditions": [
             "@supports (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -8942,7 +8942,7 @@
         {
           "selector": ".speed-dial-action:nth-child(1)",
           "file": "22-nav.css",
-          "line": 337,
+          "line": 346,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -8950,7 +8950,7 @@
         {
           "selector": ".speed-dial-action:nth-child(2)",
           "file": "22-nav.css",
-          "line": 338,
+          "line": 347,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -8958,7 +8958,7 @@
         {
           "selector": ".speed-dial-action:nth-child(3)",
           "file": "22-nav.css",
-          "line": 339,
+          "line": 348,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -8966,7 +8966,7 @@
         {
           "selector": ".speed-dial-action:nth-child(4)",
           "file": "22-nav.css",
-          "line": 340,
+          "line": 349,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -8974,7 +8974,7 @@
         {
           "selector": ".speed-dial-action:nth-child(5)",
           "file": "22-nav.css",
-          "line": 341,
+          "line": 350,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -8982,7 +8982,7 @@
         {
           "selector": ".speed-dial-action:nth-child(6)",
           "file": "22-nav.css",
-          "line": 342,
+          "line": 351,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -8990,7 +8990,7 @@
         {
           "selector": ".speed-dial-action:nth-child(7)",
           "file": "22-nav.css",
-          "line": 343,
+          "line": 352,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -8998,7 +8998,7 @@
         {
           "selector": ".speed-dial-action:nth-child(8)",
           "file": "22-nav.css",
-          "line": 344,
+          "line": 353,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -9006,67 +9006,67 @@
         {
           "selector": ".speed-dial-action",
           "file": "22-nav.css",
-          "line": 346,
+          "line": 355,
           "conditions": []
         },
         {
           "selector": ".speed-dial.is-open .speed-dial-action",
           "file": "22-nav.css",
-          "line": 359,
+          "line": 368,
           "conditions": []
         },
         {
           "selector": ".speed-dial-label",
           "file": "22-nav.css",
-          "line": 365,
+          "line": 374,
           "conditions": []
         },
         {
           "selector": ".speed-dial-button",
           "file": "22-nav.css",
-          "line": 375,
+          "line": 384,
           "conditions": []
         },
         {
           "selector": ".speed-dial-button:hover",
           "file": "22-nav.css",
-          "line": 387,
+          "line": 396,
           "conditions": []
         },
         {
           "selector": ".speed-dial > .fab",
           "file": "22-nav.css",
-          "line": 388,
+          "line": 397,
           "conditions": []
         },
         {
           "selector": ".speed-dial > .fab .icon",
           "file": "22-nav.css",
-          "line": 389,
+          "line": 398,
           "conditions": []
         },
         {
           "selector": ".speed-dial.is-open > .fab .icon",
           "file": "22-nav.css",
-          "line": 390,
+          "line": 399,
           "conditions": []
         },
         {
           "selector": "body:has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 443,
+          "line": 452,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 449,
+          "line": 458,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 457,
+          "line": 466,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -9074,7 +9074,7 @@
         {
           "selector": "body:has(.speed-dial.is-open) .back-to-top",
           "file": "22-nav.css",
-          "line": 466,
+          "line": 475,
           "conditions": []
         },
         {
@@ -9118,13 +9118,13 @@
         {
           "selector": ".spinner",
           "file": "07-components.css",
-          "line": 510,
+          "line": 531,
           "conditions": []
         },
         {
           "selector": ".spinner-lg",
           "file": "07-components.css",
-          "line": 518,
+          "line": 539,
           "conditions": []
         }
       ]
@@ -9439,37 +9439,37 @@
         {
           "selector": ".stat",
           "file": "07-components.css",
-          "line": 684,
+          "line": 738,
           "conditions": []
         },
         {
           "selector": ".stat-value",
           "file": "07-components.css",
-          "line": 685,
+          "line": 739,
           "conditions": []
         },
         {
           "selector": ".stat-label",
           "file": "07-components.css",
-          "line": 692,
+          "line": 746,
           "conditions": []
         },
         {
           "selector": ".stat-delta",
           "file": "07-components.css",
-          "line": 693,
+          "line": 747,
           "conditions": []
         },
         {
           "selector": ".stat-delta-up",
           "file": "07-components.css",
-          "line": 694,
+          "line": 748,
           "conditions": []
         },
         {
           "selector": ".stat-delta-down",
           "file": "07-components.css",
-          "line": 695,
+          "line": 749,
           "conditions": []
         },
         {
@@ -9531,97 +9531,97 @@
         {
           "selector": ".step",
           "file": "22-nav.css",
-          "line": 505,
+          "line": 514,
           "conditions": []
         },
         {
           "selector": ".step-marker",
           "file": "22-nav.css",
-          "line": 514,
+          "line": 523,
           "conditions": []
         },
         {
           "selector": ".step-marker::before",
           "file": "22-nav.css",
-          "line": 519,
+          "line": 528,
           "conditions": []
         },
         {
           "selector": ".step-marker::after",
           "file": "22-nav.css",
-          "line": 536,
+          "line": 545,
           "conditions": []
         },
         {
           "selector": ".step:last-child .step-marker::after",
           "file": "22-nav.css",
-          "line": 543,
+          "line": 552,
           "conditions": []
         },
         {
           "selector": ".step-label",
           "file": "22-nav.css",
-          "line": 544,
+          "line": 553,
           "conditions": []
         },
         {
           "selector": ".step-note",
           "file": "22-nav.css",
-          "line": 545,
+          "line": 554,
           "conditions": []
         },
         {
           "selector": ".step.is-done .step-marker::before",
           "file": "22-nav.css",
-          "line": 547,
+          "line": 556,
           "conditions": []
         },
         {
           "selector": ".step.is-done .step-marker::after",
           "file": "22-nav.css",
-          "line": 558,
+          "line": 567,
           "conditions": []
         },
         {
           "selector": ".step.is-done .step-label",
           "file": "22-nav.css",
-          "line": 559,
+          "line": 568,
           "conditions": []
         },
         {
           "selector": ".step.is-current .step-marker::before",
           "file": "22-nav.css",
-          "line": 560,
+          "line": 569,
           "conditions": []
         },
         {
           "selector": ".step.is-current .step-label",
           "file": "22-nav.css",
-          "line": 565,
+          "line": 574,
           "conditions": []
         },
         {
           "selector": ".stepper-vertical .step",
           "file": "22-nav.css",
-          "line": 569,
+          "line": 578,
           "conditions": []
         },
         {
           "selector": ".stepper-vertical .step-marker",
           "file": "22-nav.css",
-          "line": 570,
+          "line": 579,
           "conditions": []
         },
         {
           "selector": ".stepper-vertical .step-marker::after",
           "file": "22-nav.css",
-          "line": 571,
+          "line": 580,
           "conditions": []
         },
         {
           "selector": ".stepper-auto .step",
           "file": "22-nav.css",
-          "line": 574,
+          "line": 583,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -9629,7 +9629,7 @@
         {
           "selector": ".stepper-auto .step-marker",
           "file": "22-nav.css",
-          "line": 575,
+          "line": 584,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -9637,7 +9637,7 @@
         {
           "selector": ".stepper-auto .step-marker::after",
           "file": "22-nav.css",
-          "line": 576,
+          "line": 585,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -9659,43 +9659,43 @@
         {
           "selector": ".stepper",
           "file": "22-nav.css",
-          "line": 497,
+          "line": 506,
           "conditions": []
         },
         {
           "selector": ".stepper::-webkit-scrollbar",
           "file": "22-nav.css",
-          "line": 504,
+          "line": 513,
           "conditions": []
         },
         {
           "selector": ".stepper-vertical",
           "file": "22-nav.css",
-          "line": 568,
+          "line": 577,
           "conditions": []
         },
         {
           "selector": ".stepper-vertical .step",
           "file": "22-nav.css",
-          "line": 569,
+          "line": 578,
           "conditions": []
         },
         {
           "selector": ".stepper-vertical .step-marker",
           "file": "22-nav.css",
-          "line": 570,
+          "line": 579,
           "conditions": []
         },
         {
           "selector": ".stepper-vertical .step-marker::after",
           "file": "22-nav.css",
-          "line": 571,
+          "line": 580,
           "conditions": []
         },
         {
           "selector": ".stepper-auto",
           "file": "22-nav.css",
-          "line": 573,
+          "line": 582,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -9703,7 +9703,7 @@
         {
           "selector": ".stepper-auto .step",
           "file": "22-nav.css",
-          "line": 574,
+          "line": 583,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -9711,7 +9711,7 @@
         {
           "selector": ".stepper-auto .step-marker",
           "file": "22-nav.css",
-          "line": 575,
+          "line": 584,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -9719,7 +9719,7 @@
         {
           "selector": ".stepper-auto .step-marker::after",
           "file": "22-nav.css",
-          "line": 576,
+          "line": 585,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -9818,13 +9818,13 @@
         {
           "selector": ".tabbar",
           "file": "08-mobile.css",
-          "line": 77,
+          "line": 84,
           "conditions": []
         },
         {
           "selector": ".tabbar",
           "file": "08-mobile.css",
-          "line": 89,
+          "line": 96,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -9832,37 +9832,37 @@
         {
           "selector": ".tabbar-item",
           "file": "08-mobile.css",
-          "line": 91,
+          "line": 98,
           "conditions": []
         },
         {
           "selector": ".tabbar-item[aria-current]",
           "file": "08-mobile.css",
-          "line": 107,
+          "line": 114,
           "conditions": []
         },
         {
           "selector": ".tabbar-item[aria-current] .icon",
           "file": "08-mobile.css",
-          "line": 108,
+          "line": 115,
           "conditions": []
         },
         {
           "selector": ".tabbar-item .icon",
           "file": "08-mobile.css",
-          "line": 109,
+          "line": 116,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar)",
           "file": "08-mobile.css",
-          "line": 112,
+          "line": 119,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar)",
           "file": "08-mobile.css",
-          "line": 113,
+          "line": 120,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -9870,13 +9870,13 @@
         {
           "selector": "body:has(.tabbar) .toast-region",
           "file": "13-toasts.css",
-          "line": 21,
+          "line": 24,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .toast-region",
           "file": "13-toasts.css",
-          "line": 25,
+          "line": 28,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -9884,13 +9884,13 @@
         {
           "selector": "body:has(.tabbar) .speed-dial",
           "file": "22-nav.css",
-          "line": 320,
+          "line": 329,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .speed-dial",
           "file": "22-nav.css",
-          "line": 324,
+          "line": 333,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -9898,19 +9898,19 @@
         {
           "selector": "body:has(.tabbar) .back-to-top",
           "file": "22-nav.css",
-          "line": 446,
+          "line": 455,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 449,
+          "line": 458,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .back-to-top",
           "file": "22-nav.css",
-          "line": 454,
+          "line": 463,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -9918,7 +9918,7 @@
         {
           "selector": "body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 457,
+          "line": 466,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -10257,31 +10257,31 @@
         {
           "selector": ".timeline",
           "file": "07-components.css",
-          "line": 698,
+          "line": 752,
           "conditions": []
         },
         {
           "selector": ".timeline-item",
           "file": "07-components.css",
-          "line": 699,
+          "line": 753,
           "conditions": []
         },
         {
           "selector": ".timeline-item:not(:last-child)::before",
           "file": "07-components.css",
-          "line": 706,
+          "line": 760,
           "conditions": []
         },
         {
           "selector": ".timeline-dot",
           "file": "07-components.css",
-          "line": 714,
+          "line": 768,
           "conditions": []
         },
         {
           "selector": ".timeline-item.is-done .timeline-dot",
           "file": "07-components.css",
-          "line": 724,
+          "line": 778,
           "conditions": []
         },
         {
@@ -10340,7 +10340,7 @@
         {
           "selector": ".tip-arrow",
           "file": "25-anchor.css",
-          "line": 98,
+          "line": 101,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -10348,7 +10348,7 @@
         {
           "selector": ".tip",
           "file": "25-anchor.css",
-          "line": 141,
+          "line": 148,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -10356,7 +10356,7 @@
         {
           "selector": ".tip",
           "file": "25-anchor.css",
-          "line": 152,
+          "line": 159,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -10364,7 +10364,7 @@
         {
           "selector": ".tip:popover-open",
           "file": "25-anchor.css",
-          "line": 180,
+          "line": 187,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -10372,7 +10372,7 @@
         {
           "selector": ".tip:popover-open",
           "file": "25-anchor.css",
-          "line": 181,
+          "line": 188,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -10380,7 +10380,7 @@
         {
           "selector": ".tip::backdrop",
           "file": "25-anchor.css",
-          "line": 182,
+          "line": 189,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -10388,7 +10388,7 @@
         {
           "selector": ".tip-arrow",
           "file": "25-anchor.css",
-          "line": 183,
+          "line": 190,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -10432,19 +10432,19 @@
         {
           "selector": ".toast-region",
           "file": "13-toasts.css",
-          "line": 9,
+          "line": 12,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .toast-region",
           "file": "13-toasts.css",
-          "line": 21,
+          "line": 24,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .toast-region",
           "file": "13-toasts.css",
-          "line": 25,
+          "line": 28,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -10452,25 +10452,25 @@
         {
           "selector": ".toast-region-start",
           "file": "13-toasts.css",
-          "line": 28,
+          "line": 31,
           "conditions": []
         },
         {
           "selector": ".toast-region-center",
           "file": "13-toasts.css",
-          "line": 29,
+          "line": 32,
           "conditions": []
         },
         {
           "selector": ".toast-region-top",
           "file": "13-toasts.css",
-          "line": 30,
+          "line": 33,
           "conditions": []
         },
         {
           "selector": ".toast-region",
           "file": "13-toasts.css",
-          "line": 37,
+          "line": 40,
           "conditions": [
             "@media (max-width: 30rem)"
           ]
@@ -10478,133 +10478,133 @@
         {
           "selector": ".toast",
           "file": "13-toasts.css",
-          "line": 41,
+          "line": 49,
           "conditions": []
         },
         {
           "selector": ".toast::before",
           "file": "13-toasts.css",
-          "line": 63,
+          "line": 71,
           "conditions": []
         },
         {
           "selector": ".toast-icon",
           "file": "13-toasts.css",
-          "line": 72,
+          "line": 82,
           "conditions": []
         },
         {
           "selector": ".toast-main",
           "file": "13-toasts.css",
-          "line": 73,
+          "line": 85,
           "conditions": []
         },
         {
           "selector": ".toast-title",
           "file": "13-toasts.css",
-          "line": 74,
+          "line": 86,
           "conditions": []
         },
         {
           "selector": ".toast-text",
           "file": "13-toasts.css",
-          "line": 75,
+          "line": 87,
           "conditions": []
         },
         {
           "selector": ".toast-close",
           "file": "13-toasts.css",
-          "line": 76,
+          "line": 88,
           "conditions": []
         },
         {
           "selector": ".toast-close:hover",
           "file": "13-toasts.css",
-          "line": 88,
+          "line": 100,
           "conditions": []
         },
         {
           "selector": ".toast-actions",
           "file": "13-toasts.css",
-          "line": 89,
+          "line": 101,
           "conditions": []
         },
         {
           "selector": ".toast-action",
           "file": "13-toasts.css",
-          "line": 90,
+          "line": 102,
           "conditions": []
         },
         {
           "selector": ".toast-action:hover",
           "file": "13-toasts.css",
-          "line": 97,
+          "line": 109,
           "conditions": []
         },
         {
           "selector": ".toast-good",
           "file": "13-toasts.css",
-          "line": 100,
+          "line": 112,
           "conditions": []
         },
         {
           "selector": ".toast-warn",
           "file": "13-toasts.css",
-          "line": 101,
+          "line": 113,
           "conditions": []
         },
         {
           "selector": ".toast-bad",
           "file": "13-toasts.css",
-          "line": 102,
+          "line": 114,
           "conditions": []
         },
         {
           "selector": ".toast-info",
           "file": "13-toasts.css",
-          "line": 103,
+          "line": 115,
           "conditions": []
         },
         {
           "selector": ".toast-loading",
           "file": "13-toasts.css",
-          "line": 104,
+          "line": 116,
           "conditions": []
         },
         {
           "selector": ".toast-timer",
           "file": "13-toasts.css",
-          "line": 107,
+          "line": 123,
           "conditions": []
         },
         {
           "selector": ".toast-region:is(:hover, :focus-within) .toast-timer",
           "file": "13-toasts.css",
-          "line": 121,
+          "line": 137,
           "conditions": []
         },
         {
           "selector": ".toast",
           "file": "13-toasts.css",
-          "line": 124,
+          "line": 140,
           "conditions": []
         },
         {
           "selector": ".toast-region-top .toast",
           "file": "13-toasts.css",
-          "line": 128,
+          "line": 144,
           "conditions": []
         },
         {
           "selector": ".toast.is-leaving",
           "file": "13-toasts.css",
-          "line": 132,
+          "line": 148,
           "conditions": []
         },
         {
           "selector": ".toast-region-stacked .toast",
           "file": "13-toasts.css",
-          "line": 145,
+          "line": 161,
           "conditions": [
             "@supports (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -10612,7 +10612,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(1)",
           "file": "13-toasts.css",
-          "line": 148,
+          "line": 164,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -10620,7 +10620,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(2)",
           "file": "13-toasts.css",
-          "line": 149,
+          "line": 165,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -10628,7 +10628,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(3)",
           "file": "13-toasts.css",
-          "line": 150,
+          "line": 166,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -10636,7 +10636,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(4)",
           "file": "13-toasts.css",
-          "line": 151,
+          "line": 167,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -10644,7 +10644,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(5)",
           "file": "13-toasts.css",
-          "line": 152,
+          "line": 168,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -10652,7 +10652,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(6)",
           "file": "13-toasts.css",
-          "line": 153,
+          "line": 169,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -10660,7 +10660,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(7)",
           "file": "13-toasts.css",
-          "line": 154,
+          "line": 170,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -10668,7 +10668,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(8)",
           "file": "13-toasts.css",
-          "line": 155,
+          "line": 171,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -10676,43 +10676,43 @@
         {
           "selector": ".toast-region-stacked .toast",
           "file": "13-toasts.css",
-          "line": 157,
+          "line": 173,
           "conditions": []
         },
         {
           "selector": ".toast-region-stacked .toast:nth-child(n+4)",
           "file": "13-toasts.css",
-          "line": 166,
+          "line": 182,
           "conditions": []
         },
         {
           "selector": ".toast-region-stacked:is(:hover, :focus-within) .toast",
           "file": "13-toasts.css",
-          "line": 168,
+          "line": 184,
           "conditions": []
         },
         {
           "selector": ".toast.is-dragging",
           "file": "13-toasts.css",
-          "line": 175,
+          "line": 191,
           "conditions": []
         },
         {
           "selector": ".toast-undo",
           "file": "13-toasts.css",
-          "line": 178,
+          "line": 194,
           "conditions": []
         },
         {
           "selector": ".toast-undo .toast-action",
           "file": "13-toasts.css",
-          "line": 179,
+          "line": 195,
           "conditions": []
         },
         {
           "selector": ".toast",
           "file": "13-toasts.css",
-          "line": 182,
+          "line": 198,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -10720,7 +10720,7 @@
         {
           "selector": ".toast-region-stacked .toast",
           "file": "13-toasts.css",
-          "line": 182,
+          "line": 198,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -10728,7 +10728,7 @@
         {
           "selector": ".toast-timer",
           "file": "13-toasts.css",
-          "line": 183,
+          "line": 199,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -11021,10 +11021,10 @@
     {
       "name": "accordion",
       "file": "07-components.css",
-      "line": 412,
+      "line": 431,
       "layer": "deck.components",
-      "section": "Accordion (native details, animates open)",
-      "doc": null,
+      "section": null,
+      "doc": "A bordered container for native <details>. The open state, the keyboard\nand the accessible name are the element's. Deck restyles the summary,\nreplaces the marker with a chevron, and animates the height using\n::details-content plus the interpolate-size opt-in in 02-reset.css — the\nfirst time a disclosure could animate to auto height without JavaScript.\nGive the details elements a shared name attribute for one-at-a-time.",
       "declarations": [
         {
           "prop": "border",
@@ -11047,61 +11047,61 @@
         {
           "selector": ".accordion",
           "file": "07-components.css",
-          "line": 412,
+          "line": 431,
           "conditions": []
         },
         {
           "selector": ".accordion > details + details",
           "file": "07-components.css",
-          "line": 413,
+          "line": 432,
           "conditions": []
         },
         {
           "selector": ".accordion summary",
           "file": "07-components.css",
-          "line": 414,
+          "line": 433,
           "conditions": []
         },
         {
           "selector": ".accordion summary::-webkit-details-marker",
           "file": "07-components.css",
-          "line": 425,
+          "line": 444,
           "conditions": []
         },
         {
           "selector": ".accordion summary:hover",
           "file": "07-components.css",
-          "line": 426,
+          "line": 445,
           "conditions": []
         },
         {
           "selector": ".accordion summary::after",
           "file": "07-components.css",
-          "line": 427,
+          "line": 446,
           "conditions": []
         },
         {
           "selector": ".accordion details[open] summary::after",
           "file": "07-components.css",
-          "line": 438,
+          "line": 457,
           "conditions": []
         },
         {
           "selector": ".accordion .accordion-body",
           "file": "07-components.css",
-          "line": 439,
+          "line": 460,
           "conditions": []
         },
         {
           "selector": ".accordion details::details-content",
           "file": "07-components.css",
-          "line": 444,
+          "line": 465,
           "conditions": []
         },
         {
           "selector": ".accordion details[open]::details-content",
           "file": "07-components.css",
-          "line": 449,
+          "line": 470,
           "conditions": []
         }
       ],
@@ -11128,7 +11128,7 @@
     {
       "name": "accordion-body",
       "file": "07-components.css",
-      "line": 439,
+      "line": 460,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -11137,7 +11137,7 @@
         {
           "selector": ".accordion .accordion-body",
           "file": "07-components.css",
-          "line": 439,
+          "line": 460,
           "conditions": []
         }
       ],
@@ -11933,7 +11933,7 @@
     {
       "name": "back-to-top",
       "file": "22-nav.css",
-      "line": 407,
+      "line": 416,
       "layer": "deck.components",
       "section": "Back to top",
       "doc": "A link, not a button. #top is a real target at the head of the document,\nso the browser moves focus there along with the scroll. A button calling\nscrollTo() leaves a keyboard user parked at the bottom of the page while\nlooking at the top of it, which is the whole bug this component usually\nships with.\nShowing and hiding is a scroll-driven animation, so there is no scroll\nlistener anywhere -- same mechanism as .scroll-progress in 16-motion.\nvisibility is in the keyframe on purpose: it takes the link out of the tab\norder and out of the accessibility tree while it is off screen, which is\nwhat aria-hidden reaches for and which CSS can actually do by itself.\ndeck.js only steps in where animation-timeline is missing, and it uses an\nIntersectionObserver on a sentinel, not a scroll handler.",
@@ -12003,43 +12003,43 @@
         {
           "selector": ".back-to-top",
           "file": "22-nav.css",
-          "line": 407,
+          "line": 416,
           "conditions": []
         },
         {
           "selector": ".back-to-top:hover",
           "file": "22-nav.css",
-          "line": 430,
+          "line": 439,
           "conditions": []
         },
         {
           "selector": ".back-to-top:active",
           "file": "22-nav.css",
-          "line": 436,
+          "line": 445,
           "conditions": []
         },
         {
           "selector": "body:has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 443,
+          "line": 452,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .back-to-top",
           "file": "22-nav.css",
-          "line": 446,
+          "line": 455,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 449,
+          "line": 458,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .back-to-top",
           "file": "22-nav.css",
-          "line": 454,
+          "line": 463,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -12047,7 +12047,7 @@
         {
           "selector": "body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 457,
+          "line": 466,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -12055,13 +12055,13 @@
         {
           "selector": "body:has(.speed-dial.is-open) .back-to-top",
           "file": "22-nav.css",
-          "line": 466,
+          "line": 475,
           "conditions": []
         },
         {
           "selector": ".back-to-top",
           "file": "22-nav.css",
-          "line": 470,
+          "line": 479,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)",
             "@supports (animation-timeline: scroll())"
@@ -12070,7 +12070,7 @@
         {
           "selector": ".back-to-top[data-deck-btt]",
           "file": "22-nav.css",
-          "line": 480,
+          "line": 489,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)",
             "@supports not (animation-timeline: scroll())"
@@ -12079,7 +12079,7 @@
         {
           "selector": ".back-to-top[data-deck-btt].is-visible",
           "file": "22-nav.css",
-          "line": 481,
+          "line": 490,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)",
             "@supports not (animation-timeline: scroll())"
@@ -12443,7 +12443,7 @@
     {
       "name": "banner",
       "file": "22-nav.css",
-      "line": 582,
+      "line": 591,
       "layer": "deck.components",
       "section": "Sticky banner",
       "doc": "An announcement strip. Top or bottom, dismissible, out of the way.",
@@ -12501,13 +12501,13 @@
         {
           "selector": ".banner",
           "file": "22-nav.css",
-          "line": 582,
+          "line": 591,
           "conditions": []
         },
         {
           "selector": ".banner[hidden]",
           "file": "22-nav.css",
-          "line": 608,
+          "line": 617,
           "conditions": []
         },
         {
@@ -12541,7 +12541,7 @@
     {
       "name": "banner-bottom",
       "file": "22-nav.css",
-      "line": 596,
+      "line": 605,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -12571,7 +12571,7 @@
         {
           "selector": ".banner-bottom",
           "file": "22-nav.css",
-          "line": 596,
+          "line": 605,
           "conditions": []
         }
       ],
@@ -12586,7 +12586,7 @@
     {
       "name": "banner-close",
       "file": "22-nav.css",
-      "line": 606,
+      "line": 615,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -12612,13 +12612,13 @@
         {
           "selector": ".banner-close",
           "file": "22-nav.css",
-          "line": 606,
+          "line": 615,
           "conditions": []
         },
         {
           "selector": ".banner-close:hover",
           "file": "22-nav.css",
-          "line": 607,
+          "line": 616,
           "conditions": []
         }
       ],
@@ -12630,7 +12630,7 @@
     {
       "name": "banner-dark",
       "file": "22-nav.css",
-      "line": 604,
+      "line": 613,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -12652,7 +12652,7 @@
         {
           "selector": ".banner-dark",
           "file": "22-nav.css",
-          "line": 604,
+          "line": 613,
           "conditions": []
         }
       ],
@@ -12667,7 +12667,7 @@
     {
       "name": "banner-fixed",
       "file": "22-nav.css",
-      "line": 603,
+      "line": 612,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -12685,7 +12685,7 @@
         {
           "selector": ".banner-fixed",
           "file": "22-nav.css",
-          "line": 603,
+          "line": 612,
           "conditions": []
         }
       ],
@@ -12697,7 +12697,7 @@
     {
       "name": "banner-warn",
       "file": "22-nav.css",
-      "line": 605,
+      "line": 614,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -12719,7 +12719,7 @@
         {
           "selector": ".banner-warn",
           "file": "22-nav.css",
-          "line": 605,
+          "line": 614,
           "conditions": []
         }
       ],
@@ -13201,7 +13201,7 @@
     {
       "name": "breadcrumb",
       "file": "07-components.css",
-      "line": 452,
+      "line": 473,
       "layer": "deck.components",
       "section": "Breadcrumb",
       "doc": null,
@@ -13231,37 +13231,37 @@
         {
           "selector": ".breadcrumb",
           "file": "07-components.css",
-          "line": 452,
+          "line": 473,
           "conditions": []
         },
         {
           "selector": ".breadcrumb a",
           "file": "07-components.css",
-          "line": 453,
+          "line": 474,
           "conditions": []
         },
         {
           "selector": ".breadcrumb a:hover",
           "file": "07-components.css",
-          "line": 454,
+          "line": 475,
           "conditions": []
         },
         {
           "selector": ".breadcrumb li + li::before",
           "file": "07-components.css",
-          "line": 455,
+          "line": 476,
           "conditions": []
         },
         {
           "selector": ".breadcrumb li",
           "file": "07-components.css",
-          "line": 456,
+          "line": 477,
           "conditions": []
         },
         {
           "selector": ".breadcrumb [aria-current]",
           "file": "07-components.css",
-          "line": 457,
+          "line": 478,
           "conditions": []
         },
         {
@@ -13540,7 +13540,7 @@
         {
           "selector": ".modal-footer > .btn",
           "file": "07-components.css",
-          "line": 658,
+          "line": 712,
           "conditions": [
             "@media (max-width: 32rem)"
           ]
@@ -13578,13 +13578,13 @@
         {
           "selector": ".drawer-footer > .btn",
           "file": "22-nav.css",
-          "line": 238,
+          "line": 247,
           "conditions": []
         },
         {
           "selector": ".jumbotron-actions > .btn",
           "file": "22-nav.css",
-          "line": 638,
+          "line": 647,
           "conditions": [
             "@media (max-width: 30rem)"
           ]
@@ -19353,7 +19353,7 @@
         {
           "selector": ".combo-list",
           "file": "25-anchor.css",
-          "line": 141,
+          "line": 148,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -21570,7 +21570,7 @@
         {
           "selector": ".datepicker",
           "file": "25-anchor.css",
-          "line": 141,
+          "line": 148,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -24552,7 +24552,7 @@
     {
       "name": "disclosure",
       "file": "07-components.css",
-      "line": 414,
+      "line": 433,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -24561,49 +24561,49 @@
         {
           "selector": ".disclosure summary",
           "file": "07-components.css",
-          "line": 414,
+          "line": 433,
           "conditions": []
         },
         {
           "selector": ".disclosure summary::-webkit-details-marker",
           "file": "07-components.css",
-          "line": 425,
+          "line": 444,
           "conditions": []
         },
         {
           "selector": ".disclosure summary:hover",
           "file": "07-components.css",
-          "line": 426,
+          "line": 445,
           "conditions": []
         },
         {
           "selector": ".disclosure summary::after",
           "file": "07-components.css",
-          "line": 427,
+          "line": 446,
           "conditions": []
         },
         {
           "selector": ".disclosure[open] summary::after",
           "file": "07-components.css",
-          "line": 438,
+          "line": 457,
           "conditions": []
         },
         {
           "selector": ".disclosure .disclosure-body",
           "file": "07-components.css",
-          "line": 439,
+          "line": 460,
           "conditions": []
         },
         {
           "selector": ".disclosure::details-content",
           "file": "07-components.css",
-          "line": 444,
+          "line": 465,
           "conditions": []
         },
         {
           "selector": ".disclosure[open]::details-content",
           "file": "07-components.css",
-          "line": 449,
+          "line": 470,
           "conditions": []
         }
       ],
@@ -24626,7 +24626,7 @@
     {
       "name": "disclosure-body",
       "file": "07-components.css",
-      "line": 439,
+      "line": 460,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -24635,7 +24635,7 @@
         {
           "selector": ".disclosure .disclosure-body",
           "file": "07-components.css",
-          "line": 439,
+          "line": 460,
           "conditions": []
         }
       ],
@@ -25116,19 +25116,19 @@
         {
           "selector": ".drawer::backdrop",
           "file": "22-nav.css",
-          "line": 200,
+          "line": 203,
           "conditions": []
         },
         {
           "selector": ".drawer[open]::backdrop",
           "file": "22-nav.css",
-          "line": 207,
+          "line": 210,
           "conditions": []
         },
         {
           "selector": ".drawer[open]::backdrop",
           "file": "22-nav.css",
-          "line": 208,
+          "line": 211,
           "conditions": []
         },
         {
@@ -25164,10 +25164,10 @@
     {
       "name": "drawer-body",
       "file": "22-nav.css",
-      "line": 220,
+      "line": 227,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The scrolling region. overscroll-behavior: contain stops a scroll that\nreaches the end from chaining to the page behind.",
       "declarations": [
         {
           "prop": "flex",
@@ -25202,7 +25202,7 @@
         {
           "selector": ".drawer-body",
           "file": "22-nav.css",
-          "line": 220,
+          "line": 227,
           "conditions": []
         }
       ],
@@ -25217,10 +25217,10 @@
     {
       "name": "drawer-end",
       "file": "22-nav.css",
-      "line": 191,
+      "line": 194,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "Pins the drawer to the ending edge instead of the starting one. The inset\nis logical and mirrors for free; the translate is not, which is why this\nrule declares its own.",
       "declarations": [
         {
           "prop": "inset-inline",
@@ -25247,13 +25247,13 @@
         {
           "selector": ".drawer-end",
           "file": "22-nav.css",
-          "line": 191,
+          "line": 194,
           "conditions": []
         },
         {
           "selector": ".drawer-end[open]",
           "file": "22-nav.css",
-          "line": 198,
+          "line": 201,
           "conditions": []
         }
       ],
@@ -25267,10 +25267,10 @@
     {
       "name": "drawer-footer",
       "file": "22-nav.css",
-      "line": 229,
+      "line": 238,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The action row, pinned to the bottom. Pads for the home indicator with\nmax(--space-4, safe-area-inset-bottom).",
       "declarations": [
         {
           "prop": "flex",
@@ -25305,13 +25305,13 @@
         {
           "selector": ".drawer-footer",
           "file": "22-nav.css",
-          "line": 229,
+          "line": 238,
           "conditions": []
         },
         {
           "selector": ".drawer-footer > .btn",
           "file": "22-nav.css",
-          "line": 238,
+          "line": 247,
           "conditions": []
         }
       ],
@@ -25329,10 +25329,10 @@
     {
       "name": "drawer-header",
       "file": "22-nav.css",
-      "line": 210,
+      "line": 214,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The title row. Pads for a notch with max(--space-4, safe-area-inset-top).",
       "declarations": [
         {
           "prop": "display",
@@ -25367,7 +25367,7 @@
         {
           "selector": ".drawer-header",
           "file": "22-nav.css",
-          "line": 210,
+          "line": 214,
           "conditions": []
         }
       ],
@@ -25384,10 +25384,10 @@
     {
       "name": "drawer-title",
       "file": "22-nav.css",
-      "line": 219,
+      "line": 224,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The drawer's heading. Point aria-labelledby at it.",
       "declarations": [
         {
           "prop": "font-size",
@@ -25402,7 +25402,7 @@
         {
           "selector": ".drawer-title",
           "file": "22-nav.css",
-          "line": 219,
+          "line": 224,
           "conditions": []
         }
       ],
@@ -26438,7 +26438,7 @@
     {
       "name": "emoji",
       "file": "08-mobile.css",
-      "line": 176,
+      "line": 183,
       "layer": "deck.mobile",
       "section": null,
       "doc": "Pins the emoji font stack and metrics so an emoji renders at the same\nsize and baseline on Windows, iOS and Android instead of jumping\nbetween them.",
@@ -26484,7 +26484,7 @@
         {
           "selector": ".emoji",
           "file": "08-mobile.css",
-          "line": 176,
+          "line": 183,
           "conditions": []
         }
       ],
@@ -26503,7 +26503,7 @@
     {
       "name": "emoji-grid",
       "file": "08-mobile.css",
-      "line": 207,
+      "line": 214,
       "layer": "deck.mobile",
       "section": null,
       "doc": "Emoji picker grid — drop your own set in",
@@ -26525,19 +26525,19 @@
         {
           "selector": ".emoji-grid",
           "file": "08-mobile.css",
-          "line": 207,
+          "line": 214,
           "conditions": []
         },
         {
           "selector": ".emoji-grid > button",
           "file": "08-mobile.css",
-          "line": 212,
+          "line": 219,
           "conditions": []
         },
         {
           "selector": ".emoji-grid > button:hover",
           "file": "08-mobile.css",
-          "line": 220,
+          "line": 227,
           "conditions": []
         }
       ],
@@ -26555,7 +26555,7 @@
     {
       "name": "emoji-hero",
       "file": "08-mobile.css",
-      "line": 190,
+      "line": 197,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -26573,7 +26573,7 @@
         {
           "selector": ".emoji-hero",
           "file": "08-mobile.css",
-          "line": 190,
+          "line": 197,
           "conditions": []
         }
       ],
@@ -26585,7 +26585,7 @@
     {
       "name": "emoji-lg",
       "file": "08-mobile.css",
-      "line": 188,
+      "line": 195,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -26603,7 +26603,7 @@
         {
           "selector": ".emoji-lg",
           "file": "08-mobile.css",
-          "line": 188,
+          "line": 195,
           "conditions": []
         }
       ],
@@ -26615,7 +26615,7 @@
     {
       "name": "emoji-tile",
       "file": "08-mobile.css",
-      "line": 193,
+      "line": 200,
       "layer": "deck.mobile",
       "section": null,
       "doc": "Emoji as an avatar or a status marker",
@@ -26661,7 +26661,7 @@
         {
           "selector": ".emoji-tile",
           "file": "08-mobile.css",
-          "line": 193,
+          "line": 200,
           "conditions": []
         }
       ],
@@ -26679,7 +26679,7 @@
     {
       "name": "emoji-tile-round",
       "file": "08-mobile.css",
-      "line": 204,
+      "line": 211,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -26693,7 +26693,7 @@
         {
           "selector": ".emoji-tile-round",
           "file": "08-mobile.css",
-          "line": 204,
+          "line": 211,
           "conditions": []
         }
       ],
@@ -26707,7 +26707,7 @@
     {
       "name": "emoji-xl",
       "file": "08-mobile.css",
-      "line": 189,
+      "line": 196,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -26725,7 +26725,7 @@
         {
           "selector": ".emoji-xl",
           "file": "08-mobile.css",
-          "line": 189,
+          "line": 196,
           "conditions": []
         }
       ],
@@ -26737,7 +26737,7 @@
     {
       "name": "empty",
       "file": "07-components.css",
-      "line": 662,
+      "line": 716,
       "layer": "deck.components",
       "section": "Empty state",
       "doc": null,
@@ -26771,13 +26771,13 @@
         {
           "selector": ".empty",
           "file": "07-components.css",
-          "line": 662,
+          "line": 716,
           "conditions": []
         },
         {
           "selector": ".empty p",
           "file": "07-components.css",
-          "line": 681,
+          "line": 735,
           "conditions": []
         }
       ],
@@ -26797,7 +26797,7 @@
     {
       "name": "empty-art",
       "file": "07-components.css",
-      "line": 670,
+      "line": 724,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -26839,7 +26839,7 @@
         {
           "selector": ".empty-art",
           "file": "07-components.css",
-          "line": 670,
+          "line": 724,
           "conditions": []
         }
       ],
@@ -26855,7 +26855,7 @@
     {
       "name": "empty-title",
       "file": "07-components.css",
-      "line": 680,
+      "line": 734,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -26877,7 +26877,7 @@
         {
           "selector": ".empty-title",
           "file": "07-components.css",
-          "line": 680,
+          "line": 734,
           "conditions": []
         }
       ],
@@ -27321,37 +27321,37 @@
         {
           "selector": ".speed-dial > .fab",
           "file": "22-nav.css",
-          "line": 388,
+          "line": 397,
           "conditions": []
         },
         {
           "selector": ".speed-dial > .fab .icon",
           "file": "22-nav.css",
-          "line": 389,
+          "line": 398,
           "conditions": []
         },
         {
           "selector": ".speed-dial.is-open > .fab .icon",
           "file": "22-nav.css",
-          "line": 390,
+          "line": 399,
           "conditions": []
         },
         {
           "selector": "body:has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 443,
+          "line": 452,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 449,
+          "line": 458,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 457,
+          "line": 466,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -28467,7 +28467,7 @@
     {
       "name": "footer",
       "file": "22-nav.css",
-      "line": 644,
+      "line": 653,
       "layer": "deck.components",
       "section": "Footer",
       "doc": "A real component rather than the demo's ad-hoc one.",
@@ -28493,19 +28493,19 @@
         {
           "selector": ".footer",
           "file": "22-nav.css",
-          "line": 644,
+          "line": 653,
           "conditions": []
         },
         {
           "selector": ".footer a",
           "file": "22-nav.css",
-          "line": 664,
+          "line": 673,
           "conditions": []
         },
         {
           "selector": ".footer a:hover",
           "file": "22-nav.css",
-          "line": 665,
+          "line": 674,
           "conditions": []
         }
       ],
@@ -28531,7 +28531,7 @@
     {
       "name": "footer-bottom",
       "file": "22-nav.css",
-      "line": 666,
+      "line": 675,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -28569,7 +28569,7 @@
         {
           "selector": ".footer-bottom",
           "file": "22-nav.css",
-          "line": 666,
+          "line": 675,
           "conditions": []
         }
       ],
@@ -28586,7 +28586,7 @@
     {
       "name": "footer-brand",
       "file": "22-nav.css",
-      "line": 656,
+      "line": 665,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -28612,7 +28612,7 @@
         {
           "selector": ".footer-brand",
           "file": "22-nav.css",
-          "line": 656,
+          "line": 665,
           "conditions": []
         }
       ],
@@ -28626,7 +28626,7 @@
     {
       "name": "footer-col",
       "file": "22-nav.css",
-      "line": 657,
+      "line": 666,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -28648,7 +28648,7 @@
         {
           "selector": ".footer-col",
           "file": "22-nav.css",
-          "line": 657,
+          "line": 666,
           "conditions": []
         }
       ],
@@ -28662,7 +28662,7 @@
     {
       "name": "footer-grid",
       "file": "22-nav.css",
-      "line": 650,
+      "line": 659,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -28688,7 +28688,7 @@
         {
           "selector": ".footer-grid",
           "file": "22-nav.css",
-          "line": 650,
+          "line": 659,
           "conditions": []
         }
       ],
@@ -28702,7 +28702,7 @@
     {
       "name": "footer-heading",
       "file": "22-nav.css",
-      "line": 658,
+      "line": 667,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -28728,7 +28728,7 @@
         {
           "selector": ".footer-heading",
           "file": "22-nav.css",
-          "line": 658,
+          "line": 667,
           "conditions": []
         }
       ],
@@ -28744,7 +28744,7 @@
     {
       "name": "footer-social",
       "file": "22-nav.css",
-      "line": 675,
+      "line": 684,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -28766,19 +28766,19 @@
         {
           "selector": ".footer-social",
           "file": "22-nav.css",
-          "line": 675,
+          "line": 684,
           "conditions": []
         },
         {
           "selector": ".footer-social a",
           "file": "22-nav.css",
-          "line": 676,
+          "line": 685,
           "conditions": []
         },
         {
           "selector": ".footer-social a:hover",
           "file": "22-nav.css",
-          "line": 683,
+          "line": 692,
           "conditions": []
         }
       ],
@@ -31284,7 +31284,7 @@
     {
       "name": "icon",
       "file": "08-mobile.css",
-      "line": 127,
+      "line": 134,
       "layer": "deck.mobile",
       "section": null,
       "doc": "An SVG icon sized in em, so it scales with the text it sits beside and\nlands on the baseline. Icons are filled with currentColor and inherit\nthe surrounding colour.",
@@ -31342,19 +31342,19 @@
         {
           "selector": ".tabbar-item[aria-current] .icon",
           "file": "08-mobile.css",
-          "line": 108,
+          "line": 115,
           "conditions": []
         },
         {
           "selector": ".tabbar-item .icon",
           "file": "08-mobile.css",
-          "line": 109,
+          "line": 116,
           "conditions": []
         },
         {
           "selector": ".icon",
           "file": "08-mobile.css",
-          "line": 127,
+          "line": 134,
           "conditions": []
         },
         {
@@ -31444,13 +31444,13 @@
         {
           "selector": ".speed-dial > .fab .icon",
           "file": "22-nav.css",
-          "line": 389,
+          "line": 398,
           "conditions": []
         },
         {
           "selector": ".speed-dial.is-open > .fab .icon",
           "file": "22-nav.css",
-          "line": 390,
+          "line": 399,
           "conditions": []
         },
         {
@@ -31495,7 +31495,7 @@
     {
       "name": "icon-fill",
       "file": "08-mobile.css",
-      "line": 149,
+      "line": 156,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -31513,7 +31513,7 @@
         {
           "selector": ".icon-fill",
           "file": "08-mobile.css",
-          "line": 149,
+          "line": 156,
           "conditions": []
         }
       ],
@@ -31612,7 +31612,7 @@
     {
       "name": "icon-lg",
       "file": "08-mobile.css",
-      "line": 147,
+      "line": 154,
       "layer": "deck.mobile",
       "section": null,
       "doc": "A 1.6em icon, for icon tiles and empty states where the default would\nlook undersized.",
@@ -31634,7 +31634,7 @@
         {
           "selector": ".icon-lg",
           "file": "08-mobile.css",
-          "line": 147,
+          "line": 154,
           "conditions": []
         }
       ],
@@ -31646,7 +31646,7 @@
     {
       "name": "icon-muted",
       "file": "08-mobile.css",
-      "line": 150,
+      "line": 157,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -31660,7 +31660,7 @@
         {
           "selector": ".icon-muted",
           "file": "08-mobile.css",
-          "line": 150,
+          "line": 157,
           "conditions": []
         }
       ],
@@ -31674,7 +31674,7 @@
     {
       "name": "icon-sm",
       "file": "08-mobile.css",
-      "line": 144,
+      "line": 151,
       "layer": "deck.mobile",
       "section": null,
       "doc": "Small icons reference the heavier cut of the sprite, not a thicker stroke:\nthe symbols are filled outlines, so stroke-width does nothing to them.\nEvery icon ships twice, #name at wght 400 and #name-sm at wght 500, and\n.icon-sm goes with the -sm symbol. CSS cannot rewrite a <use href>, so the\npairing lives in the markup:\n<svg class=\"icon icon-sm\"><use href=\"deck-icons.svg#check-sm\"></use></svg>",
@@ -31692,7 +31692,7 @@
         {
           "selector": ".icon-sm",
           "file": "08-mobile.css",
-          "line": 144,
+          "line": 151,
           "conditions": []
         }
       ],
@@ -31704,7 +31704,7 @@
     {
       "name": "icon-spin",
       "file": "08-mobile.css",
-      "line": 151,
+      "line": 158,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -31726,7 +31726,7 @@
         {
           "selector": ".icon-spin",
           "file": "08-mobile.css",
-          "line": 151,
+          "line": 158,
           "conditions": []
         }
       ],
@@ -31738,7 +31738,7 @@
     {
       "name": "icon-tile",
       "file": "08-mobile.css",
-      "line": 154,
+      "line": 161,
       "layer": "deck.mobile",
       "section": null,
       "doc": "Icon in a tinted tile — for feature rows and empty states",
@@ -31780,7 +31780,7 @@
         {
           "selector": ".icon-tile",
           "file": "08-mobile.css",
-          "line": 154,
+          "line": 161,
           "conditions": []
         },
         {
@@ -31809,7 +31809,7 @@
     {
       "name": "icon-tile-bad",
       "file": "08-mobile.css",
-      "line": 166,
+      "line": 173,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -31827,7 +31827,7 @@
         {
           "selector": ".icon-tile-bad",
           "file": "08-mobile.css",
-          "line": 166,
+          "line": 173,
           "conditions": []
         }
       ],
@@ -31842,7 +31842,7 @@
     {
       "name": "icon-tile-good",
       "file": "08-mobile.css",
-      "line": 164,
+      "line": 171,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -31860,7 +31860,7 @@
         {
           "selector": ".icon-tile-good",
           "file": "08-mobile.css",
-          "line": 164,
+          "line": 171,
           "conditions": []
         }
       ],
@@ -31875,7 +31875,7 @@
     {
       "name": "icon-tile-lg",
       "file": "08-mobile.css",
-      "line": 167,
+      "line": 174,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -31897,7 +31897,7 @@
         {
           "selector": ".icon-tile-lg",
           "file": "08-mobile.css",
-          "line": 167,
+          "line": 174,
           "conditions": []
         }
       ],
@@ -31911,7 +31911,7 @@
     {
       "name": "icon-tile-warn",
       "file": "08-mobile.css",
-      "line": 165,
+      "line": 172,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -31929,7 +31929,7 @@
         {
           "selector": ".icon-tile-warn",
           "file": "08-mobile.css",
-          "line": 165,
+          "line": 172,
           "conditions": []
         }
       ],
@@ -31944,7 +31944,7 @@
     {
       "name": "icon-xl",
       "file": "08-mobile.css",
-      "line": 148,
+      "line": 155,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -31966,7 +31966,7 @@
         {
           "selector": ".icon-xl",
           "file": "08-mobile.css",
-          "line": 148,
+          "line": 155,
           "conditions": []
         }
       ],
@@ -31978,7 +31978,7 @@
     {
       "name": "indicator",
       "file": "22-nav.css",
-      "line": 688,
+      "line": 697,
       "layer": "deck.components",
       "section": "Indicators",
       "doc": "Status dots, counts on an icon, and unread markers.",
@@ -32012,13 +32012,13 @@
         {
           "selector": ".indicator",
           "file": "22-nav.css",
-          "line": 688,
+          "line": 697,
           "conditions": []
         },
         {
           "selector": ".status-line .indicator",
           "file": "22-nav.css",
-          "line": 734,
+          "line": 743,
           "conditions": []
         }
       ],
@@ -32043,7 +32043,7 @@
     {
       "name": "indicator-bad",
       "file": "22-nav.css",
-      "line": 698,
+      "line": 707,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -32057,7 +32057,7 @@
         {
           "selector": ".indicator-bad",
           "file": "22-nav.css",
-          "line": 698,
+          "line": 707,
           "conditions": []
         }
       ],
@@ -32071,7 +32071,7 @@
     {
       "name": "indicator-badge",
       "file": "22-nav.css",
-      "line": 705,
+      "line": 714,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -32080,7 +32080,7 @@
         {
           "selector": ".with-indicator > .indicator-badge",
           "file": "22-nav.css",
-          "line": 705,
+          "line": 714,
           "conditions": []
         }
       ],
@@ -32100,7 +32100,7 @@
     {
       "name": "indicator-badge-brand",
       "file": "22-nav.css",
-      "line": 730,
+      "line": 739,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -32109,7 +32109,7 @@
         {
           "selector": ".with-indicator > .indicator-badge-brand",
           "file": "22-nav.css",
-          "line": 730,
+          "line": 739,
           "conditions": []
         }
       ],
@@ -32123,7 +32123,7 @@
     {
       "name": "indicator-badge-dot",
       "file": "22-nav.css",
-      "line": 722,
+      "line": 731,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -32132,7 +32132,7 @@
         {
           "selector": ".with-indicator > .indicator-badge-dot",
           "file": "22-nav.css",
-          "line": 722,
+          "line": 731,
           "conditions": []
         }
       ],
@@ -32143,7 +32143,7 @@
     {
       "name": "indicator-brand",
       "file": "22-nav.css",
-      "line": 699,
+      "line": 708,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -32157,7 +32157,7 @@
         {
           "selector": ".indicator-brand",
           "file": "22-nav.css",
-          "line": 699,
+          "line": 708,
           "conditions": []
         }
       ],
@@ -32171,7 +32171,7 @@
     {
       "name": "indicator-good",
       "file": "22-nav.css",
-      "line": 696,
+      "line": 705,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -32185,7 +32185,7 @@
         {
           "selector": ".indicator-good",
           "file": "22-nav.css",
-          "line": 696,
+          "line": 705,
           "conditions": []
         }
       ],
@@ -32199,7 +32199,7 @@
     {
       "name": "indicator-lg",
       "file": "22-nav.css",
-      "line": 700,
+      "line": 709,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -32217,7 +32217,7 @@
         {
           "selector": ".indicator-lg",
           "file": "22-nav.css",
-          "line": 700,
+          "line": 709,
           "conditions": []
         }
       ],
@@ -32229,7 +32229,7 @@
     {
       "name": "indicator-ring",
       "file": "22-nav.css",
-      "line": 701,
+      "line": 710,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -32243,7 +32243,7 @@
         {
           "selector": ".indicator-ring",
           "file": "22-nav.css",
-          "line": 701,
+          "line": 710,
           "conditions": []
         }
       ],
@@ -32257,7 +32257,7 @@
     {
       "name": "indicator-warn",
       "file": "22-nav.css",
-      "line": 697,
+      "line": 706,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -32271,7 +32271,7 @@
         {
           "selector": ".indicator-warn",
           "file": "22-nav.css",
-          "line": 697,
+          "line": 706,
           "conditions": []
         }
       ],
@@ -32837,13 +32837,13 @@
         {
           "selector": ".tab.is-active",
           "file": "07-components.css",
-          "line": 374,
+          "line": 382,
           "conditions": []
         },
         {
           "selector": ".segmented > .is-active",
           "file": "07-components.css",
-          "line": 405,
+          "line": 418,
           "conditions": []
         },
         {
@@ -33050,7 +33050,7 @@
     {
       "name": "is-current",
       "file": "22-nav.css",
-      "line": 560,
+      "line": 569,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -33059,13 +33059,13 @@
         {
           "selector": ".step.is-current .step-marker::before",
           "file": "22-nav.css",
-          "line": 560,
+          "line": 569,
           "conditions": []
         },
         {
           "selector": ".step.is-current .step-label",
           "file": "22-nav.css",
-          "line": 565,
+          "line": 574,
           "conditions": []
         }
       ],
@@ -33154,7 +33154,7 @@
     {
       "name": "is-done",
       "file": "07-components.css",
-      "line": 724,
+      "line": 778,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -33163,25 +33163,25 @@
         {
           "selector": ".timeline-item.is-done .timeline-dot",
           "file": "07-components.css",
-          "line": 724,
+          "line": 778,
           "conditions": []
         },
         {
           "selector": ".step.is-done .step-marker::before",
           "file": "22-nav.css",
-          "line": 547,
+          "line": 556,
           "conditions": []
         },
         {
           "selector": ".step.is-done .step-marker::after",
           "file": "22-nav.css",
-          "line": 558,
+          "line": 567,
           "conditions": []
         },
         {
           "selector": ".step.is-done .step-label",
           "file": "22-nav.css",
-          "line": 559,
+          "line": 568,
           "conditions": []
         }
       ],
@@ -33236,7 +33236,7 @@
     {
       "name": "is-dragging",
       "file": "13-toasts.css",
-      "line": 175,
+      "line": 191,
       "layer": "deck.components",
       "section": "Swipe to dismiss",
       "doc": null,
@@ -33245,7 +33245,7 @@
         {
           "selector": ".toast.is-dragging",
           "file": "13-toasts.css",
-          "line": 175,
+          "line": 191,
           "conditions": []
         }
       ],
@@ -33517,7 +33517,7 @@
     {
       "name": "is-leaving",
       "file": "13-toasts.css",
-      "line": 132,
+      "line": 148,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -33526,7 +33526,7 @@
         {
           "selector": ".toast.is-leaving",
           "file": "13-toasts.css",
-          "line": 132,
+          "line": 148,
           "conditions": []
         }
       ],
@@ -33776,19 +33776,19 @@
         {
           "selector": ".speed-dial.is-open .speed-dial-action",
           "file": "22-nav.css",
-          "line": 359,
+          "line": 368,
           "conditions": []
         },
         {
           "selector": ".speed-dial.is-open > .fab .icon",
           "file": "22-nav.css",
-          "line": 390,
+          "line": 399,
           "conditions": []
         },
         {
           "selector": "body:has(.speed-dial.is-open) .back-to-top",
           "file": "22-nav.css",
-          "line": 466,
+          "line": 475,
           "conditions": []
         }
       ],
@@ -34306,7 +34306,7 @@
     {
       "name": "is-visible",
       "file": "22-nav.css",
-      "line": 481,
+      "line": 490,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -34315,7 +34315,7 @@
         {
           "selector": ".back-to-top[data-deck-btt].is-visible",
           "file": "22-nav.css",
-          "line": 481,
+          "line": 490,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)",
             "@supports not (animation-timeline: scroll())"
@@ -34466,7 +34466,7 @@
     {
       "name": "jumbotron",
       "file": "22-nav.css",
-      "line": 613,
+      "line": 622,
       "layer": "deck.components",
       "section": "Jumbotron",
       "doc": "A hero block. Kept deliberately plain so the content carries it.",
@@ -34508,13 +34508,13 @@
         {
           "selector": ".jumbotron",
           "file": "22-nav.css",
-          "line": 613,
+          "line": 622,
           "conditions": []
         },
         {
           "selector": ".jumbotron h1",
           "file": "22-nav.css",
-          "line": 634,
+          "line": 643,
           "conditions": []
         }
       ],
@@ -34537,7 +34537,7 @@
     {
       "name": "jumbotron-actions",
       "file": "22-nav.css",
-      "line": 636,
+      "line": 645,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -34559,13 +34559,13 @@
         {
           "selector": ".jumbotron-actions",
           "file": "22-nav.css",
-          "line": 636,
+          "line": 645,
           "conditions": []
         },
         {
           "selector": ".jumbotron-actions > .btn",
           "file": "22-nav.css",
-          "line": 638,
+          "line": 647,
           "conditions": [
             "@media (max-width: 30rem)"
           ]
@@ -34581,7 +34581,7 @@
     {
       "name": "jumbotron-center",
       "file": "22-nav.css",
-      "line": 623,
+      "line": 632,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -34599,19 +34599,19 @@
         {
           "selector": ".jumbotron-center",
           "file": "22-nav.css",
-          "line": 623,
+          "line": 632,
           "conditions": []
         },
         {
           "selector": ".jumbotron-center .lede",
           "file": "22-nav.css",
-          "line": 624,
+          "line": 633,
           "conditions": []
         },
         {
           "selector": ".jumbotron-center h1",
           "file": "22-nav.css",
-          "line": 635,
+          "line": 644,
           "conditions": []
         }
       ],
@@ -34623,7 +34623,7 @@
     {
       "name": "jumbotron-media",
       "file": "22-nav.css",
-      "line": 625,
+      "line": 634,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -34649,13 +34649,13 @@
         {
           "selector": ".jumbotron-media",
           "file": "22-nav.css",
-          "line": 625,
+          "line": 634,
           "conditions": []
         },
         {
           "selector": ".jumbotron-media",
           "file": "22-nav.css",
-          "line": 632,
+          "line": 641,
           "conditions": [
             "@media (min-width: 56rem)"
           ]
@@ -35652,7 +35652,7 @@
         {
           "selector": ".jumbotron-center .lede",
           "file": "22-nav.css",
-          "line": 624,
+          "line": 633,
           "conditions": []
         },
         {
@@ -36961,7 +36961,7 @@
     {
       "name": "mega",
       "file": "22-nav.css",
-      "line": 244,
+      "line": 253,
       "layer": "deck.components",
       "section": "Mega menu",
       "doc": "A wide panel under a nav item. Built on the popover attribute, so escape\nand outside-click are the browser's job.",
@@ -37019,25 +37019,25 @@
         {
           "selector": ".mega",
           "file": "22-nav.css",
-          "line": 244,
+          "line": 253,
           "conditions": []
         },
         {
           "selector": ".mega:popover-open",
           "file": "22-nav.css",
-          "line": 261,
+          "line": 270,
           "conditions": []
         },
         {
           "selector": ".mega:popover-open",
           "file": "22-nav.css",
-          "line": 262,
+          "line": 271,
           "conditions": []
         },
         {
           "selector": ".mega::backdrop",
           "file": "22-nav.css",
-          "line": 263,
+          "line": 272,
           "conditions": []
         },
         {
@@ -37067,7 +37067,7 @@
         {
           "selector": ".mega",
           "file": "25-anchor.css",
-          "line": 141,
+          "line": 148,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -37102,7 +37102,7 @@
     {
       "name": "mega-col",
       "file": "22-nav.css",
-      "line": 270,
+      "line": 279,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -37124,7 +37124,7 @@
         {
           "selector": ".mega-col",
           "file": "22-nav.css",
-          "line": 270,
+          "line": 279,
           "conditions": []
         }
       ],
@@ -37138,7 +37138,7 @@
     {
       "name": "mega-feature",
       "file": "22-nav.css",
-      "line": 290,
+      "line": 299,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -37168,7 +37168,7 @@
         {
           "selector": ".mega-feature",
           "file": "22-nav.css",
-          "line": 290,
+          "line": 299,
           "conditions": []
         }
       ],
@@ -37185,7 +37185,7 @@
     {
       "name": "mega-footer",
       "file": "22-nav.css",
-      "line": 297,
+      "line": 306,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -37223,7 +37223,7 @@
         {
           "selector": ".mega-footer",
           "file": "22-nav.css",
-          "line": 297,
+          "line": 306,
           "conditions": []
         }
       ],
@@ -37240,7 +37240,7 @@
     {
       "name": "mega-grid",
       "file": "22-nav.css",
-      "line": 265,
+      "line": 274,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -37262,7 +37262,7 @@
         {
           "selector": ".mega-grid",
           "file": "22-nav.css",
-          "line": 265,
+          "line": 274,
           "conditions": []
         }
       ],
@@ -37276,7 +37276,7 @@
     {
       "name": "mega-heading",
       "file": "22-nav.css",
-      "line": 271,
+      "line": 280,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -37302,7 +37302,7 @@
         {
           "selector": ".mega-heading",
           "file": "22-nav.css",
-          "line": 271,
+          "line": 280,
           "conditions": []
         }
       ],
@@ -37319,7 +37319,7 @@
     {
       "name": "mega-item",
       "file": "22-nav.css",
-      "line": 277,
+      "line": 286,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -37361,13 +37361,13 @@
         {
           "selector": ".mega-item",
           "file": "22-nav.css",
-          "line": 277,
+          "line": 286,
           "conditions": []
         },
         {
           "selector": ".mega-item:hover",
           "file": "22-nav.css",
-          "line": 287,
+          "line": 296,
           "conditions": []
         }
       ],
@@ -37390,7 +37390,7 @@
     {
       "name": "mega-item-note",
       "file": "22-nav.css",
-      "line": 289,
+      "line": 298,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -37408,7 +37408,7 @@
         {
           "selector": ".mega-item-note",
           "file": "22-nav.css",
-          "line": 289,
+          "line": 298,
           "conditions": []
         }
       ],
@@ -37423,7 +37423,7 @@
     {
       "name": "mega-item-title",
       "file": "22-nav.css",
-      "line": 288,
+      "line": 297,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -37441,7 +37441,7 @@
         {
           "selector": ".mega-item-title",
           "file": "22-nav.css",
-          "line": 288,
+          "line": 297,
           "conditions": []
         }
       ],
@@ -37455,10 +37455,10 @@
     {
       "name": "menu",
       "file": "07-components.css",
-      "line": 561,
+      "line": 591,
       "layer": "deck.components",
-      "section": "Menu / dropdown, built on the native popover",
-      "doc": null,
+      "section": null,
+      "doc": "A dropdown built on the native popover attribute: light dismiss, Escape,\nthe top layer and one-at-a-time behaviour all come from the platform.\n25-anchor.css positions it against its trigger with anchor positioning and\na fallback chain, so it flips when there is no room below.",
       "declarations": [
         {
           "prop": "position",
@@ -37521,25 +37521,25 @@
         {
           "selector": ".menu",
           "file": "07-components.css",
-          "line": 561,
+          "line": 591,
           "conditions": []
         },
         {
           "selector": ".menu:popover-open",
           "file": "07-components.css",
-          "line": 580,
+          "line": 610,
           "conditions": []
         },
         {
           "selector": ".menu:popover-open",
           "file": "07-components.css",
-          "line": 581,
+          "line": 611,
           "conditions": []
         },
         {
           "selector": ".menu::backdrop",
           "file": "07-components.css",
-          "line": 582,
+          "line": 612,
           "conditions": []
         },
         {
@@ -37561,7 +37561,7 @@
         {
           "selector": ".menu",
           "file": "25-anchor.css",
-          "line": 141,
+          "line": 148,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -37601,10 +37601,10 @@
     {
       "name": "menu-item",
       "file": "07-components.css",
-      "line": 584,
+      "line": 618,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "One row in a menu. Works on a button or an anchor — colour and\ntext-decoration are reset so a link needs no help. Hover and focus share a\nstyle, so a keyboard user sees what a mouse user sees. 40px tall, which is\nunder the 44px target: a deliberate density trade for a list of eight.",
       "declarations": [
         {
           "prop": "display",
@@ -37663,25 +37663,25 @@
         {
           "selector": ".menu-item",
           "file": "07-components.css",
-          "line": 584,
+          "line": 618,
           "conditions": []
         },
         {
           "selector": ".menu-item:hover",
           "file": "07-components.css",
-          "line": 599,
+          "line": 633,
           "conditions": []
         },
         {
           "selector": ".menu-item:focus-visible",
           "file": "07-components.css",
-          "line": 599,
+          "line": 633,
           "conditions": []
         },
         {
           "selector": ".menu-item .push",
           "file": "07-components.css",
-          "line": 602,
+          "line": 638,
           "conditions": []
         }
       ],
@@ -37704,10 +37704,10 @@
     {
       "name": "menu-item-danger",
       "file": "07-components.css",
-      "line": 600,
+      "line": 636,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "A destructive item. Red is not announced, so the label has to say what it\ndoes and a confirmation should stand behind it.",
       "declarations": [
         {
           "prop": "color",
@@ -37718,13 +37718,13 @@
         {
           "selector": ".menu-item-danger",
           "file": "07-components.css",
-          "line": 600,
+          "line": 636,
           "conditions": []
         },
         {
           "selector": ".menu-item-danger:hover",
           "file": "07-components.css",
-          "line": 601,
+          "line": 637,
           "conditions": []
         }
       ],
@@ -37739,10 +37739,10 @@
     {
       "name": "menu-label",
       "file": "07-components.css",
-      "line": 604,
+      "line": 643,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "A small heading above a group of items. Styling only — a screen reader\nhears ordinary text.",
       "declarations": [
         {
           "prop": "padding",
@@ -37765,7 +37765,7 @@
         {
           "selector": ".menu-label",
           "file": "07-components.css",
-          "line": 604,
+          "line": 643,
           "conditions": []
         }
       ],
@@ -37815,10 +37815,10 @@
     {
       "name": "menu-sep",
       "file": "07-components.css",
-      "line": 603,
+      "line": 640,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "A one-pixel divider between groups of items.",
       "declarations": [
         {
           "prop": "block-size",
@@ -37837,7 +37837,7 @@
         {
           "selector": ".menu-sep",
           "file": "07-components.css",
-          "line": 603,
+          "line": 640,
           "conditions": []
         }
       ],
@@ -38428,10 +38428,10 @@
     {
       "name": "modal",
       "file": "07-components.css",
-      "line": 607,
+      "line": 651,
       "layer": "deck.components",
-      "section": "Modal, built on native dialog",
-      "doc": null,
+      "section": null,
+      "doc": "A native <dialog>. Open it with showModal(), never show() and never the\nopen attribute: only showModal() gives the top layer, the backdrop, the\nfocus trap and an inert background. The open and close animate because\ndisplay and overlay are in the transition with allow-discrete, which is\nwhat keeps the element rendered long enough to fade out.",
       "declarations": [
         {
           "prop": "inline-size",
@@ -38490,37 +38490,37 @@
         {
           "selector": ".modal",
           "file": "07-components.css",
-          "line": 607,
+          "line": 651,
           "conditions": []
         },
         {
           "selector": ".modal[open]",
           "file": "07-components.css",
-          "line": 626,
+          "line": 670,
           "conditions": []
         },
         {
           "selector": ".modal[open]",
           "file": "07-components.css",
-          "line": 627,
+          "line": 671,
           "conditions": []
         },
         {
           "selector": ".modal::backdrop",
           "file": "07-components.css",
-          "line": 628,
+          "line": 672,
           "conditions": []
         },
         {
           "selector": ".modal[open]::backdrop",
           "file": "07-components.css",
-          "line": 635,
+          "line": 679,
           "conditions": []
         },
         {
           "selector": ".modal[open]::backdrop",
           "file": "07-components.css",
-          "line": 636,
+          "line": 680,
           "conditions": []
         }
       ],
@@ -38548,10 +38548,10 @@
     {
       "name": "modal-body",
       "file": "07-components.css",
-      "line": 646,
+      "line": 697,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The scrolling region. The modal caps at min(85dvh, 48rem) and clips, so a\nlong body scrolls while the header and footer stay put — which is what\nkeeps the actions above the fold.",
       "declarations": [
         {
           "prop": "padding",
@@ -38578,7 +38578,7 @@
         {
           "selector": ".modal-body",
           "file": "07-components.css",
-          "line": 646,
+          "line": 697,
           "conditions": []
         }
       ],
@@ -38593,10 +38593,10 @@
     {
       "name": "modal-footer",
       "file": "07-components.css",
-      "line": 647,
+      "line": 701,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The action row, end-aligned. Below 32rem it becomes column-reverse with\nfull-width buttons, so the primary action — last in the markup — is on top\nwhere a thumb reaches it, without changing DOM order.",
       "declarations": [
         {
           "prop": "display",
@@ -38631,13 +38631,13 @@
         {
           "selector": ".modal-footer",
           "file": "07-components.css",
-          "line": 647,
+          "line": 701,
           "conditions": []
         },
         {
           "selector": ".modal-footer",
           "file": "07-components.css",
-          "line": 657,
+          "line": 711,
           "conditions": [
             "@media (max-width: 32rem)"
           ]
@@ -38645,7 +38645,7 @@
         {
           "selector": ".modal-footer > .btn",
           "file": "07-components.css",
-          "line": 658,
+          "line": 712,
           "conditions": [
             "@media (max-width: 32rem)"
           ]
@@ -38665,10 +38665,10 @@
     {
       "name": "modal-header",
       "file": "07-components.css",
-      "line": 638,
+      "line": 684,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The title row. A flex row aligned to flex-start, so a long title and a\nclose button line up on the first line.",
       "declarations": [
         {
           "prop": "display",
@@ -38695,7 +38695,7 @@
         {
           "selector": ".modal-header",
           "file": "07-components.css",
-          "line": 638,
+          "line": 684,
           "conditions": []
         }
       ],
@@ -38711,10 +38711,10 @@
     {
       "name": "modal-title",
       "file": "07-components.css",
-      "line": 645,
+      "line": 693,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The dialog's heading. Give it an id and point aria-labelledby at it, or\nthe dialog is announced with no name.",
       "declarations": [
         {
           "prop": "font-size",
@@ -38733,7 +38733,7 @@
         {
           "selector": ".modal-title",
           "file": "07-components.css",
-          "line": 645,
+          "line": 693,
           "conditions": []
         }
       ],
@@ -39187,7 +39187,7 @@
     {
       "name": "nav-link",
       "file": "07-components.css",
-      "line": 749,
+      "line": 803,
       "layer": "deck.components",
       "section": null,
       "doc": "One destination in a .navbar. Carries the hover and current-page\nstates; use .btn only for actions, never for navigation.",
@@ -39225,19 +39225,19 @@
         {
           "selector": ".nav-link",
           "file": "07-components.css",
-          "line": 749,
+          "line": 803,
           "conditions": []
         },
         {
           "selector": ".nav-link:hover",
           "file": "07-components.css",
-          "line": 758,
+          "line": 812,
           "conditions": []
         },
         {
           "selector": ".nav-link[aria-current]",
           "file": "07-components.css",
-          "line": 759,
+          "line": 813,
           "conditions": []
         }
       ],
@@ -39261,7 +39261,7 @@
     {
       "name": "navbar",
       "file": "07-components.css",
-      "line": 727,
+      "line": 781,
       "layer": "deck.components",
       "section": "Nav bar",
       "doc": null,
@@ -39295,7 +39295,7 @@
         {
           "selector": ".navbar",
           "file": "07-components.css",
-          "line": 727,
+          "line": 781,
           "conditions": []
         }
       ],
@@ -39315,7 +39315,7 @@
     {
       "name": "navbar-brand",
       "file": "07-components.css",
-      "line": 735,
+      "line": 789,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -39357,7 +39357,7 @@
         {
           "selector": ".navbar-brand",
           "file": "07-components.css",
-          "line": 735,
+          "line": 789,
           "conditions": []
         }
       ],
@@ -39373,7 +39373,7 @@
     {
       "name": "navbar-links",
       "file": "07-components.css",
-      "line": 745,
+      "line": 799,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -39395,13 +39395,13 @@
         {
           "selector": ".navbar-links",
           "file": "07-components.css",
-          "line": 745,
+          "line": 799,
           "conditions": []
         },
         {
           "selector": ".navbar-links",
           "file": "07-components.css",
-          "line": 746,
+          "line": 800,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -40357,7 +40357,7 @@
     {
       "name": "pagination",
       "file": "07-components.css",
-      "line": 460,
+      "line": 481,
       "layer": "deck.components",
       "section": "Pagination",
       "doc": null,
@@ -40383,25 +40383,25 @@
         {
           "selector": ".pagination",
           "file": "07-components.css",
-          "line": 460,
+          "line": 481,
           "conditions": []
         },
         {
           "selector": ".pagination > *",
           "file": "07-components.css",
-          "line": 461,
+          "line": 482,
           "conditions": []
         },
         {
           "selector": ".pagination > a:hover",
           "file": "07-components.css",
-          "line": 474,
+          "line": 495,
           "conditions": []
         },
         {
           "selector": ".pagination > [aria-current=\"page\"]",
           "file": "07-components.css",
-          "line": 475,
+          "line": 496,
           "conditions": []
         },
         {
@@ -41967,7 +41967,7 @@
     {
       "name": "pop",
       "file": "25-anchor.css",
-      "line": 112,
+      "line": 115,
       "layer": "deck.components",
       "section": "Popover card",
       "doc": "A richer tooltip: a heading, body copy, and actions. Used for the\n\"what does this labor code mean\" pattern.",
@@ -42041,7 +42041,7 @@
         {
           "selector": ".pop",
           "file": "25-anchor.css",
-          "line": 112,
+          "line": 115,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -42049,7 +42049,7 @@
         {
           "selector": ".pop:popover-open",
           "file": "25-anchor.css",
-          "line": 133,
+          "line": 136,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -42057,7 +42057,7 @@
         {
           "selector": ".pop:popover-open",
           "file": "25-anchor.css",
-          "line": 134,
+          "line": 137,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -42065,7 +42065,7 @@
         {
           "selector": ".pop::backdrop",
           "file": "25-anchor.css",
-          "line": 135,
+          "line": 138,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -42073,7 +42073,7 @@
         {
           "selector": ".pop",
           "file": "25-anchor.css",
-          "line": 141,
+          "line": 148,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -42081,7 +42081,7 @@
         {
           "selector": ".pop",
           "file": "25-anchor.css",
-          "line": 152,
+          "line": 159,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -42089,7 +42089,7 @@
         {
           "selector": ".pop",
           "file": "25-anchor.css",
-          "line": 170,
+          "line": 177,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -42097,7 +42097,7 @@
         {
           "selector": ".pop:popover-open",
           "file": "25-anchor.css",
-          "line": 180,
+          "line": 187,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -42105,7 +42105,7 @@
         {
           "selector": ".pop:popover-open",
           "file": "25-anchor.css",
-          "line": 181,
+          "line": 188,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -42113,7 +42113,7 @@
         {
           "selector": ".pop::backdrop",
           "file": "25-anchor.css",
-          "line": 182,
+          "line": 189,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -42149,10 +42149,10 @@
     {
       "name": "pop-actions",
       "file": "25-anchor.css",
-      "line": 138,
+      "line": 145,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The action row at the bottom of a popover card. A button here can close\nthe panel with popovertargetaction=\"hide\" and no script.",
       "declarations": [
         {
           "prop": "display",
@@ -42171,7 +42171,7 @@
         {
           "selector": ".pop-actions",
           "file": "25-anchor.css",
-          "line": 138,
+          "line": 145,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -42188,10 +42188,10 @@
     {
       "name": "pop-body",
       "file": "25-anchor.css",
-      "line": 137,
+      "line": 142,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The explanatory text inside a popover card.",
       "declarations": [
         {
           "prop": "font-size",
@@ -42206,7 +42206,7 @@
         {
           "selector": ".pop-body",
           "file": "25-anchor.css",
-          "line": 137,
+          "line": 142,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -42223,10 +42223,10 @@
     {
       "name": "pop-title",
       "file": "25-anchor.css",
-      "line": 136,
+      "line": 140,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The heading inside a popover card.",
       "declarations": [
         {
           "prop": "font-weight",
@@ -42241,7 +42241,7 @@
         {
           "selector": ".pop-title",
           "file": "25-anchor.css",
-          "line": 136,
+          "line": 140,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -42515,7 +42515,7 @@
     {
       "name": "progress",
       "file": "07-components.css",
-      "line": 478,
+      "line": 499,
       "layer": "deck.components",
       "section": "Progress, meter, spinner, skeleton",
       "doc": null,
@@ -42553,25 +42553,25 @@
         {
           "selector": ".progress",
           "file": "07-components.css",
-          "line": 478,
+          "line": 499,
           "conditions": []
         },
         {
           "selector": ".progress::-webkit-progress-bar",
           "file": "07-components.css",
-          "line": 487,
+          "line": 508,
           "conditions": []
         },
         {
           "selector": ".progress::-webkit-progress-value",
           "file": "07-components.css",
-          "line": 488,
+          "line": 509,
           "conditions": []
         },
         {
           "selector": ".progress::-moz-progress-bar",
           "file": "07-components.css",
-          "line": 489,
+          "line": 510,
           "conditions": []
         },
         {
@@ -42735,13 +42735,13 @@
         {
           "selector": ".menu-item .push",
           "file": "07-components.css",
-          "line": 602,
+          "line": 638,
           "conditions": []
         },
         {
           "selector": ".sidebar-link .push",
           "file": "07-components.css",
-          "line": 784,
+          "line": 838,
           "conditions": []
         },
         {
@@ -44203,7 +44203,7 @@
     {
       "name": "reaction",
       "file": "08-mobile.css",
-      "line": 223,
+      "line": 230,
       "layer": "deck.mobile",
       "section": null,
       "doc": "Reaction pill, like a Slack or Teams reaction",
@@ -44261,13 +44261,13 @@
         {
           "selector": ".reaction",
           "file": "08-mobile.css",
-          "line": 223,
+          "line": 230,
           "conditions": []
         },
         {
           "selector": ".reaction[aria-pressed=\"true\"]",
           "file": "08-mobile.css",
-          "line": 237,
+          "line": 244,
           "conditions": []
         }
       ],
@@ -44546,7 +44546,7 @@
     {
       "name": "ring",
       "file": "07-components.css",
-      "line": 491,
+      "line": 512,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -44612,7 +44612,7 @@
         {
           "selector": ".ring",
           "file": "07-components.css",
-          "line": 491,
+          "line": 512,
           "conditions": []
         }
       ],
@@ -44635,7 +44635,7 @@
     {
       "name": "ring-label",
       "file": "07-components.css",
-      "line": 508,
+      "line": 529,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -44644,7 +44644,7 @@
         {
           "selector": ".ring-wrap > .ring-label",
           "file": "07-components.css",
-          "line": 508,
+          "line": 529,
           "conditions": []
         }
       ],
@@ -44657,7 +44657,7 @@
     {
       "name": "ring-wrap",
       "file": "07-components.css",
-      "line": 507,
+      "line": 528,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -44679,13 +44679,13 @@
         {
           "selector": ".ring-wrap",
           "file": "07-components.css",
-          "line": 507,
+          "line": 528,
           "conditions": []
         },
         {
           "selector": ".ring-wrap > .ring-label",
           "file": "07-components.css",
-          "line": 508,
+          "line": 529,
           "conditions": []
         }
       ],
@@ -45107,7 +45107,7 @@
     {
       "name": "safe-bottom",
       "file": "08-mobile.css",
-      "line": 117,
+      "line": 124,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -45121,7 +45121,7 @@
         {
           "selector": ".safe-bottom",
           "file": "08-mobile.css",
-          "line": 117,
+          "line": 124,
           "conditions": []
         }
       ],
@@ -45133,7 +45133,7 @@
     {
       "name": "safe-top",
       "file": "08-mobile.css",
-      "line": 116,
+      "line": 123,
       "layer": "deck.mobile",
       "section": "Safe area helpers",
       "doc": null,
@@ -45147,7 +45147,7 @@
         {
           "selector": ".safe-top",
           "file": "08-mobile.css",
-          "line": 116,
+          "line": 123,
           "conditions": []
         }
       ],
@@ -45159,7 +45159,7 @@
     {
       "name": "safe-x",
       "file": "08-mobile.css",
-      "line": 118,
+      "line": 125,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -45173,7 +45173,7 @@
         {
           "selector": ".safe-x",
           "file": "08-mobile.css",
-          "line": 118,
+          "line": 125,
           "conditions": []
         }
       ],
@@ -45528,10 +45528,10 @@
     {
       "name": "segmented",
       "file": "07-components.css",
-      "line": 380,
+      "line": 393,
       "layer": "deck.components",
-      "section": "Segmented control (iOS-style, good on a phone)",
-      "doc": null,
+      "section": null,
+      "doc": "A one-of-N control: equal-width children in a sunken track with the\nselected one raised. Styled from [aria-selected=\"true\"] or .is-active.\nBuilt from radio inputs it needs no JavaScript and gets arrow keys free —\nbut Deck does not style :has(:checked), so that version needs one rule of\nyour own.",
       "declarations": [
         {
           "prop": "display",
@@ -45566,25 +45566,25 @@
         {
           "selector": ".segmented",
           "file": "07-components.css",
-          "line": 380,
+          "line": 393,
           "conditions": []
         },
         {
           "selector": ".segmented > *",
           "file": "07-components.css",
-          "line": 389,
+          "line": 402,
           "conditions": []
         },
         {
           "selector": ".segmented > [aria-selected=\"true\"]",
           "file": "07-components.css",
-          "line": 405,
+          "line": 418,
           "conditions": []
         },
         {
           "selector": ".segmented > .is-active",
           "file": "07-components.css",
-          "line": 405,
+          "line": 418,
           "conditions": []
         },
         {
@@ -46083,7 +46083,7 @@
         {
           "selector": ".sheet",
           "file": "08-mobile.css",
-          "line": 62,
+          "line": 69,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -46091,7 +46091,7 @@
         {
           "selector": ".sheet[open]",
           "file": "08-mobile.css",
-          "line": 72,
+          "line": 79,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -46099,7 +46099,7 @@
         {
           "selector": ".sheet[open]",
           "file": "08-mobile.css",
-          "line": 73,
+          "line": 80,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -46129,10 +46129,10 @@
     {
       "name": "sheet-body",
       "file": "08-mobile.css",
-      "line": 52,
+      "line": 59,
       "layer": "deck.mobile",
       "section": null,
-      "doc": null,
+      "doc": "The scrolling region. Pads for the home indicator, and contains its\noverscroll so reaching the end does not scroll the page behind.",
       "declarations": [
         {
           "prop": "padding",
@@ -46163,7 +46163,7 @@
         {
           "selector": ".sheet-body",
           "file": "08-mobile.css",
-          "line": 52,
+          "line": 59,
           "conditions": []
         }
       ],
@@ -46180,10 +46180,10 @@
     {
       "name": "sheet-grip",
       "file": "08-mobile.css",
-      "line": 43,
+      "line": 46,
       "layer": "deck.mobile",
       "section": null,
-      "doc": null,
+      "doc": "The drag handle at the top of a bottom sheet. Deck draws it and does not\nimplement the drag — swiping down does nothing — so always ship a real\nclose button as well.",
       "declarations": [
         {
           "prop": "inline-size",
@@ -46210,7 +46210,7 @@
         {
           "selector": ".sheet-grip",
           "file": "08-mobile.css",
-          "line": 43,
+          "line": 46,
           "conditions": []
         },
         {
@@ -46235,10 +46235,10 @@
     {
       "name": "sheet-header",
       "file": "08-mobile.css",
-      "line": 50,
+      "line": 54,
       "layer": "deck.mobile",
       "section": null,
-      "doc": null,
+      "doc": "The title row of a sheet.",
       "declarations": [
         {
           "prop": "padding",
@@ -46261,7 +46261,7 @@
         {
           "selector": ".sheet-header",
           "file": "08-mobile.css",
-          "line": 50,
+          "line": 54,
           "conditions": []
         }
       ],
@@ -46276,10 +46276,10 @@
     {
       "name": "sheet-title",
       "file": "08-mobile.css",
-      "line": 51,
+      "line": 56,
       "layer": "deck.mobile",
       "section": null,
-      "doc": null,
+      "doc": "The sheet's heading. Point aria-labelledby at it.",
       "declarations": [
         {
           "prop": "font-size",
@@ -46294,7 +46294,7 @@
         {
           "selector": ".sheet-title",
           "file": "08-mobile.css",
-          "line": 51,
+          "line": 56,
           "conditions": []
         }
       ],
@@ -46371,7 +46371,7 @@
     {
       "name": "sidebar",
       "file": "07-components.css",
-      "line": 762,
+      "line": 816,
       "layer": "deck.components",
       "section": "Sidebar",
       "doc": null,
@@ -46397,7 +46397,7 @@
         {
           "selector": ".sidebar",
           "file": "07-components.css",
-          "line": 762,
+          "line": 816,
           "conditions": []
         },
         {
@@ -46423,7 +46423,7 @@
     {
       "name": "sidebar-group",
       "file": "07-components.css",
-      "line": 768,
+      "line": 822,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -46449,7 +46449,7 @@
         {
           "selector": ".sidebar-group",
           "file": "07-components.css",
-          "line": 768,
+          "line": 822,
           "conditions": []
         },
         {
@@ -46474,7 +46474,7 @@
     {
       "name": "sidebar-link",
       "file": "07-components.css",
-      "line": 769,
+      "line": 823,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -46528,25 +46528,25 @@
         {
           "selector": ".sidebar-link",
           "file": "07-components.css",
-          "line": 769,
+          "line": 823,
           "conditions": []
         },
         {
           "selector": ".sidebar-link:hover",
           "file": "07-components.css",
-          "line": 782,
+          "line": 836,
           "conditions": []
         },
         {
           "selector": ".sidebar-link[aria-current]",
           "file": "07-components.css",
-          "line": 783,
+          "line": 837,
           "conditions": []
         },
         {
           "selector": ".sidebar-link .push",
           "file": "07-components.css",
-          "line": 784,
+          "line": 838,
           "conditions": []
         },
         {
@@ -46586,7 +46586,7 @@
     {
       "name": "skeleton",
       "file": "07-components.css",
-      "line": 520,
+      "line": 541,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -46632,7 +46632,7 @@
         {
           "selector": ".skeleton",
           "file": "07-components.css",
-          "line": 520,
+          "line": 541,
           "conditions": []
         }
       ],
@@ -46652,7 +46652,7 @@
     {
       "name": "skeleton-circle",
       "file": "07-components.css",
-      "line": 531,
+      "line": 552,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -46666,7 +46666,7 @@
         {
           "selector": ".skeleton-circle",
           "file": "07-components.css",
-          "line": 531,
+          "line": 552,
           "conditions": []
         }
       ],
@@ -46680,7 +46680,7 @@
     {
       "name": "skeleton-text",
       "file": "07-components.css",
-      "line": 530,
+      "line": 551,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -46698,7 +46698,7 @@
         {
           "selector": ".skeleton-text",
           "file": "07-components.css",
-          "line": 530,
+          "line": 551,
           "conditions": []
         }
       ],
@@ -47199,7 +47199,7 @@
     {
       "name": "speed-dial",
       "file": "22-nav.css",
-      "line": 310,
+      "line": 319,
       "layer": "deck.components",
       "section": "Speed dial",
       "doc": "A FAB that fans out into related actions.",
@@ -47241,19 +47241,19 @@
         {
           "selector": ".speed-dial",
           "file": "22-nav.css",
-          "line": 310,
+          "line": 319,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .speed-dial",
           "file": "22-nav.css",
-          "line": 320,
+          "line": 329,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .speed-dial",
           "file": "22-nav.css",
-          "line": 324,
+          "line": 333,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -47261,43 +47261,43 @@
         {
           "selector": ".speed-dial.is-open .speed-dial-action",
           "file": "22-nav.css",
-          "line": 359,
+          "line": 368,
           "conditions": []
         },
         {
           "selector": ".speed-dial > .fab",
           "file": "22-nav.css",
-          "line": 388,
+          "line": 397,
           "conditions": []
         },
         {
           "selector": ".speed-dial > .fab .icon",
           "file": "22-nav.css",
-          "line": 389,
+          "line": 398,
           "conditions": []
         },
         {
           "selector": ".speed-dial.is-open > .fab .icon",
           "file": "22-nav.css",
-          "line": 390,
+          "line": 399,
           "conditions": []
         },
         {
           "selector": "body:has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 443,
+          "line": 452,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 449,
+          "line": 458,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 457,
+          "line": 466,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -47305,7 +47305,7 @@
         {
           "selector": "body:has(.speed-dial.is-open) .back-to-top",
           "file": "22-nav.css",
-          "line": 466,
+          "line": 475,
           "conditions": []
         },
         {
@@ -47344,7 +47344,7 @@
     {
       "name": "speed-dial-action",
       "file": "22-nav.css",
-      "line": 346,
+      "line": 355,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47390,7 +47390,7 @@
         {
           "selector": ".speed-dial-action",
           "file": "22-nav.css",
-          "line": 334,
+          "line": 343,
           "conditions": [
             "@supports (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -47398,7 +47398,7 @@
         {
           "selector": ".speed-dial-action:nth-child(1)",
           "file": "22-nav.css",
-          "line": 337,
+          "line": 346,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -47406,7 +47406,7 @@
         {
           "selector": ".speed-dial-action:nth-child(2)",
           "file": "22-nav.css",
-          "line": 338,
+          "line": 347,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -47414,7 +47414,7 @@
         {
           "selector": ".speed-dial-action:nth-child(3)",
           "file": "22-nav.css",
-          "line": 339,
+          "line": 348,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -47422,7 +47422,7 @@
         {
           "selector": ".speed-dial-action:nth-child(4)",
           "file": "22-nav.css",
-          "line": 340,
+          "line": 349,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -47430,7 +47430,7 @@
         {
           "selector": ".speed-dial-action:nth-child(5)",
           "file": "22-nav.css",
-          "line": 341,
+          "line": 350,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -47438,7 +47438,7 @@
         {
           "selector": ".speed-dial-action:nth-child(6)",
           "file": "22-nav.css",
-          "line": 342,
+          "line": 351,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -47446,7 +47446,7 @@
         {
           "selector": ".speed-dial-action:nth-child(7)",
           "file": "22-nav.css",
-          "line": 343,
+          "line": 352,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -47454,7 +47454,7 @@
         {
           "selector": ".speed-dial-action:nth-child(8)",
           "file": "22-nav.css",
-          "line": 344,
+          "line": 353,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -47462,13 +47462,13 @@
         {
           "selector": ".speed-dial-action",
           "file": "22-nav.css",
-          "line": 346,
+          "line": 355,
           "conditions": []
         },
         {
           "selector": ".speed-dial.is-open .speed-dial-action",
           "file": "22-nav.css",
-          "line": 359,
+          "line": 368,
           "conditions": []
         }
       ],
@@ -47486,7 +47486,7 @@
     {
       "name": "speed-dial-actions",
       "file": "22-nav.css",
-      "line": 327,
+      "line": 336,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47512,7 +47512,7 @@
         {
           "selector": ".speed-dial-actions",
           "file": "22-nav.css",
-          "line": 327,
+          "line": 336,
           "conditions": []
         }
       ],
@@ -47526,7 +47526,7 @@
     {
       "name": "speed-dial-button",
       "file": "22-nav.css",
-      "line": 375,
+      "line": 384,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47576,13 +47576,13 @@
         {
           "selector": ".speed-dial-button",
           "file": "22-nav.css",
-          "line": 375,
+          "line": 384,
           "conditions": []
         },
         {
           "selector": ".speed-dial-button:hover",
           "file": "22-nav.css",
-          "line": 387,
+          "line": 396,
           "conditions": []
         }
       ],
@@ -47601,7 +47601,7 @@
     {
       "name": "speed-dial-label",
       "file": "22-nav.css",
-      "line": 365,
+      "line": 374,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47643,7 +47643,7 @@
         {
           "selector": ".speed-dial-label",
           "file": "22-nav.css",
-          "line": 365,
+          "line": 374,
           "conditions": []
         }
       ],
@@ -47663,7 +47663,7 @@
     {
       "name": "spinner",
       "file": "07-components.css",
-      "line": 510,
+      "line": 531,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47705,7 +47705,7 @@
         {
           "selector": ".spinner",
           "file": "07-components.css",
-          "line": 510,
+          "line": 531,
           "conditions": []
         }
       ],
@@ -47723,7 +47723,7 @@
     {
       "name": "spinner-lg",
       "file": "07-components.css",
-      "line": 518,
+      "line": 539,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47745,7 +47745,7 @@
         {
           "selector": ".spinner-lg",
           "file": "07-components.css",
-          "line": 518,
+          "line": 539,
           "conditions": []
         }
       ],
@@ -48389,7 +48389,7 @@
     {
       "name": "stat",
       "file": "07-components.css",
-      "line": 684,
+      "line": 738,
       "layer": "deck.components",
       "section": "Stat",
       "doc": null,
@@ -48411,7 +48411,7 @@
         {
           "selector": ".stat",
           "file": "07-components.css",
-          "line": 684,
+          "line": 738,
           "conditions": []
         },
         {
@@ -48501,7 +48501,7 @@
     {
       "name": "stat-delta",
       "file": "07-components.css",
-      "line": 693,
+      "line": 747,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48531,7 +48531,7 @@
         {
           "selector": ".stat-delta",
           "file": "07-components.css",
-          "line": 693,
+          "line": 747,
           "conditions": []
         }
       ],
@@ -48549,7 +48549,7 @@
     {
       "name": "stat-delta-down",
       "file": "07-components.css",
-      "line": 695,
+      "line": 749,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48563,7 +48563,7 @@
         {
           "selector": ".stat-delta-down",
           "file": "07-components.css",
-          "line": 695,
+          "line": 749,
           "conditions": []
         }
       ],
@@ -48577,7 +48577,7 @@
     {
       "name": "stat-delta-up",
       "file": "07-components.css",
-      "line": 694,
+      "line": 748,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48591,7 +48591,7 @@
         {
           "selector": ".stat-delta-up",
           "file": "07-components.css",
-          "line": 694,
+          "line": 748,
           "conditions": []
         }
       ],
@@ -48605,7 +48605,7 @@
     {
       "name": "stat-label",
       "file": "07-components.css",
-      "line": 692,
+      "line": 746,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48623,7 +48623,7 @@
         {
           "selector": ".stat-label",
           "file": "07-components.css",
-          "line": 692,
+          "line": 746,
           "conditions": []
         },
         {
@@ -48646,7 +48646,7 @@
     {
       "name": "stat-value",
       "file": "07-components.css",
-      "line": 685,
+      "line": 739,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48676,7 +48676,7 @@
         {
           "selector": ".stat-value",
           "file": "07-components.css",
-          "line": 685,
+          "line": 739,
           "conditions": []
         },
         {
@@ -48698,7 +48698,7 @@
     {
       "name": "status-line",
       "file": "22-nav.css",
-      "line": 733,
+      "line": 742,
       "layer": "deck.components",
       "section": null,
       "doc": "Live status line: dot plus label, the pattern used in status pages",
@@ -48724,13 +48724,13 @@
         {
           "selector": ".status-line",
           "file": "22-nav.css",
-          "line": 733,
+          "line": 742,
           "conditions": []
         },
         {
           "selector": ".status-line .indicator",
           "file": "22-nav.css",
-          "line": 734,
+          "line": 743,
           "conditions": []
         }
       ],
@@ -48745,7 +48745,7 @@
     {
       "name": "step",
       "file": "22-nav.css",
-      "line": 505,
+      "line": 514,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48783,55 +48783,55 @@
         {
           "selector": ".step",
           "file": "22-nav.css",
-          "line": 505,
+          "line": 514,
           "conditions": []
         },
         {
           "selector": ".step:last-child .step-marker::after",
           "file": "22-nav.css",
-          "line": 543,
+          "line": 552,
           "conditions": []
         },
         {
           "selector": ".step.is-done .step-marker::before",
           "file": "22-nav.css",
-          "line": 547,
+          "line": 556,
           "conditions": []
         },
         {
           "selector": ".step.is-done .step-marker::after",
           "file": "22-nav.css",
-          "line": 558,
+          "line": 567,
           "conditions": []
         },
         {
           "selector": ".step.is-done .step-label",
           "file": "22-nav.css",
-          "line": 559,
+          "line": 568,
           "conditions": []
         },
         {
           "selector": ".step.is-current .step-marker::before",
           "file": "22-nav.css",
-          "line": 560,
+          "line": 569,
           "conditions": []
         },
         {
           "selector": ".step.is-current .step-label",
           "file": "22-nav.css",
-          "line": 565,
+          "line": 574,
           "conditions": []
         },
         {
           "selector": ".stepper-vertical .step",
           "file": "22-nav.css",
-          "line": 569,
+          "line": 578,
           "conditions": []
         },
         {
           "selector": ".stepper-auto .step",
           "file": "22-nav.css",
-          "line": 574,
+          "line": 583,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -48852,7 +48852,7 @@
     {
       "name": "step-label",
       "file": "22-nav.css",
-      "line": 544,
+      "line": 553,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48874,19 +48874,19 @@
         {
           "selector": ".step-label",
           "file": "22-nav.css",
-          "line": 544,
+          "line": 553,
           "conditions": []
         },
         {
           "selector": ".step.is-done .step-label",
           "file": "22-nav.css",
-          "line": 559,
+          "line": 568,
           "conditions": []
         },
         {
           "selector": ".step.is-current .step-label",
           "file": "22-nav.css",
-          "line": 565,
+          "line": 574,
           "conditions": []
         }
       ],
@@ -48902,7 +48902,7 @@
     {
       "name": "step-marker",
       "file": "22-nav.css",
-      "line": 514,
+      "line": 523,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48924,61 +48924,61 @@
         {
           "selector": ".step-marker",
           "file": "22-nav.css",
-          "line": 514,
+          "line": 523,
           "conditions": []
         },
         {
           "selector": ".step-marker::before",
           "file": "22-nav.css",
-          "line": 519,
+          "line": 528,
           "conditions": []
         },
         {
           "selector": ".step-marker::after",
           "file": "22-nav.css",
-          "line": 536,
+          "line": 545,
           "conditions": []
         },
         {
           "selector": ".step:last-child .step-marker::after",
           "file": "22-nav.css",
-          "line": 543,
+          "line": 552,
           "conditions": []
         },
         {
           "selector": ".step.is-done .step-marker::before",
           "file": "22-nav.css",
-          "line": 547,
+          "line": 556,
           "conditions": []
         },
         {
           "selector": ".step.is-done .step-marker::after",
           "file": "22-nav.css",
-          "line": 558,
+          "line": 567,
           "conditions": []
         },
         {
           "selector": ".step.is-current .step-marker::before",
           "file": "22-nav.css",
-          "line": 560,
+          "line": 569,
           "conditions": []
         },
         {
           "selector": ".stepper-vertical .step-marker",
           "file": "22-nav.css",
-          "line": 570,
+          "line": 579,
           "conditions": []
         },
         {
           "selector": ".stepper-vertical .step-marker::after",
           "file": "22-nav.css",
-          "line": 571,
+          "line": 580,
           "conditions": []
         },
         {
           "selector": ".stepper-auto .step-marker",
           "file": "22-nav.css",
-          "line": 575,
+          "line": 584,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -48986,7 +48986,7 @@
         {
           "selector": ".stepper-auto .step-marker::after",
           "file": "22-nav.css",
-          "line": 576,
+          "line": 585,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -49015,7 +49015,7 @@
     {
       "name": "step-note",
       "file": "22-nav.css",
-      "line": 545,
+      "line": 554,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -49033,7 +49033,7 @@
         {
           "selector": ".step-note",
           "file": "22-nav.css",
-          "line": 545,
+          "line": 554,
           "conditions": []
         }
       ],
@@ -49048,7 +49048,7 @@
     {
       "name": "stepper",
       "file": "22-nav.css",
-      "line": 497,
+      "line": 506,
       "layer": "deck.components",
       "section": "Stepper",
       "doc": "A wizard. The timeline in 07 records what happened; this one shows where\nyou are in a process you are actively moving through.",
@@ -49078,13 +49078,13 @@
         {
           "selector": ".stepper",
           "file": "22-nav.css",
-          "line": 497,
+          "line": 506,
           "conditions": []
         },
         {
           "selector": ".stepper::-webkit-scrollbar",
           "file": "22-nav.css",
-          "line": 504,
+          "line": 513,
           "conditions": []
         }
       ],
@@ -49101,7 +49101,7 @@
     {
       "name": "stepper-auto",
       "file": "22-nav.css",
-      "line": 573,
+      "line": 582,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -49119,7 +49119,7 @@
         {
           "selector": ".stepper-auto",
           "file": "22-nav.css",
-          "line": 573,
+          "line": 582,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -49127,7 +49127,7 @@
         {
           "selector": ".stepper-auto .step",
           "file": "22-nav.css",
-          "line": 574,
+          "line": 583,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -49135,7 +49135,7 @@
         {
           "selector": ".stepper-auto .step-marker",
           "file": "22-nav.css",
-          "line": 575,
+          "line": 584,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -49143,7 +49143,7 @@
         {
           "selector": ".stepper-auto .step-marker::after",
           "file": "22-nav.css",
-          "line": 576,
+          "line": 585,
           "conditions": [
             "@media (max-width: 40rem)"
           ]
@@ -49159,7 +49159,7 @@
     {
       "name": "stepper-vertical",
       "file": "22-nav.css",
-      "line": 568,
+      "line": 577,
       "layer": "deck.components",
       "section": null,
       "doc": "Vertical on a phone, where five steps side by side never fits",
@@ -49177,25 +49177,25 @@
         {
           "selector": ".stepper-vertical",
           "file": "22-nav.css",
-          "line": 568,
+          "line": 577,
           "conditions": []
         },
         {
           "selector": ".stepper-vertical .step",
           "file": "22-nav.css",
-          "line": 569,
+          "line": 578,
           "conditions": []
         },
         {
           "selector": ".stepper-vertical .step-marker",
           "file": "22-nav.css",
-          "line": 570,
+          "line": 579,
           "conditions": []
         },
         {
           "selector": ".stepper-vertical .step-marker::after",
           "file": "22-nav.css",
-          "line": 571,
+          "line": 580,
           "conditions": []
         }
       ],
@@ -49537,10 +49537,10 @@
     {
       "name": "tab",
       "file": "07-components.css",
-      "line": 357,
+      "line": 365,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "One trigger. Styled from [aria-selected=\"true\"], so the visual state and\nthe accessible state are the same attribute and cannot disagree. The\nunselected state carries the same transparent border, so selecting one\nchanges a colour and never moves anything.",
       "declarations": [
         {
           "prop": "padding",
@@ -49603,25 +49603,25 @@
         {
           "selector": ".tab",
           "file": "07-components.css",
-          "line": 357,
+          "line": 365,
           "conditions": []
         },
         {
           "selector": ".tab:hover",
           "file": "07-components.css",
-          "line": 373,
+          "line": 381,
           "conditions": []
         },
         {
           "selector": ".tab[aria-selected=\"true\"]",
           "file": "07-components.css",
-          "line": 374,
+          "line": 382,
           "conditions": []
         },
         {
           "selector": ".tab.is-active",
           "file": "07-components.css",
-          "line": 374,
+          "line": 382,
           "conditions": []
         }
       ],
@@ -49644,7 +49644,7 @@
     {
       "name": "tabbar",
       "file": "08-mobile.css",
-      "line": 77,
+      "line": 84,
       "layer": "deck.mobile",
       "section": "Bottom tab bar",
       "doc": null,
@@ -49700,13 +49700,13 @@
         {
           "selector": ".tabbar",
           "file": "08-mobile.css",
-          "line": 77,
+          "line": 84,
           "conditions": []
         },
         {
           "selector": ".tabbar",
           "file": "08-mobile.css",
-          "line": 89,
+          "line": 96,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -49714,13 +49714,13 @@
         {
           "selector": "body:has(.tabbar)",
           "file": "08-mobile.css",
-          "line": 112,
+          "line": 119,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar)",
           "file": "08-mobile.css",
-          "line": 113,
+          "line": 120,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -49728,13 +49728,13 @@
         {
           "selector": "body:has(.tabbar) .toast-region",
           "file": "13-toasts.css",
-          "line": 21,
+          "line": 24,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .toast-region",
           "file": "13-toasts.css",
-          "line": 25,
+          "line": 28,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -49742,13 +49742,13 @@
         {
           "selector": "body:has(.tabbar) .speed-dial",
           "file": "22-nav.css",
-          "line": 320,
+          "line": 329,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .speed-dial",
           "file": "22-nav.css",
-          "line": 324,
+          "line": 333,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -49756,19 +49756,19 @@
         {
           "selector": "body:has(.tabbar) .back-to-top",
           "file": "22-nav.css",
-          "line": 446,
+          "line": 455,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 449,
+          "line": 458,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .back-to-top",
           "file": "22-nav.css",
-          "line": 454,
+          "line": 463,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -49776,7 +49776,7 @@
         {
           "selector": "body:has(.tabbar):has(:is(.fab, .speed-dial)) .back-to-top",
           "file": "22-nav.css",
-          "line": 457,
+          "line": 466,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -49806,7 +49806,7 @@
     {
       "name": "tabbar-item",
       "file": "08-mobile.css",
-      "line": 91,
+      "line": 98,
       "layer": "deck.mobile",
       "section": null,
       "doc": null,
@@ -49872,25 +49872,25 @@
         {
           "selector": ".tabbar-item",
           "file": "08-mobile.css",
-          "line": 91,
+          "line": 98,
           "conditions": []
         },
         {
           "selector": ".tabbar-item[aria-current]",
           "file": "08-mobile.css",
-          "line": 107,
+          "line": 114,
           "conditions": []
         },
         {
           "selector": ".tabbar-item[aria-current] .icon",
           "file": "08-mobile.css",
-          "line": 108,
+          "line": 115,
           "conditions": []
         },
         {
           "selector": ".tabbar-item .icon",
           "file": "08-mobile.css",
-          "line": 109,
+          "line": 116,
           "conditions": []
         }
       ],
@@ -50255,10 +50255,10 @@
     {
       "name": "tabs",
       "file": "07-components.css",
-      "line": 349,
+      "line": 353,
       "layer": "deck.components",
-      "section": "Tabs",
-      "doc": null,
+      "section": null,
+      "doc": "The strip. Scrolls sideways rather than wrapping, because tabs that wrap\nstop reading as a strip. Deck styles the tabs and ships no keyboard\nbehaviour: if you use role=\"tablist\" you must add the roving tabindex and\nthe arrow keys yourself, or the role promises what the page does not do.",
       "declarations": [
         {
           "prop": "display",
@@ -50285,13 +50285,13 @@
         {
           "selector": ".tabs",
           "file": "07-components.css",
-          "line": 349,
+          "line": 353,
           "conditions": []
         },
         {
           "selector": ".tabs::-webkit-scrollbar",
           "file": "07-components.css",
-          "line": 356,
+          "line": 360,
           "conditions": []
         },
         {
@@ -51307,7 +51307,7 @@
     {
       "name": "timeline",
       "file": "07-components.css",
-      "line": 698,
+      "line": 752,
       "layer": "deck.components",
       "section": "Timeline",
       "doc": null,
@@ -51325,7 +51325,7 @@
         {
           "selector": ".timeline",
           "file": "07-components.css",
-          "line": 698,
+          "line": 752,
           "conditions": []
         }
       ],
@@ -51340,7 +51340,7 @@
     {
       "name": "timeline-dot",
       "file": "07-components.css",
-      "line": 714,
+      "line": 768,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -51382,13 +51382,13 @@
         {
           "selector": ".timeline-dot",
           "file": "07-components.css",
-          "line": 714,
+          "line": 768,
           "conditions": []
         },
         {
           "selector": ".timeline-item.is-done .timeline-dot",
           "file": "07-components.css",
-          "line": 724,
+          "line": 778,
           "conditions": []
         }
       ],
@@ -51406,7 +51406,7 @@
     {
       "name": "timeline-item",
       "file": "07-components.css",
-      "line": 699,
+      "line": 753,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -51436,19 +51436,19 @@
         {
           "selector": ".timeline-item",
           "file": "07-components.css",
-          "line": 699,
+          "line": 753,
           "conditions": []
         },
         {
           "selector": ".timeline-item:not(:last-child)::before",
           "file": "07-components.css",
-          "line": 706,
+          "line": 760,
           "conditions": []
         },
         {
           "selector": ".timeline-item.is-done .timeline-dot",
           "file": "07-components.css",
-          "line": 724,
+          "line": 778,
           "conditions": []
         },
         {
@@ -51586,7 +51586,7 @@
         {
           "selector": ".tip",
           "file": "25-anchor.css",
-          "line": 141,
+          "line": 148,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -51594,7 +51594,7 @@
         {
           "selector": ".tip",
           "file": "25-anchor.css",
-          "line": 152,
+          "line": 159,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -51602,7 +51602,7 @@
         {
           "selector": ".tip:popover-open",
           "file": "25-anchor.css",
-          "line": 180,
+          "line": 187,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -51610,7 +51610,7 @@
         {
           "selector": ".tip:popover-open",
           "file": "25-anchor.css",
-          "line": 181,
+          "line": 188,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -51618,7 +51618,7 @@
         {
           "selector": ".tip::backdrop",
           "file": "25-anchor.css",
-          "line": 182,
+          "line": 189,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -51645,10 +51645,10 @@
     {
       "name": "tip-arrow",
       "file": "25-anchor.css",
-      "line": 98,
+      "line": 101,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The arrow on a .tip. background: inherit takes the tip's colour, and\njustify-self: anchor-center keeps it pointed at the trigger whichever way\nthe tip has flipped.",
       "declarations": [
         {
           "prop": "position",
@@ -51683,7 +51683,7 @@
         {
           "selector": ".tip-arrow",
           "file": "25-anchor.css",
-          "line": 98,
+          "line": 101,
           "conditions": [
             "@supports (anchor-name: --a)"
           ]
@@ -51691,7 +51691,7 @@
         {
           "selector": ".tip-arrow",
           "file": "25-anchor.css",
-          "line": 183,
+          "line": 190,
           "conditions": [
             "@supports not (anchor-name: --a)"
           ]
@@ -51707,10 +51707,10 @@
     {
       "name": "toast",
       "file": "13-toasts.css",
-      "line": 41,
+      "line": 49,
       "layer": "deck.components",
-      "section": "The toast",
-      "doc": null,
+      "section": "Enter and exit",
+      "doc": "One notification. The accent colour is a single custom property,\n--toast-accent, which paints the edge, the icon and the timer together, so\na kind is one declaration. Built by Deck.toast() rather than written by\nhand; touch-action: pan-y lets a horizontal swipe dismiss it while a\nvertical drag still scrolls the page.",
       "declarations": [
         {
           "prop": "--toast-accent",
@@ -51785,37 +51785,37 @@
         {
           "selector": ".toast",
           "file": "13-toasts.css",
-          "line": 41,
+          "line": 49,
           "conditions": []
         },
         {
           "selector": ".toast::before",
           "file": "13-toasts.css",
-          "line": 63,
+          "line": 71,
           "conditions": []
         },
         {
           "selector": ".toast",
           "file": "13-toasts.css",
-          "line": 124,
+          "line": 140,
           "conditions": []
         },
         {
           "selector": ".toast-region-top .toast",
           "file": "13-toasts.css",
-          "line": 128,
+          "line": 144,
           "conditions": []
         },
         {
           "selector": ".toast.is-leaving",
           "file": "13-toasts.css",
-          "line": 132,
+          "line": 148,
           "conditions": []
         },
         {
           "selector": ".toast-region-stacked .toast",
           "file": "13-toasts.css",
-          "line": 145,
+          "line": 161,
           "conditions": [
             "@supports (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -51823,7 +51823,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(1)",
           "file": "13-toasts.css",
-          "line": 148,
+          "line": 164,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -51831,7 +51831,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(2)",
           "file": "13-toasts.css",
-          "line": 149,
+          "line": 165,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -51839,7 +51839,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(3)",
           "file": "13-toasts.css",
-          "line": 150,
+          "line": 166,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -51847,7 +51847,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(4)",
           "file": "13-toasts.css",
-          "line": 151,
+          "line": 167,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -51855,7 +51855,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(5)",
           "file": "13-toasts.css",
-          "line": 152,
+          "line": 168,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -51863,7 +51863,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(6)",
           "file": "13-toasts.css",
-          "line": 153,
+          "line": 169,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -51871,7 +51871,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(7)",
           "file": "13-toasts.css",
-          "line": 154,
+          "line": 170,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -51879,7 +51879,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(8)",
           "file": "13-toasts.css",
-          "line": 155,
+          "line": 171,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -51887,31 +51887,31 @@
         {
           "selector": ".toast-region-stacked .toast",
           "file": "13-toasts.css",
-          "line": 157,
+          "line": 173,
           "conditions": []
         },
         {
           "selector": ".toast-region-stacked .toast:nth-child(n+4)",
           "file": "13-toasts.css",
-          "line": 166,
+          "line": 182,
           "conditions": []
         },
         {
           "selector": ".toast-region-stacked:is(:hover, :focus-within) .toast",
           "file": "13-toasts.css",
-          "line": 168,
+          "line": 184,
           "conditions": []
         },
         {
           "selector": ".toast.is-dragging",
           "file": "13-toasts.css",
-          "line": 175,
+          "line": 191,
           "conditions": []
         },
         {
           "selector": ".toast",
           "file": "13-toasts.css",
-          "line": 182,
+          "line": 198,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -51919,7 +51919,7 @@
         {
           "selector": ".toast-region-stacked .toast",
           "file": "13-toasts.css",
-          "line": 182,
+          "line": 198,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -51972,7 +51972,7 @@
     {
       "name": "toast-action",
       "file": "13-toasts.css",
-      "line": 90,
+      "line": 102,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -52002,19 +52002,19 @@
         {
           "selector": ".toast-action",
           "file": "13-toasts.css",
-          "line": 90,
+          "line": 102,
           "conditions": []
         },
         {
           "selector": ".toast-action:hover",
           "file": "13-toasts.css",
-          "line": 97,
+          "line": 109,
           "conditions": []
         },
         {
           "selector": ".toast-undo .toast-action",
           "file": "13-toasts.css",
-          "line": 179,
+          "line": 195,
           "conditions": []
         }
       ],
@@ -52031,7 +52031,7 @@
     {
       "name": "toast-actions",
       "file": "13-toasts.css",
-      "line": 89,
+      "line": 101,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -52053,7 +52053,7 @@
         {
           "selector": ".toast-actions",
           "file": "13-toasts.css",
-          "line": 89,
+          "line": 101,
           "conditions": []
         }
       ],
@@ -52067,7 +52067,7 @@
     {
       "name": "toast-bad",
       "file": "13-toasts.css",
-      "line": 102,
+      "line": 114,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -52081,7 +52081,7 @@
         {
           "selector": ".toast-bad",
           "file": "13-toasts.css",
-          "line": 102,
+          "line": 114,
           "conditions": []
         }
       ],
@@ -52095,7 +52095,7 @@
     {
       "name": "toast-close",
       "file": "13-toasts.css",
-      "line": 76,
+      "line": 88,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -52145,13 +52145,13 @@
         {
           "selector": ".toast-close",
           "file": "13-toasts.css",
-          "line": 76,
+          "line": 88,
           "conditions": []
         },
         {
           "selector": ".toast-close:hover",
           "file": "13-toasts.css",
-          "line": 88,
+          "line": 100,
           "conditions": []
         }
       ],
@@ -52168,7 +52168,7 @@
     {
       "name": "toast-good",
       "file": "13-toasts.css",
-      "line": 100,
+      "line": 112,
       "layer": "deck.components",
       "section": "Kinds",
       "doc": null,
@@ -52182,7 +52182,7 @@
         {
           "selector": ".toast-good",
           "file": "13-toasts.css",
-          "line": 100,
+          "line": 112,
           "conditions": []
         }
       ],
@@ -52196,10 +52196,10 @@
     {
       "name": "toast-icon",
       "file": "13-toasts.css",
-      "line": 72,
+      "line": 82,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The leading glyph, coloured by --toast-accent so it matches the kind\nwithout a rule of its own.",
       "declarations": [
         {
           "prop": "color",
@@ -52218,7 +52218,7 @@
         {
           "selector": ".toast-icon",
           "file": "13-toasts.css",
-          "line": 72,
+          "line": 82,
           "conditions": []
         }
       ],
@@ -52232,7 +52232,7 @@
     {
       "name": "toast-info",
       "file": "13-toasts.css",
-      "line": 103,
+      "line": 115,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -52246,7 +52246,7 @@
         {
           "selector": ".toast-info",
           "file": "13-toasts.css",
-          "line": 103,
+          "line": 115,
           "conditions": []
         }
       ],
@@ -52260,7 +52260,7 @@
     {
       "name": "toast-loading",
       "file": "13-toasts.css",
-      "line": 104,
+      "line": 116,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -52274,7 +52274,7 @@
         {
           "selector": ".toast-loading",
           "file": "13-toasts.css",
-          "line": 104,
+          "line": 116,
           "conditions": []
         }
       ],
@@ -52288,10 +52288,10 @@
     {
       "name": "toast-main",
       "file": "13-toasts.css",
-      "line": 73,
+      "line": 85,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The text column of a toast. min-inline-size: 0 so a long unbroken string\ncannot push the close button off the end.",
       "declarations": [
         {
           "prop": "flex",
@@ -52318,7 +52318,7 @@
         {
           "selector": ".toast-main",
           "file": "13-toasts.css",
-          "line": 73,
+          "line": 85,
           "conditions": []
         }
       ],
@@ -52330,10 +52330,10 @@
     {
       "name": "toast-region",
       "file": "13-toasts.css",
-      "line": 9,
+      "line": 12,
       "layer": "deck.components",
       "section": null,
-      "doc": null,
+      "doc": "The fixed container. pointer-events: none on the region and auto on each\ntoast, so the empty area does not swallow clicks on the page beneath. Sits\nabove a .tabbar when the page has one, and clears the home indicator.",
       "declarations": [
         {
           "prop": "position",
@@ -52376,19 +52376,19 @@
         {
           "selector": ".toast-region",
           "file": "13-toasts.css",
-          "line": 9,
+          "line": 12,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .toast-region",
           "file": "13-toasts.css",
-          "line": 21,
+          "line": 24,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .toast-region",
           "file": "13-toasts.css",
-          "line": 25,
+          "line": 28,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -52396,7 +52396,7 @@
         {
           "selector": ".toast-region",
           "file": "13-toasts.css",
-          "line": 37,
+          "line": 40,
           "conditions": [
             "@media (max-width: 30rem)"
           ]
@@ -52404,7 +52404,7 @@
         {
           "selector": ".toast-region:is(:hover, :focus-within) .toast-timer",
           "file": "13-toasts.css",
-          "line": 121,
+          "line": 137,
           "conditions": []
         },
         {
@@ -52436,7 +52436,7 @@
     {
       "name": "toast-region-center",
       "file": "13-toasts.css",
-      "line": 29,
+      "line": 32,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -52454,7 +52454,7 @@
         {
           "selector": ".toast-region-center",
           "file": "13-toasts.css",
-          "line": 29,
+          "line": 32,
           "conditions": []
         }
       ],
@@ -52466,7 +52466,7 @@
     {
       "name": "toast-region-stacked",
       "file": "13-toasts.css",
-      "line": 145,
+      "line": 161,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -52475,7 +52475,7 @@
         {
           "selector": ".toast-region-stacked .toast",
           "file": "13-toasts.css",
-          "line": 145,
+          "line": 161,
           "conditions": [
             "@supports (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -52483,7 +52483,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(1)",
           "file": "13-toasts.css",
-          "line": 148,
+          "line": 164,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -52491,7 +52491,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(2)",
           "file": "13-toasts.css",
-          "line": 149,
+          "line": 165,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -52499,7 +52499,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(3)",
           "file": "13-toasts.css",
-          "line": 150,
+          "line": 166,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -52507,7 +52507,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(4)",
           "file": "13-toasts.css",
-          "line": 151,
+          "line": 167,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -52515,7 +52515,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(5)",
           "file": "13-toasts.css",
-          "line": 152,
+          "line": 168,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -52523,7 +52523,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(6)",
           "file": "13-toasts.css",
-          "line": 153,
+          "line": 169,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -52531,7 +52531,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(7)",
           "file": "13-toasts.css",
-          "line": 154,
+          "line": 170,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -52539,7 +52539,7 @@
         {
           "selector": ".toast-region-stacked .toast:nth-child(8)",
           "file": "13-toasts.css",
-          "line": 155,
+          "line": 171,
           "conditions": [
             "@supports not (animation-delay: calc(sibling-index() * 1ms))"
           ]
@@ -52547,25 +52547,25 @@
         {
           "selector": ".toast-region-stacked .toast",
           "file": "13-toasts.css",
-          "line": 157,
+          "line": 173,
           "conditions": []
         },
         {
           "selector": ".toast-region-stacked .toast:nth-child(n+4)",
           "file": "13-toasts.css",
-          "line": 166,
+          "line": 182,
           "conditions": []
         },
         {
           "selector": ".toast-region-stacked:is(:hover, :focus-within) .toast",
           "file": "13-toasts.css",
-          "line": 168,
+          "line": 184,
           "conditions": []
         },
         {
           "selector": ".toast-region-stacked .toast",
           "file": "13-toasts.css",
-          "line": 182,
+          "line": 198,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -52578,7 +52578,7 @@
     {
       "name": "toast-region-start",
       "file": "13-toasts.css",
-      "line": 28,
+      "line": 31,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -52592,7 +52592,7 @@
         {
           "selector": ".toast-region-start",
           "file": "13-toasts.css",
-          "line": 28,
+          "line": 31,
           "conditions": []
         }
       ],
@@ -52606,7 +52606,7 @@
     {
       "name": "toast-region-top",
       "file": "13-toasts.css",
-      "line": 30,
+      "line": 33,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -52624,13 +52624,13 @@
         {
           "selector": ".toast-region-top",
           "file": "13-toasts.css",
-          "line": 30,
+          "line": 33,
           "conditions": []
         },
         {
           "selector": ".toast-region-top .toast",
           "file": "13-toasts.css",
-          "line": 128,
+          "line": 144,
           "conditions": []
         }
       ],
@@ -52644,7 +52644,7 @@
     {
       "name": "toast-text",
       "file": "13-toasts.css",
-      "line": 75,
+      "line": 87,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -52658,7 +52658,7 @@
         {
           "selector": ".toast-text",
           "file": "13-toasts.css",
-          "line": 75,
+          "line": 87,
           "conditions": []
         }
       ],
@@ -52672,10 +52672,10 @@
     {
       "name": "toast-timer",
       "file": "13-toasts.css",
-      "line": 107,
+      "line": 123,
       "layer": "deck.components",
-      "section": "Auto-dismiss timer",
-      "doc": null,
+      "section": null,
+      "doc": "The auto-dismiss bar. A CSS animation rather than a JavaScript countdown,\nwhich is what allows hovering or focusing the region to pause every timer\nin it with one declaration — so a reader moving toward an Undo button does\nnot have it vanish as they arrive.",
       "declarations": [
         {
           "prop": "position",
@@ -52722,19 +52722,19 @@
         {
           "selector": ".toast-timer",
           "file": "13-toasts.css",
-          "line": 107,
+          "line": 123,
           "conditions": []
         },
         {
           "selector": ".toast-region:is(:hover, :focus-within) .toast-timer",
           "file": "13-toasts.css",
-          "line": 121,
+          "line": 137,
           "conditions": []
         },
         {
           "selector": ".toast-timer",
           "file": "13-toasts.css",
-          "line": 183,
+          "line": 199,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -52757,7 +52757,7 @@
     {
       "name": "toast-title",
       "file": "13-toasts.css",
-      "line": 74,
+      "line": 86,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -52771,7 +52771,7 @@
         {
           "selector": ".toast-title",
           "file": "13-toasts.css",
-          "line": 74,
+          "line": 86,
           "conditions": []
         }
       ],
@@ -52783,7 +52783,7 @@
     {
       "name": "toast-undo",
       "file": "13-toasts.css",
-      "line": 178,
+      "line": 194,
       "layer": "deck.components",
       "section": "Undo pattern",
       "doc": null,
@@ -52797,13 +52797,13 @@
         {
           "selector": ".toast-undo",
           "file": "13-toasts.css",
-          "line": 178,
+          "line": 194,
           "conditions": []
         },
         {
           "selector": ".toast-undo .toast-action",
           "file": "13-toasts.css",
-          "line": 179,
+          "line": 195,
           "conditions": []
         }
       ],
@@ -52817,7 +52817,7 @@
     {
       "name": "toast-warn",
       "file": "13-toasts.css",
-      "line": 101,
+      "line": 113,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -52831,7 +52831,7 @@
         {
           "selector": ".toast-warn",
           "file": "13-toasts.css",
-          "line": 101,
+          "line": 113,
           "conditions": []
         }
       ],
@@ -52996,10 +52996,10 @@
     {
       "name": "tooltip",
       "file": "07-components.css",
-      "line": 535,
+      "line": 561,
       "layer": "deck.components",
-      "section": "Tooltip",
-      "doc": null,
+      "section": null,
+      "doc": "A CSS-only tooltip: the text comes from data-tip through ::after, so there\nis no second element. It cannot flip near a window edge, cannot escape an\noverflow:hidden ancestor, and is hidden entirely on a coarse pointer. Never\nput anything essential in it, and pair it with aria-label — generated\ncontent is not a reliable accessible name.",
       "declarations": [
         {
           "prop": "position",
@@ -53010,25 +53010,25 @@
         {
           "selector": ".tooltip",
           "file": "07-components.css",
-          "line": 535,
+          "line": 561,
           "conditions": []
         },
         {
           "selector": ".tooltip::after",
           "file": "07-components.css",
-          "line": 536,
+          "line": 562,
           "conditions": []
         },
         {
           "selector": ".tooltip:is(:hover, :focus-visible)::after",
           "file": "07-components.css",
-          "line": 557,
+          "line": 583,
           "conditions": []
         },
         {
           "selector": ".tooltip::after",
           "file": "07-components.css",
-          "line": 558,
+          "line": 584,
           "conditions": [
             "@media (pointer: coarse)"
           ]
@@ -54115,7 +54115,7 @@
     {
       "name": "with-indicator",
       "file": "22-nav.css",
-      "line": 704,
+      "line": 713,
       "layer": "deck.components",
       "section": null,
       "doc": "A count or dot anchored to a corner of something",
@@ -54133,25 +54133,25 @@
         {
           "selector": ".with-indicator",
           "file": "22-nav.css",
-          "line": 704,
+          "line": 713,
           "conditions": []
         },
         {
           "selector": ".with-indicator > .indicator-badge",
           "file": "22-nav.css",
-          "line": 705,
+          "line": 714,
           "conditions": []
         },
         {
           "selector": ".with-indicator > .indicator-badge-dot",
           "file": "22-nav.css",
-          "line": 722,
+          "line": 731,
           "conditions": []
         },
         {
           "selector": ".with-indicator > .indicator-badge-brand",
           "file": "22-nav.css",
-          "line": 730,
+          "line": 739,
           "conditions": []
         }
       ],

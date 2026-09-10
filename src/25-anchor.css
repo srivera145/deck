@@ -95,6 +95,9 @@
     @starting-style { .tip:popover-open { opacity: 0; } }
     .tip::backdrop { background: transparent; }
 
+    /* The arrow on a .tip. background: inherit takes the tip's colour, and
+       justify-self: anchor-center keeps it pointed at the trigger whichever way
+       the tip has flipped. */
     .tip-arrow {
       position: absolute;
       inline-size: 8px;
@@ -133,8 +136,12 @@
     .pop:popover-open { opacity: 1; translate: 0; }
     @starting-style { .pop:popover-open { opacity: 0; translate: 0 -4px; } }
     .pop::backdrop { background: transparent; }
+    /* The heading inside a popover card. */
     .pop-title { font-weight: 620; margin-block-end: var(--space-1); }
+    /* The explanatory text inside a popover card. */
     .pop-body { font-size: var(--text-sm); color: var(--text-muted); }
+    /* The action row at the bottom of a popover card. A button here can close
+       the panel with popovertargetaction="hide" and no script. */
     .pop-actions { display: flex; gap: var(--space-2); margin-block-start: var(--space-3); }
 
     /* --- Hide the anchored element when its anchor scrolls out of view ------ */

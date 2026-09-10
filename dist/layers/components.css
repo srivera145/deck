@@ -346,6 +346,10 @@
   }
 
   /* --- Tabs --------------------------------------------------------------- */
+  /* The strip. Scrolls sideways rather than wrapping, because tabs that wrap
+     stop reading as a strip. Deck styles the tabs and ships no keyboard
+     behaviour: if you use role="tablist" you must add the roving tabindex and
+     the arrow keys yourself, or the role promises what the page does not do. */
   .tabs {
     display: flex;
     gap: var(--space-1);
@@ -354,6 +358,10 @@
     scrollbar-width: none;
   }
   .tabs::-webkit-scrollbar { display: none; }
+  /* One trigger. Styled from [aria-selected="true"], so the visual state and
+     the accessible state are the same attribute and cannot disagree. The
+     unselected state carries the same transparent border, so selecting one
+     changes a colour and never moves anything. */
   .tab {
     padding: var(--space-3) var(--space-4);
     min-block-size: var(--tap);
@@ -377,6 +385,11 @@
   }
 
   /* --- Segmented control (iOS-style, good on a phone) --------------------- */
+  /* A one-of-N control: equal-width children in a sunken track with the
+     selected one raised. Styled from [aria-selected="true"] or .is-active.
+     Built from radio inputs it needs no JavaScript and gets arrow keys free —
+     but Deck does not style :has(:checked), so that version needs one rule of
+     your own. */
   .segmented {
     display: inline-flex;
     padding: 3px;
@@ -409,6 +422,12 @@
   }
 
   /* --- Accordion (native details, animates open) -------------------------- */
+  /* A bordered container for native <details>. The open state, the keyboard
+     and the accessible name are the element's. Deck restyles the summary,
+     replaces the marker with a chevron, and animates the height using
+     ::details-content plus the interpolate-size opt-in in 02-reset.css — the
+     first time a disclosure could animate to auto height without JavaScript.
+     Give the details elements a shared name attribute for one-at-a-time. */
   .accordion { border: 1px solid var(--line); border-radius: var(--r-md); overflow: clip; background: var(--surface); }
   .accordion > details + details { border-block-start: 1px solid var(--line); }
   .accordion summary, .disclosure summary {
@@ -436,6 +455,8 @@
     transition: rotate var(--dur-2) var(--ease-out);
   }
   .accordion details[open] summary::after, .disclosure[open] summary::after { rotate: 225deg; translate: 0 2px; }
+  /* The padded region below a summary. Indented to line up with the summary
+     text rather than the chevron. */
   .accordion .accordion-body, .disclosure .disclosure-body {
     padding: 0 var(--space-4) var(--space-4);
     color: var(--text-muted);
@@ -532,6 +553,11 @@
   @keyframes dk-shimmer { to { background-position: -300% 0; } }
 
   /* --- Tooltip ------------------------------------------------------------ */
+  /* A CSS-only tooltip: the text comes from data-tip through ::after, so there
+     is no second element. It cannot flip near a window edge, cannot escape an
+     overflow:hidden ancestor, and is hidden entirely on a coarse pointer. Never
+     put anything essential in it, and pair it with aria-label — generated
+     content is not a reliable accessible name. */
   .tooltip { position: relative; }
   .tooltip::after {
     content: attr(data-tip);
@@ -558,6 +584,10 @@
   @media (pointer: coarse) { .tooltip::after { display: none; } }
 
   /* --- Menu / dropdown, built on the native popover ----------------------- */
+  /* A dropdown built on the native popover attribute: light dismiss, Escape,
+     the top layer and one-at-a-time behaviour all come from the platform.
+     25-anchor.css positions it against its trigger with anchor positioning and
+     a fallback chain, so it flips when there is no room below. */
   .menu {
     position: absolute;
     margin: 0;
@@ -581,6 +611,10 @@
   @starting-style { .menu:popover-open { opacity: 0; translate: 0 -6px; } }
   .menu::backdrop { background: transparent; }
 
+  /* One row in a menu. Works on a button or an anchor — colour and
+     text-decoration are reset so a link needs no help. Hover and focus share a
+     style, so a keyboard user sees what a mouse user sees. 40px tall, which is
+     under the 44px target: a deliberate density trade for a list of eight. */
   .menu-item {
     display: flex;
     align-items: center;
@@ -597,13 +631,23 @@
     transition: background-color var(--dur-1) var(--ease-out);
   }
   .menu-item:hover, .menu-item:focus-visible { background: var(--surface-hover); }
+  /* A destructive item. Red is not announced, so the label has to say what it
+     does and a confirmation should stand behind it. */
   .menu-item-danger { color: var(--bad-700); }
   .menu-item-danger:hover { background: var(--bad-100); }
   .menu-item .push { margin-inline-start: auto; color: var(--text-faint); }
+  /* A one-pixel divider between groups of items. */
   .menu-sep { block-size: 1px; background: var(--line); margin: var(--space-1) 0; }
+  /* A small heading above a group of items. Styling only — a screen reader
+     hears ordinary text. */
   .menu-label { padding: var(--space-2) var(--space-3) var(--space-1); font-size: var(--text-xs); font-weight: 620; color: var(--text-faint); }
 
   /* --- Modal, built on native dialog -------------------------------------- */
+  /* A native <dialog>. Open it with showModal(), never show() and never the
+     open attribute: only showModal() gives the top layer, the backdrop, the
+     focus trap and an inert background. The open and close animate because
+     display and overlay are in the transition with allow-discrete, which is
+     what keeps the element rendered long enough to fade out. */
   .modal {
     inline-size: min(34rem, calc(100vw - var(--space-8)));
     max-block-size: min(85dvh, 48rem);
@@ -635,6 +679,8 @@
   .modal[open]::backdrop { opacity: 1; }
   @starting-style { .modal[open]::backdrop { opacity: 0; } }
 
+  /* The title row. A flex row aligned to flex-start, so a long title and a
+     close button line up on the first line. */
   .modal-header {
     display: flex;
     align-items: flex-start;
@@ -642,8 +688,16 @@
     padding: var(--space-5);
     border-block-end: 1px solid var(--line);
   }
+  /* The dialog's heading. Give it an id and point aria-labelledby at it, or
+     the dialog is announced with no name. */
   .modal-title { font-size: var(--text-lg); font-weight: 640; letter-spacing: -.018em; }
+  /* The scrolling region. The modal caps at min(85dvh, 48rem) and clips, so a
+     long body scrolls while the header and footer stay put — which is what
+     keeps the actions above the fold. */
   .modal-body { padding: var(--space-5); overflow-y: auto; display: flex; flex-direction: column; gap: var(--space-4); }
+  /* The action row, end-aligned. Below 32rem it becomes column-reverse with
+     full-width buttons, so the primary action — last in the markup — is on top
+     where a thumb reaches it, without changing DOM order. */
   .modal-footer {
     display: flex;
     gap: var(--space-3);

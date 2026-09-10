@@ -77,9 +77,8 @@ require __DIR__ . '/../_layout.php';
     on every toggle. It is also why the movement can be transitioned smoothly.
   </p>
   <p class="dx-note text-muted">
-    <code>inset-inline-start</code> is the logical property doing real work here. Under
-    <code>dir="rtl"</code> the knob starts on the right, and the same
-    <code>translate: 18px 0</code> moves it toward the centre and across — see
+    <code>inset-inline-start</code> puts the knob at the starting end of the track, which
+    mirrors for free. The <code>translate</code> does not — see
     <a href="#rtl">Right to left</a>.
   </p>
   <?php
@@ -214,10 +213,23 @@ require __DIR__ . '/../_layout.php';
 <section class="stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
-    The row is a flex line with a gap, so the track moves to the right of the text on its
-    own. The knob's offset is <code>inset-inline-start</code>, so it starts at the right
-    end of the track and <code>translate: 18px 0</code> carries it across — the same
-    declaration, mirrored by the property rather than by a second rule.
+    The row is a flex line with a gap, so the track moves to the other side of the text on
+    its own, and the knob's resting position is
+    <code>inset-inline-start</code>, which mirrors with it.
+  </p>
+  <p>
+    <strong>The travel does not mirror.</strong> <code>translate: 18px 0</code> is a
+    physical X offset, so in an RTL document it would push the knob further off the track
+    rather than across it. <code>src/19-logical.css</code> negates it:
+  </p>
+  <pre class="dx-code"><code><?= e('[dir="rtl"] .switch input:checked::after { translate: -18px 0; }') ?></code></pre>
+  <p class="text-muted">
+    That is the same shape of problem as the
+    <a href="drawer.php#rtl">drawer's slide</a>: <code>translate</code> has no logical
+    form, so any component that moves along the inline axis needs a hand-written RTL rule.
+    It also means the magic number appears twice — see
+    <a href="#overriding">Overriding it</a>, where resizing the switch now means four
+    numbers rather than three.
   </p>
   <?php
   docs_example(
@@ -265,16 +277,21 @@ require __DIR__ . '/../_layout.php';
 <section class="stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
-  /* A larger switch — three numbers have to move together */
+  /* A larger switch — four numbers have to move together */
   .switch input { inline-size: 58px; block-size: 34px; }
   .switch input::after { inline-size: 28px; block-size: 28px; }
   .switch input:checked::after { translate: 24px 0; }
+  [dir="rtl"] .switch input:checked::after { translate: -24px 0; }
 }') ?></code></pre>
   <p class="dx-note text-muted">
     That is the one awkward thing about this component: the track size, the knob size and
-    the travel distance are three separate numbers that have to agree, and nothing checks
-    that they do. A version driven by a single <code>--switch-size</code> would be
-    better, and it is recorded in <code>FINDINGS.md</code>.
+    the travel distance have to agree, and nothing checks that they do — and because
+    <code>translate</code> has no logical form, the travel is written
+    <strong>twice</strong>, once here and once negated in
+    <code>src/19-logical.css</code>. Change it and forget the RTL copy, and the switch
+    breaks only for readers of Arabic and Hebrew. A version driven by a single
+    <code>--switch-size</code> with the rest derived by <code>calc()</code> would fix
+    both problems; it is recorded in <code>FINDINGS.md</code>.
   </p>
 </section>
 

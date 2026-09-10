@@ -46,7 +46,7 @@ spacing steps and that `p`, `m` and `gap` take them, you know the whole family
 without reading it. The component layers are the opposite: 99 components,
 each a handful of names, and a page that uses six of them needs six.
 
-One number that is not comfortable: **240 of the 828 public classes are
+One number that is not comfortable: **239 of the 828 public classes are
 used nowhere in this repository** — not in the demo, not in the docs, not in
 Deck's own JavaScript. They are frozen on the strength of their source alone.
 
@@ -56,7 +56,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.accordion` | deck.components | Sets border, border-radius, overflow, background. |
+| `.accordion` | deck.components | A bordered container for native <details>. The open state, the keyboard |
 | `.accordion-body` | deck.components | Modifier; see the component. |
 
 ## alert
@@ -299,11 +299,11 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.pagination` | deck.components | Sets display, gap, align-items, flex-wrap. |
 | `.panel` | deck.components | Sets background, border-block, padding, margin-inline. |
 | `.progress` | deck.components | Sets inline-size, block-size, border-radius, background, and 3 more. |
-| `.segmented` | deck.components | Sets display, padding, gap, background, and 3 more. |
+| `.segmented` | deck.components | A one-of-N control: equal-width children in a sunken track with the |
 | `.stretch` | deck.components | Modifier; see the component. |
-| `.tab` | deck.components | Sets padding, min-block-size, display, align-items, and 10 more. |
-| `.tabs` | deck.components | Sets display, gap, border-block-end, overflow-x, and 1 more. |
-| `.tooltip` | deck.components | Sets position. |
+| `.tab` | deck.components | One trigger. Styled from [aria-selected="true"], so the visual state and |
+| `.tabs` | deck.components | The strip. Scrolls sideways rather than wrapping, because tabs that wrap |
+| `.tooltip` | deck.components | A CSS-only tooltip: the text comes from data-tip through ::after, so there |
 
 ## contain
 
@@ -437,11 +437,11 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.drawer` | deck.components | A side panel. The bottom sheet is in 08-mobile; this one comes in from an |
-| `.drawer-body` | deck.components | Sets flex, overflow-y, overscroll-behavior, padding, and 3 more. |
-| `.drawer-end` | deck.components | Sets inset-inline, border-inline, border-inline-start, border-inline-end, and 1 more. |
-| `.drawer-footer` | deck.components | Sets flex, display, gap, padding, and 3 more. |
-| `.drawer-header` | deck.components | Sets display, align-items, gap, padding, and 3 more. |
-| `.drawer-title` | deck.components | Sets font-size, font-weight. |
+| `.drawer-body` | deck.components | The scrolling region. overscroll-behavior: contain stops a scroll that |
+| `.drawer-end` | deck.components | Pins the drawer to the ending edge instead of the starting one. The inset |
+| `.drawer-footer` | deck.components | The action row, pinned to the bottom. Pads for the home indicator with |
+| `.drawer-header` | deck.components | The title row. Pads for a notch with max(--space-4, safe-area-inset-top). |
+| `.drawer-title` | deck.components | The drawer's heading. Point aria-labelledby at it. |
 
 ## editor
 
@@ -860,12 +860,12 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.menu` | deck.components | Sets position, margin, padding, inline-size, and 10 more. |
-| `.menu-item` | deck.components | Sets display, align-items, gap, inline-size, and 9 more. |
-| `.menu-item-danger` | deck.components | Sets color. |
-| `.menu-label` | deck.components | Sets padding, font-size, font-weight, color. |
+| `.menu` | deck.components | A dropdown built on the native popover attribute: light dismiss, Escape, |
+| `.menu-item` | deck.components | One row in a menu. Works on a button or an anchor — colour and |
+| `.menu-item-danger` | deck.components | A destructive item. Red is not announced, so the label has to say what it |
+| `.menu-label` | deck.components | A small heading above a group of items. Styling only — a screen reader |
 | `.menu-match` | deck.components | A dropdown that should match the width of the field it belongs to |
-| `.menu-sep` | deck.components | Sets block-size, background, margin. |
+| `.menu-sep` | deck.components | A one-pixel divider between groups of items. |
 
 ## mobile
 
@@ -880,11 +880,11 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.modal` | deck.components | Sets inline-size, max-block-size, padding, border, and 9 more. |
-| `.modal-body` | deck.components | Sets padding, overflow-y, display, flex-direction, and 1 more. |
-| `.modal-footer` | deck.components | Sets display, gap, justify-content, padding, and 3 more. |
-| `.modal-header` | deck.components | Sets display, align-items, gap, padding, and 1 more. |
-| `.modal-title` | deck.components | Sets font-size, font-weight, letter-spacing. |
+| `.modal` | deck.components | A native <dialog>. Open it with showModal(), never show() and never the |
+| `.modal-body` | deck.components | The scrolling region. The modal caps at min(85dvh, 48rem) and clips, so a |
+| `.modal-footer` | deck.components | The action row, end-aligned. Below 32rem it becomes column-reverse with |
+| `.modal-header` | deck.components | The title row. A flex row aligned to flex-start, so a long title and a |
+| `.modal-title` | deck.components | The dialog's heading. Give it an id and point aria-labelledby at it, or |
 
 ## motion
 
@@ -1001,9 +1001,9 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.pop` | deck.components | A richer tooltip: a heading, body copy, and actions. Used for the |
-| `.pop-actions` | deck.components | Sets display, gap, margin-block-start. |
-| `.pop-body` | deck.components | Sets font-size, color. |
-| `.pop-title` | deck.components | Sets font-weight, margin-block-end. |
+| `.pop-actions` | deck.components | The action row at the bottom of a popover card. A button here can close |
+| `.pop-body` | deck.components | The explanatory text inside a popover card. |
+| `.pop-title` | deck.components | The heading inside a popover card. |
 
 ## presence
 
@@ -1098,10 +1098,10 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.sheet` | deck.mobile | <dialog class="sheet"> on a phone, a centred modal from 40rem up. |
-| `.sheet-body` | deck.mobile | Sets padding, overflow-y, overscroll-behavior, display, and 2 more. |
-| `.sheet-grip` | deck.mobile | Sets inline-size, block-size, border-radius, background, and 1 more. |
-| `.sheet-header` | deck.mobile | Sets padding, display, align-items, gap. |
-| `.sheet-title` | deck.mobile | Sets font-size, font-weight. |
+| `.sheet-body` | deck.mobile | The scrolling region. Pads for the home indicator, and contains its |
+| `.sheet-grip` | deck.mobile | The drag handle at the top of a bottom sheet. Deck draws it and does not |
+| `.sheet-header` | deck.mobile | The title row of a sheet. |
+| `.sheet-title` | deck.mobile | The sheet's heading. Point aria-labelledby at it. |
 
 ## sidebar
 
@@ -1267,13 +1267,13 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.tip` | deck.components | The ::after tooltip could never flip. This one can, and it can carry a |
-| `.tip-arrow` | deck.components | Sets position, inline-size, block-size, rotate, and 3 more. |
+| `.tip-arrow` | deck.components | The arrow on a .tip. background: inherit takes the tip's colour, and |
 
 ## toast
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.toast` | deck.components | Sets position, display, align-items, gap, and 12 more. |
+| `.toast` | deck.components | One notification. The accent colour is a single custom property, |
 
 ## transition
 
