@@ -211,9 +211,12 @@ To load the sprite from somewhere else:
 
 <section class="stack-4">
   <h2 id="composer">Composer: for a PHP project</h2>
-  <pre class="dx-code"><code>composer require echodial/deck</code></pre>
   <p>
-    From an empty directory:
+    <code>composer require echodial/deck</code> installs Deck into <code>vendor/</code> and
+    does nothing else. A browser cannot read <code>vendor/</code>, and Composer never runs
+    scripts from a package you install, only the ones in your own
+    <code>composer.json</code>. So a bare install copies no assets, and
+    <code>composer deck-publish</code> is not a command yet. From an empty directory:
   </p>
   <pre class="dx-code"><code>$ composer require echodial/deck
 ./composer.json has been created
@@ -229,38 +232,111 @@ Package operations: 1 install, 0 updates, 0 removals
   - Installing echodial/deck (v0.1.1): Extracting archive
 Generating autoload files
 No security vulnerability advisories found.
-Using version ^0.1.1 for echodial/deck</code></pre>
+Using version ^0.1.1 for echodial/deck
+
+$ composer deck-publish
+
+  Command "deck-publish" is not defined.
+</code></pre>
   <p>
-    That puts Deck in <code>vendor/</code>, where a browser cannot reach it. Copying the
-    files into your public folder is a script, and Composer only runs the scripts in your
-    own <code>composer.json</code>, never a dependency's, so add these two blocks to yours:
+    Nothing was written outside <code>vendor/</code> except <code>composer.json</code> and
+    <code>composer.lock</code>. Get the files into your public folder one of three ways.
+  </p>
+
+  <h3 id="composer-scripts">1. Opt-in scripts</h3>
+  <p>
+    Add these two blocks to your <code>composer.json</code>, then run
+    <code>composer require echodial/deck</code>:
   </p>
   <pre class="dx-code"><code>"scripts": {
-  "deck-publish": "EchoDial\\Deck\\Installer::publish",
   "post-install-cmd": ["EchoDial\\Deck\\Installer::postInstall"],
-  "post-update-cmd": ["EchoDial\\Deck\\Installer::postInstall"]
+  "post-update-cmd": ["EchoDial\\Deck\\Installer::postInstall"],
+  "deck-publish": "EchoDial\\Deck\\Installer::publish"
 },
 "extra": {
   "deck": {
     "publish-to": "public/assets/deck",
-    "auto-publish": false
+    "auto-publish": true
   }
 }</code></pre>
+
+  <div class="alert alert-warn">
+    <svg class="icon"><use href="../../assets/deck/deck-icons.svg#alert-triangle"></use></svg>
+    <div>
+      <div class="alert-title">Set publish-to to the folder your web server serves</div>
+      <p class="alert-body">
+        The default, <code>public/assets/deck</code>, is right for Laravel and Symfony,
+        whose document root is <code>public/</code>. On cPanel hosting and Helm sites the
+        document root is <code>public_html/</code>, so use
+        <code>public_html/assets/deck</code>. Deck cannot tell which folder is served; if
+        <code>publish-to</code> names the wrong one, the files land where no URL reaches.
+      </p>
+    </div>
+  </div>
+
   <p>
-    Then publish:
+    From an empty directory holding only those two blocks:
   </p>
-  <pre class="dx-code"><code>$ composer deck-publish
-&gt; EchoDial\Deck\Installer::publish
+  <pre class="dx-code"><code>$ composer require echodial/deck
+./composer.json has been updated
+Running composer update echodial/deck
+Loading composer repositories with package information
+Updating dependencies
+Lock file operations: 1 install, 0 updates, 0 removals
+  - Locking echodial/deck (v0.1.1)
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Package operations: 1 install, 0 updates, 0 removals
+  - Downloading echodial/deck (v0.1.1)
+  - Installing echodial/deck (v0.1.1): Extracting archive
+Generating autoload files
+&gt; EchoDial\Deck\Installer::postInstall
 Deck 0.1.1 published to public/assets/deck (8 copied, 0 unchanged)
   Add to your layout:
     &lt;link rel="stylesheet" href="/assets/deck/deck.css"&gt;
-    &lt;script src="/assets/deck/deck.js" defer&gt;&lt;/script&gt;</code></pre>
+    &lt;script src="/assets/deck/deck.js" defer&gt;&lt;/script&gt;
+No security vulnerability advisories found.
+Using version ^0.1.1 for echodial/deck</code></pre>
   <p>
-    With <code>auto-publish</code> left <code>false</code>, <code>composer install</code>
-    and <code>composer update</code> print a one-line reminder instead of copying. Set it to
-    <code>true</code> and they publish every time, skipping files that have not changed.
-    The <a href="../reference/php.php">PHP helper</a> can then write the tags for you, with
-    cache-busting URLs.
+    Every <code>composer install</code> and <code>composer update</code> after that
+    publishes again, skipping files that have not changed. If Deck was already installed
+    when you added the scripts, run <code>composer deck-publish</code> once;
+    <code>composer deck-publish -- public/static/deck</code> publishes somewhere else for
+    one run. With <code>auto-publish</code> left out or <code>false</code>, the install and
+    update hooks print a reminder instead of copying, and <code>composer deck-publish</code>
+    is the only thing that publishes.
+  </p>
+  <p class="dx-note">
+    <strong>Take the scripts out if you remove Deck.</strong> Composer keeps calling them,
+    and without the class every install prints <em>Class EchoDial\Deck\Installer is not
+    autoloadable, can not call post-install-cmd script</em>. The command still succeeds, but
+    the line will puzzle whoever reads it next.
+  </p>
+
+  <h3 id="composer-copy">2. Copy by hand</h3>
+  <p>
+    No scripts at all. After <code>composer require</code>:
+  </p>
+  <pre class="dx-code"><code>mkdir -p public/assets/deck
+cp -r vendor/echodial/deck/dist/* public/assets/deck/</code></pre>
+  <p>
+    That copies everything in <code>dist/</code>: 50 files and 3.2 MB, where the page
+    below loads four. <code>api.json</code> alone is 1.4 MB of build data that no browser
+    requests, so delete what you do not serve if the size matters. Run the copy again after
+    every <code>composer update</code>, or the files fall behind the package. The commands
+    are for a POSIX shell: Git Bash on Windows, macOS, or Linux.
+  </p>
+
+  <h3 id="composer-npx">3. npx</h3>
+  <p>
+    If Node is on the machine, the <a href="#npx">npx command</a> copies the five files a
+    page uses without touching <code>composer.json</code>. It takes them from npm rather
+    than from <code>vendor/</code>, so make sure the version it installs matches the one in
+    your <code>composer.lock</code>.
+  </p>
+  <p>
+    Whichever way the files arrive, the <a href="../reference/php.php">PHP helper</a> can
+    write the tags for you, with cache-busting URLs.
   </p>
 </section>
 
@@ -295,6 +371,9 @@ Deck 0.1.1 published to public/assets/deck (8 copied, 0 unchanged)
       &lt;use href="assets/deck/deck-icons.svg#check-circle"&gt;&lt;/use&gt;
     &lt;/svg&gt;
   &lt;/div&gt;
+
+  &lt;input class="range" type="range" min="0" max="360" value="196"
+    aria-label="Brand hue" oninput="Deck.hue(this.value)"&gt;
 
   &lt;button class="btn" onclick="Deck.toast({kind:'good', title:'JavaScript works too'})"&gt;
     Fire a toast
@@ -342,6 +421,7 @@ php -S localhost:8000</code></pre>
       '    <span class="badge badge-good">A badge</span>' . "\n" .
       '    <svg class="icon icon-lg" style="color:var(--brand)"><use href="../../assets/deck/deck-icons.svg#check-circle"></use></svg>' . "\n" .
       '  </div>' . "\n" .
+      '  <input class="range" type="range" min="0" max="360" value="196" aria-label="Brand hue" oninput="Deck.hue(this.value)">' . "\n" .
       '</div>',
       'The check page, rendered here by the same stylesheet you just installed',
       'stack'
@@ -350,6 +430,12 @@ php -S localhost:8000</code></pre>
     Press <strong>Fire a toast</strong> on your own copy. A notification should slide in
     from the corner and dismiss itself after five seconds. That tells you the scripts
     loaded as well as the stylesheet, which is the half people usually get wrong.
+  </p>
+  <p>
+    Then drag the slider. The button and the icon change colour together, because every
+    brand colour in Deck is computed from one custom property, <code>--hue-brand</code>,
+    and <code>Deck.hue()</code> sets it. The slider in the example above does the same to
+    this page.
   </p>
 </section>
 
@@ -371,7 +457,7 @@ php -S localhost:8000</code></pre>
       points at another origin such as the CDN, or <code>deck-icons.svg</code> was never
       copied. Open the sprite's URL in the browser before you check anything else.
     </dd>
-    <dt><strong>The button looks right but the toast does nothing</strong></dt>
+    <dt><strong>The button looks right but the toast and the slider do nothing</strong></dt>
     <dd>
       The script is missing or failed to parse. Type <code>Deck</code> into the console:
       if it says <code>undefined</code> the script never ran. If you see a warning reading

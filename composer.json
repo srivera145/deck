@@ -33,33 +33,7 @@
       "EchoDial\\Deck\\": "php/"
     }
   },
-  "scripts": {
-    "deck-publish": "EchoDial\\Deck\\Installer::publish",
-    "post-install-cmd": [
-      "EchoDial\\Deck\\Installer::postInstall"
-    ],
-    "post-update-cmd": [
-      "EchoDial\\Deck\\Installer::postInstall"
-    ]
-  },
-  "scripts-descriptions": {
-    "deck-publish": "Copy Deck's assets into your public directory. Reads extra.deck.publish-to from the root composer.json, or defaults to public/assets/deck. Refuses inside Deck's own repository unless given --allow-self."
-  },
   "extra": {
-    "deck": {
-      "publish-to": "public_html/assets/deck",
-      "auto-publish": false,
-      "files": [
-        "deck.css",
-        "deck.min.css",
-        "deck-icons.svg",
-        "deck.js",
-        "deck-extras.js",
-        "deck-adapters.js",
-        "deck.bundle.js",
-        "deck.bundle.min.js"
-      ]
-    },
     "branch-alias": {
       "dev-main": "0.1.x-dev"
     }

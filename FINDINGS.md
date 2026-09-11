@@ -1700,3 +1700,38 @@ it because the pages read them, and issuing the certificate, both happen outside
 repository.
 
 **How it was found:** fetching the published URLs before editing anything.
+
+## 78. Deck's Composer scripts never ran for anyone who installed Deck
+
+Deck's `composer.json` defined `post-install-cmd`, `post-update-cmd` and `deck-publish`, all
+calling `EchoDial\Deck\Installer`. Composer runs scripts from the root package only, the
+project `composer` is run in, and never from a dependency. So for every project that
+installed Deck, none of them existed: `composer require echodial/deck` copied nothing, and
+`composer deck-publish` answered `Command "deck-publish" is not defined.` The only root
+package they could fire in was Deck's own repository, which is how Deck published a copy of
+itself into itself.
+
+The 0.1.0 README, `reference/php.php` and `reference/cli.php` described that path as
+working: assets published into the public directory on install, configured by an
+`extra.deck` block alone, with `composer deck-publish` to run it again. None of it could
+happen. The 0.1.1 docs said to add the scripts to your own `composer.json`, which works, but
+showed `"auto-publish": false`, so following them `composer require` still copied nothing
+and printed a reminder.
+
+**Fixed:** Deck's `composer.json` has no `scripts`, `scripts-descriptions` or `extra.deck`.
+The install page, the README and `reference/php.php` document three routes, each run from
+an empty directory against Packagist: the scripts in your own `composer.json` with
+`"auto-publish": true`, which publish during `composer require`; a manual
+`cp -r vendor/echodial/deck/dist/* public/assets/deck/`; and `npx @echodial/deck init`.
+They also say that `publish-to` defaults to `public/assets/deck` and has to change where the
+document root is `public_html/`. The installer's behaviour is unchanged from 0.1.1, so all
+of this is true of the release on Packagist today.
+
+A Composer plugin would publish with no scripts at all, and it is the mechanism Composer
+provides for exactly this. It was not chosen: the package type would become
+`composer-plugin`, every project installing Deck would have to approve it under
+`allow-plugins` before it could run, including projects that only want the PHP helper, and
+to be automatic it would copy files into projects that never asked for them.
+
+**How it was found:** `composer require echodial/deck` in a fresh project with no scripts
+of its own.

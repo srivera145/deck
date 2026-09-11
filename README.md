@@ -232,53 +232,64 @@ curl -sSL --create-dirs -o public/assets/deck/deck-icons.svg https://cdn.jsdeliv
 composer require echodial/deck
 ```
 
-Assets cannot be served out of `vendor/`, so Deck ships an installer that copies them into
-your public directory. Composer only runs scripts from the root `composer.json` — the
-project you run `composer` in — and never from a dependency's, so the installer does
-nothing until you wire it into your own `composer.json`:
+On its own, that installs Deck into `vendor/` and nothing else. A browser cannot read
+`vendor/`, and Composer never runs scripts from a package you install, only the ones in
+your own `composer.json`, so no assets are copied and `composer deck-publish` is not a
+command yet (`Command "deck-publish" is not defined.`). Get the files into your public
+folder one of three ways.
+
+**Opt-in scripts.** Add these to your own `composer.json`, then run `composer require`:
 
 ```json
 {
   "scripts": {
-    "deck-publish": "EchoDial\\Deck\\Installer::publish",
     "post-install-cmd": ["EchoDial\\Deck\\Installer::postInstall"],
-    "post-update-cmd": ["EchoDial\\Deck\\Installer::postInstall"]
+    "post-update-cmd": ["EchoDial\\Deck\\Installer::postInstall"],
+    "deck-publish": "EchoDial\\Deck\\Installer::publish"
   },
   "extra": {
     "deck": {
       "publish-to": "public/assets/deck",
-      "auto-publish": false
+      "auto-publish": true
     }
   }
 }
 ```
 
-Then publish whenever you like:
+`composer require`, and every `composer install` and `composer update` after it, copies the
+eight asset files into `publish-to`, skipping any that have not changed. If Deck is already
+installed when you add the scripts, run `composer deck-publish` once;
+`composer deck-publish -- public/static/deck` publishes somewhere else for one run. With
+`auto-publish` left out or `false`, the install and update hooks print a reminder instead
+of copying. Take the scripts out if you remove Deck: without the class to call, every
+install prints `Class EchoDial\Deck\Installer is not autoloadable, can not call
+post-install-cmd script`.
+
+> **Set `publish-to` to the folder your web server serves.** The default,
+> `public/assets/deck`, is right for Laravel and Symfony, whose document root is `public/`.
+> On cPanel hosting and Helm sites the document root is `public_html/`, so use
+> `public_html/assets/deck`. Deck cannot tell which folder is served; if `publish-to` names
+> the wrong one, the files land where no URL reaches.
+
+**Copy by hand**, with no scripts at all:
 
 ```bash
-composer deck-publish
-composer deck-publish -- public/static/deck
-composer deck-publish -- --link          # symlink during development
+mkdir -p public/assets/deck
+cp -r vendor/echodial/deck/dist/* public/assets/deck/
 ```
 
-`auto-publish` is off by default. With it off, the install and update hooks print a
-reminder instead of writing anything; set it to `true` and they publish on every
-`composer install` and `composer update`. Either way, Deck writes nothing into your
-project unless your own `composer.json` asks it to.
+That copies everything in `dist/`: 50 files and 3.2 MB, where a page needs four of them.
+`api.json` alone is 1.4 MB of build data that no browser requests. Run it again after every
+`composer update`.
 
-> **`extra.deck` is read from your `composer.json`, not from Deck's.** Composer reads
-> `extra` from the root package. Deck's own `composer.json` has an `extra.deck` block too,
-> but it only applies when Deck itself is the root package — when someone runs
-> `composer install` inside Deck's own repository. In your project it is ignored, and
-> yours is read instead. Confusing the two is how Deck once published a copy of itself
-> into its own repository.
+**npx**, if Node is on the machine: `npx @echodial/deck init public/assets/deck`, as in
+[option 1](#1-just-the-files), copies the five files a page uses. It takes them from npm,
+not from `vendor/`, so make sure the two are the same version.
 
-Inside Deck's own repository the installer is inert: `composer install` prints that it
-skipped publishing, and `composer deck-publish` refuses unless you pass
-`-- --allow-self`.
-
-Publishing skips files that have not changed, so a redeploy does not churn mtimes and
-invalidate every cache-busting URL for nothing.
+Deck's own `composer.json` defines no scripts. Scripts in a dependency never run for the
+project that installs it; the ones Deck used to define could only fire inside Deck's own
+repository, and did, publishing a copy of Deck into itself. The installer also refuses to
+publish whenever the root package is `echodial/deck`.
 
 #### The PHP helper
 

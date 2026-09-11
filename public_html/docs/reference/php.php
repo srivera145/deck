@@ -292,33 +292,38 @@ $METHODS = [
     Laravel, in Symfony, in WordPress, and in a single <code>index.php</code>.
   </p>
   <p>
-    A browser cannot read <code>vendor/</code>, so the assets have to be published into a
-    public directory. Composer runs scripts from the root project only, never from a
-    dependency, so the publisher does nothing until your own <code>composer.json</code>
-    wires it in:
+    A browser cannot read <code>vendor/</code>, so the assets have to be copied into a
+    public directory, and Composer will not do it for you: it never runs scripts from a
+    package you install, only the ones in your own <code>composer.json</code>. Add the
+    publisher there:
   </p>
   <pre class="dx-code"><code>"scripts": {
-  "deck-publish": "EchoDial\\Deck\\Installer::publish",
   "post-install-cmd": ["EchoDial\\Deck\\Installer::postInstall"],
-  "post-update-cmd": ["EchoDial\\Deck\\Installer::postInstall"]
+  "post-update-cmd": ["EchoDial\\Deck\\Installer::postInstall"],
+  "deck-publish": "EchoDial\\Deck\\Installer::publish"
 },
 "extra": {
   "deck": {
     "publish-to": "public/assets/deck",
-    "auto-publish": false
+    "auto-publish": true
   }
 }</code></pre>
   <p>
-    <code>extra.deck</code> is read from your <code>composer.json</code>, not from Deck's.
-    Then publish whenever you like:
+    <code>composer require</code>, <code>composer install</code> and
+    <code>composer update</code> then publish, and <code>composer deck-publish</code>
+    publishes on demand. <code>extra.deck</code> is read from your
+    <code>composer.json</code>, never from Deck's.
   </p>
   <pre class="dx-code"><code>composer deck-publish
 composer deck-publish -- public/static/deck
-composer deck-publish -- --link          # symlink instead of copy, for development</code></pre>
+composer deck-publish -- --link          # symlink where the platform allows it</code></pre>
   <p>
-    With <code>auto-publish</code> off, <code>composer install</code> and
-    <code>composer update</code> print a reminder rather than writing into your project.
-    Set it to <code>true</code> and they publish every time.
+    <code>publish-to</code> defaults to <code>public/assets/deck</code>. Change it if your
+    document root is not <code>public/</code>: on cPanel and Helm it is
+    <code>public_html/</code>. With <code>auto-publish</code> left out or
+    <code>false</code>, the install and update hooks print a reminder instead of copying.
+    The <a href="../start/install.php#composer">install page</a> covers the two ways to get
+    the files without any scripts.
   </p>
   <p class="dx-note">
     The installer skips a file whose contents are unchanged rather than recopying it. That

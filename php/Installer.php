@@ -10,35 +10,41 @@ use Composer\Script\Event;
  * Publishes Deck's assets out of vendor/ and into the project's public
  * directory, because a browser cannot read vendor/.
  *
- * Composer only runs scripts defined in the root package, so none of this runs
- * in your project until your own composer.json wires it in:
+ * Composer runs scripts from the root package only, never from a dependency,
+ * so nothing here runs in your project until your own composer.json calls it.
+ * Deck's own composer.json deliberately defines no scripts: any it defined
+ * could never fire in a project that installs Deck, and would only ever run
+ * inside Deck's own repository, which is how Deck once published a copy of
+ * itself into itself. To opt in, add this to your composer.json:
  *
  *   "scripts": {
- *     "deck-publish": "EchoDial\\Deck\\Installer::publish",
  *     "post-install-cmd": ["EchoDial\\Deck\\Installer::postInstall"],
- *     "post-update-cmd": ["EchoDial\\Deck\\Installer::postInstall"]
+ *     "post-update-cmd": ["EchoDial\\Deck\\Installer::postInstall"],
+ *     "deck-publish": "EchoDial\\Deck\\Installer::publish"
  *   },
  *   "extra": {
  *     "deck": {
  *       "publish-to": "public/assets/deck",
- *       "auto-publish": false
+ *       "auto-publish": true
  *     }
  *   }
  *
- * extra.deck is read from the root package too, which is your project. The
- * extra.deck block in Deck's own composer.json only applies inside Deck's own
- * repository, and there this class refuses to publish: running it there once
- * copied Deck into itself, and the copy was committed.
+ * publish-to defaults to public/assets/deck, which is right where public/ is
+ * the document root (Laravel, Symfony) and wrong where it is public_html/
+ * (cPanel, Helm) or anything else, so set it. extra.deck is read from the root
+ * package, which is your project.
  *
- * auto-publish is off unless set to true. With it off the install and update
- * hooks print a reminder instead of writing files into a project that did not
- * ask for them.
- *
- * Publish by hand at any time:
+ * postInstall() publishes only when auto-publish is true, and prints a
+ * reminder otherwise. publish() ignores auto-publish, so once the script is
+ * defined `composer deck-publish` works either way:
  *
  *   composer deck-publish
  *   composer deck-publish -- public/static/deck
- *   composer deck-publish -- --link              symlink instead of copy
+ *   composer deck-publish -- --link              symlink where the platform allows it
+ *
+ * Both refuse to publish when the root package is echodial/deck itself, which
+ * only happens inside Deck's own repository. publish() can be forced there
+ * with -- --allow-self.
  */
 final class Installer
 {
@@ -128,6 +134,7 @@ final class Installer
         }
 
         $copied  = 0;
+        $linked  = 0;
         $skipped = 0;
         $failed  = 0;
 
@@ -147,7 +154,7 @@ final class Installer
                 }
 
                 if (@symlink($from, $to)) {
-                    $copied++;
+                    $linked++;
 
                     continue;
                 }
@@ -171,12 +178,16 @@ final class Installer
             }
         }
 
+        // With --link, say how many were really linked. Where the platform
+        // refuses symlinks every file falls back to a copy, and counting those
+        // as linked hid it: on Windows without developer mode, "8 linked" was
+        // eight plain copies.
         $io->write(sprintf(
-            '<info>Deck %s published to %s</info> (%d %s, %d unchanged)',
+            '<info>Deck %s published to %s</info> (%s%d copied, %d unchanged)',
             Deck::VERSION,
             trim((string) $target, '/'),
+            $link ? $linked . ' linked, ' : '',
             $copied,
-            $link ? 'linked' : 'copied',
             $skipped
         ));
 
