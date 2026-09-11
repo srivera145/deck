@@ -4,7 +4,7 @@
 [![Packagist version](https://img.shields.io/packagist/v/echodial/deck)](https://packagist.org/packages/echodial/deck)
 [![License: MIT](https://img.shields.io/npm/l/@echodial/deck)](LICENSE)
 
-**Deck is a CSS framework that ships as one 26.8 KB Brotli (32.7 KB gzip) stylesheet: buttons, forms,
+**Deck is a CSS framework that ships as one 26.7 KB Brotli (32.7 KB gzip) stylesheet: buttons, forms,
 tables, a data grid, charts, overlays, an icon sprite, and a full color system. You add it
 with one `<link>` tag. There is no build step, no config file, and zero dependencies.**
 
@@ -23,7 +23,7 @@ That is the whole install. Nothing to compile, nothing to purge, nothing to conf
   whole page with no second stylesheet.
 - **Zero runtime dependencies.** The JavaScript is optional and dependency-free.
 
-Version 0.1.1 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
+Version 0.1.2 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
 ## What Deck weighs
 
@@ -33,7 +33,7 @@ it for text by default, so Brotli is what most users actually receive.
 
 | File | Brotli | gzip |
 | --- | --- | --- |
-| `deck.min.css` | **26.8 KB** | 32.7 KB |
+| `deck.min.css` | **26.7 KB** | 32.7 KB |
 | `deck-icons.svg` | **27.1 KB** | 33.6 KB |
 | `deck.min.js` | **8.9 KB** | 10.0 KB |
 | **All three** | **62.8 KB** | **76.3 KB** |
@@ -74,7 +74,7 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 
 | File | Brotli | gzip | What it is |
 | --- | --- | --- | --- |
-| `deck.min.css` | 26.8 KB | 32.7 KB | The whole framework |
+| `deck.min.css` | 26.7 KB | 32.7 KB | The whole framework |
 | `deck.min.js` | 8.9 KB | 10.0 KB | Optional behaviour, no dependencies |
 | `deck-extras.min.js` | 5.7 KB | 6.5 KB | Date picker, combobox, data grid, toasts, QR encoder |
 | `deck-adapters.min.js` | 4.0 KB | 4.5 KB | Optional library integrations, inert unless one is loaded |

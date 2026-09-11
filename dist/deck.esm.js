@@ -1,4 +1,4 @@
-/* Deck v0.1.1 — ES module entry.
+/* Deck v0.1.2 — ES module entry.
    The scripts attach Deck to globalThis; this re-exports it so that
    `import Deck from '@echodial/deck'` behaves the way you expect. */
 /*! ==========================================================================
