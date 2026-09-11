@@ -44,12 +44,12 @@
     ]
   },
   "scripts-descriptions": {
-    "deck-publish": "Copy Deck's assets into your public directory. Reads extra.deck.publish-to from composer.json, or defaults to public/assets/deck."
+    "deck-publish": "Copy Deck's assets into your public directory. Reads extra.deck.publish-to from the root composer.json, or defaults to public/assets/deck. Refuses inside Deck's own repository unless given --allow-self."
   },
   "extra": {
     "deck": {
-      "publish-to": "public/assets/deck",
-      "auto-publish": true,
+      "publish-to": "public_html/assets/deck",
+      "auto-publish": false,
       "files": [
         "deck.css",
         "deck.min.css",

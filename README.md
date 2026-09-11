@@ -212,27 +212,50 @@ Publishing to npm makes the CDNs work with no extra step:
 composer require echodial/deck
 ```
 
-Assets cannot be served out of `vendor/`, so the package publishes them into your public
-directory on install. Configure the destination in your own `composer.json`:
+Assets cannot be served out of `vendor/`, so Deck ships an installer that copies them into
+your public directory. Composer only runs scripts from the root `composer.json` — the
+project you run `composer` in — and never from a dependency's, so the installer does
+nothing until you wire it into your own `composer.json`:
 
 ```json
 {
+  "scripts": {
+    "deck-publish": "EchoDial\\Deck\\Installer::publish",
+    "post-install-cmd": ["EchoDial\\Deck\\Installer::postInstall"],
+    "post-update-cmd": ["EchoDial\\Deck\\Installer::postInstall"]
+  },
   "extra": {
     "deck": {
       "publish-to": "public/assets/deck",
-      "auto-publish": true
+      "auto-publish": false
     }
   }
 }
 ```
 
-Or run it whenever you like:
+Then publish whenever you like:
 
 ```bash
 composer deck-publish
 composer deck-publish -- public/static/deck
 composer deck-publish -- --link          # symlink during development
 ```
+
+`auto-publish` is off by default. With it off, the install and update hooks print a
+reminder instead of writing anything; set it to `true` and they publish on every
+`composer install` and `composer update`. Either way, Deck writes nothing into your
+project unless your own `composer.json` asks it to.
+
+> **`extra.deck` is read from your `composer.json`, not from Deck's.** Composer reads
+> `extra` from the root package. Deck's own `composer.json` has an `extra.deck` block too,
+> but it only applies when Deck itself is the root package — when someone runs
+> `composer install` inside Deck's own repository. In your project it is ignored, and
+> yours is read instead. Confusing the two is how Deck once published a copy of itself
+> into its own repository.
+
+Inside Deck's own repository the installer is inert: `composer install` prints that it
+skipped publishing, and `composer deck-publish` refuses unless you pass
+`-- --allow-self`.
 
 Publishing skips files that have not changed, so a redeploy does not churn mtimes and
 invalidate every cache-busting URL for nothing.

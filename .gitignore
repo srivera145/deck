@@ -8,6 +8,11 @@ package-lock.json
 /public_html/assets/deck/
 /public_html/assets/images/
 
+# The Composer installer once published Deck into its own repository and created
+# public/assets/deck/, which was then committed. The installer now refuses to
+# publish inside this repo; this entry is the backstop in case that ever regresses.
+/public/
+
 # Editor and OS noise
 .DS_Store
 Thumbs.db
