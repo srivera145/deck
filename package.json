@@ -1,6 +1,6 @@
 {
   "name": "@echodial/deck",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A mobile-first CSS framework with no build step, no config file, and no dependencies. Retheme an entire app from one number.",
   "keywords": [
     "css",

@@ -1,9 +1,9 @@
 # Deck
 
-> Deck is a CSS framework that ships as a single 26.7 KB Brotli (32.7 KB gzip) stylesheet containing
+> Deck is a CSS framework that ships as a single 26.8 KB Brotli (32.7 KB gzip) stylesheet containing
 > buttons, forms, tables, a data grid, charts, overlays, an icon sprite, and a complete
 > color system. It is added to a page with one `<link>` tag and has no build step, no
-> configuration file, and zero runtime dependencies. Version 0.1.2, MIT licensed.
+> configuration file, and zero runtime dependencies. Version 0.1.3, MIT licensed.
 
 ## Why this file exists
 
