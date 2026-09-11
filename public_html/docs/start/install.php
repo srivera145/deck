@@ -225,6 +225,7 @@ Lock file operations: 1 install, 0 updates, 0 removals
 Writing lock file
 Installing dependencies from lock file (including require-dev)
 Package operations: 1 install, 0 updates, 0 removals
+  - Downloading echodial/deck (v0.1.1)
   - Installing echodial/deck (v0.1.1): Extracting archive
 Generating autoload files
 No security vulnerability advisories found.
