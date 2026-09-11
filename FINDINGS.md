@@ -1735,3 +1735,48 @@ to be automatic it would copy files into projects that never asked for them.
 
 **How it was found:** `composer require echodial/deck` in a fresh project with no scripts
 of its own.
+
+## 79. `import Deck from '@echodial/deck'` did not build
+
+`build.mjs` wrote `dist/deck.esm.js` as the bundle followed by two lines:
+`export default globalThis.Deck;` and `export { globalThis as __deckGlobal };`. The second
+exports a name the module never declares, which is a syntax error in any ES module. Node
+says `SyntaxError: Export 'globalThis' is not defined in module`, Vite 8
+`[PARSE_ERROR] Export 'globalThis' is not defined`, and webpack 5 `Module parse failed:
+Export 'globalThis' is not defined`. The exports map sends `import Deck from '@echodial/deck'`
+to that file, and both the README and the install page showed exactly that line, so the
+documented bundler import failed in every bundler against the published 0.1.2, and the same line is in build.mjs at v0.1.0 and v0.1.1, so no release has had a working default import. The check
+that the exports map worked had used `import.meta.resolve`, which finds the file and never
+parses it.
+
+**Fixed** in `build.mjs`: the named export is gone, and the rebuilt `deck.esm.js` passes
+`node --check` and builds in webpack. That reaches readers only in the next release, so the
+install page and the README now import `@echodial/deck/bundle` for its side effect and read
+`window.Deck`. That import builds, serves and passes the install page's four-point check in
+Vite 8.3 and webpack 5.110 against 0.1.2 as published.
+
+**How it was found:** building a real page with Vite and with webpack for the install page,
+instead of resolving the import.
+
+## 80. Packagist's 0.1.2 is not the commit tagged v0.1.2, and neither one was built
+
+Packagist lists v0.1.2 at commit `3adb4d6`, made at 12:03:50 −06:00 on 11 September 2026.
+The tag `v0.1.2` now points at `939a63b`, committed seven minutes later with the same
+message, and `3adb4d6` is no longer on `main`. Packagist read the tag before it moved and
+kept what it read. So `composer require echodial/deck` installs `3adb4d6`, whose
+`php/Deck.php` still says `VERSION = '0.1.1'`: the installer prints *Deck 0.1.1 published
+to …*, and every banner in its `dist/` says v0.1.1.
+
+The tagged commit is not right either. It bumps `php/Deck.php` and `package.json` but not
+`dist/`, whose `sizes.json` and banners still say 0.1.1; the rebuilt `dist/` arrives only in
+`6e12193`, after the tag. npm is the one registry with a correct 0.1.2, because
+`npm publish` runs the build before it packs.
+
+**Not fixed here.** A tag should not move once a registry has read it. The repair is a 0.1.3
+cut from a commit whose `dist/` was rebuilt and committed first, and tagged once. The build
+already refuses a `php/Deck.php` that disagrees with `package.json`; nothing checks that
+`dist/` was rebuilt before tagging, and `node build.mjs && git diff --exit-code dist` would.
+The install page shows the 0.1.1 line as printed, with a note saying why.
+
+**How it was found:** the Composer transcript for the install page said 0.1.1 after
+installing v0.1.2.

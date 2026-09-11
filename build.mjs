@@ -287,7 +287,7 @@ async function build() {
     `/* Deck v${pkg.version} — ES module entry.\n` +
     `   The scripts attach Deck to globalThis; this re-exports it so that\n` +
     `   \`import Deck from '@echodial/deck'\` behaves the way you expect. */\n` +
-    bundle + '\nexport default globalThis.Deck;\nexport { globalThis as __deckGlobal };\n');
+    bundle + '\nexport default globalThis.Deck;\n');
 
   // ---- Sizes ---------------------------------------------------------------
   // One place for every published figure. dist/sizes.json is the single source

@@ -40,7 +40,7 @@ it for text by default, so Brotli is what most users actually receive.
 
 The sprite is the largest single file, slightly bigger than the stylesheet — worth stating
 plainly rather than leaving you to find it in devtools. Swapping `deck.min.js` for the full
-`deck.bundle.min.js` (adds the date picker, combobox, data grid, toasts, QR encoder)
+`deck.bundle.min.js` (adds the carousel, drawer, mega menu, copy button, QR encoder, editor and library adapters)
 makes the JavaScript 17.3 KB and the total 71.2 KB Brotli (85.8 KB gzip).
 
 ### The sprite is a manifest, not a fixed cost
@@ -76,7 +76,7 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 | --- | --- | --- | --- |
 | `deck.min.css` | 26.7 KB | 32.7 KB | The whole framework |
 | `deck.min.js` | 8.9 KB | 10.0 KB | Optional behaviour, no dependencies |
-| `deck-extras.min.js` | 5.7 KB | 6.5 KB | Date picker, combobox, data grid, toasts, QR encoder |
+| `deck-extras.min.js` | 5.7 KB | 6.5 KB | Carousel, drawer, mega menu, copy button, QR encoder, editor |
 | `deck-adapters.min.js` | 4.0 KB | 4.5 KB | Optional library integrations, inert unless one is loaded |
 | `deck.bundle.min.js` | 17.3 KB | 19.5 KB | All three scripts in one file |
 | `deck-icons.svg` | 27.1 KB | 33.6 KB | 152 symbols: 75 icons at two weights, plus two brand marks |
@@ -183,8 +183,11 @@ npm install @echodial/deck
 
 ```js
 import '@echodial/deck/css';
-import Deck from '@echodial/deck';
+import '@echodial/deck/bundle';   // sets window.Deck
 ```
+
+In 0.1.2, `import Deck from '@echodial/deck'` does not build: the file it resolves to ends in
+an export that is not valid JavaScript. Import the bundle for its side effect instead.
 
 Subpath exports, so you can take only what you need:
 
@@ -193,8 +196,8 @@ Subpath exports, so you can take only what you need:
 | `@echodial/deck/css` | the whole stylesheet |
 | `@echodial/deck/css/min` | minified |
 | `@echodial/deck/icons` | the sprite |
-| `@echodial/deck/js` | core behaviour |
-| `@echodial/deck/extras` | datepicker, combobox, grid, toasts, QR |
+| `@echodial/deck/js` | core behaviour: toasts, theme switch, date picker, combobox, data grid |
+| `@echodial/deck/extras` | carousel, drawer, mega menu, copy button, QR, editor |
 | `@echodial/deck/adapters` | optional library integrations |
 | `@echodial/deck/bundle` | all three in one file |
 | `@echodial/deck/layers/tokens.css` | one layer at a time |

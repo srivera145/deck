@@ -2641,4 +2641,3 @@ if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
    : typeof Deck !== 'undefined' ? Deck : null);
 
 export default globalThis.Deck;
-export { globalThis as __deckGlobal };
