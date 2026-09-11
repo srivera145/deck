@@ -702,6 +702,9 @@ $canonical = $DOCS_BASE . '/' . ($here ?: 'index.php');
 </style>
 </head>
 <body>
+<!-- The back-to-top link's target. tabindex="-1" moves keyboard focus here too,
+     so the next Tab lands on the skip link rather than wherever it was left. -->
+<span id="dx-top" tabindex="-1"></span>
 <a class="skip-link" href="#dx-main">Skip to content</a>
 
 <header class="sticky-top">
@@ -751,7 +754,7 @@ $canonical = $DOCS_BASE . '/' . ($here ?: 'index.php');
 /* ------------------------------------------------------------------------- */
 function docs_footer(): void
 {
-    global $up, $api, $sizes;
+    global $up, $api, $sizes, $assets;
     ?>
       <hr>
       <footer class="stack-3 text-muted">
@@ -773,6 +776,13 @@ function docs_footer(): void
     </main>
   </div>
 </div>
+
+<!-- Deck's own .back-to-top: it stays hidden until the page has scrolled 400px,
+     through a scroll-driven animation where the browser has one and deck.js
+     where it does not, and it is simply always visible with JavaScript off. -->
+<a class="back-to-top" href="#dx-top" aria-label="Back to top">
+  <svg class="icon" aria-hidden="true"><use href="<?= e($assets) ?>/deck/deck-icons.svg#chevron-up"></use></svg>
+</a>
 </body>
 </html>
     <?php

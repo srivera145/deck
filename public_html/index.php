@@ -231,6 +231,23 @@ $ogImage = $url('assets/images/deck-og.png');
     flex: 0 0 auto;
     flex-wrap: nowrap;
   }
+
+  /* Thirteen section links, the Docs link, the hue slider and the theme switch
+     need 1,200px of row. The standard 76rem container has 1,152px inside its
+     gutters, so the last link was always cut off mid-word, at every width. The
+     dock now uses the 90rem container, which fits the whole row from about
+     1,264px wide; the 85rem breakpoint adds slack, because system fonts are not
+     the same width on every platform. Below it the links move into a Sections
+     menu rather than being clipped. Deck itself hides the row below 48rem. */
+  .theme-dock .navbar-links { display: none; }
+  .dock-sections { display: none; }
+  @media (min-width: 48rem) {
+    .dock-sections { display: revert-layer; }
+  }
+  @media (min-width: 85rem) {
+    .theme-dock .navbar-links { display: flex; }
+    .dock-sections { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -246,30 +263,40 @@ $ogImage = $url('assets/images/deck-og.png');
 
 <!-- ===================== Theme dock ===================== -->
 <div class="theme-dock">
-  <div class="container">
+  <div class="container container-xl">
     <div class="navbar" style="border:0">
       <a class="navbar-brand" href="#">
         <svg class="icon icon-lg icon-fill" style="color:var(--brand)"><use href="assets/deck/deck-icons.svg#deck-mark"></use></svg>
         Deck
       </a>
-      <nav class="navbar-links">
+      <?php
+      /* The section links, written once and rendered twice: inline when the row
+         fits, and inside the Sections menu when it does not. Adding a section
+         here adds it to both. */
+      $DOCK_SECTIONS = [
+          'about' => 'About', 'compare' => 'Compare', 'forms' => 'Forms', 'grid' => 'Grid',
+          'charts' => 'Charts', 'motion' => 'Motion', 'gradients' => 'Gradients', 'space' => '3D',
+          'more' => 'More', 'gallery' => 'Gallery', 'sidebar' => 'Sidebar', 'tooltips' => 'Tooltips',
+          'libs' => 'Libraries',
+      ];
+      ?>
+      <nav class="navbar-links" aria-label="Sections">
         <!-- The brand mark to the left already links to the top, so a separate
              "Overview" link was redundant and cost the row 83px it did not have. -->
-        <a class="nav-link" aria-current="page" href="#about">About</a>
-        <a class="nav-link" href="#compare">Compare</a>
-        <a class="nav-link" href="#forms">Forms</a>
-        <a class="nav-link" href="#grid">Grid</a>
-        <a class="nav-link" href="#charts">Charts</a>
-        <a class="nav-link" href="#motion">Motion</a>
-        <a class="nav-link" href="#gradients">Gradients</a>
-        <a class="nav-link" href="#space">3D</a>
-        <a class="nav-link" href="#more">More</a>
-        <a class="nav-link" href="#gallery">Gallery</a>
-        <a class="nav-link" href="#sidebar">Sidebar</a>
-        <a class="nav-link" href="#tooltips">Tooltips</a>
-        <a class="nav-link" href="#libs">Libraries</a>
+        <?php foreach ($DOCK_SECTIONS as $id => $label): ?>
+          <a class="nav-link"<?= $id === 'about' ? ' aria-current="page"' : '' ?> href="#<?= $e($id) ?>"><?= $e($label) ?></a>
+        <?php endforeach; ?>
       </nav>
       <div class="push cluster cluster-tight">
+        <button class="btn btn-sm btn-ghost dock-sections" type="button" popovertarget="sectionsMenu">
+          Sections
+          <svg class="icon icon-sm" aria-hidden="true"><use href="assets/deck/deck-icons.svg#chevron-down"></use></svg>
+        </button>
+        <nav class="menu" id="sectionsMenu" popover aria-label="Sections">
+          <?php foreach ($DOCK_SECTIONS as $id => $label): ?>
+            <a class="menu-item" href="#<?= $e($id) ?>"><?= $e($label) ?></a>
+          <?php endforeach; ?>
+        </nav>
         <a class="btn btn-sm" href="docs/index.php">Docs</a>
         <label class="sr-only" for="hue">Brand hue</label>
         <input id="hue" class="range" type="range" min="0" max="360" value="196"
@@ -2679,6 +2706,14 @@ $ npm run icons</code></pre>
     btn.addEventListener('click', () => {
       Deck.theme(isDark() ? 'light' : 'dark');
       paintIcon();
+    });
+
+    // Sections menu: close it once a section has been picked. The link still
+    // navigates; without this the menu would stay open over the section it
+    // just scrolled to.
+    const sections = document.getElementById('sectionsMenu');
+    sections.addEventListener('click', (event) => {
+      if (event.target.closest('a')) sections.hidePopover();
     });
 
     // Indeterminate checkbox demo
