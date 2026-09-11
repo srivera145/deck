@@ -237,9 +237,11 @@ npx @echodial/deck starter public_html/index.html</code></pre>
   <h2 id="composer">The Composer equivalent</h2>
   <p>
     A PHP project does not need the Node CLI at all. <code>composer require
-    echodial/deck</code> publishes the same files into your public directory on install
-    and update, and <code>composer deck-publish</code> runs it again on demand. That path
-    is documented in full on the <a href="php.php">PHP helper</a> page.
+    echodial/deck</code> installs the package, and <code>composer deck-publish</code>
+    copies the same files into your public directory — once your own
+    <code>composer.json</code> wires the publisher in, because Composer never runs a
+    dependency's scripts. The wiring is on the <a href="php.php#install">PHP helper</a>
+    page.
   </p>
 </section>
 

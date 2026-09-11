@@ -329,9 +329,9 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
     </li>
     <li>
       <strong>Maturity.</strong> Tailwind is at v4.3 with years of production use behind it.
-      Deck is v0.1 and is not on npm or Packagist yet — you install it
-      <a href="../start/install.php">from the repository</a>. Its public API is frozen and
-      checked on every build, which is the right start, but it is a start.
+      Deck is v0.1. It is on npm and Packagist and <a href="../start/install.php">installs
+      like any other package</a>, but it has none of those years. Its public API is frozen
+      and checked on every build, which is the right start, but it is a start.
     </li>
   </ol>
 </section>

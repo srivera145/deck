@@ -293,21 +293,33 @@ $METHODS = [
   </p>
   <p>
     A browser cannot read <code>vendor/</code>, so the assets have to be published into a
-    public directory. That happens automatically after <code>composer install</code> and
-    <code>composer update</code>, and you can run it whenever you like:
+    public directory. Composer runs scripts from the root project only, never from a
+    dependency, so the publisher does nothing until your own <code>composer.json</code>
+    wires it in:
+  </p>
+  <pre class="dx-code"><code>"scripts": {
+  "deck-publish": "EchoDial\\Deck\\Installer::publish",
+  "post-install-cmd": ["EchoDial\\Deck\\Installer::postInstall"],
+  "post-update-cmd": ["EchoDial\\Deck\\Installer::postInstall"]
+},
+"extra": {
+  "deck": {
+    "publish-to": "public/assets/deck",
+    "auto-publish": false
+  }
+}</code></pre>
+  <p>
+    <code>extra.deck</code> is read from your <code>composer.json</code>, not from Deck's.
+    Then publish whenever you like:
   </p>
   <pre class="dx-code"><code>composer deck-publish
 composer deck-publish -- public/static/deck
 composer deck-publish -- --link          # symlink instead of copy, for development</code></pre>
   <p>
-    Configure the destination in your own <code>composer.json</code>:
+    With <code>auto-publish</code> off, <code>composer install</code> and
+    <code>composer update</code> print a reminder rather than writing into your project.
+    Set it to <code>true</code> and they publish every time.
   </p>
-  <pre class="dx-code"><code>"extra": {
-  "deck": {
-    "publish-to": "public/assets/deck",
-    "auto-publish": true
-  }
-}</code></pre>
   <p class="dx-note">
     The installer skips a file whose contents are unchanged rather than recopying it. That
     is deliberate: recopying rewrites the mtime, and the mtime is what

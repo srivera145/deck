@@ -11,6 +11,9 @@
  * ONCE. If someone rewrites a sentence and a rule stops matching, the build
  * fails loudly rather than quietly leaving a stale number behind — which is
  * the failure this whole mechanism exists to prevent.
+ *
+ * The version rides along. README.md and llms.txt both state it, it was typed
+ * into both by hand, and sizes.json already carries it from package.json.
  */
 
 import { readFile, writeFile } from 'node:fs/promises';
@@ -41,6 +44,10 @@ function rules(s) {
       (bold ? String.raw` \|` : ` \\| ${tail}`));
 
   const readme = [
+    ['version line',
+      anchor(String.raw`Version [0-9.]+ · MIT`),
+      () => `Version ${s.version} · MIT`],
+
     ['headline stylesheet size',
       anchor(String.raw`ships as one ${N} Brotli \(${N} gzip\) stylesheet`),
       () => `ships as one ${br('deck.min.css')} Brotli (${gz('deck.min.css')} gzip) stylesheet`],
@@ -89,6 +96,9 @@ function rules(s) {
   ];
 
   const llms = [
+    ['version line',
+      anchor(String.raw`Version [0-9.]+, MIT licensed`),
+      () => `Version ${s.version}, MIT licensed`],
     ['blockquote stylesheet size',
       anchor(String.raw`ships as a single ${N} Brotli \(${N} gzip\) stylesheet`),
       () => `ships as a single ${br('deck.min.css')} Brotli (${gz('deck.min.css')} gzip) stylesheet`],

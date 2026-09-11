@@ -5,10 +5,13 @@
    Every meta tag, the canonical URL, and the JSON-LD below read from this one
    array. Change a fact here and it changes everywhere on the page.
 
-   DECK_SITE_BASE lets the same file serve the canonical deployment and a local
-   Helm vhost without editing anything: set it in the environment and the
-   canonical, Open Graph, and structured-data URLs all follow. The fallback is
-   the canonical URL from package.json.
+   The base URL and the version come from _site.php, which the docs share. It
+   reads package.json: "homepage" is the canonical base, "version" the release.
+   DECK_SITE_BASE overrides the base, so the same file serves the canonical
+   deployment and a local Helm vhost without editing anything: set it in the
+   environment and the canonical, Open Graph, and structured-data URLs all
+   follow, and so do sitemap.xml, robots.txt and llms.txt when build.mjs runs
+   with it set.
 
        DECK_SITE_BASE=http://deck.local php -S 0.0.0.0:80 -t public_html
 
@@ -36,10 +39,12 @@ $kb = static fn(int $bytes): string => number_format($bytes / 1000, 1) . ' KB';
 $br = static fn(string $f): string => $kb($sizes['files'][$f]['brotli']);
 $gz = static fn(string $f): string => $kb($sizes['files'][$f]['gzip']);
 
+$siteMeta = require __DIR__ . '/_site.php';
+
 $site = [
     'name'         => 'Deck',
-    'version'      => '0.1.0',
-    'base'         => rtrim(getenv('DECK_SITE_BASE') ?: 'https://get-keel.dev/deck', '/'),
+    'version'      => $siteMeta['version'],
+    'base'         => $siteMeta['base'],
     'locale'       => 'en_US',
     'author'       => 'Santos Rivera',
     'repository'   => 'https://github.com/srivera145/deck',
@@ -77,9 +82,10 @@ $site = [
     'deps'         => 0,
 ];
 
-/* Absolute URL for a path under the site base. */
+/* Absolute URL for a path under the site base. With no path it is the home
+   page with its trailing slash, the same URL sitemap.xml lists. */
 $url = static fn(string $path = ''): string =>
-    $site['base'] . ($path === '' ? '' : '/' . ltrim($path, '/'));
+    $site['base'] . '/' . ltrim($path, '/');
 
 /* Escape for an HTML attribute or text node. */
 $e = static fn(?string $s): string => htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');

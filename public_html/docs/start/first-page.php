@@ -72,7 +72,7 @@ require __DIR__ . '/../_layout.php';
 &lt;meta charset="utf-8"&gt;
 &lt;meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"&gt;
 &lt;title&gt;Account settings — Ledgerly&lt;/title&gt;
-&lt;link rel="stylesheet" href="assets/deck/deck.min.css"&gt;
+&lt;link rel="stylesheet" href="assets/deck/deck.css"&gt;
 &lt;script src="assets/deck/deck.js" defer&gt;&lt;/script&gt;
 &lt;script src="assets/deck/deck-extras.js" defer&gt;&lt;/script&gt;
 &lt;/head&gt;

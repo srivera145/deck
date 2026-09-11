@@ -1185,7 +1185,7 @@
       "layer": "deck.components",
       "file": "07-components.css",
       "line": 81,
-      "uses": 204
+      "uses": 194
     },
     "badge-bad": {
       "bucket": "public",
@@ -1225,7 +1225,7 @@
       "layer": "deck.components",
       "file": "07-components.css",
       "line": 98,
-      "uses": 48
+      "uses": 44
     },
     "badge-solid": {
       "bucket": "public",
@@ -1245,7 +1245,7 @@
       "layer": "deck.components",
       "file": "07-components.css",
       "line": 100,
-      "uses": 28
+      "uses": 22
     },
     "banner": {
       "bucket": "public",
@@ -8895,7 +8895,7 @@
       "layer": "deck.utilities",
       "file": "09-utilities.css",
       "line": 182,
-      "uses": 127
+      "uses": 125
     },
     "stack": {
       "bucket": "public",
@@ -8955,7 +8955,7 @@
       "layer": "deck.layout",
       "file": "04-layout.css",
       "line": 67,
-      "uses": 312
+      "uses": 314
     },
     "stack-6": {
       "bucket": "public",
@@ -9245,7 +9245,7 @@
       "layer": "deck.components",
       "file": "07-components.css",
       "line": 241,
-      "uses": 114
+      "uses": 112
     },
     "table-compact": {
       "bucket": "public",
@@ -9265,7 +9265,7 @@
       "layer": "deck.components",
       "file": "07-components.css",
       "line": 274,
-      "uses": 102
+      "uses": 100
     },
     "table-wrap": {
       "bucket": "public",
@@ -9275,7 +9275,7 @@
       "layer": "deck.components",
       "file": "07-components.css",
       "line": 231,
-      "uses": 111
+      "uses": 109
     },
     "tabs": {
       "bucket": "public",

@@ -40,8 +40,8 @@ require __DIR__ . '/../_layout.php';
   <h1>Why Deck has no build step</h1>
   <p class="lede">
     Deck has no build step, so it cannot strip out the parts of its stylesheet that a page
-    does not use. Every page that loads Deck downloads all of it: 26.7 KB compressed with
-    Brotli, or 32.7 KB with gzip, whether the page uses ten classes or nine hundred. Deck
+    does not use. Every page that loads Deck downloads all of it: <?= e(docs_kb('deck.min.css')) ?> compressed with
+    Brotli, or <?= e(docs_kb('deck.min.css', 'gzip')) ?> with gzip, whether the page uses ten classes or nine hundred. Deck
     makes that trade because a stylesheet with no build
     step styles content that did not exist when the site was deployed, rethemes at runtime
     from a single value, and adopts new browser features without a redeploy.
@@ -204,10 +204,12 @@ require __DIR__ . '/../_layout.php';
     Safari and Chrome it reaches further back than Deck does.
   </p>
   <p>
-    A team that may only install dependencies from npm or Packagist cannot use Deck today.
-    Deck is at version 0.1 and is not yet published to either registry, so installing it
-    means downloading the files or copying them from the Git repository, as the
-    <a href="../start/install.php">install page</a> describes.
+    A team whose policy rules out dependencies below 1.0 cannot use Deck yet. Deck is at
+    version 0.1, on npm as <code>@echodial/deck</code> and on Packagist as
+    <code>echodial/deck</code>, and semantic versioning makes no promise about a 0.x
+    release. That is why the <a href="../start/install.php">install page</a> pins the CDN
+    URL to <code>@0.1</code>, the range npm treats as compatible, rather than to a tag
+    that moves.
   </p>
 </section>
 
@@ -215,7 +217,7 @@ require __DIR__ . '/../_layout.php';
   <h2 id="case">The case in one paragraph</h2>
   <p>
     Deck's argument is that for server-rendered applications with many pages, many tenants
-    or content that changes after deployment, a fixed 26.7 KB stylesheet is a better deal
+    or content that changes after deployment, a fixed <?= e(docs_kb('deck.min.css')) ?> stylesheet is a better deal
     than a CSS toolchain. That one file is cached once per site, styles every class that
     later content might use, rethemes from a single value at runtime, and adopts new browser
     features without a redeploy. The price is 12.3 KB of unused CSS on a typical settings

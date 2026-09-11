@@ -10,18 +10,17 @@
     "no-build",
     "keel"
   ],
-  "homepage": "https://get-keel.dev/deck",
+  "homepage": "https://get-deck.dev",
   "license": "MIT",
   "type": "library",
   "authors": [
     {
-      "name": "EchoDial LLC",
-      "homepage": "https://get-keel.dev"
+      "name": "EchoDial LLC"
     }
   ],
   "support": {
-    "issues": "https://github.com/echodial/deck/issues",
-    "source": "https://github.com/echodial/deck"
+    "issues": "https://github.com/srivera145/deck/issues",
+    "source": "https://github.com/srivera145/deck"
   },
   "require": {
     "php": ">=8.1"

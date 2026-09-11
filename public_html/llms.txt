@@ -1,9 +1,9 @@
 # Deck
 
-> Deck is a CSS framework that ships as a single 26.7 KB Brotli (32.7 KB gzip) stylesheet containing
+> Deck is a CSS framework that ships as a single 26.8 KB Brotli (32.7 KB gzip) stylesheet containing
 > buttons, forms, tables, a data grid, charts, overlays, an icon sprite, and a complete
 > color system. It is added to a page with one `<link>` tag and has no build step, no
-> configuration file, and zero runtime dependencies. Version 0.1.0, MIT licensed.
+> configuration file, and zero runtime dependencies. Version 0.1.1, MIT licensed.
 
 ## Why this file exists
 
@@ -22,12 +22,11 @@ If that use case ever disappears, delete this file rather than keeping it for it
 
 ## Documentation
 
-- [README](https://raw.githubusercontent.com/srivera145/deck/main/README.md): The complete documentation — install, theming, every component, the JS API, motion, print, and browser support. Start here; it is the single source of truth.
+- [Documentation site](https://get-deck.dev/docs/index.php): Tutorials, task guides, a page per component with its markup, reference tables for every class and token, and the JavaScript, PHP and CLI APIs. Every Deck class shown on it is checked against the stylesheet when Deck builds.
+- [Install page](https://get-deck.dev/docs/start/install.php): The four ways to install Deck — CDN, npm, npx and Composer — each with the exact command and the output it prints.
+- [README](https://raw.githubusercontent.com/srivera145/deck/main/README.md): The complete documentation in one file — install, theming, every component, the JS API, motion, print, and browser support.
 - [Component reference](https://github.com/srivera145/deck/blob/main/README.md#components): The list of component classes and the markup each one expects.
 - [Repository](https://github.com/srivera145/deck): Source, issue tracker, and the demo page under `public_html/index.php` with every component rendered and its markup visible.
-
-The canonical documentation URL will be `https://get-keel.dev/deck` once that site is
-deployed. It is not live yet, so it is deliberately not linked above; use the repository.
 
 ## Source of truth for class names
 
@@ -50,6 +49,7 @@ generation, so a class that does not appear in these files does not exist.
 - `.rating` and `.rating-static` need the solid star, `#star-fill`, not `#star`. Those components tell a selected star from an empty one by colour alone, so an outlined glyph makes both states look the same.
 - Deck targets Chrome 117+, Edge 117+, Safari 17.4+, and Firefox 128+. Cascade layers, container queries, `oklch()`, and `popover` are load-bearing, not progressive enhancements.
 - The JavaScript is optional. Only the date picker, combobox, data grid, toasts, carousel, drawer, and editor need it; everything else is CSS.
+- Install it as `@echodial/deck` from npm or `echodial/deck` from Packagist. On a CDN, pin the version — `https://cdn.jsdelivr.net/npm/@echodial/deck@0.1/dist/deck.min.css` — and never write `@latest`, which moves a page onto the next breaking release unannounced. The icon sprite cannot come from a CDN: browsers block an SVG `<use>` that points at another origin, so `deck-icons.svg` has to be served from the page's own site.
 
 ## License
 

@@ -36,12 +36,19 @@ if (!is_readable($apiFile)) {
 }
 $api = json_decode(file_get_contents($apiFile), true, 512, JSON_THROW_ON_ERROR);
 
+/* Measured file sizes, written by build.mjs. Pages read them through
+   docs_kb(). Not called $sizes: component pages use that name for their own
+   lists of sizes, and assigning it after requiring this file used to replace
+   the measurements before the footer printed them. */
 $sizesFile = $REPO . '/dist/sizes.json';
-$sizes = is_readable($sizesFile)
+$DOCS_SIZES = is_readable($sizesFile)
     ? json_decode(file_get_contents($sizesFile), true, 512, JSON_THROW_ON_ERROR)
     : null;
 
-$DOCS_BASE = rtrim(getenv('DECK_SITE_BASE') ?: 'https://get-keel.dev/deck', '/') . '/docs';
+/* Base URL and version, shared with the demo page and with the sitemap that
+   build.mjs writes. See public_html/_site.php. */
+$SITE = require dirname(__DIR__) . '/_site.php';
+$DOCS_BASE = $SITE['base'] . '/docs';
 
 /* --------------------------------------------------------------------------
    Helpers
@@ -50,6 +57,15 @@ $DOCS_BASE = rtrim(getenv('DECK_SITE_BASE') ?: 'https://get-keel.dev/deck', '/')
 function e(?string $s): string
 {
     return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
+}
+
+/** A measured size from dist/sizes.json, as the build prints it: "26.8 KB". */
+function docs_kb(string $file, string $encoding = 'brotli'): string
+{
+    global $DOCS_SIZES;
+    $bytes = $DOCS_SIZES['files'][$file][$encoding] ?? null;
+
+    return $bytes === null ? '?' : number_format($bytes / 1000, 1) . ' KB';
 }
 
 /** Look a class up in the generated inventory. */
@@ -606,7 +622,7 @@ $canonical = $DOCS_BASE . '/' . ($here ?: 'index.php');
 <meta property="og:url" content="<?= e($canonical) ?>">
 <meta property="og:title" content="<?= e($title) ?>">
 <meta property="og:description" content="<?= e($page['description'] ?? '') ?>">
-<meta property="og:image" content="<?= e($DOCS_BASE) ?>/../assets/images/deck-og.png">
+<meta property="og:image" content="<?= e($SITE['base']) ?>/assets/images/deck-og.png">
 <meta name="twitter:card" content="summary_large_image">
 
 <script type="application/ld+json">
@@ -754,7 +770,7 @@ $canonical = $DOCS_BASE . '/' . ($here ?: 'index.php');
 /* ------------------------------------------------------------------------- */
 function docs_footer(): void
 {
-    global $up, $api, $sizes, $assets;
+    global $up, $api, $DOCS_SIZES, $assets;
     ?>
       <hr>
       <footer class="stack-3 text-muted">
@@ -762,8 +778,8 @@ function docs_footer(): void
           Generated against <?= (int) $api['counts']['classes'] ?> classes and
           <?= (int) $api['counts']['tokens'] ?> tokens in
           <?= (int) $api['stylesheets'] ?> stylesheets.
-          <?php if ($sizes): ?>
-            Deck is <?= e(number_format($sizes['files']['deck.min.css']['brotli'] / 1000, 1)) ?> KB Brotli.
+          <?php if ($DOCS_SIZES): ?>
+            Deck is <?= e(docs_kb('deck.min.css')) ?> Brotli.
           <?php endif; ?>
         </p>
         <p class="text-sm">

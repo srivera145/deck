@@ -1,11 +1,7 @@
-# Deck — a CSS framework in one file.  https://get-keel.dev/deck
+# Deck — a CSS framework in one file.
 #
-# DEPLOYMENT NOTE
-# robots.txt is only read from the root of a host. This file is correct when
-# public_html/ is the document root — the local Helm vhost, or a dedicated
-# domain. If Deck is served from a subdirectory such as get-keel.dev/deck, a
-# robots.txt inside that subdirectory is ignored: merge these rules into
-# https://get-keel.dev/robots.txt instead, and put the Sitemap line there too.
+# Served from the root of the host, the only place a crawler looks for
+# robots.txt, so every line below is read and has an effect.
 #
 # Everything here is public documentation for an open source project. There is
 # nothing to protect, so nothing that carries prose is disallowed.
@@ -15,6 +11,14 @@
 # being read accurately by those crawlers is the point of it. Blocking them
 # buys nothing and guarantees the one outcome worse than not being cited:
 # being described from an invented memory of the API.
+#
+# EVERY GROUP CARRIES ITS OWN RULES
+# A crawler obeys only the group that names it. The * group is for crawlers no
+# group names, and nobody else (RFC 9309, section 2.2.1), so a rule written only
+# under * never reaches Googlebot, GPTBot, or any other agent listed here. Each
+# group repeats the two Disallow lines for that reason. tools/site.mjs fails the
+# build if any group's rules differ from the * group's, and writes the Sitemap
+# line from the site's base URL.
 
 User-agent: *
 Allow: /
@@ -25,55 +29,89 @@ Disallow: /assets/deck/deck.bundle.min.js
 # --- Search engines -----------------------------------------------------
 User-agent: Googlebot
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: Bingbot
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: DuckDuckBot
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 # --- Answer engines and AI crawlers -------------------------------------
 # Retrieval, live search, and training agents alike.
 User-agent: GPTBot
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: Claude-User
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: Claude-SearchBot
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: Perplexity-User
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: Applebot
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: CCBot
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
 User-agent: meta-externalagent
 Allow: /
+Disallow: /assets/deck/deck.min.css
+Disallow: /assets/deck/deck.bundle.min.js
 
-Sitemap: https://get-keel.dev/deck/sitemap.xml
+Sitemap: https://get-deck.dev/sitemap.xml

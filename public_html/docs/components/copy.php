@@ -81,7 +81,7 @@ require __DIR__ . '/../_layout.php';
   <?php
   docs_example(
       '<div class="stack-3" style="max-inline-size:30rem">' . "\n" .
-      '  <textarea class="textarea" id="dx-copy-src" rows="2">npm install deck-css --save-exact</textarea>' . "\n" .
+      '  <textarea class="textarea" id="dx-copy-src" rows="2">npm install @echodial/deck</textarea>' . "\n" .
       '  <button type="button" class="btn" data-deck-copy="#dx-copy-src">' . "\n" .
       '    <svg class="icon" aria-hidden="true"><use href="/assets/deck/deck-icons.svg#copy"></use></svg>' . "\n" .
       '    Copy the command' . "\n" .

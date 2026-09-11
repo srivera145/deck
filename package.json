@@ -1,6 +1,6 @@
 {
   "name": "@echodial/deck",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A mobile-first CSS framework with no build step, no config file, and no dependencies. Retheme an entire app from one number.",
   "keywords": [
     "css",
@@ -17,7 +17,7 @@
     "php",
     "keel"
   ],
-  "homepage": "https://get-keel.dev/deck",
+  "homepage": "https://get-deck.dev",
   "bugs": "https://github.com/srivera145/deck/issues",
   "repository": {
     "type": "git",

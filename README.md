@@ -1,6 +1,10 @@
 # Deck
 
-**Deck is a CSS framework that ships as one 26.7 KB Brotli (32.7 KB gzip) stylesheet: buttons, forms,
+[![npm version](https://img.shields.io/npm/v/@echodial/deck)](https://www.npmjs.com/package/@echodial/deck)
+[![Packagist version](https://img.shields.io/packagist/v/echodial/deck)](https://packagist.org/packages/echodial/deck)
+[![License: MIT](https://img.shields.io/npm/l/@echodial/deck)](LICENSE)
+
+**Deck is a CSS framework that ships as one 26.8 KB Brotli (32.7 KB gzip) stylesheet: buttons, forms,
 tables, a data grid, charts, overlays, an icon sprite, and a full color system. You add it
 with one `<link>` tag. There is no build step, no config file, and zero dependencies.**
 
@@ -19,25 +23,25 @@ That is the whole install. Nothing to compile, nothing to purge, nothing to conf
   whole page with no second stylesheet.
 - **Zero runtime dependencies.** The JavaScript is optional and dependency-free.
 
-Version 0.1.0 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
+Version 0.1.1 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
 ## What Deck weighs
 
-A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **62.7 KB** Brotli, or **76.3 KB** gzip. Every browser Deck supports sends `br` in
+A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **62.8 KB** Brotli, or **76.3 KB** gzip. Every browser Deck supports sends `br` in
 `Accept-Encoding`, and Cloudflare, Vercel, Netlify, and nginx with `ngx_brotli` negotiate
 it for text by default, so Brotli is what most users actually receive.
 
 | File | Brotli | gzip |
 | --- | --- | --- |
-| `deck.min.css` | **26.7 KB** | 32.7 KB |
+| `deck.min.css` | **26.8 KB** | 32.7 KB |
 | `deck-icons.svg` | **27.1 KB** | 33.6 KB |
 | `deck.min.js` | **8.9 KB** | 10.0 KB |
-| **All three** | **62.7 KB** | **76.3 KB** |
+| **All three** | **62.8 KB** | **76.3 KB** |
 
 The sprite is the largest single file, slightly bigger than the stylesheet — worth stating
 plainly rather than leaving you to find it in devtools. Swapping `deck.min.js` for the full
 `deck.bundle.min.js` (adds the date picker, combobox, data grid, toasts, QR encoder)
-makes the JavaScript 17.3 KB and the total 71.1 KB Brotli (85.8 KB gzip).
+makes the JavaScript 17.3 KB and the total 71.2 KB Brotli (85.8 KB gzip).
 
 ### The sprite is a manifest, not a fixed cost
 
@@ -70,7 +74,7 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 
 | File | Brotli | gzip | What it is |
 | --- | --- | --- | --- |
-| `deck.min.css` | 26.7 KB | 32.7 KB | The whole framework |
+| `deck.min.css` | 26.8 KB | 32.7 KB | The whole framework |
 | `deck.min.js` | 8.9 KB | 10.0 KB | Optional behaviour, no dependencies |
 | `deck-extras.min.js` | 5.7 KB | 6.5 KB | Date picker, combobox, data grid, toasts, QR encoder |
 | `deck-adapters.min.js` | 4.0 KB | 4.5 KB | Optional library integrations, inert unless one is loaded |
@@ -150,18 +154,21 @@ npm start         # php -S localhost:4321 -t public_html
 
 ## Install
 
-Deck ships three ways. Pick whichever matches how the project already works.
+Deck is published to npm as `@echodial/deck` and to Packagist as `echodial/deck`, and the
+CDNs mirror npm. That makes four ways to install it; pick whichever matches how the
+project already works.
 
 ### 1. Just the files
 
-Download `deck.css` and `deck-icons.svg`, drop them next to your other assets, and add
-one line. No package manager, no build step, no Node on the server.
+Put `deck.css` and `deck-icons.svg` next to your other assets and add one line. No
+package manager in the project, no build step, no Node on the server.
 
 ```html
-<link rel="stylesheet" href="/assets/deck.css">
+<link rel="stylesheet" href="/assets/deck/deck.css">
 ```
 
-Or let the CLI put them there for you — this does not install anything permanently:
+The CLI copies them for you. It runs straight from npm and adds nothing to your
+dependencies:
 
 ```bash
 npx @echodial/deck init public/assets/deck
@@ -199,11 +206,24 @@ reasonable way to adopt it into an existing app one screen at a time.
 
 ### 3. CDN
 
-Publishing to npm makes the CDNs work with no extra step:
+jsDelivr and unpkg mirror every version published to npm:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@echodial/deck@0.1/dist/deck.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@echodial/deck@0.1/dist/deck.bundle.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@echodial/deck@0.1/dist/deck.bundle.min.js" data-deck-icons="/assets/deck/deck-icons.svg" defer></script>
+```
+
+Pin the version to `@0.1`, as above. It follows every 0.1.x release and never moves to 0.2.
+Never use `@latest`, or leave the version off, which means the same thing: either one moves
+your page onto the next breaking release the day it is published, with nothing in your code
+to show why.
+
+The icon sprite is the one file a CDN cannot serve. Browsers refuse an SVG `<use>` whose
+`href` is on another origin, so serve `deck-icons.svg` from your own site and point
+`data-deck-icons` at it:
+
+```bash
+curl -sSL --create-dirs -o public/assets/deck/deck-icons.svg https://cdn.jsdelivr.net/npm/@echodial/deck@0.1/dist/deck-icons.svg
 ```
 
 ### 4. Composer
@@ -1226,10 +1246,14 @@ that job over while keeping its own markup, classes, and styling.
 <script src="/assets/deck-extras.js" defer></script>
 <script src="/assets/deck-adapters.js" defer></script>
 
-<!-- add only what you want -->
-<script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/sortablejs" defer></script>
+<!-- add only what you want, each pinned to its major version -->
+<script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1" defer></script>
 ```
+
+Floating UI's DOM build expects its core to be loaded first. Without it, `FloatingUIDOM`
+exists but has no `computePosition`, and the script throws.
 
 | Job | Deck alone | With a library | Verdict |
 |---|---|---|---|

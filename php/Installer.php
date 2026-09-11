@@ -180,9 +180,14 @@ final class Installer
             $skipped
         ));
 
+        // A URL, not a path. The first directory of the target is usually the
+        // document root, which is not part of the URL: public/assets/deck is
+        // served as /assets/deck. The npx CLI strips the same names.
+        $url = '/' . preg_replace('#^(public_html|public|web|htdocs|httpdocs|www|wwwroot|dist|static)/#', '', trim((string) $target, '/'));
+
         $io->write('  Add to your layout:');
-        $io->write(sprintf('    <link rel="stylesheet" href="/%s/deck.css">', trim((string) $target, '/')));
-        $io->write(sprintf('    <script src="/%s/deck.js" defer></script>', trim((string) $target, '/')));
+        $io->write(sprintf('    <link rel="stylesheet" href="%s/deck.css">', $url));
+        $io->write(sprintf('    <script src="%s/deck.js" defer></script>', $url));
 
         return $failed === 0;
     }

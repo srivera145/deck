@@ -26,7 +26,7 @@ namespace EchoDial\Deck;
  */
 final class Deck
 {
-    public const VERSION = '0.1.0';
+    public const VERSION = '0.1.1';
 
     /** @var array<string, mixed> */
     private static array $config = [

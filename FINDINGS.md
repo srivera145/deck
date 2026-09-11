@@ -1565,3 +1565,138 @@ and still returns `'auto'` when nothing is saved.
 
 **How it was found:** adding a theme switch to the documentation site, and testing the
 first press on both colour schemes before copying the pattern.
+
+## 72. robots.txt disallowed nothing for any crawler it named
+
+The file had a `User-agent: *` group with `Allow: /` and two `Disallow` lines for the
+minified twins, then seventeen named groups — Googlebot, Bingbot, DuckDuckBot, GPTBot,
+ClaudeBot and the rest — each holding only `Allow: /`. A crawler obeys the one group that
+names it and reads `*` only when no group does (RFC 9309, section 2.2.1). The two
+`Disallow` lines therefore reached unnamed crawlers only; every crawler the file took the
+trouble to name was allowed the minified files.
+
+While the site was planned for a subdirectory this cost nothing, because a robots.txt in a
+subdirectory is never read. Moving the site to the root of `get-deck.dev` is what turns the
+mistake into behaviour.
+
+**Fixed** in `public_html/robots.txt`: every group carries the same rules, and
+`tools/site.mjs` fails the build if any group's rules differ from the `*` group's. The same
+step writes the `Sitemap` line from the site's base URL. All 18 groups survive, the AI
+crawlers included.
+
+**How it was found:** checking the file for a host root, where it will now be read, by
+parsing it into groups the way a crawler does.
+
+## 73. The Composer installer printed a filesystem path as the stylesheet URL
+
+`composer deck-publish` ends with tags to paste, and built their URLs from the publish
+target. Publishing to `public/assets/deck` printed `href="/public/assets/deck/deck.css"`,
+which 404s in any project whose document root is `public/` — Laravel and Symfony
+included — and disagrees with `Deck::head()`, whose default base is `/assets/deck`. The npx
+CLI already stripped the usual document-root names and printed `/assets/deck/deck.css` for
+the same folder.
+
+Measured against 0.1.0 from Packagist, in a consumer with `publish-to` set to
+`web/static/deck`: eight files arrived in `web/static/deck`, the four compared were
+byte-identical to the npm package's, nothing was written to `public/`, and the printed tag
+was `/web/static/deck/deck.css`.
+
+**Fixed** in `php/Installer.php`, which strips the same names as the CLI: `web/static/deck`
+now prints `/static/deck/deck.css`, and `public/assets/deck` and `public_html/assets/deck`
+both print `/assets/deck/deck.css`.
+
+Two reference pages had not caught up with the previous installer change either.
+`reference/php.php` said publishing "happens automatically after composer install" and
+showed `"auto-publish": true`; `reference/cli.php` said `composer require` publishes on
+install and update. Neither is true until the project's own composer.json wires the scripts
+in, and both pages now show that wiring.
+
+**How it was found:** running `composer require echodial/deck` against Packagist for the
+first time.
+
+## 74. Icons cannot load from a CDN, and the CDN instructions did not say so
+
+The README's CDN section offered jsDelivr tags for the stylesheet and the bundle. Both
+load. Icons do not: browsers refuse an SVG `<use>` whose `href` is on another origin, and
+`deck.js` resolves the sprite against its own script URL, so a bundle loaded from jsDelivr
+points every icon it renders at jsDelivr.
+
+Measured in headless Chrome, with the page on `127.0.0.1` and the stylesheet and bundle
+from `@echodial/deck@0.1`:
+
+| `<use href>` | Bounding box |
+|---|---|
+| `https://cdn.jsdelivr.net/npm/@echodial/deck@0.1/dist/deck-icons.svg#check` | 0 × 0, and an error event |
+| `deck-icons.svg#check` on the page's own origin | 12.1 × 8.8 |
+
+**Fixed** in the README, the install page and llms.txt. The CDN path saves the sprite with
+one `curl` and points `data-deck-icons` at it; `deck.js` reads that attribute from
+`document.currentScript`, so it works on a CDN script tag.
+
+The same README section loaded `@floating-ui/dom` and `sortablejs` with no version, which is
+`@latest` by another name, and its Floating UI tag could not have worked: the DOM build
+expects `FloatingUICore` to be loaded first. On its own, `window.FloatingUIDOM` existed with
+no `computePosition` and the script threw; with `@floating-ui/core@1` first it worked. All
+three tags are now pinned to their major version, core first.
+
+**How it was found:** loading the CDN tags in a browser instead of checking that the URLs
+return 200.
+
+## 75. Two absolute URLs were not quite the URLs they named
+
+Every docs page built `og:image` as the docs base plus `/../assets/images/deck-og.png`, so
+the image URL it advertised contained a `..` segment. Browsers resolve that; a social-card
+scraper is not obliged to. The demo page's canonical URL was the bare base without a
+trailing slash, and its JSON-LD `@id` values were built on it.
+
+**Fixed:** `og:image` is the site base plus `/assets/images/deck-og.png`, and the home
+page's canonical and `@id` values carry the trailing slash, which is the URL `sitemap.xml`
+lists. Every absolute URL the pages print now comes from `public_html/_site.php`
+(`DECK_SITE_BASE`, otherwise package.json `homepage`), and `tools/site.mjs` resolves the
+base the same way for `sitemap.xml`, `robots.txt` and `llms.txt`. The sitemap is generated
+from the pages on disk.
+
+A check that serves the site and fetches every sitemap URL found each canonical and `og:url`
+equal to its sitemap entry, all 190 JSON-LD URLs under the base, and 94 pages on disk
+against 94 entries.
+
+**How it was found:** writing that check for this pass.
+
+## 76. Two component pages replaced the size the docs footer prints
+
+`docs/_layout.php` loaded `dist/sizes.json` into a global `$sizes`, and `docs_footer()`
+prints "Deck is N KB Brotli" from it. `components/avatar.php` and `components/icon.php` each
+assign their own `$sizes`, the list of sizes they document, after requiring the layout. By
+the time the footer ran, the global was that list: both pages printed three PHP warnings,
+and with warnings hidden they would have said "Deck is 0.0 KB Brotli". The bug predates this
+pass; an archive of HEAD served on its own shows the same three warnings on each page.
+
+A second size was stale for a different reason. Changing the banner's URL moved
+`deck.min.css` from 26.7 to 26.8 KB Brotli, and `explain/why-no-build-step.php` had 26.7 KB
+typed into its opening paragraph and its closing one, the only figures on the site that
+were not read from `sizes.json`.
+
+**Fixed** in `_layout.php`: the measurements live in `$DOCS_SIZES`, a name no page uses, and
+a `docs_kb()` helper formats them. The footer and the essay both call it.
+
+**How it was found:** the URL check above treats PHP warning text on a page as a failure,
+and a grep for the old figures after the rebuild.
+
+## 77. The site was not serving Deck when this release pointed at it
+
+`get-deck.dev` was registered at 00:31 UTC on 11 September 2026. Checked from 00:46 to
+01:19 UTC, it resolved to Hostinger, answered plain HTTP with Hostinger's "Default page",
+returned 404 for `/robots.txt`, `/sitemap.xml` and `/docs/index.php`, and failed every TLS
+handshake with alert 80 and no certificate. `.dev` is on the HSTS preload list, so a browser
+will not fall back to plain HTTP: nobody could open the site.
+
+0.1.1's `homepage` and every canonical URL in the repository name that host, which is right
+once the site is deployed with a certificate. Until then, the checks that need the live host
+— robots.txt fetched from the site root, the sitemap served where it says it is — were run
+against a local PHP server serving `public_html/` instead.
+
+**Not fixed here:** deploying `public_html/`, with `dist/`, `php/` and `package.json` beside
+it because the pages read them, and issuing the certificate, both happen outside the
+repository.
+
+**How it was found:** fetching the published URLs before editing anything.

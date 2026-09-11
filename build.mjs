@@ -27,6 +27,17 @@ const DIST = path.join(root, 'dist');
 
 const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
 
+// php/Deck.php carries the version as a constant, for PHP that has no business
+// parsing package.json, and `composer deck-publish` prints it. A release with
+// the two out of step would announce the wrong version, so refuse to build.
+// php/ is not shipped to npm, so an install without it skips the check.
+const deckPhp = await readFile(path.join(root, 'php', 'Deck.php'), 'utf8').catch(() => null);
+const phpVersion = deckPhp && /const VERSION = '([^']+)'/.exec(deckPhp)?.[1];
+if (deckPhp && phpVersion !== pkg.version) {
+  console.error(`  php/Deck.php has VERSION = '${phpVersion}' but package.json is ${pkg.version}. Make them match.`);
+  process.exit(1);
+}
+
 const BANNER = `/*! ==========================================================================
  *  Deck v${pkg.version} — the CSS framework for Keel
  *  Mobile first. One file. No build step. No config. No dependencies.
@@ -329,6 +340,24 @@ async function build() {
     for (const [f, n] of touched) console.log(`  ${f.padEnd(22)} ${String(n).padStart(6)} figures synced`);
   } catch (err) {
     // tools/ is not shipped to npm, so an install can still run this build.
+    if (err.code !== 'ERR_MODULE_NOT_FOUND') throw err;
+  }
+
+  // ---- Site files -------------------------------------------------------------
+  // sitemap.xml, robots.txt and llms.txt are served as they are, so they cannot
+  // ask PHP for the base URL the pages print. tools/site.mjs writes it into them
+  // from the same inputs, and generates the sitemap from the pages on disk.
+  try {
+    const { writeSiteFiles } = await import('./tools/site.mjs');
+    const site = await writeSiteFiles(pkg, root);
+    console.log(`  ${'sitemap.xml'.padEnd(22)} ${String(site.pages).padStart(6)} pages   ${site.base}/  (${site.source})`);
+    console.log(`  ${'robots.txt'.padEnd(22)} ${String(site.groups).padStart(6)} groups, one rule set, Sitemap line written`);
+    console.log(`  ${'llms.txt'.padEnd(22)} ${String(site.links).padStart(6)} site links written`);
+    if (site.source === 'DECK_SITE_BASE') {
+      console.log(`  ${''.padEnd(22)} DECK_SITE_BASE is set: these three files now name ${site.base}, not package.json's homepage`);
+    }
+  } catch (err) {
+    // tools/ and public_html/ are not shipped to npm.
     if (err.code !== 'ERR_MODULE_NOT_FOUND') throw err;
   }
 
