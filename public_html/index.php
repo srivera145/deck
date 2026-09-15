@@ -2674,14 +2674,14 @@ $ npm run icons</code></pre>
   <a class="tabbar-item" aria-current="page" href="#main">
     <svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#home"></use></svg> Home
   </a>
-  <a class="tabbar-item" href="#forms">
-    <svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#clipboard"></use></svg> Issues
+  <a class="tabbar-item" href="/docs/">
+    <svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#file"></use></svg> Docs
   </a>
-  <a class="tabbar-item" href="#mobile">
-    <svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#chart"></use></svg> Reports
+  <a class="tabbar-item" href="/docs/start/install.php">
+    <svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#download"></use></svg> Install
   </a>
-  <a class="tabbar-item" href="#main">
-    <svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#user"></use></svg> Account
+  <a class="tabbar-item" href="https://github.com/srivera145/deck">
+    <svg class="icon icon-lg"><use href="assets/deck/deck-icons.svg#external"></use></svg> Github
   </a>
 </nav>
 
