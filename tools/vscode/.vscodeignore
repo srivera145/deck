@@ -1,0 +1,5 @@
+test.mjs
+generate.mjs
+.vscodeignore
+node_modules/**
+*.vsix

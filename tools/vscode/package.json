@@ -1,0 +1,130 @@
+{
+  "name": "deck-intellisense",
+  "displayName": "Deck IntelliSense",
+  "description": "Class and token completion, hover docs, and typo detection for the Deck CSS framework.",
+  "version": "0.1.0",
+  "publisher": "echodial",
+  "license": "MIT",
+  "author": { "name": "Santos Rivera" },
+  "homepage": "https://get-deck.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/srivera145/deck.git",
+    "directory": "tools/vscode"
+  },
+  "bugs": { "url": "https://github.com/srivera145/deck/issues" },
+  "icon": "icon.png",
+  "engines": { "vscode": "^1.84.0" },
+  "categories": ["Programming Languages", "Linters", "Snippets"],
+  "keywords": ["deck", "css", "intellisense", "autocomplete", "mobile-first"],
+  "galleryBanner": { "color": "#0b1620", "theme": "dark" },
+
+  "main": "./extension.js",
+
+  "activationEvents": [
+    "onLanguage:html",
+    "onLanguage:php",
+    "onLanguage:blade",
+    "onLanguage:twig",
+    "onLanguage:css",
+    "onLanguage:scss",
+    "onLanguage:less",
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact",
+    "onLanguage:vue",
+    "onLanguage:svelte",
+    "onLanguage:astro",
+    "onLanguage:handlebars",
+    "onLanguage:erb",
+    "onLanguage:django-html",
+    "onLanguage:jinja-html",
+    "onLanguage:razor"
+  ],
+
+  "contributes": {
+    "commands": [
+      {
+        "command": "deck.showInfo",
+        "title": "Deck: Show loaded API version and counts"
+      },
+      {
+        "command": "deck.recheckAll",
+        "title": "Deck: Re-check all open files"
+      }
+    ],
+    "configuration": {
+      "title": "Deck",
+      "properties": {
+        "deck.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Master switch. Turn off to disable completion, hover and diagnostics without uninstalling."
+        },
+        "deck.languages": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "markdownDescription": "Extra language IDs to treat as markup, beyond the built-in list. Use this for a templating language the extension does not know, e.g. `[\"liquid\", \"njk\"]`."
+        },
+        "deck.completion.classes": {
+          "type": "boolean",
+          "default": true,
+          "description": "Suggest Deck class names inside class and className attributes."
+        },
+        "deck.completion.tokens": {
+          "type": "boolean",
+          "default": true,
+          "description": "Suggest Deck custom properties inside var( ), with a colour swatch where the token is a colour."
+        },
+        "deck.completion.icons": {
+          "type": "boolean",
+          "default": true,
+          "description": "Suggest icon symbol names after deck-icons.svg#."
+        },
+        "deck.diagnostics.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Report removed, internal and misspelt Deck classes as you type."
+        },
+        "deck.diagnostics.unknownClasses": {
+          "type": "string",
+          "enum": ["off", "likely", "all"],
+          "default": "likely",
+          "markdownEnumDescriptions": [
+            "Never report a class just because Deck does not define it.",
+            "Report only classes that look like a Deck class gone wrong — an off-the-scale number such as `stack-5`, or a one-character slip such as `btn-primery`. Your own app classes are left alone.",
+            "Report every class Deck does not define. Only sensible in a project that uses Deck classes exclusively, and noisy everywhere else."
+          ],
+          "description": "How aggressively to report classes Deck does not define."
+        },
+        "deck.diagnostics.internalClasses": {
+          "type": "boolean",
+          "default": true,
+          "description": "Warn when markup uses a class that is internal to Deck and may change in a patch release."
+        },
+        "deck.diagnostics.stateClasses": {
+          "type": "boolean",
+          "default": true,
+          "description": "Hint when markup hand-writes an is-* state class that Deck's JavaScript is supposed to apply."
+        },
+        "deck.sourceRoot": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to Deck's `src/` folder, for go-to-definition on a class. Leave empty to search `node_modules/@echodial/deck/src` and `vendor/echodial/deck/src` in each workspace folder."
+        }
+      }
+    }
+  },
+
+  "scripts": {
+    "generate": "node generate.mjs",
+    "package": "npm run generate && npx --yes @vscode/vsce package --no-dependencies",
+    "publish": "npm run generate && npx --yes @vscode/vsce publish --no-dependencies"
+  },
+
+  "devDependencies": {
+    "@types/vscode": "^1.84.0"
+  }
+}
