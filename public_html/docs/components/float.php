@@ -27,7 +27,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Floating label</h1>
   <p class="lede">
     A label that sits inside the field when it is empty and lifts above the text when it is
@@ -37,7 +37,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it where vertical space is genuinely tight and the labels are short — a dense
@@ -52,12 +52,12 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="markup">The markup, and the order that matters</h2>
   <p>
     Two rules, and both are easy to get wrong because neither fails loudly:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The label comes <em>after</em> the control.</strong> Every selector that
       lifts the label is a sibling combinator — <code>.float &gt; .input:not(:placeholder-shown) ~ label</code>
@@ -88,7 +88,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="controls">What it works with</h2>
   <p>
     <code>.input</code>, <code>.textarea</code> and <code>.select</code>. The wrapper adds
@@ -97,7 +97,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-3" style="max-inline-size:22rem">' . "\n" .
+      '<div class="stack stack-3" style="max-inline-size:22rem">' . "\n" .
       '  <div class="float">' . "\n" .
       '    <input class="input" id="dx-fl-name" placeholder=" " value="Ada Lovelace">' . "\n" .
       '    <label for="dx-fl-name">Full name</label>' . "\n" .
@@ -126,7 +126,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="outline">The outlined variant</h2>
   <p>
     <code>.float-outline</code> parks the lifted label on the border itself, in a notch cut
@@ -135,7 +135,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-3" style="max-inline-size:22rem">' . "\n" .
+      '<div class="stack stack-3" style="max-inline-size:22rem">' . "\n" .
       '  <div class="float float-outline">' . "\n" .
       '    <input class="input" id="dx-fo-a" placeholder=" ">' . "\n" .
       '    <label for="dx-fo-a">Company</label>' . "\n" .
@@ -158,7 +158,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="invalid">Invalid</h2>
   <p>
     Two ways in, and they do the same thing. <code>:user-invalid</code> is the browser's
@@ -168,7 +168,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-2" style="max-inline-size:22rem">' . "\n" .
+      '<div class="stack stack-2" style="max-inline-size:22rem">' . "\n" .
       '  <div class="float is-invalid">' . "\n" .
       '    <input class="input" id="dx-fl-bad" placeholder=" " value="not-an-email" aria-describedby="dx-fl-bad-e">' . "\n" .
       '    <label for="dx-fl-bad">Email address</label>' . "\n" .
@@ -195,20 +195,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/23-inputs.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--control-h-lg', '--text-faint', '--text-muted', '--brand', '--bad-700', '--surface', '--text-base', '--dur-2']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The label is real, and that is the reason to use this over a placeholder.</strong>
       A placeholder-as-label disappears the moment someone types and is announced
@@ -250,7 +250,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The label is placed with <code>inset-inline-start</code> and its
@@ -270,7 +270,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The lift is a <?= e(api_token('--dur-2')['value'] ?? '180ms') ?> transition on
@@ -281,7 +281,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.float</code> is not in <code>src/99-print.css</code>. A filled field prints with
@@ -296,7 +296,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* The outlined notch on a tinted card rather than the page surface */
@@ -317,9 +317,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not as a default.</strong> A <a href="field.php"><code>.field</code></a> with
       the label above is more legible and more robust. Floating labels are a space

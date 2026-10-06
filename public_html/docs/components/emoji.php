@@ -28,7 +28,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Emoji</h1>
   <p class="lede">
     An emoji is a character, and browsers pick the font for it inconsistently — sometimes
@@ -38,7 +38,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Wrap an emoji in a <code>&lt;span class="emoji"&gt;</code> whenever it appears beside
@@ -61,7 +61,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="sizes">Sizes</h2>
   <p>
     Three steps, each pairing a size with the <code>vertical-align</code> that keeps it on
@@ -85,7 +85,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tiles">Tiles</h2>
   <p>
     <code>.emoji-tile</code> puts the character in a tinted rounded square — the emoji
@@ -103,7 +103,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="grid">Picker grid</h2>
   <p>
     <code>.emoji-grid</code> is an auto-fitting grid of buttons that scale slightly on
@@ -126,20 +126,20 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/08-mobile.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--surface-2', '--surface-hover', '--r-md', '--r-full', '--space-2']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>An emoji is read aloud, and the reading is often long.</strong>
       "🎉" is announced as "party popper". In a sentence that is usually fine; in a row of
@@ -174,7 +174,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Emoji are neutral characters in the bidirectional algorithm, so they take the
@@ -192,7 +192,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Only the picker grid moves — its buttons scale to 1.16 on hover — and the global reset
@@ -201,7 +201,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     Emoji print as characters, in colour, on a colour printer. There is no print rule and
@@ -211,7 +211,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Prefer a bundled emoji font you ship yourself */
@@ -226,9 +226,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not instead of an icon.</strong> An <a href="icon.php">icon</a> takes
       <code>currentColor</code>, mirrors under RTL, prints as line art and looks the same

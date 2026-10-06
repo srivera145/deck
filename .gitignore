@@ -21,7 +21,4 @@ Thumbs.db
 
 # Local Helm/XAMPP overrides
 /public_html/.htaccess.local
-*.log
-
-tools/vscode/*.vsix
-tools/vscode/*.vsix
+*.logtools/vscode/*.vsix

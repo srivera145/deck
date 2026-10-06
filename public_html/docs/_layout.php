@@ -198,7 +198,7 @@ function docs_example(string $html, string $caption = '', string $layout = 'clus
         <?php if ($caption !== ''): ?>
             <figcaption class="dx-example-caption"><?= e($caption) ?></figcaption>
         <?php endif; ?>
-        <div class="dx-example-preview <?= $layout === 'cluster' ? 'cluster' : 'stack-3' ?>">
+        <div class="dx-example-preview <?= $layout === 'cluster' ? 'cluster' : 'stack stack-3' ?>">
             <?= $source ?>
         </div>
         <div class="dx-example-source">
@@ -432,6 +432,12 @@ function docs_token_preview(array $t): void
             ?><span class="dx-swatch" style="background: oklch(62% .14 var(<?= e($name) ?>))"></span><?php
             break;
         case 'length':
+            /* A radius is a corner, not a distance, so draw the corner. As a
+               width, --r-full is a 999px bar. Every radius token is --r-*. */
+            if (str_starts_with($name, '--r-')) {
+                ?><span class="dx-radius" style="border-radius: var(<?= e($name) ?>)"></span><?php
+                break;
+            }
             ?><span class="dx-rule" style="inline-size: var(<?= e($name) ?>)"></span><?php
             break;
         case 'shadow':
@@ -495,6 +501,7 @@ function docs_token_table(array $names, bool $source = false): void
 $DOCS_NAV = [
     'Start' => [
         ['start/install.php', 'Install Deck', true],
+        ['start/editor.php', 'Set up your editor', true],
         ['start/first-page.php', 'Your first page', true],
     ],
     /* Guides are named for the task, not the feature, because that is what a
@@ -691,7 +698,11 @@ $canonical = $DOCS_BASE . '/' . ($here ?: 'index.php');
     .dx-code { margin: 0; border-radius: 0; max-block-size: 22rem; }
 
     .dx-swatch { display: inline-block; inline-size: 2.5rem; block-size: 1.25rem; border-radius: var(--r-xs); border: 1px solid var(--line); vertical-align: middle; }
-    .dx-rule { display: inline-block; block-size: .5rem; background: var(--brand); border-radius: var(--r-full); vertical-align: middle; max-inline-size: 100%; }
+    /* The cap is a length, not a percentage: a table column is sized from its
+       content, and a percentage of a width still being worked out caps nothing.
+       The exact value is printed in the next column; the bar is a sense of scale. */
+    .dx-rule { display: inline-block; block-size: .5rem; background: var(--brand); border-radius: var(--r-full); vertical-align: middle; max-inline-size: 16rem; }
+    .dx-radius { display: inline-block; inline-size: 2.5rem; block-size: 1.5rem; border: 2px solid var(--brand); background: var(--brand-soft); vertical-align: middle; }
     .dx-shadow { display: inline-block; inline-size: 2.5rem; block-size: 1.25rem; border-radius: var(--r-xs); background: var(--surface); vertical-align: middle; }
     .dx-font { font-size: var(--text-md); }
     /* A duration and an easing curve are only legible in motion, so the cell
@@ -765,7 +776,7 @@ $canonical = $DOCS_BASE . '/' . ($here ?: 'index.php');
       </nav>
     </aside>
 
-    <main id="dx-main" class="stack-8">
+    <main id="dx-main" class="stack stack-8">
 <?php
 /* ------------------------------------------------------------------------- */
 function docs_footer(): void
@@ -773,7 +784,7 @@ function docs_footer(): void
     global $up, $api, $DOCS_SIZES, $assets;
     ?>
       <hr>
-      <footer class="stack-3 text-muted">
+      <footer class="stack stack-3 text-muted">
         <p class="text-sm">
           Generated against <?= (int) $api['counts']['classes'] ?> classes and
           <?= (int) $api['counts']['tokens'] ?> tokens in

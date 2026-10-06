@@ -8,13 +8,19 @@
  * environment, otherwise "homepage" in package.json. No URL is typed here.
  *
  * sitemap.xml is generated from the filesystem rather than kept by hand. It lists
- * every .php file under public_html/ except partials, whose names start with an
- * underscore, and anything under assets/. A page's entry is the URL that page
- * prints as its canonical, because a sitemap that disagrees with a page about
- * its own address leaves a search engine to pick one:
+ * every .php and .html file under public_html/ except partials, whose names
+ * start with an underscore, and anything under assets/. A page's entry is the
+ * URL that page prints as its canonical, because a sitemap that disagrees with a
+ * page about its own address leaves a search engine to pick one:
  *
  *   index.php        {base}/
- *   anything else    {base}/{path}      what docs/_layout.php prints for docs/{path}
+ *   anything else    {base}/{path}      what docs/_layout.php prints for docs/{path},
+ *                                       and templates/index.php for itself
+ *
+ * The .html files are the templates. They print no canonical on purpose: they
+ * are made to be copied into other people's projects, and a canonical pointing
+ * at this site would go with them. Their path is their only address, so it is
+ * their entry.
  *
  * lastmod is the date of the last commit that touched the page, or today for a
  * page with uncommitted changes; outside a git checkout it is left out rather
@@ -34,6 +40,8 @@ const PUBLIC = 'public_html';
 const LLMS_LINKS = [
   ['Documentation site', '/docs/index.php'],
   ['Install page', '/docs/start/install.php'],
+  ['Editor setup page', '/docs/start/editor.php'],
+  ['Templates', '/templates/index.php'],
 ];
 
 /** The same resolution as public_html/_site.php. */
@@ -54,7 +62,7 @@ async function listPages(root) {
       const rel = dir ? `${dir}/${entry.name}` : entry.name;
       if (entry.isDirectory()) {
         if (rel !== 'assets') await walk(rel);
-      } else if (entry.name.endsWith('.php') && !entry.name.startsWith('_')) {
+      } else if (/\.(php|html)$/.test(entry.name) && !entry.name.startsWith('_')) {
         found.push(rel);
       }
     }

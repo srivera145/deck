@@ -27,7 +27,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Number input</h1>
   <p class="lede">
     The browser's own spinner arrows are about eight pixels tall, sit on top of each other,
@@ -37,7 +37,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     For a quantity someone adjusts by small amounts and can see the whole range of: items in
@@ -72,9 +72,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="behaviour">What the script does</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Reads <code>step</code>, <code>min</code> and <code>max</code> off the
       input.</strong> They are ordinary attributes, so the same values constrain typing,
@@ -120,7 +120,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="unit">Units and size</h2>
   <p>
     <code>.number-unit</code> is a tinted cell welded to the end of the row for the unit the
@@ -152,13 +152,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/23-inputs.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--control-h', '--control-h-sm', '--line', '--line-strong', '--surface', '--surface-2', '--surface-hover', '--brand-soft', '--focus', '--ring', '--r-sm', '--dur-1']); ?>
   <p class="text-muted">
@@ -168,9 +168,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The input is a real <code>&lt;input type="number"&gt;</code>.</strong> It
       keeps its role, its value, its <code>min</code> and <code>max</code> in the
@@ -214,7 +214,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="js-off">With JavaScript off</h2>
   <p>
     This is the one component on this page with a real gap, and it is worth stating plainly.
@@ -236,7 +236,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The row is a flex container, so it follows the document direction and the whole control
@@ -264,7 +264,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Only the buttons animate — <code>background-color</code> and <code>color</code> over
@@ -274,7 +274,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.number</code> is not in <code>src/99-print.css</code>. The row prints with both
@@ -291,7 +291,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One control, no layer needed */
 <div class="number" style="--number-width:7rem"> … </div>
@@ -305,9 +305,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a number people type.</strong> A year, a price, an account number —
       nobody steps to 1987. Use an <a href="input.php"><code>.input</code></a>.

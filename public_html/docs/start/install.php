@@ -42,7 +42,7 @@ $UNPKG = 'https://unpkg.com/@echodial/deck@0.1/dist';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Install Deck</h1>
   <p class="lede">
     Installing with npm or Composer puts Deck in <code>node_modules</code> or
@@ -65,7 +65,7 @@ $UNPKG = 'https://unpkg.com/@echodial/deck@0.1/dist';
   </div>
 </div>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="choose">Pick a route</h2>
   <p>
     In order of how little work each one is. All four end with the same
@@ -103,7 +103,7 @@ $UNPKG = 'https://unpkg.com/@echodial/deck@0.1/dist';
   </div>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="cdn">1. CDN</h2>
   <p>
     Nothing to install. jsDelivr and unpkg serve every version published to npm, so these
@@ -193,7 +193,7 @@ curl -sSL --create-dirs -o public/assets/deck/deck-icons.svg <?= e($CDN) ?>/deck
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="bundler">2. Bundler</h2>
   <p>
     Nothing to copy: your bundler reads Deck out of <code>node_modules</code> and emits what
@@ -286,7 +286,7 @@ for (const use of document.querySelectorAll('use[href^="#"]')) {
 &lt;/head&gt;
 &lt;body&gt;
 
-&lt;main class="container section stack-6"&gt;
+&lt;main class="container section stack stack-6"&gt;
   &lt;h1&gt;Deck is installed&lt;/h1&gt;
   &lt;p class="lede"&gt;If this line is muted grey and the button below is a filled,
     rounded, brand-coloured rectangle, the stylesheet loaded.&lt;/p&gt;
@@ -394,7 +394,7 @@ for (const use of document.querySelectorAll('use[href^="#"]')) {
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="npx">3. npx</h2>
   <p>
     One command copies Deck out of npm and into your site, and installs nothing in your
@@ -479,7 +479,7 @@ To load the sprite from somewhere else:
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="composer">4. Composer</h2>
   <p>
     <code>composer require echodial/deck</code> puts Deck in <code>vendor/</code>, which a
@@ -507,22 +507,26 @@ To load the sprite from somewhere else:
     "auto-publish": true
   }
 }</code></pre>
-  <dl class="stack-3">
-    <dt><strong><code>publish-to</code></strong></dt>
-    <dd>
-      Where the files go, relative to <code>composer.json</code>. Make it your document root
-      plus <code>/assets/deck</code>: <code>public_html/assets/deck</code> on cPanel, Plesk
-      and Helm, <code>public/assets/deck</code> on Laravel and Symfony. Left out, it is
-      <code>public/assets/deck</code>, which is wrong for every <code>public_html/</code>
-      site.
-    </dd>
-    <dt><strong><code>auto-publish</code></strong></dt>
-    <dd>
-      <code>true</code>: every <code>composer install</code> and <code>composer update</code>
-      copies the files, skipping any that have not changed. <code>false</code> or left out:
-      those commands print a one-line reminder instead, and <code>composer deck-publish</code>
-      copies on demand.
-    </dd>
+  <dl class="stack stack-3">
+    <div class="stack stack-1">
+      <dt><strong><code>publish-to</code></strong></dt>
+      <dd>
+        Where the files go, relative to <code>composer.json</code>. Make it your document root
+        plus <code>/assets/deck</code>: <code>public_html/assets/deck</code> on cPanel, Plesk
+        and Helm, <code>public/assets/deck</code> on Laravel and Symfony. Left out, it is
+        <code>public/assets/deck</code>, which is wrong for every <code>public_html/</code>
+        site.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong><code>auto-publish</code></strong></dt>
+      <dd>
+        <code>true</code>: every <code>composer install</code> and <code>composer update</code>
+        copies the files, skipping any that have not changed. <code>false</code> or left out:
+        those commands print a one-line reminder instead, and <code>composer deck-publish</code>
+        copies on demand.
+      </dd>
+    </div>
   </dl>
   <p>
     Then:
@@ -577,7 +581,7 @@ Using version ^0.1.2 for echodial/deck</code></pre>
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="check">The check page</h2>
   <p>
     Every route ends here. Save this as <code>public_html/deck-check.html</code>, or
@@ -596,7 +600,7 @@ Using version ^0.1.2 for echodial/deck</code></pre>
 &lt;/head&gt;
 &lt;body&gt;
 
-&lt;main class="container section stack-6"&gt;
+&lt;main class="container section stack stack-6"&gt;
   &lt;h1&gt;Deck is installed&lt;/h1&gt;
   &lt;p class="lede"&gt;If this line is muted grey and the button below is a filled,
     rounded, brand-coloured rectangle, the stylesheet loaded.&lt;/p&gt;
@@ -635,7 +639,7 @@ python -m http.server 8000 --directory public</code></pre>
   </p>
 
   <h3 id="check-success">What success looks like</h3>
-  <ol class="stack-2">
+  <ol class="stack stack-2">
     <li><strong>The stylesheet loaded.</strong> The button is a filled, rounded, brand-coloured rectangle, not a grey system button.</li>
     <li><strong>An icon rendered.</strong> A check mark in a circle sits beside the badge, not an empty gap.</li>
     <li><strong>The hue slider retunes.</strong> Drag it, and the button and the icon change colour together, because every brand colour comes from one custom property, <code>--hue-brand</code>, and <code>Deck.hue()</code> sets it.</li>
@@ -646,7 +650,7 @@ python -m http.server 8000 --directory public</code></pre>
     page too:
   </p>
   <?php docs_example(
-      '<div class="stack-4">' . "\n" .
+      '<div class="stack stack-4">' . "\n" .
       '  <h3>Deck is installed</h3>' . "\n" .
       '  <p class="lede">If this line is muted grey and the button below is a filled, rounded, brand-coloured rectangle, the stylesheet loaded.</p>' . "\n" .
       '  <div class="cluster">' . "\n" .
@@ -666,7 +670,7 @@ python -m http.server 8000 --directory public</code></pre>
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="assets">Assets</h2>
   <p>
     The stylesheet is not all Deck ships. This is where each of the other pieces comes from.
@@ -797,12 +801,12 @@ vendor/echodial/deck/dist/brand/            Composer
 &lt;/svg&gt;</code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="without">Without Node or Composer</h2>
   <div class="accordion">
     <details>
       <summary>Download or copy the files by hand</summary>
-      <div class="accordion-body stack-3">
+      <div class="accordion-body stack stack-3">
         <p>
           Only if none of the four routes fits. Download the four files the check page
           loads:
@@ -831,66 +835,87 @@ for f in deck.css deck-icons.svg deck.js deck-extras.js; do cp "vendor/echodial/
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="trouble">If something did not work</h2>
-  <dl class="stack-3">
-    <dt><strong>The page is unstyled: plain black Times New Roman</strong></dt>
-    <dd>
-      The stylesheet did not load. Open the network tab and find the request for
-      <code>deck.css</code>, or <code>deck.min.css</code> on the CDN. A 404 there is nearly
-      always a path: the page links <code>/assets/…</code> from the site root, and the site is
-      served from a subfolder, or the files went to the wrong folder.
-    </dd>
-    <dt><strong>Everything is styled but every icon is an empty box</strong></dt>
-    <dd>
-      The sprite is not reachable from the page's own origin. Either it points at a CDN, which
-      <a href="#icons">never works</a>, or the file is not where the <code>href</code> says.
-      Open the sprite's URL in the browser before you check anything else.
-    </dd>
-    <dt><strong>The button looks right but the toast and the slider do nothing</strong></dt>
-    <dd>
-      The script is missing or failed to parse. Type <code>Deck</code> into the console: if it
-      says <code>undefined</code>, the script never ran. If you see a warning reading
-      <em>load deck.js first</em>, the script tags are in the wrong order.
-    </dd>
-    <dt><strong>A bundler stops with <em>Export 'globalThis' is not defined</em></strong></dt>
-    <dd>
-      You wrote <code>import Deck from '@echodial/deck'</code>, which does not build in 0.1.2.
-      <a href="#bundler">Import <code>@echodial/deck/bundle</code></a> and use
-      <code>window.Deck</code>.
-    </dd>
-    <dt><strong>webpack says <em>"./icons?url" is not exported</em>, or that <em>'import' and 'export' may appear only with 'sourceType: module'</em></strong></dt>
-    <dd>
-      Drop the <code>?url</code> and let the <code>asset/resource</code> rule make the import a
-      URL. For the second message, name the entry <code>.mjs</code>.
-      <a href="#webpack">Both are shown above.</a>
-    </dd>
-    <dt><strong>Composer says <em>Command "deck-publish" is not defined</em></strong></dt>
-    <dd>
-      The scripts are not in your <code>composer.json</code>. Composer never runs the ones
-      inside a package. <a href="#composer">Add the two blocks.</a>
-    </dd>
-    <dt><strong>The page is dark and you expected light</strong></dt>
-    <dd>
-      That is correct behaviour: Deck follows the operating system's colour scheme with no
-      configuration. <a href="../guides/dark-mode.php">Add a theme switch</a> if you want a
-      person to be able to override it.
-    </dd>
-    <dt><strong>It looks right but everything is a bit too big or too small</strong></dt>
-    <dd>
-      Deck sizes in <code>rem</code>, so it follows the browser's font size on purpose. That is
-      a reader's setting, and Deck respects it rather than overriding it.
-    </dd>
+  <dl class="stack stack-3">
+    <div class="stack stack-1">
+      <dt><strong>The page is unstyled: plain black Times New Roman</strong></dt>
+      <dd>
+        The stylesheet did not load. Open the network tab and find the request for
+        <code>deck.css</code>, or <code>deck.min.css</code> on the CDN. A 404 there is nearly
+        always a path: the page links <code>/assets/…</code> from the site root, and the site is
+        served from a subfolder, or the files went to the wrong folder.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong>Everything is styled but every icon is an empty box</strong></dt>
+      <dd>
+        The sprite is not reachable from the page's own origin. Either it points at a CDN, which
+        <a href="#icons">never works</a>, or the file is not where the <code>href</code> says.
+        Open the sprite's URL in the browser before you check anything else.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong>The button looks right but the toast and the slider do nothing</strong></dt>
+      <dd>
+        The script is missing or failed to parse. Type <code>Deck</code> into the console: if it
+        says <code>undefined</code>, the script never ran. If you see a warning reading
+        <em>load deck.js first</em>, the script tags are in the wrong order.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong>A bundler stops with <em>Export 'globalThis' is not defined</em></strong></dt>
+      <dd>
+        You wrote <code>import Deck from '@echodial/deck'</code>, which does not build in 0.1.2.
+        <a href="#bundler">Import <code>@echodial/deck/bundle</code></a> and use
+        <code>window.Deck</code>.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong>webpack says <em>"./icons?url" is not exported</em>, or that <em>'import' and 'export' may appear only with 'sourceType: module'</em></strong></dt>
+      <dd>
+        Drop the <code>?url</code> and let the <code>asset/resource</code> rule make the import a
+        URL. For the second message, name the entry <code>.mjs</code>.
+        <a href="#webpack">Both are shown above.</a>
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong>Composer says <em>Command "deck-publish" is not defined</em></strong></dt>
+      <dd>
+        The scripts are not in your <code>composer.json</code>. Composer never runs the ones
+        inside a package. <a href="#composer">Add the two blocks.</a>
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong>The page is dark and you expected light</strong></dt>
+      <dd>
+        That is correct behaviour: Deck follows the operating system's colour scheme with no
+        configuration. <a href="../guides/dark-mode.php">Add a theme switch</a> if you want a
+        person to be able to override it.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong>It looks right but everything is a bit too big or too small</strong></dt>
+      <dd>
+        Deck sizes in <code>rem</code>, so it follows the browser's font size on purpose. That is
+        a reader's setting, and Deck respects it rather than overriding it.
+      </dd>
+    </div>
   </dl>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="next">Next</h2>
   <p>
     You have a page that loads Deck. The next tutorial builds something real with it: a full
-    account settings page, typed line by line, in one sitting.
+    account settings page, typed line by line, in one sitting. If you write in Visual
+    Studio Code, Cursor or Antigravity, take two minutes to install Deck IntelliSense
+    first, so the editor completes class names and catches the typos for you.
   </p>
-  <a class="btn btn-primary" href="first-page.php">Build your first page</a>
+  <div class="cluster">
+    <a class="btn btn-primary" href="first-page.php">Build your first page</a>
+    <a class="btn" href="editor.php">Set up your editor</a>
+  </div>
 </section>
 
 <?php docs_footer(); ?>

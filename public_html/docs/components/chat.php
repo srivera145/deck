@@ -29,7 +29,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Chat</h1>
   <p class="lede">
     <code>.chat</code> is a scrolling thread of <code>.msg</code> rows, each holding a
@@ -39,7 +39,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it for a conversation between two or more participants where the order is
@@ -73,10 +73,10 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="grouping">How a run of messages groups</h2>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="g-radii">Flattened corners</h3>
     <p>
       A second message from the same sender flattens the corner nearest the previous
@@ -91,7 +91,7 @@ require __DIR__ . '/../_layout.php';
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="g-avatar">The avatar that is hidden, not removed</h3>
     <p>
       <code>src/24-media.css</code> shrinks the avatar inside a message to 28px, aligns it
@@ -107,7 +107,7 @@ require __DIR__ . '/../_layout.php';
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="g-direction">Incoming and outgoing</h3>
     <p>
       <code>.msg</code> is <code>align-self: flex-start</code>; <code>.msg-out</code>
@@ -119,9 +119,9 @@ require __DIR__ . '/../_layout.php';
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="parts">Bubble parts</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li><code>.bubble-name</code> — the sender, in the brand colour on incoming messages and inherited on outgoing ones.</li>
     <li><code>.bubble-meta</code> — the timestamp and read state, aligned to the sender's edge.</li>
     <li><code>.bubble-attachment</code> — a full-bleed image or file inside the bubble.</li>
@@ -156,7 +156,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="composer">The composer</h2>
   <p>
     <code>.chat-composer</code> is the row at the bottom of a thread. Deck styles it and
@@ -178,7 +178,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     The <code>chat</code> component proper is three classes; <code>.msg</code> and
@@ -188,14 +188,14 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--surface', '--surface-2', '--brand', '--brand-600', '--text-on-brand', '--text-faint', '--text-xs', '--r-full', '--r-xs', '--space-1', '--space-2', '--space-3', '--space-4']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Deck supplies no semantics, and a thread needs some.</strong> The classes
       style <code>&lt;div&gt;</code>s. Use a <code>&lt;ul&gt;</code> of
@@ -243,7 +243,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     <code>align-self: flex-start</code> and <code>flex-end</code> follow the writing
@@ -273,7 +273,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The typing indicator's three dots animate. Under
@@ -289,7 +289,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     A thread prints in full, and more care has gone into this than into most of Deck's
@@ -315,7 +315,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Wider bubbles on a big screen */
@@ -329,9 +329,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a comment thread with replies.</strong> Bubbles imply a linear
       conversation. Nested replies need indentation and a tree, which this is not — use a

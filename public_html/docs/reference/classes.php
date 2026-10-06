@@ -74,7 +74,7 @@ $undocumented = $total - count($claims);
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>All classes</h1>
   <p class="lede">
     Every one of the <?= (int) $total ?> classes Deck defines, read from
@@ -84,7 +84,7 @@ $undocumented = $total - count($claims);
   </p>
 </header>
 
-<form method="get" class="stack-4" action="classes.php">
+<form method="get" class="stack stack-4" action="classes.php">
   <div class="field">
     <label class="label" for="q">Name, description or source file</label>
     <div class="search">
@@ -189,35 +189,43 @@ $undocumented = $total - count($claims);
   </div>
 <?php endif; ?>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="reading">Reading the columns</h2>
-  <dl class="stack-3">
-    <dt><strong>Layer</strong></dt>
-    <dd>
-      The <code>@layer</code> the rule sits in. Layers earlier in Deck's order lose to
-      layers later in it, and every one of them loses to your own
-      <code>@layer app</code> — which is why overriding Deck never needs
-      <code>!important</code>.
-    </dd>
-    <dt><strong>Bucket</strong></dt>
-    <dd>
-      <strong>Public</strong> is frozen: it will not change or disappear without a
-      major version. <strong>Internal</strong> exists in the stylesheet and is not part
-      of the promise — it is usually a hook the JavaScript sets, and it may move.
-      <strong>Deprecated</strong> still works and will go.
-    </dd>
-    <dt><strong>What it does</strong></dt>
-    <dd>
-      The comment written above the rule in the source where there is one. Where there
-      is not, a dimmed summary of the properties the rule sets — honest filler that
-      says what the rule does without pretending to say why.
-    </dd>
-    <dt><strong>Documented in</strong></dt>
-    <dd>
-      The page that claims the class, or its file and line where none does yet.
-      <?= (int) $undocumented ?> classes currently have no page; filtering the last
-      select to <em>No page yet</em> lists exactly those.
-    </dd>
+  <dl class="stack stack-3">
+    <div class="stack stack-1">
+      <dt><strong>Layer</strong></dt>
+      <dd>
+        The <code>@layer</code> the rule sits in. Layers earlier in Deck's order lose to
+        layers later in it, and every one of them loses to your own
+        <code>@layer app</code> — which is why overriding Deck never needs
+        <code>!important</code>.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong>Bucket</strong></dt>
+      <dd>
+        <strong>Public</strong> is frozen: it will not change or disappear without a
+        major version. <strong>Internal</strong> exists in the stylesheet and is not part
+        of the promise — it is usually a hook the JavaScript sets, and it may move.
+        <strong>Deprecated</strong> still works and will go.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong>What it does</strong></dt>
+      <dd>
+        The comment written above the rule in the source where there is one. Where there
+        is not, a dimmed summary of the properties the rule sets — honest filler that
+        says what the rule does without pretending to say why.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong>Documented in</strong></dt>
+      <dd>
+        The page that claims the class, or its file and line where none does yet.
+        <?= (int) $undocumented ?> classes currently have no page; filtering the last
+        select to <em>No page yet</em> lists exactly those.
+      </dd>
+    </div>
   </dl>
 </section>
 

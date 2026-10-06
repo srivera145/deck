@@ -22,7 +22,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Progress</h1>
   <p class="lede">
     Three ways to show that something is happening, and the choice between them comes
@@ -32,7 +32,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="progress">.progress — the native element</h2>
   <p>
     <code>.progress</code> goes on a real <code>&lt;progress&gt;</code>. The element
@@ -43,7 +43,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-3" style="max-inline-size:26rem">' . "\n" .
+      '<div class="stack stack-3" style="max-inline-size:26rem">' . "\n" .
       '  <div class="field">' . "\n" .
       '    <label class="label" for="dx-prog">Export</label>' . "\n" .
       '    <progress class="progress" id="dx-prog" value="68" max="100"></progress>' . "\n" .
@@ -61,7 +61,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="ring">.ring — circular</h2>
   <p>
     A conic gradient from <code>--value</code>, with a radial
@@ -116,7 +116,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="meter">A bar with no element</h2>
   <p>
     Deck ships no standalone meter. Where you need a bar drawn from a value rather than
@@ -130,7 +130,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="spinner">.spinner — no known end</h2>
   <p>
     A rotating border. <code>.spinner-lg</code> is the 34px version. Use it when the
@@ -153,7 +153,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     <code>.progress</code>, <code>.ring</code> and <code>.spinner</code> are three
@@ -163,14 +163,14 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--ink-200', '--brand-600', '--r-full', '--text-xs', '--dur-3', '--ease-out']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The element gives you everything.</strong>
       <code>&lt;progress&gt;</code> is announced as a progress bar with its value, updates
@@ -209,7 +209,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     A <code>&lt;progress&gt;</code> fills from the right under <code>dir="rtl"</code> with
@@ -240,7 +240,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     <code>.progress</code>'s value transitions over
@@ -252,7 +252,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     None of these are in <code>src/99-print.css</code>. A <code>&lt;progress&gt;</code>
@@ -265,7 +265,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One bar, no layer needed */
 <progress class="progress" style="block-size:14px" value="68" max="100"></progress>
@@ -282,9 +282,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not a spinner when you know the total.</strong> "Uploading 3 of 12" is
       better than a spinner in every respect.

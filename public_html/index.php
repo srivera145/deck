@@ -238,22 +238,45 @@ $ogImage = $url('assets/images/deck-og.png');
     flex-wrap: nowrap;
   }
 
-  /* Thirteen section links, the Docs link, the hue slider and the theme switch
-     need 1,200px of row. The standard 76rem container has 1,152px inside its
-     gutters, so the last link was always cut off mid-word, at every width. The
-     dock now uses the 90rem container, which fits the whole row from about
-     1,264px wide; the 85rem breakpoint adds slack, because system fonts are not
-     the same width on every platform. Below it the links move into a Sections
-     menu rather than being clipped. Deck itself hides the row below 48rem. */
+  /* Thirteen section links, the Templates link, the Docs link, the hue slider
+     and the theme switch need 1,288px of row. The standard 76rem container has
+     1,152px inside its gutters, so the last link was always cut off mid-word,
+     at every width. The dock uses the 90rem container, which has 1,376px inside
+     its gutters from 90rem up; the 88px left over is slack, because system
+     fonts are not the same width on every platform. Below 90rem the links move
+     into a Sections menu rather than being clipped. Deck itself hides the row
+     below 48rem. Add a link here and re-measure: the row has no more room. */
   .theme-dock .navbar-links { display: none; }
   .dock-sections { display: none; }
   @media (min-width: 48rem) {
     .dock-sections { display: revert-layer; }
   }
-  @media (min-width: 85rem) {
+  @media (min-width: 90rem) {
     .theme-dock .navbar-links { display: flex; }
     .dock-sections { display: none; }
   }
+
+  /* .banner is sticky by default, and so is the dock. Both stick at the top
+     and the banner stacks above, so once the page scrolled it covered 45 of
+     the dock's 61px: the navigation, Sections menu included, was hidden behind
+     an announcement. The announcement scrolls away; the dock stays. */
+  .banner { position: relative; }
+
+  /* The Sections menu holds every link the row does, and in one column that is
+     taller than a laptop window: it opens below the dock, but Deck caps a .menu
+     at the viewport height rather than at the room left under its trigger, so
+     the end of the list ran off the bottom of the screen. Two columns halve the
+     height, with the page links under a full-width divider. A grid rather than
+     CSS columns: a height-capped multi-column box spills into a third column
+     sideways instead of scrolling, and the grid reads left to right, which is
+     also the tab order. */
+  #sectionsMenu { min-inline-size: 20rem; }
+  .sections-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--space-1); }
+  /* A window too short even for two columns scrolls inside the menu instead
+     of past the edge. 7rem is the banner and the dock above the trigger; a
+     percentage would be neater, but Chrome does not resolve one against the
+     anchored area. */
+  #sectionsMenu { max-block-size: calc(100dvh - 7rem); }
 </style>
 </head>
 <body>
@@ -285,12 +308,22 @@ $ogImage = $url('assets/images/deck-og.png');
           'more' => 'More', 'gallery' => 'Gallery', 'sidebar' => 'Sidebar', 'tooltips' => 'Tooltips',
           'libs' => 'Libraries',
       ];
+      /* Pages that live outside this one, after the sections. They open in a
+         new tab so the reader keeps their place on this long page, and the
+         arrow plus the hidden text say so before the click, not after it. */
+      $DOCK_PAGES = [
+          'templates/index.php' => 'Templates',
+      ];
       ?>
       <nav class="navbar-links" aria-label="Sections">
         <!-- The brand mark to the left already links to the top, so a separate
              "Overview" link was redundant and cost the row 83px it did not have. -->
         <?php foreach ($DOCK_SECTIONS as $id => $label): ?>
           <a class="nav-link"<?= $id === 'about' ? ' aria-current="page"' : '' ?> href="#<?= $e($id) ?>"><?= $e($label) ?></a>
+        <?php endforeach; ?>
+        <?php foreach ($DOCK_PAGES as $href => $label): ?>
+          <a class="nav-link inline-flex items-center gap-1" href="<?= $e($href) ?>" target="_blank" rel="noopener"><?= $e($label) ?>
+            <svg class="icon icon-sm" aria-hidden="true"><use href="assets/deck/deck-icons.svg#arrow-up-right-sm"></use></svg><span class="sr-only">(opens in a new tab)</span></a>
         <?php endforeach; ?>
       </nav>
       <div class="push cluster cluster-tight">
@@ -299,8 +332,15 @@ $ogImage = $url('assets/images/deck-og.png');
           <svg class="icon icon-sm" aria-hidden="true"><use href="assets/deck/deck-icons.svg#chevron-down"></use></svg>
         </button>
         <nav class="menu" id="sectionsMenu" popover aria-label="Sections">
-          <?php foreach ($DOCK_SECTIONS as $id => $label): ?>
-            <a class="menu-item" href="#<?= $e($id) ?>"><?= $e($label) ?></a>
+          <div class="sections-grid">
+            <?php foreach ($DOCK_SECTIONS as $id => $label): ?>
+              <a class="menu-item" href="#<?= $e($id) ?>"><?= $e($label) ?></a>
+            <?php endforeach; ?>
+          </div>
+          <div class="menu-sep" role="separator"></div>
+          <?php foreach ($DOCK_PAGES as $href => $label): ?>
+            <a class="menu-item" href="<?= $e($href) ?>" target="_blank" rel="noopener"><?= $e($label) ?> <span class="sr-only">(opens in a new tab)</span>
+              <svg class="icon icon-sm push" aria-hidden="true"><use href="assets/deck/deck-icons.svg#arrow-up-right-sm"></use></svg></a>
           <?php endforeach; ?>
         </nav>
         <a class="btn btn-sm" href="docs/index.php">Docs</a>
@@ -318,7 +358,7 @@ $ogImage = $url('assets/images/deck-og.png');
 <main id="main">
 
   <!-- ===================== Hero ===================== -->
-  <section class="container hero stack-6">
+  <section class="container hero stack stack-6">
     <div class="cluster cluster-tight">
       <span class="badge badge-brand badge-dot">v0.1</span>
       <span class="badge">One stylesheet</span>
@@ -372,7 +412,7 @@ $ogImage = $url('assets/images/deck-og.png');
   <!-- ===================== What / how / why =====================
        Question-shaped headings, each answered completely in its first
        sentence, so a paragraph still makes sense lifted out on its own. -->
-  <section class="container section stack-6" id="about">
+  <section class="container section stack stack-6" id="about">
     <h2>What is Deck?</h2>
     <p class="lede">Deck is a CSS framework that ships as a single
       <?= $e($site['css_br']) ?> stylesheet containing buttons, forms, tables,
@@ -519,7 +559,7 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Comparison ===================== -->
-  <section class="container section stack-6" id="compare">
+  <section class="container section stack stack-6" id="compare">
     <h2>How is Deck different from Tailwind CSS and Bootstrap?</h2>
     <p class="lede">Deck differs from Tailwind CSS and Bootstrap in that it has no build
       step and no configuration file, and its entire palette can be rethemed at runtime
@@ -579,13 +619,13 @@ $ npm run icons</code></pre>
           </tr>
           <tr>
             <th scope="row" data-label="Question">Ecosystem and plugins</th>
-            <td data-label="Deck">None</td>
+            <td data-label="Deck"><a href="templates/index.php"><?= count(glob(__DIR__ . '/templates/*.html') ?: []) ?> first-party templates</a>; no plugins</td>
             <td data-label="Tailwind CSS">Large — component kits, plugins, templates</td>
             <td data-label="Bootstrap">Large — themes, plugins, long-standing community</td>
           </tr>
           <tr>
             <th scope="row" data-label="Question">Editor tooling</th>
-            <td data-label="Deck">None</td>
+            <td data-label="Deck"><a href="docs/start/editor.php">Deck IntelliSense</a> for VS Code and editors built on it</td>
             <td data-label="Tailwind CSS">Official IntelliSense extension</td>
             <td data-label="Bootstrap">Community extensions and snippets</td>
           </tr>
@@ -600,10 +640,10 @@ $ npm run icons</code></pre>
     </div>
 
     <h3>Where Deck loses</h3>
-    <p>Deck has no plugin marketplace, no third-party component kits, no editor
-      autocomplete extension, and one maintainer, so a team that needs a large hiring
-      pool or an off-the-shelf admin template is better served by Tailwind CSS or
-      Bootstrap. Deck also has a fixed stylesheet size: a page that uses six components
+    <p>Deck has no plugin marketplace, no third-party component kits, editor support
+      only in Visual Studio Code and the editors built on it, and one maintainer, so a
+      team that needs a large hiring pool or a deep catalogue of ready-made themes is
+      better served by Tailwind CSS or Bootstrap. Deck also has a fixed stylesheet size: a page that uses six components
       downloads the same <?= $e($site['css_br']) ?> as a page that uses all of them,
       whereas Tailwind's generated output scales down with usage.</p>
 
@@ -617,8 +657,8 @@ $ npm run icons</code></pre>
 
   <!-- ===================== Buttons ===================== -->
   <!-- id="demo" marks where the component showcase begins; the docs link here. -->
-  <section class="container section stack-6" id="demo">
-    <div class="stack-4">
+  <section class="container section stack stack-6" id="demo">
+    <div class="stack stack-4">
       <h2>Buttons</h2>
       <p class="text-muted mb-1">Seven variants, three sizes, groups, and a loading state.</p>
     </div>
@@ -656,7 +696,7 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Cards + stats ===================== -->
-  <section class="container section stack-6">
+  <section class="container section stack stack-6">
     <h2 class="mb-2">Cards and stats</h2>
 
     <div class="grid mb-3">
@@ -726,7 +766,7 @@ $ npm run icons</code></pre>
         </footer>
       </article>
 
-      <div class="stack-4">
+      <div class="stack stack-4">
         <div class="alert alert-info mb-2">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#info"></use></svg>
           <div>
@@ -762,15 +802,15 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Forms ===================== -->
-  <section class="container section stack-6" id="forms">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="forms">
+    <div class="stack stack-2">
       <h2>Forms</h2>
       <p class="text-muted">Inputs are 16px on touch devices, so iOS never zooms when a
         field takes focus. Every control clears a 44px target.</p>
     </div>
 
     <div class="split">
-      <form class="stack-4">
+      <form class="stack stack-4">
         <div class="field-row">
           <div class="field">
             <label class="label" for="wsname">Workspace name <span class="required">*</span></label>
@@ -841,7 +881,7 @@ $ npm run icons</code></pre>
           <span>Require two-factor authentication for everyone</span>
         </label>
 
-        <div class="stack-3">
+        <div class="stack stack-3">
           <span class="label">Plan</span>
           <div class="grid grid-tight">
             <label class="check check-card">
@@ -874,7 +914,7 @@ $ npm run icons</code></pre>
         </div>
       </form>
 
-      <aside class="stack-4">
+      <aside class="stack stack-4">
         <div class="search">
           <svg class="icon"><use href="assets/deck/deck-icons.svg#search"></use></svg>
           <input class="input" type="search" placeholder="Search invoices">
@@ -914,7 +954,7 @@ $ npm run icons</code></pre>
           </a>
         </div>
 
-        <div class="stack-2">
+        <div class="stack stack-2">
           <span class="demo-label">Progress</span>
           <progress class="progress" value="68" max="100"></progress>
           <div class="cluster">
@@ -927,12 +967,12 @@ $ npm run icons</code></pre>
           </div>
         </div>
 
-        <div class="stack-2">
+        <div class="stack stack-2">
           <span class="demo-label">Loading</span>
           <div class="card"><div class="card-body">
             <div class="cluster cluster-tight">
               <div class="skeleton skeleton-circle" style="inline-size:40px;block-size:40px"></div>
-              <div class="grow stack-1">
+              <div class="grow stack stack-1">
                 <div class="skeleton skeleton-text" style="inline-size:60%"></div>
                 <div class="skeleton skeleton-text" style="inline-size:40%"></div>
               </div>
@@ -946,7 +986,7 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Table ===================== -->
-  <section class="container section stack-6">
+  <section class="container section stack stack-6">
     <div class="bar">
       <h2>Tables</h2>
       <div class="push cluster cluster-tight">
@@ -1008,7 +1048,7 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Navigation + disclosure ===================== -->
-  <section class="container section stack-6">
+  <section class="container section stack stack-6">
     <h2>Navigation and disclosure</h2>
 
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -1075,8 +1115,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Icons + emoji ===================== -->
-  <section class="container section stack-6" id="mobile">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="mobile">
+    <div class="stack stack-2">
       <h2>Icons and emoji</h2>
       <p class="text-muted">Deck ships <?= (int) $site['icons'] ?> icons as a single SVG
         sprite of <?= (int) $site['symbols'] ?> symbols — each icon at two weights, plus two
@@ -1128,8 +1168,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Overlays ===================== -->
-  <section class="container section stack-6">
-    <div class="stack-2">
+  <section class="container section stack stack-6">
+    <div class="stack stack-2">
       <h2>Overlays</h2>
       <p class="text-muted">Built on native <code>&lt;dialog&gt;</code> and the popover
         attribute, so focus trapping, escape-to-close, and the top layer are handled by
@@ -1223,8 +1263,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Date picker ===================== -->
-  <section class="container section stack-6" id="dates">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="dates">
+    <div class="stack stack-2">
       <h2>Date picker</h2>
       <p class="text-muted">Single date, range with two months, and presets. It's a
         popover on a desktop and slides up as a sheet under 480px.</p>
@@ -1259,8 +1299,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Combobox ===================== -->
-  <section class="container section stack-6" id="combo">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="combo">
+    <div class="stack stack-2">
       <h2>Combobox</h2>
       <p class="text-muted">Type to filter, arrows to move, enter to pick. The real
         <code>&lt;select&gt;</code> stays in the DOM and stays in sync, so a plain PHP
@@ -1303,8 +1343,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Data grid ===================== -->
-  <section class="container section stack-4" id="grid">
-    <div class="stack-2">
+  <section class="container section stack stack-4" id="grid">
+    <div class="stack stack-2">
       <h2>Data grid</h2>
       <p class="text-muted">Frozen header, pinned first and last columns, sortable
         headers, resizable columns, and a totals row that sticks to the bottom. Scroll
@@ -1458,8 +1498,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Toasts ===================== -->
-  <section class="container section stack-6" id="toasts-demo">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="toasts-demo">
+    <div class="stack stack-2">
       <h2>Toast queue</h2>
       <p class="text-muted">Toasts stack instead of stringing down the screen. Hover the
         stack to fan it out and pause every timer. Swipe or drag one sideways to
@@ -1480,8 +1520,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Charts ===================== -->
-  <section class="container section stack-6" id="charts">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="charts">
+    <div class="stack stack-2">
       <h2>Charts</h2>
       <p class="text-muted">No charting library. Bars and donuts are CSS driven by a
         <code>--value</code> property; lines are inline SVG you style with classes.
@@ -1578,7 +1618,7 @@ $ npm run icons</code></pre>
         </div>
       </div></div>
 
-      <div class="card"><div class="card-body stack-4">
+      <div class="card"><div class="card-body">
         <div class="stat">
           <span class="stat-label">Revenue this week</span>
           <div class="cluster cluster-tight">
@@ -1592,7 +1632,7 @@ $ npm run icons</code></pre>
             8.1% vs last week
           </span>
         </div>
-        <div class="stack-2">
+        <div class="stack stack-2">
           <span class="chart-note">Plan mix</span>
           <div class="chart-meter">
             <span class="s1" style="--value:62"></span>
@@ -1600,7 +1640,7 @@ $ npm run icons</code></pre>
             <span class="s4" style="--value:16"></span>
           </div>
         </div>
-        <div class="stack-2">
+        <div class="stack stack-2">
           <span class="chart-note">Commits, last five weeks</span>
           <div class="chart-heat" style="--cols:7">
             <div style="--value:10"></div><div style="--value:35"></div><div style="--value:80"></div>
@@ -1621,8 +1661,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Motion ===================== -->
-  <section class="container section stack-6" id="motion">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="motion">
+    <div class="stack stack-2">
       <h2>Transitions and animations</h2>
       <p class="text-muted">Motion answers an action or shows what changed. Nothing here
         runs unless you ask for it by class, and everything is off for anyone whose OS
@@ -1630,7 +1670,7 @@ $ npm run icons</code></pre>
         because a frozen spinner reads as broken.</p>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Entrances, staggered</span>
       <div class="grid grid-tight stagger" id="entranceDemo">
         <div class="card enter-rise"><div class="card-body"><span class="fw-semi">Backlog</span><span class="text-sm text-muted">42 issues</span></div></div>
@@ -1641,7 +1681,7 @@ $ npm run icons</code></pre>
       <button class="btn btn-sm" onclick="replayEntrances()">Replay</button>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Scroll reveal</span>
       <p class="text-muted text-sm">These use <code>animation-timeline: view()</code> —
         tied to scroll position with no IntersectionObserver. deck.js falls back to an
@@ -1653,7 +1693,7 @@ $ npm run icons</code></pre>
       </div>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Micro-interactions</span>
       <div class="cluster">
         <button class="btn lift">Lift on hover</button>
@@ -1668,7 +1708,7 @@ $ npm run icons</code></pre>
       </div>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Attention and feedback</span>
       <div class="cluster">
         <button class="btn" onclick="Deck.play(this, 'shake')">Shake</button>
@@ -1689,7 +1729,7 @@ $ npm run icons</code></pre>
       </div>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Expand and collapse</span>
       <p class="text-muted text-sm">A real <code>height: auto</code> transition using
         <code>interpolate-size</code>. No measuring in JavaScript, no max-height guess.</p>
@@ -1703,7 +1743,7 @@ $ npm run icons</code></pre>
       </div>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Ticker</span>
       <div class="marquee card" style="padding-block:var(--space-3)">
         <div class="marquee-track text-sm text-muted">
@@ -1736,8 +1776,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Cascade layers ===================== -->
-  <section class="container section stack-6" id="layers">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="layers">
+    <div class="stack stack-2">
       <h2>Cascade layers</h2>
       <p class="text-muted">Deck declares the whole cascade contract in
         <code>00-layers.css</code> before a single rule exists. Order is decided there —
@@ -1775,8 +1815,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Container queries ===================== -->
-  <section class="container section stack-6" id="containers">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="containers">
+    <div class="stack stack-2">
       <h2>Container queries</h2>
       <p class="text-muted">The same card markup, twice. The one in the wide column goes
         horizontal; the one in the rail stays stacked. Neither knows where it was
@@ -1813,7 +1853,7 @@ $ npm run icons</code></pre>
       </aside>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Style queries — set <code>--tone</code> on the container, children follow</span>
       <div class="grid grid-tight">
         <div class="cq-tone" style="--tone: clear">
@@ -1841,8 +1881,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Logical properties ===================== -->
-  <section class="container section stack-6" id="logical">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="logical">
+    <div class="stack stack-2">
       <h2>Logical properties</h2>
       <p class="text-muted">Deck is written in logical properties end to end, so a full
         right-to-left flip needs nothing but <code>dir="rtl"</code>. Try the switch — the
@@ -1860,7 +1900,7 @@ $ npm run icons</code></pre>
     </div>
 
     <div class="grid grid-tight">
-      <div class="card"><div class="card-body stack-3">
+      <div class="card"><div class="card-body">
         <span class="card-title">Mirrors</span>
         <div class="cluster cluster-tight">
           <button class="btn btn-sm">Next <svg class="icon icon-sm"><use href="assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></button>
@@ -1873,11 +1913,11 @@ $ npm run icons</code></pre>
         </div>
       </div></div>
 
-      <div class="card"><div class="card-body stack-3">
+      <div class="card"><div class="card-body">
         <span class="card-title">Does not mirror</span>
         <p class="text-sm text-muted">Identifiers stay in their own direction and stay
           isolated from the text around them.</p>
-        <div class="stack-2">
+        <div class="stack stack-2">
           <span class="mono code-ltr">a81ac26bc87ec010f4d9</span>
           <span class="cluster cluster-tight">
             <svg class="icon no-flip"><use href="assets/deck/deck-icons.svg#settings"></use></svg>
@@ -1901,8 +1941,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Gradients ===================== -->
-  <section class="container section stack-6" id="gradients">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="gradients">
+    <div class="stack stack-2">
       <h2>Gradients</h2>
       <p class="text-muted">All built from the brand hue and interpolated in oklab, which
         avoids the grey dead zone you get blending two saturated colors in sRGB. Drag the
@@ -1954,8 +1994,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== 3D ===================== -->
-  <section class="container section stack-6" id="space">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="space">
+    <div class="stack stack-2">
       <h2>3D transforms</h2>
       <p class="text-muted">Depth earns its place when it carries meaning: a card with two
         sides, a pile you are working down through, a control that physically depresses.
@@ -1966,12 +2006,12 @@ $ npm run icons</code></pre>
     <div class="grid grid-tight">
       <div class="scene">
         <div class="flip card" id="flipCard" style="min-block-size:170px">
-          <div class="flip-front card-body stack-2">
+          <div class="flip-front card-body">
             <span class="card-title">Order #1042</span>
             <p class="text-sm text-muted">Northwind Traders · 24 seats</p>
             <button class="btn btn-sm push" data-deck-flip>See the breakdown</button>
           </div>
-          <div class="flip-back card-body stack-2 g-brand-soft">
+          <div class="flip-back card-body g-brand-soft">
             <span class="card-title">Breakdown</span>
             <p class="text-sm">Subtotal $780.00 · Tax $62.16</p>
             <button class="btn btn-sm" data-deck-flip>Back</button>
@@ -1989,7 +2029,7 @@ $ npm run icons</code></pre>
         </div>
       </div>
 
-      <div class="stack-3">
+      <div class="stack stack-3">
         <div class="pile" id="pile" style="min-block-size:150px">
           <div class="card"><div class="card-body"><span class="fw-semi">PR #418</span><span class="text-sm text-muted">Awaiting review</span></div></div>
           <div class="card"><div class="card-body"><span class="fw-semi">PR #421</span><span class="text-sm text-muted">Awaiting review</span></div></div>
@@ -2017,7 +2057,7 @@ $ npm run icons</code></pre>
       </div>
     </div>
 
-    <div class="stack-2">
+    <div class="stack stack-2">
       <span class="demo-label">Coverflow — scroll it sideways</span>
       <div class="coverflow">
         <div class="card" style="inline-size:190px"><div class="card-body"><span class="fw-semi">March</span><span class="text-sm text-muted">84 releases</span></div></div>
@@ -2032,8 +2072,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Added components ===================== -->
-  <section class="container section stack-8" id="more">
-    <div class="stack-2">
+  <section class="container section stack stack-8" id="more">
+    <div class="stack stack-2">
       <h2>Carousel, drawer, mega menu, speed dial</h2>
       <p class="text-muted">The carousel is scroll snap underneath, so it swipes correctly
         with JavaScript off. Arrows and dots are enhancement.</p>
@@ -2113,7 +2153,7 @@ $ npm run icons</code></pre>
       <div class="mega-footer"><a href="#more">Documentation</a><a href="#more">Release notes</a><a href="#more">Contact support</a></div>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Stepper</span>
       <div class="stepper stepper-auto">
         <div class="step is-done"><div class="step-marker"></div><span class="step-label">Account</span><span class="step-note">Email confirmed</span></div>
@@ -2123,7 +2163,7 @@ $ npm run icons</code></pre>
       </div>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Inputs</span>
       <div class="grid grid-tight">
         <div class="float">
@@ -2182,7 +2222,7 @@ $ npm run icons</code></pre>
       </div>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Editor</span>
       <div class="editor" data-limit="600">
         <div class="editor-toolbar">
@@ -2207,7 +2247,7 @@ $ npm run icons</code></pre>
     </div>
 
     <div class="grid grid-wide">
-      <div class="stack-3">
+      <div class="stack stack-3">
         <span class="demo-label">Chat</span>
         <div class="card">
           <div class="chat" style="max-block-size:280px">
@@ -2235,7 +2275,7 @@ $ npm run icons</code></pre>
         </div>
       </div>
 
-      <div class="stack-3">
+      <div class="stack stack-3">
         <span class="demo-label">QR code — encoded in the browser, no library and no network call</span>
         <div class="cluster">
           <div class="qr" data-deck-qr="https://example.com/orders/1042" data-ecl="M"></div>
@@ -2252,7 +2292,7 @@ $ npm run icons</code></pre>
       </div>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Masonry gallery with lazy loading</span>
       <div class="masonry masonry-3">
         <div class="lazy" style="--ratio:3/4"><img data-src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%2390a4ae'/%3E%3C/svg%3E" alt=""></div>
@@ -2282,8 +2322,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Gallery ===================== -->
-  <section class="container section stack-6" id="gallery">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="gallery">
+    <div class="stack stack-2">
       <h2>Gallery</h2>
       <p class="text-muted">Equal tiles for a media library — screenshots, exports, brand
         assets. <code>.gallery</code> is a grid of square cells that reflows on its own,
@@ -2293,7 +2333,7 @@ $ npm run icons</code></pre>
         the one image that should be seen first.</p>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Assets &middot; Acme Design &middot; 8 files, 24 MB</span>
       <div class="gallery">
         <a class="span-2" href="#gallery"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%2378909c'/%3E%3C/svg%3E" alt="Dashboard screenshot, dark theme"></a>
@@ -2311,8 +2351,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Sidebar ===================== -->
-  <section class="container section stack-6" id="sidebar">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="sidebar">
+    <div class="stack stack-2">
       <h2>Sidebar</h2>
       <p class="text-muted"><code>.sidebar</code> is a bare nav list — <code>.sidebar-group</code>
         for a heading, <code>.sidebar-link</code> for a row, <code>.push</code> to shove a
@@ -2325,8 +2365,8 @@ $ npm run icons</code></pre>
     </div>
 
     <div class="split" style="--rail: 17rem">
-      <div class="stack-4">
-        <div class="card"><div class="card-body stack-2">
+      <div class="stack stack-4">
+        <div class="card"><div class="card-body">
           <h3 class="card-title">Open issues</h3>
           <p class="text-sm text-muted">Forty-two issues are waiting on something. Thirty-one
             of them are waiting on a reviewer, not on the build.</p>
@@ -2381,8 +2421,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Tooltips ===================== -->
-  <section class="container section stack-6" id="tooltips">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="tooltips">
+    <div class="stack stack-2">
       <h2>Tooltips</h2>
       <p class="text-muted">There are two of them and the difference matters.
         <code>.tooltip</code> is a <code>::after</code> on the trigger with the text in
@@ -2396,7 +2436,7 @@ $ npm run icons</code></pre>
         when the text is longer, has to survive an edge, or should open on click.</p>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">.tooltip &mdash; CSS only, hover or focus, never flips, gone on touch</span>
       <div class="cluster">
         <button class="btn btn-icon tooltip" data-tip="Re-run the failed jobs" aria-label="Re-run the failed jobs">
@@ -2411,7 +2451,7 @@ $ npm run icons</code></pre>
       </div>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">.tip &mdash; anchored popover, flips at an edge, carries an arrow</span>
       <div class="cluster">
         <button class="btn" popovertarget="tipBuild">Why did this build fail?</button>
@@ -2429,8 +2469,8 @@ $ npm run icons</code></pre>
   <hr>
 
   <!-- ===================== Libraries and performance ===================== -->
-  <section class="container section stack-8" id="libs">
-    <div class="stack-2">
+  <section class="container section stack stack-8" id="libs">
+    <div class="stack stack-2">
       <h2>Optional libraries</h2>
       <p class="text-muted">Deck's core stays zero-dependency. <code>deck-adapters.js</code>
         detects a library if you've loaded it and hands that job over, keeping Deck's
@@ -2498,7 +2538,7 @@ $ npm run icons</code></pre>
       </div>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Anchored tooltips and popovers — these flip and shift on their own</span>
       <div class="cluster">
         <button class="btn" popovertarget="tip1">Hover-free tooltip</button>
@@ -2517,7 +2557,7 @@ $ npm run icons</code></pre>
       </div>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Kanban with drag reordering</span>
       <div class="kanban">
         <div class="kanban-col">
@@ -2557,7 +2597,7 @@ $ npm run icons</code></pre>
       </div>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Virtualized grid — 5,000 rows, no virtualization library</span>
       <p class="text-muted text-sm">One line of CSS. Off-screen rows are skipped during
         layout, style, and paint, but they stay in the DOM — so Ctrl+F still finds them
@@ -2576,7 +2616,7 @@ $ npm run icons</code></pre>
       <span class="text-sm text-muted" id="rowStat"></span>
     </div>
 
-    <div class="stack-3">
+    <div class="stack stack-3">
       <span class="demo-label">Datepicker localization — <code>Intl</code>, not a date library</span>
       <div class="grid grid-tight">
         <div class="field">
@@ -2602,8 +2642,8 @@ $ npm run icons</code></pre>
   </section>
 
   <!-- ===================== Print ===================== -->
-  <section class="container section stack-6" id="print">
-    <div class="stack-2">
+  <section class="container section stack stack-6" id="print">
+    <div class="stack stack-2">
       <h2>Print</h2>
       <p class="text-muted">Invoices, packing slips, and reports still end up on paper.
         Print this page and the nav, tab bar, buttons, toasts, and theme dock drop out;
@@ -2640,7 +2680,7 @@ $ npm run icons</code></pre>
 
 
   <!-- ===================== Footer ===================== -->
-  <footer class="container section stack-4 text-muted">
+  <footer class="container section stack stack-4 text-muted">
     <hr>
     <div class="cluster cluster-between">
       <div class="cluster cluster-tight">

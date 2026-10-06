@@ -22,7 +22,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Section</h1>
   <p class="lede">
     <code>.section</code> is one declaration —
@@ -33,7 +33,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it on the outermost band of each part of a page — usually a
@@ -43,7 +43,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-0">' . "\n" .
+      '<div class="stack stack-0">' . "\n" .
       '  <section class="section" style="background:var(--surface-2)">' . "\n" .
       '    <div class="container"><h3>First section</h3></div>' . "\n" .
       '  </section>' . "\n" .
@@ -57,7 +57,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="clamp">Why a clamp</h2>
   <p>
     <code>clamp(2.5rem, 1.4rem + 5.5vw, 6rem)</code> reads as: never less than
@@ -81,13 +81,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="padding">Padding, not margin</h2>
   <p>
     <code>.section</code> uses <code>padding-block</code>. That choice does two things
     that a margin would not:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Two adjacent sections do not collapse.</strong> Vertical margins merge into
       the larger of the two, so two sections with <?= e('6rem') ?> margins would be
@@ -108,7 +108,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="inside">Not for spacing inside a component</h2>
   <p>
     At the top of its range <code>.section</code> is <?= e('6rem') ?> of padding, top and
@@ -124,7 +124,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     One class, one declaration, no variants — so there is no component root and no
@@ -133,14 +133,14 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--space-section', '--space-gutter', '--space-8']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The class is not the element.</strong> <code>.section</code> supplies
       padding and nothing else — no role, no landmark. Put it on a real
@@ -173,7 +173,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     <code>padding-block</code> is the block axis, which is unaffected by text direction.
@@ -181,7 +181,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing animates. The clamp resizes with the viewport, which is layout rather than
@@ -189,7 +189,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> replaces the padding with
@@ -201,7 +201,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One section, no layer needed */
 <section class="section" style="--space-section:3rem">
@@ -221,9 +221,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not inside a card, a modal or a panel.</strong> Its padding is page-scale.
       Use <a href="stack.php"><code>.stack</code></a>, or the component's own padded

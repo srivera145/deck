@@ -28,7 +28,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Skeleton</h1>
   <p class="lede">
     A grey block where content will be, shimmering to say it is on its way. It works because
@@ -37,7 +37,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     When you know the shape of what is coming and it will take long enough to notice —
@@ -53,7 +53,7 @@ require __DIR__ . '/../_layout.php';
       '<div class="card" style="max-inline-size:24rem" aria-hidden="true">' . "\n" .
       '  <div class="cluster">' . "\n" .
       '    <span class="skeleton skeleton-circle" style="inline-size:40px;block-size:40px"></span>' . "\n" .
-      '    <span class="stack-1" style="flex:1">' . "\n" .
+      '    <span class="stack stack-1" style="flex:1">' . "\n" .
       '      <span class="skeleton skeleton-text" style="inline-size:40%"></span>' . "\n" .
       '      <span class="skeleton skeleton-text" style="inline-size:60%"></span>' . "\n" .
       '    </span>' . "\n" .
@@ -67,7 +67,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="sizing">Sizing it</h2>
   <p>
     <code>.skeleton</code> is <code>block-size: 1em</code> and full width by default, so it
@@ -82,9 +82,9 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-3" style="max-inline-size:26rem" aria-hidden="true">' . "\n" .
+      '<div class="stack stack-3" style="max-inline-size:26rem" aria-hidden="true">' . "\n" .
       '  <span class="skeleton" style="block-size:1.6em;inline-size:55%"></span>' . "\n" .
-      '  <div class="stack-1">' . "\n" .
+      '  <div class="stack stack-1">' . "\n" .
       '    <span class="skeleton skeleton-text"></span>' . "\n" .
       '    <span class="skeleton skeleton-text"></span>' . "\n" .
       '    <span class="skeleton skeleton-text" style="inline-size:72%"></span>' . "\n" .
@@ -103,20 +103,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/07-components.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--ink-100', '--ink-200', '--r-xs', '--r-full', '--ease-in-out']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>A skeleton announces nothing.</strong> It is an empty element with a
       background. A screen reader user gets silence where a sighted user gets a clear "this
@@ -155,7 +155,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Nothing here is directional in a way that needs a rule, and nothing in
@@ -170,7 +170,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div dir="rtl" class="stack-1" style="max-inline-size:22rem" aria-hidden="true">' . "\n" .
+      '<div dir="rtl" class="stack stack-1" style="max-inline-size:22rem" aria-hidden="true">' . "\n" .
       '  <span class="skeleton skeleton-text"></span>' . "\n" .
       '  <span class="skeleton skeleton-text" style="inline-size:65%"></span>' . "\n" .
       '</div>',
@@ -180,7 +180,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     <code>.skeleton</code> is one of seven things <code>src/02-reset.css</code> exempts from
@@ -201,7 +201,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.skeleton</code> is not in <code>src/99-print.css</code> and is not in the list of
@@ -215,7 +215,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One block, no layer needed */
 <span class="skeleton" style="block-size:3rem;inline-size:70%"></span>
@@ -234,9 +234,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not when you do not know the shape.</strong> A skeleton that does not match
       what arrives causes the layout shift it was supposed to prevent, and costs a shimmer

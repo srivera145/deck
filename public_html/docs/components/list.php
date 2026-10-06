@@ -39,7 +39,7 @@ $people = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>List</h1>
   <p class="lede">
     <code>.list</code> is a bordered, clipped flex column; <code>.list-row</code> is one
@@ -51,7 +51,7 @@ $people = [
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use a list when the reader reads one row at a time — people, files, notifications,
@@ -77,13 +77,13 @@ $people = [
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="structure">Main, title, sub, trail</h2>
   <p>
     A row is usually three parts: something at the start, the text in the middle,
     something at the end.
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <code>.list-main</code> is <code>flex: 1 1 auto</code> with
       <code>min-inline-size: 0</code>, so it takes the free space <em>and</em> is allowed
@@ -142,7 +142,7 @@ $people = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rows-as-links">Rows that are links</h2>
   <p>
     <code>.list-row</code> sets <code>color: inherit</code> and
@@ -174,7 +174,7 @@ $people = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="header">Group headers</h2>
   <p>
     <code>.list-header</code> is a small uppercase band on
@@ -202,7 +202,7 @@ $people = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="cq">Responds to its own width</h2>
   <p>
     <code>.list.cq</code> makes a list a query container, so rows inside it can respond
@@ -226,7 +226,7 @@ $people = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="long">Long lists</h2>
   <p>
     <code>.list-virtual</code> puts <code>content-visibility: auto</code> and
@@ -252,7 +252,7 @@ $people = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="reorder">Reordering</h2>
   <p>
     <code>.reorder</code> on the list makes rows unselectable, and
@@ -272,13 +272,13 @@ $people = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from the stylesheet source by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     <code>--tap</code> is the one worth noting: it is the row's
@@ -288,9 +288,9 @@ $people = [
   <?php docs_token_table(['--surface', '--surface-2', '--surface-hover', '--line', '--r-md', '--r-sm', '--tap', '--space-3', '--space-4', '--text-sm', '--text-xs', '--text-muted', '--text-faint', '--shadow-3', '--dur-1']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong><code>.list</code> is not a list.</strong> It is a flex column of
       <code>&lt;div&gt;</code>s with no <code>role</code>, so a screen reader announces
@@ -345,7 +345,7 @@ $people = [
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Rows are flex lines with <code>gap</code> and logical padding, so the avatar moves to
@@ -373,7 +373,7 @@ $people = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     <code>.list-row</code> transitions <code>background-color</code> over
@@ -389,7 +389,7 @@ $people = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> gives <code>.list</code> the same surface treatment as
@@ -401,7 +401,7 @@ $people = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Taller rows, and tell the virtual list about it */
@@ -417,9 +417,9 @@ $people = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong><code>.list</code> versus <code>.table</code>.</strong> If values line up
       in columns and the reader compares them, use a table. A list of rows with four

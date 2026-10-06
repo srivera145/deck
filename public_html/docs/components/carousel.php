@@ -44,7 +44,7 @@ function demo_slides(int $n = 4): string
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Carousel</h1>
   <p class="lede">
     <code>.carousel</code> is a scroll-snap track with dots and arrows over it. What makes
@@ -55,7 +55,7 @@ function demo_slides(int $n = 4): string
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it for a set of peer items where seeing them all at once is not necessary and
@@ -88,7 +88,7 @@ function demo_slides(int $n = 4): string
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="native">Two implementations, one markup</h2>
   <p>
     This is the most interesting thing in the component, and it is worth reading the
@@ -101,7 +101,7 @@ function demo_slides(int $n = 4): string
     browser.
   </blockquote>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="n-native">Where the browser has them</h3>
     <pre class="dx-code"><code><?= e('@supports selector(::scroll-marker) {
   .carousel-dots, .carousel-arrow { display: none; }
@@ -121,7 +121,7 @@ function demo_slides(int $n = 4): string
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="n-js">Where it does not</h3>
     <p>
       <code>deck-extras.js</code> builds the dots, wires the arrows, tracks the current
@@ -139,7 +139,7 @@ function demo_slides(int $n = 4): string
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="variants">Peek and multi</h2>
   <p>
     Slides are <code>flex-basis: 100%</code> by default — one at a time.
@@ -166,7 +166,7 @@ function demo_slides(int $n = 4): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="captions">Captions</h2>
   <p>
     <code>.carousel-caption</code> overlays text on a slide. It reads the shared
@@ -195,7 +195,7 @@ function demo_slides(int $n = 4): string
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="autoplay">Autoplay</h2>
   <p>
     <code>data-autoplay="5000"</code> advances the carousel every five seconds. It pauses
@@ -211,20 +211,20 @@ function demo_slides(int $n = 4): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/22-nav.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--surface', '--brand-600', '--ink-300', '--r-md', '--r-full', '--shadow-2', '--space-2', '--space-3', '--space-4', '--dur-2']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The native path is more accessible than the scripted one</strong>, which is
       the argument for it. <code>::scroll-marker</code> dots are real focusable controls
@@ -272,7 +272,7 @@ function demo_slides(int $n = 4): string
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The track is a flex row that the browser reverses under <code>dir="rtl"</code>, and
@@ -293,7 +293,7 @@ function demo_slides(int $n = 4): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Scrolling between slides is smooth by default and <code>auto</code> when
@@ -313,7 +313,7 @@ function demo_slides(int $n = 4): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/24-media.css</code> drops <code>.carousel-arrow</code> and
@@ -328,7 +328,7 @@ function demo_slides(int $n = 4): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Two slides at a time rather than three */
@@ -350,9 +350,9 @@ function demo_slides(int $n = 4): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for anything important.</strong> Readers do not move past the first
       slide. If all the content matters, use a <a href="grid.php"><code>.grid</code></a>

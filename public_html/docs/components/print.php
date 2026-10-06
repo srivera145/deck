@@ -23,7 +23,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Printing</h1>
   <p class="lede">
     Deck's own summary is the right framing: <em>real work still gets printed. Invoices,
@@ -33,7 +33,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="where">Where the print rules live</h2>
   <p>
     Two places, and knowing both saves an afternoon. The main sheet is
@@ -51,9 +51,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="automatic">What happens without you asking</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The light palette is forced.</strong> <code>color-scheme: light only</code>
       and every surface token overridden to white, text to black, lines to grey. Dark mode
@@ -98,13 +98,13 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tables">Tables get the most work</h2>
   <p>
     Which is right, because a table is what people actually print. Three things happen that
     are worth knowing about:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The header repeats on every page.</strong>
       <code>display: table-header-group</code> on <code>thead</code> — so a fifty-row
@@ -131,7 +131,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="forms">Forms print as forms</h2>
   <p>
     A form on paper is usually something to be filled in by hand, and Deck treats it that
@@ -150,7 +150,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-3" style="max-inline-size:24rem">' . "\n" .
+      '<div class="stack stack-3" style="max-inline-size:24rem">' . "\n" .
       '  <div class="field">' . "\n" .
       '    <label class="label" for="dx-pr-name">Name</label>' . "\n" .
       '    <input class="input" id="dx-pr-name">' . "\n" .
@@ -169,9 +169,9 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">The nine classes</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li><strong><code>.page-break</code></strong> — <code>break-before: page</code>. Start
       this element on a new sheet.</li>
     <li><strong><code>.page-break-after</code></strong> — the same, after.</li>
@@ -191,11 +191,11 @@ require __DIR__ . '/../_layout.php';
   </ul>
   <?php
   docs_example(
-      '<div class="card stack-3" style="max-inline-size:26rem">' . "\n" .
+      '<div class="card stack stack-3" style="max-inline-size:26rem">' . "\n" .
       '  <p>Visible on screen and on paper.</p>' . "\n" .
       '  <p class="no-print text-muted">Screen only — a hint, a control, a nudge.</p>' . "\n" .
       '  <p class="print-only">Paper only — reference ORD-4417-QK, printed from example.com.</p>' . "\n" .
-      '  <div class="keep-together stack-1">' . "\n" .
+      '  <div class="keep-together stack stack-1">' . "\n" .
       '    <strong>Signature</strong>' . "\n" .
       '    <p class="text-muted">This block will not be split across two pages.</p>' . "\n" .
       '  </div>' . "\n" .
@@ -212,7 +212,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     Printing does not use Deck's tokens so much as <strong>replace</strong> them. The
@@ -230,9 +230,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Paper has no assistive technology.</strong> A printed page is read by eye or
       not at all, which makes the ordinary rules sharper rather than looser: anything
@@ -269,7 +269,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     <code>@page</code> margins are set with the physical
@@ -291,7 +291,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Not applicable, and handled anyway: the universal selector inside
@@ -302,7 +302,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing this page</h2>
   <p>
     The section every other page has is this whole page, so instead: the honest way to check
@@ -316,7 +316,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* A4 rather than letter */
 @page { size: A4; margin: 18mm 16mm; }
@@ -340,9 +340,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not <code>.print-only</code> for anything essential.</strong> Screen readers
       never reach it.

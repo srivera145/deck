@@ -46,7 +46,7 @@ $sizes = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Icon</h1>
   <p class="lede">
     <code>.icon</code> is sized in <code>em</code>, not pixels — so it scales with the
@@ -57,7 +57,7 @@ $sizes = [
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Put it on an <code>&lt;svg&gt;</code> containing a <code>&lt;use&gt;</code> that
@@ -85,7 +85,7 @@ $sizes = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="sizes">Sizes</h2>
   <div class="table-wrap">
     <table class="table table-stack">
@@ -114,7 +114,7 @@ $sizes = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="two-weights">Why .icon-sm needs a different symbol</h2>
   <p>
     The sprite's symbols are <strong>filled outlines</strong> rather than strokes, so
@@ -135,7 +135,7 @@ $sizes = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="variants">Fill and muted</h2>
   <p>
     <code>.icon-fill</code> swaps stroke for fill, for the solid cut of a glyph —
@@ -153,7 +153,7 @@ $sizes = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tiles">Icon tiles</h2>
   <p>
     <code>.icon-tile</code> is a rounded square with a tinted background, for a feature
@@ -173,7 +173,7 @@ $sizes = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion-classes">.icon-spin and .icon-follow</h2>
   <p>
     <code>.icon-spin</code> rotates continuously — a loading state on an icon that is not
@@ -200,7 +200,7 @@ $sizes = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     Eleven files style an icon, which is what happens to a primitive used everywhere. Only
@@ -209,7 +209,7 @@ $sizes = [
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     An icon reads almost nothing. It inherits <code>color</code> and
@@ -218,9 +218,9 @@ $sizes = [
   <?php docs_token_table(['--text-faint', '--brand-soft', '--brand-soft-text', '--good-100', '--warn-100', '--bad-100', '--r-md']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Nearly every icon should be <code>aria-hidden="true"</code>.</strong> An
       icon beside a label is decoration — the label is the name. Every example on this
@@ -261,7 +261,7 @@ $sizes = [
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     This is the most interesting rule in the component.
@@ -294,7 +294,7 @@ $sizes = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     <code>.icon-follow</code> is declared inside
@@ -305,7 +305,7 @@ $sizes = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     Icons print. They are strokes in <code>currentColor</code>, so they come out as line
@@ -320,7 +320,7 @@ $sizes = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One icon, no layer needed */
 <svg class="icon" style="inline-size:2.5em;block-size:2.5em">
@@ -339,9 +339,9 @@ $sizes = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not as the only label.</strong> An icon-only button is fine with
       <code>aria-label</code>, and a row of unlabelled glyphs is a guessing game for

@@ -28,7 +28,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Timeline</h1>
   <p class="lede">
     A vertical run of events, each with a dot, joined by a line. It suits anything with a
@@ -37,7 +37,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     When the sequence is the point. A timeline says "this, then this, then this" more
@@ -56,7 +56,7 @@ require __DIR__ . '/../_layout.php';
       '    <span class="timeline-dot">' . "\n" .
       '      <svg class="icon icon-sm" aria-hidden="true"><use href="/assets/deck/deck-icons.svg#check"></use></svg>' . "\n" .
       '    </span>' . "\n" .
-      '    <div class="stack-1">' . "\n" .
+      '    <div class="stack stack-1">' . "\n" .
       '      <strong>Order placed</strong>' . "\n" .
       '      <p class="text-muted"><time datetime="2026-09-04T09:12">4 September, 09:12</time> — payment authorised</p>' . "\n" .
       '    </div>' . "\n" .
@@ -65,14 +65,14 @@ require __DIR__ . '/../_layout.php';
       '    <span class="timeline-dot">' . "\n" .
       '      <svg class="icon icon-sm" aria-hidden="true"><use href="/assets/deck/deck-icons.svg#check"></use></svg>' . "\n" .
       '    </span>' . "\n" .
-      '    <div class="stack-1">' . "\n" .
+      '    <div class="stack stack-1">' . "\n" .
       '      <strong>Dispatched</strong>' . "\n" .
       '      <p class="text-muted"><time datetime="2026-09-05T16:40">5 September, 16:40</time> — left the Bristol depot</p>' . "\n" .
       '    </div>' . "\n" .
       '  </li>' . "\n" .
       '  <li class="timeline-item">' . "\n" .
       '    <span class="timeline-dot"></span>' . "\n" .
-      '    <div class="stack-1">' . "\n" .
+      '    <div class="stack stack-1">' . "\n" .
       '      <strong>Out for delivery</strong>' . "\n" .
       '      <p class="text-muted">Expected <time datetime="2026-09-06">6 September</time></p>' . "\n" .
       '    </div>' . "\n" .
@@ -90,7 +90,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="structure">How it is drawn</h2>
   <p>
     <code>.timeline-item</code> is a two-column grid: a fixed 22px track for the dot and
@@ -122,7 +122,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="done">Completed entries</h2>
   <p>
     <code>.is-done</code> on the <em>item</em> — not the dot — fills its dot with the brand
@@ -155,20 +155,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/07-components.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--line', '--line-strong', '--surface', '--brand-600', '--text-on-brand', '--r-full', '--space-3', '--space-5']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Use an <code>&lt;ol&gt;</code>.</strong> The order is the information. An
       ordered list is announced with its position — "3 of 5" — which is exactly what the
@@ -203,7 +203,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The dot track moves to the right and the connector follows, because the item is a grid
@@ -231,7 +231,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing on the timeline animates — no transitions, no keyframes, no transforms. There is
@@ -243,7 +243,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.timeline-item</code> is one of the few things <code>src/99-print.css</code>
@@ -262,7 +262,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* A larger dot. Four values have to move together. */
@@ -286,9 +286,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a process in progress.</strong> Checkout, onboarding and any "you are
       here" sequence is a <a href="stepper.php">stepper</a>.

@@ -22,7 +22,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Segmented</h1>
   <p class="lede">
     <code>.segmented</code> is a one-of-N control drawn as a sunken track with the
@@ -33,7 +33,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it for two to four mutually exclusive options that the reader should be able to
@@ -60,7 +60,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="state">The selected state</h2>
   <p>
     The raised look comes from <code>[aria-selected="true"]</code> — a surface background,
@@ -80,7 +80,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="radios">The version with no JavaScript</h2>
   <p>
     A segmented control is a radio group wearing different clothes, and it can be built as
@@ -125,7 +125,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="width">Width</h2>
   <p>
     <code>inline-size: 100%</code> is set on the control, so a segmented control fills its
@@ -134,7 +134,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-3">' . "\n" .
+      '<div class="stack stack-3">' . "\n" .
       '  <div class="segmented" style="max-inline-size:16rem">' . "\n" .
       '    <button class="btn btn-ghost" aria-selected="true">On</button>' . "\n" .
       '    <button class="btn btn-ghost" aria-selected="false">Off</button>' . "\n" .
@@ -150,7 +150,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     One class. The children are styled by <code>.segmented &gt; *</code>, so there are no
@@ -160,14 +160,14 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--bg-sunken', '--surface', '--line', '--text', '--text-muted', '--text-sm', '--r-sm', '--shadow-1', '--space-2', '--space-3', '--dur-2']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Pick a pattern and commit to it.</strong> A segmented control can be a
       tablist, a radio group, or a group of buttons — and each has different obligations.
@@ -209,7 +209,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     A flex row with a gap and <code>padding-inline</code> on the children, so it fills
@@ -229,7 +229,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Children transition their background and colour over
@@ -240,7 +240,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> lists <code>.segmented</code> among the chrome that
@@ -254,7 +254,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Style the radio version, which Deck does not */
@@ -272,9 +272,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for more than about four options.</strong> Equal widths mean five
       options are five narrow columns, and the labels start truncating. Use

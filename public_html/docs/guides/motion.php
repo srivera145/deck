@@ -27,7 +27,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Animate without a JavaScript library</h1>
   <p class="lede">
     You want things to move a little — a panel that slides, a row that fades in, a button
@@ -37,7 +37,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="answer">The short answer</h2>
   <p>Four families, and you can guess which you need from the name.</p>
   <div class="table-wrap">
@@ -81,7 +81,7 @@ require __DIR__ . '/../_layout.php';
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="reduced">Reduced motion is the default, not an afterthought</h2>
   <p>
     Almost everything that moves in Deck is inside
@@ -115,7 +115,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="tokens">Durations and easings</h2>
   <p>
     Seven durations and ten easing curves, and the point of using the tokens rather than
@@ -146,14 +146,14 @@ require __DIR__ . '/../_layout.php';
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="stagger">Lists that arrive in sequence</h2>
   <p>
     Put <code>.stagger</code> on the container and the entrance classes on the children,
     and each child starts a little after the one before it. The step is
     <code>--stagger-step</code>, 45ms by default.
   </p>
-  <pre class="dx-code"><code>&lt;ul class="stack-2 stagger"&gt;
+  <pre class="dx-code"><code>&lt;ul class="stack stack-2 stagger"&gt;
   &lt;li class="enter-rise"&gt;First&lt;/li&gt;
   &lt;li class="enter-rise"&gt;Second&lt;/li&gt;
   &lt;li class="enter-rise"&gt;Third&lt;/li&gt;
@@ -166,7 +166,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="reveal">Revealing on scroll</h2>
   <p>
     <code>.reveal</code>, <code>.reveal-fade</code> and <code>.reveal-pop</code> animate
@@ -184,7 +184,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="transitions">Animating between two states of the page</h2>
   <p>
     <code>Deck.transition()</code> wraps a DOM change so the browser tweens between before
@@ -210,7 +210,7 @@ newRow.focus();</code></pre>
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="oneshot">One-shot reactions</h2>
   <p>
     <code>Deck.play()</code> adds an animation class, waits for it, and cleans up after
@@ -230,9 +230,9 @@ Deck.play(card, 'flash-good');</code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="taste">Two rules of taste</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Motion should explain, not decorate.</strong> A panel that slides down from
       its trigger tells you where it came from. A card that spins on hover tells you

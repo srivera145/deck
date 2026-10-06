@@ -30,7 +30,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Your first page</h1>
   <p class="lede">
     You are going to build an account settings page: a nav bar with a working theme
@@ -41,7 +41,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="before">Before you start</h2>
   <p>
     You need <a href="install.php">Deck installed</a> and a folder you can serve. Make a
@@ -56,7 +56,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="step1">1. The shell</h2>
   <p>
     Start with the same head you finished the install with, and an empty
@@ -81,7 +81,7 @@ require __DIR__ . '/../_layout.php';
 &lt;a class="skip-link" href="#main"&gt;Skip to content&lt;/a&gt;
 
 &lt;main id="main" class="container section"&gt;
-  &lt;div class="stack-2 mb-8"&gt;
+  &lt;div class="stack stack-2 mb-8"&gt;
     &lt;h1&gt;Account settings&lt;/h1&gt;
     &lt;p class="lede"&gt;Changes are saved to your account and apply everywhere you are signed in.&lt;/p&gt;
   &lt;/div&gt;
@@ -103,7 +103,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="step2">2. A nav bar that already does something</h2>
   <p>
     Above the <code>&lt;main&gt;</code>, add a header. <code>.sticky-top</code> pins it
@@ -148,7 +148,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="step3">3. The rail layout</h2>
   <p>
     Settings pages are a narrow rail of section links beside a wide column of controls.
@@ -164,7 +164,7 @@ require __DIR__ . '/../_layout.php';
       &lt;/nav&gt;
     &lt;/aside&gt;
 
-    &lt;form class="stack-8" id="settings"&gt;
+    &lt;form class="stack stack-8" id="settings"&gt;
       &lt;!-- the next three steps go here --&gt;
     &lt;/form&gt;
   &lt;/div&gt;</code></pre>
@@ -192,19 +192,19 @@ require __DIR__ . '/../_layout.php';
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="step4">4. The profile fields</h2>
   <p>
     Inside the <code>&lt;form&gt;</code>. This is the part worth slowing down on, because
     it is the part every application has and the part most frameworks make you assemble
     yourself.
   </p>
-  <pre class="dx-code"><code>      &lt;section class="stack-4" id="profile"&gt;
+  <pre class="dx-code"><code>      &lt;section class="stack stack-4" id="profile"&gt;
         &lt;h2&gt;Profile&lt;/h2&gt;
 
         &lt;div class="cluster"&gt;
           &lt;span class="avatar avatar-xl"&gt;AC&lt;/span&gt;
-          &lt;div class="stack-2"&gt;
+          &lt;div class="stack stack-2"&gt;
             &lt;button class="btn btn-sm" type="button"&gt;Upload a photo&lt;/button&gt;
             &lt;p class="help"&gt;JPG or PNG, up to 2 MB.&lt;/p&gt;
           &lt;/div&gt;
@@ -228,10 +228,10 @@ require __DIR__ . '/../_layout.php';
         &lt;/div&gt;
       &lt;/section&gt;</code></pre>
   <?php docs_example(
-      '<div class="stack-4" style="max-inline-size:34rem">' . "\n" .
+      '<div class="stack stack-4" style="max-inline-size:34rem">' . "\n" .
       '  <div class="cluster">' . "\n" .
       '    <span class="avatar avatar-xl">AC</span>' . "\n" .
-      '    <div class="stack-2">' . "\n" .
+      '    <div class="stack stack-2">' . "\n" .
       '      <button class="btn btn-sm" type="button">Upload a photo</button>' . "\n" .
       '      <p class="help">JPG or PNG, up to 2 MB.</p>' . "\n" .
       '    </div>' . "\n" .
@@ -267,7 +267,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="step5">5. Preferences: choice cards and switches</h2>
   <p>
     Still inside the form, after the profile section. An <code>&lt;hr&gt;</code> between
@@ -275,7 +275,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <pre class="dx-code"><code>      &lt;hr&gt;
 
-      &lt;section class="stack-4" id="preferences"&gt;
+      &lt;section class="stack stack-4" id="preferences"&gt;
         &lt;h2&gt;Preferences&lt;/h2&gt;
 
         &lt;div class="field"&gt;
@@ -314,7 +314,7 @@ require __DIR__ . '/../_layout.php';
           &lt;/div&gt;
         &lt;/fieldset&gt;
 
-        &lt;div class="stack-2"&gt;
+        &lt;div class="stack stack-2"&gt;
           &lt;label class="switch"&gt;
             &lt;input type="checkbox" name="digest" checked&gt;
             &lt;span&gt;Weekly summary email&lt;/span&gt;
@@ -326,7 +326,7 @@ require __DIR__ . '/../_layout.php';
         &lt;/div&gt;
       &lt;/section&gt;</code></pre>
   <?php docs_example(
-      '<div class="stack-4">' . "\n" .
+      '<div class="stack stack-4">' . "\n" .
       '  <div class="grid grid-tight">' . "\n" .
       '    <label class="check check-card">' . "\n" .
       '      <input type="radio" name="t-remind" value="off">' . "\n" .
@@ -352,7 +352,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="step6">6. The danger zone and a confirm dialog</h2>
   <p>
     The last section inside the form, then the dialog itself just before
@@ -360,7 +360,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <pre class="dx-code"><code>      &lt;hr&gt;
 
-      &lt;section class="stack-4" id="danger"&gt;
+      &lt;section class="stack stack-4" id="danger"&gt;
         &lt;h2&gt;Danger zone&lt;/h2&gt;
         &lt;div class="alert alert-bad"&gt;
           &lt;svg class="icon"&gt;&lt;use href="assets/deck/deck-icons.svg#alert-triangle"&gt;&lt;/use&gt;&lt;/svg&gt;
@@ -379,11 +379,11 @@ require __DIR__ . '/../_layout.php';
       &lt;/section&gt;</code></pre>
 
   <pre class="dx-code"><code>&lt;dialog class="modal" id="close-account"&gt;
-  &lt;form method="dialog" class="stack-0"&gt;
+  &lt;form method="dialog" class="stack stack-0"&gt;
     &lt;div class="modal-header"&gt;
       &lt;h3 class="modal-title"&gt;Close this account?&lt;/h3&gt;
     &lt;/div&gt;
-    &lt;div class="modal-body stack-3"&gt;
+    &lt;div class="modal-body stack stack-3"&gt;
       &lt;p&gt;This deletes 2,481 invoices and cannot be undone.&lt;/p&gt;
       &lt;div class="field"&gt;
         &lt;label class="label" for="confirm"&gt;Type &lt;code&gt;ledgerly&lt;/code&gt; to confirm&lt;/label&gt;
@@ -410,7 +410,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="step7">7. The save bar</h2>
   <p>
     The last thing in the form, after the danger section.
@@ -429,7 +429,7 @@ require __DIR__ . '/../_layout.php';
     Now make it do something. Add an <code>onsubmit</code> to the form and a script before
     <code>&lt;/body&gt;</code>:
   </p>
-  <pre class="dx-code"><code>&lt;form class="stack-8" id="settings" onsubmit="save(event)"&gt;</code></pre>
+  <pre class="dx-code"><code>&lt;form class="stack stack-8" id="settings" onsubmit="save(event)"&gt;</code></pre>
   <pre class="dx-code"><code>&lt;script&gt;
   function save(event) {
     event.preventDefault();
@@ -460,13 +460,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="check">Check it</h2>
   <p>
     Reload and go through this list. Every one of these should already work, and if one
     does not it is worth finding out why now rather than later.
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>Press <kbd>Tab</kbd> from the address bar. The first stop is <em>Skip to content</em>.</li>
     <li>Press the moon in the nav bar. The page switches theme and remembers it.</li>
     <li>Narrow the window to phone width. The rail moves above the form and the two-column field row becomes one.</li>
@@ -481,7 +481,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="learned">What that taught you</h2>
   <div class="table-wrap">
     <table class="table table-stack">

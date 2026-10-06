@@ -22,7 +22,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Textarea</h1>
   <p class="lede">
     <code>.textarea</code> is declared in the same rule as
@@ -34,7 +34,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Put it on a real <code>&lt;textarea&gt;</code>, wrapped in a
@@ -54,10 +54,10 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="sizing">The three declarations</h2>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="s-field-sizing">field-sizing: content</h3>
     <p>
       The browser sizes the control to its content instead of to the
@@ -73,7 +73,7 @@ require __DIR__ . '/../_layout.php';
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="s-floor">A two-row floor</h3>
     <p>
       <code>min-block-size: calc(var(--control-h) * 2)</code> — twice the height of an
@@ -83,7 +83,7 @@ require __DIR__ . '/../_layout.php';
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="s-ceiling">A 22rem ceiling</h3>
     <p>
       <code>max-block-size: 22rem</code>. Without it, a textarea with a thousand words in
@@ -93,7 +93,7 @@ require __DIR__ . '/../_layout.php';
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="s-resize">Vertical resize stays available</h3>
     <p>
       <code>resize: vertical</code> rather than <code>none</code> or <code>both</code>.
@@ -118,7 +118,7 @@ Paste enough text in here and the box stops growing at 22rem and starts scrollin
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="states">States</h2>
   <p>
     Every state comes from the shared rule, so a textarea hovers, focuses, disables and
@@ -129,7 +129,7 @@ Paste enough text in here and the box stops growing at 22rem and starts scrollin
   </p>
   <?php
   docs_example(
-      '<div class="stack-3" style="max-inline-size:26rem">' . "\n" .
+      '<div class="stack stack-3" style="max-inline-size:26rem">' . "\n" .
       '  <textarea class="textarea" aria-label="Ordinary">Ordinary</textarea>' . "\n" .
       '  <textarea class="textarea" readonly aria-label="Readonly">Readonly</textarea>' . "\n" .
       '  <textarea class="textarea" disabled aria-label="Disabled">Disabled</textarea>' . "\n" .
@@ -140,7 +140,7 @@ Paste enough text in here and the box stops growing at 22rem and starts scrollin
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="counter">Counting characters</h2>
   <p>
     Deck ships no character counter for <code>.textarea</code>. The
@@ -160,7 +160,7 @@ Paste enough text in here and the box stops growing at 22rem and starts scrollin
 </div>') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     <code>.textarea</code> is declared alongside <code>.input</code> and
@@ -170,7 +170,7 @@ Paste enough text in here and the box stops growing at 22rem and starts scrollin
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     <code>--control-h</code> is doing double duty here: the same token that sets an
@@ -179,9 +179,9 @@ Paste enough text in here and the box stops growing at 22rem and starts scrollin
   <?php docs_token_table(['--control-h', '--surface', '--surface-2', '--bg-sunken', '--line-strong', '--focus', '--ring', '--r-sm', '--shadow-1', '--text-base', '--text-faint', '--bad-500', '--space-2', '--space-3', '--dur-1']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>It needs a label like any other control.</strong> A
       <code>&lt;label class="label" for="id"&gt;</code> is the right answer;
@@ -217,7 +217,7 @@ Paste enough text in here and the box stops growing at 22rem and starts scrollin
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Padding is logical and the browser handles the text direction itself, so a textarea
@@ -236,7 +236,7 @@ Paste enough text in here and the box stops growing at 22rem and starts scrollin
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The border, shadow and background transition over
@@ -251,7 +251,7 @@ Paste enough text in here and the box stops growing at 22rem and starts scrollin
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> gives every control a plain <code>#999</code> border
@@ -270,7 +270,7 @@ Paste enough text in here and the box stops growing at 22rem and starts scrollin
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One textarea, no layer needed */
 <textarea class="textarea" style="max-block-size:40rem"></textarea>
@@ -288,9 +288,9 @@ Paste enough text in here and the box stops growing at 22rem and starts scrollin
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a single line.</strong> Use <a href="input.php"><code>.input</code></a>.
       A textarea accepts newlines, which means a name field can contain one and your

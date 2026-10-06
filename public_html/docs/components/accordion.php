@@ -27,7 +27,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Accordion</h1>
   <p class="lede">
     <code>.accordion</code> is a bordered container for native
@@ -38,7 +38,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it for a set of sections a reader opens one at a time and mostly leaves closed:
@@ -68,7 +68,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="animating">Animating to auto height</h2>
   <p>
     Animating a disclosure open has been a JavaScript problem for twenty years, for one
@@ -80,7 +80,7 @@ require __DIR__ . '/../_layout.php';
     Two new pieces remove the need. Deck uses both.
   </p>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="a-details-content">::details-content</h3>
     <p>
       A pseudo-element wrapping everything after the <code>&lt;summary&gt;</code>. It can
@@ -96,7 +96,7 @@ require __DIR__ . '/../_layout.php';
 .accordion details[open]::details-content { block-size: auto; }') ?></code></pre>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="a-interpolate">interpolate-size: allow-keywords</h3>
     <p>
       The transition above animates to <code>block-size: auto</code>, which normally is
@@ -113,7 +113,7 @@ require __DIR__ . '/../_layout.php';
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="a-fallback">Where it is unsupported</h3>
     <p>
       A browser that does not know <code>::details-content</code> ignores the rule, and
@@ -124,7 +124,7 @@ require __DIR__ . '/../_layout.php';
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="chevron">The chevron</h2>
   <p>
     <code>list-style: none</code> and
@@ -140,7 +140,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="single">One at a time</h2>
   <p>
     Give every <code>&lt;details&gt;</code> in a group the same <code>name</code>
@@ -174,7 +174,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="disclosure">A single disclosure</h2>
   <p>
     Every rule on this page is written as <code>.accordion …, .disclosure …</code>, so a
@@ -189,20 +189,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/07-components.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--surface', '--surface-hover', '--line', '--text-faint', '--text-muted', '--text-sm', '--tap', '--r-md', '--space-3', '--space-4', '--dur-1', '--dur-2', '--dur-3']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The element does everything.</strong> <code>&lt;summary&gt;</code> is
       focusable, operable with Enter and Space, and exposed with an expanded state that
@@ -252,7 +252,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The summary is a flex row with a gap and logical padding, and the chevron is pushed
@@ -279,7 +279,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The height animates over <?= e(api_token('--dur-3')['value'] ?? '320ms') ?>, the
@@ -297,7 +297,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     There is no <code>.accordion</code> rule in <code>src/99-print.css</code>, so a
@@ -314,7 +314,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* A chevron that rotates the other way */
@@ -330,9 +330,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for content most readers need.</strong> Hiding something behind a click
       means most people never see it — and it will not print or be found by a page search.

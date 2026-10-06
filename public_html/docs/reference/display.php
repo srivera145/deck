@@ -45,7 +45,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Display and sizing</h1>
   <p class="lede">
     The low-level half of layout: what box an element makes, how it aligns its
@@ -58,7 +58,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="display">Display</h2>
   <p>
     <code>.contents</code> is the interesting one. It removes the element's own box
@@ -73,7 +73,7 @@ require __DIR__ . '/../_layout.php';
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="flex">Flex direction and alignment</h2>
   <p>
     <code>.grow</code> sets <code>flex: 1 1 auto</code> and
@@ -89,7 +89,7 @@ require __DIR__ . '/../_layout.php';
   ], 'Flex direction and alignment utilities'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="size">Size</h2>
   <p>
     All of these are logical: <code>.w-full</code> sets
@@ -110,7 +110,7 @@ require __DIR__ . '/../_layout.php';
   ], 'Sizing utilities'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="ratio">Aspect ratio</h2>
   <p>
     Three ratios with <code>object-fit: cover</code> already set, for the media slot in
@@ -120,7 +120,7 @@ require __DIR__ . '/../_layout.php';
   <?php docs_utility_table(['ratio-16x9', 'ratio-4x3', 'ratio-1x1', 'square'], 'Aspect ratio utilities'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="overflow">Overflow</h2>
   <p>
     <code>.overflow-clip</code> and <code>.overflow-hidden</code> both cut the content
@@ -136,7 +136,7 @@ require __DIR__ . '/../_layout.php';
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="visibility">Visibility and input</h2>
   <p>
     <code>.hidden</code> removes an element from the page and from assistive
@@ -157,14 +157,14 @@ require __DIR__ . '/../_layout.php';
   ], 'Visibility and pointer utilities'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="breakpoints">Breakpoint prefixes</h2>
   <p>
     Deck has three viewport breakpoints — 40rem, 48rem and 64rem — and a small set of
     prefixed classes that turn on at each. They are mobile-first: the prefixed class
     applies at that width and above, so the unprefixed state is the phone.
   </p>
-  <pre class="dx-code"><code>&lt;div class="stack-3 md:row md:items-center"&gt;
+  <pre class="dx-code"><code>&lt;div class="stack stack-3 md:row md:items-center"&gt;
   &lt;img class="ratio-1x1" src="…" alt=""&gt;
   &lt;p&gt;Stacked on a phone, side by side from 48rem up.&lt;/p&gt;
 &lt;/div&gt;</code></pre>
@@ -214,7 +214,7 @@ require __DIR__ . '/../_layout.php';
   </div>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="container">Container queries</h2>
   <p>
     A viewport breakpoint asks how wide the window is. A container query asks how wide
@@ -254,7 +254,7 @@ require __DIR__ . '/../_layout.php';
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="rtl">Mirroring</h2>
   <p>
     Deck is written in logical properties, so a right-to-left page mirrors on its own.
@@ -267,7 +267,7 @@ require __DIR__ . '/../_layout.php';
   <?php docs_utility_table(['mirror-rtl', 'no-flip'], 'RTL mirroring utilities'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="containment">Containment</h2>
   <p>
     Six classes that tell the engine it may skip work. <code>.defer</code> sets
@@ -288,9 +288,9 @@ require __DIR__ . '/../_layout.php';
   ); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use these</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not to rebuild a primitive.</strong>
       <code>.flex .flex-col .gap-4</code> is <code>.stack</code> written out.

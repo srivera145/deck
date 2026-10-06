@@ -30,7 +30,7 @@ require __DIR__ . '/../_layout.php';
 function js_method(array $m): void
 {
     ?>
-    <article class="stack-3" id="<?= e($m['id']) ?>">
+    <article class="stack stack-3" id="<?= e($m['id']) ?>">
       <h3><code><?= e($m['signature']) ?></code></h3>
       <p><?= $m['summary'] ?></p>
 
@@ -54,11 +54,15 @@ function js_method(array $m): void
         </div>
       <?php endif; ?>
 
-      <dl class="stack-2">
-        <dt><strong>Returns</strong></dt>
-        <dd><?= $m['returns'] ?></dd>
-        <dt><strong>When what it needs is missing</strong></dt>
-        <dd><?= $m['absent'] ?></dd>
+      <dl class="stack stack-2">
+        <div class="stack stack-1">
+          <dt><strong>Returns</strong></dt>
+          <dd><?= $m['returns'] ?></dd>
+        </div>
+        <div class="stack stack-1">
+          <dt><strong>When what it needs is missing</strong></dt>
+          <dd><?= $m['absent'] ?></dd>
+        </div>
       </dl>
 
       <pre class="dx-code"><code><?= e($m['example']) ?></code></pre>
@@ -515,7 +519,7 @@ $INTERNAL_ATTRS = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>JavaScript API</h1>
   <p class="lede">
     Deck is a stylesheet first. The JavaScript adds behaviour that CSS cannot express —
@@ -526,7 +530,7 @@ $INTERNAL_ATTRS = [
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="loading">Loading it</h2>
   <p>
     Three files, in order, and only the first is required.
@@ -557,7 +561,7 @@ $INTERNAL_ATTRS = [
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="attributes">The data attributes</h2>
   <p>
     This is how most people will use the JavaScript: by not writing any. Add an
@@ -618,7 +622,7 @@ $INTERNAL_ATTRS = [
   </div>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="core">Core methods</h2>
   <p>
     On <code>window.Deck</code>, from <code>deck.js</code>. Available on every page that
@@ -627,7 +631,7 @@ $INTERNAL_ATTRS = [
   <?php foreach ($CORE as $m) { js_method($m); } ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="extras">Extras and adapters</h2>
   <p>
     Added to the same global by <code>deck-extras.js</code> and
@@ -637,7 +641,7 @@ $INTERNAL_ATTRS = [
   <?php foreach ($EXTRAS as $m) { js_method($m); } ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="properties">Properties</h2>
   <div class="table-wrap">
     <table class="table table-stack">
@@ -679,7 +683,7 @@ $INTERNAL_ATTRS = [
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="without">What still works with the scripts removed</h2>
   <p>
     Worth knowing before you reach for any of the above. The modal, drawer, sheet,

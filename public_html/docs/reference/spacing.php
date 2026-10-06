@@ -57,7 +57,7 @@ $STEPS = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Spacing</h1>
   <p class="lede">
     Every gap, pad and margin in Deck comes from one scale of <?= count($STEPS) ?>
@@ -67,7 +67,7 @@ $STEPS = [
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="scale">One scale</h2>
   <p>
     The base unit is 4px, expressed in <code>rem</code> so it follows the reader's
@@ -99,7 +99,7 @@ $STEPS = [
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="subset">The utilities are a subset, on purpose</h2>
   <p>
     Fourteen steps in the scale; seven with utilities: <strong>0, 1, 2, 3, 4, 6,
@@ -162,7 +162,7 @@ $STEPS = [
   </div>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="logical">Physical names, logical properties</h2>
   <p>
     The short utilities are named the way everyone expects and implemented the way
@@ -217,14 +217,14 @@ $STEPS = [
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="gap">Why gap beats margin</h2>
   <p>
     When you are spacing a run of siblings, set <code>gap</code> on the parent rather
     than a margin on the children. Four reasons, in ascending order of how much time
     they cost you.
   </p>
-  <ol class="stack-3">
+  <ol class="stack stack-3">
     <li>
       <strong>The last one is wrong.</strong> <code>.mb-4</code> on every child puts a
       margin under the final child too, so the group ends with a space that is not
@@ -258,7 +258,7 @@ $STEPS = [
     yourself.
   </p>
   <?php docs_example(
-      '<div class="stack-2">' . "\n" .
+      '<div class="stack stack-2">' . "\n" .
       '  <div class="card"><div class="card-body">First</div></div>' . "\n" .
       '  <div class="card"><div class="card-body">Second</div></div>' . "\n" .
       '  <div class="card"><div class="card-body">Third, with no trailing space under it</div></div>' . "\n" .
@@ -273,7 +273,7 @@ $STEPS = [
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="safe">Safe areas</h2>
   <p>
     Three padding utilities read <code>env(safe-area-inset-*)</code> instead of the
@@ -291,7 +291,7 @@ $STEPS = [
   <?php docs_utility_table(['safe-top', 'safe-bottom', 'safe-x'], 'Safe-area padding utilities'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="container">Spacing that follows the container</h2>
   <p>
     <code>.pad-cq</code> and <code>.gap-cq</code> scale with the width of the nearest
@@ -308,7 +308,7 @@ $STEPS = [
   <?php docs_utility_table(['pad-cq', 'gap-cq'], 'Container-relative spacing'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="padding">Padding</h2>
   <p>
     <code>.p-*</code> sets all four sides, <code>.px-*</code> the inline axis,
@@ -334,7 +334,7 @@ $STEPS = [
   ], 'Single-side logical padding utilities'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="margin">Margin</h2>
   <p>
     Deliberately a smaller set than the padding one. There is no <code>.m-4</code>,
@@ -351,7 +351,7 @@ $STEPS = [
   ], 'Margin utilities'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="gap-table">Gap</h2>
   <p>
     <code>gap</code> applies to flex, grid and multi-column containers. On anything
@@ -364,9 +364,9 @@ $STEPS = [
   ], 'Gap utilities'); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use these</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for the space between siblings.</strong> That is
       <code>.stack-*</code>, <code>.cluster</code> or <code>.grid</code>, each of

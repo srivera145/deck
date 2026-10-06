@@ -22,7 +22,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Popover</h1>
   <p class="lede">
     <code>.pop</code> is what a <a href="tooltip.php">tooltip</a> becomes when it needs a
@@ -32,7 +32,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it for an explanation the reader might act on: what a field means and a link to
@@ -62,7 +62,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="anchor">.anchor and the naming problem</h2>
   <p>
     CSS anchor positioning connects two elements by name: the trigger declares
@@ -94,7 +94,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="positioning">Positioning</h2>
   <pre class="dx-code"><code><?= e('position-area: block-end;
 position-try-fallbacks: flip-block, flip-inline, block-start span-inline-start;
@@ -117,7 +117,7 @@ justify-self: anchor-center;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="parts">Title, body and actions</h2>
   <p>
     Three parts, all optional, all plain: <code>.pop-title</code> is a weight change,
@@ -138,7 +138,7 @@ justify-self: anchor-center;') ?></code></pre>
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     These live in <code>src/25-anchor.css</code> and are not a component root — the
@@ -149,14 +149,14 @@ justify-self: anchor-center;') ?></code></pre>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--surface', '--line', '--text', '--text-muted', '--text-sm', '--r-md', '--shadow-4', '--space-1', '--space-2', '--space-3', '--space-4', '--space-6', '--dur-2']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The platform supplies the behaviour.</strong> Light dismiss, Escape,
       closing when another popover opens, and <code>aria-expanded</code> on the trigger
@@ -197,7 +197,7 @@ justify-self: anchor-center;') ?></code></pre>
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     <code>position-area</code>, <code>justify-self: anchor-center</code> and the fallback
@@ -223,7 +223,7 @@ justify-self: anchor-center;') ?></code></pre>
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The panel fades and rises four pixels over
@@ -234,7 +234,7 @@ justify-self: anchor-center;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.pop</code> has no print rule and is not in the never-print list, so an open
@@ -248,7 +248,7 @@ justify-self: anchor-center;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One popover, no layer needed */
 <div class="pop" popover style="--anchor:--pop-x;inline-size:min(28rem, 92vw)">
@@ -269,9 +269,9 @@ justify-self: anchor-center;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a label.</strong> A few words naming a control is
       <a href="tooltip.php"><code>.tooltip</code></a> or <code>.tip</code>. A popover is

@@ -27,7 +27,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Copy to clipboard</h1>
   <p class="lede">
     A value someone needs to move somewhere else — an API key, an install command, an order
@@ -36,7 +36,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Where the value is long, exact, and going to be pasted: a token, a connection string, a
@@ -50,7 +50,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="attribute">The class is the look; the attribute is the behaviour</h2>
   <p>
     This is the one thing to get right. <code>deck-extras.js</code> binds to
@@ -80,7 +80,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-3" style="max-inline-size:30rem">' . "\n" .
+      '<div class="stack stack-3" style="max-inline-size:30rem">' . "\n" .
       '  <textarea class="textarea" id="dx-copy-src" rows="2">npm install @echodial/deck</textarea>' . "\n" .
       '  <button type="button" class="btn" data-deck-copy="#dx-copy-src">' . "\n" .
       '    <svg class="icon" aria-hidden="true"><use href="/assets/deck/deck-icons.svg#copy"></use></svg>' . "\n" .
@@ -98,13 +98,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="feedback">Two kinds of feedback, and how to choose</h2>
   <p>
     After a successful copy the button gets <code>.is-copied</code> for 1.8 seconds. What
     that shows depends on what is inside the button, and the switch is easy to miss:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Put a <code>.copy-done</code> element inside the button</strong> and it swaps
       places with <code>.copy-idle</code> — the label changes in place, and no toast is
@@ -146,7 +146,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="inline">The inline variant</h2>
   <p>
     <code>.copy-inline</code> is a faint icon-only button for use beside a value already in
@@ -172,20 +172,20 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/23-inputs.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--line', '--surface', '--surface-2', '--surface-hover', '--good-100', '--good-700', '--font-mono', '--text-sm', '--r-sm', '--r-xs', '--tap', '--dur-1']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The button needs a label that names the value.</strong> "Copy" is fine when
       there is one on the page and useless when there are six. In a table, put the value in
@@ -227,7 +227,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="context">Secure contexts and the fallback</h2>
   <p>
     <code>navigator.clipboard</code> only exists in a secure context — HTTPS, or
@@ -245,7 +245,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The row mirrors — the button moves to the left — but the value does not. The value cell
@@ -269,7 +269,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The button transitions <code>background-color</code> and <code>color</code> over
@@ -280,7 +280,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.copy</code> is not in <code>src/99-print.css</code>, and it needs attention if
@@ -300,7 +300,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Let a long value wrap on screen rather than scroll */
@@ -315,9 +315,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a value people read.</strong> A total, a date, a name. The button
       implies the value is going somewhere else.

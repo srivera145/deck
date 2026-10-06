@@ -45,7 +45,7 @@ $face = 'data:image/svg+xml;utf8,'
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Avatar</h1>
   <p class="lede">
     <code>.avatar</code> is a round box that holds either an image or a person's
@@ -55,7 +55,7 @@ $face = 'data:image/svg+xml;utf8,'
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use an avatar wherever a row, a comment or a message needs to be attributed to a
@@ -79,7 +79,7 @@ $face = 'data:image/svg+xml;utf8,'
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="sizes">Sizes</h2>
   <p>
     Five sizes, each setting <code>--size</code> and nothing else. Because the font size
@@ -119,7 +119,7 @@ $face = 'data:image/svg+xml;utf8,'
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="square">Square</h2>
   <p>
     <code>.avatar-square</code> swaps <code>--r-full</code> for
@@ -135,7 +135,7 @@ $face = 'data:image/svg+xml;utf8,'
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="stack">Overlapping stack</h2>
   <p>
     <code>.avatar-stack</code> is a flex row that pulls each avatar after the first back
@@ -168,7 +168,7 @@ $face = 'data:image/svg+xml;utf8,'
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="chat">In a chat thread</h2>
   <p>
     <code>src/24-media.css</code> overrides the avatar inside <code>.msg</code>: 28px,
@@ -195,13 +195,13 @@ $face = 'data:image/svg+xml;utf8,'
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/07-components.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     The avatar's fill is the brand tint, which is why a wall of initials reads as one
@@ -211,9 +211,9 @@ $face = 'data:image/svg+xml;utf8,'
   <?php docs_token_table(['--brand-soft', '--brand-soft-text', '--r-full', '--r-sm', '--surface']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>An avatar beside a name needs empty alt text.</strong> If the person's
       name is already in the row, <code>alt=""</code> is correct — otherwise a screen
@@ -258,7 +258,7 @@ $face = 'data:image/svg+xml;utf8,'
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The stack's offset is <code>margin-inline-start</code>, so under
@@ -279,7 +279,7 @@ $face = 'data:image/svg+xml;utf8,'
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The avatar has no transition and no animation, so
@@ -288,7 +288,7 @@ $face = 'data:image/svg+xml;utf8,'
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> lists <code>.avatar</code> among the elements that
@@ -298,7 +298,7 @@ $face = 'data:image/svg+xml;utf8,'
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <p>
     <code>--size</code> is the intended override and it needs no layer at all — set it
@@ -323,9 +323,9 @@ $face = 'data:image/svg+xml;utf8,'
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a logo.</strong> An avatar clips to a circle and centres its
       contents; a wordmark comes out cropped. Use an <code>&lt;img&gt;</code> with

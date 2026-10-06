@@ -37,7 +37,7 @@ $tones = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Alert</h1>
   <p class="lede">
     <code>.alert</code> is a block of prose the reader is meant to stop and read. It is a
@@ -48,7 +48,7 @@ $tones = [
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use an alert when the message is a sentence and it is <em>about the page</em> — a
@@ -75,7 +75,7 @@ $tones = [
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="tones">Tones</h2>
   <p>
     Five looks. Each sets the fill, the text colour and
@@ -84,7 +84,7 @@ $tones = [
     a colour.
   </p>
   <?php foreach ($tones as [$cls, $label, $blurb]): ?>
-    <div class="stack-2">
+    <div class="stack stack-2">
       <h3 id="t-<?= e($cls) ?>"><?= e($label) ?></h3>
       <p class="text-muted"><?= e($blurb) ?></p>
       <?php
@@ -104,7 +104,7 @@ $tones = [
   <?php endforeach; ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="icon">With an icon</h2>
   <p>
     <code>.alert &gt; .icon</code> gets <code>flex: 0 0 auto</code> so the icon never
@@ -132,7 +132,7 @@ $tones = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="body">Title and body</h2>
   <p>
     <code>.alert-title</code> is a weight change and two pixels of bottom margin — not a
@@ -165,13 +165,13 @@ $tones = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/07-components.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     Each tone uses the <code>100</code> step of a status ramp for its fill, the
@@ -180,9 +180,9 @@ $tones = [
   <?php docs_token_table(['--surface-2', '--line', '--ink-400', '--r-md', '--space-4', '--text-sm', '--brand-soft', '--brand-soft-text', '--brand-500', '--good-100', '--good-500', '--good-700', '--warn-100', '--warn-500', '--warn-700', '--bad-100', '--bad-500', '--bad-700']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Deck sets no ARIA role, and that is deliberate.</strong> An alert that is
       part of the page when it loads should have no role at all — a
@@ -225,7 +225,7 @@ $tones = [
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The tone edge is <code>border-inline-start</code>, so it moves to the right under
@@ -249,7 +249,7 @@ $tones = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     An alert has no transition and no animation of its own, so
@@ -260,7 +260,7 @@ $tones = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> gives alerts the same treatment as cards and panels: a
@@ -271,7 +271,7 @@ $tones = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <p>
     No local custom properties; the tones set their colours directly. Override in
@@ -291,9 +291,9 @@ $tones = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong><code>.alert</code> versus <code>.toast</code>.</strong> An alert is part
       of the page and stays. A toast appears, stacks, and leaves. If the reader can

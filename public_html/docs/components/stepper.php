@@ -49,7 +49,7 @@ function demo_steps(string $extra = ''): string
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Stepper</h1>
   <p class="lede">
     <code>.stepper</code> answers one question: where am I, and how much is left. Each
@@ -60,7 +60,7 @@ function demo_steps(string $extra = ''): string
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it for a process with a fixed, known number of steps that the reader moves through
@@ -70,12 +70,12 @@ function demo_steps(string $extra = ''): string
   <?php docs_example(demo_steps(), 'Done, current, upcoming', 'stack'); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="states">Three states</h2>
   <p>
     Everything is drawn from two classes on the step:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong><code>.is-done</code></strong> — the marker fills with the brand colour and
       shows a tick, the connector after it turns brand, and the label goes from muted to
@@ -98,12 +98,12 @@ function demo_steps(string $extra = ''): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="vertical">Vertical</h2>
   <p>
     Two ways to get a vertical stepper, and the difference is when.
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <code>.stepper-vertical</code> — always vertical. The step becomes a row, the
       marker a column, and the connector switches from a horizontal 2px bar to a vertical
@@ -123,7 +123,7 @@ function demo_steps(string $extra = ''): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overflow">When there are too many</h2>
   <p>
     <code>.stepper</code> scrolls horizontally with the scrollbar hidden, so a strip that
@@ -139,7 +139,7 @@ function demo_steps(string $extra = ''): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     <code>.step</code> and its parts are separate classes rather than members of the
@@ -150,14 +150,14 @@ function demo_steps(string $extra = ''): string
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--brand', '--brand-500', '--brand-600', '--surface', '--line', '--text', '--text-muted', '--text-faint', '--text-sm', '--text-xs', '--r-full', '--space-3', '--space-5']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Use an <code>&lt;ol&gt;</code>.</strong> The steps are ordered and the count
       matters, which is exactly what an ordered list conveys. Every example here does, and
@@ -201,7 +201,7 @@ function demo_steps(string $extra = ''): string
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The strip is a flex row that reverses under <code>dir="rtl"</code>, and the vertical
@@ -222,7 +222,7 @@ function demo_steps(string $extra = ''): string
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing about a stepper animates. Moving between steps is a page change or a re-render,
@@ -230,7 +230,7 @@ function demo_steps(string $extra = ''): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.stepper</code> is not in the never-print list, so it prints — which is
@@ -245,7 +245,7 @@ function demo_steps(string $extra = ''): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Numbered markers instead of ticks */
@@ -264,9 +264,9 @@ function demo_steps(string $extra = ''): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not when the number of steps is unknown.</strong> A stepper's value is
       showing how much is left. If the flow branches, it will show a path the reader may

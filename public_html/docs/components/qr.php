@@ -27,7 +27,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>QR code</h1>
   <p class="lede">
     A working QR encoder, in the browser, with no dependency — Galois field arithmetic,
@@ -36,7 +36,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     To move something from a screen to a phone, or from paper to a phone: a ticket, a
@@ -62,9 +62,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="options">Options</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong><code>data-deck-qr</code></strong> — the value to encode. Anything: a URL, a
       <code>WIFI:</code> string, an <code>otpauth://</code> URI.
@@ -105,7 +105,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="logo">A logo in the middle</h2>
   <p>
     <code>.qr-logo</code> on the frame and <code>.qr-logo-mark</code> on a child punches a
@@ -136,7 +136,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="colour">Why it stays white in dark mode</h2>
   <p>
     <code>.qr</code> sets <code>background: var(--qr-bg, #fff)</code> and fills its modules
@@ -163,13 +163,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/24-media.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--line', '--r-sm', '--r-xs', '--text-xs', '--text-muted', '--space-2']); ?>
   <p class="text-muted">
@@ -179,9 +179,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>A QR code is an image and announces as nothing.</strong> The rendered SVG is a
       grid of unlabelled rectangles. Give the frame <code>role="img"</code> and an
@@ -217,7 +217,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     A QR code has a fixed orientation defined by the specification and does not mirror in
@@ -240,7 +240,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing here animates — no transitions, no keyframes, no transforms. The code appears
@@ -249,7 +249,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     This is the one component in Deck that is <em>designed</em> for print, and it shows. The
@@ -274,7 +274,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One code, no layer needed */
 <span class="qr" style="--qr-size:180px" data-deck-qr="…"></span>
@@ -296,9 +296,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not on a phone, for that phone.</strong> If the reader is already holding the
       destination, give them a link.

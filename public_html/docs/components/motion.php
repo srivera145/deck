@@ -34,7 +34,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Motion</h1>
   <p class="lede">
     Sixty-odd classes for movement, and one structural decision underneath all of them:
@@ -44,7 +44,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Motion earns its place when it explains something: where an element came from, that a
@@ -58,7 +58,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="guard">How the guard is built</h2>
   <p>
     This matters more than any individual class, and it is unusual enough to be worth
@@ -86,13 +86,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="utilities">Transitions, durations and easings</h2>
   <p>
     Five transition shorthands for the properties worth animating, plus the scales to tune
     them.
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li><code>.transition</code> — <code>all</code>, which is convenient and the least
       efficient. Prefer one of the specific ones.</li>
     <li><code>.transition-colors</code> — background, border, text, fill and stroke.</li>
@@ -126,7 +126,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="entrances">Entrances and stagger</h2>
   <p>
     Seven one-shot animations for content arriving: <code>.enter</code> (fade),
@@ -173,7 +173,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="reveal">Scroll-driven reveals</h2>
   <p>
     <code>.reveal</code>, <code>.reveal-fade</code> and <code>.reveal-pop</code> animate as
@@ -206,7 +206,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="attention">Attention and micro-interaction</h2>
   <p>
     <code>.shake</code>, <code>.flash</code>, <code>.flash-good</code>,
@@ -244,7 +244,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="vt">View transitions</h2>
   <p>
     The most consequential thing in the file, and it does nothing until you opt in. Add one
@@ -274,7 +274,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     These are a dozen unrelated utility groups in <code>src/16-motion.css</code> rather than
@@ -283,7 +283,7 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--dur-1', '--dur-2', '--dur-3', '--ease-out', '--ease-spring', '--ease-in-out', '--brand-500', '--good-500', '--z-toast']); ?>
   <p class="text-muted">
@@ -293,9 +293,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The guard is structural, and you can undo it.</strong> Everything Deck ships
       respects <code>prefers-reduced-motion</code>. Motion you add in your own layer does
@@ -335,7 +335,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Mostly correct by construction. <code>.enter-start</code> and
@@ -352,7 +352,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div dir="rtl" class="stagger stack-2" style="max-inline-size:20rem">' . "\n" .
+      '<div dir="rtl" class="stagger stack stack-2" style="max-inline-size:20rem">' . "\n" .
       '  <div class="card enter-start">الأول</div>' . "\n" .
       '  <div class="card enter-start">الثاني</div>' . "\n" .
       '  <div class="card enter-start">الثالث</div>' . "\n" .
@@ -363,12 +363,12 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     This whole page is that topic, so the summary is short. Three mechanisms are in play:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The <code>no-preference</code> wrapper</strong> around everything from
       entrances to the ticker — the motion is not declared at all.
@@ -392,7 +392,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     Nothing in <code>src/16-motion.css</code> has a print rule, in either of Deck's two
@@ -413,7 +413,7 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One element, no layer needed */
 <div class="enter-rise" style="--travel:24px"> … </div>
@@ -434,9 +434,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not on everything that appears.</strong> Entrances are for content the reader
       is waiting for, not for every section of a page they scrolled to.

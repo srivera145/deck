@@ -29,7 +29,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Split</h1>
   <p class="lede">
     <code>.split</code> is content plus a rail. One column below
@@ -40,7 +40,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it for a page or a panel that has a primary column and a secondary one:
@@ -51,12 +51,12 @@ require __DIR__ . '/../_layout.php';
   <?php
   docs_example(
       '<div class="split">' . "\n" .
-      '  <div class="stack-3">' . "\n" .
+      '  <div class="stack stack-3">' . "\n" .
       '    <h3>Invoice INV-2291</h3>' . "\n" .
       '    <p>Two licences, billed annually. Charged to the card ending 4242.</p>' . "\n" .
       '    <p class="text-muted">The main column takes whatever is left.</p>' . "\n" .
       '  </div>' . "\n" .
-      '  <aside class="panel stack-2">' . "\n" .
+      '  <aside class="panel stack stack-2">' . "\n" .
       '    <strong>Summary</strong>' . "\n" .
       '    <p class="text-muted">The rail is 20rem, and only exists above 64rem.</p>' . "\n" .
       '  </aside>' . "\n" .
@@ -67,7 +67,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rail">The rail width</h2>
   <p>
     <code>--rail</code> sets the second track. It takes a length rather than a fraction,
@@ -77,7 +77,7 @@ require __DIR__ . '/../_layout.php';
   <?php
   docs_example(
       '<div class="split" style="--rail:12rem">' . "\n" .
-      '  <div class="stack-2">' . "\n" .
+      '  <div class="stack stack-2">' . "\n" .
       '    <h3>A narrower rail</h3>' . "\n" .
       '    <p class="text-muted">--rail:12rem, set inline.</p>' . "\n" .
       '  </div>' . "\n" .
@@ -94,7 +94,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rail-start">Rail on the starting edge</h2>
   <p>
     <code>.split-rail-start</code> swaps the track order so the rail comes first
@@ -107,7 +107,7 @@ require __DIR__ . '/../_layout.php';
   <?php
   docs_example(
       '<div class="split split-rail-start">' . "\n" .
-      '  <div class="stack-2">' . "\n" .
+      '  <div class="stack stack-2">' . "\n" .
       '    <h3>Main content, second visually</h3>' . "\n" .
       '    <p class="text-muted">Still first in the markup, so still first for a screen reader.</p>' . "\n" .
       '  </div>' . "\n" .
@@ -125,7 +125,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="min-inline-size">The one line that stops a page scrolling sideways</h2>
   <pre class="dx-code"><code><?= e('.split > * { min-inline-size: 0; }') ?></code></pre>
   <p>
@@ -145,7 +145,7 @@ require __DIR__ . '/../_layout.php';
   <?php
   docs_example(
       '<div class="split" style="--rail:8rem">' . "\n" .
-      '  <div class="stack-2">' . "\n" .
+      '  <div class="stack stack-2">' . "\n" .
       '    <p class="truncate">https://example.com/exports/2026/03/a-very-long-generated-filename-that-cannot-wrap.csv</p>' . "\n" .
       '    <p class="text-muted">The column shrinks because it is allowed to.</p>' . "\n" .
       '  </div>' . "\n" .
@@ -163,7 +163,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="cq">A rail that knows it is narrow</h2>
   <p>
     <code>src/18-container.css</code> makes a <code>.cq</code> child of a split its own
@@ -175,7 +175,7 @@ require __DIR__ . '/../_layout.php';
   <?php
   docs_example(
       '<div class="split" style="--rail:16rem">' . "\n" .
-      '  <div class="stack-2"><h3>Main</h3><p class="text-muted">Plenty of room here.</p></div>' . "\n" .
+      '  <div class="stack stack-2"><h3>Main</h3><p class="text-muted">Plenty of room here.</p></div>' . "\n" .
       '  <aside class="cq">' . "\n" .
       '    <div class="card">' . "\n" .
       '      <div class="card-body"><h3 class="card-title text-cq">Sized by the rail</h3></div>' . "\n" .
@@ -188,7 +188,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="breakpoint">The one breakpoint</h2>
   <p>
     <code>.split</code> contains a <code>@media (min-width: 64rem)</code>, which makes it
@@ -206,7 +206,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="gap">Gap</h2>
   <p>
     Same <code>--gap</code>, but with a looser default than the other primitives:
@@ -215,13 +215,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/04-layout.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--space-4', '--space-6', '--space-8']); ?>
   <p class="text-muted">
@@ -231,9 +231,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Markup order is reading order and tab order.</strong> Put the main content
       first. Everything on this page follows from that: the rail is the second child even
@@ -271,7 +271,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Grid columns follow the inline direction, so under <code>dir="rtl"</code> the main
@@ -283,7 +283,7 @@ require __DIR__ . '/../_layout.php';
   <?php
   docs_example(
       '<div dir="rtl" class="split" style="--rail:12rem">' . "\n" .
-      '  <div class="stack-2"><h3>المحتوى الرئيسي</h3><p class="text-muted">العمود المرن.</p></div>' . "\n" .
+      '  <div class="stack stack-2"><h3>المحتوى الرئيسي</h3><p class="text-muted">العمود المرن.</p></div>' . "\n" .
       '  <aside class="panel"><p class="text-muted">الشريط الجانبي</p></aside>' . "\n" .
       '</div>',
       'Main on the right, rail on the left, from the same markup',
@@ -292,7 +292,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing animates. Collapsing to one column at <code>64rem</code> happens at layout
@@ -300,7 +300,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> sets <code>.split { display: block }</code>. Two
@@ -311,7 +311,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One split, no layer needed */
 <div class="split" style="--rail:16rem;--gap:var(--space-8)">
@@ -332,9 +332,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for two equal columns.</strong> A split has one flexible column and one
       fixed rail. Two things of equal weight are <code>.grid-fixed-2</code>, or

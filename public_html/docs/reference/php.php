@@ -23,7 +23,7 @@ require __DIR__ . '/../_layout.php';
 function php_method(array $m): void
 {
     ?>
-    <article class="stack-3" id="<?= e($m['id']) ?>">
+    <article class="stack stack-3" id="<?= e($m['id']) ?>">
       <h3><code><?= e($m['signature']) ?></code></h3>
       <p><?= $m['summary'] ?></p>
 
@@ -47,11 +47,15 @@ function php_method(array $m): void
         </div>
       <?php endif; ?>
 
-      <dl class="stack-2">
-        <dt><strong>Returns</strong></dt>
-        <dd><?= $m['returns'] ?></dd>
-        <dt><strong>When what it needs is missing</strong></dt>
-        <dd><?= $m['absent'] ?></dd>
+      <dl class="stack stack-2">
+        <div class="stack stack-1">
+          <dt><strong>Returns</strong></dt>
+          <dd><?= $m['returns'] ?></dd>
+        </div>
+        <div class="stack stack-1">
+          <dt><strong>When what it needs is missing</strong></dt>
+          <dd><?= $m['absent'] ?></dd>
+        </div>
       </dl>
 
       <pre class="dx-code"><code><?= e($m['example']) ?></code></pre>
@@ -272,7 +276,7 @@ $METHODS = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>PHP helper</h1>
   <p class="lede">
     Deck is a stylesheet, not a PHP library, so this class does three things: tell you
@@ -283,7 +287,7 @@ $METHODS = [
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="install">Installing</h2>
   <pre class="dx-code"><code>composer require echodial/deck</code></pre>
   <p>
@@ -335,7 +339,7 @@ composer deck-publish -- --link          # symlink where the platform allows it<
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="configuration">Configuration</h2>
   <p>
     Ten options, all with defaults that work. The two worth setting explicitly are
@@ -369,7 +373,7 @@ composer deck-publish -- --link          # symlink where the platform allows it<
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="methods">Methods</h2>
   <p>
     All static, all on <code>EchoDial\Deck\Deck</code>. <code>Deck::VERSION</code> is the
@@ -378,7 +382,7 @@ composer deck-publish -- --link          # symlink where the platform allows it<
   <?php foreach ($METHODS as $m) { php_method($m); } ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="together">All together</h2>
   <p>
     A complete page. The tenant's brand colour and the user's theme come out of the
@@ -412,7 +416,7 @@ Deck::configure([
       &lt;/nav&gt;
     &lt;/div&gt;
   &lt;/header&gt;
-  &lt;main class="container section stack-6"&gt;…&lt;/main&gt;
+  &lt;main class="container section stack stack-6"&gt;…&lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
   <p>
@@ -423,9 +427,9 @@ Deck::configure([
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="notes">Things worth knowing</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Everything returns a string.</strong> Nothing echoes, nothing buffers, and
       nothing touches global state beyond the static configuration. The methods are safe

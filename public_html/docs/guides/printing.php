@@ -27,7 +27,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Make a page print properly</h1>
   <p class="lede">
     Somebody needs a paper copy of an invoice, and the browser's print preview shows a
@@ -37,13 +37,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="already">Try printing first</h2>
   <p>
     Press <kbd>Ctrl</kbd>+<kbd>P</kbd> on a Deck page before changing anything. Everything
     in this list already happened:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The palette is forced to light.</strong> Dark mode is a screen idea. Paper is
       white, ink is black, and the whole token set is redeclared inside
@@ -89,41 +89,51 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="classes">The five classes</h2>
   <p>
     These are the choices Deck cannot guess: what is chrome on <em>your</em> page, and
     where a page break belongs in <em>your</em> document.
   </p>
   <?php docs_class_table(['no-print', 'print-only', 'page-break', 'keep-together', 'no-print-url']); ?>
-  <dl class="stack-3">
-    <dt><strong><code>.no-print</code></strong></dt>
-    <dd>
-      Anything on screen that is not on paper. Your own filter bar, a "back to list" link,
-      a live chat widget, the action buttons above a report.
-    </dd>
-    <dt><strong><code>.print-only</code></strong></dt>
-    <dd>
-      The reverse, and the one people forget. A letterhead, a signature line, a page of
-      terms, the "this is a copy" watermark — things that belong on the paper and would be
-      clutter on the screen.
-    </dd>
-    <dt><strong><code>.page-break</code></strong></dt>
-    <dd>
-      Force a new sheet before this element. One per major section of a long report; not
-      between every card.
-    </dd>
-    <dt><strong><code>.keep-together</code></strong></dt>
-    <dd>
-      Never split this across two pages. A signature block, an address, a total, a small
-      table. Use it on things that are meaningless in halves.
-    </dd>
-    <dt><strong><code>.no-print-url</code></strong></dt>
-    <dd>
-      Suppress the printed URL after a link. For a link whose text already is the address,
-      or a link into your own app that a reader cannot use from paper. Buttons and in-page
-      anchors are already exempt.
-    </dd>
+  <dl class="stack stack-3">
+    <div class="stack stack-1">
+      <dt><strong><code>.no-print</code></strong></dt>
+      <dd>
+        Anything on screen that is not on paper. Your own filter bar, a "back to list" link,
+        a live chat widget, the action buttons above a report.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong><code>.print-only</code></strong></dt>
+      <dd>
+        The reverse, and the one people forget. A letterhead, a signature line, a page of
+        terms, the "this is a copy" watermark — things that belong on the paper and would be
+        clutter on the screen.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong><code>.page-break</code></strong></dt>
+      <dd>
+        Force a new sheet before this element. One per major section of a long report; not
+        between every card.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong><code>.keep-together</code></strong></dt>
+      <dd>
+        Never split this across two pages. A signature block, an address, a total, a small
+        table. Use it on things that are meaningless in halves.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong><code>.no-print-url</code></strong></dt>
+      <dd>
+        Suppress the printed URL after a link. For a link whose text already is the address,
+        or a link into your own app that a reader cannot use from paper. Buttons and in-page
+        anchors are already exempt.
+      </dd>
+    </div>
   </dl>
   <pre class="dx-code"><code>&lt;div class="print-header print-only"&gt;
   &lt;img src="/letterhead.svg" alt="Ledgerly"&gt;
@@ -136,7 +146,7 @@ require __DIR__ . '/../_layout.php';
 
 &lt;table class="table"&gt;…&lt;/table&gt;
 
-&lt;div class="keep-together stack-2"&gt;
+&lt;div class="keep-together stack stack-2"&gt;
   &lt;p class="text-sm"&gt;Total due&lt;/p&gt;
   &lt;p class="h2"&gt;£4,281.16&lt;/p&gt;
 &lt;/div&gt;
@@ -151,7 +161,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="margins">Page size and margins</h2>
   <p>
     Deck does not set <code>@page</code>, because the right margin depends on whether you
@@ -181,7 +191,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="testing">Testing it</h2>
   <p>
     The print preview dialogue is the real test, but it is slow to iterate in. In Chrome
@@ -189,7 +199,7 @@ require __DIR__ . '/../_layout.php';
     tools, Rendering, then <em>Emulate CSS media type: print</em>. Firefox has a printer
     icon in the Inspector's toolbar that does the same.
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>Check page two. Most print bugs are on the second sheet: a repeated header that is not repeating, a table row split in half, a heading stranded at the bottom of page one.</li>
     <li>Print to PDF rather than paper while iterating, then check one real print before you ship. Printers disagree with PDF renderers about margins.</li>
     <li>Look at the printed URLs. If a table of internal links has turned into a wall of grey text, that is what <code>.no-print-url</code> is for.</li>
@@ -198,7 +208,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="next">Next</h2>
   <p>
     <a href="../components/print.php">The printing component page</a> has the full class

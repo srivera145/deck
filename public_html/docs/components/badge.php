@@ -38,7 +38,7 @@ $tones = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Badge</h1>
   <p class="lede">
     <code>.badge</code> is a small status pill. Its padding is
@@ -49,7 +49,7 @@ $tones = [
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use a badge for a short, categorical value attached to something else: a status, a
@@ -71,7 +71,7 @@ $tones = [
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="tones">Tones</h2>
   <p>
     Six looks. Each sets <code>background</code>, <code>color</code> and
@@ -79,7 +79,7 @@ $tones = [
     or moves what is around it.
   </p>
   <?php foreach ($tones as [$cls, $label, $blurb]): ?>
-    <div class="stack-2">
+    <div class="stack stack-2">
       <h3 id="t-<?= e($cls) ?>"><?= e($label) ?></h3>
       <p class="text-muted"><?= e($blurb) ?></p>
       <?php
@@ -90,7 +90,7 @@ $tones = [
   <?php endforeach; ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="dot">Leading dot</h2>
   <p>
     <code>.badge-dot</code> adds a <code>::before</code> circle in
@@ -112,7 +112,7 @@ $tones = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="in-context">In context</h2>
   <p>
     Badges are almost always inside something else. The two places they earn their keep
@@ -136,7 +136,7 @@ $tones = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     Generated from <code>src/07-components.css</code> by
@@ -145,7 +145,7 @@ $tones = [
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     The badge reads the status ramps directly. Each tone uses the <code>100</code> step
@@ -155,9 +155,9 @@ $tones = [
   <?php docs_token_table(['--surface-2', '--text-muted', '--line', '--r-xs', '--text-xs', '--brand-soft', '--brand-soft-text', '--good-100', '--good-700', '--warn-100', '--warn-700', '--bad-100', '--bad-700', '--brand-600', '--text-on-brand']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>A badge is a <code>&lt;span&gt;</code> with no role.</strong> A screen
       reader reads the text and nothing more. That is usually right — "Paid" in a status
@@ -188,7 +188,7 @@ $tones = [
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The badge uses <code>gap</code> and <code>padding</code> shorthands with no
@@ -204,7 +204,7 @@ $tones = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing about a badge animates or transitions, so
@@ -213,7 +213,7 @@ $tones = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     Print stylesheets usually strip backgrounds, which would turn every badge into plain
@@ -224,7 +224,7 @@ $tones = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <p>
     The badge has no local custom properties; the tones set
@@ -245,9 +245,9 @@ $tones = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for something clickable.</strong> Use <code>.chip</code>, which has a
       hover state, a focus ring and a 44px target, or a <code>.btn-sm</code>. A badge

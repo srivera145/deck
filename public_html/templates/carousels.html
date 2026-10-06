@@ -1,0 +1,1298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Carousels · Deck template</title>
+<meta name="description" content="Seven carousels built with Deck: a hero slider with autoplay and a pause button, peeking story cards, a product row, testimonials, a logo marquee, a gallery with thumbnails and a 3D coverflow. Copy any one.">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e7490'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+<script src="../assets/deck/deck-extras.js" defer></script>   <!-- only if you use carousel, drawer, number stepper, banner dismiss, speed dial or mega menu -->
+
+<style>
+@layer app.pages {
+  /* How this block is laid out: "Showcase chrome" is this page only (top bar,
+     intro, the frames around each demo) and is not part of any carousel.
+     "Shared" is the handful of rules the variants lean on. After that there
+     is one group per variant, prefixed like its HTML (.cr-hero-…, .cr-peek-…).
+     Copying a variant? Take its group plus "Shared". */
+
+  /* ===== Showcase chrome (this page only) ===== */
+  .topbar {
+    position: sticky; inset-block-start: 0; z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid var(--line);
+  }
+  .topbar .navbar { border: 0; }
+  .topbar nav[aria-label="Breadcrumb"] { padding-inline-start: var(--space-4); border-inline-start: 1px solid var(--line); }
+  .topbar .range { inline-size: 7rem; }
+  @media (max-width: 39.99rem) {
+    .topbar nav[aria-label="Breadcrumb"], .topbar .range { display: none; }
+  }
+
+  .intro { padding-block-end: var(--space-10); }
+  .intro .display { max-inline-size: 15ch; text-wrap: balance; }
+  .intro .lede { text-wrap: pretty; }
+  .intro .chip { text-decoration: none; color: var(--text); }
+
+  .variants { display: flex; flex-direction: column; gap: var(--space-16); padding-block-end: var(--space-section); }
+  .variant { display: flex; flex-direction: column; gap: var(--space-5); scroll-margin-block-start: var(--space-20); }
+  /* .bar does not wrap; this one does, so on a phone the copy button drops
+     under the description, lined up with the title rather than the badge. */
+  .variant-head { flex-wrap: wrap; align-items: flex-start; row-gap: var(--space-3); }
+  .variant-head > .badge { min-inline-size: 2rem; justify-content: center; margin-block-start: .2rem; font-variant-numeric: tabular-nums; }
+  .variant-head > .stack { flex: 1 1 16rem; min-inline-size: 0; }
+  @media (max-width: 39.99rem) { .variant-head > .push { margin-inline-start: calc(2rem + var(--space-3)); } }
+  @media (min-width: 40rem) { .variant-head { align-items: center; } .variant-head > .badge { margin: 0; } }
+  .variant-frame {
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: clip;
+    background: var(--bg);
+    box-shadow: var(--shadow-2);
+  }
+
+  .page-foot { padding-block: var(--space-6); }
+  .page-foot .footer-bottom { border: 0; padding: 0; }
+
+  /* ===== Shared by every carousel ===== */
+  /* The small label above a headline. */
+  .eyebrow { font-size: var(--text-sm); font-weight: 640; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); }
+
+  /* Workaround: Deck's status tint (--good-100) stays light in dark
+     mode, so this badge glares on dark surfaces. light-dark() follows
+     the element's colour scheme, data-theme="dark" subtrees included. */
+  .badge-good { background: light-dark(var(--good-100), color-mix(in oklab, var(--good-500) 20%, transparent)); color: light-dark(var(--good-700), oklch(from var(--good-500) 82% c h)); }
+
+  /* ===== 01 Hero slider (.cr-hero-…) =====
+     Full-width slides, a caption on Deck's --scrim, and autoplay with a
+     pause button (WCAG 2.2.2: hover and focus alone do not cover a reader
+     who is simply reading). Slides are 4:5 on a phone so the caption fits. */
+  .cr-hero { padding-block-end: var(--space-4); }
+  .cr-hero .carousel-track { border-radius: 0; }
+  .cr-hero .carousel-slide { aspect-ratio: 4 / 5; background: var(--bg-sunken); }
+  @media (min-width: 40rem) { .cr-hero .carousel-slide { aspect-ratio: 16 / 9; } }
+  @media (min-width: 64rem) { .cr-hero .carousel-slide { aspect-ratio: 2 / 1; } }
+  /* A taller scrim than Deck's --scrim, plus one from the start corner:
+     the type is left-aligned and on a phone it reaches up into bright sky. */
+  .cr-hero-caption {
+    display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3);
+    padding: clamp(var(--space-16), 8vw, var(--space-24)) clamp(var(--space-5), 6vw, var(--space-20)) clamp(var(--space-6), 4vw, var(--space-12));
+    background:
+      radial-gradient(90% 85% at 0% 100%, oklch(14% .02 var(--hue-neutral) / .45), transparent 75%),
+      linear-gradient(to top, oklch(14% .02 var(--hue-neutral) / .78), oklch(14% .02 var(--hue-neutral) / .45) 60%, transparent);
+  }
+  .cr-hero-caption :is(p, h3) { text-shadow: 0 1px 2px oklch(0% 0 0 / .25); }
+  .cr-hero-caption .eyebrow { color: var(--brand-200); }
+  .cr-hero-title {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: 1.05;
+    color: oklch(99% 0 0);
+    max-inline-size: 17ch;
+    text-wrap: balance;
+  }
+  .cr-hero-caption p:not(.eyebrow) { max-inline-size: 44ch; color: oklch(92% .01 var(--hue-neutral)); text-wrap: pretty; }
+  .cr-hero-caption .btn { margin-block-start: var(--space-2); }
+  /* Frosted round button in the slide's top corner. The icon swaps on aria-pressed. */
+  .cr-hero-pause {
+    position: absolute; z-index: 3;
+    inset-block-start: var(--space-4); inset-inline-end: var(--space-4);
+    inline-size: 40px; block-size: 40px;
+    display: grid; place-items: center;
+    border: 1px solid oklch(100% 0 0 / .3);
+    border-radius: var(--r-full);
+    background: oklch(15% .02 var(--hue-neutral) / .35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: oklch(99% 0 0);
+    cursor: pointer;
+  }
+  .cr-hero-pause:hover { background: oklch(15% .02 var(--hue-neutral) / .55); }
+  .cr-hero-pause .icon { inline-size: 16px; block-size: 16px; }
+  .cr-hero-pause .cr-hero-play, .cr-hero-pause[aria-pressed="true"] .cr-hero-paused { display: none; }
+  .cr-hero-pause[aria-pressed="true"] .cr-hero-play { display: block; }
+  /* No autoplay under reduced motion, so nothing to pause. */
+  @media (prefers-reduced-motion: reduce) { .cr-hero-pause { display: none; } }
+
+  /* ===== 02 Peek cards (.cr-peek-…) =====
+     .carousel-peek shows 86% of a slide on a phone; wider screens show two
+     and then three with the next one peeking, which is the cue that it scrolls. */
+  .cr-peek { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-8); padding: clamp(2rem, 1.5rem + 3vw, 4rem) var(--space-gutter); }
+  .cr-peek-head { flex-wrap: wrap; align-items: flex-end; row-gap: var(--space-4); }
+  .cr-peek-title { font-size: var(--text-2xl); font-weight: 700; letter-spacing: -.03em; max-inline-size: 22ch; text-wrap: balance; }
+  @media (min-width: 40rem) { .cr-peek .carousel-slide { flex-basis: 46%; } }
+  @media (min-width: 64rem) { .cr-peek .carousel-slide { flex-basis: 31.5%; } }
+  /* Room for the cards' shadow and lift inside the scroll container's clip. */
+  .cr-peek .carousel-track { padding-block: var(--space-2) var(--space-4); }
+  .cr-peek-card { block-size: 100%; }
+  .cr-peek-top {
+    --tint: 0;
+    display: grid; gap: var(--space-1);
+    padding: var(--space-5);
+    background: linear-gradient(in oklab 140deg,
+      light-dark(oklch(95% .045 calc(var(--hue-brand) + var(--tint))), oklch(28% .06 calc(var(--hue-brand) + var(--tint)))),
+      light-dark(oklch(89% .075 calc(var(--hue-brand) + var(--tint) + 40)), oklch(34% .08 calc(var(--hue-brand) + var(--tint) + 40))));
+  }
+  .cr-peek-brand { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: 700; letter-spacing: -.02em; margin-block-end: var(--space-6); }
+  .cr-peek-metric { font-size: clamp(2.25rem, 1.8rem + 1.6vw, 3rem); font-weight: 700; letter-spacing: -.045em; line-height: 1; }
+  .cr-peek-card .card-footer { font-size: var(--text-xs); color: var(--text-muted); }
+
+  /* ===== 03 Product row (.cr-products-…) =====
+     .carousel-multi shows three at a time; this makes it four on a wide
+     screen and one and a half on a phone, so a card always peeks. */
+  .cr-products { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); padding: clamp(2rem, 1.5rem + 3vw, 4rem) var(--space-gutter); }
+  .cr-products-head { flex-wrap: wrap; align-items: flex-end; row-gap: var(--space-3); }
+  .cr-products-title { font-size: var(--text-2xl); font-weight: 700; letter-spacing: -.03em; }
+  .cr-products .carousel-track { padding-block: var(--space-1) var(--space-4); }
+  @media (min-width: 64rem) {
+    .cr-products .carousel-slide { flex-basis: calc((100% - var(--space-4) * 3) / 4); }
+  }
+  @media (max-width: 48rem) { .cr-products .carousel-slide { flex-basis: 62%; } }
+  .cr-product { block-size: 100%; }
+  .cr-product-media { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--bg-sunken); }
+  .cr-product-media img { transition: scale var(--dur-3) var(--ease-out); }
+  .cr-product:hover .cr-product-media img { scale: 1.04; }
+  .cr-product-badge { position: absolute; inset-block-start: var(--space-3); inset-inline-start: var(--space-3); }
+  /* Sits above .stretch's overlay so it is its own button, not the card link. */
+  .cr-product-fav {
+    position: absolute; z-index: 2;
+    inset-block-start: var(--space-2); inset-inline-end: var(--space-2);
+    border-radius: var(--r-full);
+    --btn-bg: color-mix(in oklab, var(--surface) 88%, transparent);
+    --btn-border: transparent;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  /* Outline heart from the sprite, filled one from the inline sprite; aria-pressed picks. */
+  .cr-product-fav[aria-pressed="true"] { color: var(--bad-500); }
+  .cr-product-fav .cr-product-on, .cr-product-fav[aria-pressed="true"] .cr-product-off { display: none; }
+  .cr-product-fav[aria-pressed="true"] .cr-product-on { display: block; }
+  .cr-product .card-body { gap: var(--space-2); }
+  .cr-product .card-title a { color: inherit; text-decoration: none; }
+  .cr-product-price { display: flex; align-items: baseline; gap: var(--space-2); font-weight: 680; }
+  .cr-product-price s { color: var(--text-faint); font-weight: 400; font-size: var(--text-sm); }
+
+  /* ===== 04 Testimonials (.cr-quotes-…) =====
+     One quote per slide. The arrows move under the quote, beside the dots,
+     so they never sit on top of the text. */
+  .cr-quotes {
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(2rem, 1rem + 4vw, 4rem); align-items: center;
+    padding: clamp(2.5rem, 1.5rem + 4vw, 5rem) var(--space-gutter);
+    background: radial-gradient(45% 70% at 72% 50%, var(--brand-soft), transparent 75%);
+  }
+  @media (min-width: 56rem) { .cr-quotes { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); } }
+  .cr-quotes-title { font-size: clamp(1.75rem, 1.3rem + 1.7vw, 2.5rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.08; max-inline-size: 16ch; text-wrap: balance; }
+  .cr-quotes-score { font-size: var(--text-4xl); font-weight: 700; letter-spacing: -.04em; line-height: 1; }
+  .cr-quotes-card {
+    position: relative;
+    padding: clamp(var(--space-6), 4vw, var(--space-10));
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-3);
+  }
+  .cr-quotes .carousel-track { border-radius: 0; }
+  .cr-quotes-slide { display: flex; flex-direction: column; gap: var(--space-6); margin: 0; }
+  .cr-quotes-mark { inline-size: 40px; block-size: 40px; color: var(--brand); }
+  /* Undo the default blockquote rule (bar, muted colour): the quote mark does that job here. */
+  .cr-quotes-text { margin: 0; padding: 0; border: 0; color: var(--text); font-size: var(--text-xl); line-height: 1.45; letter-spacing: -.014em; font-weight: 520; text-wrap: pretty; }
+  .cr-quotes-who { display: flex; align-items: center; gap: var(--space-3); margin-block-start: auto; }
+  .cr-quotes .carousel-dots { justify-content: flex-start; padding-block-start: var(--space-8); }
+  .cr-quotes .carousel-arrow { inset-block-start: auto; inset-block-end: 0; translate: none; inline-size: 36px; block-size: 36px; }
+  .cr-quotes .carousel-prev { inset-inline-start: auto; inset-inline-end: 44px; }
+  .cr-quotes .carousel-next { inset-inline-end: 0; }
+  @supports selector(::scroll-marker) {
+    .cr-quotes .carousel-track::scroll-marker-group { justify-content: flex-start; padding-block-start: var(--space-8); }
+    .cr-quotes .carousel-track::scroll-button(*) { inset-block-start: auto; inset-block-end: -6px; translate: none; inline-size: 36px; block-size: 36px; }
+    .cr-quotes .carousel-track::scroll-button(inline-start) { inset-inline-start: auto; inset-inline-end: 44px; }
+    .cr-quotes .carousel-track::scroll-button(inline-end) { inset-inline-end: 0; }
+  }
+
+  /* ===== 05 Logo marquee (.cr-logos-…) =====
+     Two rows running opposite ways. The gap between the tracks is moved
+     into each track's trailing padding, so the loop has no visible jump. */
+  .cr-logos { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); padding-block: clamp(2.5rem, 1.5rem + 3vw, 4rem); }
+  .cr-logos-title { text-align: center; font-size: var(--text-sm); color: var(--text-muted); padding-inline: var(--space-gutter); text-wrap: balance; }
+  .cr-logos .marquee { --marquee-dur: 40s; gap: 0; }
+  .cr-logos .marquee-track { list-style: none; margin: 0; padding-inline: 0 clamp(2.5rem, 1.5rem + 4vw, 4.5rem); gap: clamp(2.5rem, 1.5rem + 4vw, 4.5rem); align-items: center; }
+  .cr-logos-reverse .marquee-track { animation-direction: reverse; --marquee-dur: 46s; }
+  /* Deck only styles .marquee when motion is allowed. Under reduced motion the
+     row would wrap and the aria-hidden copy would show as a second set of
+     logos, so drop the copy and let the real track wrap, centred. */
+  @media (prefers-reduced-motion: reduce) {
+    .cr-logos .marquee { display: block; }
+    .cr-logos .marquee-track[aria-hidden="true"] { display: none; }
+    .cr-logos .marquee-track { display: flex; flex-wrap: wrap; justify-content: center; padding-inline: var(--space-gutter); row-gap: var(--space-4); }
+  }
+  .cr-logos-mark {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    font-size: var(--text-xl); font-weight: 700; letter-spacing: -.035em;
+    color: var(--text-faint);
+    transition: color var(--dur-2) var(--ease-out);
+  }
+  .cr-logos-mark:hover { color: var(--text); }
+  .cr-logos-mark .icon { inline-size: 1.1em; block-size: 1.1em; }
+  /* Different letterforms so the strip reads as many brands, not one font. */
+  .cr-logos-serif { font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-style: italic; font-weight: 600; letter-spacing: -.01em; }
+  .cr-logos-wide { font-size: var(--text-md); text-transform: uppercase; letter-spacing: .22em; font-weight: 640; }
+  .cr-logos-mono { font-family: var(--font-mono); font-size: var(--text-lg); font-weight: 600; letter-spacing: -.02em; }
+  .cr-logos-light { font-weight: 400; letter-spacing: -.02em; }
+
+  /* ===== 06 Gallery with thumbnails (.cr-gallery-…) =====
+     The thumbnails replace the dots, so the native marker group is switched
+     off; the script under the markup drives the carousel and tracks it. */
+  .cr-gallery { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1.5rem, 1rem + 3vw, 3.5rem); padding: clamp(1.25rem, 1rem + 2vw, 3rem) var(--space-gutter) clamp(2rem, 1.5rem + 3vw, 4rem); }
+  @media (min-width: 56rem) { .cr-gallery { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: start; } }
+  .cr-gallery .carousel-track { border-radius: var(--r-lg); scroll-marker-group: none; }
+  .cr-gallery .carousel-slide { aspect-ratio: 3 / 2; background: var(--bg-sunken); }
+  .cr-gallery-count {
+    position: absolute; z-index: 2;
+    inset-block-end: var(--space-3); inset-inline-end: var(--space-3);
+    padding: 3px var(--space-3);
+    border-radius: var(--r-full);
+    background: oklch(14% .02 var(--hue-neutral) / .7);
+    color: oklch(98% 0 0);
+    font-size: var(--text-xs);
+    font-weight: 600;
+  }
+  .cr-gallery-thumbs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-2); margin-block-start: var(--space-3); }
+  .cr-gallery-thumb {
+    padding: 0; border: 0;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    background: var(--bg-sunken);
+    cursor: pointer;
+    opacity: .55;
+    transition: opacity var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
+  }
+  .cr-gallery-thumb img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  .cr-gallery-thumb:hover { opacity: .85; }
+  .cr-gallery-thumb[aria-current="true"] { opacity: 1; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--brand); }
+  .cr-gallery-title { font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.08; }
+  .cr-gallery-facts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+  .cr-gallery-facts li { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); }
+  .cr-gallery-facts .icon { color: var(--brand); }
+  .cr-gallery-price { font-size: var(--text-2xl); font-weight: 700; letter-spacing: -.03em; }
+
+  /* ===== 07 Coverflow (.cr-cover-…) =====
+     .coverflow is scroll snap plus 3D: deck.js marks the centred book
+     .is-front and turns the others away. The covers are pure CSS art; swap
+     .cr-cover-art for an <img> of a real jacket. */
+  .cr-cover { --book: clamp(8.5rem, 6rem + 8vw, 12rem); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-2); padding-block: clamp(2.5rem, 1.5rem + 3vw, 4rem) var(--space-6); }
+  .cr-cover-head { text-align: center; justify-items: center; padding-inline: var(--space-gutter); }
+  .cr-cover-title { font-size: clamp(1.75rem, 1.3rem + 2vw, 2.5rem); font-weight: 700; letter-spacing: -.035em; text-wrap: balance; }
+  /* Half the strip minus half a book either side, so the first and last can centre. */
+  .cr-cover-strip { padding-inline: calc(50% - var(--book) / 2); padding-block: var(--space-8) var(--space-6); gap: var(--space-2); }
+  .cr-cover-book { display: grid; justify-items: center; gap: var(--space-4); inline-size: var(--book); color: inherit; text-decoration: none; text-align: center; }
+  .cr-cover-strip > :not(.is-front) .cr-cover-meta { opacity: .45; }
+  .cr-cover-meta { display: grid; gap: 2px; font-size: var(--text-sm); transition: opacity var(--dur-3) var(--ease-out); }
+  .cr-cover-art {
+    position: relative;
+    display: flex; flex-direction: column;
+    inline-size: 100%; aspect-ratio: 2 / 3;
+    padding: var(--space-4) var(--space-3) var(--space-4) var(--space-4);
+    border-radius: 3px 8px 8px 3px;
+    overflow: hidden;
+    color: oklch(97% .02 90);
+    text-align: start;
+    box-shadow: var(--shadow-4);
+  }
+  /* The spine: a shadow and a highlight along the bound edge. */
+  .cr-cover-art::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, oklch(0% 0 0 / .28), oklch(100% 0 0 / .16) 2.5%, transparent 7%);
+  }
+  .cr-cover-kicker { font-size: var(--text-2xs); letter-spacing: .16em; text-transform: uppercase; opacity: .8; }
+  .cr-cover-name { margin-block-start: auto; font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-size: calc(var(--book) * .14); line-height: 1.05; font-weight: 600; text-wrap: balance; }
+  .cr-cover-author { margin-block-start: var(--space-2); font-size: var(--text-2xs); letter-spacing: .1em; text-transform: uppercase; }
+  .cr-cover-a { background:
+      radial-gradient(circle at 50% 40%, oklch(86% .13 70) 0 21%, transparent 21.5%),
+      repeating-linear-gradient(to bottom, transparent 0 9px, oklch(100% 0 0 / .1) 9px 10px) 0 100% / 100% 45% no-repeat,
+      linear-gradient(oklch(52% .13 35), oklch(36% .1 25)); }
+  .cr-cover-b { background:
+      radial-gradient(circle at 74% 22%, oklch(94% .04 95) 0 9%, transparent 9.5%),
+      radial-gradient(oklch(95% .02 95 / .8) 1px, transparent 1.5px) 0 0 / 19px 23px,
+      linear-gradient(oklch(24% .07 270), oklch(16% .05 275)); }
+  .cr-cover-c { color: oklch(28% .06 150); background:
+      repeating-linear-gradient(90deg, oklch(56% .1 150) 0 5px, transparent 5px 13px) 50% 38% / 70% 34% no-repeat,
+      oklch(94% .03 95); }
+  /* Title at the top on this one, so it never lands on the mountains. */
+  .cr-cover-d { color: oklch(22% .04 240); background:
+      conic-gradient(from 135deg at 34% 74%, oklch(30% .05 240) 90deg, transparent 0),
+      conic-gradient(from 135deg at 70% 68%, oklch(44% .06 235) 90deg, transparent 0),
+      linear-gradient(oklch(95% .025 220), oklch(80% .07 225)); }
+  .cr-cover-d .cr-cover-name { margin-block-start: var(--space-3); }
+  .cr-cover-d .cr-cover-author { margin-block-start: auto; color: oklch(96% .02 220); }
+  .cr-cover-e { background:
+      linear-gradient(oklch(100% 0 0 / .16) 1px, transparent 1px) 0 0 / 20px 20px,
+      linear-gradient(90deg, oklch(100% 0 0 / .16) 1px, transparent 1px) 0 0 / 20px 20px,
+      oklch(56% .13 40); }
+  .cr-cover-f { color: oklch(24% .04 160); background:
+      repeating-radial-gradient(circle at 50% 42%, transparent 0 11px, oklch(100% 0 0 / .32) 11px 12px),
+      oklch(76% .07 160); }
+  .cr-cover-g { color: oklch(24% .05 80); background:
+      repeating-linear-gradient(-45deg, transparent 0 14px, oklch(100% 0 0 / .22) 14px 26px),
+      oklch(82% .13 85); }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Photos are hotlinked from Unsplash for the preview. Replace them with your own. -->
+
+<!-- Icons the Deck sprite does not have. Referenced as <use href="#i-quote">. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13a.6.6 0 0 0 .9.5l10.2-6.5a.6.6 0 0 0 0-1L8.9 5a.6.6 0 0 0-.9.5z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-heart-fill" viewBox="0 0 24 24"><path d="M12 20.3s-8.3-4.9-8.3-11A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 8.3 2.9c0 6.1-8.3 11-8.3 11z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2zM5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ===== Top bar (showcase chrome) ===== -->
+<header class="topbar">
+  <div class="container">
+    <div class="navbar">
+      <a class="navbar-brand" href="index.php">
+        <svg class="icon icon-lg icon-fill" style="color:var(--brand)" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#deck-mark"></use></svg>Deck
+      </a>
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb">
+          <li><a href="index.php">Templates</a></li>
+          <li><span aria-current="page">Carousels</span></li>
+        </ol>
+      </nav>
+      <div class="push cluster cluster-tight">
+        <!-- Deck.hue() rewrites --hue-brand on the root, so every variant below retints live. -->
+        <label class="sr-only" for="hue">Brand hue</label>
+        <input id="hue" class="range" type="range" min="0" max="360" value="196" oninput="Deck.hue(this.value)">
+        <button class="btn btn-icon btn-ghost" type="button" data-deck-theme aria-label="Switch theme">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== Intro ===== -->
+  <section class="container section intro">
+    <div class="stack stack-4 enter-rise stagger">
+      <p class="eyebrow">Section templates</p>
+      <h1 class="display">Carousels, seven ways.</h1>
+      <p class="lede">
+        Seven carousels, each one a self-contained block of markup you can copy. Most run
+        on Deck's <code>.carousel</code>: scroll snap moves the slides, and
+        <code class="nowrap">deck-extras.js</code> adds arrows, dots and a slide event. Drag
+        the hue slider to retint them all, and resize: every one is responsive.
+      </p>
+      <div class="cluster cluster-tight">
+        <a class="chip" href="#cr-hero">Hero slider</a>
+        <a class="chip" href="#cr-peek">Peek cards</a>
+        <a class="chip" href="#cr-products">Product row</a>
+        <a class="chip" href="#cr-quotes">Testimonials</a>
+        <a class="chip" href="#cr-logos">Logo marquee</a>
+        <a class="chip" href="#cr-gallery">Gallery</a>
+        <a class="chip" href="#cr-cover">Coverflow</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container variants">
+
+    <!-- ===== 01 Hero slider ===== -->
+    <section class="variant" id="cr-hero" aria-labelledby="cr-hero-title">
+      <div class="bar variant-head">
+        <span class="badge">01</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="cr-hero-title">Hero slider</h2>
+          <p class="text-sm text-muted">Full-width photos, a caption with a call to action, arrows, dots and autoplay with a pause button. Best for travel and editorial home pages.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#cr-hero-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="cr-hero-demo">
+        <!-- Needs deck-extras.js. data-autoplay="6000" advances every six seconds; it
+             pauses on hover, on focus and in a hidden tab, and never starts under
+             reduced motion. Slide titles are h3 only because this showcase owns the h1. -->
+        <div class="cr-hero">
+          <div class="carousel" id="cr-hero-carousel" data-deck-carousel data-autoplay="6000" role="region" aria-roledescription="carousel" aria-label="Featured trips">
+            <div class="carousel-track">
+              <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 4">
+                <!-- <picture> serves a portrait crop to phones, where the slide is 4:5. -->
+                <picture>
+                  <source media="(max-width: 40rem)" srcset="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&amp;h=1000&amp;q=80&amp;auto=format&amp;fit=crop">
+                  <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1800&amp;h=900&amp;q=80&amp;auto=format&amp;fit=crop" alt="The bow of a wooden rowing boat on a green alpine lake below limestone peaks" width="1800" height="900" fetchpriority="high" decoding="async">
+                </picture>
+                <div class="carousel-caption cr-hero-caption">
+                  <p class="eyebrow">Italy · 6 nights · from €1,480</p>
+                  <h3 class="cr-hero-title">South Tyrol's lakes, by rowing boat</h3>
+                  <p>Mornings on the water, afternoons in the mountain huts, and a guide who does the rowing.</p>
+                  <a class="btn btn-primary" href="#">See the trip
+                    <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></a>
+                </div>
+              </div>
+              <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+                <picture>
+                  <source media="(max-width: 40rem)" srcset="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&amp;h=1000&amp;q=80&amp;auto=format&amp;fit=crop">
+                  <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1800&amp;h=900&amp;q=80&amp;auto=format&amp;fit=crop" alt="The Eiffel Tower at dusk under a lilac sky, seen across the Seine" width="1800" height="900" loading="lazy" decoding="async">
+                </picture>
+                <div class="carousel-caption cr-hero-caption">
+                  <p class="eyebrow">France · 4 nights · from €890</p>
+                  <h3 class="cr-hero-title">Paris in November, without the queues</h3>
+                  <p>Galleries at opening time, a cooking class in the Marais and a hotel you can walk home to.</p>
+                  <a class="btn btn-primary" href="#">See the trip
+                    <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></a>
+                </div>
+              </div>
+              <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+                <picture>
+                  <source media="(max-width: 40rem)" srcset="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&amp;h=1000&amp;q=80&amp;auto=format&amp;fit=crop">
+                  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1800&amp;h=900&amp;q=80&amp;auto=format&amp;fit=crop" alt="Low sun over turquoise surf on an empty white-sand beach" width="1800" height="900" loading="lazy" decoding="async">
+                </picture>
+                <div class="carousel-caption cr-hero-caption">
+                  <p class="eyebrow">Zanzibar · 8 nights · from €2,150</p>
+                  <h3 class="cr-hero-title">An island in the quiet season</h3>
+                  <p>Warm water, half-empty beaches and a dhow trip to a sandbank at low tide.</p>
+                  <a class="btn btn-primary" href="#">See the trip
+                    <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></a>
+                </div>
+              </div>
+              <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+                <picture>
+                  <source media="(max-width: 40rem)" srcset="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=800&amp;h=1000&amp;q=80&amp;auto=format&amp;fit=crop">
+                  <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=1800&amp;h=900&amp;q=80&amp;auto=format&amp;fit=crop" alt="Snow-streaked peaks glowing pink at sunrise, mirrored in a still blue lake" width="1800" height="900" loading="lazy" decoding="async">
+                </picture>
+                <div class="carousel-caption cr-hero-caption">
+                  <p class="eyebrow">Canada · 9 nights · from €2,640</p>
+                  <h3 class="cr-hero-title">The Rockies at first light</h3>
+                  <p>Canoes before breakfast, glacier walks after it, and lodges with nothing on the walls but windows.</p>
+                  <a class="btn btn-primary" href="#">See the trip
+                    <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></a>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous trip">
+              <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-left"></use></svg>
+            </button>
+            <button class="carousel-arrow carousel-next" type="button" aria-label="Next trip">
+              <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right"></use></svg>
+            </button>
+            <button class="cr-hero-pause" type="button" aria-label="Pause slideshow" aria-pressed="false">
+              <svg class="icon cr-hero-paused" aria-hidden="true"><use href="#i-pause"></use></svg>
+              <svg class="icon cr-hero-play" aria-hidden="true"><use href="#i-play"></use></svg>
+            </button>
+            <div class="carousel-dots"></div>
+          </div>
+        </div>
+        <script>
+          /* Pause for data-autoplay. deck-extras stops autoplay on focusin and
+             restarts it on pointerleave or when the tab comes back; this button
+             sends those events itself and, while paused, swallows the restarts. */
+          (() => {
+            const car = document.getElementById('cr-hero-carousel');
+            const btn = car.querySelector('.cr-hero-pause');
+            let paused = false;
+            car.addEventListener('pointerleave', e => { if (paused) e.stopImmediatePropagation(); }, true);
+            document.addEventListener('visibilitychange', () => {
+              if (paused) setTimeout(() => car.dispatchEvent(new Event('focusin')));
+            });
+            btn.addEventListener('click', () => {
+              paused = !paused;
+              btn.setAttribute('aria-pressed', String(paused));
+              car.dispatchEvent(new Event(paused ? 'focusin' : 'pointerleave'));
+            });
+          })();
+        </script>
+      </div>
+    </section>
+
+    <!-- ===== 02 Peek cards ===== -->
+    <section class="variant" id="cr-peek" aria-labelledby="cr-peek-title">
+      <div class="bar variant-head">
+        <span class="badge">02</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="cr-peek-title">Peek cards</h2>
+          <p class="text-sm text-muted">Story cards with the next one peeking in from the edge. Best for case studies, guides and blog posts.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#cr-peek-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="cr-peek-demo">
+        <!-- Needs deck-extras.js. Each card is one link: .card-link plus .stretch on the title. -->
+        <section class="cr-peek" aria-labelledby="cr-peek-heading">
+          <div class="bar cr-peek-head">
+            <div class="stack stack-2">
+              <p class="eyebrow">Customer stories</p>
+              <h3 class="cr-peek-title" id="cr-peek-heading">Teams that got their Mondays back</h3>
+            </div>
+            <a class="btn btn-ghost push" href="#">All 48 stories
+              <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></a>
+          </div>
+          <div class="carousel carousel-peek" data-deck-carousel role="region" aria-roledescription="carousel" aria-labelledby="cr-peek-heading">
+            <div class="carousel-track">
+              <article class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 5">
+                <div class="card card-link lift cr-peek-card">
+                  <div class="cr-peek-top">
+                    <span class="cr-peek-brand"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#sparkle"></use></svg>Fieldnote</span>
+                    <span class="cr-peek-metric nums">−38%</span>
+                    <span class="text-sm">time in status meetings</span>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title"><a class="stretch link-quiet" href="#">How Fieldnote cut status meetings to one a week</a></h4>
+                    <p class="text-sm text-muted clamp-3">A 14-person studio swapped the Monday round-robin for a shared board that answers "where is it?" before anyone asks.</p>
+                  </div>
+                  <div class="card-footer"><span>Design studio · 14 people</span><svg class="icon icon-sm icon-follow push mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></div>
+                </div>
+              </article>
+              <article class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 5">
+                <div class="card card-link lift cr-peek-card">
+                  <div class="cr-peek-top" style="--tint: 60">
+                    <span class="cr-peek-brand"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#clock"></use></svg>Kiln Coffee</span>
+                    <span class="cr-peek-metric nums">4 → 1</span>
+                    <span class="text-sm">calendars to keep in sync</span>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title"><a class="stretch link-quiet" href="#">Kiln runs four time zones from one calendar</a></h4>
+                    <p class="text-sm text-muted clamp-3">Roasting in Lisbon, shipping from Leeds, selling in Denver: one schedule that everyone trusts, including the night shift.</p>
+                  </div>
+                  <div class="card-footer"><span>Roastery · 4 time zones</span><svg class="icon icon-sm icon-follow push mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></div>
+                </div>
+              </article>
+              <article class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 5">
+                <div class="card card-link lift cr-peek-card">
+                  <div class="cr-peek-top" style="--tint: 120">
+                    <span class="cr-peek-brand"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#shield"></use></svg>Ostra Health</span>
+                    <span class="cr-peek-metric nums">2.5×</span>
+                    <span class="text-sm">faster clinician onboarding</span>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title"><a class="stretch link-quiet" href="#">Ostra onboards clinicians in days, not weeks</a></h4>
+                    <p class="text-sm text-muted clamp-3">A clinic network of 220 turned a 40-step checklist into a template that assigns itself the moment a contract is signed.</p>
+                  </div>
+                  <div class="card-footer"><span>Clinic network · 220 people</span><svg class="icon icon-sm icon-follow push mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></div>
+                </div>
+              </article>
+              <article class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 5">
+                <div class="card card-link lift cr-peek-card">
+                  <div class="cr-peek-top" style="--tint: 200">
+                    <span class="cr-peek-brand"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#truck"></use></svg>Parcel+Pine</span>
+                    <span class="cr-peek-metric nums">+19%</span>
+                    <span class="text-sm">launches shipped on the promised date</span>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title"><a class="stretch link-quiet" href="#">Parcel+Pine stopped moving launch dates</a></h4>
+                    <p class="text-sm text-muted clamp-3">Marketing, warehouse and support now see the same dependencies, so the slip shows up in week two instead of launch week.</p>
+                  </div>
+                  <div class="card-footer"><span>E-commerce · 60 people</span><svg class="icon icon-sm icon-follow push mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></div>
+                </div>
+              </article>
+              <article class="carousel-slide" role="group" aria-roledescription="slide" aria-label="5 of 5">
+                <div class="card card-link lift cr-peek-card">
+                  <div class="cr-peek-top" style="--tint: 280">
+                    <span class="cr-peek-brand"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#map-pin"></use></svg>Tidewater</span>
+                    <span class="cr-peek-metric nums">0</span>
+                    <span class="text-sm">missed handovers since March</span>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title"><a class="stretch link-quiet" href="#">Tidewater's night shift stopped losing handovers</a></h4>
+                    <p class="text-sm text-muted clamp-3">Ferry crews log the shift in two taps, and the morning team reads one summary instead of six group chats.</p>
+                  </div>
+                  <div class="card-footer"><span>Ferry operator · 340 people</span><svg class="icon icon-sm icon-follow push mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></div>
+                </div>
+              </article>
+            </div>
+            <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous story">
+              <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-left"></use></svg>
+            </button>
+            <button class="carousel-arrow carousel-next" type="button" aria-label="Next story">
+              <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right"></use></svg>
+            </button>
+            <div class="carousel-dots"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== 03 Product row ===== -->
+    <section class="variant" id="cr-products" aria-labelledby="cr-products-title">
+      <div class="bar variant-head">
+        <span class="badge">03</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="cr-products-title">Product row</h2>
+          <p class="text-sm text-muted">Product cards with photo, price, rating and a save button, four across on a wide screen. Best for a store's home page or a "you might also like" row.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#cr-products-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="cr-products-demo">
+        <!-- Needs deck-extras.js. The save buttons toggle aria-pressed with the two
+             lines of script at the end. -->
+        <section class="cr-products" aria-labelledby="cr-products-heading">
+          <div class="bar cr-products-head">
+            <div class="stack stack-1">
+              <h3 class="cr-products-title" id="cr-products-heading">New this week</h3>
+              <p class="text-sm text-muted">Field-tested kit for the commute and the weekend.</p>
+            </div>
+            <a class="btn btn-sm push" href="#">Shop all</a>
+          </div>
+          <div class="carousel carousel-multi" data-deck-carousel role="region" aria-roledescription="carousel" aria-labelledby="cr-products-heading">
+            <div class="carousel-track">
+              <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 6">
+                <article class="card card-link cr-product">
+                  <div class="cr-product-media">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=420&amp;h=420&amp;q=80&amp;auto=format&amp;fit=crop" alt="Black over-ear headphones on a yellow background" width="420" height="420" loading="lazy" decoding="async">
+                    <span class="badge badge-solid cr-product-badge">−17%</span>
+                  </div>
+                  <button class="btn btn-icon btn-sm cr-product-fav" type="button" aria-pressed="false" aria-label="Save Halden headphones">
+                    <svg class="icon icon-sm cr-product-off" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart-sm"></use></svg>
+                    <svg class="icon cr-product-on" width="16" height="16" aria-hidden="true"><use href="#i-heart-fill"></use></svg>
+                  </button>
+                  <div class="card-body">
+                    <span class="text-xs text-muted">Audio</span>
+                    <h4 class="card-title"><a class="stretch" href="#">Halden wireless headphones</a></h4>
+                    <span class="cluster cluster-tight">
+                      <span class="rating-static" style="--value:94;--star:14px" role="img" aria-label="Rated 4.7 out of 5">
+                        <span class="rating-fill">
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        </span>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                      </span>
+                      <span class="text-xs text-muted nums">212</span>
+                    </span>
+                    <p class="cr-product-price nums">$249 <s>$299</s></p>
+                  </div>
+                </article>
+              </div>
+              <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 6">
+                <article class="card card-link cr-product">
+                  <div class="cr-product-media">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=420&amp;h=420&amp;q=80&amp;auto=format&amp;fit=crop" alt="A white analogue watch with a white silicone strap on a pale grey background" width="420" height="420" loading="lazy" decoding="async">
+                    <span class="badge badge-brand cr-product-badge">New</span>
+                  </div>
+                  <button class="btn btn-icon btn-sm cr-product-fav" type="button" aria-pressed="false" aria-label="Save Mora field watch">
+                    <svg class="icon icon-sm cr-product-off" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart-sm"></use></svg>
+                    <svg class="icon cr-product-on" width="16" height="16" aria-hidden="true"><use href="#i-heart-fill"></use></svg>
+                  </button>
+                  <div class="card-body">
+                    <span class="text-xs text-muted">Watches</span>
+                    <h4 class="card-title"><a class="stretch" href="#">Mora field watch, chalk</a></h4>
+                    <span class="cluster cluster-tight">
+                      <span class="rating-static" style="--value:96;--star:14px" role="img" aria-label="Rated 4.8 out of 5">
+                        <span class="rating-fill">
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        </span>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                      </span>
+                      <span class="text-xs text-muted nums">96</span>
+                    </span>
+                    <p class="cr-product-price nums">$185</p>
+                  </div>
+                </article>
+              </div>
+              <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 6">
+                <article class="card card-link cr-product">
+                  <div class="cr-product-media">
+                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=420&amp;h=420&amp;q=80&amp;auto=format&amp;fit=crop" alt="A navy canvas backpack standing on a pale floor" width="420" height="420" loading="lazy" decoding="async">
+                  </div>
+                  <button class="btn btn-icon btn-sm cr-product-fav" type="button" aria-pressed="true" aria-label="Save Tarn daypack">
+                    <svg class="icon icon-sm cr-product-off" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart-sm"></use></svg>
+                    <svg class="icon cr-product-on" width="16" height="16" aria-hidden="true"><use href="#i-heart-fill"></use></svg>
+                  </button>
+                  <div class="card-body">
+                    <span class="text-xs text-muted">Bags</span>
+                    <h4 class="card-title"><a class="stretch" href="#">Tarn 22 L daypack</a></h4>
+                    <span class="cluster cluster-tight">
+                      <span class="rating-static" style="--value:92;--star:14px" role="img" aria-label="Rated 4.6 out of 5">
+                        <span class="rating-fill">
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        </span>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                      </span>
+                      <span class="text-xs text-muted nums">341</span>
+                    </span>
+                    <p class="cr-product-price nums">$129</p>
+                  </div>
+                </article>
+              </div>
+              <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 6">
+                <article class="card card-link cr-product">
+                  <div class="cr-product-media">
+                    <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=420&amp;h=420&amp;q=80&amp;auto=format&amp;fit=crop" alt="Black square-framed sunglasses on a white surface" width="420" height="420" loading="lazy" decoding="async">
+                  </div>
+                  <button class="btn btn-icon btn-sm cr-product-fav" type="button" aria-pressed="false" aria-label="Save Lido sunglasses">
+                    <svg class="icon icon-sm cr-product-off" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart-sm"></use></svg>
+                    <svg class="icon cr-product-on" width="16" height="16" aria-hidden="true"><use href="#i-heart-fill"></use></svg>
+                  </button>
+                  <div class="card-body">
+                    <span class="text-xs text-muted">Eyewear</span>
+                    <h4 class="card-title"><a class="stretch" href="#">Lido polarised sunglasses</a></h4>
+                    <span class="cluster cluster-tight">
+                      <span class="rating-static" style="--value:90;--star:14px" role="img" aria-label="Rated 4.5 out of 5">
+                        <span class="rating-fill">
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        </span>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                      </span>
+                      <span class="text-xs text-muted nums">58</span>
+                    </span>
+                    <p class="cr-product-price nums">$95</p>
+                  </div>
+                </article>
+              </div>
+              <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="5 of 6">
+                <article class="card card-link cr-product">
+                  <div class="cr-product-media">
+                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=420&amp;h=420&amp;q=80&amp;auto=format&amp;fit=crop" alt="A black smartwatch with a sport band, face lit, on white" width="420" height="420" loading="lazy" decoding="async">
+                    <span class="badge badge-good cr-product-badge">Back in stock</span>
+                  </div>
+                  <button class="btn btn-icon btn-sm cr-product-fav" type="button" aria-pressed="false" aria-label="Save Pulse 2 watch">
+                    <svg class="icon icon-sm cr-product-off" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart-sm"></use></svg>
+                    <svg class="icon cr-product-on" width="16" height="16" aria-hidden="true"><use href="#i-heart-fill"></use></svg>
+                  </button>
+                  <div class="card-body">
+                    <span class="text-xs text-muted">Wearables</span>
+                    <h4 class="card-title"><a class="stretch" href="#">Pulse 2 fitness watch</a></h4>
+                    <span class="cluster cluster-tight">
+                      <span class="rating-static" style="--value:88;--star:14px" role="img" aria-label="Rated 4.4 out of 5">
+                        <span class="rating-fill">
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        </span>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                      </span>
+                      <span class="text-xs text-muted nums">1,024</span>
+                    </span>
+                    <p class="cr-product-price nums">$219</p>
+                  </div>
+                </article>
+              </div>
+              <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="6 of 6">
+                <article class="card card-link cr-product">
+                  <div class="cr-product-media">
+                    <img src="https://images.unsplash.com/photo-1560343090-f0409e92791a?w=420&amp;h=420&amp;q=80&amp;auto=format&amp;fit=crop" alt="A teal suede brogue on a pale pink plinth" width="420" height="420" loading="lazy" decoding="async">
+                  </div>
+                  <button class="btn btn-icon btn-sm cr-product-fav" type="button" aria-pressed="false" aria-label="Save Fen suede brogue">
+                    <svg class="icon icon-sm cr-product-off" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart-sm"></use></svg>
+                    <svg class="icon cr-product-on" width="16" height="16" aria-hidden="true"><use href="#i-heart-fill"></use></svg>
+                  </button>
+                  <div class="card-body">
+                    <span class="text-xs text-muted">Shoes</span>
+                    <h4 class="card-title"><a class="stretch" href="#">Fen suede brogue, lagoon</a></h4>
+                    <span class="cluster cluster-tight">
+                      <span class="rating-static" style="--value:98;--star:14px" role="img" aria-label="Rated 4.9 out of 5">
+                        <span class="rating-fill">
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        </span>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                      </span>
+                      <span class="text-xs text-muted nums">77</span>
+                    </span>
+                    <p class="cr-product-price nums">$165</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous products">
+              <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-left"></use></svg>
+            </button>
+            <button class="carousel-arrow carousel-next" type="button" aria-label="More products">
+              <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right"></use></svg>
+            </button>
+          </div>
+        </section>
+        <script>
+          /* Save buttons: a toggle, so aria-pressed carries the state and the CSS fills the heart. */
+          document.querySelectorAll('.cr-product-fav').forEach(b => b.addEventListener('click', () =>
+            b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'))));
+        </script>
+      </div>
+    </section>
+
+    <!-- ===== 04 Testimonials ===== -->
+    <section class="variant" id="cr-quotes" aria-labelledby="cr-quotes-title">
+      <div class="bar variant-head">
+        <span class="badge">04</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="cr-quotes-title">Testimonials</h2>
+          <p class="text-sm text-muted">One quote at a time beside a rating summary, with the controls tucked under the quote. Best for social proof on a pricing or sign-up page.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#cr-quotes-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="cr-quotes-demo">
+        <!-- Needs deck-extras.js, and the #i-quote symbol from this page's inline sprite. -->
+        <section class="cr-quotes" aria-labelledby="cr-quotes-heading">
+          <div class="stack stack-6">
+            <div class="stack stack-3">
+              <p class="eyebrow">What customers say</p>
+              <h3 class="cr-quotes-title" id="cr-quotes-heading">Loved by teams who hate status meetings.</h3>
+            </div>
+            <div class="cluster">
+              <span class="cr-quotes-score nums">4.9</span>
+              <span class="stack stack-1">
+                <span class="rating-static" style="--value:98;--star:18px" role="img" aria-label="Rated 4.9 out of 5">
+                  <span class="rating-fill">
+                    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  </span>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                </span>
+                <span class="text-sm text-muted">from 2,140 reviews</span>
+              </span>
+            </div>
+            <a class="btn btn-outline" href="#" style="align-self:flex-start">Read all reviews</a>
+          </div>
+
+          <div class="cr-quotes-card">
+            <div class="carousel" data-deck-carousel role="region" aria-roledescription="carousel" aria-label="Customer quotes">
+              <div class="carousel-track">
+                <figure class="carousel-slide cr-quotes-slide" role="group" aria-roledescription="slide" aria-label="1 of 4">
+                  <svg class="cr-quotes-mark" aria-hidden="true"><use href="#i-quote"></use></svg>
+                  <blockquote class="cr-quotes-text">We replaced three spreadsheets and a whiteboard with Cadence in a week. The Monday meeting went from an hour to twenty minutes, and nobody misses the other forty.</blockquote>
+                  <figcaption class="cr-quotes-who">
+                    <span class="avatar avatar-lg"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=112&amp;h=112&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="112" height="112" loading="lazy" decoding="async"></span>
+                    <span class="stack stack-0">
+                      <span class="fw-semi">Ingrid Sørensen</span>
+                      <span class="text-sm text-muted">COO, Tidewater Ferries</span>
+                    </span>
+                  </figcaption>
+                </figure>
+                <figure class="carousel-slide cr-quotes-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+                  <svg class="cr-quotes-mark" aria-hidden="true"><use href="#i-quote"></use></svg>
+                  <blockquote class="cr-quotes-text">The first tool our engineers asked to keep after the trial. It stays out of the way until you need it, and then it has exactly the view you wanted.</blockquote>
+                  <figcaption class="cr-quotes-who">
+                    <span class="avatar avatar-lg"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=112&amp;h=112&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="112" height="112" loading="lazy" decoding="async"></span>
+                    <span class="stack stack-0">
+                      <span class="fw-semi">Daniel Reyes</span>
+                      <span class="text-sm text-muted">Head of Engineering, Parcel+Pine</span>
+                    </span>
+                  </figcaption>
+                </figure>
+                <figure class="carousel-slide cr-quotes-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+                  <svg class="cr-quotes-mark" aria-hidden="true"><use href="#i-quote"></use></svg>
+                  <blockquote class="cr-quotes-text">Clients get a link instead of a status deck. They read it, they comment, and we stopped building slides about work we could have been doing.</blockquote>
+                  <figcaption class="cr-quotes-who">
+                    <span class="avatar avatar-lg"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=112&amp;h=112&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="112" height="112" loading="lazy" decoding="async"></span>
+                    <span class="stack stack-0">
+                      <span class="fw-semi">Lena Fischer</span>
+                      <span class="text-sm text-muted">Design Director, Studio Morrow</span>
+                    </span>
+                  </figcaption>
+                </figure>
+                <figure class="carousel-slide cr-quotes-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+                  <svg class="cr-quotes-mark" aria-hidden="true"><use href="#i-quote"></use></svg>
+                  <blockquote class="cr-quotes-text">Twelve people, four time zones and one calendar that everyone actually trusts. That alone paid for the year.</blockquote>
+                  <figcaption class="cr-quotes-who">
+                    <span class="avatar avatar-lg"><img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=112&amp;h=112&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="112" height="112" loading="lazy" decoding="async"></span>
+                    <span class="stack stack-0">
+                      <span class="fw-semi">Tom Whitfield</span>
+                      <span class="text-sm text-muted">Founder, Kiln Coffee Roasters</span>
+                    </span>
+                  </figcaption>
+                </figure>
+              </div>
+              <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous quote">
+                <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-left"></use></svg>
+              </button>
+              <button class="carousel-arrow carousel-next" type="button" aria-label="Next quote">
+                <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right"></use></svg>
+              </button>
+              <div class="carousel-dots"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== 05 Logo marquee ===== -->
+    <section class="variant" id="cr-logos" aria-labelledby="cr-logos-title">
+      <div class="bar variant-head">
+        <span class="badge">05</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="cr-logos-title">Logo marquee</h2>
+          <p class="text-sm text-muted">Two rows of wordmarks drifting in opposite directions; hover to pause. Best for a "trusted by" band.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#cr-logos-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="cr-logos-demo">
+        <!-- Not a .carousel and no JavaScript: a .marquee is two identical tracks that CSS
+             slides in a loop. The second track is aria-hidden so each name is read once.
+             Hover pauses it, and reduced motion stops it. Real logos would be <img> or SVG. -->
+        <section class="cr-logos" aria-labelledby="cr-logos-heading">
+          <p class="cr-logos-title" id="cr-logos-heading">Trusted by 2,000 teams who ship every week</p>
+          <div class="marquee">
+            <ul class="marquee-track">
+              <li class="cr-logos-mark"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#sparkle"></use></svg>Fieldnote</li>
+              <li class="cr-logos-mark cr-logos-serif">Morrow &amp; Co</li>
+              <li class="cr-logos-mark cr-logos-wide">Tidewater</li>
+              <li class="cr-logos-mark"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#gauge"></use></svg>Kiln</li>
+              <li class="cr-logos-mark cr-logos-mono">ostra_</li>
+              <li class="cr-logos-mark cr-logos-light"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#map-pin"></use></svg>Parcel+Pine</li>
+              <li class="cr-logos-mark cr-logos-serif">Halyard</li>
+            </ul>
+            <ul class="marquee-track" aria-hidden="true">
+              <li class="cr-logos-mark"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#sparkle"></use></svg>Fieldnote</li>
+              <li class="cr-logos-mark cr-logos-serif">Morrow &amp; Co</li>
+              <li class="cr-logos-mark cr-logos-wide">Tidewater</li>
+              <li class="cr-logos-mark"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#gauge"></use></svg>Kiln</li>
+              <li class="cr-logos-mark cr-logos-mono">ostra_</li>
+              <li class="cr-logos-mark cr-logos-light"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#map-pin"></use></svg>Parcel+Pine</li>
+              <li class="cr-logos-mark cr-logos-serif">Halyard</li>
+            </ul>
+          </div>
+          <div class="marquee cr-logos-reverse">
+            <ul class="marquee-track">
+              <li class="cr-logos-mark cr-logos-wide">Northwind</li>
+              <li class="cr-logos-mark"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#sun"></use></svg>Brightline</li>
+              <li class="cr-logos-mark cr-logos-mono">quarry/</li>
+              <li class="cr-logos-mark cr-logos-serif">Saltmarsh</li>
+              <li class="cr-logos-mark"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#shield"></use></svg>Lumen</li>
+              <li class="cr-logos-mark cr-logos-light">Crewline</li>
+              <li class="cr-logos-mark cr-logos-wide">Altura</li>
+            </ul>
+            <ul class="marquee-track" aria-hidden="true">
+              <li class="cr-logos-mark cr-logos-wide">Northwind</li>
+              <li class="cr-logos-mark"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#sun"></use></svg>Brightline</li>
+              <li class="cr-logos-mark cr-logos-mono">quarry/</li>
+              <li class="cr-logos-mark cr-logos-serif">Saltmarsh</li>
+              <li class="cr-logos-mark"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#shield"></use></svg>Lumen</li>
+              <li class="cr-logos-mark cr-logos-light">Crewline</li>
+              <li class="cr-logos-mark cr-logos-wide">Altura</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== 06 Gallery with thumbnails ===== -->
+    <section class="variant" id="cr-gallery" aria-labelledby="cr-gallery-title">
+      <div class="bar variant-head">
+        <span class="badge">06</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="cr-gallery-title">Gallery with thumbnails</h2>
+          <p class="text-sm text-muted">A photo carousel driven by a thumbnail strip, beside the listing details. Best for rentals, real estate and product pages.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#cr-gallery-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="cr-gallery-demo">
+        <!-- Needs deck-extras.js, which gives the carousel element a .carousel API
+             (go, current) and fires deck:slide whenever the slide changes. -->
+        <section class="cr-gallery" aria-labelledby="cr-gallery-heading">
+          <div>
+            <div class="carousel" id="cr-gallery-carousel" data-deck-carousel role="region" aria-roledescription="carousel" aria-label="Photos of The Larch House">
+              <div class="carousel-track">
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 5">
+                  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1100&amp;h=733&amp;q=80&amp;auto=format&amp;fit=crop" alt="The house at dusk: dark timber cladding, lit glass walls and a big tree over the lawn" width="1100" height="733" loading="lazy" decoding="async">
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 5">
+                  <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1100&amp;h=733&amp;q=80&amp;auto=format&amp;fit=crop" alt="Open-plan living room with a white sofa, a walnut feature wall and the kitchen beyond" width="1100" height="733" loading="lazy" decoding="async">
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 5">
+                  <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1100&amp;h=733&amp;q=80&amp;auto=format&amp;fit=crop" alt="White kitchen with a marble worktop, a bowl of lemons and a gas hob" width="1100" height="733" loading="lazy" decoding="async">
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 5">
+                  <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1100&amp;h=733&amp;q=80&amp;auto=format&amp;fit=crop" alt="Reading corner with a mustard armchair, a brass floor lamp and a framed print" width="1100" height="733" loading="lazy" decoding="async">
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="5 of 5">
+                  <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1100&amp;h=733&amp;q=80&amp;auto=format&amp;fit=crop" alt="Sunny snug with a grey sofa, bookshelves and hanging plants" width="1100" height="733" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous photo">
+                <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-left"></use></svg>
+              </button>
+              <button class="carousel-arrow carousel-next" type="button" aria-label="Next photo">
+                <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right"></use></svg>
+              </button>
+              <span class="cr-gallery-count nums" aria-hidden="true">1 / 5</span>
+            </div>
+            <div class="cr-gallery-thumbs" id="cr-gallery-thumbs" role="group" aria-label="Choose a photo">
+              <button class="cr-gallery-thumb" type="button" data-slide="0" aria-current="true" aria-label="Photo 1: the house at dusk">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=180&amp;h=135&amp;q=70&amp;auto=format&amp;fit=crop" alt="" width="180" height="135" loading="lazy" decoding="async">
+              </button>
+              <button class="cr-gallery-thumb" type="button" data-slide="1" aria-current="false" aria-label="Photo 2: living room">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=180&amp;h=135&amp;q=70&amp;auto=format&amp;fit=crop" alt="" width="180" height="135" loading="lazy" decoding="async">
+              </button>
+              <button class="cr-gallery-thumb" type="button" data-slide="2" aria-current="false" aria-label="Photo 3: kitchen">
+                <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=180&amp;h=135&amp;q=70&amp;auto=format&amp;fit=crop" alt="" width="180" height="135" loading="lazy" decoding="async">
+              </button>
+              <button class="cr-gallery-thumb" type="button" data-slide="3" aria-current="false" aria-label="Photo 4: reading corner">
+                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=180&amp;h=135&amp;q=70&amp;auto=format&amp;fit=crop" alt="" width="180" height="135" loading="lazy" decoding="async">
+              </button>
+              <button class="cr-gallery-thumb" type="button" data-slide="4" aria-current="false" aria-label="Photo 5: the snug">
+                <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=180&amp;h=135&amp;q=70&amp;auto=format&amp;fit=crop" alt="" width="180" height="135" loading="lazy" decoding="async">
+              </button>
+            </div>
+          </div>
+
+          <div class="stack stack-6">
+            <div class="stack stack-2">
+              <p class="eyebrow">Entire home · Tumalo, Oregon</p>
+              <h3 class="cr-gallery-title" id="cr-gallery-heading">The Larch House</h3>
+              <span class="cluster cluster-tight text-sm">
+                <svg class="icon icon-sm" style="color:var(--accent-500)" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill-sm"></use></svg>
+                <span class="fw-semi nums">4.96</span>
+                <span class="text-muted">· 128 stays · Hosted by Maren</span>
+              </span>
+            </div>
+            <p class="text-muted">
+              A timber house on four acres of juniper, twenty minutes from the trailheads.
+              Glass on three sides, a wood stove, and a deck that faces the Cascades.
+            </p>
+            <ul class="cr-gallery-facts">
+              <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users-sm"></use></svg>Sleeps 6</li>
+              <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home-sm"></use></svg>3 bedrooms</li>
+              <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#sun-sm"></use></svg>South-facing deck</li>
+              <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#car-sm"></use></svg>Parking for 2</li>
+            </ul>
+            <div class="panel stack stack-4">
+              <div class="bar">
+                <span><span class="cr-gallery-price nums">$310</span> <span class="text-sm text-muted">/ night</span></span>
+                <span class="badge badge-good push">Free cancellation</span>
+              </div>
+              <a class="btn btn-primary btn-block btn-lg" href="#">Check availability</a>
+              <p class="text-xs text-muted text-center">You won't be charged yet</p>
+            </div>
+          </div>
+        </section>
+        <script>
+          /* Thumbnails drive the carousel through deck-extras' API, and the
+             deck:slide event keeps aria-current and the counter in step when
+             the reader swipes or uses the arrows instead. */
+          (() => {
+            const car = document.getElementById('cr-gallery-carousel');
+            const thumbs = [...document.querySelectorAll('#cr-gallery-thumbs [data-slide]')];
+            const count = car.querySelector('.cr-gallery-count');
+            thumbs.forEach(t => t.addEventListener('click', () => {
+              const i = Number(t.dataset.slide);
+              if (car.carousel) car.carousel.go(i);
+              else car.querySelectorAll('.carousel-slide')[i].scrollIntoView({ block: 'nearest', inline: 'center' });
+            }));
+            car.addEventListener('deck:slide', e => {
+              const i = e.detail.index;
+              thumbs.forEach((t, n) => t.setAttribute('aria-current', String(n === i)));
+              count.textContent = `${i + 1} / ${thumbs.length}`;
+            });
+          })();
+        </script>
+      </div>
+    </section>
+
+    <!-- ===== 07 Coverflow ===== -->
+    <section class="variant" id="cr-cover" aria-labelledby="cr-cover-title">
+      <div class="bar variant-head">
+        <span class="badge">07</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="cr-cover-title">Coverflow</h2>
+          <p class="text-sm text-muted">Book covers on a scroll-snap strip that tilt away from the centre in 3D. Best for albums, books and anything with a cover.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#cr-cover-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="cr-cover-demo">
+        <!-- Not a .carousel: .coverflow is wired by deck.js alone. Under reduced
+             motion the books sit flat and the strip simply scrolls. -->
+        <section class="cr-cover" aria-labelledby="cr-cover-heading">
+          <div class="stack stack-2 cr-cover-head">
+            <p class="eyebrow">Staff picks · October</p>
+            <h3 class="cr-cover-title" id="cr-cover-heading">Seven books we could not put down</h3>
+          </div>
+          <div class="coverflow cr-cover-strip" id="cr-cover-strip" tabindex="0" role="region" aria-label="Staff picks. Scroll sideways for more">
+            <a class="cr-cover-book" href="#">
+              <span class="cr-cover-art cr-cover-a" aria-hidden="true">
+                <span class="cr-cover-kicker">A novel</span>
+                <span class="cr-cover-name">The Salt Road</span>
+                <span class="cr-cover-author">Mira Castell</span>
+              </span>
+              <span class="cr-cover-meta"><span class="fw-semi">The Salt Road</span><span class="text-xs text-muted">Mira Castell · $18</span></span>
+            </a>
+            <a class="cr-cover-book" href="#">
+              <span class="cr-cover-art cr-cover-b" aria-hidden="true">
+                <span class="cr-cover-kicker">Stories</span>
+                <span class="cr-cover-name">Small Hours</span>
+                <span class="cr-cover-author">Jonah Leaf</span>
+              </span>
+              <span class="cr-cover-meta"><span class="fw-semi">Small Hours</span><span class="text-xs text-muted">Jonah Leaf · $16</span></span>
+            </a>
+            <a class="cr-cover-book" href="#">
+              <span class="cr-cover-art cr-cover-c" aria-hidden="true">
+                <span class="cr-cover-kicker">Nature writing</span>
+                <span class="cr-cover-name">A Field Guide to Quiet</span>
+                <span class="cr-cover-author">Ana Ribeiro</span>
+              </span>
+              <span class="cr-cover-meta"><span class="fw-semi">A Field Guide to Quiet</span><span class="text-xs text-muted">Ana Ribeiro · $22</span></span>
+            </a>
+            <a class="cr-cover-book" href="#">
+              <span class="cr-cover-art cr-cover-d" aria-hidden="true">
+                <span class="cr-cover-kicker">Travel</span>
+                <span class="cr-cover-name">Ninety Days North</span>
+                <span class="cr-cover-author">Per Holm</span>
+              </span>
+              <span class="cr-cover-meta"><span class="fw-semi">Ninety Days North</span><span class="text-xs text-muted">Per Holm · $24</span></span>
+            </a>
+            <a class="cr-cover-book" href="#">
+              <span class="cr-cover-art cr-cover-e" aria-hidden="true">
+                <span class="cr-cover-kicker">Architecture</span>
+                <span class="cr-cover-name">A Grammar of Rooms</span>
+                <span class="cr-cover-author">Ines Okoro</span>
+              </span>
+              <span class="cr-cover-meta"><span class="fw-semi">A Grammar of Rooms</span><span class="text-xs text-muted">Ines Okoro · $30</span></span>
+            </a>
+            <a class="cr-cover-book" href="#">
+              <span class="cr-cover-art cr-cover-f" aria-hidden="true">
+                <span class="cr-cover-kicker">Poems</span>
+                <span class="cr-cover-name">Glasshouse</span>
+                <span class="cr-cover-author">Theo Marsh</span>
+              </span>
+              <span class="cr-cover-meta"><span class="fw-semi">Glasshouse</span><span class="text-xs text-muted">Theo Marsh · $14</span></span>
+            </a>
+            <a class="cr-cover-book" href="#">
+              <span class="cr-cover-art cr-cover-g" aria-hidden="true">
+                <span class="cr-cover-kicker">A novel</span>
+                <span class="cr-cover-name">The Long Weekend</span>
+                <span class="cr-cover-author">Clara Benn</span>
+              </span>
+              <span class="cr-cover-meta"><span class="fw-semi">The Long Weekend</span><span class="text-xs text-muted">Clara Benn · $17</span></span>
+            </a>
+          </div>
+          <p class="text-xs text-faint text-center">Drag, swipe, or focus the strip and use the arrow keys</p>
+        </section>
+        <script>
+          /* Open on the middle book, so there are covers turned away on both sides. */
+          document.addEventListener('DOMContentLoaded', () => {
+            const strip = document.getElementById('cr-cover-strip');
+            const mid = strip.children[Math.floor(strip.children.length / 2)];
+            strip.scrollLeft = mid.offsetLeft - (strip.clientWidth - mid.offsetWidth) / 2;
+          });
+        </script>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ===== Page footer (showcase chrome) ===== -->
+<footer class="footer page-foot">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>Deck templates · MIT</span>
+      <span class="push cluster">
+        <a href="index.php">Templates</a>
+        <a href="../docs/index.php">Docs</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- Copy buttons. The markup is snapshotted now, before deck.js runs, so the
+     copied HTML has none of the attributes deck.js adds at runtime. -->
+<script>
+  (() => {
+    const pristine = new Map();
+    document.querySelectorAll('[data-copy]').forEach((btn) => {
+      const target = document.querySelector(btn.dataset.copy);
+      if (target) pristine.set(btn, target.innerHTML);
+    });
+
+    const dedent = (html) => {
+      const lines = html.replace(/^\s*\n/, '').replace(/\s+$/, '').split('\n');
+      const indent = Math.min(...lines.filter((l) => l.trim()).map((l) => l.match(/^ */)[0].length));
+      return lines.map((l) => l.slice(indent)).join('\n') + '\n';
+    };
+
+    document.addEventListener('click', async (event) => {
+      const btn = event.target.closest('[data-copy]');
+      if (!btn || !pristine.has(btn)) return;
+      const name = btn.closest('.variant')?.querySelector('h2')?.textContent.trim() || 'Variant';
+      const label = [...btn.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
+      if (!navigator.clipboard?.writeText) {
+        Deck.toast({ title: 'Copy unavailable', text: 'This browser blocks clipboard access here. View source instead.', kind: 'warn' });
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(dedent(pristine.get(btn)));
+      } catch {
+        Deck.toast({ title: 'Copy failed', text: 'The clipboard refused the write. View source instead.', kind: 'bad' });
+        return;
+      }
+      Deck.toast({ title: 'Copied', text: `${name} HTML is on your clipboard.`, kind: 'good', duration: 2500 });
+      if (label) {
+        label.textContent = ' Copied';
+        clearTimeout(btn._reset);
+        btn._reset = setTimeout(() => { label.textContent = ' Copy HTML'; }, 1500);
+      }
+    });
+  })();
+</script>
+</body>
+</html>

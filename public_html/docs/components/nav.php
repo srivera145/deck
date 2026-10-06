@@ -28,7 +28,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Nav bar</h1>
   <p class="lede">
     A brand on one side, destinations on the other, a hairline underneath. It is four
@@ -37,7 +37,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     For top-level navigation on a page with a handful of destinations. Above about six it
@@ -75,7 +75,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="mobile">What happens on a narrow screen</h2>
   <p>
     <code>.navbar-links</code> is <code>display: none</code> and only becomes a flex row at
@@ -89,7 +89,7 @@ require __DIR__ . '/../_layout.php';
     right one depends on the application — but it means a <code>.navbar</code> on its own is
     an unfinished component on a phone. The three answers Deck already has parts for:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>A <a href="drawer.php">drawer</a></strong> opened by a button in the bar. The
       usual choice for a site with more than a few destinations.
@@ -133,7 +133,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="link">.nav-link, and when not to use a button</h2>
   <p>
     <code>.nav-link</code> is one destination. It is muted until hovered, and
@@ -161,20 +161,20 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/07-components.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--control-h-lg', '--line', '--text-md', '--text-sm', '--text-muted', '--surface-hover', '--brand', '--brand-soft', '--r-sm', '--dur-1']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Put it in a <code>&lt;nav&gt;</code> with a label.</strong>
       <code>.navbar</code> is a class, not an element — it confers no role. A page with more
@@ -210,7 +210,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The bar is a flex row and the link padding is symmetrical, so the whole thing mirrors
@@ -234,7 +234,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     <code>.nav-link</code> transitions its background and text colour over
@@ -244,7 +244,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.navbar-links</code> is in the "chrome that should never print" list in
@@ -259,7 +259,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Show the links earlier than 48rem */
@@ -283,9 +283,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not on a phone without a disclosure.</strong> The link row is hidden and
       nothing takes its place. This is the failure mode of this component.

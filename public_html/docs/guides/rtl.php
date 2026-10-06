@@ -28,7 +28,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Support right-to-left languages</h1>
   <p class="lede">
     You need an Arabic, Hebrew, Persian or Urdu version of your interface and you are
@@ -38,7 +38,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="answer">The short answer</h2>
   <pre class="dx-code"><code>&lt;html lang="ar" dir="rtl"&gt;</code></pre>
   <p>
@@ -67,7 +67,7 @@ Deck.dir('rtl');   // flip, and remember it</code></pre>
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="why">Why it costs nothing</h2>
   <p>
     Every spacing and alignment property in Deck names the writing axis rather than the
@@ -99,7 +99,7 @@ Deck.dir('rtl');   // flip, and remember it</code></pre>
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="icons">Icons that point</h2>
   <p>
     An arrow, a chevron, a reply glyph and a back button all mean "the direction of
@@ -124,7 +124,7 @@ Deck.dir('rtl');   // flip, and remember it</code></pre>
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="isolate">What must never flip</h2>
   <p>
     This is where RTL bugs actually live. Some values have one true direction regardless of
@@ -137,24 +137,30 @@ Deck.dir('rtl');   // flip, and remember it</code></pre>
       ['dir-ltr', 'dir-rtl', 'bidi-isolate', 'bidi-plaintext', 'code-ltr'],
       'Direction and bidi utilities'
   ); ?>
-  <dl class="stack-3">
-    <dt><strong><code>.code-ltr</code></strong></dt>
-    <dd>
-      A path, a URL, a command, a code span. Always left to right, always isolated, and
-      aligned to the reading edge so it still sits correctly in the paragraph.
-    </dd>
-    <dt><strong><code>.bidi-isolate</code></strong></dt>
-    <dd>
-      A run whose direction you know but which differs from the page — an English product
-      name inside an Arabic sentence.
-    </dd>
-    <dt><strong><code>.bidi-plaintext</code></strong></dt>
-    <dd>
-      A run whose direction you do <em>not</em> know: a chat message, a comment, a
-      user-supplied display name. The direction is taken from the first strong character in
-      the string, so an Arabic message and an English message in the same list each read
-      correctly. This is the one to reach for on anything a person typed.
-    </dd>
+  <dl class="stack stack-3">
+    <div class="stack stack-1">
+      <dt><strong><code>.code-ltr</code></strong></dt>
+      <dd>
+        A path, a URL, a command, a code span. Always left to right, always isolated, and
+        aligned to the reading edge so it still sits correctly in the paragraph.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong><code>.bidi-isolate</code></strong></dt>
+      <dd>
+        A run whose direction you know but which differs from the page — an English product
+        name inside an Arabic sentence.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong><code>.bidi-plaintext</code></strong></dt>
+      <dd>
+        A run whose direction you do <em>not</em> know: a chat message, a comment, a
+        user-supplied display name. The direction is taken from the first strong character in
+        the string, so an Arabic message and an English message in the same list each read
+        correctly. This is the one to reach for on anything a person typed.
+      </dd>
+    </div>
   </dl>
   <p class="dx-note">
     Deck already isolates <code>code</code>, <code>kbd</code>, <code>samp</code>,
@@ -164,7 +170,7 @@ Deck.dir('rtl');   // flip, and remember it</code></pre>
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="motion">Motion flips too</h2>
   <p>
     The entrance animations move toward the reader, so their keyframes mirror with the
@@ -175,9 +181,9 @@ Deck.dir('rtl');   // flip, and remember it</code></pre>
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="check">Checking it</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       Flip the whole page with the button above, or set <code>dir="rtl"</code> in dev tools
       on the <code>&lt;html&gt;</code> element. Look at the sidebar, the table headers, the

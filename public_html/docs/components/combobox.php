@@ -34,7 +34,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Combobox</h1>
   <p class="lede">
     <code>.combo</code> is a filtering select: type to narrow a long list, pick one or
@@ -45,7 +45,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it when a <a href="select.php">select</a> would be unusable: more than about
@@ -68,7 +68,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="select">The hidden select is the point</h2>
   <p>
     Most combobox components replace the native control entirely and then need a hidden
@@ -79,7 +79,7 @@ require __DIR__ . '/../_layout.php';
   <p>
     Three consequences follow, and they are the reason to prefer this shape:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>An ordinary form post works.</strong> No JSON, no hidden field, no special
       case in the handler. The server sees a select.
@@ -103,7 +103,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="control">The control</h2>
   <p>
     <code>.combo-control</code> is the box, styled to match
@@ -144,7 +144,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="options">Option rows</h2>
   <p>
     <code>.combo-option</code> has the same three-part shape as a
@@ -189,7 +189,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="two-states">Two highlight states, deliberately different</h2>
   <p>
     An option can be <em>active</em> — where the keyboard is — and
@@ -215,7 +215,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="anchor">Escaping the modal</h2>
   <p>
     By default <code>.combo-list</code> is a positioned sibling, and
@@ -238,9 +238,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="extras">Create, count, loading, empty</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li><code>.combo-create</code> — the "Add …" row for a value not in the list, shown with <code>data-create</code>.</li>
     <li><code>.combo-count</code> — a "+3 more" pill when tokens overflow the control.</li>
     <li><code>.combo-loading</code> — a placeholder row while options are fetched.</li>
@@ -250,20 +250,20 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/11-combobox.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--surface', '--surface-hover', '--line', '--line-strong', '--ink-400', '--focus', '--ring', '--brand', '--brand-soft', '--brand-soft-text', '--brand-300', '--bad-500', '--text-faint', '--text-muted', '--text-xs', '--text-2xs', '--r-sm', '--space-1', '--space-2', '--space-3', '--dur-2']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The ARIA is built by the script, not by you.</strong>
       <code>deck.js</code> gives the input <code>role="combobox"</code>,
@@ -318,7 +318,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The tick is pushed with <code>margin-inline-start: auto</code>, groups and options use
@@ -332,7 +332,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The list animates in with <code>dk-combo-in</code>, tokens animate as they are added,
@@ -348,7 +348,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.combo-list</code> is in the never-print list, and
@@ -359,7 +359,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* A taller list */
@@ -381,9 +381,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a short list.</strong> Under about twenty options a native
       <a href="select.php">select</a> is better: no script, platform picker on a phone, and

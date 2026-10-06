@@ -28,7 +28,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Video</h1>
   <p class="lede">
     A frame that reserves the right amount of space before anything loads, holds a
@@ -38,7 +38,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Any time you put a video on a page. The frame's job is to stop the layout jumping when
@@ -66,13 +66,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="ratios">Ratios and fit</h2>
   <p>
     The frame is <code>aspect-ratio: var(--ratio, 16 / 9)</code>. Three modifiers change it,
     and <code>--ratio</code> takes anything else directly.
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li><code>.video-square</code> — 1:1, for a social embed.</li>
     <li><code>.video-portrait</code> — 9:16, for vertical video.</li>
     <li><code>.video-wide</code> — 21:9, for anamorphic footage.</li>
@@ -110,7 +110,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="poster">The poster overlay</h2>
   <p>
     A third-party embed loads a player, a tracker and several hundred kilobytes the moment
@@ -173,20 +173,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/24-media.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--ink-950', '--surface', '--text', '--brand-500', '--shadow-3', '--r-md', '--r-full', '--r-xs', '--text-xs', '--dur-2']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Captions are not optional, and Deck cannot provide them.</strong> A
       <code>&lt;track kind="captions"&gt;</code> on a self-hosted video, or captions enabled
@@ -230,7 +230,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The frame itself has no direction. <code>.video-meta</code> is placed with
@@ -268,7 +268,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Deck's own motion here is one transition: <code>.video-play</code> scales to 1.08 on
@@ -284,7 +284,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.video</code> does not print. It is not in <code>src/99-print.css</code> — but it
@@ -309,7 +309,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One frame, no layer needed */
 <div class="video" style="--ratio:4/3"> … </div>
@@ -328,9 +328,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for an animated GIF or a decorative loop.</strong> Those are images with
       no controls; wrap them in a plain figure and respect reduced motion.

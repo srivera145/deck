@@ -59,7 +59,7 @@ function demo_table(string $classes, array $rows, bool $labels = true): string
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Table</h1>
   <p class="lede">
     <code>.table</code> styles a real <code>&lt;table&gt;</code>. It stays a table at
@@ -69,7 +69,7 @@ function demo_table(string $classes, array $rows, bool $labels = true): string
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use a table when the reader needs to compare values <em>down</em> a column: amounts,
@@ -85,7 +85,7 @@ function demo_table(string $classes, array $rows, bool $labels = true): string
   <?php docs_example(demo_table('table', $rows, false), 'The wrapper carries the border and the horizontal scroll', 'stack'); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="header">The sticky header</h2>
   <p>
     <code>.table thead th</code> is <code>position: sticky</code> with
@@ -101,7 +101,7 @@ function demo_table(string $classes, array $rows, bool $labels = true): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="num">Numeric columns</h2>
   <p>
     <code>.num</code> on a cell sets <code>text-align: end</code> and
@@ -117,7 +117,7 @@ function demo_table(string $classes, array $rows, bool $labels = true): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="compact">Compact</h2>
   <p>
     <code>.table-compact</code> drops cell padding from
@@ -131,7 +131,7 @@ function demo_table(string $classes, array $rows, bool $labels = true): string
   <?php docs_example(demo_table('table table-compact', $rows, false), '', 'stack'); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="stack">Restacking on a phone</h2>
   <p>
     Below <code>40rem</code>, <code>.table-stack</code> turns each row into a small
@@ -152,7 +152,7 @@ function demo_table(string $classes, array $rows, bool $labels = true): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     Generated from <code>src/07-components.css</code> by
@@ -163,14 +163,14 @@ function demo_table(string $classes, array $rows, bool $labels = true): string
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--surface', '--surface-2', '--surface-hover', '--line', '--r-md', '--r-sm', '--text-sm', '--text-xs', '--text-muted', '--space-2', '--space-3', '--space-4']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong><code>scope</code> is on you.</strong> Deck styles
       <code>&lt;th&gt;</code> but cannot know whether it heads a column or a row. Every
@@ -218,7 +218,7 @@ function demo_table(string $classes, array $rows, bool $labels = true): string
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Cells use <code>text-align: start</code> and <code>.num</code> uses
@@ -243,7 +243,7 @@ function demo_table(string $classes, array $rows, bool $labels = true): string
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The only animated property is the row hover background, which is not transitioned at
@@ -252,13 +252,13 @@ function demo_table(string $classes, array $rows, bool $labels = true): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     Print is where the table's design pays off, and
     <code>src/99-print.css</code> does more work here than anywhere else — twelve rules:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <code>display: table-header-group</code> on <code>&lt;thead&gt;</code>, so the
       header repeats at the top of every printed page.
@@ -280,7 +280,7 @@ function demo_table(string $classes, array $rows, bool $labels = true): string
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <p>
     No local custom properties. Override in <code>app.components</code>, which beats
@@ -300,9 +300,9 @@ function demo_table(string $classes, array $rows, bool $labels = true): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong><code>.table</code> versus <code>.dg</code>.</strong> The data grid brings
       sorting, column pinning, selection, virtual scrolling and a card mode. If you need

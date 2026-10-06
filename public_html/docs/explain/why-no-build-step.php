@@ -36,7 +36,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Why Deck has no build step</h1>
   <p class="lede">
     Deck has no build step, so it cannot strip out the parts of its stylesheet that a page
@@ -48,7 +48,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="cost">What having no build step costs</h2>
   <p>
     Deck's first tutorial builds an account settings page that uses 59 classes, which is
@@ -89,7 +89,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="history">What build steps were for</h2>
   <p>
     Much of what CSS build tools were adopted to provide now ships in browsers. Custom
@@ -112,7 +112,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="exchange">What Deck gets in exchange</h2>
   <p>
     Deck ships <code>deck.css</code>, which is its 26 source stylesheets concatenated in
@@ -159,7 +159,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="trimming">Where Deck can still be trimmed</h2>
   <p>
     Deck offers a manual, coarse form of trimming. The <code>dist/layers</code> folder
@@ -180,16 +180,18 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="not-for">Who Deck is not for</h2>
   <p>
     A team already productive in Tailwind CSS, with a design system built on it, should
     probably stay there. Tailwind's official IntelliSense extension gives Visual Studio Code
     autocompletion, linting and hover previews of the generated CSS; Zed and JetBrains IDEs
     include equivalent support; an official Prettier plugin sorts class names; and
-    first-party plugins such as the typography plugin extend the framework. Deck has none of
-    that tooling, and for a team whose toolchain already works, trading it for a stylesheet
-    without one is rarely a good exchange.
+    first-party plugins such as the typography plugin extend the framework. Deck's tooling
+    is thinner: <a href="../start/editor.php">an editor extension</a> for Visual Studio Code
+    and the editors built on it, nothing for JetBrains IDEs or Zed, no class sorter and no
+    plugins. For a team whose toolchain already works, trading it for that is rarely a good
+    exchange.
   </p>
   <p>
     A small marketing site that uses a few of Deck's components and none of its application
@@ -213,7 +215,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="case">The case in one paragraph</h2>
   <p>
     Deck's argument is that for server-rendered applications with many pages, many tenants

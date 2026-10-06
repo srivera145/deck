@@ -27,7 +27,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Cluster</h1>
   <p class="lede">
     <code>.cluster</code> is a flex row that <strong>wraps</strong>. That one word is the
@@ -38,7 +38,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it for any horizontal group whose length you do not control: action buttons,
@@ -66,14 +66,14 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="alignment">Alignment</h2>
   <p>
     Three variants, each setting <code>justify-content</code> and nothing else. They
     change where the items sit along the row; they never change the gap or the wrapping.
   </p>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="a-default">Default — packed to the start</h3>
     <?php
     docs_example(
@@ -88,7 +88,7 @@ require __DIR__ . '/../_layout.php';
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="a-end">Packed to the end</h3>
     <p class="text-muted">
       <code>flex-end</code>, which follows the writing direction — so it is the right
@@ -106,7 +106,7 @@ require __DIR__ . '/../_layout.php';
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="a-center">Centred</h3>
     <?php
     docs_example(
@@ -120,7 +120,7 @@ require __DIR__ . '/../_layout.php';
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="a-between">Space between</h3>
     <p class="text-muted">
       Pushes the first item to one end and the last to the other. With exactly two
@@ -145,7 +145,7 @@ require __DIR__ . '/../_layout.php';
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="gap">Gap</h2>
   <p>
     <code>.cluster</code> reads the same <code>--gap</code> as every other layout
@@ -162,7 +162,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-3">' . "\n" .
+      '<div class="stack stack-3">' . "\n" .
       '  <div class="cluster cluster-tight">' . "\n" .
       '    <span class="chip">Overdue</span><span class="chip">This week</span><span class="chip">Unassigned</span>' . "\n" .
       '  </div>' . "\n" .
@@ -182,7 +182,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="bar">The row that does not wrap</h2>
   <p>
     <a href="bar.php"><code>.bar</code></a> is the same idea with the wrapping removed: a
@@ -209,7 +209,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overflow">What happens when it does not fit</h2>
   <p>
     This is the difference that matters when you are choosing between the three
@@ -247,7 +247,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     Generated from <code>src/04-layout.css</code>. <code>.push</code> is listed because
@@ -257,14 +257,14 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--space-2', '--space-3', '--space-4', '--space-6']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>No semantics, as with every layout primitive.</strong> A cluster of links
       that is navigation needs a <code>&lt;nav&gt;</code> with a label; a cluster of tags
@@ -303,7 +303,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     <code>justify-content: flex-end</code> follows the writing direction, and
@@ -313,7 +313,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div dir="rtl" class="stack-3">' . "\n" .
+      '<div dir="rtl" class="stack stack-3">' . "\n" .
       '  <div class="cluster cluster-end" style="border:1px dashed var(--line);padding:var(--space-3)">' . "\n" .
       '    <button class="btn btn-sm">إلغاء</button>' . "\n" .
       '    <button class="btn btn-sm btn-primary">حفظ</button>' . "\n" .
@@ -329,7 +329,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing here animates or transitions. Wrapping happens at layout time and is not a
@@ -338,7 +338,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     No print rule. A wrapping flex row prints as a wrapping flex row, which is correct —
@@ -347,7 +347,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One cluster, no layer needed */
 <div class="cluster" style="--gap:var(--space-1)">
@@ -367,9 +367,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not when wrapping would be wrong.</strong> A navigation bar whose links
       drop onto a second line looks broken. Use <code>.bar</code>, and let the

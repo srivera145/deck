@@ -22,7 +22,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Switch</h1>
   <p class="lede">
     <code>.switch</code> goes on a <code>&lt;label&gt;</code> wrapping a real
@@ -32,7 +32,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use a switch when the change <strong>takes effect immediately</strong>: a setting
@@ -46,7 +46,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-2" style="max-inline-size:26rem">' . "\n" .
+      '<div class="stack stack-2" style="max-inline-size:26rem">' . "\n" .
       '  <label class="switch">' . "\n" .
       '    <input type="checkbox" checked>' . "\n" .
       '    <span>Two-factor authentication</span>' . "\n" .
@@ -62,7 +62,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="how">How it is drawn</h2>
   <p>
     <code>appearance: none</code> on the input, then a
@@ -94,7 +94,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rows">In a settings list</h2>
   <p>
     The most common home for a switch. The row is
@@ -132,7 +132,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="role">role="switch"</h2>
   <p>
     Deck does not add <code>role="switch"</code> for you. Added to the input, it changes
@@ -151,7 +151,7 @@ require __DIR__ . '/../_layout.php';
 </label>') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     <code>.switch</code> has no <code>.switch-*</code> variants, so the extractor does
@@ -162,14 +162,14 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--tap', '--ink-0', '--ink-300', '--brand-600', '--focus', '--r-full', '--shadow-2', '--space-3', '--dur-2']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>It is a real checkbox.</strong> Space toggles it, it is announced as a
       checkbox (or a switch, with the role), it submits with the form, and
@@ -210,7 +210,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The row is a flex line with a gap, so the track moves to the other side of the text on
@@ -233,7 +233,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div dir="rtl" class="stack-2">' . "\n" .
+      '<div dir="rtl" class="stack stack-2">' . "\n" .
       '  <label class="switch"><input type="checkbox" checked><span>المصادقة الثنائية</span></label>' . "\n" .
       '  <label class="switch"><input type="checkbox"><span>الملخص الأسبوعي</span></label>' . "\n" .
       '</div>',
@@ -243,7 +243,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The track transitions its background and the knob transitions its
@@ -259,7 +259,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> gives <code>.switch input</code> a
@@ -274,7 +274,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* A larger switch — four numbers have to move together */
@@ -295,9 +295,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not in a form with a Save button.</strong> That is a
       <a href="check.php"><code>.check</code></a>. The switch affordance says "this is

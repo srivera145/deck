@@ -27,7 +27,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Build a form that validates itself</h1>
   <p class="lede">
     Your form goes red on the first keystroke, because an empty required field is invalid
@@ -38,7 +38,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="answer">The short answer</h2>
   <p>
     Use real HTML validation attributes and let Deck style
@@ -55,7 +55,7 @@ require __DIR__ . '/../_layout.php';
     the difference is the whole complaint people have about native form validation.
   </p>
   <?php docs_example(
-      '<div class="stack-4" style="max-inline-size:26rem">' . "\n" .
+      '<div class="stack stack-4" style="max-inline-size:26rem">' . "\n" .
       '  <div class="field">' . "\n" .
       '    <label class="label" for="g-email">Email <span class="required">*</span></label>' . "\n" .
       '    <input class="input" id="g-email" type="email" required placeholder="you@example.com">' . "\n" .
@@ -71,7 +71,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="anatomy">The anatomy of a field</h2>
   <p>
     <code>.field</code> is a stack. The gap between the label, the control and the help
@@ -103,7 +103,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="server">Errors that come back from the server</h2>
   <p>
     The browser cannot know an email is already taken. For those, add
@@ -132,13 +132,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="yours">The four things Deck cannot do for you</h2>
   <p>
     Every one of these is markup rather than styling, so no framework can supply them. They
     are also the four that most often go missing.
   </p>
-  <ol class="stack-3">
+  <ol class="stack stack-3">
     <li>
       <strong>A <code>for</code> and an <code>id</code> on every label and control.</strong>
       This is what makes the label clickable, what enlarges the tap target to the whole row,
@@ -171,7 +171,7 @@ require __DIR__ . '/../_layout.php';
 &lt;/div&gt;</code></pre>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="controls">Controls that are really controls</h2>
   <p>
     The switch and the choice card are one real input wearing a costume — a
@@ -180,7 +180,7 @@ require __DIR__ . '/../_layout.php';
     with the form because it is a checkbox.
   </p>
   <?php docs_example(
-      '<div class="stack-3" style="max-inline-size:28rem">' . "\n" .
+      '<div class="stack stack-3" style="max-inline-size:28rem">' . "\n" .
       '  <label class="switch"><input type="checkbox" checked><span>Weekly summary email</span></label>' . "\n" .
       '  <label class="check"><input type="checkbox"><span>I agree to the terms</span></label>' . "\n" .
       '  <label class="check check-card">' . "\n" .
@@ -204,7 +204,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="submit">Submitting</h2>
   <p>
     Let the browser block the submit when the form is invalid — that is what
@@ -233,9 +233,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="dont">Things not to do</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Do not validate on every keystroke.</strong> Telling someone their email is
       invalid while they are on the fourth character is technically true and practically
@@ -259,7 +259,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="next">Next</h2>
   <p>
     Every control has its own page with the full class table:

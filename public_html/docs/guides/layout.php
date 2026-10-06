@@ -42,7 +42,7 @@ $PRIMITIVES = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Stop writing margins</h1>
   <p class="lede">
     You are about to put <code>margin-bottom</code> on something. This page is an argument
@@ -52,14 +52,14 @@ $PRIMITIVES = [
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="the-move">The move</h2>
   <p>
     Spacing is a property of a <em>group</em>, not of the things in it. So it goes on the
     parent, once, as a <code>gap</code> — not on each child as a margin.
   </p>
   <div class="split">
-    <div class="stack-2">
+    <div class="stack stack-2">
       <p class="text-sm fw-semi text-bad">The habit</p>
       <pre class="dx-code"><code>&lt;div&gt;
   &lt;h2 class="mb-2"&gt;Title&lt;/h2&gt;
@@ -67,9 +67,9 @@ $PRIMITIVES = [
   &lt;button class="btn"&gt;Action&lt;/button&gt;
 &lt;/div&gt;</code></pre>
     </div>
-    <div class="stack-2">
+    <div class="stack stack-2">
       <p class="text-sm fw-semi text-good">The move</p>
-      <pre class="dx-code"><code>&lt;div class="stack-3"&gt;
+      <pre class="dx-code"><code>&lt;div class="stack stack-3"&gt;
   &lt;h2&gt;Title&lt;/h2&gt;
   &lt;p&gt;Body copy.&lt;/p&gt;
   &lt;button class="btn"&gt;Action&lt;/button&gt;
@@ -82,9 +82,9 @@ $PRIMITIVES = [
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="bugs">Four bugs you just deleted</h2>
-  <ol class="stack-4">
+  <ol class="stack stack-4">
     <li>
       <strong>The trailing space.</strong> <code>.mb-4</code> on every child puts a margin
       under the last one too, so the group ends with a gap that is not between anything. In
@@ -123,7 +123,7 @@ $PRIMITIVES = [
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="deck-itself">Deck barely uses margin either</h2>
   <p>
     This is not advice the framework gives and does not follow. The reset opens with
@@ -145,7 +145,7 @@ $PRIMITIVES = [
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="primitives">The eight classes</h2>
   <p>
     You lay out with about eight classes, not forty. Each one is a container, each one sets
@@ -191,18 +191,18 @@ $PRIMITIVES = [
     Which means two ways to change it, and both are legitimate. Use the named step when it
     exists, and set the property directly when you want a value the scale does not carry:
   </p>
-  <pre class="dx-code"><code>&lt;div class="stack-2"&gt;…&lt;/div&gt;                      &lt;!-- named step --&gt;
+  <pre class="dx-code"><code>&lt;div class="stack stack-2"&gt;…&lt;/div&gt;                      &lt;!-- named step --&gt;
 &lt;div class="stack" style="--gap: var(--space-10)"&gt;…&lt;/div&gt;  &lt;!-- any token --&gt;</code></pre>
   <?php docs_example(
-      '<div class="stack-1 bg-sunken p-3 r-md">' . "\n" .
+      '<div class="stack stack-1 bg-sunken p-3 r-md">' . "\n" .
       '  <div class="bg-surface p-2 r-sm">stack-1</div>' . "\n" .
       '  <div class="bg-surface p-2 r-sm">4px apart</div>' . "\n" .
       '</div>' . "\n" .
-      '<div class="stack-4 bg-sunken p-3 r-md">' . "\n" .
+      '<div class="stack stack-4 bg-sunken p-3 r-md">' . "\n" .
       '  <div class="bg-surface p-2 r-sm">stack-4</div>' . "\n" .
       '  <div class="bg-surface p-2 r-sm">16px apart</div>' . "\n" .
       '</div>' . "\n" .
-      '<div class="stack-8 bg-sunken p-3 r-md">' . "\n" .
+      '<div class="stack stack-8 bg-sunken p-3 r-md">' . "\n" .
       '  <div class="bg-surface p-2 r-sm">stack-8</div>' . "\n" .
       '  <div class="bg-surface p-2 r-sm">32px apart</div>' . "\n" .
       '</div>',
@@ -211,7 +211,7 @@ $PRIMITIVES = [
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="composing">Composing them</h2>
   <p>
     The primitives nest, and nesting is how you get real layouts rather than by adding
@@ -219,9 +219,9 @@ $PRIMITIVES = [
     that.
   </p>
   <pre class="dx-code"><code>&lt;main class="container section"&gt;
-  &lt;div class="stack-8"&gt;
+  &lt;div class="stack stack-8"&gt;
 
-    &lt;div class="stack-2"&gt;
+    &lt;div class="stack stack-2"&gt;
       &lt;h1&gt;Invoices&lt;/h1&gt;
       &lt;p class="lede"&gt;Everything issued in the last 90 days.&lt;/p&gt;
     &lt;/div&gt;
@@ -232,15 +232,15 @@ $PRIMITIVES = [
     &lt;/div&gt;
 
     &lt;div class="grid"&gt;
-      &lt;article class="card"&gt;&lt;div class="card-body stack-2"&gt;…&lt;/div&gt;&lt;/article&gt;
-      &lt;article class="card"&gt;&lt;div class="card-body stack-2"&gt;…&lt;/div&gt;&lt;/article&gt;
+      &lt;article class="card"&gt;&lt;div class="card-body"&gt;…&lt;/div&gt;&lt;/article&gt;
+      &lt;article class="card"&gt;&lt;div class="card-body"&gt;…&lt;/div&gt;&lt;/article&gt;
     &lt;/div&gt;
 
   &lt;/div&gt;
 &lt;/main&gt;</code></pre>
   <?php docs_example(
-      '<div class="stack-6">' . "\n" .
-      '  <div class="stack-2">' . "\n" .
+      '<div class="stack stack-6">' . "\n" .
+      '  <div class="stack stack-2">' . "\n" .
       '    <h3>Invoices</h3>' . "\n" .
       '    <p class="lede">Everything issued in the last 90 days.</p>' . "\n" .
       '  </div>' . "\n" .
@@ -249,8 +249,8 @@ $PRIMITIVES = [
       '    <button class="btn btn-primary push">New invoice</button>' . "\n" .
       '  </div>' . "\n" .
       '  <div class="grid">' . "\n" .
-      '    <article class="card"><div class="card-body stack-2"><h4 class="card-title">INV-2291</h4><span class="badge badge-good">Paid</span></div></article>' . "\n" .
-      '    <article class="card"><div class="card-body stack-2"><h4 class="card-title">INV-2290</h4><span class="badge badge-warn">Pending</span></div></article>' . "\n" .
+      '    <article class="card"><div class="card-body"><h4 class="card-title">INV-2291</h4><span class="badge badge-good">Paid</span></div></article>' . "\n" .
+      '    <article class="card"><div class="card-body"><h4 class="card-title">INV-2290</h4><span class="badge badge-warn">Pending</span></div></article>' . "\n" .
       '  </div>' . "\n" .
       '</div>',
       'Five nested containers, zero margins, and it is already responsive',
@@ -264,13 +264,13 @@ $PRIMITIVES = [
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="keep">Where a margin is still right</h2>
   <p>
     This is not a prohibition. Three cases where a margin is the correct tool and a gap is
     not:
   </p>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>One element, one neighbour.</strong> A back link that needs to sit further
       from the heading below it than the stack's rhythm allows. That is genuinely about
@@ -294,28 +294,34 @@ $PRIMITIVES = [
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="gotchas">Two things that will look broken</h2>
-  <dl class="stack-3">
-    <dt><strong><code>.gap-3</code> on a plain <code>&lt;div&gt;</code> does nothing</strong></dt>
-    <dd>
-      <code>gap</code> only applies to flex, grid and multi-column containers. On anything
-      else it is inert, silently. Check the parent is really a flex or grid container —
-      usually you wanted <code>.stack-3</code>, which sets both.
-    </dd>
-    <dt><strong>A long word or a wide table pushes the page sideways</strong></dt>
-    <dd>
-      A flex item will not shrink below its content, and a grid track's minimum is
-      <code>auto</code>. So one unbreakable string inside a flex row drags the whole layout
-      past the viewport and you get a horizontal scrollbar on the body. The fix is
-      <code>.grow</code> — which sets <code>min-inline-size: 0</code> along with the flex —
-      or <code>.min-is-0</code> on a grid child. This is the most common layout bug in any
-      flex-based system and it is worth recognising on sight.
-    </dd>
+  <dl class="stack stack-3">
+    <div class="stack stack-1">
+      <dt><strong><code>.gap-3</code> on a plain <code>&lt;div&gt;</code> does nothing</strong></dt>
+      <dd>
+        <code>gap</code> only applies to flex, grid and multi-column containers. On anything
+        else it is inert, silently. Check the parent is really a flex or grid container —
+        usually you wanted <code>.stack</code>, which makes it one, with a step such as
+        <code>.stack-3</code> beside it for the gap. The step alone is the same trap: it
+        sets a gap property and nothing reads it.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong>A long word or a wide table pushes the page sideways</strong></dt>
+      <dd>
+        A flex item will not shrink below its content, and a grid track's minimum is
+        <code>auto</code>. So one unbreakable string inside a flex row drags the whole layout
+        past the viewport and you get a horizontal scrollbar on the body. The fix is
+        <code>.grow</code> — which sets <code>min-inline-size: 0</code> along with the flex —
+        or <code>.min-is-0</code> on a grid child. This is the most common layout bug in any
+        flex-based system and it is worth recognising on sight.
+      </dd>
+    </div>
   </dl>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="next">Next</h2>
   <p>
     The <a href="../reference/spacing.php">spacing reference</a> has the scale itself and

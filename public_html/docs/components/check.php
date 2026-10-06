@@ -29,7 +29,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Checkbox and radio</h1>
   <p class="lede">
     <code>.check</code> goes on a <code>&lt;label&gt;</code> that wraps a real
@@ -40,7 +40,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Checkboxes for any number of independent choices; radios for exactly one of a small
@@ -69,7 +69,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="drawn">How the tick is drawn</h2>
   <p>
     There is no icon and no background image. The <code>::before</code> is a solid block
@@ -103,7 +103,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="radio">Radios</h2>
   <p>
     Same class. The only difference in the stylesheet is
@@ -133,7 +133,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="indeterminate">Indeterminate</h2>
   <p>
     <code>:indeterminate</code> is a real CSS pseudo-class and Deck styles it: filled
@@ -156,7 +156,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="text">Two-line labels</h2>
   <p>
     <code>.check-text</code> makes the text a column so a
@@ -180,7 +180,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="card">Choice cards</h2>
   <p>
     <code>.check-card</code> adds a border, padding and a surface to the same label, and
@@ -216,7 +216,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="switch">Switch</h2>
   <p>
     <code>.switch</code> is the same pattern — a <code>&lt;label&gt;</code> wrapping a
@@ -249,7 +249,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="datagrid">In a data grid</h2>
   <p>
     <code>src/12-datagrid.css</code> reuses <code>.check</code> for the row-selection
@@ -261,20 +261,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/06-forms.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--tap', '--surface', '--line', '--line-strong', '--brand-400', '--brand-500', '--brand-600', '--brand-soft', '--text-on-brand', '--focus', '--r-xs', '--r-full', '--r-md', '--text-sm', '--text-muted', '--space-2', '--space-3', '--space-4', '--dur-1', '--dur-2']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The input is real.</strong> <code>appearance: none</code> changes painting
       only. Space toggles, arrows move within a radio group, the control is announced as
@@ -326,7 +326,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The row is a flex line with <code>gap</code>, so the box moves to the right of the
@@ -336,7 +336,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div dir="rtl" class="stack-2">' . "\n" .
+      '<div dir="rtl" class="stack stack-2">' . "\n" .
       '  <label class="check">' . "\n" .
       '    <input type="checkbox" checked>' . "\n" .
       '    <span>النسخ الاحتياطي الليلي</span>' . "\n" .
@@ -352,7 +352,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The tick and the dot scale in over
@@ -364,7 +364,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> gives the box a visible outline on paper and fills a
@@ -374,7 +374,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* A larger box without touching the row */
@@ -392,9 +392,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong><code>.check</code> versus <code>.switch</code>.</strong> A checkbox
       collects a value that is submitted with a form. A switch turns something on or off

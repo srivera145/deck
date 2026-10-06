@@ -11,7 +11,7 @@ $page = [
 require __DIR__ . '/_layout.php';
 ?>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Deck documentation</h1>
   <p class="lede">
     Deck is a CSS framework that ships as a single stylesheet. Add one
@@ -21,22 +21,22 @@ require __DIR__ . '/_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2>Start here</h2>
   <div class="grid">
     <article class="card card-link">
-      <div class="card-body stack-2">
+      <div class="card-body">
         <h3 class="card-title"><a class="link-quiet stretch" href="start/install.php">New to Deck</a></h3>
         <p class="text-sm text-muted">
-          Install it in about a minute, then build a complete account settings page —
-          nav bar, rail layout, real form controls, a confirm dialog and a save bar — in
-          one sitting, typing every line.
+          Install it in about a minute, add class completion to your editor, then build a
+          complete account settings page — nav bar, rail layout, real form controls, a
+          confirm dialog and a save bar — in one sitting, typing every line.
         </p>
         <span class="badge badge-brand">Start here</span>
       </div>
     </article>
     <article class="card card-link">
-      <div class="card-body stack-2">
+      <div class="card-body">
         <h3 class="card-title"><a class="link-quiet stretch" href="components/button.php">Components</a></h3>
         <p class="text-sm text-muted">
           One page per component: every variant rendered, the class table generated from
@@ -46,7 +46,7 @@ require __DIR__ . '/_layout.php';
       </div>
     </article>
     <article class="card card-link">
-      <div class="card-body stack-2">
+      <div class="card-body">
         <h3 class="card-title"><a class="link-quiet stretch" href="reference/classes.php">Reference</a></h3>
         <p class="text-sm text-muted">
           All <?= (int) $api['counts']['classes'] ?> classes and
@@ -57,7 +57,7 @@ require __DIR__ . '/_layout.php';
       </div>
     </article>
     <article class="card">
-      <div class="card-body stack-2">
+      <div class="card-body">
         <h3 class="card-title">The demo</h3>
         <p class="text-sm text-muted">
           Every component on one page, in context. It shows what Deck looks like; these
@@ -69,7 +69,7 @@ require __DIR__ . '/_layout.php';
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2>How these docs are organised</h2>
   <p>
     Four modes, kept apart on purpose. Mixing reference into a tutorial is the usual way
@@ -107,7 +107,7 @@ require __DIR__ . '/_layout.php';
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2>Status</h2>
   <div class="alert alert-info">
     <svg class="icon"><use href="../assets/deck/deck-icons.svg#info"></use></svg>

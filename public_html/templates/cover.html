@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Halcyon · Deck template</title>
+<meta name="description" content="A one-screen launch page: full-bleed photo, glass top bar, a waitlist form, social proof and a quiet countdown. Fits 100dvh on a desktop and a phone.">
+<meta name="theme-color" content="#123c44">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%230e5a66'/%3E%3Cpath d='M7 18c3-3 6-3 9 0s6 3 9 0' fill='none' stroke='%23e8f6f6' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+
+<style>
+@layer app.pages {
+
+  /* Kingfisher teal, picked out of the photo, with a warm accent for the
+     one live dot. Everything else retints from these two. */
+  :root {
+    --hue-brand: 200;
+    --hue-accent: 52;
+    --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    /* Ink and glass for things laid over the photo. The text on the photo
+       stays light in both themes; the glass flips. */
+    --on-photo: oklch(98.5% .008 var(--hue-brand));
+    --on-photo-muted: oklch(92.5% .018 var(--hue-brand));
+    --glass: light-dark(oklch(99% .006 var(--hue-brand) / .74), oklch(17% .02 var(--hue-brand) / .58));
+    --glass-line: light-dark(oklch(100% 0 0 / .65), oklch(100% 0 0 / .12));
+  }
+
+  /* ===== Page frame =====
+     .app-shell is Deck's header / 1fr / footer grid at min-block-size 100dvh.
+     The photo layer is fixed and out of flow, so it is not one of the three
+     rows. Nothing here needs to scroll unless the screen is very short. */
+  body { background: oklch(22% .04 var(--hue-brand)); }
+
+  .cover-bg { position: fixed; inset: 0; z-index: -1; overflow: clip; background: oklch(30% .05 var(--hue-brand)); }
+  .cover-bg img { inline-size: 100%; block-size: 100%; object-fit: cover; object-position: 50% 62%; }
+  /* The drift layer: Deck's mesh, made transparent and blended, so the photo
+     breathes with brand colour instead of sitting under a flat tint. */
+  .cover-bg .g-mesh { position: absolute; inset: 0; background-color: transparent; mix-blend-mode: soft-light; opacity: .9; }
+  /* The scrim does the contrast work. A soft vignette behind the copy, a
+     floor and a ceiling for the bars, and a deeper wash in dark mode. */
+  .cover-bg::after {
+    --vignette: 95% 46%;
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(var(--vignette) at 50% 48%, oklch(15% .035 var(--hue-brand) / .62), transparent 100%),
+      linear-gradient(to bottom, oklch(16% .035 var(--hue-brand) / .38), transparent 22% 70%, oklch(14% .03 var(--hue-brand) / .62)),
+      light-dark(oklch(20% .04 var(--hue-brand) / .16), oklch(8% .025 var(--hue-brand) / .5));
+  }
+
+  @media (min-width: 48rem) { .cover-bg::after { --vignette: 56% 54%; } }
+
+  /* ===== Top bar ===== */
+  .cover-top { padding-block-start: max(var(--space-4), env(safe-area-inset-top)); }
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-line);
+    backdrop-filter: blur(18px) saturate(1.5);
+    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+    box-shadow: 0 10px 30px oklch(10% .03 var(--hue-brand) / .18);
+  }
+  .topbar { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4); border-radius: var(--r-full); }
+  .wordmark { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: 680; font-size: var(--text-md); letter-spacing: -.02em; color: var(--text); text-decoration: none; }
+  .wordmark svg { inline-size: 1.6rem; block-size: 1.6rem; color: var(--brand); }
+  .toplinks { display: none; gap: var(--space-1); }
+  @media (min-width: 40rem) { .toplinks { display: flex; } }
+  .toplinks a { padding: var(--space-2) var(--space-3); border-radius: var(--r-full); color: var(--text-muted); font-size: var(--text-sm); font-weight: 540; text-decoration: none; }
+  .toplinks a:hover { color: var(--text); background: var(--surface-hover); }
+  .topbar .btn-icon { border-radius: var(--r-full); }
+
+  /* ===== Centre ===== */
+  .cover-main { display: grid; place-items: center; padding-block: var(--space-8); }
+  .hero-copy { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-6); max-inline-size: 46rem; color: var(--on-photo); }
+  .pill {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+    border-radius: var(--r-full);
+    font-size: var(--text-xs); font-weight: 600; color: var(--text);
+  }
+  .pill .live { inline-size: 8px; block-size: 8px; border-radius: var(--r-full); background: var(--accent-500); box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent-500) 30%, transparent); }
+  .pill .sep { color: var(--text-faint); }
+  .hero-copy .display {
+    color: inherit;
+    font-size: clamp(2.85rem, 1.6rem + 5.2vw, 5.6rem);
+    font-weight: 660;
+    letter-spacing: -.045em;
+    line-height: .98;
+    text-wrap: balance;
+    text-shadow: 0 2px 30px oklch(12% .03 var(--hue-brand) / .35);
+  }
+  .hero-copy .display em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -.02em; color: oklch(93% .06 calc(var(--hue-brand) - 25)); }
+  .hero-copy .lede { color: var(--on-photo-muted); font-size: var(--text-lg); line-height: var(--leading-normal); max-inline-size: 44ch; margin-inline: auto; text-wrap: pretty; }
+
+  .waitlist { inline-size: min(100%, 30rem); display: flex; flex-direction: column; gap: var(--space-2); }
+  .waitlist .input-group { border-radius: var(--r-full); padding: 5px; background: var(--glass); border-color: var(--glass-line); backdrop-filter: blur(18px) saturate(1.5); -webkit-backdrop-filter: blur(18px) saturate(1.5); box-shadow: 0 12px 40px oklch(10% .03 var(--hue-brand) / .28); }
+  .waitlist .input-group:focus-within { border-color: var(--focus); box-shadow: var(--ring), 0 12px 40px oklch(10% .03 var(--hue-brand) / .28); }
+  .waitlist .input { padding-inline-start: var(--space-4); min-block-size: 44px; min-inline-size: 0; }
+  /* flex: none, or the group shrinks the button along with the input and the
+     nowrap label runs into its own padding. The input is the one that gives. */
+  .waitlist .btn { flex: none; border-radius: var(--r-full); block-size: auto; padding-inline: var(--space-5); }
+  .fineprint { font-size: var(--text-xs); color: var(--on-photo-muted); }
+
+  .proof { display: flex; align-items: center; justify-content: center; gap: var(--space-3); font-size: var(--text-sm); color: var(--on-photo-muted); }
+  .proof strong { color: var(--on-photo); font-weight: 640; }
+  .proof .avatar-stack > .avatar { box-shadow: 0 0 0 2px oklch(25% .04 var(--hue-brand)); }
+
+  /* ===== Countdown =====
+     The numbers are filled in by the script at the bottom. Without it they
+     show the values below, which were right on the day this was written. */
+  .countdown { display: flex; align-items: center; gap: var(--space-2); }
+  .tile { display: grid; place-items: center; min-inline-size: 4.25rem; padding: var(--space-2) var(--space-3); border-radius: var(--r-md); }
+  .tile b { font-size: var(--text-xl); font-weight: 640; letter-spacing: -.02em; color: var(--text); line-height: 1.1; }
+  .tile span { font-size: var(--text-2xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
+  .count-label { font-size: var(--text-xs); color: var(--on-photo-muted); letter-spacing: .04em; }
+  /* On a short screen the countdown is the first thing to go. */
+  @media (max-height: 46rem) { .countdown-wrap { display: none; } }
+  @media (max-height: 40rem) { .proof { display: none; } }
+
+  /* ===== Bottom bar ===== */
+  .cover-foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); padding-block: var(--space-4) max(var(--space-4), env(safe-area-inset-bottom)); font-size: var(--text-xs); color: var(--on-photo-muted); }
+  .cover-foot a { color: inherit; }
+  .socials { display: flex; gap: var(--space-1); margin-inline-start: auto; }
+  .socials a { inline-size: 36px; block-size: 36px; display: grid; place-items: center; border-radius: var(--r-full); color: var(--on-photo); transition: background-color var(--dur-1) var(--ease-out); }
+  .socials a:hover { background: oklch(100% 0 0 / .14); }
+  /* A laptop with its browser chrome is often under 700px tall. Tighten
+     the rhythm before anything has to scroll. */
+  @media (max-height: 48rem) {
+    .cover-main { padding-block: var(--space-4); }
+    .hero-copy { gap: var(--space-4); }
+    .hero-copy .display { font-size: clamp(2.4rem, .8rem + 7vh, 4.6rem); }
+  }
+  @media (max-width: 30rem) {
+    .hero-copy { gap: var(--space-5); }
+    .hero-copy .lede { font-size: var(--text-md); }
+    .tile { min-inline-size: 3.6rem; padding-inline: var(--space-2); }
+  }
+}
+</style>
+</head>
+<body class="app-shell">
+
+<!-- Photos are hotlinked from Unsplash for the preview. Replace them with your own. -->
+
+<!-- Social icons the Deck sprite does not have. Stroke-based, 24x24. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-halcyon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M5.5 13.2c2.2-2.2 4.3-2.2 6.5 0s4.3 2.2 6.5 0"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.7 16H20L8.3 4z"/><path d="M4 20l6.8-6.8m2.4-2.4L20 4"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><path d="M2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- The background: photo, a drifting brand mesh blended over it, and the
+     scrim (on ::after). Fixed, so it still fills the screen if a very short
+     viewport makes the page scroll. Decorative, hence alt="". -->
+<div class="cover-bg" aria-hidden="true">
+  <img src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=1600&amp;q=80&amp;auto=format&amp;fit=crop"
+       srcset="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=900&amp;q=80&amp;auto=format&amp;fit=crop 900w,
+               https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=1600&amp;q=80&amp;auto=format&amp;fit=crop 1600w,
+               https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=2400&amp;q=80&amp;auto=format&amp;fit=crop 2400w"
+       sizes="100vw" width="2400" height="1600" fetchpriority="high" alt="">
+  <div class="g-mesh g-mesh-drift"></div>
+</div>
+
+<!-- ===== Top bar ===== -->
+<header class="container cover-top">
+  <nav class="bar topbar glass enter" aria-label="Primary">
+    <a class="wordmark" href="#" aria-current="page">
+      <svg aria-hidden="true"><use href="#i-halcyon"></use></svg>
+      Halcyon
+    </a>
+    <div class="push cluster cluster-tight">
+      <div class="toplinks">
+        <a href="#">Manifesto</a>
+        <a href="#">How it works</a>
+        <a href="#">Press kit</a>
+      </div>
+      <button class="btn btn-icon btn-ghost" data-deck-theme aria-label="Switch theme">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ===== Launch ===== -->
+<main id="main" class="container cover-main">
+  <div class="hero-copy stagger">
+
+    <p class="pill glass enter-rise">
+      <span class="live" aria-hidden="true"></span>
+      Private beta <span class="sep" aria-hidden="true">·</span> Launching spring 2027
+    </p>
+
+    <h1 class="display enter-rise">A calmer inbox is <em>on its way.</em></h1>
+
+    <p class="lede enter-rise">
+      Halcyon lets the people you know straight through and gathers everything
+      else — receipts, newsletters, notifications — into two quiet digests a day.
+    </p>
+
+    <!-- A real form: type="email", autocomplete and a label for the screen
+         reader, even though the visible design has none. -->
+    <form class="waitlist enter-rise" action="#" method="post">
+      <label class="sr-only" for="email">Email address</label>
+      <div class="input-group">
+        <input class="input" id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" inputmode="email" required>
+        <button class="btn btn-primary" type="submit">
+          Join the waitlist
+        </button>
+      </div>
+      <p class="fineprint">One email when your invite is ready. That is the whole list.</p>
+    </form>
+
+    <div class="proof">
+      <div class="avatar-stack" aria-hidden="true">
+        <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=96&amp;h=96&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="32" height="32" alt=""></span>
+        <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=96&amp;h=96&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="32" height="32" alt=""></span>
+        <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=96&amp;h=96&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="32" height="32" alt=""></span>
+        <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=96&amp;h=96&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="32" height="32" alt=""></span>
+        <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=96&amp;h=96&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="32" height="32" alt=""></span>
+      </div>
+      <span><strong class="nums">2,400</strong> people on the list</span>
+    </div>
+
+    <div class="countdown-wrap stack stack-2" style="align-items:center">
+      <div class="countdown" role="timer" aria-label="Time until launch on 20 March 2027">
+        <div class="tile glass"><b class="nums" data-unit="d">165</b><span>Days</span></div>
+        <div class="tile glass"><b class="nums" data-unit="h">14</b><span>Hours</span></div>
+        <div class="tile glass"><b class="nums" data-unit="m">32</b><span>Mins</span></div>
+      </div>
+      <p class="count-label">Doors open on the equinox, 20 March 2027</p>
+    </div>
+
+  </div>
+</main>
+
+<!-- ===== Bottom bar ===== -->
+<footer class="container cover-foot">
+  <span>© 2026 Halcyon Labs · Lisbon · <a href="#">Privacy</a></span>
+  <div class="socials">
+    <a href="#" aria-label="Halcyon on X"><svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg></a>
+    <a href="#" aria-label="Halcyon on Instagram"><svg class="icon" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
+    <a href="#" aria-label="Halcyon on LinkedIn"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"></use></svg></a>
+  </div>
+</footer>
+
+<!-- Countdown. Minutes, not seconds: a ticking clock on a page about calm
+     would be a bit much. Swap the date for yours. -->
+<script>
+  (() => {
+    const launch = Date.UTC(2027, 2, 20, 9, 0);
+    const cells = Object.fromEntries([...document.querySelectorAll('[data-unit]')].map((n) => [n.dataset.unit, n]));
+    const pad = (n) => String(n).padStart(2, '0');
+    const tick = () => {
+      const left = Math.max(0, launch - Date.now());
+      cells.d.textContent = Math.floor(left / 864e5);
+      cells.h.textContent = pad(Math.floor(left / 36e5) % 24);
+      cells.m.textContent = pad(Math.floor(left / 6e4) % 60);
+    };
+    tick();
+    setInterval(tick, 30e3);
+  })();
+</script>
+
+</body>
+</html>

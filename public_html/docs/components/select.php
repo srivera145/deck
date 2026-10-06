@@ -22,7 +22,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Select</h1>
   <p class="lede">
     <code>.select</code> shares the control rule with
@@ -34,7 +34,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Put it on a real <code>&lt;select&gt;</code>, wrapped in a
@@ -58,7 +58,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="chevron">The chevron</h2>
   <pre class="dx-code"><code><?= e('appearance: none;
 padding-inline-end: var(--space-10);
@@ -71,7 +71,7 @@ background-size: 5px 5px, 5px 5px;') ?></code></pre>
     filled halves form a chevron. It is a trick, and it earns its place for three
     reasons:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>No request.</strong> No SVG file, no data URI, nothing to 404 and nothing
       to add to the byte count beyond the declarations themselves.
@@ -94,7 +94,7 @@ background-size: 5px 5px, 5px 5px;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="states">States</h2>
   <p>
     All from the shared rule: hover darkens the border, focus swaps it for
@@ -104,7 +104,7 @@ background-size: 5px 5px, 5px 5px;') ?></code></pre>
   </p>
   <?php
   docs_example(
-      '<div class="stack-3" style="max-inline-size:22rem">' . "\n" .
+      '<div class="stack stack-3" style="max-inline-size:22rem">' . "\n" .
       '  <select class="select" aria-label="Ordinary"><option>Ordinary</option></select>' . "\n" .
       '  <select class="select" disabled aria-label="Disabled"><option>Disabled</option></select>' . "\n" .
       '</div>',
@@ -119,7 +119,7 @@ background-size: 5px 5px, 5px 5px;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="multiple">Multiple and size</h2>
   <p>
     <code>&lt;select multiple&gt;</code> and <code>size="n"</code> render as a list box
@@ -152,7 +152,7 @@ background-size: 5px 5px, 5px 5px;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     <code>.select</code> is declared alongside <code>.input</code> and
@@ -162,14 +162,14 @@ background-size: 5px 5px, 5px 5px;') ?></code></pre>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--control-h', '--surface', '--bg-sunken', '--line-strong', '--ink-400', '--focus', '--ring', '--r-sm', '--shadow-1', '--text-base', '--text-faint', '--space-3', '--space-10', '--dur-1']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The element is real, so everything works.</strong>
       <code>appearance: none</code> changes painting only. The control is announced as a
@@ -210,7 +210,7 @@ background-size: 5px 5px, 5px 5px;') ?></code></pre>
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     This is the one place in Deck's forms where logical properties are not enough.
@@ -245,7 +245,7 @@ background-size: 5px 5px, 5px 5px;') ?></code></pre>
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The border, shadow and background transition over
@@ -256,7 +256,7 @@ background-size: 5px 5px, 5px 5px;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> gives the control a plain <code>#999</code> border on
@@ -270,7 +270,7 @@ background-size: 5px 5px, 5px 5px;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* A larger chevron */
@@ -295,9 +295,9 @@ background-size: 5px 5px, 5px 5px;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a long list.</strong> A select with two hundred options is
       unusable — no filtering, no search, a scroll list the reader has to read. Use

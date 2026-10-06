@@ -74,7 +74,7 @@ $counts = array_count_values(array_column($verdicts, 1));
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Gradients</h1>
   <p class="lede">
     Thirty-four <code>.g-*</code> classes, every one built from the brand hue and
@@ -84,13 +84,13 @@ $counts = array_count_values(array_column($verdicts, 1));
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use them</h2>
   <p>
     The useful ones fall into three groups, and they are worth separating because they
     are not the same kind of thing at all:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Gradients doing a job</strong> — a scrim making text legible over a photo, a
       fade telling the reader content continues past an edge, a pattern standing in for a
@@ -111,10 +111,10 @@ $counts = array_count_values(array_column($verdicts, 1));
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="jobs">The ones doing a job</h2>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="j-scrim">Scrims</h3>
     <p>
       <code>.g-scrim</code> puts a legible floor under text laid over an image. It is
@@ -137,7 +137,7 @@ $counts = array_count_values(array_column($verdicts, 1));
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="j-fade">Fade masks</h3>
     <p>
       Content that runs off an edge should fade rather than be cut with a hard line — the
@@ -162,7 +162,7 @@ $counts = array_count_values(array_column($verdicts, 1));
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="j-patterns">Patterns</h3>
     <p>
       The source calls these "gradients standing in for an image", which is exactly right:
@@ -188,7 +188,7 @@ $counts = array_count_values(array_column($verdicts, 1));
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="j-surfaces">Surfaces</h3>
     <p>
       The point of these is not the gradient — it is that each also sets the correct text
@@ -210,7 +210,7 @@ $counts = array_count_values(array_column($verdicts, 1));
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="j-border">Gradient borders</h3>
     <p>
       <code>.g-border</code> uses the two-background trick: a flat fill clipped to
@@ -229,7 +229,7 @@ $counts = array_count_values(array_column($verdicts, 1));
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="j-mesh">Mesh</h3>
     <p>
       <code>.g-mesh</code> is three soft radial blooms — no image, no SVG filter, and
@@ -246,7 +246,7 @@ $counts = array_count_values(array_column($verdicts, 1));
   </div>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="verdict">The audit</h2>
   <p>
     The brief for this page was to justify all thirty-four one at a time, and to say so if
@@ -278,7 +278,7 @@ $counts = array_count_values(array_column($verdicts, 1));
     </table>
   </div>
 
-  <div class="stack-3">
+  <div class="stack stack-3">
     <h3 id="v-recommendation">What I would do</h3>
     <p>
       <strong>Demote the eight.</strong> They are not broken and they are not ugly — they
@@ -319,13 +319,13 @@ $counts = array_count_values(array_column($verdicts, 1));
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/20-gradients.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     <code>--hue-brand</code> is the one that matters: every gradient in the file is
@@ -334,9 +334,9 @@ $counts = array_count_values(array_column($verdicts, 1));
   <?php docs_token_table(['--hue-brand', '--scrim', '--brand-400', '--brand-500', '--brand-600', '--brand-soft', '--text-on-brand', '--good-600', '--warn-500', '--bad-600', '--line', '--line-strong', '--surface', '--bg', '--dur-5']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong><code>.g-text</code> is the one to be careful with.</strong> Gradient text
       is <code>background-clip: text</code> with a transparent fill, so its contrast varies
@@ -377,7 +377,7 @@ $counts = array_count_values(array_column($verdicts, 1));
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Most of these are symmetrical or angle-based and need nothing.
@@ -392,7 +392,7 @@ $counts = array_count_values(array_column($verdicts, 1));
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Five classes animate, and every one is inside
@@ -408,7 +408,7 @@ $counts = array_count_values(array_column($verdicts, 1));
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     None of these are in <code>src/99-print.css</code>, and browsers drop background
@@ -423,7 +423,7 @@ $counts = array_count_values(array_column($verdicts, 1));
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* Per-instance, no layer needed */
 <div class="g-grid-lines" style="--cell:32px">
@@ -441,9 +441,9 @@ $counts = array_count_values(array_column($verdicts, 1));
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use them</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not behind body text.</strong> <code>.g-mesh</code> and the washes are
       designed to sit behind content, but a busy background under a paragraph costs

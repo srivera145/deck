@@ -31,7 +31,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Field</h1>
   <p class="lede">
     <code>.field</code> is one control and everything attached to it: a label above, the
@@ -42,7 +42,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Wrap every control in one. A form is then a <code>.stack</code> of fields, and the
@@ -68,10 +68,10 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="parts">The parts</h2>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="p-label">Label</h3>
     <p>
       <code>.label</code> is a flex row, not a block, so a marker sits beside the text
@@ -80,7 +80,7 @@ require __DIR__ . '/../_layout.php';
     </p>
     <?php
     docs_example(
-        '<div class="stack-4" style="max-inline-size:24rem">' . "\n" .
+        '<div class="stack stack-4" style="max-inline-size:24rem">' . "\n" .
         '  <div class="field">' . "\n" .
         '    <label class="label" for="f-vat">VAT number <span class="required">*</span></label>' . "\n" .
         '    <input class="input" id="f-vat">' . "\n" .
@@ -101,7 +101,7 @@ require __DIR__ . '/../_layout.php';
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="p-help">Help and error</h3>
     <p>
       <code>.help</code> is muted; <code>.error</code> is a flex row in a red that is
@@ -128,7 +128,7 @@ require __DIR__ . '/../_layout.php';
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="p-fieldset">Fieldset</h3>
     <p>
       <code>.fieldset</code> is a real <code>&lt;fieldset&gt;</code> with a border, a
@@ -155,7 +155,7 @@ require __DIR__ . '/../_layout.php';
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="p-file">File</h3>
     <p>
       <code>.file</code> is a dashed drop zone. The real
@@ -184,7 +184,7 @@ require __DIR__ . '/../_layout.php';
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="row">Pairing fields</h2>
   <p>
     <code>.field-row</code> is one column on a phone and an auto-fitting grid above
@@ -210,7 +210,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="row-cq">Pairing on the container</h2>
   <p>
     <code>.field-row-cq</code> does the same thing on its own container's width instead
@@ -243,7 +243,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="actions">Form actions</h2>
   <p>
     <code>.form-actions</code> is a wrapping flex row for the buttons at the end of a
@@ -270,7 +270,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     Generated from the stylesheet source. The <code>field</code> component proper is
@@ -281,14 +281,14 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--space-2', '--space-3', '--space-4', '--space-5', '--line', '--line-strong', '--r-md', '--text-sm', '--text', '--text-muted', '--text-faint', '--bad-500', '--bad-700', '--brand-500', '--brand-soft', '--surface', '--surface-2', '--bg', '--z-sticky']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong><code>.field</code> has no semantics.</strong> It is a
       <code>&lt;div&gt;</code> that supplies spacing. The label/control association comes
@@ -337,7 +337,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Everything here is a flex column, a grid, or logical padding, so the whole assembly
@@ -363,7 +363,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     <code>src/16-motion.css</code> shakes an invalid field once —
@@ -379,7 +379,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.fieldset</code> gets the same surface treatment as a card — a hairline, no
@@ -400,7 +400,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* A label beside the control instead of above it */
@@ -423,9 +423,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a checkbox or radio.</strong> Those already carry their own label
       by wrapping it — see <a href="check.php">checkbox and radio</a>. A

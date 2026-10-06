@@ -27,7 +27,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Tooltip</h1>
   <p class="lede">
     Deck ships two, and the difference is worth understanding before choosing.
@@ -39,7 +39,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use one</h2>
   <p>
     A tooltip names something whose meaning is not obvious — an icon-only button, an
@@ -58,7 +58,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="css-tooltip">.tooltip — the CSS-only one</h2>
   <p>
     Put <code>.tooltip</code> on the trigger and the text in <code>data-tip</code>. The
@@ -76,9 +76,9 @@ require __DIR__ . '/../_layout.php';
   );
   ?>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="t-limits">What it cannot do</h3>
-    <ul class="stack-2">
+    <ul class="stack stack-2">
       <li>
         <strong>It cannot flip.</strong> It is pinned above the trigger with
         <code>inset-block-end: calc(100% + 8px)</code>. Near the top of the window it is
@@ -105,7 +105,7 @@ require __DIR__ . '/../_layout.php';
   </div>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="tip">.tip — the anchor-positioned one</h2>
   <p>
     <code>.tip</code> is a popover element with <code>position-area: block-start</code>
@@ -139,7 +139,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="choosing">Choosing between them</h2>
   <div class="table-wrap">
     <table class="table table-stack">
@@ -183,7 +183,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     <code>.tooltip</code> lives in <code>07-components.css</code> and is not part of the
@@ -192,7 +192,7 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     Both use the same near-black on near-white pairing —
@@ -203,9 +203,9 @@ require __DIR__ . '/../_layout.php';
   <?php docs_token_table(['--ink-900', '--ink-50', '--r-xs', '--text-xs', '--shadow-3', '--space-2', '--space-3', '--dur-2', '--z-toast']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong><code>data-tip</code> is not an accessible name.</strong> A
       <code>::after</code>'s generated content is exposed inconsistently and should never
@@ -246,7 +246,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     <code>.tooltip::after</code> is centred with
@@ -267,7 +267,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     <code>.tooltip::after</code> fades and rises four pixels;
@@ -277,7 +277,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     Neither has a print rule. <code>.tooltip::after</code> is
@@ -292,7 +292,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Tooltip below the trigger instead of above */
@@ -313,9 +313,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for anything essential.</strong> Hidden on touch, absent in print,
       unreliable to screen readers. If a reader needs it to complete a task, put it on the

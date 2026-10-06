@@ -22,6 +22,12 @@ That is the whole install. Nothing to compile, nothing to purge, nothing to conf
 - **RTL built in.** Written in logical properties end to end; `dir="rtl"` flips the
   whole page with no second stylesheet.
 - **Zero runtime dependencies.** The JavaScript is optional and dependency-free.
+- **Templates to start from.** Nineteen single-file pages — a store, agency and local
+  business sites, a dashboard, pricing, checkout — plus sets of sidebars, footers,
+  heroes and carousels. See [Templates](#templates).
+- **Editor support.** Deck IntelliSense completes class names, tokens and icons, and
+  catches the class names that look almost right, in Visual Studio Code and the editors
+  built on it. See [Editor support](#editor-support).
 
 Version 0.1.3 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
@@ -111,6 +117,7 @@ deck/
 ├─ bin/deck.mjs            the `npx @echodial/deck` CLI
 ├─ public_html/            the Helm docroot — the demo site, not part of the package
 │  ├─ index.php            component demo
+│  ├─ templates/           19 copy-ready page templates, and the gallery that lists them
 │  ├─ php-helper.php       the PHP helper, demonstrated
 │  └─ assets/               published copies, both gitignored
 │     ├─ deck/              dist/
@@ -118,6 +125,7 @@ deck/
 ├─ build.mjs
 ├─ tools/
 │  ├─ make-brand.mjs      regenerates the logo family from the master
+│  ├─ vscode/             Deck IntelliSense, the editor extension, and its packaged VSIX
 │  └─ icons/              the icon toolchain: `npm run icons`
 │     ├─ icons.txt        the list of icons to extract
 │     ├─ build-icons.mjs  writes src/deck-icons.svg from the font
@@ -348,6 +356,107 @@ that walks the file character by character so strings, `url()` values, and data 
 never touched. The build never depends on a toolchain being present, which is the same
 promise the framework makes.
 
+## Templates
+
+Nineteen complete pages built with Deck, in `public_html/templates/`. Each one is a
+single HTML file with no build step: open it in a browser, copy it into a project, and
+delete the parts you do not want. Browse them, with live previews, at
+[get-deck.dev/templates](https://get-deck.dev/templates/).
+
+| Group | Templates |
+| --- | --- |
+| Websites | `landing.html` · `ecommerce.html` · `consulting.html` · `it-agency.html` · `auto-repair.html` · `digital-marketing.html` · `travel.html` · `cover.html` |
+| Commerce | `product.html` · `checkout.html` · `pricing.html` — the store, product and checkout pages are one shop and link to each other |
+| App screens | `app-shell.html` · `dashboard.html` · `settings.html` · `sign-in.html` — one app, sharing a top bar, a sidebar, a phone tab bar and a drawer |
+| Sections | `sidebars.html` (7 styles) · `footers.html` (8) · `jumbotrons.html` (8) · `carousels.html` (7) — each variant has a Copy HTML button |
+
+### Using a template
+
+1. Copy the file into your project.
+2. Repoint the tags near the top at your copy of Deck. They point two folders up because
+   that is where Deck sits on the demo site:
+
+   ```html
+   <link rel="stylesheet" href="../assets/deck/deck.css">
+   <script src="../assets/deck/deck.js" defer></script>
+   <script src="../assets/deck/deck-extras.js" defer></script>
+   ```
+
+   Only templates with a carousel, a drawer, a number stepper, a mega menu or a
+   dismissible banner load `deck-extras.js`. Keep whichever tags the template already has.
+3. Serve `deck-icons.svg` from your own site. Icons are referenced as
+   `../assets/deck/deck-icons.svg#name`, and a cross-origin `<use href>` renders nothing
+   at all — a CDN works for the stylesheet but not for the sprite.
+
+Worth knowing before you start deleting:
+
+- **Rebrand with one number.** Each template sets `--hue-brand` in its own style block.
+  Change it and every colour on the page follows.
+- **Page CSS is in `@layer app.pages`.** It beats Deck without `!important`, and your
+  own unlayered CSS still beats it.
+- **The photos are placeholders,** hotlinked from Unsplash so the previews look finished.
+  Replace them before you ship. Every image has its width and height set, so the layout
+  does not move when you do.
+- **Section variants copy one at a time.** On the sidebars, footers, jumbotrons and
+  carousels pages, Copy HTML puts one variant's markup on the clipboard. Its CSS is in
+  the page's style block under a comment for that variant, every class prefixed with the
+  page's initials (`sb-`, `ft-`, `jt-`, `cr-`). Copy those rules as well.
+- **The build checks them.** `tools/docs/verify.mjs` fails if a template uses a class
+  that is neither a Deck class nor defined in the template's own style block, so a
+  renamed class cannot quietly break one.
+
+## Editor support
+
+Deck IntelliSense, in `tools/vscode/`, adds Deck to Visual Studio Code and the editors
+built on it:
+
+- **Completion** for class names inside `class` and `className`, for custom properties
+  inside `var(`, and for icon names after `deck-icons.svg#`.
+- **Hover** on a class or token: what it declares, which cascade layer owns it, and the
+  source file and line.
+- **Go to definition** into Deck's `src/`.
+- **Diagnostics** for the mistakes that look almost right — a spacing step Deck does not
+  have (`stack-5` in a scale of 0, 1, 2, 3, 4, 6, 8), a class removed from Deck, a class
+  one character off a real one — each with a quick fix. Your own class names are left
+  alone.
+
+| Editor | Status |
+| --- | --- |
+| Visual Studio Code 1.84 or later | Tested |
+| Antigravity | Tested |
+| Cursor | Expected to work — same extension API and install command — but not yet checked |
+| JetBrains IDEs, Zed, Sublime Text, Neovim | Not supported |
+
+### Installing it
+
+It is not on the Visual Studio Marketplace or Open VSX yet, so you install the packaged
+file, `tools/vscode/deck-intellisense-0.1.0.vsix`
+([download](https://github.com/srivera145/deck/raw/main/tools/vscode/deck-intellisense-0.1.0.vsix)).
+
+1. Open the Command Palette: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> on Windows and
+   Linux, <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> on macOS.
+2. Run **Extensions: Install from VSIX…** and choose the file. The command is the same in
+   Visual Studio Code, Cursor and Antigravity.
+3. Reload the window if the editor asks.
+
+Or from a terminal, in the folder that holds the file:
+
+```bash
+code --install-extension deck-intellisense-0.1.0.vsix     # Visual Studio Code
+cursor --install-extension deck-intellisense-0.1.0.vsix   # Cursor
+```
+
+To check it is running, run **Deck: Show loaded API version and counts** from the
+Command Palette, then type `class="btn-` in an HTML file and watch the button classes
+appear.
+
+Because it comes from a file rather than a marketplace, it does not update itself. Each
+Deck release regenerates the extension's class list, so when you upgrade Deck, install
+the new file the same way; it replaces the old one and keeps your settings.
+
+Settings, everything it reports, and troubleshooting are on the
+[editor setup page](https://get-deck.dev/docs/start/editor.php). Building and releasing
+the extension is covered in [tools/vscode/README.md](tools/vscode/README.md).
 
 ## Theming
 

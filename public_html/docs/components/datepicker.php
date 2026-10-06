@@ -34,7 +34,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Date picker</h1>
   <p class="lede">
     <code>.datefield</code> is the trigger — an <a href="input.php">input</a> with a
@@ -44,7 +44,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it when the format matters, when you need a range, or when the reader benefits
@@ -97,7 +97,7 @@ require __DIR__ . '/../_layout.php';
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="field">The trigger field</h2>
   <p>
     <code>.datefield</code> positions an icon inside the input's starting edge — the same
@@ -130,7 +130,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="opening">Opening and closing</h2>
   <p>
     The panel is a native popover, so most of its behaviour is the platform's. What
@@ -164,7 +164,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="states">Eight day states</h2>
   <p>
     <code>.datepicker-day</code> is a 38px square — 42px on a coarse pointer, so it clears
@@ -205,7 +205,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="positioning">Positioning</h2>
   <p>
     The panel is a native popover — light dismiss, Escape and the top layer from the
@@ -221,7 +221,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="presets">Presets and the month jump</h2>
   <p>
     <code>.datepicker-presets</code> is a rail of shortcuts — "Last 7 days", "This month".
@@ -240,20 +240,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/10-datepicker.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--surface', '--surface-hover', '--line', '--text', '--text-faint', '--brand', '--brand-soft', '--brand-600', '--text-on-brand', '--r-md', '--r-sm', '--r-full', '--shadow-4', '--space-2', '--space-3', '--space-6', '--space-10', '--dur-2']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Consider <code>&lt;input type="date"&gt;</code> first.</strong> It is fully
       accessible, gives a phone the platform picker, and needs nothing from you. A custom
@@ -303,7 +303,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The field's icon and clear button use <code>inset-inline-start</code> and
@@ -318,7 +318,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The panel fades and rises six pixels over
@@ -329,7 +329,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> lists <code>.datepicker</code> among the chrome that
@@ -339,7 +339,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Larger days everywhere, not only on touch */
@@ -360,9 +360,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not when <code>&lt;input type="date"&gt;</code> would do.</strong> A single
       date with no format requirement is a solved problem, and the native control is

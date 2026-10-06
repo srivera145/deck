@@ -53,9 +53,9 @@ $orders = [
   </div>
 </header>
 
-<main class="container section stack-6">
+<main class="container section stack stack-6">
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h1>Recent orders</h1>
     <p class="lede">Rendered by <code>php/Deck.php</code>. The brand hue comes from the
       tenant record, applied as one inline style on the <code>&lt;html&gt;</code> tag —
@@ -83,7 +83,7 @@ $orders = [
   </div>
 
   <div class="card">
-    <div class="card-body stack-3">
+    <div class="card-body">
       <h2 class="card-title">What the helper emitted</h2>
       <div class="copy">
         <code class="copy-value"><?= htmlspecialchars(Deck::css()) ?></code>

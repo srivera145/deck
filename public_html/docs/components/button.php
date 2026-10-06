@@ -54,7 +54,7 @@ $variants = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Button</h1>
   <p class="lede">
     <code>.btn</code> is Deck's action element: an inline-flex box with a
@@ -65,7 +65,7 @@ $variants = [
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use <code>.btn</code> when the element performs an action: submitting a form,
@@ -80,7 +80,7 @@ $variants = [
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="variants">Variants</h2>
   <p>
     Eight looks, including the bare <code>.btn</code>. Each sets the four
@@ -89,7 +89,7 @@ $variants = [
   </p>
 
   <?php foreach ($variants as [$cls, $label, $blurb]): ?>
-    <div class="stack-2">
+    <div class="stack stack-2">
       <h3 id="v-<?= e($cls) ?>"><?= e($label) ?></h3>
       <p class="text-muted"><?= e($blurb) ?></p>
       <?php
@@ -104,7 +104,7 @@ $variants = [
   <?php endforeach; ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="sizes">Sizes</h2>
   <p>
     Three heights, set from <code>--control-h-sm</code>, <code>--control-h</code>, and
@@ -137,7 +137,7 @@ $variants = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="shapes">Icon-only, round, and block</h2>
   <p>
     <code>.btn-icon</code> makes the button square by dropping the inline padding, so it
@@ -171,7 +171,7 @@ $variants = [
   <?php docs_example('<button class="btn btn-primary btn-3d">Press me</button>'); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="group">Groups</h2>
   <p>
     <code>.btn-group</code> joins adjacent buttons into a segmented control: it squares
@@ -190,7 +190,7 @@ $variants = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="states">States</h2>
   <p>
     <code>.is-loading</code> hides the label and draws a spinner in its place, and sets
@@ -212,7 +212,7 @@ $variants = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="fab">Floating action button</h2>
   <p>
     <code>.fab</code> is a fixed, circular action parked above the tab bar and clear of
@@ -229,7 +229,7 @@ $variants = [
 </button>') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     Generated from <code>src/05-buttons.css</code> by
@@ -239,7 +239,7 @@ $variants = [
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     <code>.btn</code> sets four local properties from global tokens, then every variant
@@ -251,9 +251,9 @@ $variants = [
   <?php docs_token_table(['--surface', '--text', '--line-strong', '--shadow-1', '--control-h', '--control-h-sm', '--control-h-lg', '--tap', '--r-sm', '--focus']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Touch target.</strong> <code>.btn</code> is
       <?= e(api_token('--control-h')['value'] ?? '42px') ?> tall, below the
@@ -285,7 +285,7 @@ $variants = [
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     <code>.btn</code> is written in logical properties, so <code>dir="rtl"</code> mirrors
@@ -310,7 +310,7 @@ $variants = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     <code>.btn</code> transitions background, border, colour, shadow, and a one-pixel
@@ -326,7 +326,7 @@ $variants = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <p>
     Deck ships inside cascade layers and reserves four empty <code>app.*</code> layers
@@ -348,9 +348,9 @@ $variants = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong><code>.btn-link</code> versus a plain anchor.</strong> Reach for
       <code>.btn-link</code> only when the element is genuinely a

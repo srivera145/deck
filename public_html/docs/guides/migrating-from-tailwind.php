@@ -89,14 +89,14 @@ $TW = [
 function versus(string $title, string $tw, string $deck, string $note = ''): void
 {
     ?>
-    <div class="stack-3">
+    <div class="stack stack-3">
       <h3><?= e($title) ?></h3>
       <div class="split">
-        <div class="stack-2">
+        <div class="stack stack-2">
           <p class="text-sm fw-semi text-muted">Tailwind</p>
           <pre class="dx-code"><code><?= e($tw) ?></code></pre>
         </div>
-        <div class="stack-2">
+        <div class="stack stack-2">
           <p class="text-sm fw-semi text-brand">Deck</p>
           <pre class="dx-code"><code><?= e($deck) ?></code></pre>
         </div>
@@ -115,7 +115,7 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Move a page from Tailwind</h1>
   <p class="lede">
     You have a Tailwind project and you are wondering what a page looks like in Deck. This
@@ -125,7 +125,7 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="difference">The one difference everything else follows from</h2>
   <p>
     Tailwind gives you <strong>utilities</strong> and expects you to build the components.
@@ -148,14 +148,14 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="side-by-side">The same things, both ways</h2>
 
   <?php versus(
       'A card',
       $TW['card'],
       '<div class="card">' . "\n" .
-      '  <div class="card-body stack-2">' . "\n" .
+      '  <div class="card-body">' . "\n" .
       '    <h3 class="card-title">Invoice INV-2291</h3>' . "\n" .
       '    <p class="text-sm text-muted">Northwind Traders</p>' . "\n" .
       '  </div>' . "\n" .
@@ -228,7 +228,7 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="translate">A translation table</h2>
   <p>
     Two things transfer directly, which makes the first hour easier than you expect.
@@ -271,22 +271,27 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
   </div>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="lose">What you give up</h2>
   <p>
     All of these are real, none of them are going away soon, and any one of them can be the
     reason not to switch.
   </p>
-  <ol class="stack-4">
+  <ol class="stack stack-4">
     <li>
-      <strong>Editor autocomplete.</strong> This is the one people feel first and it is the
-      biggest single loss. Tailwind ships an official IntelliSense extension for VS Code
+      <strong>Editor support, outside one family of editors.</strong> This is the one
+      people feel first. Tailwind ships an official IntelliSense extension for VS Code
       with completion, linting and hover previews of the generated CSS; Zed and the
       JetBrains IDEs have equivalent support built in; and there is an official Prettier
-      plugin that sorts classes for you. Deck has <strong>none of that</strong> — no
-      extension, no language server, no class sorting. You will be reading
-      <a href="../reference/classes.php">the class reference</a> in another tab for the
-      first week.
+      plugin that sorts classes for you. Deck has
+      <a href="../start/editor.php">Deck IntelliSense</a>, which completes classes,
+      tokens and icon names, shows what a class declares on hover, and underlines
+      off-scale and misspelt classes as you type — but only in Visual Studio Code and the
+      editors built on it, such as Cursor and Antigravity, and installed from a file
+      rather than a marketplace. In JetBrains, Zed, Sublime Text or Neovim there is
+      <strong>nothing</strong>, and there is no class sorter in any editor. Outside VS
+      Code you will be reading <a href="../reference/classes.php">the class reference</a>
+      in another tab for the first week.
     </li>
     <li>
       <strong>Class names you cannot derive.</strong> Tailwind's are mechanical: knowing
@@ -336,9 +341,9 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
   </ol>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="gain">What you get</h2>
-  <ol class="stack-3">
+  <ol class="stack stack-3">
     <li>
       <strong>No build step, at all.</strong> Not a faster one — none. No PostCSS, no Vite
       plugin, no scan of your source files for class names, no watcher, no CI step that regenerates CSS. Tailwind's own
@@ -367,13 +372,13 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
   </ol>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="how">Migrating in practice</h2>
   <p>
     Do not convert a codebase. Run both, convert at the page boundary, and stop when it
     stops paying.
   </p>
-  <ol class="stack-3">
+  <ol class="stack stack-3">
     <li>
       <strong>Load Deck first, then Tailwind.</strong> Tailwind's output is unlayered, and
       unlayered CSS beats every cascade layer — so Tailwind utilities will win over Deck
@@ -403,9 +408,9 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
   </ol>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="dont">When not to switch</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li><strong>Your interface is the product.</strong> A design tool, a game, anything with a distinctive visual language. Components will be in your way.</li>
     <li><strong>You need Safari 16.</strong> Not negotiable.</li>
     <li><strong>Your team is fast in Tailwind.</strong> Fluency is worth more than either framework's feature list, and you would be trading a known speed for an unknown one.</li>
@@ -414,7 +419,7 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="checked">What was checked, and what was not</h2>
   <p>
     Every claim about Tailwind here was read off <code>tailwindcss.com</code> at
@@ -425,7 +430,7 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
     utilities, container queries in core, arbitrary values, and the editor tooling.
   </p>
   <p>Three things are <em>not</em> verified and are marked as such:</p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Relative bundle sizes.</strong> Deck's 26 KB brotli is measured, from
       <code>dist/sizes.json</code>. Tailwind's output size depends entirely on your

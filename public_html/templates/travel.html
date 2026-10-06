@@ -1,0 +1,1315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wayfarer &amp; Co. · Deck template</title>
+<meta name="description" content="A boutique travel agency homepage: full-bleed hero with a booking bar, destination bento, a filterable trip carousel, a day-by-day itinerary, reviews, journal and newsletter.">
+<meta name="theme-color" content="#0b6f78">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230b6f78'/%3E%3Cpath d='M20.5 11.5 18 18l-6.5 2.5L14 14z' fill='%23f3e6cf'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+<script src="../assets/deck/deck-extras.js" defer></script>   <!-- carousel and the mobile drawer -->
+
+<style>
+@layer app.pages {
+  /* Deck lets a .btn inside an .input-group shrink along with the input, so a
+     nowrap label runs into its own padding on a narrow row. The input is the
+     one that should give. */
+  .input-group > .btn { flex: none; }
+
+
+  /* The whole palette retints from these. 188 is lagoon teal; the accent is
+     pulled down in chroma so it reads as sand rather than orange. */
+  :root {
+    --hue-brand: 188;
+    --hue-accent: 70;
+    --chroma-accent: .095;
+    --font-display: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --hdr-h: 4.5rem;
+    --sand: light-dark(oklch(96.6% .016 78), oklch(17.5% .012 78));
+    --sand-line: light-dark(oklch(89% .028 78), oklch(28% .018 78));
+    /* Always-dark ink for anything laid over a photo, whatever the theme. */
+    --photo-ink: oklch(18% .035 var(--hue-brand));
+  }
+
+  /* A serif at regular weight is what makes it read as a magazine rather than
+     an app. Palatino has no 640, so asking for one would jump to bold. */
+  :is(h1, h2, .display, .serif) { font-weight: 500; letter-spacing: -.016em; }
+  h3.serif { font-family: var(--font-display); }
+  .display em, h2 em { font-style: italic; }
+
+  .eyebrow {
+    font-size: var(--text-xs);
+    font-weight: 640;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+  /* --gap is inherited, so a .cluster or a carousel inside a .stack-8 would
+     pick up the stack's 2rem. Pin them back to their documented steps. */
+  .cluster:not(.cluster-tight) { --gap: var(--space-3); }
+  .carousel-track { --gap: var(--space-4); }
+  /* Deck's .drawer sets display:flex, which beats the browser's own rule that hides a closed <dialog>, so a closed drawer would sit off-screen with its links still in the tab order. The transition on display is allow-discrete, so the slide-out still plays. */
+  .drawer:not([open]) { display: none; }
+
+  .section-head { display: flex; flex-wrap: wrap; align-items: end; gap: var(--space-4) var(--space-8); justify-content: space-between; }
+  .section-head h2 { font-size: clamp(2rem, 1.4rem + 2.2vw, 3rem); max-inline-size: 18ch; }
+  .section-head .lede { max-inline-size: 46ch; }
+  .band-sand { background: var(--sand); border-block: 1px solid var(--sand-line); }
+
+  /* ===== Header =====
+     Solid by default. Where scroll-driven animations exist it starts
+     transparent over the photo and turns solid in the first 8rem of scroll,
+     so the no-support fallback is the safe one. */
+  .site-header {
+    position: sticky; inset-block-start: 0; z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid var(--line);
+    color: var(--text);
+  }
+  .site-header .navbar { border: 0; min-block-size: var(--hdr-h); padding-block: 0; }
+  .site-header .navbar-brand { color: inherit; font-family: var(--font-display); font-weight: 500; font-size: var(--text-lg); letter-spacing: -.01em; }
+  .site-header .nav-link { color: inherit; opacity: .82; }
+  .site-header .nav-link:hover { opacity: 1; }
+  .site-header .btn-ghost { --btn-text: currentColor; }
+  .brand-mark { inline-size: 1.6em; block-size: 1.6em; color: var(--brand); }
+  .phone-link { display: none; color: inherit; font-size: var(--text-sm); font-weight: 560; text-decoration: none; gap: var(--space-2); align-items: center; opacity: .9; }
+  .menu-btn { display: inline-flex; }
+  @media (min-width: 48rem) { .menu-btn { display: none; } }
+  @media (min-width: 72rem) { .phone-link { display: inline-flex; } }
+  @media (max-width: 30rem) { .site-header .cta-sm { display: none; } }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: scroll()) {
+      .site-header {
+        animation: hdr-solid linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 0 8rem;
+      }
+      .site-header .brand-mark { color: inherit; }
+      @keyframes hdr-solid {
+        from {
+          background-color: transparent;
+          border-block-end-color: transparent;
+          backdrop-filter: none;
+          color: oklch(99% .005 var(--hue-brand));
+        }
+      }
+    }
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    position: relative;
+    isolation: isolate;
+    margin-block-start: calc(var(--hdr-h) * -1);
+    min-block-size: min(94svh, 54rem);
+    display: grid;
+    align-items: end;
+    overflow: clip;
+    background: var(--photo-ink);
+    color: oklch(98.5% .008 var(--hue-brand));
+  }
+  .hero-img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: 50% 60%; z-index: -2; }
+  /* Three washes, each doing one job: the top keeps the nav legible, the
+     bottom carries the headline, the side darkens only where the text sits. */
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      linear-gradient(to bottom, oklch(16% .03 var(--hue-brand) / .62), transparent 30%),
+      linear-gradient(to top, oklch(15% .04 var(--hue-brand) / .9) 0%, oklch(15% .04 var(--hue-brand) / .55) 34%, transparent 68%),
+      linear-gradient(to right, oklch(15% .04 var(--hue-brand) / .55), transparent 62%);
+  }
+  .hero-inner { padding-block: calc(var(--hdr-h) + var(--space-12)) calc(var(--space-12) + 5.5rem); }
+  .hero .eyebrow { color: oklch(88% .07 var(--hue-accent)); }
+  .hero .display {
+    color: inherit;
+    font-size: clamp(2.9rem, 1.5rem + 5.6vw, 6rem);
+    line-height: .98;
+    letter-spacing: -.025em;
+    max-inline-size: 12ch;
+  }
+  .hero .display em { color: oklch(90% .075 var(--hue-accent)); }
+  .hero .lede { color: oklch(95% .01 var(--hue-brand) / .88); max-inline-size: 50ch; font-size: var(--text-lg); line-height: var(--leading-normal); }
+  .btn-glass {
+    --btn-bg: oklch(100% 0 0 / .14);
+    --btn-text: oklch(99% 0 0);
+    --btn-border: oklch(100% 0 0 / .35);
+    --btn-shadow: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .btn-glass:hover { background: oklch(100% 0 0 / .24); border-color: oklch(100% 0 0 / .5); }
+  .hero .avatar-stack > .avatar { box-shadow: 0 0 0 2px var(--photo-ink); }
+  .hero-proof { font-size: var(--text-sm); color: oklch(95% .01 var(--hue-brand) / .85); }
+  .hero-proof strong { color: oklch(99% 0 0); }
+  .photo-tag {
+    position: absolute; inset-block-end: calc(5.5rem + var(--space-6)); inset-inline-end: var(--space-gutter);
+    display: none; align-items: center; gap: var(--space-2);
+    padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+    border-radius: var(--r-full);
+    background: oklch(18% .03 var(--hue-brand) / .45);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border: 1px solid oklch(100% 0 0 / .18);
+    font-size: var(--text-xs); font-weight: 560;
+  }
+  @media (min-width: 56rem) { .photo-tag { display: inline-flex; } }
+
+  /* ===== Booking bar =====
+     A stacked card on a phone; one row with hairline dividers from 64rem. */
+  .booking-wrap { position: relative; z-index: 2; margin-block-start: -5.5rem; }
+  .booking {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-4);
+  }
+  .booking .label { font-size: var(--text-2xs); font-weight: 680; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); }
+  /* Dates and travellers share a row even on a phone; the rest span it. */
+  .booking { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .booking > :first-child, .booking > :nth-child(4), .booking > .btn { grid-column: 1 / -1; }
+  @media (min-width: 40rem) {
+    .booking { padding: var(--space-5); }
+    .booking > :nth-child(4) { grid-column: auto; }
+    .booking > :nth-child(2) { grid-column: 1 / -1; }
+  }
+  @media (min-width: 64rem) {
+    .booking { grid-template-columns: 1.55fr 1fr 1fr 1fr auto; gap: 0; padding: var(--space-2); align-items: stretch; border-radius: var(--r-full); }
+    .booking > :is(:first-child, :nth-child(2), .btn) { grid-column: auto; }
+    .booking .field { gap: 0; padding: var(--space-3) var(--space-6); border-radius: var(--r-full); position: relative; justify-content: center; }
+    .booking .field + .field::before { content: ""; position: absolute; inset-block: 22%; inset-inline-start: 0; inline-size: 1px; background: var(--line); }
+    .booking .field:hover { background: var(--surface-hover); }
+    .booking .field:focus-within { background: var(--surface-2); box-shadow: inset 0 0 0 2px var(--focus); }
+    .booking :is(.input, .select) { border-color: transparent; box-shadow: none; background-color: transparent; padding-inline-start: 0; min-block-size: 2rem; font-weight: 580; }
+    .booking :is(.input, .select):focus { box-shadow: none; border-color: transparent; }
+    .booking .search > .icon { inset-inline-start: 0; color: var(--brand); }
+    .booking .search > .input { padding-inline-start: var(--space-8); }
+    .booking > .btn { block-size: auto; min-block-size: 3.75rem; padding-inline: var(--space-8); border-radius: var(--r-full); margin-inline-start: var(--space-2); }
+  }
+
+  /* Press strip under the booking bar. Real logos would be <img> here. */
+  .press-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-3) var(--space-10); color: var(--text-faint); }
+  .press-strip span { font-family: var(--font-display); font-size: var(--text-lg); letter-spacing: -.01em; white-space: nowrap; }
+  .press-strip .press-italic { font-style: italic; }
+  .press-strip .press-caps { font-family: var(--font-sans); font-weight: 760; letter-spacing: .18em; font-size: var(--text-sm); }
+
+  /* ===== Destinations bento =====
+     Two columns on a phone, four from 56rem. The size classes describe the
+     tile's shape, so reordering the markup keeps the mosaic intact. */
+  .dest-grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 10.5rem; }
+  .dest-xl { grid-column: span 2; grid-row: span 2; }
+  .dest-tall { grid-row: span 2; }
+  .dest-wide { grid-column: span 2; }
+  @media (min-width: 56rem) {
+    .dest-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 15.5rem; gap: var(--space-4); }
+  }
+  .dest {
+    position: relative; isolation: isolate; overflow: clip;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: var(--space-4);
+    border-radius: var(--r-lg);
+    background: var(--bg-sunken);
+    color: oklch(99% 0 0);
+    text-decoration: none;
+    box-shadow: 0 0 0 1px oklch(0% 0 0 / .06) inset;
+  }
+  .dest:hover { color: oklch(99% 0 0); }
+  .dest img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; z-index: -2; transition: scale var(--dur-3) var(--ease-out); }
+  .dest::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--scrim); }
+  @media (prefers-reduced-motion: no-preference) { .dest:hover img { scale: 1.045; } }
+  .dest-country { font-size: var(--text-2xs); font-weight: 680; letter-spacing: .14em; text-transform: uppercase; opacity: .86; }
+  .dest-name { color: inherit; font-family: var(--font-display); font-weight: 500; font-size: var(--text-xl); line-height: 1.1; }
+  .dest-xl .dest-name { font-size: clamp(1.6rem, 1.1rem + 1.6vw, 2.4rem); }
+  .dest-facts { font-size: var(--text-sm); opacity: .92; font-variant-numeric: tabular-nums; }
+  .dest-facts strong { font-weight: 640; }
+  .dest-go {
+    position: absolute; inset-block-start: var(--space-3); inset-inline-end: var(--space-3);
+    inline-size: 2.25rem; block-size: 2.25rem; display: grid; place-items: center;
+    border-radius: var(--r-full);
+    background: oklch(100% 0 0 / .18); border: 1px solid oklch(100% 0 0 / .3);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    transition: background-color var(--dur-2) var(--ease-out);
+  }
+  .dest:hover .dest-go { background: oklch(100% 0 0 / .32); }
+  @media (max-width: 40rem) { .dest:not(.dest-xl, .dest-wide) .dest-facts { display: none; } .dest-name { font-size: var(--text-lg); } }
+
+  /* ===== Trips carousel ===== */
+  /* A .scroller on a phone, a wrapping row once there is room. */
+  .chip-row { --gap: var(--space-2); padding-block-start: 2px; }
+  @media (min-width: 48rem) { .chip-row { flex-wrap: wrap; overflow: visible; margin-inline: 0; padding-inline: 0; mask-image: none; -webkit-mask-image: none; } }
+  /* Room for the card shadows, which the scrolling track would otherwise clip. */
+  .trips .carousel-track { padding: var(--space-1) var(--space-1) var(--space-4); scroll-padding-inline: var(--space-1); }
+  @media (max-width: 47.999rem) {
+    .trips .carousel { margin-inline: calc(var(--space-gutter) * -1); }
+    .trips .carousel-track { padding-inline: var(--space-gutter); scroll-padding-inline: var(--space-gutter); border-radius: 0; }
+    .trips .carousel-slide { scroll-snap-align: start; }
+  }
+  /* Deck's multi carousel jumps from 78% straight to thirds; a tablet
+     wants two and a bit in between. */
+  @media (min-width: 36rem) and (max-width: 63.999rem) {
+    .trips .carousel-slide { flex-basis: calc((100% - var(--space-4)) / 2.15); }
+  }
+  .trip { block-size: 100%; }
+  .trip .card-media { position: relative; aspect-ratio: 4 / 3; background: var(--bg-sunken); overflow: clip; }
+  .trip .card-media img { block-size: 100%; transition: scale var(--dur-3) var(--ease-out); }
+  @media (prefers-reduced-motion: no-preference) { .trip:hover .card-media img { scale: 1.04; } }
+  .trip-flag { position: absolute; inset-block-start: var(--space-3); inset-inline-start: var(--space-3); background: color-mix(in oklab, var(--surface) 90%, transparent); border-color: transparent; color: var(--text); backdrop-filter: blur(6px); }
+  .trip-save {
+    position: absolute; inset-block-start: var(--space-3); inset-inline-end: var(--space-3); z-index: 1;
+    --btn-bg: color-mix(in oklab, var(--surface) 88%, transparent); --btn-border: transparent;
+    border-radius: var(--r-full);
+  }
+  .trip-save[aria-pressed="true"] { color: var(--bad-500); }
+  .trip-save[aria-pressed="true"] .icon { fill: currentColor; }
+  .trip .card-title { font-family: var(--font-display); font-weight: 500; font-size: var(--text-xl); letter-spacing: -.01em; line-height: 1.15; }
+  .trip-meta { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--text-muted); }
+  .trip-meta .icon { color: var(--accent-500); }
+  .trip-price { display: flex; align-items: baseline; gap: var(--space-2); padding-block-start: var(--space-3); margin-block-start: auto; border-block-start: 1px solid var(--line); }
+  .trip-price strong { font-size: var(--text-lg); font-weight: 660; color: var(--text); font-variant-numeric: tabular-nums; }
+  .trip .card-body { flex: 1 1 auto; }
+  .trips-empty { padding: var(--space-8); text-align: center; color: var(--text-muted); border: 1px dashed var(--line-strong); border-radius: var(--r-lg); }
+
+  /* ===== Why us ===== */
+  .why { display: grid; gap: var(--space-10); }
+  @media (min-width: 64rem) { .why { grid-template-columns: .9fr 1.1fr; gap: var(--space-16); align-items: center; } }
+  .why-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); }
+  .why-item { padding: var(--space-6); border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-1); }
+  .why-item .icon-tile { inline-size: 44px; block-size: 44px; border-radius: var(--r-md); }
+  .why-item h3 { font-size: var(--text-lg); font-weight: 500; }
+  @media (max-width: 40rem) {
+    .why-item { display: grid; grid-template-columns: 44px 1fr; gap: var(--space-1) var(--space-4); padding: var(--space-5); }
+    .why-item .icon-tile { grid-row: span 2; }
+  }
+
+  /* ===== Featured itinerary ===== */
+  .journey { display: grid; gap: var(--space-10); }
+  @media (min-width: 64rem) { .journey { grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: start; } }
+  .journey-media { position: relative; padding-block-end: var(--space-12); padding-inline-end: var(--space-8); }
+  @media (min-width: 64rem) { .journey-media { position: sticky; inset-block-start: calc(var(--hdr-h) + var(--space-6)); } }
+  .journey-main { border-radius: var(--r-lg); background: var(--bg-sunken); inline-size: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 40%; box-shadow: var(--shadow-3); }
+  @media (min-width: 64rem) { .journey-main { aspect-ratio: 4 / 5; } }
+  .journey-inset {
+    position: absolute; inset-block-end: 0; inset-inline-end: 0;
+    inline-size: 42%; aspect-ratio: 1; object-fit: cover;
+    border-radius: var(--r-md); background: var(--bg-sunken);
+    border: 6px solid var(--sand); box-shadow: var(--shadow-3);
+    object-position: 85% 50%;
+  }
+  .journey-card {
+    position: absolute; inset-block-start: var(--space-6); inset-inline-start: calc(var(--space-4) * -1);
+    padding: var(--space-3) var(--space-4); border-radius: var(--r-md);
+    background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-3);
+  }
+  @media (max-width: 40rem) { .journey-card { inset-inline-start: var(--space-3); } }
+  .journey .timeline-item { padding-block-end: var(--space-6); grid-template-columns: 28px 1fr; gap: var(--space-4); }
+  .journey .timeline-item:not(:last-child)::before { inset-inline-start: 13px; inset-block-start: 28px; }
+  .journey .timeline-dot { inline-size: 28px; block-size: 28px; font-size: var(--text-2xs); font-weight: 700; color: var(--brand); border-color: var(--brand-300); background: var(--brand-soft); }
+  .day { font-size: var(--text-xs); font-weight: 640; letter-spacing: .08em; text-transform: uppercase; color: var(--text-faint); }
+  .journey .timeline h3 { font-family: var(--font-display); font-weight: 500; font-size: var(--text-lg); }
+  .inclusions { display: grid; gap: var(--space-2) var(--space-6); grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); font-size: var(--text-sm); }
+  .inclusions li { display: flex; gap: var(--space-2); align-items: flex-start; }
+  .inclusions .icon { color: var(--good-600); margin-block-start: 2px; }
+
+  /* ===== Stats band =====
+     Always dark, in both themes: the brand ramp's deep end, plus a bloom. */
+  .stats-band {
+    position: relative; overflow: clip; isolation: isolate;
+    background:
+      radial-gradient(60% 120% at 12% 0%, oklch(48% .1 var(--hue-brand) / .55), transparent 70%),
+      radial-gradient(45% 90% at 95% 100%, oklch(55% .09 calc(var(--hue-brand) - 20) / .35), transparent 70%),
+      var(--brand-950);
+    color: oklch(97% .012 var(--hue-brand));
+  }
+  .stats-layout { display: grid; gap: var(--space-10); }
+  @media (min-width: 64rem) { .stats-layout { grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center; } }
+  .travel-stats { display: grid; gap: var(--space-8) var(--space-6); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .travel-stats .stat { padding-inline-start: var(--space-4); border-inline-start: 1px solid oklch(100% 0 0 / .16); }
+  .travel-stats .stat-value { font-family: var(--font-display); font-weight: 500; font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.5rem); letter-spacing: -.02em; color: inherit; }
+  .travel-stats .stat-label { color: oklch(90% .02 var(--hue-brand) / .82); font-size: var(--text-sm); }
+  .stats-quote { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.4rem); line-height: 1.25; letter-spacing: -.012em; max-inline-size: 24ch; color: oklch(97% .012 var(--hue-brand)); }
+  .stats-quote { border: 0; padding: 0; }
+  .stats-band .avatar { box-shadow: 0 0 0 2px oklch(100% 0 0 / .2); }
+  .stats-band .who { font-size: var(--text-sm); color: oklch(90% .02 var(--hue-brand) / .82); }
+  .stats-band .who strong { color: oklch(98% 0 0); font-weight: 620; }
+  .stats-band .eyebrow { color: oklch(84% .08 var(--hue-accent)); }
+
+  /* ===== Reviews ===== */
+  .reviews { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); align-items: start; }
+  @media (min-width: 64rem) { .reviews > :nth-child(2) { translate: 0 var(--space-8); } }
+  .review blockquote { border: 0; padding: 0; color: var(--text); font-family: var(--font-display); font-size: var(--text-lg); line-height: 1.5; }
+  .review .quote-mark { color: var(--brand-300); inline-size: 2rem; block-size: 2rem; }
+  .review-trip { font-size: var(--text-xs); color: var(--text-muted); display: inline-flex; gap: var(--space-1); align-items: center; }
+  .review-score { display: inline-flex; align-items: center; gap: var(--space-2); }
+  .rating-static { --star: 16px; }
+
+  /* ===== Journal ===== */
+  .post .card-media { aspect-ratio: 3 / 2; background: var(--bg-sunken); overflow: clip; }
+  .post .card-media img { block-size: 100%; transition: scale var(--dur-3) var(--ease-out); }
+  @media (prefers-reduced-motion: no-preference) { .post:hover .card-media img { scale: 1.04; } }
+  .post .card-title { font-family: var(--font-display); font-weight: 500; font-size: var(--text-xl); line-height: 1.2; }
+
+  /* ===== Newsletter ===== */
+  .letter {
+    position: relative; overflow: clip; isolation: isolate;
+    display: grid; gap: var(--space-8); align-items: center;
+    padding: clamp(1.5rem, 1rem + 3vw, 4rem);
+    border-radius: var(--r-lg);
+    background: var(--sand);
+    border: 1px solid var(--sand-line);
+  }
+  @media (min-width: 64rem) { .letter { grid-template-columns: 1.1fr .9fr; } }
+  .letter h2 { font-size: clamp(2rem, 1.4rem + 2vw, 2.9rem); }
+  .letter .input-group { max-inline-size: 30rem; border-radius: var(--r-full); padding: var(--space-1); }
+  .letter .input-group > .input { padding-inline-start: var(--space-4); }
+  .letter .input-group > .btn { border-radius: var(--r-full); }
+  /* Three postcards, fanned. Decorative, so alt="" and aria-hidden. */
+  .postcards { position: relative; block-size: 17rem; display: none; }
+  @media (min-width: 64rem) { .postcards { display: block; } }
+  .postcards img {
+    position: absolute; inline-size: 13rem; aspect-ratio: 4 / 5; object-fit: cover;
+    border: 8px solid var(--ink-0); border-block-end-width: 28px; border-radius: var(--r-xs);
+    box-shadow: var(--shadow-4); background: var(--bg-sunken);
+  }
+  .postcards img:nth-child(1) { inset-block-start: 1.5rem; inset-inline-start: 4%; rotate: -8deg; }
+  .postcards img:nth-child(2) { inset-block-start: 0; inset-inline-start: 32%; rotate: 3deg; z-index: 1; }
+  .postcards img:nth-child(3) { inset-block-start: 2.25rem; inset-inline-start: 60%; rotate: 10deg; }
+
+  /* ===== Footer ===== */
+  .site-footer { background: var(--sand); border-block-start: 1px solid var(--sand-line); }
+  .site-footer .footer { border: 0; }
+  @media (max-width: 40rem) {
+    .site-footer .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8) var(--space-4); }
+    .site-footer .footer-brand { grid-column: 1 / -1; max-inline-size: none; }
+  }
+  .site-footer .navbar-brand { font-family: var(--font-display); font-weight: 500; font-size: var(--text-lg); }
+  .protect { display: flex; gap: var(--space-4); align-items: flex-start; padding: var(--space-4) var(--space-5); border-radius: var(--r-md); background: var(--surface); border: 1px solid var(--sand-line); margin-block-end: var(--space-6); }
+  .protect p { font-size: var(--text-xs); color: var(--text-muted); max-inline-size: 90ch; }
+  /* Workaround: Deck's --good-100 stays light in dark mode; deepen it there. */
+  .protect .icon-tile { background: light-dark(var(--good-100), oklch(30% .07 var(--hue-good))); color: light-dark(var(--good-700), oklch(86% .1 var(--hue-good))); }
+  .badge-outline { border: 1px solid var(--line-strong); background: transparent; color: var(--text); font-weight: 640; letter-spacing: .04em; }
+}
+</style>
+</head>
+<body>
+
+<!-- Photos are hotlinked from Unsplash for the preview. Replace them with your own. -->
+
+<!-- Icons the Deck sprite does not have. Stroke-based, 24x24, referenced as
+     <use href="#i-plane">. Same-document, so they work from any origin. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m15.8 8.2-1.9 5.7-5.7 1.9 1.9-5.7z"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 2.5a14 14 0 0 0 0 19 14 14 0 0 0 0-19M2.5 12h19"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v4c0 3-1.5 5-4 6M19 11h-4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v4c0 3-1.5 5-4 6"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
+  <symbol id="i-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+  <symbol id="i-youtube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24 24 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.6 49.6 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24 24 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.6 49.6 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===== Header =====
+     Sticky, and transparent over the hero photo until you scroll (see the
+     hdr-solid keyframes). The menu button only shows below 48rem, where
+     .navbar-links hides itself. -->
+<header class="site-header">
+  <div class="container">
+    <nav class="navbar" aria-label="Primary">
+      <a class="navbar-brand" href="#" aria-current="page">
+        <svg class="brand-mark" aria-hidden="true"><use href="#i-compass"></use></svg>
+        Wayfarer &amp; Co.
+      </a>
+      <div class="navbar-links">
+        <a class="nav-link" href="#destinations">Destinations</a>
+        <a class="nav-link" href="#trips">Trips</a>
+        <a class="nav-link" href="#journey">Itineraries</a>
+        <a class="nav-link" href="#journal">Journal</a>
+        <a class="nav-link" href="#why">About</a>
+      </div>
+      <div class="push cluster cluster-tight">
+        <a class="phone-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#phone-sm"></use></svg>
+          <span class="nums">+44 20 7946 0321</span>
+        </a>
+        <button class="btn btn-icon btn-ghost" data-deck-theme aria-label="Switch theme">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        </button>
+        <a class="btn btn-primary btn-sm cta-sm" href="#plan">Plan a trip</a>
+        <button class="btn btn-icon btn-ghost menu-btn" data-deck-drawer="#site-nav" aria-label="Open menu">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#menu"></use></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Mobile navigation. Needs deck-extras.js for the open/close wiring. -->
+<dialog class="drawer drawer-end" id="site-nav" aria-labelledby="site-nav-title">
+  <div class="drawer-header">
+    <h2 class="drawer-title" id="site-nav-title">Wayfarer &amp; Co.</h2>
+    <button class="btn btn-sm btn-ghost btn-icon push" data-drawer-close aria-label="Close menu">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x"></use></svg>
+    </button>
+  </div>
+  <nav class="drawer-body" aria-label="Mobile">
+    <div class="stack stack-1">
+      <a class="sidebar-link" href="#destinations">
+        <svg class="icon" aria-hidden="true"><use href="#i-globe"></use></svg> Destinations
+      </a>
+      <a class="sidebar-link" href="#trips">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#map-pin"></use></svg> Trips
+      </a>
+      <a class="sidebar-link" href="#journey">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#calendar"></use></svg> Itineraries
+      </a>
+      <a class="sidebar-link" href="#journal">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#file"></use></svg> Journal
+      </a>
+      <a class="sidebar-link" href="#why">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg> About us
+      </a>
+    </div>
+    <div class="stack stack-2 text-sm text-muted">
+      <span>Speak to a specialist, 8am–10pm daily</span>
+      <a class="fw-semi nums" href="#">+44 20 7946 0321</a>
+    </div>
+  </nav>
+  <div class="drawer-footer">
+    <a class="btn btn-primary" href="#plan">Plan a trip</a>
+  </div>
+</dialog>
+
+<main id="main">
+
+  <!-- ===== Hero =====
+       The photo is an <img>, not a CSS background, so it gets a real alt,
+       srcset and fetchpriority. .hero::before holds the scrims. -->
+  <section class="hero" aria-labelledby="hero-title">
+    <img class="hero-img"
+         src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=1600&amp;q=80&amp;auto=format&amp;fit=crop"
+         srcset="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=800&amp;q=80&amp;auto=format&amp;fit=crop 800w,
+                 https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=1600&amp;q=80&amp;auto=format&amp;fit=crop 1600w,
+                 https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=2400&amp;q=80&amp;auto=format&amp;fit=crop 2400w"
+         sizes="100vw" width="2400" height="1600" fetchpriority="high"
+         alt="Longtail boats moored in a turquoise lagoon between jungle-covered limestone cliffs">
+    <div class="container hero-inner">
+      <div class="stack stack-6 enter-rise stagger">
+        <p class="eyebrow">Small-group &amp; tailor-made journeys</p>
+        <h1 class="display" id="hero-title">Travel that leaves room to <em>wander.</em></h1>
+        <p class="lede">
+          Unhurried trips to 64 countries, planned by specialists who have walked
+          every route themselves — and answered by a person, day or night, once you are there.
+        </p>
+        <div class="cluster">
+          <a class="btn btn-primary btn-lg" href="#trips">
+            Explore trips
+            <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+          </a>
+          <a class="btn btn-lg btn-glass" href="#plan">Speak to a specialist</a>
+        </div>
+        <div class="cluster hero-proof">
+          <div class="avatar-stack" aria-hidden="true">
+            <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&amp;h=96&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="32" height="32" alt=""></span>
+            <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&amp;h=96&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="32" height="32" alt=""></span>
+            <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=96&amp;h=96&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="32" height="32" alt=""></span>
+            <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=96&amp;h=96&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="32" height="32" alt=""></span>
+          </div>
+          <span><strong>4.9 out of 5</strong> from 3,812 travellers</span>
+        </div>
+      </div>
+    </div>
+    <p class="photo-tag">
+      <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#map-pin-sm"></use></svg>
+      Pileh Lagoon, Koh Phi Phi, Thailand
+    </p>
+  </section>
+
+  <!-- ===== Booking bar =====
+       A real GET form. It overlaps the hero by pulling itself up with a
+       negative margin; on a phone it is a plain stacked card. -->
+  <div class="container booking-wrap">
+    <form class="booking enter-rise" action="#" method="get" role="search" aria-label="Find a trip">
+      <div class="field">
+        <label class="label" for="q">Where to?</label>
+        <div class="search">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search"></use></svg>
+          <input class="input" id="q" name="q" type="search" placeholder="Country, region or trip" autocomplete="off" list="places">
+          <datalist id="places">
+            <option value="Japan"></option><option value="Peru"></option><option value="Norway"></option>
+            <option value="Tanzania"></option><option value="Italy"></option><option value="Maldives"></option>
+          </datalist>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="when">Dates</label>
+        <select class="select" id="when" name="when">
+          <option>Any time</option>
+          <option>Nov 2026</option>
+          <option>Dec 2026</option>
+          <option selected>Jan 2027</option>
+          <option>Feb 2027</option>
+          <option>Mar 2027</option>
+          <option>Apr 2027</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for="who">Travellers</label>
+        <select class="select" id="who" name="who">
+          <option>1 adult</option>
+          <option selected>2 adults</option>
+          <option>2 adults, 1 child</option>
+          <option>2 adults, 2 children</option>
+          <option>Group of 6+</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for="style">Trip style</label>
+        <select class="select" id="style" name="style">
+          <option>Any style</option>
+          <option>Small group</option>
+          <option>Tailor-made</option>
+          <option>Private guided</option>
+          <option>Honeymoon</option>
+        </select>
+      </div>
+      <button class="btn btn-primary btn-lg" type="submit">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search"></use></svg>
+        Search trips
+      </button>
+    </form>
+  </div>
+
+  <!-- ===== Press ===== -->
+  <section class="container section" aria-label="As featured in">
+    <div class="stack stack-4">
+      <p class="text-center text-xs text-muted uppercase fw-semi" style="letter-spacing:.14em">As featured in</p>
+      <div class="press-strip">
+        <span class="press-italic">The Wanderer</span>
+        <span class="press-caps">ATLAS</span>
+        <span>Slow Journeys</span>
+        <span class="press-italic">Meridian Weekly</span>
+        <span class="press-caps">FAR&nbsp;&amp;&nbsp;WIDE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Destinations =====
+       A bento of links. .dest-xl / -tall / -wide set the tile's shape. -->
+  <section class="container section" id="destinations" aria-labelledby="dest-title" style="padding-block-start:0">
+    <div class="stack stack-8">
+      <div class="section-head reveal">
+        <div class="stack stack-3">
+          <p class="eyebrow">Where to next</p>
+          <h2 id="dest-title">Popular this <em>season</em></h2>
+        </div>
+        <a class="btn btn-outline" href="#">
+          All 64 destinations
+          <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+        </a>
+      </div>
+
+      <div class="dest-grid reveal">
+        <a class="dest dest-xl" href="#">
+          <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1000&amp;h=860&amp;q=80&amp;auto=format&amp;fit=crop" width="1000" height="860" loading="lazy" decoding="async" alt="White houses and blue domes of Oia stacked above the caldera at dusk">
+          <span class="dest-go" aria-hidden="true"><svg class="icon icon-sm mirror-rtl"><use href="../assets/deck/deck-icons.svg#arrow-up-right-sm"></use></svg></span>
+          <span class="dest-country">Greece</span>
+          <h3 class="dest-name">Santorini &amp; the Cyclades</h3>
+          <span class="dest-facts">9 nights · from <strong>$3,290</strong> pp</span>
+        </a>
+        <a class="dest dest-tall" href="#">
+          <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=520&amp;h=860&amp;q=80&amp;auto=format&amp;fit=crop" width="520" height="860" loading="lazy" decoding="async" alt="Aerial view of overwater villas on a winding boardwalk above a turquoise reef">
+          <span class="dest-go" aria-hidden="true"><svg class="icon icon-sm mirror-rtl"><use href="../assets/deck/deck-icons.svg#arrow-up-right-sm"></use></svg></span>
+          <span class="dest-country">Maldives</span>
+          <h3 class="dest-name">Baa Atoll</h3>
+          <span class="dest-facts">7 nights · from <strong>$5,640</strong> pp</span>
+        </a>
+        <a class="dest" href="#">
+          <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=520&amp;h=440&amp;q=80&amp;auto=format&amp;fit=crop" width="520" height="440" loading="lazy" decoding="async" alt="Bow of a wooden rowing boat on an emerald alpine lake ringed by pale peaks">
+          <span class="dest-go" aria-hidden="true"><svg class="icon icon-sm mirror-rtl"><use href="../assets/deck/deck-icons.svg#arrow-up-right-sm"></use></svg></span>
+          <span class="dest-country">Italy</span>
+          <h3 class="dest-name">The Dolomites</h3>
+          <span class="dest-facts">8 nights · from <strong>$2,980</strong> pp</span>
+        </a>
+        <a class="dest" href="#">
+          <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?w=520&amp;h=440&amp;q=80&amp;auto=format&amp;fit=crop" width="520" height="440" loading="lazy" decoding="async" alt="Machu Picchu's terraces beneath the peak of Huayna Picchu, wrapped in cloud">
+          <span class="dest-go" aria-hidden="true"><svg class="icon icon-sm mirror-rtl"><use href="../assets/deck/deck-icons.svg#arrow-up-right-sm"></use></svg></span>
+          <span class="dest-country">Peru</span>
+          <h3 class="dest-name">Sacred Valley</h3>
+          <span class="dest-facts">11 nights · from <strong>$4,450</strong> pp</span>
+        </a>
+        <a class="dest dest-wide" href="#">
+          <img src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=1000&amp;h=440&amp;q=80&amp;auto=format&amp;fit=crop" width="1000" height="440" loading="lazy" decoding="async" alt="Flat-topped acacias on the savanna with snow-capped Kilimanjaro above the clouds">
+          <span class="dest-go" aria-hidden="true"><svg class="icon icon-sm mirror-rtl"><use href="../assets/deck/deck-icons.svg#arrow-up-right-sm"></use></svg></span>
+          <span class="dest-country">Tanzania</span>
+          <h3 class="dest-name">Northern Safari Circuit</h3>
+          <span class="dest-facts">10 nights · from <strong>$6,120</strong> pp</span>
+        </a>
+        <a class="dest dest-wide" href="#">
+          <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=1000&amp;h=440&amp;q=80&amp;auto=format&amp;fit=crop" width="1000" height="440" loading="lazy" decoding="async" alt="Tanah Lot sea temple silhouetted on its rock as the sun sets over the surf">
+          <span class="dest-go" aria-hidden="true"><svg class="icon icon-sm mirror-rtl"><use href="../assets/deck/deck-icons.svg#arrow-up-right-sm"></use></svg></span>
+          <span class="dest-country">Indonesia</span>
+          <h3 class="dest-name">Bali &amp; the Gili Islands</h3>
+          <span class="dest-facts">12 nights · from <strong>$2,760</strong> pp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Curated trips =====
+       .carousel-multi shows three cards on a desktop and 78% of one on a
+       phone. The chips filter the slides by their data-style; the script at
+       the bottom of the page does it by toggling the hidden attribute. -->
+  <section class="band-sand section trips" id="trips" aria-labelledby="trips-title">
+    <div class="container stack stack-8">
+      <div class="section-head reveal">
+        <div class="stack stack-3">
+          <p class="eyebrow">Curated by our specialists</p>
+          <h2 id="trips-title">Trips we keep <em>coming back to</em></h2>
+        </div>
+        <p class="lede">Every departure is capped at twelve guests and led by someone who lives there. Prices are per person, flights from London included.</p>
+      </div>
+
+      <div class="scroller chip-row" role="group" aria-label="Filter trips by style" id="trip-filters">
+        <button class="chip" type="button" aria-pressed="true" data-filter="all">All trips</button>
+        <button class="chip" type="button" aria-pressed="false" data-filter="small-group">Small group</button>
+        <button class="chip" type="button" aria-pressed="false" data-filter="walking">Walking &amp; hiking</button>
+        <button class="chip" type="button" aria-pressed="false" data-filter="wildlife">Wildlife</button>
+        <button class="chip" type="button" aria-pressed="false" data-filter="rail">Rail journeys</button>
+        <button class="chip" type="button" aria-pressed="false" data-filter="tailor-made">Tailor-made</button>
+      </div>
+
+      <div class="carousel carousel-multi" data-deck-carousel aria-label="Curated trips" aria-roledescription="carousel">
+        <div class="carousel-track">
+
+          <div class="carousel-slide" data-style="small-group wildlife">
+            <article class="card card-link trip lift">
+              <div class="card-media">
+                <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=720&amp;h=540&amp;q=80&amp;auto=format&amp;fit=crop" width="720" height="540" loading="lazy" decoding="async" alt="Green and violet aurora over a snowfield under a starry sky">
+                <span class="badge trip-flag">Small group · max 12</span>
+                <button class="btn btn-icon btn-sm trip-save" type="button" aria-pressed="false" aria-label="Save Lofoten &amp; the Northern Lights">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart-sm"></use></svg>
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="trip-meta">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill-sm"></use></svg>
+                  <span><strong class="text-base" style="color:var(--text)">4.9</strong> (214)</span>
+                  <span class="push nums">8 nights</span>
+                </div>
+                <h3 class="card-title"><a class="stretch link-quiet" href="#">Lofoten &amp; the Northern Lights</a></h3>
+                <p class="text-sm text-muted">Norway · Tromsø to Reine, Jan–Mar</p>
+                <div class="cluster cluster-tight">
+                  <span class="badge">Aurora</span><span class="badge">Fjords</span><span class="badge">Cabins</span>
+                </div>
+                <div class="trip-price">
+                  <span class="text-sm text-muted">from</span><strong>$4,180</strong><span class="text-sm text-muted">pp</span>
+                  <svg class="icon icon-sm icon-follow push mirror-rtl" style="color:var(--brand)" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="carousel-slide" data-style="walking small-group">
+            <article class="card card-link trip lift">
+              <div class="card-media">
+                <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=720&amp;h=540&amp;q=80&amp;auto=format&amp;fit=crop" width="720" height="540" loading="lazy" decoding="async" alt="Pastel houses of Manarola stacked on a cliff above the Ligurian Sea">
+                <span class="badge trip-flag">Walking · moderate</span>
+                <button class="btn btn-icon btn-sm trip-save" type="button" aria-pressed="false" aria-label="Save Cinque Terre, slowly">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart-sm"></use></svg>
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="trip-meta">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill-sm"></use></svg>
+                  <span><strong class="text-base" style="color:var(--text)">4.8</strong> (389)</span>
+                  <span class="push nums">7 nights</span>
+                </div>
+                <h3 class="card-title"><a class="stretch link-quiet" href="#">Cinque Terre, slowly</a></h3>
+                <p class="text-sm text-muted">Italy · Levanto to Portovenere, Apr–Oct</p>
+                <div class="cluster cluster-tight">
+                  <span class="badge">Coast path</span><span class="badge">Wine</span><span class="badge">Boutique inns</span>
+                </div>
+                <div class="trip-price">
+                  <span class="text-sm text-muted">from</span><strong>$2,640</strong><span class="text-sm text-muted">pp</span>
+                  <svg class="icon icon-sm icon-follow push mirror-rtl" style="color:var(--brand)" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="carousel-slide" data-style="wildlife tailor-made">
+            <article class="card card-link trip lift">
+              <div class="card-media">
+                <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=720&amp;h=540&amp;q=80&amp;auto=format&amp;fit=crop" width="720" height="540" loading="lazy" decoding="async" alt="A lone acacia silhouetted against an orange sunset over the savanna">
+                <span class="badge trip-flag">Tailor-made</span>
+                <button class="btn btn-icon btn-sm trip-save" type="button" aria-pressed="false" aria-label="Save Masai Mara migration">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart-sm"></use></svg>
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="trip-meta">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill-sm"></use></svg>
+                  <span><strong class="text-base" style="color:var(--text)">5.0</strong> (97)</span>
+                  <span class="push nums">9 nights</span>
+                </div>
+                <h3 class="card-title"><a class="stretch link-quiet" href="#">Masai Mara migration</a></h3>
+                <p class="text-sm text-muted">Kenya · Nairobi to the Mara, Jul–Oct</p>
+                <div class="cluster cluster-tight">
+                  <span class="badge">Big five</span><span class="badge">Tented camps</span><span class="badge">Guides</span>
+                </div>
+                <div class="trip-price">
+                  <span class="text-sm text-muted">from</span><strong>$7,350</strong><span class="text-sm text-muted">pp</span>
+                  <svg class="icon icon-sm icon-follow push mirror-rtl" style="color:var(--brand)" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="carousel-slide" data-style="rail small-group">
+            <article class="card card-link trip lift">
+              <div class="card-media">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=720&amp;h=540&amp;q=80&amp;auto=format&amp;fit=crop" width="720" height="540" loading="lazy" decoding="async" alt="Jagged alpine peaks rising out of a sea of cloud at sunset">
+                <span class="badge trip-flag">Rail · first class</span>
+                <button class="btn btn-icon btn-sm trip-save" type="button" aria-pressed="false" aria-label="Save Swiss Alps by rail">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart-sm"></use></svg>
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="trip-meta">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill-sm"></use></svg>
+                  <span><strong class="text-base" style="color:var(--text)">4.9</strong> (156)</span>
+                  <span class="push nums">10 nights</span>
+                </div>
+                <h3 class="card-title"><a class="stretch link-quiet" href="#">The Swiss Alps by rail</a></h3>
+                <p class="text-sm text-muted">Switzerland · Zermatt to St. Moritz, May–Sep</p>
+                <div class="cluster cluster-tight">
+                  <span class="badge">Glacier Express</span><span class="badge">Lakes</span>
+                </div>
+                <div class="trip-price">
+                  <span class="text-sm text-muted">from</span><strong>$5,290</strong><span class="text-sm text-muted">pp</span>
+                  <svg class="icon icon-sm icon-follow push mirror-rtl" style="color:var(--brand)" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="carousel-slide" data-style="tailor-made">
+            <article class="card card-link trip lift">
+              <div class="card-media">
+                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=720&amp;h=540&amp;q=80&amp;auto=format&amp;fit=crop" width="720" height="540" loading="lazy" decoding="async" alt="A gondola on the Grand Canal in front of the Rialto Bridge">
+                <span class="badge trip-flag">Tailor-made</span>
+                <button class="btn btn-icon btn-sm trip-save" type="button" aria-pressed="false" aria-label="Save Venice &amp; the Veneto">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart-sm"></use></svg>
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="trip-meta">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill-sm"></use></svg>
+                  <span><strong class="text-base" style="color:var(--text)">4.7</strong> (241)</span>
+                  <span class="push nums">6 nights</span>
+                </div>
+                <h3 class="card-title"><a class="stretch link-quiet" href="#">Venice &amp; the Veneto</a></h3>
+                <p class="text-sm text-muted">Italy · Venice, Verona and Prosecco hills</p>
+                <div class="cluster cluster-tight">
+                  <span class="badge">Art</span><span class="badge">Food &amp; wine</span><span class="badge">Palazzo stay</span>
+                </div>
+                <div class="trip-price">
+                  <span class="text-sm text-muted">from</span><strong>$3,120</strong><span class="text-sm text-muted">pp</span>
+                  <svg class="icon icon-sm icon-follow push mirror-rtl" style="color:var(--brand)" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="carousel-slide" data-style="rail walking">
+            <article class="card card-link trip lift">
+              <div class="card-media">
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=720&amp;h=540&amp;q=80&amp;auto=format&amp;fit=crop" width="720" height="540" loading="lazy" decoding="async" alt="Snow-capped mountains above a pine forest and a wide glacial valley">
+                <span class="badge trip-flag">Rail &amp; hiking</span>
+                <button class="btn btn-icon btn-sm trip-save" type="button" aria-pressed="false" aria-label="Save Canadian Rockies">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart-sm"></use></svg>
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="trip-meta">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill-sm"></use></svg>
+                  <span><strong class="text-base" style="color:var(--text)">4.8</strong> (132)</span>
+                  <span class="push nums">12 nights</span>
+                </div>
+                <h3 class="card-title"><a class="stretch link-quiet" href="#">Canadian Rockies</a></h3>
+                <p class="text-sm text-muted">Canada · Vancouver to Banff, Jun–Sep</p>
+                <div class="cluster cluster-tight">
+                  <span class="badge">Rocky Mountaineer</span><span class="badge">Lakes</span>
+                </div>
+                <div class="trip-price">
+                  <span class="text-sm text-muted">from</span><strong>$5,870</strong><span class="text-sm text-muted">pp</span>
+                  <svg class="icon icon-sm icon-follow push mirror-rtl" style="color:var(--brand)" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+        <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous trips">
+          <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-left"></use></svg>
+        </button>
+        <button class="carousel-arrow carousel-next" type="button" aria-label="Next trips">
+          <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right"></use></svg>
+        </button>
+        <div class="carousel-dots"></div>
+      </div>
+      <p class="trips-empty" id="trips-empty" hidden>Nothing in that style right now — our specialists can build one around you.</p>
+    </div>
+  </section>
+
+  <!-- ===== Why travel with us ===== -->
+  <section class="container section" id="why" aria-labelledby="why-title">
+    <div class="why">
+      <div class="stack stack-6 reveal">
+        <p class="eyebrow">Why Wayfarer</p>
+        <h2 id="why-title" style="font-size:clamp(2rem,1.4rem + 2.2vw,3rem)">Fewer places, <em>more time</em> in each of them.</h2>
+        <p class="lede">
+          We plan the way we travel: two or three bases instead of eight hotels, a guide
+          who grew up there, and a free afternoon every couple of days. Then we stay on the
+          phone until you are home.
+        </p>
+        <div class="cluster">
+          <div class="avatar-stack" aria-hidden="true">
+            <span class="avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&amp;h=120&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="40" height="40" alt="" loading="lazy" decoding="async"></span>
+            <span class="avatar"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&amp;h=120&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="40" height="40" alt="" loading="lazy" decoding="async"></span>
+            <span class="avatar"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&amp;h=120&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="40" height="40" alt="" loading="lazy" decoding="async"></span>
+            <span class="avatar"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=120&amp;h=120&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="40" height="40" alt="" loading="lazy" decoding="async"></span>
+          </div>
+          <div class="stack stack-0">
+            <span class="fw-semi">38 destination specialists</span>
+            <span class="text-sm text-muted">Average 11 years on the ground</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-grid stagger">
+        <div class="why-item stack stack-3 reveal">
+          <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#shield"></use></svg></span>
+          <h3>Fully protected</h3>
+          <p class="text-sm text-muted">Every flight-inclusive trip is financially protected, and your deposit sits in an audited trust account until you travel.</p>
+        </div>
+        <div class="why-item stack stack-3 reveal">
+          <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#map-pin"></use></svg></span>
+          <h3>Specialists who've been</h3>
+          <p class="text-sm text-muted">The person planning your trip has done it, usually more than once. Ask them where they ate.</p>
+        </div>
+        <div class="why-item stack stack-3 reveal">
+          <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#users"></use></svg></span>
+          <h3>Twelve guests, never more</h3>
+          <p class="text-sm text-muted">Small enough for the family-run places and the boat that only takes fourteen. Solo travellers pay no supplement.</p>
+        </div>
+        <div class="why-item stack stack-3 reveal">
+          <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="#i-leaf"></use></svg></span>
+          <h3>Lighter by design</h3>
+          <p class="text-sm text-muted">Rail where it's possible, locally owned stays, and a measured carbon budget for every itinerary we publish.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Featured itinerary =====
+       The photo column sticks beside the day-by-day list on a desktop. The
+       timeline is Deck's .timeline with numbered dots. -->
+  <section class="band-sand section" id="journey" aria-labelledby="journey-title">
+    <div class="container journey">
+      <div class="journey-media reveal">
+        <img class="journey-main" src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=900&amp;h=1125&amp;q=80&amp;auto=format&amp;fit=crop" width="900" height="1125" loading="lazy" decoding="async" alt="Two women in kimono walking up a lantern-lit lane towards Yasaka pagoda in Kyoto">
+        <img class="journey-inset" src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=720&amp;q=80&amp;auto=format&amp;fit=crop" width="720" height="480" loading="lazy" decoding="async" alt="A pagoda above autumn maples, with the city and hills beyond">
+        <div class="journey-card stack stack-1">
+          <span class="text-xs text-muted">Next departure</span>
+          <span class="fw-semi nums">4 Nov 2026 · 3 places left</span>
+        </div>
+      </div>
+
+      <div class="stack stack-8">
+        <div class="stack stack-4 reveal">
+          <p class="eyebrow">Featured journey · 12 days</p>
+          <h2 id="journey-title" style="font-size:clamp(2rem,1.4rem + 2.2vw,3rem)">Japan in the <em>slow season</em></h2>
+          <p class="lede">
+            Late autumn, when the maples turn and the crowds go home. Tokyo to the
+            Seto Inland Sea by rail, with two nights in a ryokan and a whole morning
+            with nothing planned at all.
+          </p>
+          <div class="cluster">
+            <span class="badge badge-brand badge-dot">Small group · max 10</span>
+            <span class="badge">Moderate pace</span>
+            <span class="badge nums">From $6,850 pp</span>
+          </div>
+        </div>
+
+        <ol class="timeline" aria-label="Day by day">
+          <li class="timeline-item">
+            <span class="timeline-dot nums" aria-hidden="true">1</span>
+            <div class="stack stack-1">
+              <span class="day">Days 1–3 · Tokyo</span>
+              <h3>Arrive, and walk it off</h3>
+              <p class="text-sm text-muted">Private transfer from Haneda. A morning at Tsukiji with a chef who still buys there, an afternoon in Yanaka's old lanes.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-dot nums" aria-hidden="true">2</span>
+            <div class="stack stack-1">
+              <span class="day">Days 4–5 · Hakone</span>
+              <h3>Ryokan and hot springs</h3>
+              <p class="text-sm text-muted">Two nights at a family-run ryokan with a private onsen. Kaiseki dinner both evenings; Fuji, if it decides to appear.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-dot nums" aria-hidden="true">3</span>
+            <div class="stack stack-1">
+              <span class="day">Days 6–9 · Kyoto</span>
+              <h3>Temples before the gates open</h3>
+              <p class="text-sm text-muted">Early access to Tōfuku-ji for the maples, a tea ceremony in a Gion townhouse, and a free day with a bicycle.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-dot nums" aria-hidden="true">4</span>
+            <div class="stack stack-1">
+              <span class="day">Days 10–11 · Naoshima</span>
+              <h3>Art islands of the Inland Sea</h3>
+              <p class="text-sm text-muted">Ferry out to the Benesse museums and Teshima's single-room gallery. Sunset from the pier, yellow pumpkin optional.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-dot nums" aria-hidden="true">5</span>
+            <div class="stack stack-1">
+              <span class="day">Day 12 · Osaka</span>
+              <h3>One last dinner, then home</h3>
+              <p class="text-sm text-muted">Street food in Dōtonbori with your guide, then a transfer to Kansai for the overnight flight.</p>
+            </div>
+          </li>
+        </ol>
+
+        <ul class="inclusions" aria-label="Included">
+          <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 11 nights, boutique hotels &amp; ryokan</li>
+          <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 7-day JR pass and all transfers</li>
+          <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 11 breakfasts, 6 dinners</li>
+          <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Local guide in every city</li>
+        </ul>
+
+        <div class="cluster">
+          <a class="btn btn-primary" href="#">
+            See the full itinerary
+            <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+          </a>
+          <a class="btn btn-ghost" href="#">
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#download"></use></svg>
+            Brochure (PDF, 4 MB)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Stats band ===== -->
+  <section class="stats-band section" aria-label="Wayfarer in numbers">
+    <div class="container stats-layout">
+      <figure class="stack stack-6 reveal">
+        <p class="eyebrow">Seventeen years in</p>
+        <blockquote class="stats-quote">“We measure a trip by how often you ring us afterwards to plan the next one.”</blockquote>
+        <figcaption class="cluster who">
+          <span class="avatar"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=120&amp;h=120&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="40" height="40" alt="" loading="lazy" decoding="async"></span>
+          <span class="stack stack-0"><strong>Clara Wynne</strong><span>Founder, Wayfarer &amp; Co.</span></span>
+        </figcaption>
+      </figure>
+      <dl class="travel-stats reveal">
+        <div class="stat">
+          <dt class="stat-label">Countries we plan</dt>
+          <dd class="stat-value nums m-0">64</dd>
+        </div>
+        <div class="stat">
+          <dt class="stat-label">Travellers since 2009</dt>
+          <dd class="stat-value nums m-0">48,000+</dd>
+        </div>
+        <div class="stat">
+          <dt class="stat-label">Average review, 3,812 trips</dt>
+          <dd class="stat-value nums m-0">4.9 / 5</dd>
+        </div>
+        <div class="stat">
+          <dt class="stat-label">Book their next trip with us</dt>
+          <dd class="stat-value nums m-0">92%</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===== Reviews ===== -->
+  <section class="container section" aria-labelledby="reviews-title">
+    <div class="stack stack-8">
+      <div class="section-head reveal">
+        <div class="stack stack-3">
+          <p class="eyebrow">In their words</p>
+          <h2 id="reviews-title">Postcards from <em>past travellers</em></h2>
+        </div>
+        <div class="review-score">
+          <span class="rating-static" style="--value:98;--star:20px" role="img" aria-label="4.9 out of 5">
+            <span class="rating-fill">
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            </span>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+          </span>
+          <span class="text-sm"><strong>4.9</strong> <span class="text-muted">· 3,812 verified reviews</span></span>
+        </div>
+      </div>
+
+      <div class="reviews">
+        <figure class="card review reveal">
+          <div class="card-body">
+            <div class="stack stack-4">
+              <svg class="quote-mark" aria-hidden="true"><use href="#i-quote"></use></svg>
+              <blockquote>Kenji met us off the train in Kyoto with umbrellas and a list of where he'd eat that night. Every hotel felt like someone's favourite. We have already booked Peru.</blockquote>
+              <figcaption class="bar">
+                <span class="avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&amp;h=120&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="40" height="40" alt="" loading="lazy" decoding="async"></span>
+                <span class="stack stack-0">
+                  <span class="fw-semi">Hannah Okafor</span>
+                  <span class="review-trip"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#map-pin-sm"></use></svg> Japan in the slow season · Nov 2025</span>
+                </span>
+              </figcaption>
+            </div>
+          </div>
+        </figure>
+        <figure class="card review reveal">
+          <div class="card-body">
+            <div class="stack stack-4">
+              <svg class="quote-mark" aria-hidden="true"><use href="#i-quote"></use></svg>
+              <blockquote>Our flight to Nairobi was cancelled at midnight. By the time we'd found our bags there was a text with a new routing, a hotel, and an apology from the camp. That's what you pay for.</blockquote>
+              <figcaption class="bar">
+                <span class="avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&amp;h=120&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="40" height="40" alt="" loading="lazy" decoding="async"></span>
+                <span class="stack stack-0">
+                  <span class="fw-semi">Graham Whitlock</span>
+                  <span class="review-trip"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#map-pin-sm"></use></svg> Masai Mara migration · Aug 2025</span>
+                </span>
+              </figcaption>
+            </div>
+          </div>
+        </figure>
+        <figure class="card review reveal">
+          <div class="card-body">
+            <div class="stack stack-4">
+              <svg class="quote-mark" aria-hidden="true"><use href="#i-quote"></use></svg>
+              <blockquote>I travelled solo and never once felt like the spare seat. Ten of us, a cabin each, and the aurora on the third night. I still have the group chat.</blockquote>
+              <figcaption class="bar">
+                <span class="avatar"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&amp;h=120&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="40" height="40" alt="" loading="lazy" decoding="async"></span>
+                <span class="stack stack-0">
+                  <span class="fw-semi">Priya Raman</span>
+                  <span class="review-trip"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#map-pin-sm"></use></svg> Lofoten &amp; the Northern Lights · Feb 2026</span>
+                </span>
+              </figcaption>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Journal ===== -->
+  <section class="container section" id="journal" aria-labelledby="journal-title" style="padding-block-start:var(--space-8)">
+    <div class="stack stack-8">
+      <div class="section-head reveal">
+        <div class="stack stack-3">
+          <p class="eyebrow">The journal</p>
+          <h2 id="journal-title">Notes from the road</h2>
+        </div>
+        <a class="btn btn-outline" href="#">
+          Read the journal
+          <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+        </a>
+      </div>
+
+      <div class="grid" style="--min:18rem;--gap:var(--space-6)">
+        <article class="card card-flush card-link post reveal">
+          <div class="card-media r-lg overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=720&amp;h=480&amp;q=80&amp;auto=format&amp;fit=crop" width="720" height="480" loading="lazy" decoding="async" alt="A hiker with a red backpack looking out over a still lake between mountains">
+          </div>
+          <div class="card-body px-0">
+            <span class="eyebrow">Packing</span>
+            <h3 class="card-title"><a class="stretch link-quiet" href="#">Three climates, one carry-on: what our guides actually pack</a></h3>
+            <p class="text-sm text-muted clamp-2">Merino, a down gilet that folds into its own pocket, and the one thing every guide said to leave at home.</p>
+            <span class="text-xs text-muted">6 min read · Ama Owusu</span>
+          </div>
+        </article>
+        <article class="card card-flush card-link post reveal">
+          <div class="card-media r-lg overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=720&amp;h=480&amp;q=80&amp;auto=format&amp;fit=crop" width="720" height="480" loading="lazy" decoding="async" alt="An empty two-lane road running straight between red desert rock formations">
+          </div>
+          <div class="card-body px-0">
+            <span class="eyebrow">Self-drive</span>
+            <h3 class="card-title"><a class="stretch link-quiet" href="#">The case for driving less on a road trip</a></h3>
+            <p class="text-sm text-muted clamp-2">Why our Utah itineraries now cap the driving at three hours a day, and what we did with the time we got back.</p>
+            <span class="text-xs text-muted">8 min read · Tom Ferreira</span>
+          </div>
+        </article>
+        <article class="card card-flush card-link post reveal">
+          <div class="card-media r-lg overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=720&amp;h=480&amp;q=80&amp;auto=format&amp;fit=crop" width="720" height="480" loading="lazy" decoding="async" alt="Snowy mountain ridge beneath a night sky full of stars and the Milky Way">
+          </div>
+          <div class="card-body px-0">
+            <span class="eyebrow">Dark skies</span>
+            <h3 class="card-title"><a class="stretch link-quiet" href="#">Seven places the Milky Way still shows up</a></h3>
+            <p class="text-sm text-muted clamp-2">From the Atacama to the Kerry coast, the dark-sky reserves worth planning a trip around — and when to go.</p>
+            <span class="text-xs text-muted">5 min read · Lena Varga</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Newsletter =====
+       A real form posting an email address. The postcards are decoration. -->
+  <section class="container section" id="plan" aria-labelledby="letter-title" style="padding-block-start:0">
+    <div class="letter reveal">
+      <div class="stack stack-6">
+        <div class="stack stack-3">
+          <p class="eyebrow">Postcards, once a month</p>
+          <h2 id="letter-title">Ideas for the trip <em>after next.</em></h2>
+          <p class="lede">New departures before they go on sale, a specialist's pick of the month, and nothing else. Around 40,000 people read it.</p>
+        </div>
+        <form class="stack stack-2" action="#" method="post">
+          <label class="sr-only" for="nl-email">Email address</label>
+          <div class="input-group">
+            <input class="input" id="nl-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email" required>
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+          </div>
+          <p class="text-xs text-muted">One email a month. Unsubscribe from any of them.</p>
+        </form>
+      </div>
+      <div class="postcards" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=420&amp;h=520&amp;q=80&amp;auto=format&amp;fit=crop" width="420" height="520" loading="lazy" decoding="async" alt="">
+        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=420&amp;h=520&amp;q=80&amp;auto=format&amp;fit=crop" width="420" height="520" loading="lazy" decoding="async" alt="">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=420&amp;h=520&amp;q=80&amp;auto=format&amp;fit=crop" width="420" height="520" loading="lazy" decoding="async" alt="">
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer =====
+     The protection note is placeholder wording for a fictional scheme.
+     Replace it with your real licence numbers and bonding body. -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <a class="navbar-brand" href="#">
+            <svg class="brand-mark" aria-hidden="true"><use href="#i-compass"></use></svg>
+            Wayfarer &amp; Co.
+          </a>
+          <p>Small-group and tailor-made travel from a studio in Bristol. Planned by people who have been.</p>
+          <p class="nums">+44 20 7946 0321<br>hello@wayfarer.example</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-heading">Destinations</p>
+          <a href="#">Asia</a>
+          <a href="#">Africa</a>
+          <a href="#">Europe</a>
+          <a href="#">Latin America</a>
+          <a href="#">Polar</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-heading">Ways to travel</p>
+          <a href="#">Small group</a>
+          <a href="#">Tailor-made</a>
+          <a href="#">Rail journeys</a>
+          <a href="#">Honeymoons</a>
+          <a href="#">Solo, no supplement</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-heading">Company</p>
+          <a href="#">Our specialists</a>
+          <a href="#">Responsible travel</a>
+          <a href="#">Journal</a>
+          <a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-heading">Help</p>
+          <a href="#">Booking conditions</a>
+          <a href="#">Travel insurance</a>
+          <a href="#">Visas &amp; health</a>
+          <a href="#">Contact us</a>
+        </div>
+      </div>
+
+      <div class="protect">
+        <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#shield"></use></svg></span>
+        <div class="stack stack-2">
+          <div class="cluster cluster-tight">
+            <span class="badge badge-outline">TPA 4821</span>
+            <span class="badge badge-outline">GITO member W117</span>
+          </div>
+          <p>
+            Your money is protected. Flight-inclusive packages are covered by our licence with the
+            Travel Protection Authority (TPA 4821), and every deposit is held in an independently
+            audited trust account until you travel. Wayfarer &amp; Co., the TPA and GITO are fictional
+            names used in this template.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Wayfarer &amp; Co. Ltd · <a href="#">Privacy</a> · <a href="#">Cookies</a></span>
+        <div class="footer-social">
+          <a href="#" aria-label="Wayfarer on Instagram"><svg class="icon" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
+          <a href="#" aria-label="Wayfarer on Facebook"><svg class="icon" aria-hidden="true"><use href="#i-facebook"></use></svg></a>
+          <a href="#" aria-label="Wayfarer on YouTube"><svg class="icon" aria-hidden="true"><use href="#i-youtube"></use></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Filter chips and the save hearts. Without this script every trip shows
+     and the hearts do nothing, which is a fine fallback. -->
+<script>
+  (() => {
+    const chips = document.getElementById('trip-filters');
+    const empty = document.getElementById('trips-empty');
+    const carousel = document.querySelector('.trips .carousel');
+    chips.addEventListener('click', (e) => {
+      const chip = e.target.closest('[data-filter]');
+      if (!chip) return;
+      chips.querySelectorAll('[data-filter]').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      const want = chip.dataset.filter;
+      let shown = 0;
+      carousel.querySelectorAll('.carousel-slide').forEach((s) => {
+        const hit = want === 'all' || s.dataset.style.split(' ').includes(want);
+        s.hidden = !hit;
+        shown += hit;
+      });
+      carousel.hidden = shown === 0;
+      empty.hidden = shown !== 0;
+      carousel.querySelector('.carousel-track').scrollTo({ left: 0 });
+      carousel.carousel?.paint();
+    });
+    document.querySelectorAll('.trip-save').forEach((b) => b.addEventListener('click', () => {
+      b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+    }));
+  })();
+</script>
+
+</body>
+</html>

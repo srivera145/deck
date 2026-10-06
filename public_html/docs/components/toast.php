@@ -33,7 +33,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Toast</h1>
   <p class="lede">
     A toast reports something that has already happened. Deck's are a
@@ -43,7 +43,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use a toast for the result of something the reader just did, when they do not need to
@@ -65,7 +65,7 @@ Deck.toast({
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="anatomy">Anatomy</h2>
   <p>
     The generated markup, so you can recognise the parts and restyle them. This is
@@ -98,11 +98,11 @@ Deck.toast({
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="kinds">Kinds</h2>
   <?php
   docs_example(
-      '<div class="stack-2" style="max-inline-size:23rem">' . "\n" .
+      '<div class="stack stack-2" style="max-inline-size:23rem">' . "\n" .
       '  <div class="toast toast-good" role="status"><div class="toast-main"><div class="toast-title">Good</div></div></div>' . "\n" .
       '  <div class="toast toast-warn" role="status"><div class="toast-main"><div class="toast-title">Warn</div></div></div>' . "\n" .
       '  <div class="toast toast-bad" role="alert"><div class="toast-main"><div class="toast-title">Bad</div></div></div>' . "\n" .
@@ -130,7 +130,7 @@ t.update({ kind: \'good\', title: \'Submitted\', duration: 4000 });') ?></code><
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="stack">The stack</h2>
   <p>
     <code>.toast-region-stacked</code> collapses older toasts behind the newest one,
@@ -150,7 +150,7 @@ t.update({ kind: \'good\', title: \'Submitted\', duration: 4000 });') ?></code><
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="timer">Timers that pause</h2>
   <p>
     <code>.toast-timer</code> is a two-pixel bar that scales from full to zero over
@@ -165,7 +165,7 @@ t.update({ kind: \'good\', title: \'Submitted\', duration: 4000 });') ?></code><
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="placement">Where the region sits</h2>
   <p>
     Bottom end by default, which on a phone is where the thumb is. Four modifiers move it,
@@ -195,7 +195,7 @@ t.update({ kind: \'good\', title: \'Submitted\', duration: 4000 });') ?></code><
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="states">is-leaving and is-dragging</h2>
   <p>
     Both are set by <code>deck.js</code> at runtime and are <strong>internal</strong> —
@@ -210,20 +210,20 @@ t.update({ kind: \'good\', title: \'Submitted\', duration: 4000 });') ?></code><
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/13-toasts.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--surface', '--surface-hover', '--line', '--text', '--text-muted', '--text-faint', '--text-sm', '--brand', '--brand-500', '--good-500', '--warn-500', '--bad-500', '--ink-400', '--ink-500', '--r-md', '--r-full', '--shadow-4', '--tap', '--space-1', '--space-2', '--space-3', '--space-4', '--space-6', '--z-toast', '--dur-2', '--dur-3']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The region is a labelled landmark.</strong> <code>Deck.toast</code> sets
       <code>role="region"</code> and <code>aria-label="Notifications"</code> on it when it
@@ -271,7 +271,7 @@ t.update({ kind: \'good\', title: \'Submitted\', duration: 4000 });') ?></code><
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The region's placement uses <code>inset-inline</code>, the accent edge is
@@ -314,7 +314,7 @@ t.update({ kind: \'good\', title: \'Submitted\', duration: 4000 });') ?></code><
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Toasts animate in, animate out, and move as the stack reflows. Under
@@ -331,7 +331,7 @@ t.update({ kind: \'good\', title: \'Submitted\', duration: 4000 });') ?></code><
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> lists <code>.toast-region</code> among the chrome that
@@ -340,7 +340,7 @@ t.update({ kind: \'good\', title: \'Submitted\', duration: 4000 });') ?></code><
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* Choose the placement once, before the first toast */
 Deck.toasts.stacked = true;
@@ -361,9 +361,9 @@ Deck.toasts.stacked = true;
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for anything the reader must act on.</strong> It disappears. Use an
       <a href="alert.php"><code>.alert</code></a> in the page, or a

@@ -22,7 +22,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Tabs</h1>
   <p class="lede">
     <code>.tabs</code> is the strip; <code>.tab</code> is one trigger in it. The selected
@@ -31,7 +31,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use tabs when one region of a page shows one of several panels and the reader switches
@@ -47,7 +47,7 @@ require __DIR__ . '/../_layout.php';
       '  <button class="tab" role="tab" aria-selected="false" aria-controls="dx-p2" id="dx-t2" tabindex="-1">History</button>' . "\n" .
       '  <button class="tab" role="tab" aria-selected="false" aria-controls="dx-p3" id="dx-t3" tabindex="-1">Settings</button>' . "\n" .
       '</div>' . "\n" .
-      '<div class="stack-3" style="padding-block-start:var(--space-4)">' . "\n" .
+      '<div class="stack stack-3" style="padding-block-start:var(--space-4)">' . "\n" .
       '  <div role="tabpanel" id="dx-p1" aria-labelledby="dx-t1">' . "\n" .
       '    <p>2,481 rows, last run at 04:12 UTC.</p>' . "\n" .
       '  </div>' . "\n" .
@@ -70,7 +70,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="styling">How the selected tab is drawn</h2>
   <p>
     A two-pixel <code>border-block-end</code> in the brand colour, with
@@ -88,7 +88,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overflow">Overflowing</h2>
   <p>
     <code>.tabs</code> is <code>overflow-x: auto</code> with the scrollbar hidden and
@@ -120,13 +120,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="keyboard">The keyboard pattern, which is yours</h2>
   <p>
     A correct tablist is not just markup. The ARIA authoring practices ask for four things,
     and Deck's CSS provides none of them:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>One tab stop for the whole strip.</strong> The selected tab has
       <code>tabindex="0"</code>, the rest <code>tabindex="-1"</code> — the roving
@@ -180,7 +180,7 @@ tabs.forEach((t, i) => t.addEventListener(\'click\', () => select(i)));') ?></co
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     <code>.tabs</code> and <code>.tab</code> are two separate classes rather than a
@@ -190,14 +190,14 @@ tabs.forEach((t, i) => t.addEventListener(\'click\', () => select(i)));') ?></co
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--brand', '--line', '--text', '--text-muted', '--text-sm', '--tap', '--space-1', '--space-2', '--space-3', '--space-4', '--dur-1']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The visual state and the accessible state are one attribute.</strong>
       Styling from <code>[aria-selected="true"]</code> means a tab cannot look selected
@@ -242,7 +242,7 @@ tabs.forEach((t, i) => t.addEventListener(\'click\', () => select(i)));') ?></co
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The strip is a flex row with a gap and logical padding, so it fills from the right
@@ -266,7 +266,7 @@ tabs.forEach((t, i) => t.addEventListener(\'click\', () => select(i)));') ?></co
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     A tab transitions its colour and border colour over
@@ -277,7 +277,7 @@ tabs.forEach((t, i) => t.addEventListener(\'click\', () => select(i)));') ?></co
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> lists <code>.tabs</code> among the chrome that never
@@ -290,7 +290,7 @@ tabs.forEach((t, i) => t.addEventListener(\'click\', () => select(i)));') ?></co
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* A vertical strip for a settings page */
@@ -314,9 +314,9 @@ tabs.forEach((t, i) => t.addEventListener(\'click\', () => select(i)));') ?></co
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not without the keyboard script.</strong> <code>role="tablist"</code>
       without arrow keys is a promise the page breaks. Either add the behaviour or drop

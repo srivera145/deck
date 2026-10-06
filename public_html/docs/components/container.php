@@ -38,7 +38,7 @@ $widths = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Container</h1>
   <p class="lede">
     <code>.container</code> does three things: caps the content at
@@ -50,7 +50,7 @@ $widths = [
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Wrap the content of a page section in one. Almost every page is a
@@ -62,7 +62,7 @@ $widths = [
   docs_example(
       '<section class="section" style="background:var(--surface-2)">' . "\n" .
       '  <div class="container">' . "\n" .
-      '    <div class="stack-2">' . "\n" .
+      '    <div class="stack stack-2">' . "\n" .
       '      <h3>Full-width band, capped content</h3>' . "\n" .
       '      <p class="text-muted">The background reaches the edges; the text does not.</p>' . "\n" .
       '    </div>' . "\n" .
@@ -79,7 +79,7 @@ $widths = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="widths">Widths</h2>
   <p>
     Each variant sets <code>--container</code> and nothing else, so switching width never
@@ -110,7 +110,7 @@ $widths = [
   </p>
   <?php
   docs_example(
-      '<div class="stack-3">' . "\n" .
+      '<div class="stack stack-3">' . "\n" .
       '  <div class="container-sm" style="background:var(--surface-2);padding-block:var(--space-3)">' . "\n" .
       '    <p class="text-muted">container-sm — 40rem</p>' . "\n" .
       '  </div>' . "\n" .
@@ -129,7 +129,7 @@ $widths = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="nesting">Do not nest containers</h2>
   <p>
     A container inside a container applies the gutter twice, so the inner content sits
@@ -149,7 +149,7 @@ $widths = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="section">Vertical page rhythm</h2>
   <p>
     The container handles the horizontal axis. The vertical counterpart is
@@ -162,7 +162,7 @@ $widths = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="app-shell">.app-shell — header, content, footer</h2>
   <p>
     <code>.app-shell</code> is a grid with
@@ -191,7 +191,7 @@ $widths = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="sticky-top">.sticky-top</h2>
   <p>
     A sticky header. What is interesting is what it does <em>not</em> do while it is at
@@ -215,13 +215,13 @@ $widths = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/04-layout.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     Both page-level spacings are clamps rather than breakpoint steps, which is why a Deck
@@ -230,9 +230,9 @@ $widths = [
   <?php docs_token_table(['--space-gutter', '--space-section', '--z-sticky', '--shadow-2']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>A container is a <code>&lt;div&gt;</code> with no role.</strong> Landmarks
       come from the elements around it — <code>&lt;header&gt;</code>,
@@ -273,7 +273,7 @@ $widths = [
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     <code>margin-inline: auto</code> and <code>padding-inline</code> are both
@@ -283,7 +283,7 @@ $widths = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     <code>.sticky-top::after</code> transitions its opacity over
@@ -294,7 +294,7 @@ $widths = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> removes the cap and the gutter from every container
@@ -306,7 +306,7 @@ $widths = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One container, no layer needed */
 <div class="container" style="--container:64rem">
@@ -326,9 +326,9 @@ $widths = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not inside another container.</strong> Two gutters. Use
       <code>.container-full</code>, or set a <code>max-inline-size</code> on the child.

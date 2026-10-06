@@ -45,7 +45,7 @@ if ($needle !== '') {
 $showing = $kind === 'tokens' ? count($tokens) : count($classes);
 ?>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Reference</h1>
   <p class="lede">
     Every class and token Deck defines, read straight from
@@ -55,7 +55,7 @@ $showing = $kind === 'tokens' ? count($tokens) : count($classes);
   </p>
 </header>
 
-<form method="get" class="stack-3" action="search.php">
+<form method="get" class="stack stack-3" action="search.php">
   <div class="field">
     <label class="label" for="q">Filter by name, description, or file</label>
     <div class="search">

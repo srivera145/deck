@@ -45,7 +45,7 @@ function demo_cards(int $n = 5): string
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Grid</h1>
   <p class="lede">
     <code>.grid</code> is one rule with no breakpoints in it. Columns appear as the
@@ -55,7 +55,7 @@ function demo_cards(int $n = 5): string
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it for a collection of things of the same kind that should line up in columns:
@@ -69,13 +69,13 @@ function demo_cards(int $n = 5): string
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="how">How the one rule works</h2>
   <pre class="dx-code"><code><?= e('grid-template-columns: repeat(auto-fit, minmax(min(var(--min, 17rem), 100%), 1fr));') ?></code></pre>
   <p>
     It is worth taking apart, because once you can read it you can write your own.
   </p>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong><code>repeat(auto-fit, …)</code></strong> — make as many columns of this
       size as will fit, and collapse the empty ones so the items stretch to fill the
@@ -103,7 +103,7 @@ function demo_cards(int $n = 5): string
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="floors">Changing the floor</h2>
   <p>
     <code>--min</code> is the only knob. The variants set it and nothing else, so
@@ -111,7 +111,7 @@ function demo_cards(int $n = 5): string
     items.
   </p>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="f-tight">.grid-tight — a 12rem floor</h3>
     <p class="text-muted">More columns before it wraps. For stats, icons, small tiles.</p>
     <?php
@@ -119,7 +119,7 @@ function demo_cards(int $n = 5): string
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="f-wide">.grid-wide — a 24rem floor</h3>
     <p class="text-muted">Fewer, wider columns. For cards with a paragraph in them.</p>
     <?php
@@ -127,7 +127,7 @@ function demo_cards(int $n = 5): string
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="f-custom">Any floor you like</h3>
     <p class="text-muted">
       <code>--min</code> is a plain custom property, so a floor Deck does not ship needs
@@ -148,7 +148,7 @@ function demo_cards(int $n = 5): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="fixed">Fixed column counts</h2>
   <p>
     <code>.grid-fixed-2</code>, <code>-3</code> and <code>-4</code> set an exact number
@@ -166,7 +166,7 @@ function demo_cards(int $n = 5): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="gap">Gap</h2>
   <p>
     Same <code>--gap</code> as everything else, defaulting to
@@ -179,7 +179,7 @@ function demo_cards(int $n = 5): string
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="cq">Cards that respond to their track</h2>
   <p>
     <code>src/18-container.css</code> makes a <code>.cq</code> child of a grid its own
@@ -207,20 +207,20 @@ function demo_cards(int $n = 5): string
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/04-layout.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--space-1', '--space-3', '--space-4', '--space-6']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>A CSS grid is not a table.</strong> It has no row or column semantics, so
       a screen reader reads the items in DOM order with no notion of position. If the
@@ -257,7 +257,7 @@ function demo_cards(int $n = 5): string
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Grid columns follow the inline direction, so items fill from the right under
@@ -276,7 +276,7 @@ function demo_cards(int $n = 5): string
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing animates. Reflowing as the container changes width is layout, not a
@@ -284,7 +284,7 @@ function demo_cards(int $n = 5): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> sets <code>.grid { display: block }</code> and gives
@@ -296,7 +296,7 @@ function demo_cards(int $n = 5): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One grid, no layer needed */
 <div class="grid" style="--min:9rem;--gap:var(--space-6)">
@@ -317,9 +317,9 @@ function demo_cards(int $n = 5): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for content and a sidebar.</strong> That is <code>.split</code>, which
       has one flexible column and one fixed rail. A grid gives every column an equal

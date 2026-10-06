@@ -24,7 +24,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Gallery</h1>
   <p class="lede">
     Two ways to lay out a set of images, and one way to load them. Which layout you want
@@ -33,7 +33,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="gallery">.gallery — equal tiles</h2>
   <p>
     An auto-filling grid of squares. Every child gets
@@ -78,14 +78,14 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="masonry">.masonry — ragged heights</h2>
   <p>
     For photographs of mixed shapes, where cropping everything square would throw away the
     composition. <code>.masonry</code> ships <strong>two implementations</strong> and picks
     between them at runtime.
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>CSS columns</strong> is the baseline and works everywhere. Its weakness is
       reading order: content flows down column one, then down column two, so item 2 is
@@ -125,7 +125,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="lazy">.lazy — loading without the jump</h2>
   <p>
     <code>.lazy</code> is a frame with an <code>aspect-ratio</code> and a shimmer. It holds
@@ -168,7 +168,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     These are three separate layouts in <code>src/24-media.css</code> rather than one
@@ -177,14 +177,14 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--space-2', '--space-3', '--r-sm', '--r-md', '--line', '--text-faint', '--ink-300', '--bg-sunken', '--dur-3']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Every image needs <code>alt</code>.</strong> Describe what is in the picture,
       not what it is called. A gallery of twelve images alt-texted "photo" is twelve
@@ -225,7 +225,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     <code>.gallery</code> is a grid and fills from the correct edge under
@@ -240,7 +240,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Two things move. The tile hover scale is a normal transition and the global reset in
@@ -263,7 +263,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     None of these are in <code>src/99-print.css</code>, but two of them are handled in a second <code>@layer deck.print</code> block at the end of <code>src/24-media.css</code>:
@@ -295,7 +295,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One gallery, no layer needed */
 <div class="masonry" style="--cols:2;--gap:1rem"> … </div>
@@ -322,9 +322,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not <code>.gallery</code> where cropping loses the point.</strong> Diagrams,
       screenshots and scans need to be seen whole.

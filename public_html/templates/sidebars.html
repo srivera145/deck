@@ -1,0 +1,1304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sidebars · Deck template</title>
+<meta name="description" content="Seven copy-ready sidebar layouts built with Deck: classic grouped, icon rail, always-dark, floating card, two-level, docs tree and an off-canvas drawer.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f6f8">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d10">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23007b7e'/%3E%3Crect x='7' y='8' width='6' height='16' rx='2' fill='white'/%3E%3Cpath d='M17 11h8M17 16h8M17 21h5' stroke='white' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+<script src="../assets/deck/deck-extras.js" defer></script>   <!-- the off-canvas variant opens a .drawer -->
+
+<style>
+@layer app.pages {
+  /* How this block is laid out: "Showcase chrome" is this page only (top bar,
+     intro, the frames around each demo) and is not part of any sidebar.
+     "Shared" is the faux app window every variant sits in. After that there is
+     one group per variant, prefixed like its HTML (.sb-classic-…, .sb-rail-…).
+     Copying a variant? Take its group plus "Shared". */
+
+  /* ===== Showcase chrome (this page only) ===== */
+  .topbar {
+    position: sticky; inset-block-start: 0; z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid var(--line);
+  }
+  .topbar .navbar { border: 0; }
+  .topbar nav[aria-label="Breadcrumb"] { padding-inline-start: var(--space-4); border-inline-start: 1px solid var(--line); }
+  .topbar .range { inline-size: 7rem; }
+  @media (max-width: 39.99rem) {
+    .topbar nav[aria-label="Breadcrumb"], .topbar .range { display: none; }
+  }
+
+  .eyebrow { font-size: var(--text-sm); font-weight: 640; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); }
+  .intro { padding-block-end: var(--space-10); }
+  .intro .display { max-inline-size: 15ch; text-wrap: balance; }
+  .intro .lede { text-wrap: pretty; }
+  .intro .chip { text-decoration: none; color: var(--text); }
+
+  .variants { display: flex; flex-direction: column; gap: var(--space-16); padding-block-end: var(--space-section); }
+  .variant { display: flex; flex-direction: column; gap: var(--space-5); scroll-margin-block-start: var(--space-20); }
+  /* .bar does not wrap; this one does, so on a phone the copy button drops
+     under the description, lined up with the title rather than the badge. */
+  .variant-head { flex-wrap: wrap; align-items: flex-start; row-gap: var(--space-3); }
+  .variant-head > .badge { min-inline-size: 2rem; justify-content: center; margin-block-start: .2rem; font-variant-numeric: tabular-nums; }
+  .variant-head > .stack { flex: 1 1 16rem; min-inline-size: 0; }
+  @media (max-width: 39.99rem) { .variant-head > .push { margin-inline-start: calc(2rem + var(--space-3)); } }
+  @media (min-width: 40rem) { .variant-head { align-items: center; } .variant-head > .badge { margin: 0; } }
+  .variant-frame {
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: clip;
+    background: var(--bg);
+    box-shadow: var(--shadow-2);
+  }
+
+  .page-foot { padding-block: var(--space-6); }
+  .page-foot .footer-bottom { border: 0; padding: 0; }
+
+  /* Workaround: Deck's status tints (--good-100, --warn-100, --bad-100) stay
+     light in dark mode, so these badges glare on dark surfaces. light-dark()
+     follows the element's colour scheme, data-theme="dark" subtrees included. */
+  .badge-good { background: light-dark(var(--good-100), color-mix(in oklab, var(--good-500) 20%, transparent)); color: light-dark(var(--good-700), oklch(from var(--good-500) 82% c h)); }
+  .badge-warn { background: light-dark(var(--warn-100), color-mix(in oklab, var(--warn-500) 20%, transparent)); color: light-dark(var(--warn-700), oklch(from var(--warn-500) 85% c h)); }
+  .badge-bad  { background: light-dark(var(--bad-100), color-mix(in oklab, var(--bad-500) 24%, transparent)); color: light-dark(var(--bad-700), oklch(from var(--bad-500) 82% c h)); }
+
+  /* ===== Shared by every sidebar: the faux app window =====
+     A sidebar column plus a placeholder page so each sidebar reads in context.
+     Below 40rem the placeholder page is hidden and the sidebar fills the
+     window, which is how the same markup reads inside a phone's nav drawer.
+     (The icon rail and off-canvas variants keep their page: they are narrow
+     enough not to need the room.) */
+  .sb-app { display: grid; grid-template-columns: auto minmax(0, 1fr); block-size: 36rem; background: var(--bg); }
+  .sb-main { display: flex; flex-direction: column; min-inline-size: 0; min-block-size: 0; overflow: hidden; container-type: inline-size; }
+  .sb-top {
+    display: flex; align-items: center; gap: var(--space-3);
+    min-block-size: 3.75rem; padding: var(--space-2) var(--space-6);
+    border-block-end: 1px solid var(--line); background: var(--surface);
+  }
+  .sb-body { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-6); min-block-size: 0; }
+  .sb-tiles { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr)); }
+  .sb-tile { padding: var(--space-4) var(--space-5); }
+  /* Three tiles need about 34rem of page; narrower, show two rather than orphan one. */
+  @container (max-width: 34rem) { .sb-tiles { grid-template-columns: 1fr 1fr; } .sb-tile:nth-child(3) { display: none; } }
+  /* Placeholders hold still (seven windows shimmering at once is noise) and
+     use a text-tinted fill, because .skeleton's own greys stay light in dark mode. */
+  .sb-main .skeleton { animation: none; background: color-mix(in oklab, var(--text) 8%, transparent); }
+  /* Charts in the placeholder pages: still, softer bars, one highlighted. */
+  .sb-main .chart-col { animation: none; --series: color-mix(in oklab, var(--c1) 40%, transparent); }
+  .sb-main .chart-columns { --gap: var(--space-2); }
+  /* Deck's delta colours are tuned for light surfaces; lift them in dark mode. */
+  .sb-main .stat-delta-up { color: light-dark(var(--good-700), var(--good-500)); }
+  .sb-main .stat-delta-down { color: light-dark(var(--bad-700), var(--bad-500)); }
+  .sb-sk-av { inline-size: 2rem; block-size: 2rem; flex: none; }
+  .sb-sk-pill { inline-size: 3.75rem; block-size: 1.25rem; border-radius: var(--r-full); flex: none; }
+  @media (max-width: 39.99rem) {
+    .sb-app { grid-template-columns: minmax(0, 1fr); block-size: auto; }
+    .sb-main { display: none; }
+  }
+
+  /* ===== 01 Classic ===== */
+  .sb-classic-side {
+    inline-size: 16.5rem; display: flex; flex-direction: column; min-block-size: 0;
+    background: var(--surface); border-inline-end: 1px solid var(--line);
+  }
+  .sb-classic-head { display: grid; gap: var(--space-3); padding: var(--space-3) var(--space-3) var(--space-2); }
+  .sb-classic-ws {
+    display: flex; align-items: center; gap: var(--space-3); inline-size: 100%;
+    padding: var(--space-2); border-radius: var(--r-sm); text-align: start; cursor: pointer;
+    transition: background-color var(--dur-1) var(--ease-out);
+  }
+  .sb-classic-ws:hover { background: var(--surface-hover); }
+  .sb-classic-ws > .icon { inline-size: 1em; block-size: 1em; margin-inline-start: auto; color: var(--text-faint); }
+  .sb-classic-logo { background-image: linear-gradient(135deg, var(--brand-500), var(--brand-700)); color: var(--text-on-brand); font-weight: 720; }
+  .sb-classic-search .input { min-block-size: 2.25rem; padding-inline-end: 3rem; border-radius: var(--r-sm); background: var(--surface-2); box-shadow: none; font-size: var(--text-sm); }
+  .sb-classic-search kbd { position: absolute; inset-inline-end: var(--space-2); pointer-events: none; }
+  .sb-classic-nav { flex: 1 1 auto; min-block-size: 0; overflow-y: auto; padding-block: var(--space-1) var(--space-3); gap: 2px; scrollbar-width: thin; }
+  .sb-classic-nav .sidebar-link { min-block-size: 2.25rem; padding-block: var(--space-1); }
+  .sb-classic-nav .sidebar-link > .icon { color: var(--text-faint); }
+  .sb-classic-nav .sidebar-link[aria-current] > .icon { color: var(--brand); }
+  .sb-classic-group { padding-inline-end: var(--space-1); }
+  .sb-classic-group .btn { inline-size: 1.75rem; block-size: 1.75rem; min-inline-size: 0; color: var(--text-faint); }
+  /* Project colour squares. Swap the --dot per project. */
+  .sb-classic-dot { inline-size: .625rem; block-size: .625rem; margin-inline: .3rem; border-radius: 3px; background: var(--dot, var(--brand-500)); flex: none; }
+  .sb-classic-foot { padding: var(--space-3); border-block-start: 1px solid var(--line); }
+  .sb-classic-user { padding: var(--space-2); border-radius: var(--r-sm); }
+  .sb-classic-user:hover { background: var(--surface-hover); }
+  .sb-classic-who { min-inline-size: 0; line-height: 1.35; }
+  @media (max-width: 39.99rem) { .sb-classic-side { inline-size: auto; border-inline-end: 0; } }
+
+  /* ===== 02 Icon rail ===== */
+  .sb-rail-side {
+    inline-size: 4.5rem; display: flex; flex-direction: column; align-items: center;
+    gap: var(--space-2); padding-block: var(--space-4) var(--space-3);
+    background: var(--surface); border-inline-end: 1px solid var(--line);
+  }
+  .sb-rail-logo {
+    inline-size: 2.5rem; block-size: 2.5rem; display: grid; place-items: center; margin-block-end: var(--space-2);
+    border-radius: var(--r-md); color: var(--text-on-brand); box-shadow: var(--shadow-2);
+    background-image: linear-gradient(140deg, var(--brand-500), var(--brand-700));
+  }
+  .sb-rail-side .sidebar { padding: 0; align-items: center; }
+  .sb-rail-side .sidebar-link { position: relative; inline-size: 2.75rem; block-size: 2.75rem; min-block-size: 0; padding: 0; justify-content: center; }
+  .sb-rail-side .sidebar-link[aria-current] { color: var(--brand); }
+  .sb-rail-side .sidebar-link .icon { inline-size: 1.375rem; block-size: 1.375rem; }
+  .sb-rail-side .indicator-badge { inset-block-start: -7px; inset-inline-end: -9px; }
+  /* The active bar sits on the rail's edge, 14px out from the 44px button. */
+  .sb-rail-side .sidebar-link[aria-current]::before {
+    content: ""; position: absolute; inset-inline-start: -.875rem; inset-block: .625rem;
+    inline-size: 3px; border-radius: 0 3px 3px 0; background: var(--brand);
+  }
+  /* Deck's tooltip opens upwards; on a rail it belongs beside the icon. */
+  .sb-rail-side .tooltip::after { inset-block-end: auto; inset-block-start: 50%; inset-inline-start: calc(100% + .75rem); translate: -4px -50%; }
+  .sb-rail-side .tooltip:is(:hover, :focus-visible)::after { translate: 0 -50%; }
+  .sb-rail-foot { margin-block-start: auto; }
+  .sb-rail-me { border-radius: var(--r-full); margin-block-start: var(--space-2); }
+  .sb-rail-filters { display: none; }
+  @media (min-width: 40rem) { .sb-rail-filters { display: flex; } }
+  /* The rail is narrow enough to keep its page on a phone. */
+  @media (max-width: 39.99rem) {
+    .sb-rail { grid-template-columns: auto minmax(0, 1fr); block-size: 34rem; }
+    .sb-rail .sb-main { display: flex; }
+    .sb-rail .sb-top, .sb-rail .sb-body { padding-inline: var(--space-4); }
+  }
+  .sb-rail .chart { --chart-h: 13.5rem; }
+
+  /* ===== 03 Dark =====
+     data-theme="dark" works on any element, not just <html>: it sets
+     color-scheme on the subtree, so every Deck token inside resolves to its
+     dark value whatever the page theme is. */
+  .sb-dark-side {
+    inline-size: 16.5rem; display: flex; flex-direction: column; min-block-size: 0; color: var(--text);
+    background-image: linear-gradient(180deg, color-mix(in oklab, var(--brand-900) 55%, var(--ink-950)), var(--ink-950) 42%);
+    border-inline-end: 1px solid var(--line);
+  }
+  .sb-dark-head { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); }
+  .sb-dark-logo {
+    inline-size: 2rem; block-size: 2rem; display: grid; place-items: center; border-radius: var(--r-sm);
+    background-image: linear-gradient(140deg, var(--brand-400), var(--brand-600)); color: var(--brand-950);
+    box-shadow: 0 0 0 1px oklch(100% 0 0 / .14) inset, 0 6px 18px -6px var(--brand-500);
+  }
+  .sb-dark-jump {
+    display: flex; align-items: center; gap: var(--space-2); margin-inline: var(--space-3);
+    padding: var(--space-2) var(--space-3); border: 1px solid var(--line); border-radius: var(--r-sm);
+    background: oklch(100% 0 0 / .03); color: var(--text-faint); font-size: var(--text-sm); cursor: pointer;
+  }
+  .sb-dark-jump:hover { color: var(--text-muted); border-color: var(--line-strong); }
+  .sb-dark-jump kbd { margin-inline-start: auto; background: transparent; }
+  .sb-dark-nav { flex: 1 1 auto; min-block-size: 0; overflow-y: auto; padding-block: var(--space-2); gap: 2px; scrollbar-width: thin; }
+  .sb-dark-nav .sidebar-link { min-block-size: 2rem; padding-block: var(--space-1); color: var(--ink-400); }
+  .sb-dark-nav .sidebar-link:hover { background: oklch(100% 0 0 / .05); color: var(--ink-100); }
+  .sb-dark-nav .sidebar-link[aria-current] {
+    color: var(--ink-0);
+    background-image: linear-gradient(90deg, color-mix(in oklab, var(--brand-500) 34%, transparent), color-mix(in oklab, var(--brand-500) 6%, transparent));
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-400) 26%, transparent);
+  }
+  .sb-dark-nav .sidebar-link[aria-current] > .icon { color: var(--brand-300); }
+  .sb-dark-dot { inline-size: .5rem; block-size: .5rem; margin-inline: .375rem; border-radius: var(--r-full); background: var(--dot, var(--brand-400)); box-shadow: 0 0 0 3px color-mix(in oklab, var(--dot, var(--brand-400)) 22%, transparent); flex: none; }
+  .sb-dark-upgrade {
+    display: grid; gap: var(--space-3); margin: 0 var(--space-3) var(--space-3); padding: var(--space-3) var(--space-4) var(--space-4);
+    border-radius: var(--r-md); border: 1px solid color-mix(in oklab, var(--brand-400) 26%, transparent);
+    background-image: radial-gradient(120% 90% at 100% 0%, color-mix(in oklab, var(--brand-500) 34%, transparent), transparent 70%);
+    background-color: var(--ink-900);
+  }
+  .sb-dark-upgrade .icon-tile { inline-size: 2rem; block-size: 2rem; background: color-mix(in oklab, var(--brand-400) 18%, transparent); color: var(--brand-300); }
+  /* Deck's progress track is a light grey; on a dark card it wants a dark one. */
+  .sb-dark-upgrade .progress { block-size: 6px; background: var(--ink-800); }
+  .sb-dark-upgrade .progress::-webkit-progress-bar { background: var(--ink-800); }
+  .sb-dark-upgrade .progress::-webkit-progress-value { background-image: linear-gradient(90deg, var(--brand-500), var(--brand-300)); }
+  .sb-dark-upgrade .progress::-moz-progress-bar { background-image: linear-gradient(90deg, var(--brand-500), var(--brand-300)); }
+  .sb-dark-user { padding: var(--space-3) var(--space-4); border-block-start: 1px solid var(--line); }
+  .sb-dark .chart { --chart-h: 12rem; }
+  @media (max-width: 39.99rem) { .sb-dark-side { inline-size: auto; border-inline-end: 0; } }
+
+  /* ===== 04 Floating ===== */
+  .sb-float {
+    gap: var(--space-3); padding: var(--space-3);
+    background-color: var(--bg-sunken);
+    background-image:
+      radial-gradient(55% 70% at 0% 0%, color-mix(in oklab, var(--brand-400) 20%, transparent), transparent 70%),
+      radial-gradient(45% 60% at 100% 100%, color-mix(in oklab, var(--accent-500) 14%, transparent), transparent 70%);
+  }
+  .sb-float-side {
+    inline-size: 15.5rem; display: flex; flex-direction: column; gap: var(--space-3); min-block-size: 0;
+    padding: var(--space-3); border-radius: var(--r-lg); background: var(--surface);
+    border: 1px solid color-mix(in oklab, var(--line) 70%, transparent); box-shadow: var(--shadow-3);
+  }
+  .sb-float-head { padding: var(--space-1) var(--space-1) 0 var(--space-2); }
+  .sb-float-mark {
+    inline-size: 1.75rem; block-size: 1.75rem; display: grid; place-items: center; border-radius: var(--r-full);
+    background-image: conic-gradient(from 200deg, var(--brand-400), var(--accent-500), var(--brand-600), var(--brand-400));
+  }
+  .sb-float-mark::after { content: ""; inline-size: .625rem; block-size: .625rem; border-radius: var(--r-full); background: var(--surface); }
+  .sb-float-nav { flex: 1 1 auto; min-block-size: 0; overflow-y: auto; padding: 0; gap: 2px; scrollbar-width: thin; }
+  .sb-float-nav .sidebar-link { border-radius: var(--r-full); min-block-size: 2.25rem; padding-inline: var(--space-4) var(--space-3); }
+  .sb-float-nav .sidebar-link[aria-current] {
+    background: var(--brand-600); color: var(--text-on-brand);
+    box-shadow: 0 8px 18px -8px color-mix(in oklab, var(--brand-600) 80%, transparent);
+  }
+  .sb-float-nav .sidebar-link[aria-current] .badge { background: oklch(100% 0 0 / .22); color: inherit; border-color: transparent; }
+  .sb-float-fav { inline-size: 1.25rem; block-size: 1.25rem; display: grid; place-items: center; border-radius: 6px; font-size: var(--text-2xs); font-weight: 700; color: var(--text-on-brand); background: var(--fav, var(--brand-500)); flex: none; }
+  .sb-float-invite { display: grid; gap: var(--space-3); padding: var(--space-4); border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--line); }
+  .sb-float-invite .avatar-stack > .avatar { box-shadow: 0 0 0 2px var(--surface-2); }
+  .sb-float-av-a { background: var(--accent-100); color: var(--accent-700); }
+  .sb-float .sb-main { border-radius: var(--r-lg); }
+  .sb-float .sb-top { background: transparent; border: 0; padding-inline: var(--space-4); }
+  /* The project grid scrolls in a real app; the fade says so when it is cut. */
+  .sb-float .sb-body { flex: 1 1 auto; padding: var(--space-2) var(--space-4) var(--space-4); mask-image: linear-gradient(to bottom, black calc(100% - var(--space-10)), transparent); }
+  .sb-float-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); }
+  .sb-float-cover { block-size: 5.5rem; background-image: linear-gradient(135deg, var(--from), var(--to)); }
+  .sb-float-grid .card { border-radius: var(--r-lg); }
+  .sb-float-grid .card-body { padding: var(--space-4); gap: var(--space-2); }
+  @media (max-width: 39.99rem) { .sb-float-side { inline-size: auto; } }
+
+  /* ===== 05 Two-level ===== */
+  .sb-dual { grid-template-columns: 4.5rem 16rem minmax(0, 1fr); }
+  .sb-dual-rail {
+    display: flex; flex-direction: column; align-items: center; gap: var(--space-2); padding-block: var(--space-4) var(--space-3);
+    background-image: linear-gradient(180deg, var(--brand-800), var(--brand-950));
+  }
+  .sb-dual-spaces { display: grid; gap: var(--space-3); justify-items: center; }
+  .sb-dual-space {
+    inline-size: 2.5rem; block-size: 2.5rem; display: grid; place-items: center; border-radius: var(--r-md);
+    background: var(--ink-0); color: var(--brand-900); font-weight: 720; text-decoration: none; cursor: pointer;
+    transition: border-radius var(--dur-2) var(--ease-out);
+  }
+  .sb-dual-space:hover { border-radius: var(--r-lg); color: var(--brand-900); }
+  .sb-dual-space[aria-current] { box-shadow: 0 0 0 2px var(--brand-900), 0 0 0 4px var(--ink-0); }
+  .sb-dual-space-alt { background: var(--accent-500); color: var(--text-on-accent); }
+  .sb-dual-space-alt:hover { color: var(--text-on-accent); }
+  .sb-dual-space-add { background: transparent; color: oklch(100% 0 0 / .75); border: 1px dashed oklch(100% 0 0 / .35); }
+  .sb-dual-sep { inline-size: 1.75rem; block-size: 1px; margin-block: var(--space-2); background: oklch(100% 0 0 / .16); }
+  .sb-dual-sections { display: grid; gap: var(--space-1); justify-items: center; }
+  .sb-dual-sec { display: grid; justify-items: center; gap: 2px; inline-size: 3.75rem; color: oklch(100% 0 0 / .7); font-size: var(--text-2xs); font-weight: 580; text-decoration: none; }
+  .sb-dual-sec:hover { color: var(--ink-0); }
+  .sb-dual-ico { inline-size: 2.25rem; block-size: 2.25rem; display: grid; place-items: center; border-radius: var(--r-sm); transition: background-color var(--dur-1) var(--ease-out); }
+  .sb-dual-sec:hover .sb-dual-ico { background: oklch(100% 0 0 / .1); }
+  .sb-dual-sec[aria-current] { color: var(--ink-0); }
+  .sb-dual-sec[aria-current] .sb-dual-ico { background: oklch(100% 0 0 / .18); }
+  .sb-dual-rail .indicator-badge { box-shadow: 0 0 0 2px var(--brand-800); }
+  .sb-dual-me { margin-block-start: auto; }
+  .sb-dual-rail .presence::after { box-shadow: 0 0 0 2px var(--brand-950); }
+  .sb-dual-panel { display: flex; flex-direction: column; min-block-size: 0; background: var(--surface-2); border-inline-end: 1px solid var(--line); }
+  .sb-dual-head { min-block-size: 3.75rem; padding: var(--space-2) var(--space-3) var(--space-2) var(--space-4); border-block-end: 1px solid var(--line); }
+  .sb-dual-ws { display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--text-md); font-weight: 680; letter-spacing: -.02em; cursor: pointer; }
+  .sb-dual-nav { flex: 1 1 auto; min-block-size: 0; overflow-y: auto; padding: var(--space-3) var(--space-2); gap: 1px; scrollbar-width: thin; }
+  .sb-dual-nav .sidebar-link { min-block-size: 2rem; padding-block: var(--space-1); gap: var(--space-2); }
+  .sb-dual-group { padding-inline-end: var(--space-1); }
+  .sb-dual-group .btn { inline-size: 1.75rem; block-size: 1.75rem; min-inline-size: 0; color: var(--text-faint); }
+  .sb-dual-hash { inline-size: 1.25rem; text-align: center; color: var(--text-faint); font-size: var(--text-md); line-height: 1; flex: none; }
+  .sb-dual-unread { color: var(--text); font-weight: 680; }
+  .sb-dual-nav .avatar-xs { font-size: 9px; }
+  .sb-dual-nav .presence::after { box-shadow: 0 0 0 2px var(--surface-2); }
+  .sb-dual-topic { flex: 1 1 auto; min-inline-size: 0; }
+  @container (max-width: 32rem) { .sb-dual-count { display: none; } }
+  .sb-dual-feed { flex: 1 1 auto; justify-content: flex-end; gap: var(--space-5); }
+  .sb-dual-day { display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-xs); font-weight: 600; color: var(--text-faint); }
+  .sb-dual-day::before, .sb-dual-day::after { content: ""; flex: 1; block-size: 1px; background: var(--line); }
+  .sb-dual-msg { display: flex; gap: var(--space-3); align-items: flex-start; }
+  .sb-dual-msg .avatar { border-radius: var(--r-sm); }
+  .sb-dual-compose { padding: 0 var(--space-6) var(--space-5); }
+  .sb-dual-av-a { background: var(--accent-100); color: var(--accent-700); }
+  .sb-dual-av-g { background: var(--good-100); color: var(--good-700); }
+  .sb-dual-av-w { background: var(--warn-100); color: var(--warn-700); }
+  @media (max-width: 39.99rem) {
+    .sb-dual { grid-template-columns: 4.5rem minmax(0, 1fr); block-size: 34rem; }
+  }
+
+  /* ===== 06 Tree ===== */
+  .sb-tree-side { inline-size: 17rem; display: flex; flex-direction: column; min-block-size: 0; background: var(--surface); border-inline-end: 1px solid var(--line); }
+  .sb-tree-head { display: grid; gap: var(--space-3); padding: var(--space-4); border-block-end: 1px solid var(--line); }
+  .sb-tree-ver { inline-size: auto; min-block-size: 1.875rem; padding-block: 0; font-size: var(--text-xs); box-shadow: none; }
+  .sb-tree-search {
+    display: flex; align-items: center; gap: var(--space-2); inline-size: 100%;
+    padding: var(--space-2) var(--space-3); border: 1px solid var(--line-strong); border-radius: var(--r-sm);
+    background: var(--surface-2); color: var(--text-faint); font-size: var(--text-sm); cursor: text;
+  }
+  .sb-tree-search:hover { border-color: var(--ink-400); }
+  .sb-tree-search kbd { margin-inline-start: auto; }
+  .sb-tree-nav { flex: 1 1 auto; min-block-size: 0; overflow-y: auto; padding: var(--space-3) var(--space-3) var(--space-6); font-size: var(--text-sm); scrollbar-width: thin;
+    mask-image: linear-gradient(to bottom, black calc(100% - var(--space-6)), transparent); }
+  .sb-tree-nav summary { display: flex; align-items: center; gap: var(--space-2); list-style: none; cursor: pointer; border-radius: var(--r-xs); }
+  .sb-tree-nav summary::-webkit-details-marker { display: none; }
+  .sb-tree-nav summary > .icon { color: var(--text-faint); transition: rotate var(--dur-2) var(--ease-out); }
+  .sb-tree-nav details[open] > summary > .icon { rotate: 90deg; }
+  /* Same open animation Deck's accordion uses: ::details-content plus the
+     interpolate-size opt-in Deck already sets on :root. */
+  .sb-tree-nav details::details-content { block-size: 0; overflow: hidden; transition: block-size var(--dur-3) var(--ease-out), content-visibility var(--dur-3) allow-discrete; }
+  .sb-tree-nav details[open]::details-content { block-size: auto; }
+  .sb-tree-sec + .sb-tree-sec { margin-block-start: var(--space-2); }
+  .sb-tree-sec > summary { padding: var(--space-2); font-size: var(--text-xs); font-weight: 680; letter-spacing: .06em; text-transform: uppercase; color: var(--text); }
+  .sb-tree-sec > summary:hover { background: var(--surface-hover); }
+  .sb-tree-list { display: grid; gap: 1px; margin: 0 0 var(--space-2) .9rem; padding: 0; border-inline-start: 1px solid var(--line); }
+  .sb-tree-link, .sb-tree-sub > summary {
+    display: flex; align-items: center; gap: var(--space-2); min-block-size: 2rem;
+    padding: var(--space-1) var(--space-3); margin-inline-start: -1px;
+    border-inline-start: 1px solid transparent; border-radius: 0 var(--r-xs) var(--r-xs) 0;
+    color: var(--text-muted); text-decoration: none;
+  }
+  .sb-tree-link:hover, .sb-tree-sub > summary:hover { color: var(--text); border-inline-start-color: var(--ink-400); }
+  .sb-tree-sub > summary { justify-content: space-between; }
+  .sb-tree-sub .sb-tree-list { margin-block-end: var(--space-1); }
+  .sb-tree-link[aria-current] {
+    color: var(--brand); font-weight: 600; border-inline-start-color: var(--brand);
+    background-image: linear-gradient(90deg, var(--brand-soft), transparent);
+  }
+  .sb-tree-foot { padding: var(--space-3) var(--space-4); border-block-start: 1px solid var(--line); font-size: var(--text-xs); }
+  .sb-tree-foot .status-line { font-size: var(--text-xs); color: var(--text-muted); }
+  .sb-tree-foot .ping { color: var(--good-500); }
+  .sb-tree-main { container-type: inline-size; }
+  .sb-tree-page { display: grid; gap: var(--space-8); padding: var(--space-8); }
+  .sb-tree-article { max-inline-size: 40rem; }
+  .sb-tree-article pre { font-size: var(--text-xs); }
+  .sb-tree-toc { display: none; flex-direction: column; gap: var(--space-2); align-self: start; padding-inline-start: var(--space-4); border-inline-start: 1px solid var(--line); font-size: var(--text-sm); }
+  .sb-tree-toc a { color: var(--text-muted); text-decoration: none; }
+  .sb-tree-toc a:hover, .sb-tree-toc a[aria-current] { color: var(--brand); }
+  @media (max-width: 39.99rem) { .sb-tree-side { inline-size: auto; border-inline-end: 0; } }
+  @container (min-width: 46rem) {
+    .sb-tree-page { grid-template-columns: minmax(0, 1fr) 10rem; }
+    .sb-tree-toc { display: flex; }
+  }
+
+  /* ===== 07 Off-canvas ===== */
+  .sb-drawer { display: flex; flex-direction: column; background: var(--bg); }
+  .sb-drawer-top { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-5); background: var(--surface); border-block-end: 1px solid var(--line); }
+  .sb-drawer-brand { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: 680; letter-spacing: -.02em; color: var(--text); text-decoration: none; }
+  .sb-drawer-mark { inline-size: 1.75rem; block-size: 1.75rem; display: grid; place-items: center; border-radius: var(--r-sm); color: var(--text-on-brand); background-image: linear-gradient(140deg, var(--brand-500), var(--brand-700)); }
+  .sb-drawer-body { display: grid; gap: var(--space-5); padding: var(--space-6) var(--space-5) var(--space-8); }
+  .sb-drawer-cards { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr)); }
+  .sb-drawer-cards .card-body { gap: var(--space-2); }
+  /* Deck's .drawer sets display:flex, which beats the browser's own rule that hides a closed <dialog>, so a closed drawer would sit off-screen with its links still in the tab order. The transition on display is allow-discrete, so the slide-out still plays. */
+  .drawer:not([open]) { display: none; }
+  /* Inside the drawer: .drawer-body already pads, so the sidebar does not. */
+  #sb-drawer-nav .sidebar { padding: 0; }
+  #sb-drawer-nav .drawer-header { gap: var(--space-2); }
+  @media (max-width: 39.99rem) { .sb-drawer-top .btn-label { display: none; } }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- A few icons the Deck sprite does not ship. If you copy a variant that
+     uses one (#i-updown, #i-panel, #i-book), copy its <symbol> too. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-updown" viewBox="0 0 24 24"><path d="m7 15 5 5 5-5M7 9l5-5 5 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M9.5 4v16" fill="none" stroke="currentColor" stroke-width="1.75"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5 2.5 2.5 0 0 0 6.5 23H20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 -1.5)"/></symbol>
+</svg>
+
+<!-- ===== Top bar (showcase chrome) ===== -->
+<header class="topbar">
+  <div class="container">
+    <div class="navbar">
+      <a class="navbar-brand" href="index.php">
+        <svg class="icon icon-lg icon-fill" style="color:var(--brand)" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#deck-mark"></use></svg>Deck
+      </a>
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb">
+          <li><a href="index.php">Templates</a></li>
+          <li><span aria-current="page">Sidebars</span></li>
+        </ol>
+      </nav>
+      <div class="push cluster cluster-tight">
+        <label class="sr-only" for="hue">Brand hue</label>
+        <input id="hue" class="range" type="range" min="0" max="360" value="196" oninput="Deck.hue(this.value)">
+        <button class="btn btn-icon btn-ghost" type="button" data-deck-theme aria-label="Switch theme">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== Intro ===== -->
+  <section class="container section intro">
+    <div class="stack stack-4 enter-rise stagger">
+      <p class="eyebrow">Section templates</p>
+      <h1 class="display">Sidebars, seven ways.</h1>
+      <p class="lede">
+        Each variant below is self-contained markup you can copy straight into a
+        page. Drag the hue slider to retint all of them at once, flip the theme
+        to check dark mode, and narrow the window: every one is responsive.
+      </p>
+      <div class="cluster cluster-tight">
+        <a class="chip" href="#sb-classic">Classic</a>
+        <a class="chip" href="#sb-rail">Icon rail</a>
+        <a class="chip" href="#sb-dark">Dark</a>
+        <a class="chip" href="#sb-float">Floating</a>
+        <a class="chip" href="#sb-dual">Two-level</a>
+        <a class="chip" href="#sb-tree">Docs tree</a>
+        <a class="chip" href="#sb-drawer">Off-canvas</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container variants">
+
+    <!-- ===== 01 Classic ===== -->
+    <section class="variant reveal" id="sb-classic" aria-labelledby="sb-classic-title">
+      <div class="bar variant-head">
+        <span class="badge">01</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="sb-classic-title">Classic</h2>
+          <p class="text-sm text-muted">Workspace switcher, search, grouped links with counts and a user menu. Best for admin panels with ten to twenty destinations.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#sb-classic-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML
+        </button>
+      </div>
+      <div class="variant-frame" id="sb-classic-demo">
+        <div class="sb-app">
+          <div class="sb-classic-side">
+            <div class="sb-classic-head">
+              <!-- Workspace switcher. The menu is a native popover; deck.js anchors it to the button. -->
+              <button class="sb-classic-ws" type="button" popovertarget="sb-classic-ws-menu">
+                <span class="avatar avatar-sm avatar-square sb-classic-logo" aria-hidden="true">N</span>
+                <span class="stack stack-0">
+                  <span class="text-sm fw-semi">Northwind</span>
+                  <span class="text-xs text-muted">Pro plan · 14 members</span>
+                </span>
+                <svg class="icon" aria-hidden="true"><use href="#i-updown"></use></svg>
+              </button>
+              <div class="menu" id="sb-classic-ws-menu" popover>
+                <p class="menu-label">Workspaces</p>
+                <button class="menu-item" type="button"><span class="avatar avatar-xs avatar-square sb-classic-logo" aria-hidden="true">N</span>Northwind<svg class="icon icon-sm push" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></button>
+                <button class="menu-item" type="button"><span class="avatar avatar-xs avatar-square" aria-hidden="true">A</span>Atlas Studio</button>
+                <div class="menu-sep"></div>
+                <button class="menu-item" type="button"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus-sm"></use></svg>Create workspace</button>
+              </div>
+
+              <label class="search sb-classic-search">
+                <span class="sr-only">Search Northwind</span>
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search-sm"></use></svg>
+                <input class="input" type="search" placeholder="Search" autocomplete="off">
+                <kbd>⌘K</kbd>
+              </label>
+            </div>
+
+            <nav class="sidebar sb-classic-nav" aria-label="Northwind">
+              <a class="sidebar-link" href="#">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home"></use></svg><span>Home</span>
+              </a>
+              <a class="sidebar-link" href="#" aria-current="page">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail"></use></svg><span>Inbox</span>
+                <span class="badge badge-solid push nums">12</span>
+              </a>
+              <a class="sidebar-link" href="#">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-circle"></use></svg><span>My tasks</span>
+                <span class="badge push nums">4</span>
+              </a>
+              <a class="sidebar-link" href="#">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#calendar"></use></svg><span>Calendar</span>
+              </a>
+              <a class="sidebar-link" href="#">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart"></use></svg><span>Reports</span>
+                <span class="badge badge-brand push">New</span>
+              </a>
+
+              <div class="bar sb-classic-group">
+                <p class="sidebar-group">Projects</p>
+                <button class="btn btn-ghost btn-icon btn-sm push" type="button" aria-label="New project">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus-sm"></use></svg>
+                </button>
+              </div>
+              <a class="sidebar-link" href="#"><span class="sb-classic-dot" aria-hidden="true"></span><span>Website relaunch</span></a>
+              <a class="sidebar-link" href="#"><span class="sb-classic-dot" style="--dot:var(--accent-500)" aria-hidden="true"></span><span>Mobile app 2.0</span><span class="badge push nums">3</span></a>
+              <a class="sidebar-link" href="#"><span class="sb-classic-dot" style="--dot:var(--good-500)" aria-hidden="true"></span><span>Q3 planning</span></a>
+
+            </nav>
+
+            <div class="sb-classic-foot">
+              <div class="bar sb-classic-user">
+                <span class="avatar avatar-sm presence" aria-hidden="true">AL</span>
+                <span class="stack stack-0 sb-classic-who">
+                  <span class="text-sm fw-semi truncate">Amara Lewis</span>
+                  <span class="text-xs text-muted truncate">amara@northwind.co</span>
+                </span>
+                <button class="btn btn-ghost btn-icon btn-sm push" type="button" popovertarget="sb-classic-user-menu" aria-label="Account menu">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#more-vertical-sm"></use></svg>
+                </button>
+              </div>
+              <div class="menu" id="sb-classic-user-menu" popover>
+                <a class="menu-item" href="#"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#user-sm"></use></svg>Profile</a>
+                <a class="menu-item" href="#"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users-sm"></use></svg>Members</a>
+                <a class="menu-item" href="#"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings-sm"></use></svg>Workspace settings</a>
+                <a class="menu-item" href="#"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help-sm"></use></svg>Help &amp; shortcuts<span class="push">?</span></a>
+                <div class="menu-sep"></div>
+                <button class="menu-item menu-item-danger" type="button"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#log-out-sm"></use></svg>Sign out</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Placeholder page so the sidebar reads in context. Replace with yours. -->
+          <div class="sb-main">
+            <div class="sb-top">
+              <div class="stack stack-0">
+                <span class="text-xs text-muted">Support</span>
+                <h3 class="h6">Inbox</h3>
+              </div>
+              <span class="badge badge-dot badge-good">Live</span>
+              <div class="push cluster cluster-tight">
+                <button class="btn btn-sm btn-ghost btn-icon" type="button" aria-label="Filter">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#filter-sm"></use></svg>
+                </button>
+                <button class="btn btn-sm btn-primary" type="button">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus-sm"></use></svg> New ticket
+                </button>
+              </div>
+            </div>
+            <div class="sb-body">
+              <div class="sb-tiles">
+                <div class="card sb-tile"><div class="stat"><span class="stat-label">Open tickets</span><span class="stat-value">12</span></div></div>
+                <div class="card sb-tile"><div class="stat"><span class="stat-label">Due today</span><span class="stat-value">4</span></div></div>
+                <div class="card sb-tile"><div class="stat"><span class="stat-label">First reply</span><span class="stat-value">1h 42m</span></div></div>
+              </div>
+              <div class="list" aria-hidden="true">
+                <div class="list-row"><span class="skeleton skeleton-circle sb-sk-av"></span><span class="list-main"><span class="skeleton skeleton-text" style="inline-size:38%"></span><span class="skeleton skeleton-text" style="inline-size:72%"></span></span><span class="skeleton sb-sk-pill"></span></div>
+                <div class="list-row"><span class="skeleton skeleton-circle sb-sk-av"></span><span class="list-main"><span class="skeleton skeleton-text" style="inline-size:30%"></span><span class="skeleton skeleton-text" style="inline-size:58%"></span></span><span class="skeleton sb-sk-pill"></span></div>
+                <div class="list-row"><span class="skeleton skeleton-circle sb-sk-av"></span><span class="list-main"><span class="skeleton skeleton-text" style="inline-size:44%"></span><span class="skeleton skeleton-text" style="inline-size:64%"></span></span><span class="skeleton sb-sk-pill"></span></div>
+                <div class="list-row"><span class="skeleton skeleton-circle sb-sk-av"></span><span class="list-main"><span class="skeleton skeleton-text" style="inline-size:34%"></span><span class="skeleton skeleton-text" style="inline-size:50%"></span></span><span class="skeleton sb-sk-pill"></span></div>
+                <div class="list-row"><span class="skeleton skeleton-circle sb-sk-av"></span><span class="list-main"><span class="skeleton skeleton-text" style="inline-size:40%"></span><span class="skeleton skeleton-text" style="inline-size:66%"></span></span><span class="skeleton sb-sk-pill"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 02 Icon rail ===== -->
+    <section class="variant reveal" id="sb-rail" aria-labelledby="sb-rail-title">
+      <div class="bar variant-head">
+        <span class="badge">02</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="sb-rail-title">Icon rail</h2>
+          <p class="text-sm text-muted">A 72px rail of icons with tooltips and an active bar. Best for tools where the canvas matters more than the navigation.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#sb-rail-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML
+        </button>
+      </div>
+      <div class="variant-frame" id="sb-rail-demo">
+        <div class="sb-app sb-rail">
+          <!-- Icon-only links: the aria-label is the accessible name, data-tip
+               is the visible tooltip. Deck hides .tooltip on touch screens. -->
+          <div class="sb-rail-side">
+            <a class="sb-rail-logo" href="#" aria-label="Pulse home">
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#sparkle"></use></svg>
+            </a>
+            <nav class="sidebar" aria-label="Pulse">
+              <a class="sidebar-link tooltip" href="#" data-tip="Overview" aria-label="Overview" aria-current="page">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#grid"></use></svg>
+              </a>
+              <a class="sidebar-link tooltip" href="#" data-tip="Inbox" aria-label="Inbox, 3 unread">
+                <span class="with-indicator">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail"></use></svg>
+                  <span class="indicator-badge" aria-hidden="true">3</span>
+                </span>
+              </a>
+              <a class="sidebar-link tooltip" href="#" data-tip="Projects" aria-label="Projects">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#folder"></use></svg>
+              </a>
+              <a class="sidebar-link tooltip" href="#" data-tip="Calendar" aria-label="Calendar">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#calendar"></use></svg>
+              </a>
+              <a class="sidebar-link tooltip" href="#" data-tip="Reports" aria-label="Reports">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart"></use></svg>
+              </a>
+              <a class="sidebar-link tooltip" href="#" data-tip="Team" aria-label="Team">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users"></use></svg>
+              </a>
+            </nav>
+            <nav class="sidebar sb-rail-foot" aria-label="Pulse account">
+              <a class="sidebar-link tooltip" href="#" data-tip="Help" aria-label="Help">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help"></use></svg>
+              </a>
+              <a class="sidebar-link tooltip" href="#" data-tip="Settings" aria-label="Settings">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings"></use></svg>
+              </a>
+              <a class="sb-rail-me tooltip" href="#" data-tip="Amara Lewis" aria-label="Your account">
+                <span class="avatar avatar-sm presence" aria-hidden="true">AL</span>
+              </a>
+            </nav>
+          </div>
+
+          <!-- Placeholder page so the sidebar reads in context. Replace with yours. -->
+          <div class="sb-main">
+            <div class="sb-top">
+              <h3 class="h6">Overview</h3>
+              <div class="cluster cluster-tight sb-rail-filters">
+                <button class="chip" type="button" aria-pressed="true">7 days</button>
+                <button class="chip" type="button" aria-pressed="false">30 days</button>
+                <button class="chip" type="button" aria-pressed="false">Quarter</button>
+              </div>
+              <button class="btn btn-sm push" type="button">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#download-sm"></use></svg> Export
+              </button>
+            </div>
+            <div class="sb-body">
+              <div class="sb-tiles">
+                <div class="card sb-tile"><div class="stat"><span class="stat-label">Active users</span><span class="stat-value">2,481</span><span class="stat-delta stat-delta-up">+12.4%</span></div></div>
+                <div class="card sb-tile"><div class="stat"><span class="stat-label">Sessions</span><span class="stat-value">18.2k</span><span class="stat-delta stat-delta-up">+3.1%</span></div></div>
+                <div class="card sb-tile"><div class="stat"><span class="stat-label">Churned</span><span class="stat-value">37</span><span class="stat-delta stat-delta-down">+5 vs last week</span></div></div>
+              </div>
+              <div class="card"><div class="card-body">
+                <figure class="chart">
+                  <figcaption class="chart-head"><span class="chart-title">Daily active users</span><span class="chart-note">Last 14 days</span></figcaption>
+                  <div class="chart-columns">
+                    <div class="chart-col" style="--value:44" data-label="M" data-value="1,980"></div>
+                    <div class="chart-col" style="--value:52" data-label="T" data-value="2,110"></div>
+                    <div class="chart-col" style="--value:49" data-label="W" data-value="2,050"></div>
+                    <div class="chart-col" style="--value:61" data-label="T" data-value="2,240"></div>
+                    <div class="chart-col" style="--value:57" data-label="F" data-value="2,190"></div>
+                    <div class="chart-col" style="--value:30" data-label="S" data-value="1,610"></div>
+                    <div class="chart-col" style="--value:27" data-label="S" data-value="1,540"></div>
+                    <div class="chart-col" style="--value:58" data-label="M" data-value="2,200"></div>
+                    <div class="chart-col" style="--value:66" data-label="T" data-value="2,330"></div>
+                    <div class="chart-col" style="--value:63" data-label="W" data-value="2,290"></div>
+                    <div class="chart-col" style="--value:72" data-label="T" data-value="2,420"></div>
+                    <div class="chart-col" style="--value:78;--series:var(--c1)" data-label="F" data-value="2,481"></div>
+                    <div class="chart-col" style="--value:36" data-label="S" data-value="1,720"></div>
+                    <div class="chart-col" style="--value:33" data-label="S" data-value="1,660"></div>
+                  </div>
+                </figure>
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 03 Dark ===== -->
+    <section class="variant reveal" id="sb-dark" aria-labelledby="sb-dark-title">
+      <div class="bar variant-head">
+        <span class="badge">03</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="sb-dark-title">Dark</h2>
+          <p class="text-sm text-muted">Stays dark in either theme, with a brand-tinted current item and a trial card. Best for analytics and developer products.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#sb-dark-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML
+        </button>
+      </div>
+      <div class="variant-frame" id="sb-dark-demo">
+        <div class="sb-app sb-dark">
+          <!-- data-theme="dark" on the sidebar alone keeps it dark on a light page. -->
+          <div class="sb-dark-side" data-theme="dark">
+            <div class="sb-dark-head">
+              <span class="sb-dark-logo" aria-hidden="true">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#trend-up-sm"></use></svg>
+              </span>
+              <span class="stack stack-0">
+                <span class="fw-semi">Lumen</span>
+                <span class="text-xs text-muted">Acme Corp · Production</span>
+              </span>
+            </div>
+            <button class="sb-dark-jump" type="button">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search-sm"></use></svg>
+              Jump to…
+              <kbd>⌘K</kbd>
+            </button>
+
+            <nav class="sidebar sb-dark-nav" aria-label="Lumen">
+              <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home"></use></svg><span>Overview</span></a>
+              <a class="sidebar-link" href="#" aria-current="page"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart"></use></svg><span>Analytics</span></a>
+              <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users"></use></svg><span>Customers</span><span class="badge push nums">2.4k</span></a>
+              <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#bell"></use></svg><span>Alerts</span><span class="badge badge-bad push nums">3</span></a>
+              <p class="sidebar-group">Saved views</p>
+              <a class="sidebar-link" href="#"><span class="sb-dark-dot" aria-hidden="true"></span><span>Enterprise churn</span></a>
+              <a class="sidebar-link" href="#"><span class="sb-dark-dot" style="--dot:var(--accent-500)" aria-hidden="true"></span><span>EU weekly actives</span></a>
+            </nav>
+
+            <div class="sb-dark-upgrade">
+              <div class="bar">
+                <span class="icon-tile" aria-hidden="true"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#sparkle-sm"></use></svg></span>
+                <div class="stack stack-0">
+                  <p class="text-sm fw-semi">9 days left on Pro</p>
+                  <p class="text-xs text-muted nums">6,840 of 10,000 events</p>
+                </div>
+              </div>
+              <progress class="progress" value="68" max="100" aria-label="Events used this month">68%</progress>
+              <a class="btn btn-primary btn-sm btn-block" href="#">Upgrade to Pro</a>
+            </div>
+
+            <div class="bar sb-dark-user">
+              <span class="avatar avatar-sm" aria-hidden="true">DK</span>
+              <span class="stack stack-0">
+                <span class="text-sm fw-semi">Dev Kapoor</span>
+                <span class="text-xs text-muted">Admin</span>
+              </span>
+              <a class="btn btn-ghost btn-icon btn-sm push" href="#" aria-label="Sign out">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#log-out-sm"></use></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Placeholder page so the sidebar reads in context. Replace with yours. -->
+          <div class="sb-main">
+            <div class="sb-top">
+              <div class="stack stack-0">
+                <span class="text-xs text-muted">Production</span>
+                <h3 class="h6">Analytics</h3>
+              </div>
+              <div class="push cluster cluster-tight">
+                <button class="btn btn-sm" type="button">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#calendar-sm"></use></svg> Sep 1 – Oct 6
+                </button>
+              </div>
+            </div>
+            <div class="sb-body">
+              <div class="sb-tiles">
+                <div class="card sb-tile"><div class="stat"><span class="stat-label">Events</span><span class="stat-value">6.84k</span><span class="stat-delta stat-delta-up">+18%</span></div></div>
+                <div class="card sb-tile"><div class="stat"><span class="stat-label">Conversion</span><span class="stat-value">3.9%</span><span class="stat-delta stat-delta-up">+0.4 pts</span></div></div>
+                <div class="card sb-tile"><div class="stat"><span class="stat-label">Net revenue</span><span class="stat-value">$48.2k</span><span class="stat-delta stat-delta-up">+9%</span></div></div>
+              </div>
+              <div class="card"><div class="card-body">
+                <figure class="chart">
+                  <figcaption class="chart-head"><span class="chart-title">Events per week</span><span class="chart-note">Last 10 weeks</span></figcaption>
+                  <div class="chart-columns">
+                    <div class="chart-col" style="--value:38" data-label="W31" data-value="410"></div>
+                    <div class="chart-col" style="--value:46" data-label="W32" data-value="498"></div>
+                    <div class="chart-col" style="--value:41" data-label="W33" data-value="455"></div>
+                    <div class="chart-col" style="--value:55" data-label="W34" data-value="590"></div>
+                    <div class="chart-col" style="--value:60" data-label="W35" data-value="642"></div>
+                    <div class="chart-col" style="--value:58" data-label="W36" data-value="626"></div>
+                    <div class="chart-col" style="--value:69" data-label="W37" data-value="733"></div>
+                    <div class="chart-col" style="--value:74" data-label="W38" data-value="790"></div>
+                    <div class="chart-col" style="--value:71" data-label="W39" data-value="761"></div>
+                    <div class="chart-col" style="--value:86;--series:var(--c1)" data-label="W40" data-value="912"></div>
+                  </div>
+                </figure>
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 04 Floating ===== -->
+    <section class="variant reveal" id="sb-float" aria-labelledby="sb-float-title">
+      <div class="bar variant-head">
+        <span class="badge">04</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="sb-float-title">Floating</h2>
+          <p class="text-sm text-muted">The sidebar as a raised card on a tinted canvas, with pill links. Best for creative tools and anything that should feel soft.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#sb-float-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML
+        </button>
+      </div>
+      <div class="variant-frame" id="sb-float-demo">
+        <div class="sb-app sb-float">
+          <div class="sb-float-side">
+            <div class="bar sb-float-head">
+              <span class="sb-float-mark" aria-hidden="true"></span>
+              <span class="fw-semi">Atelier</span>
+              <button class="btn btn-ghost btn-icon btn-sm push" type="button" aria-label="Collapse sidebar">
+                <svg class="icon" aria-hidden="true"><use href="#i-panel"></use></svg>
+              </button>
+            </div>
+            <nav class="sidebar sb-float-nav" aria-label="Atelier">
+              <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home"></use></svg><span>Home</span></a>
+              <a class="sidebar-link" href="#" aria-current="page"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#folder"></use></svg><span>Projects</span><span class="badge push nums">8</span></a>
+              <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#calendar"></use></svg><span>Schedule</span></a>
+              <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#message"></use></svg><span>Feedback</span><span class="badge badge-brand push nums">3</span></a>
+              <p class="sidebar-group">Favourites</p>
+              <a class="sidebar-link" href="#"><span class="sb-float-fav" aria-hidden="true">B</span><span>Brand refresh</span></a>
+              <a class="sidebar-link" href="#"><span class="sb-float-fav" style="--fav:var(--accent-700)" aria-hidden="true">S</span><span>Spring campaign</span></a>
+              <a class="sidebar-link" href="#"><span class="sb-float-fav" style="--fav:var(--good-600)" aria-hidden="true">W</span><span>Website v3</span></a>
+            </nav>
+            <div class="sb-float-invite">
+              <div class="bar">
+                <div class="avatar-stack" aria-hidden="true">
+                  <span class="avatar avatar-sm">MR</span>
+                  <span class="avatar avatar-sm sb-float-av-a">JO</span>
+                </div>
+                <div class="stack stack-0">
+                  <p class="text-sm fw-semi">Bring your team</p>
+                  <p class="text-xs text-muted">3 free seats left</p>
+                </div>
+              </div>
+              <button class="btn btn-sm" type="button">Invite people</button>
+            </div>
+          </div>
+
+          <!-- Placeholder page so the sidebar reads in context. Replace with yours. -->
+          <div class="sb-main">
+            <div class="sb-top">
+              <h3 class="h5">Projects</h3>
+              <span class="badge nums">8</span>
+              <div class="push cluster cluster-tight">
+                <button class="btn btn-sm btn-ghost btn-icon" type="button" aria-label="Grid view"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#grid-sm"></use></svg></button>
+                <button class="btn btn-sm btn-ghost btn-icon" type="button" aria-label="List view"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#list-sm"></use></svg></button>
+                <button class="btn btn-sm btn-primary" type="button">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus-sm"></use></svg> New project
+                </button>
+              </div>
+            </div>
+            <div class="sb-body">
+              <div class="sb-float-grid">
+                <article class="card lift">
+                  <div class="sb-float-cover" style="--from:var(--brand-300);--to:var(--brand-600)"></div>
+                  <div class="card-body"><h4 class="card-title">Brand refresh</h4><p class="text-xs text-muted">24 files · edited 2h ago</p></div>
+                </article>
+                <article class="card lift">
+                  <div class="sb-float-cover" style="--from:var(--accent-100);--to:var(--accent-500)"></div>
+                  <div class="card-body"><h4 class="card-title">Spring campaign</h4><p class="text-xs text-muted">11 files · edited yesterday</p></div>
+                </article>
+                <article class="card lift">
+                  <div class="sb-float-cover" style="--from:var(--good-100);--to:var(--good-500)"></div>
+                  <div class="card-body"><h4 class="card-title">Website v3</h4><p class="text-xs text-muted">58 files · edited Mon</p></div>
+                </article>
+                <article class="card lift">
+                  <div class="sb-float-cover" style="--from:var(--ink-200);--to:var(--ink-400)"></div>
+                  <div class="card-body"><h4 class="card-title">Packaging study</h4><p class="text-xs text-muted">7 files · edited 12 Sep</p></div>
+                </article>
+                <article class="card lift">
+                  <div class="sb-float-cover" style="--from:var(--brand-100);--to:var(--accent-500)"></div>
+                  <div class="card-body"><h4 class="card-title">Lookbook AW26</h4><p class="text-xs text-muted">32 files · edited 9 Sep</p></div>
+                </article>
+                <article class="card lift">
+                  <div class="sb-float-cover" style="--from:var(--warn-100);--to:var(--bad-500)"></div>
+                  <div class="card-body"><h4 class="card-title">Signage</h4><p class="text-xs text-muted">5 files · edited 2 Sep</p></div>
+                </article>
+                <article class="card lift">
+                  <div class="sb-float-cover" style="--from:var(--brand-200);--to:var(--brand-800)"></div>
+                  <div class="card-body"><h4 class="card-title">Annual report</h4><p class="text-xs text-muted">19 files · edited 28 Aug</p></div>
+                </article>
+                <article class="card lift">
+                  <div class="sb-float-cover" style="--from:var(--accent-100);--to:var(--good-500)"></div>
+                  <div class="card-body"><h4 class="card-title">Menu redesign</h4><p class="text-xs text-muted">9 files · edited 21 Aug</p></div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 05 Two-level ===== -->
+    <section class="variant reveal" id="sb-dual" aria-labelledby="sb-dual-title">
+      <div class="bar variant-head">
+        <span class="badge">05</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="sb-dual-title">Two-level</h2>
+          <p class="text-sm text-muted">A rail for workspaces and sections, and a panel for what is inside them. Best for chat, email and multi-workspace apps.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#sb-dual-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML
+        </button>
+      </div>
+      <div class="variant-frame" id="sb-dual-demo">
+        <div class="sb-app sb-dual">
+          <div class="sb-dual-rail" data-theme="dark">
+            <nav class="sb-dual-spaces" aria-label="Workspaces">
+              <a class="sb-dual-space" href="#" aria-current="true" aria-label="Northwind HQ">N</a>
+              <a class="sb-dual-space sb-dual-space-alt" href="#" aria-label="Atlas Studio">A</a>
+              <button class="sb-dual-space sb-dual-space-add" type="button" aria-label="Add a workspace">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus-sm"></use></svg>
+              </button>
+            </nav>
+            <span class="sb-dual-sep" aria-hidden="true"></span>
+            <nav class="sb-dual-sections" aria-label="Sections">
+              <a class="sb-dual-sec" href="#" aria-current="page">
+                <span class="sb-dual-ico"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home"></use></svg></span>Home
+              </a>
+              <a class="sb-dual-sec" href="#">
+                <span class="sb-dual-ico"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#message"></use></svg></span>DMs
+              </a>
+              <a class="sb-dual-sec" href="#">
+                <span class="sb-dual-ico"><span class="with-indicator"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#bell"></use></svg><span class="indicator-badge indicator-badge-dot"></span></span></span>Activity
+              </a>
+              <a class="sb-dual-sec" href="#">
+                <span class="sb-dual-ico"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#file"></use></svg></span>Files
+              </a>
+            </nav>
+            <a class="sb-dual-me" href="#" aria-label="Your profile, active">
+              <span class="avatar avatar-sm presence" aria-hidden="true">AL</span>
+            </a>
+          </div>
+
+          <div class="sb-dual-panel">
+            <div class="bar sb-dual-head">
+              <button class="sb-dual-ws" type="button">Northwind HQ
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-down-sm"></use></svg>
+              </button>
+              <button class="btn btn-soft btn-icon btn-sm push" type="button" aria-label="New message">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#edit-sm"></use></svg>
+              </button>
+            </div>
+            <nav class="sidebar sb-dual-nav" aria-label="Northwind HQ">
+              <a class="sidebar-link" href="#"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#message-sm"></use></svg><span>Threads</span></a>
+              <a class="sidebar-link" href="#"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#bookmark-sm"></use></svg><span>Saved</span></a>
+              <a class="sidebar-link" href="#"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#send-sm"></use></svg><span>Drafts &amp; sent</span><span class="badge push nums">2</span></a>
+
+              <div class="bar sb-dual-group">
+                <p class="sidebar-group">Channels</p>
+                <button class="btn btn-ghost btn-icon btn-sm push" type="button" aria-label="Add a channel">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus-sm"></use></svg>
+                </button>
+              </div>
+              <a class="sidebar-link" href="#"><span class="sb-dual-hash" aria-hidden="true">#</span><span>general</span></a>
+              <a class="sidebar-link sb-dual-unread" href="#"><span class="sb-dual-hash" aria-hidden="true">#</span><span>design-crit</span><span class="badge badge-solid push nums">4</span></a>
+              <a class="sidebar-link" href="#" aria-current="page"><span class="sb-dual-hash" aria-hidden="true">#</span><span>launch-q3</span></a>
+              <a class="sidebar-link" href="#"><span class="sb-dual-hash" aria-hidden="true">#</span><span>random</span></a>
+
+              <div class="bar sb-dual-group">
+                <p class="sidebar-group">Direct messages</p>
+                <button class="btn btn-ghost btn-icon btn-sm push" type="button" aria-label="New direct message">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus-sm"></use></svg>
+                </button>
+              </div>
+              <a class="sidebar-link" href="#"><span class="avatar avatar-xs presence sb-dual-av-a" aria-hidden="true">PN</span><span>Priya Natarajan</span><span class="sr-only">(online)</span></a>
+              <a class="sidebar-link sb-dual-unread" href="#"><span class="avatar avatar-xs presence presence-away sb-dual-av-g" aria-hidden="true">TO</span><span>Tomás Ortega</span><span class="sr-only">(away)</span><span class="badge badge-solid push nums">1</span></a>
+              <a class="sidebar-link" href="#"><span class="avatar avatar-xs presence presence-off sb-dual-av-w" aria-hidden="true">ML</span><span>Mei Lin</span><span class="sr-only">(offline)</span></a>
+            </nav>
+          </div>
+
+          <!-- Placeholder page so the sidebar reads in context. Replace with yours. -->
+          <div class="sb-main">
+            <div class="sb-top">
+              <div class="stack stack-0 sb-dual-topic">
+                <h3 class="h6"># launch-q3</h3>
+                <span class="text-xs text-muted truncate">Ships Thursday 9 Oct. Release notes are pinned.</span>
+              </div>
+              <div class="avatar-stack" aria-hidden="true">
+                <span class="avatar avatar-xs sb-dual-av-a">PN</span>
+                <span class="avatar avatar-xs sb-dual-av-g">TO</span>
+                <span class="avatar avatar-xs">AL</span>
+              </div>
+              <span class="text-sm text-muted nums sb-dual-count">24 members</span>
+            </div>
+            <div class="sb-body sb-dual-feed">
+              <p class="sb-dual-day">Today</p>
+              <div class="sb-dual-msg">
+                <span class="avatar avatar-sm sb-dual-av-a" aria-hidden="true">PN</span>
+                <div class="stack stack-1">
+                  <p class="text-sm"><span class="fw-semi">Priya Natarajan</span> <span class="text-xs text-faint">9:41</span></p>
+                  <p class="text-sm">Staging is green. I'm cutting the release branch at 3pm unless anyone shouts.</p>
+                </div>
+              </div>
+              <div class="sb-dual-msg">
+                <span class="avatar avatar-sm sb-dual-av-g" aria-hidden="true">TO</span>
+                <div class="stack stack-1">
+                  <p class="text-sm"><span class="fw-semi">Tomás Ortega</span> <span class="text-xs text-faint">9:56</span></p>
+                  <p class="text-sm">One shout: the Android build still has the old onboarding copy. Fix is in review, ten minutes.</p>
+                </div>
+              </div>
+              <div class="sb-dual-msg">
+                <span class="avatar avatar-sm" aria-hidden="true">AL</span>
+                <div class="stack stack-1">
+                  <p class="text-sm"><span class="fw-semi">Amara Lewis</span> <span class="text-xs text-faint">10:02</span></p>
+                  <p class="text-sm">Approved. 3pm stands.</p>
+                </div>
+              </div>
+            </div>
+            <div class="sb-dual-compose">
+              <label class="sr-only" for="sb-dual-message">Message #launch-q3</label>
+              <input class="input" id="sb-dual-message" type="text" placeholder="Message #launch-q3" autocomplete="off">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 06 Docs tree ===== -->
+    <section class="variant reveal" id="sb-tree" aria-labelledby="sb-tree-title">
+      <div class="bar variant-head">
+        <span class="badge">06</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="sb-tree-title">Docs tree</h2>
+          <p class="text-sm text-muted">Nested native details groups, a version picker and a current page on a guide line. Best for documentation and knowledge bases.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#sb-tree-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML
+        </button>
+      </div>
+      <div class="variant-frame" id="sb-tree-demo">
+        <div class="sb-app">
+          <div class="sb-tree-side">
+            <div class="sb-tree-head">
+              <div class="bar">
+                <svg class="icon icon-lg" style="color:var(--brand)" aria-hidden="true"><use href="#i-book"></use></svg>
+                <span class="fw-bold">Harbor</span>
+                <span class="badge badge-brand">Docs</span>
+                <label class="sr-only" for="sb-tree-version">Version</label>
+                <select class="select sb-tree-ver push" id="sb-tree-version">
+                  <option>v4.2</option>
+                  <option>v4.1</option>
+                  <option>v3.x</option>
+                </select>
+              </div>
+              <button class="sb-tree-search" type="button">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search-sm"></use></svg>
+                Search docs
+                <kbd>/</kbd>
+              </button>
+            </div>
+
+            <!-- Plain <details>: open state, keyboard and the accessible name are
+                 the browser's. Give the current page's ancestors the open attribute. -->
+            <nav class="sb-tree-nav" aria-label="Harbor documentation">
+              <details class="sb-tree-sec">
+                <summary><svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right-sm"></use></svg>Getting started</summary>
+                <ul class="sb-tree-list">
+                  <li><a class="sb-tree-link" href="#">Introduction</a></li>
+                  <li><a class="sb-tree-link" href="#">Installation</a></li>
+                  <li><a class="sb-tree-link" href="#">Quick start</a></li>
+                </ul>
+              </details>
+              <details class="sb-tree-sec" open>
+                <summary><svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right-sm"></use></svg>Guides</summary>
+                <ul class="sb-tree-list">
+                  <li><a class="sb-tree-link" href="#">Configuration</a></li>
+                  <li>
+                    <details class="sb-tree-sub" open>
+                      <summary>Authentication<svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right-sm"></use></svg></summary>
+                      <ul class="sb-tree-list">
+                        <li><a class="sb-tree-link" href="#">Sessions</a></li>
+                        <li><a class="sb-tree-link" href="#" aria-current="page">OAuth providers</a></li>
+                        <li><a class="sb-tree-link" href="#">Magic links</a></li>
+                      </ul>
+                    </details>
+                  </li>
+                  <li>
+                    <details class="sb-tree-sub">
+                      <summary>Webhooks<svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right-sm"></use></svg></summary>
+                      <ul class="sb-tree-list">
+                        <li><a class="sb-tree-link" href="#">Events</a></li>
+                        <li><a class="sb-tree-link" href="#">Retries</a></li>
+                        <li><a class="sb-tree-link" href="#">Signatures</a></li>
+                      </ul>
+                    </details>
+                  </li>
+                  <li><a class="sb-tree-link" href="#">Deploying</a></li>
+                </ul>
+              </details>
+              <details class="sb-tree-sec">
+                <summary><svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right-sm"></use></svg>API reference</summary>
+                <ul class="sb-tree-list">
+                  <li><a class="sb-tree-link" href="#">Clients</a></li>
+                  <li><a class="sb-tree-link" href="#">Users</a></li>
+                  <li><a class="sb-tree-link" href="#">Tokens</a></li>
+                </ul>
+              </details>
+              <details class="sb-tree-sec">
+                <summary><svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right-sm"></use></svg>Resources</summary>
+                <ul class="sb-tree-list">
+                  <li><a class="sb-tree-link" href="#">Changelog</a></li>
+                  <li><a class="sb-tree-link" href="#">Migrating from v3</a></li>
+                </ul>
+              </details>
+            </nav>
+
+            <div class="bar sb-tree-foot">
+              <span class="status-line"><span class="indicator indicator-good ping"></span>All systems normal</span>
+              <a class="push" href="#">Status</a>
+            </div>
+          </div>
+
+          <!-- Placeholder page so the sidebar reads in context. Replace with yours. -->
+          <div class="sb-main sb-tree-main">
+            <div class="sb-tree-page">
+              <article class="stack stack-4 sb-tree-article">
+                <nav aria-label="Docs breadcrumb">
+                  <ol class="breadcrumb">
+                    <li><a href="#">Guides</a></li>
+                    <li><a href="#">Authentication</a></li>
+                    <li><span aria-current="page">OAuth providers</span></li>
+                  </ol>
+                </nav>
+                <h3 class="h2">OAuth providers</h3>
+                <p class="lede">Let people sign in with an account they already have. Harbor ships GitHub, Google and generic OpenID Connect; each one is four lines of config.</p>
+                <pre><code>auth:
+  providers:
+    - github:
+        client_id: ${GITHUB_CLIENT_ID}</code></pre>
+                <div aria-hidden="true">
+                  <p class="skeleton skeleton-text" style="inline-size:92%"></p>
+                  <p class="skeleton skeleton-text" style="inline-size:84%"></p>
+                  <p class="skeleton skeleton-text" style="inline-size:61%"></p>
+                </div>
+                <div class="alert alert-info">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#info"></use></svg>
+                  <div>
+                    <p class="alert-title">Callback URLs match exactly</p>
+                    <p class="alert-body">Including the scheme and any trailing slash. Most failed sign-ins are this.</p>
+                  </div>
+                </div>
+              </article>
+              <nav class="sb-tree-toc" aria-label="On this page">
+                <span class="text-xs fw-semi uppercase text-faint">On this page</span>
+                <a href="#" aria-current="true">Overview</a>
+                <a href="#">GitHub</a>
+                <a href="#">Google</a>
+                <a href="#">OpenID Connect</a>
+                <a href="#">Scopes</a>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 07 Off-canvas ===== -->
+    <section class="variant reveal" id="sb-drawer" aria-labelledby="sb-drawer-heading">
+      <div class="bar variant-head">
+        <span class="badge">07</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="sb-drawer-heading">Off-canvas</h2>
+          <p class="text-sm text-muted">A real drawer dialog holding the sidebar, opened from the top bar. Best for phones, or any layout that needs every column.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#sb-drawer-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML
+        </button>
+      </div>
+      <div class="variant-frame" id="sb-drawer-demo">
+        <div class="sb-drawer">
+          <div class="sb-drawer-top">
+            <!-- data-deck-drawer needs deck-extras.js: it calls showModal(), so
+                 focus is trapped, Escape closes it and the page behind goes inert. -->
+            <button class="btn btn-sm" type="button" data-deck-drawer="#sb-drawer-nav" aria-label="Open menu">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#menu-sm"></use></svg><span class="btn-label">Open menu</span>
+            </button>
+            <a class="sb-drawer-brand" href="#">
+              <span class="sb-drawer-mark" aria-hidden="true"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#map-pin-sm"></use></svg></span>Fieldwork
+            </a>
+            <div class="push cluster cluster-tight">
+              <button class="btn btn-ghost btn-icon btn-sm" type="button" aria-label="Search">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search-sm"></use></svg>
+              </button>
+              <span class="avatar avatar-sm" aria-hidden="true">AL</span>
+            </div>
+          </div>
+
+          <!-- Placeholder page so the sidebar reads in context. Replace with yours. -->
+          <div class="sb-drawer-body">
+            <div class="stack stack-1">
+              <p class="text-sm text-muted">Tuesday 6 October</p>
+              <h3 class="h3">Good morning, Amara</h3>
+            </div>
+            <div class="sb-drawer-cards">
+              <div class="card"><div class="card-body">
+                <div class="bar"><span class="icon-tile" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-circle"></use></svg></span><span class="badge badge-warn push">2 overdue</span></div>
+                <p class="fw-semi">6 visits today</p>
+                <p class="text-sm text-muted">First one at 8:30, Harbour Road depot.</p>
+              </div></div>
+              <div class="card"><div class="card-body">
+                <div class="bar"><span class="icon-tile" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#truck"></use></svg></span><span class="badge badge-good push">On time</span></div>
+                <p class="fw-semi">3 vans out</p>
+                <p class="text-sm text-muted">Next return expected 13:10.</p>
+              </div></div>
+              <div class="card"><div class="card-body">
+                <div class="bar"><span class="icon-tile" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#message"></use></svg></span><span class="badge push nums">9</span></div>
+                <p class="fw-semi">Unread messages</p>
+                <p class="text-sm text-muted">Two from the night shift.</p>
+              </div></div>
+            </div>
+          </div>
+
+          <dialog class="drawer" id="sb-drawer-nav" aria-labelledby="sb-drawer-title">
+            <div class="drawer-header">
+              <span class="sb-drawer-mark" aria-hidden="true"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#map-pin-sm"></use></svg></span>
+              <h3 class="drawer-title" id="sb-drawer-title">Fieldwork</h3>
+              <button class="btn btn-ghost btn-icon btn-sm push" type="button" data-drawer-close aria-label="Close menu">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x-sm"></use></svg>
+              </button>
+            </div>
+            <div class="drawer-body">
+              <nav class="sidebar" aria-label="Fieldwork">
+                <a class="sidebar-link" href="#" aria-current="page"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home"></use></svg><span>Today</span></a>
+                <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail"></use></svg><span>Messages</span><span class="badge badge-solid push nums">9</span></a>
+                <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#calendar"></use></svg><span>Schedule</span></a>
+                <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#truck"></use></svg><span>Fleet</span></a>
+                <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart"></use></svg><span>Reports</span></a>
+                <p class="sidebar-group">Teams</p>
+                <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#wrench"></use></svg><span>Maintenance</span></a>
+                <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users"></use></svg><span>Dispatch</span></a>
+                <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings"></use></svg><span>Settings</span></a>
+              </nav>
+            </div>
+            <div class="drawer-footer">
+              <a class="btn" href="#">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help-sm"></use></svg> Help
+              </a>
+              <a class="btn btn-primary" href="#">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus-sm"></use></svg> New visit
+              </a>
+            </div>
+          </dialog>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ===== Page footer (showcase chrome) ===== -->
+<footer class="footer page-foot">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>Deck templates · MIT</span>
+      <span class="push cluster">
+        <a href="index.php">Templates</a>
+        <a href="../docs/index.php">Docs</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- Copy buttons. The markup is snapshotted now, before deck.js runs, so the
+     copied HTML has none of the attributes deck.js adds at runtime. -->
+<script>
+  (() => {
+    const pristine = new Map();
+    document.querySelectorAll('[data-copy]').forEach((btn) => {
+      const target = document.querySelector(btn.dataset.copy);
+      if (target) pristine.set(btn, target.innerHTML);
+    });
+
+    const dedent = (html) => {
+      const lines = html.replace(/^\s*\n/, '').replace(/\s+$/, '').split('\n');
+      const indent = Math.min(...lines.filter((l) => l.trim()).map((l) => l.match(/^ */)[0].length));
+      return lines.map((l) => l.slice(indent)).join('\n') + '\n';
+    };
+
+    document.addEventListener('click', async (event) => {
+      const btn = event.target.closest('[data-copy]');
+      if (!btn || !pristine.has(btn)) return;
+      const name = btn.closest('.variant')?.querySelector('h2')?.textContent.trim() || 'Variant';
+      const label = [...btn.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
+      if (!navigator.clipboard?.writeText) {
+        Deck.toast({ title: 'Copy unavailable', text: 'This browser blocks clipboard access here. View source instead.', kind: 'warn' });
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(dedent(pristine.get(btn)));
+      } catch {
+        Deck.toast({ title: 'Copy failed', text: 'The clipboard refused the write. View source instead.', kind: 'bad' });
+        return;
+      }
+      Deck.toast({ title: 'Copied', text: `${name} HTML is on your clipboard.`, kind: 'good', duration: 2500 });
+      if (label) {
+        label.textContent = ' Copied';
+        clearTimeout(btn._reset);
+        btn._reset = setTimeout(() => { label.textContent = ' Copy HTML'; }, 1500);
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

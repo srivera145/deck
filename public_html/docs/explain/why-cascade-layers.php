@@ -36,7 +36,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Why Deck uses cascade layers</h1>
   <p class="lede">
     Deck places every one of its rules inside a cascade layer, so overriding Deck with
@@ -49,7 +49,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="cost">What the model costs</h2>
   <p>
     Load order decides whether an override of Deck works. Deck's stylesheet begins by
@@ -99,7 +99,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="replace">What layers replace</h2>
   <p>
     Before cascade layers, a CSS framework and the application using it competed on
@@ -140,7 +140,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="buys">What the order buys</h2>
   <p>
     Deck declares the four application layers inside its own stylesheet, after all eleven
@@ -169,7 +169,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="not-for">Who this model does not suit</h2>
   <p>
     Deck's cascade layer model suits applications that control the order in which their
@@ -193,7 +193,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="case">The case in one paragraph</h2>
   <p>
     Deck's argument for cascade layers is that two rules about load order are easier to

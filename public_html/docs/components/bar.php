@@ -22,7 +22,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Bar</h1>
   <p class="lede">
     <code>.bar</code> is a flex row with <code>align-items: center</code> and a
@@ -33,7 +33,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it when the row is a single line by definition: a card header, a toolbar, a
@@ -53,7 +53,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="push">.push</h2>
   <p>
     <code>.push</code> is <code>margin-inline-start: auto</code>. An auto margin in a
@@ -101,7 +101,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="squash">What happens when it does not fit</h2>
   <p>
     A bar does not wrap, so when it runs out of room the items squash — and then, past a
@@ -151,7 +151,7 @@ require __DIR__ . '/../_layout.php';
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="gap">Gap</h2>
   <p>
     <code>.bar</code> is the one layout primitive that does <strong>not</strong> read
@@ -178,7 +178,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     <code>.bar</code> has one member rule — <code>.bar &gt; .push</code> — and no
@@ -188,14 +188,14 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--space-3', '--space-6']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>No semantics.</strong> A bar is a <code>&lt;div&gt;</code> with
       <code>display: flex</code>. A toolbar that is genuinely a toolbar — a group of
@@ -227,7 +227,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     <code>.push</code> is <code>margin-inline-start</code>, so it pushes toward the end
@@ -246,7 +246,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing here animates or transitions, so
@@ -254,7 +254,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     No print rule, and none is needed: a non-wrapping flex row prints as it appears. The
@@ -264,7 +264,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Make it read --gap like every other primitive */
@@ -285,9 +285,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not when the item count varies.</strong> A row built from user data — tags,
       filters, collaborators — will eventually be too long. Use

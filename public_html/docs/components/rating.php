@@ -27,7 +27,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Rating</h1>
   <p class="lede">
     Five stars over five radio inputs. The radios are the component — they carry the value,
@@ -36,7 +36,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     For collecting a rating on a small fixed scale where the reader understands the units
@@ -49,7 +49,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="markup">The markup, and why it is backwards</h2>
   <p>
     <code>.rating</code> is <code>flex-direction: row-reverse</code>, so the first star in
@@ -91,7 +91,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="sizes">Sizes</h2>
   <p>
     <code>.rating-sm</code> and <code>.rating-lg</code> set <code>--star</code> to 18px and
@@ -100,7 +100,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-2">' . "\n" .
+      '<div class="stack stack-2">' . "\n" .
       '  <span class="rating-static rating-sm" style="--value:100" role="img" aria-label="5 out of 5">' . "\n" .
       '    <span class="rating-fill">' . "\n" .
       '      <svg class="icon" aria-hidden="true"><use href="/assets/deck/deck-icons.svg#star-fill"></use></svg>' . "\n" .
@@ -136,7 +136,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="static">Showing an average</h2>
   <p>
     An average is rarely a whole number, and radios cannot express 3.2. <code>.rating-static</code>
@@ -155,13 +155,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/23-inputs.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--accent-500', '--ink-300', '--focus', '--r-xs', '--dur-1']); ?>
   <p class="text-muted">
@@ -171,9 +171,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Real radios are the whole reason this works.</strong> Arrow keys move between
       options, the group is announced as a radio group, the current value is announced, and
@@ -226,7 +226,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     <code>row-reverse</code> is resolved against the writing direction, so under
@@ -241,7 +241,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div dir="rtl" class="stack-2">' . "\n" .
+      '<div dir="rtl" class="stack stack-2">' . "\n" .
       '  <span class="rating-static" style="--value:64" role="img" aria-label="٣٫٢ من ٥">' . "\n" .
       '    <span class="rating-fill">' . "\n" .
       '      <svg class="icon" aria-hidden="true"><use href="/assets/deck/deck-icons.svg#star-fill"></use></svg>' . "\n" .
@@ -263,7 +263,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     A star scales to 1.14 on hover over
@@ -274,7 +274,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.rating</code> is not in <code>src/99-print.css</code>. The stars are inline SVG
@@ -288,7 +288,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One control, no layer needed */
 <span class="rating-static" style="--value:64;--star:22px"> … </span>
@@ -310,9 +310,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a scale people cannot interpret.</strong> Stars mean "how good"; they
       do not mean likelihood, frequency or agreement. Use labelled

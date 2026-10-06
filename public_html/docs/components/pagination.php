@@ -22,7 +22,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Pagination</h1>
   <p class="lede">
     A row of page numbers. It is a single class styling whatever is inside it, which makes
@@ -31,7 +31,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     For a result set with a known size that people need to move around inside rather than
@@ -65,7 +65,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="children">One rule, any child</h2>
   <p>
     The whole component is three declarations on the container and one on
@@ -95,12 +95,12 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="markup">Which elements to use</h2>
   <p>
     Deck styles children and takes no view. The version that behaves best:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>A <code>&lt;nav&gt;</code> with <code>aria-label</code>.</strong> Pagination
       is navigation, and a page often has two sets of it.
@@ -147,7 +147,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     <code>.pagination</code> is a single class with no members — the styling is all on
@@ -157,14 +157,14 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--control-h-sm', '--space-1', '--space-2', '--text-sm', '--text-muted', '--surface-hover', '--brand-600', '--text-on-brand', '--r-xs']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Label the region.</strong> <code>&lt;nav aria-label="Search results"&gt;</code>.
       Where pagination appears above and below the same list, either label them differently
@@ -200,7 +200,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The row is flex, so it mirrors with the document and page 1 appears on the right —
@@ -232,7 +232,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing here is transitioned. The hover change on a link is instant by design, and there
@@ -241,7 +241,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.pagination</code> is in the "chrome that should never print" list in
@@ -254,7 +254,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Full-size targets on touch devices */
@@ -274,9 +274,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a feed.</strong> A stream with no stable page boundaries gives page
       numbers that mean something different every time they are loaded.

@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Field Pack · Halden · Deck template</title>
+<meta name="description" content="A product detail page for Halden's Field Pack: image gallery with thumbnails, colour and size pickers on real radio inputs, quantity stepper, delivery notes, accordions, a review breakdown and a buy bar that sticks on phones.">
+<meta name="theme-color" content="#a4503a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23a4503a'/%3E%3Cpath d='M9 26V14a7 7 0 0 1 14 0v12M13.5 26v-9a2.5 2.5 0 0 1 5 0v9' fill='none' stroke='%23fbeee8' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+<script src="../assets/deck/deck-extras.js" defer></script>   <!-- gallery carousel, quantity stepper, mega menu, drawer and banner dismiss -->
+
+<style>
+@layer app.pages {
+
+  /* ===== Brand =====
+     Same block as ecommerce.html and checkout.html: fired clay on warm paper. */
+  :root {
+    --hue-brand: 32;
+    --chroma-brand: .125;
+    --hue-accent: 70;
+    --hue-neutral: 60;
+    --chroma-neutral: .007;
+    --font-display: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --hdr-h: 4.25rem;
+    --on-photo: oklch(98% .005 var(--hue-neutral));
+    --buybar-h: 4.5rem;
+  }
+
+  /* A serif at regular weight is the editorial voice. Palatino has no 640,
+     so asking for Deck's heading weight would jump straight to bold. */
+  :is(h1, h2, .display, .serif) { font-weight: 500; letter-spacing: -.018em; }
+  h2 em { font-style: italic; color: var(--brand); }
+  .eyebrow { font-size: var(--text-xs); font-weight: 640; letter-spacing: .16em; text-transform: uppercase; color: var(--brand); }
+  .section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-4) var(--space-8); margin-block-end: var(--space-8); }
+  .section-head h2 { font-size: clamp(1.9rem, 1.35rem + 1.9vw, 2.8rem); max-inline-size: 20ch; text-wrap: balance; }
+  .link-arrow { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: 560; font-size: var(--text-sm); color: var(--text); text-decoration: none; }
+  .link-arrow:hover { color: var(--brand); }
+
+  /* ===== Announcement, header, mega menu =====
+     Shared with ecommerce.html; see the comments there. */
+  .banner { position: relative; display: grid; grid-template-columns: var(--tap) 1fr var(--tap); padding-block: var(--space-2); }
+  .banner-text { grid-column: 2; text-align: center; font-size: var(--text-xs); letter-spacing: .02em; }
+  .banner-text a { color: inherit; font-weight: 600; }
+  .banner .banner-close { --btn-text: currentColor; justify-self: end; }
+  .banner .banner-close:hover { background: oklch(100% 0 0 / .1); }
+  .site-header {
+    position: sticky; inset-block-start: 0; z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid var(--line);
+  }
+  .site-header .navbar { border: 0; min-block-size: var(--hdr-h); padding-block: 0; gap: var(--space-2); }
+  .logo { font-family: var(--font-display); font-weight: 500; font-size: 1.2rem; letter-spacing: .2em; text-transform: uppercase; margin-inline-end: var(--space-4); }
+  .logo-mark { inline-size: 1.35em; block-size: 1.35em; color: var(--brand); stroke-width: 2; }
+  .nav-trigger { display: inline-flex; align-items: center; gap: var(--space-1); background: none; cursor: pointer; }
+  .header-search { inline-size: 15rem; display: none; }
+  .header-search .input { min-block-size: 38px; background: var(--surface-2); box-shadow: none; }
+  .menu-btn { display: inline-flex; }
+  .account-btn { display: none; }
+  @media (min-width: 48rem) { .menu-btn { display: none; } .account-btn { display: inline-flex; } }
+  @media (min-width: 72rem) { .header-search { display: flex; } .search-btn { display: none; } }
+  .bag-count { min-inline-size: 17px; block-size: 17px; line-height: 17px; }
+  .header-tools { flex-wrap: nowrap; --gap: 0; }
+  @media (min-width: 48rem) { .header-tools { --gap: var(--space-1); } }
+  .shop-mega { inline-size: min(62rem, calc(100vw - var(--space-8))); padding: var(--space-6); }
+  @supports (anchor-name: --a) {
+    .site-header .navbar { anchor-name: --halden-nav; }
+    .shop-mega { position-anchor: --halden-nav; position-area: block-end; justify-self: anchor-center; position-try-fallbacks: none; }
+  }
+  .shop-mega .mega-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.3fr); gap: var(--space-6); }
+  .shop-mega .mega-heading { text-transform: uppercase; letter-spacing: .14em; font-size: var(--text-2xs); }
+  .mega-item-text { display: flex; flex-direction: column; gap: 2px; }
+  .shop-mega .mega-feature { padding: 0; overflow: hidden; display: flex; flex-direction: column; background: var(--bg-sunken); color: var(--text); text-decoration: none; border-radius: var(--r-md); }
+  .mega-feature img { aspect-ratio: 16 / 10; inline-size: 100%; object-fit: cover; background: var(--bg-sunken); }
+  .mega-feature-copy { padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-1); }
+
+  /* ===== Product layout =====
+     Gallery and buy box side by side from 64rem. The buy box is the long
+     column, so the gallery is the sticky one: the photo stays in view while
+     the reader works down the options and the accordions. */
+  .crumbs { padding-block: var(--space-5) var(--space-4); }
+  .pdp { display: grid; gap: var(--space-8); }
+  .pdp-info { min-inline-size: 0; }
+  @media (min-width: 64rem) {
+    .pdp { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: var(--space-16); align-items: start; }
+    .pdp-gallery { position: sticky; inset-block-start: calc(var(--hdr-h) + var(--space-6)); }
+  }
+
+  /* ===== Gallery =====
+     One .carousel at every width. Phones swipe it and get dots; from 40rem
+     a thumbnail strip drives it instead, beside the image from 64rem. */
+  .pdp-gallery { display: grid; gap: var(--space-3); }
+  .gallery-main { position: relative; }
+  .gallery-main .carousel-track { border-radius: var(--r-lg); }
+  .gallery-main .carousel-slide { aspect-ratio: 4 / 5; background: var(--bg-sunken); }
+  .gallery-flag { background: var(--surface); position: absolute; z-index: 3; inset-block-start: var(--space-4); inset-inline-start: var(--space-4); }
+  .thumbs { display: none; gap: var(--space-2); }
+  .thumb {
+    flex: 0 0 auto; inline-size: 72px; aspect-ratio: 4 / 5; padding: 0;
+    border-radius: var(--r-sm); overflow: hidden; background: var(--bg-sunken);
+    border: 1px solid var(--line); opacity: .62; cursor: pointer;
+    transition: opacity var(--dur-2) var(--ease-out), outline-color var(--dur-2) var(--ease-out);
+    outline: 2px solid transparent; outline-offset: 2px;
+  }
+  .thumb img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  .thumb:hover { opacity: 1; }
+  .thumb[aria-current="true"] { opacity: 1; outline-color: var(--text); }
+  .thumb:focus-visible { outline-color: var(--focus); }
+  @media (min-width: 40rem) {
+    .thumbs { display: flex; order: 2; }
+    .gallery-main .carousel-track { scroll-marker-group: none; }
+    .gallery-main .carousel-dots { display: none; }
+  }
+  @media (min-width: 64rem) {
+    .pdp-gallery { grid-template-columns: 72px minmax(0, 1fr); align-items: start; }
+    .thumbs { flex-direction: column; order: 0; }
+  }
+
+  /* ===== Buy box ===== */
+  .pdp-name { font-size: clamp(2.3rem, 1.7rem + 2.2vw, 3.3rem); line-height: 1.04; }
+  .pdp-rating { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); font-size: var(--text-sm); color: var(--text-muted); }
+  .pdp-rating a { color: var(--text); }
+  .rating-static.ink > .rating-fill { color: var(--text); }
+  .rating-static.ink { color: var(--line-strong); }
+  .pdp-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-3); }
+  .pdp-price .now { font-size: var(--text-2xl); font-weight: 600; color: var(--brand); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+  .pdp-price s { color: var(--text-faint); font-variant-numeric: tabular-nums; }
+  .opt { border: 0; padding: 0; margin: 0; min-inline-size: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+  .opt legend { padding: 0; margin-block-end: var(--space-3); display: flex; justify-content: space-between; gap: var(--space-3); inline-size: 100%; font-size: var(--text-sm); color: var(--text-muted); }
+  .opt legend strong { color: var(--text); font-weight: 600; }
+  .opt legend a { display: inline-flex; align-items: center; gap: var(--space-1); color: var(--text); font-size: var(--text-sm); }
+
+  /* Colour swatches: real radios, visually hidden but still focusable, so
+     arrow keys move through them and the value posts with the form. */
+  .swatch-row { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .color-swatch { position: relative; display: grid; place-items: center; inline-size: var(--tap); block-size: var(--tap); cursor: pointer; }
+  .color-swatch input, .size-chip input { position: absolute; opacity: 0; inline-size: 1px; block-size: 1px; }
+  .swatch-dot {
+    inline-size: 34px; block-size: 34px; border-radius: 50%;
+    background: var(--sw);
+    box-shadow: inset 0 0 0 1px oklch(0% 0 0 / .18), inset 0 2px 6px oklch(100% 0 0 / .18);
+    outline: 1.5px solid transparent; outline-offset: 3px;
+    transition: outline-color var(--dur-2) var(--ease-out), scale var(--dur-2) var(--ease-spring);
+  }
+  .color-swatch:hover .swatch-dot { scale: 1.06; }
+  .color-swatch input:checked + .swatch-dot { outline-color: var(--text); }
+  .color-swatch input:focus-visible + .swatch-dot { outline: 2px solid var(--focus); }
+
+  /* Size chips: pill-shaped radios. The sold-out one is disabled, struck
+     through and hatched, and still announced with its state. */
+  .size-row { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .size-chip { position: relative; cursor: pointer; }
+  .size-chip span {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    min-block-size: var(--tap); padding-inline: var(--space-5);
+    border: 1px solid var(--line-strong); border-radius: var(--r-full);
+    background: var(--surface); font-size: var(--text-sm); font-weight: 580;
+    transition: border-color var(--dur-1) var(--ease-out), background-color var(--dur-1) var(--ease-out);
+  }
+  .size-chip:hover span { border-color: var(--ink-400); }
+  .size-chip input:checked + span { background: var(--text); border-color: var(--text); color: var(--bg); }
+  .size-chip input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .size-chip input:disabled + span {
+    cursor: not-allowed; color: var(--text-faint); border-style: dashed;
+    background: repeating-linear-gradient(-45deg, transparent 0 6px, color-mix(in oklab, var(--line) 70%, transparent) 6px 7px);
+  }
+  .size-chip input:disabled + span s { text-decoration-thickness: 1px; }
+  .size-chip small { font-weight: 400; font-size: var(--text-xs); }
+
+  /* Quantity, Add and wishlist. On a phone, Add takes a full row of its own. */
+  .buy { display: grid; gap: var(--space-3); grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "qty add wish"; }
+  .buy .number { grid-area: qty; --number-width: 8.5rem; min-block-size: var(--control-h-lg); }
+  .buy .number > button { min-block-size: 100%; }
+  .buy-add { grid-area: add; }
+  .buy-wish { grid-area: wish; }
+  .buy-wish[aria-pressed="true"] { --btn-text: var(--brand); }
+  .buy-wish[aria-pressed="true"] .icon { fill: currentColor; }
+  @media (max-width: 30rem) {
+    .buy { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "qty wish" "add add"; }
+    .buy .number { --number-width: 100%; }
+  }
+  .perks { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-3); padding-block: var(--space-5); border-block: 1px solid var(--line); }
+  .perks li { display: flex; gap: var(--space-3); align-items: flex-start; font-size: var(--text-sm); color: var(--text-muted); }
+  .perks .icon { color: var(--text); margin-block-start: 1px; }
+  .perks strong { color: var(--text); font-weight: 600; }
+  .accordion .accordion-body ul { padding-inline-start: var(--space-5); list-style: disc; display: grid; gap: var(--space-1); }
+  .spec { display: grid; grid-template-columns: 8rem 1fr; gap: var(--space-1) var(--space-4); margin-block-start: var(--space-3); }
+  .spec dt { color: var(--text-faint); }
+  .spec dd { margin: 0; color: var(--text); font-variant-numeric: tabular-nums; }
+
+  /* ===== Story band ===== */
+  .story { display: grid; gap: var(--space-8); align-items: center; }
+  @media (min-width: 56rem) { .story { grid-template-columns: 1fr 1fr; gap: var(--space-16); } }
+  .story-media { border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4 / 3; background: var(--bg-sunken); }
+  .story-media img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); padding-block-start: var(--space-6); border-block-start: 1px solid var(--line); }
+  .fact-value { font-family: var(--font-display); font-size: var(--text-2xl); line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .fact-label { font-size: var(--text-xs); color: var(--text-muted); }
+
+  /* ===== Reviews ===== */
+  .reviews { display: grid; gap: var(--space-10); }
+  @media (min-width: 64rem) {
+    .reviews { grid-template-columns: 21rem minmax(0, 1fr); gap: var(--space-16); align-items: start; }
+    .reviews-summary { position: sticky; inset-block-start: calc(var(--hdr-h) + var(--space-6)); }
+  }
+  .big-score { font-family: var(--font-display); font-size: 4.5rem; line-height: .9; letter-spacing: -.03em; }
+  .reviews-summary .chart-bar { grid-template-columns: 3.2rem 1fr 2.4rem; }
+  .reviews-summary .chart-bar-value { text-align: end; font-weight: 500; color: var(--text-muted); }
+  .reviews-summary .chart-bar-fill { background: var(--text); }
+  .review-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); padding-block-end: var(--space-5); }
+  .review-tools .select { inline-size: auto; min-block-size: 36px; font-size: var(--text-sm); }
+  .review-item { display: grid; gap: var(--space-4); padding-block: var(--space-6); border-block-start: 1px solid var(--line); }
+  .review-item[hidden] { display: none; }
+  @media (min-width: 48rem) { .review-item { grid-template-columns: 12rem minmax(0, 1fr); gap: var(--space-8); } }
+  .reviewer { display: flex; gap: var(--space-3); align-items: flex-start; }
+  @media (min-width: 48rem) { .reviewer { flex-direction: column; } }
+  .review-title { font-size: var(--text-md); font-weight: 620; font-family: var(--font-sans); letter-spacing: -.01em; }
+  .review-body { color: var(--text-muted); max-inline-size: 64ch; text-wrap: pretty; }
+  .review-meta { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); font-size: var(--text-xs); color: var(--text-muted); }
+  .review-meta b { color: var(--text); font-weight: 560; }
+  .review-photo { inline-size: 88px; aspect-ratio: 1; border-radius: var(--r-sm); object-fit: cover; background: var(--bg-sunken); }
+  .helpful[aria-pressed="true"] { --btn-bg: var(--brand-soft); --btn-text: var(--brand-soft-text); --btn-border: transparent; }
+  .brand-reply { padding: var(--space-4); border-radius: var(--r-md); background: var(--surface-2); border-inline-start: 2px solid var(--brand); font-size: var(--text-sm); color: var(--text-muted); }
+  .brand-reply strong { color: var(--text); }
+  .verified { color: light-dark(var(--good-700), oklch(78% .12 var(--hue-good))); }
+
+  /* ===== Product cards (same as the storefront) ===== */
+  .products { display: grid; gap: var(--space-8) var(--space-3); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 64rem) { .products { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-10) var(--space-5); } }
+  .product { position: relative; display: flex; flex-direction: column; gap: var(--space-3); min-inline-size: 0; }
+  .product-media { position: relative; aspect-ratio: 4 / 5; border-radius: var(--r-md); overflow: hidden; background: var(--bg-sunken); }
+  .product-media img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; transition: scale .7s var(--ease-out); }
+  @media (hover: hover) { .product:hover .product-media img { scale: 1.035; } }
+  .product-wish {
+    position: absolute; z-index: 2; inset-block-start: var(--space-2); inset-inline-end: var(--space-2);
+    --btn-bg: color-mix(in oklab, var(--surface) 84%, transparent); --btn-border: transparent; --btn-shadow: var(--shadow-1);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .product-wish[aria-pressed="true"] { --btn-text: var(--brand); }
+  .product-wish[aria-pressed="true"] .icon { fill: currentColor; }
+  .product-body { display: flex; flex-direction: column; gap: var(--space-1); }
+  .product-name { font-family: var(--font-sans); font-size: var(--text-base); font-weight: 600; letter-spacing: -.01em; line-height: 1.3; }
+  .product-name a { color: inherit; text-decoration: none; }
+  .product-name a::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: var(--r-md); }
+  .product-name a:focus-visible { outline: none; }
+  .product-name a:focus-visible::after { outline: 2px solid var(--focus); outline-offset: 4px; }
+  .product-meta { font-size: var(--text-sm); color: var(--text-muted); }
+  .product-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-1) var(--space-3); margin-block-start: var(--space-1); }
+  .price { display: inline-flex; align-items: baseline; gap: var(--space-2); font-weight: 620; font-variant-numeric: tabular-nums; }
+  .star-mini { display: inline-flex; align-items: center; gap: 3px; font-size: var(--text-xs); color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .star-mini .icon { inline-size: 13px; block-size: 13px; fill: currentColor; stroke: none; color: var(--text); }
+  .star-mini b { color: var(--text); font-weight: 600; }
+
+  /* ===== Sticky buy bar (phones) =====
+     Fixed to the bottom with the home-indicator inset. The footer reserves its
+     height in its bottom padding, so the last row is never hidden behind it. The script tucks it away
+     while the real Add button is on screen; without the script it simply
+     stays up. */
+  .buybar {
+    position: fixed; z-index: var(--z-nav); inset-inline: 0; inset-block-end: 0;
+    display: flex; align-items: center; gap: var(--space-3);
+    min-block-size: var(--buybar-h);
+    padding: var(--space-3) var(--space-gutter);
+    padding-block-end: calc(var(--space-3) + env(safe-area-inset-bottom));
+    background: color-mix(in oklab, var(--surface) 90%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px); -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-start: 1px solid var(--line);
+    box-shadow: 0 -8px 24px oklch(20% .03 var(--hue-neutral) / .08);
+    transition: translate var(--dur-3) var(--ease-out);
+  }
+  .buybar img { inline-size: 44px; block-size: 44px; border-radius: var(--r-sm); object-fit: cover; background: var(--bg-sunken); flex: 0 0 auto; }
+  .buybar-text { min-inline-size: 0; display: flex; flex-direction: column; line-height: 1.3; }
+  .buybar .btn { margin-inline-start: auto; flex: 0 0 auto; }
+  .buybar.is-tucked { translate: 0 110%; }
+  .site-footer { padding-block-end: calc(var(--space-8) + var(--buybar-h) + env(safe-area-inset-bottom)); }
+  @media (min-width: 48rem) {
+    .buybar { display: none; }
+    .site-footer { padding-block-end: var(--space-8); }
+  }
+
+  /* ===== Footer ===== */
+  .site-footer { background: var(--surface); margin-block-start: var(--space-section); }
+  .site-footer .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-footer .footer-brand { grid-column: 1 / -1; max-inline-size: 34ch; }
+  @media (min-width: 56rem) {
+    .site-footer .footer-grid { grid-template-columns: 1.6fr repeat(3, minmax(0, 1fr)); }
+    .site-footer .footer-brand { grid-column: auto; }
+  }
+  .site-footer .logo { color: var(--text); }
+  .site-footer .footer-heading { text-transform: uppercase; letter-spacing: .14em; font-size: var(--text-2xs); }
+  .social { display: flex; gap: var(--space-1); margin-block-start: var(--space-2); }
+  .social a { inline-size: 36px; block-size: 36px; display: grid; place-items: center; border-radius: var(--r-full); border: 1px solid var(--line); color: var(--text-muted); }
+  .social a:hover { color: var(--brand); border-color: var(--brand); text-decoration: none; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+  .pay-marks { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; padding: 0; margin: 0; }
+  .pm { display: inline-flex; align-items: center; justify-content: center; gap: 3px; min-inline-size: 46px; block-size: 28px; padding-inline: var(--space-2); border: 1px solid var(--line-strong); border-radius: 5px; background: var(--surface); color: var(--text); font-size: 10px; font-weight: 800; letter-spacing: .02em; line-height: 1; }
+  .pm-visa { font-style: italic; font-size: 12px; letter-spacing: .04em; }
+  .pm-mc i { inline-size: 12px; block-size: 12px; border-radius: 50%; background: oklch(60% .2 28); }
+  .pm-mc i + i { margin-inline-start: -6px; background: oklch(80% .16 75 / .9); }
+  .pm-amex { font-size: 9px; letter-spacing: .08em; }
+  .pm-paypal { font-style: italic; }
+  /* Deck's .drawer sets display:flex, which beats the browser's own rule that hides a closed <dialog>, so a closed drawer would sit off-screen with its links still in the tab order. The transition on display is allow-discrete, so the slide-out still plays. */
+  .drawer:not([open]) { display: none; }
+  .drawer .sidebar-group { padding-inline: 0; text-transform: uppercase; letter-spacing: .14em; font-size: var(--text-2xs); }
+  .drawer .sidebar-link { padding-inline: var(--space-2); font-size: var(--text-base); }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Photos are hotlinked from Unsplash for the preview. Replace them with your own.
+     The detail shots are crops of the same two photos (imgix focal-point zoom). -->
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5.5 8h13l-1 12.5h-11L5.5 8ZM9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-halden" viewBox="0 0 24 24"><path d="M5 21V10a7 7 0 0 1 14 0v11M9.5 21v-8a2.5 2.5 0 0 1 5 0v8" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M3.5 16.5 16.5 3.5l4 4-13 13-4-4ZM7.5 12.5l2 2M10.5 9.5l2 2M13.5 6.5l2 2" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-thumb" viewBox="0 0 24 24"><path d="M7 10.5V20H4.5a1 1 0 0 1-1-1v-7.5a1 1 0 0 1 1-1H7Zm0 0 3.6-6.6a1.8 1.8 0 0 1 3.3 1.3l-.8 4.3h5.2a2 2 0 0 1 2 2.4l-1.3 6.5A2 2 0 0 1 17 20H7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M4 9.5V20h16V9.5M3 4h18l-1 5.5a2.5 2.5 0 0 1-4.5 1 2.5 2.5 0 0 1-3.5 0 2.5 2.5 0 0 1-3.5 0 2.5 2.5 0 0 1-4.5-1L3 4ZM10 20v-5h4v5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><path d="M17.2 6.8h.01"/></g></symbol>
+  <symbol id="i-pinterest" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m10.5 20.5 2-8.5M9.2 14.2C7.8 13.4 7.5 12 7.8 10.6 8.4 8 11 6.8 13.4 7.2c2.6.5 3.7 2.8 3 5.2-.5 1.8-1.9 3-3.4 2.7-1-.2-1.4-1-1.3-1.8"/></g></symbol>
+  <symbol id="i-youtube" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10.5 9.5 4 2.5-4 2.5z"/></g></symbol>
+</svg>
+
+<!-- ===== Announcement ===== -->
+<div class="banner banner-dark" data-dismiss-key="halden-shipping-aw26" role="region" aria-label="Announcement">
+  <p class="banner-text">Free shipping on orders over $150, and free returns for 30 days. <a href="#">Details</a></p>
+  <button class="btn btn-icon btn-sm btn-ghost banner-close" type="button" aria-label="Dismiss announcement">
+    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x"></use></svg>
+  </button>
+</div>
+
+<!-- ===== Header (shared with ecommerce.html) ===== -->
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+      <button class="btn btn-icon btn-ghost menu-btn" type="button" data-deck-drawer="#site-nav" aria-label="Open menu">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#menu"></use></svg>
+      </button>
+      <a class="navbar-brand logo" href="ecommerce.html">
+        <svg class="icon logo-mark" aria-hidden="true"><use href="#i-halden"></use></svg>
+        Halden
+      </a>
+      <nav class="navbar-links" aria-label="Primary">
+        <button class="nav-link nav-trigger" type="button" popovertarget="shop-mega" data-deck-mega="#shop-mega">
+          Shop
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-down-sm"></use></svg>
+        </button>
+        <a class="nav-link" href="ecommerce.html#new">New in</a>
+        <a class="nav-link" href="ecommerce.html#bestsellers">Bestsellers</a>
+        <a class="nav-link" href="ecommerce.html#journal">Journal</a>
+        <a class="nav-link" href="#">Stores</a>
+      </nav>
+      <div class="push cluster header-tools">
+        <form class="search header-search" role="search" action="#">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search"></use></svg>
+          <input class="input" type="search" name="q" placeholder="Search bags, watches…" aria-label="Search the shop">
+        </form>
+        <a class="btn btn-icon btn-ghost search-btn" href="#" aria-label="Search">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search"></use></svg>
+        </a>
+        <button class="btn btn-icon btn-ghost" type="button" data-deck-theme aria-label="Switch theme">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        </button>
+        <a class="btn btn-icon btn-ghost account-btn" href="#" aria-label="Your account">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#user"></use></svg>
+        </a>
+        <a class="btn btn-icon btn-ghost" href="checkout.html" aria-label="Bag, 3 items" data-bag-link>
+          <span class="with-indicator">
+            <svg class="icon" aria-hidden="true"><use href="#i-bag"></use></svg>
+            <span class="indicator-badge indicator-badge-brand bag-count" aria-hidden="true" data-bag-count>3</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="mega shop-mega" id="shop-mega" popover>
+    <div class="mega-grid">
+      <div class="mega-col">
+        <p class="mega-heading">Carry</p>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Backpacks</span><span class="mega-item-note">18 to 26 litres, laptop sleeves</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Totes &amp; shoulder bags</span><span class="mega-item-note">Woven, pebbled and smooth</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Crossbody</span><span class="mega-item-note">Hands-free, phone-sized up</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Weekenders</span><span class="mega-item-note">Cabin-size, 40 L</span></span></a>
+      </div>
+      <div class="mega-col">
+        <p class="mega-heading">Wear</p>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Watches</span><span class="mega-item-note">Swiss movements, 36 to 41 mm</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Eyewear</span><span class="mega-item-note">Sun and optical, titanium and acetate</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Footwear</span><span class="mega-item-note">Goodyear-welted, resoleable</span></span></a>
+      </div>
+      <div class="mega-col">
+        <p class="mega-heading">Everyday</p>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Audio</span><span class="mega-item-note">Over-ear and noise cancelling</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Small leather goods</span><span class="mega-item-note">Wallets, card holders, key rings</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Gift cards</span><span class="mega-item-note">Delivered by email, never expire</span></span></a>
+      </div>
+      <a class="mega-feature" href="product.html">
+        <img src="https://images.unsplash.com/photo-1622560480654-d96214fdc887?w=560&h=350&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.5&fp-y=.55" alt="The Field Pack backpack in oxblood leather, side view" width="560" height="350" loading="lazy" decoding="async">
+        <span class="mega-feature-copy">
+          <span class="eyebrow">New colour</span>
+          <span class="fw-semi">The Field Pack in Oxblood</span>
+          <span class="text-sm text-muted">Full-grain leather that darkens as you carry it.</span>
+        </span>
+      </a>
+    </div>
+    <div class="mega-footer">
+      <a class="link-arrow" href="#">Shop everything <svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></a>
+      <a class="link-quiet" href="#">Repairs</a>
+      <a class="link-quiet" href="#">Find a store</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumb" style="list-style:none;padding:0;margin:0">
+        <li><a href="ecommerce.html">Home</a></li>
+        <li><a href="#">Bags</a></li>
+        <li><a href="#">Backpacks</a></li>
+        <li aria-current="page">The Field Pack</li>
+      </ol>
+    </nav>
+
+    <!-- ===== Product ===== -->
+    <section class="pdp" aria-labelledby="pdp-title">
+
+      <!-- Gallery. The thumbnails call the carousel's go(); its deck:slide
+           event keeps aria-current in step when someone swipes instead. -->
+      <div class="pdp-gallery">
+        <div class="thumbs" role="group" aria-label="Choose an image">
+          <button class="thumb" type="button" aria-current="true" aria-label="Image 1 of 5: front, Cognac" data-thumb><img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=144&h=180&q=70&auto=format&fit=crop" alt="" width="72" height="90"></button>
+          <button class="thumb" type="button" aria-current="false" aria-label="Image 2 of 5: three-quarter view, Oxblood" data-thumb><img src="https://images.unsplash.com/photo-1622560480654-d96214fdc887?w=144&h=180&q=70&auto=format&fit=crop" alt="" width="72" height="90"></button>
+          <button class="thumb" type="button" aria-current="false" aria-label="Image 3 of 5: top handle and stamp" data-thumb><img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=144&h=180&q=70&auto=format&fit=crop&crop=focalpoint&fp-x=.5&fp-y=.4&fp-z=2.2" alt="" width="72" height="90"></button>
+          <button class="thumb" type="button" aria-current="false" aria-label="Image 4 of 5: front pocket and zip pull" data-thumb><img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=144&h=180&q=70&auto=format&fit=crop&crop=focalpoint&fp-x=.42&fp-y=.66&fp-z=2.4" alt="" width="72" height="90"></button>
+          <button class="thumb" type="button" aria-current="false" aria-label="Image 5 of 5: side seam and stitching" data-thumb><img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=144&h=180&q=70&auto=format&fit=crop&crop=focalpoint&fp-x=.85&fp-y=.72&fp-z=2.4" alt="" width="72" height="90"></button>
+        </div>
+
+        <div class="carousel gallery-main" data-deck-carousel data-gallery role="region" aria-roledescription="carousel" aria-label="The Field Pack, 5 images">
+          <span class="badge gallery-flag">Bestseller in bags</span>
+          <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous image">
+            <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-left"></use></svg>
+          </button>
+          <div class="carousel-track">
+            <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=1000&h=1250&q=80&auto=format&fit=crop" alt="The Field Pack in Cognac, front view: a rounded full-grain leather backpack with a zipped front pocket" width="1000" height="1250" fetchpriority="high"></div>
+            <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1622560480654-d96214fdc887?w=1000&h=1250&q=80&auto=format&fit=crop" alt="The Field Pack in Oxblood, three-quarter view showing the side bottle pocket" width="1000" height="1250" loading="lazy" decoding="async"></div>
+            <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=1000&h=1250&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.5&fp-y=.4&fp-z=2.2" alt="Close-up of the rolled top handle and the blind-stamped Halden mark" width="1000" height="1250" loading="lazy" decoding="async"></div>
+            <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=1000&h=1250&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.42&fp-y=.66&fp-z=2.4" alt="Close-up of the front pocket, its contrast stitching and leather zip pull" width="1000" height="1250" loading="lazy" decoding="async"></div>
+            <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=1000&h=1250&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.85&fp-y=.72&fp-z=2.4" alt="Close-up of the side seam where the front panel meets the gusset" width="1000" height="1250" loading="lazy" decoding="async"></div>
+          </div>
+          <button class="carousel-arrow carousel-next" type="button" aria-label="Next image">
+            <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right"></use></svg>
+          </button>
+          <div class="carousel-dots"></div>
+        </div>
+      </div>
+
+      <!-- Buy box. A real form: colour and size are radio groups in
+           fieldsets, so the legends name them and the values post. -->
+      <div class="pdp-info">
+        <form class="stack stack-6" action="checkout.html" data-buy-form>
+          <div class="stack stack-3">
+            <p class="eyebrow">Carry · Backpacks</p>
+            <h1 class="pdp-name" id="pdp-title">The Field Pack</h1>
+            <div class="pdp-rating">
+              <span class="rating-static ink" style="--value:96;--star:16px" role="img" aria-label="Rated 4.8 out of 5">
+                <span class="rating-fill">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                </span>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <span><b class="nums" style="color:var(--text)">4.8</b> · <a href="#reviews"><span class="nums">312</span> reviews</a></span>
+              <span aria-hidden="true">·</span>
+              <span>Made in Porto</span>
+            </div>
+          </div>
+
+          <div class="stack stack-2">
+            <p class="pdp-price">
+              <span class="now">$396</span>
+              <s aria-label="Was $495">$495</s>
+              <span class="badge badge-brand">Save 20%</span>
+            </p>
+            <p class="text-sm text-muted">Or 4 interest-free payments of <span class="nums">$99.00</span>. Duties and taxes included.</p>
+          </div>
+
+          <p class="text-muted" style="text-wrap:pretty">
+            A 22-litre everyday pack cut from one hide of vegetable-tanned leather,
+            with a padded sleeve for a 15-inch laptop and a zip that runs down both
+            sides so it opens like a suitcase.
+          </p>
+
+          <fieldset class="opt">
+            <legend><span>Colour: <strong data-colour-name>Cognac</strong></span></legend>
+            <div class="swatch-row">
+              <label class="color-swatch" title="Cognac">
+                <input type="radio" name="colour" value="Cognac" data-slide="0" checked>
+                <span class="swatch-dot" style="--sw:oklch(54% .11 45)"></span>
+                <span class="sr-only">Cognac</span>
+              </label>
+              <label class="color-swatch" title="Oxblood">
+                <input type="radio" name="colour" value="Oxblood" data-slide="1">
+                <span class="swatch-dot" style="--sw:oklch(38% .1 12)"></span>
+                <span class="sr-only">Oxblood</span>
+              </label>
+              <label class="color-swatch" title="Espresso">
+                <input type="radio" name="colour" value="Espresso">
+                <span class="swatch-dot" style="--sw:oklch(30% .035 50)"></span>
+                <span class="sr-only">Espresso</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="opt">
+            <legend>
+              <span>Size: <strong data-size-name>22 L</strong></span>
+              <a href="#"><svg class="icon" aria-hidden="true"><use href="#i-ruler"></use></svg>Size guide</a>
+            </legend>
+            <div class="size-row">
+              <label class="size-chip"><input type="radio" name="size" value="18 L" data-note="Fits a 13-inch laptop and a day's kit."><span>18 L</span></label>
+              <label class="size-chip"><input type="radio" name="size" value="22 L" data-note="Fits a 15-inch laptop, a jumper and lunch." checked><span>22 L</span></label>
+              <label class="size-chip"><input type="radio" name="size" value="26 L" disabled><span><s>26 L</s> <small>Sold out</small></span></label>
+            </div>
+            <p class="help" data-size-note>Fits a 15-inch laptop, a jumper and lunch.</p>
+          </fieldset>
+
+          <div class="stack stack-3">
+            <div class="buy">
+              <!-- .number needs deck-extras.js for the buttons; the input still
+                   works as a plain number field without it. -->
+              <div class="number">
+                <button type="button" aria-label="One fewer">−</button>
+                <input type="number" name="qty" value="1" min="1" max="4" aria-label="Quantity">
+                <button type="button" aria-label="One more">+</button>
+              </div>
+              <button class="btn btn-primary btn-lg buy-add" type="submit" data-add data-add-main>
+                <svg class="icon" aria-hidden="true"><use href="#i-bag"></use></svg>
+                Add to bag · <span class="nums">$396</span>
+              </button>
+              <button class="btn btn-icon btn-lg buy-wish" type="button" aria-pressed="false" aria-label="Save to wishlist">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg>
+              </button>
+            </div>
+            <p class="status-line">
+              <span class="indicator indicator-good" aria-hidden="true"></span>
+              <span><b>In stock.</b> <span class="text-muted">Order within 3 h 12 min to ship today.</span></span>
+            </p>
+          </div>
+
+          <ul class="perks">
+            <li>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#truck"></use></svg>
+              <span><strong>Free delivery Fri, Oct 9 – Tue, Oct 13</strong><br>to 10013 · <a href="#">Change</a></span>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true"><use href="#i-store"></use></svg>
+              <span><strong>Pick up today at Crosby Street</strong><br>3 in stock in Cognac, 22 L</span>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#refresh"></use></svg>
+              <span><strong>Free 30-day returns</strong><br>Unused, with the tags on. We send the label.</span>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#shield"></use></svg>
+              <span><strong>2-year warranty, repairs for life</strong><br>Straps, zips and stitching, at our Brooklyn workshop.</span>
+            </li>
+          </ul>
+
+          <!-- Native <details> with a shared name, so one opens at a time. -->
+          <div class="accordion">
+            <details name="pdp-info" open>
+              <summary>Details</summary>
+              <div class="accordion-body">
+                <ul>
+                  <li>Padded sleeve for laptops up to 15 inches</li>
+                  <li>Two-way perimeter zip opens the main compartment flat</li>
+                  <li>Side pocket fits a 750 ml bottle</li>
+                  <li>Contoured straps lined in recycled felt</li>
+                </ul>
+                <dl class="spec">
+                  <dt>Dimensions</dt><dd>44 × 30 × 15 cm</dd>
+                  <dt>Weight</dt><dd>1.35 kg</dd>
+                  <dt>Capacity</dt><dd>22 litres</dd>
+                </dl>
+              </div>
+            </details>
+            <details name="pdp-info">
+              <summary>Materials &amp; care</summary>
+              <div class="accordion-body">
+                Full-grain cowhide, vegetable-tanned for 40 days at a family tannery
+                outside Porto. Brass hardware, waxed linen thread, YKK Excella zips.
+                Wipe with a damp cloth; condition twice a year with the balm in the box.
+                Scratches buff out with a thumb.
+              </div>
+            </details>
+            <details name="pdp-info">
+              <summary>Shipping &amp; returns</summary>
+              <div class="accordion-body">
+                Free tracked shipping over $150, usually 2–4 business days. Express
+                next-day is $18. Returns are free within 30 days; refunds land within
+                three business days of the pack reaching us.
+              </div>
+            </details>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== Story band ===== -->
+  <section class="container section">
+    <div class="story">
+      <div class="story-media">
+        <img src="https://images.unsplash.com/photo-1517254797898-04edd251bfb3?w=900&h=675&q=80&auto=format&fit=crop" alt="Rows of leather goods in brown, black and green, stacked tightly on a workshop table" width="900" height="675" loading="lazy" decoding="async">
+      </div>
+      <div class="stack stack-6">
+        <div class="stack stack-3">
+          <p class="eyebrow">How it's made</p>
+          <h2 style="font-size:clamp(1.9rem,1.35rem + 1.9vw,2.8rem);text-wrap:balance">One hide, <em>forty days</em>, eleven people</h2>
+          <p class="text-muted" style="text-wrap:pretty">
+            Vegetable tanning takes ten times longer than chrome and smells of oak bark
+            rather than chemicals. It also means the leather keeps changing: the Cognac
+            you buy will be chestnut in three years, and nobody else's will match it.
+          </p>
+        </div>
+        <div class="facts">
+          <div><p class="fact-value">40 days</p><p class="fact-label">in the tanning pits</p></div>
+          <div><p class="fact-value">214</p><p class="fact-label">stitches per strap</p></div>
+          <div><p class="fact-value">1 hide</p><p class="fact-label">per pack, never pieced</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Reviews =====
+       The distribution is Deck's .chart-bars, one series, values labelled.
+       The chips and the helpful buttons are wired in the script below. -->
+  <section class="container section" id="reviews" aria-labelledby="reviews-title" style="padding-block-start:0">
+    <div class="reviews">
+      <div class="reviews-summary stack stack-6">
+        <div class="stack stack-2">
+          <p class="eyebrow">Reviews</p>
+          <h2 id="reviews-title" style="font-size:var(--text-2xl)">What owners say</h2>
+        </div>
+        <div class="cluster" style="--gap:var(--space-4)">
+          <span class="big-score nums">4.8</span>
+          <span class="stack stack-1">
+            <span class="rating-static ink" style="--value:96;--star:18px" role="img" aria-label="Rated 4.8 out of 5">
+              <span class="rating-fill">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            </span>
+            <span class="text-sm text-muted">Based on <span class="nums">312</span> reviews</span>
+          </span>
+        </div>
+
+        <figure class="chart m-0" aria-label="Rating distribution">
+          <div class="chart-bars">
+            <div class="chart-bar"><span class="chart-bar-label">5 stars</span><span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:79"></span></span><span class="chart-bar-value nums">248</span></div>
+            <div class="chart-bar"><span class="chart-bar-label">4 stars</span><span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:14"></span></span><span class="chart-bar-value nums">44</span></div>
+            <div class="chart-bar"><span class="chart-bar-label">3 stars</span><span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:4"></span></span><span class="chart-bar-value nums">12</span></div>
+            <div class="chart-bar"><span class="chart-bar-label">2 stars</span><span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:2"></span></span><span class="chart-bar-value nums">5</span></div>
+            <div class="chart-bar"><span class="chart-bar-label">1 star</span><span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:1"></span></span><span class="chart-bar-value nums">3</span></div>
+          </div>
+        </figure>
+
+        <p class="text-sm text-muted"><b style="color:var(--text)">96%</b> would recommend it to a friend. <b style="color:var(--text)">Fit:</b> true to the listed size.</p>
+        <a class="btn btn-block" href="#">Write a review</a>
+      </div>
+
+      <div>
+        <div class="review-tools">
+          <div class="cluster cluster-tight" role="group" aria-label="Filter reviews" data-review-filter>
+            <button class="chip" type="button" aria-pressed="true" data-tag="all">All</button>
+            <button class="chip" type="button" aria-pressed="false" data-tag="photos">With photos</button>
+            <button class="chip" type="button" aria-pressed="false" data-tag="laptop">Laptop</button>
+            <button class="chip" type="button" aria-pressed="false" data-tag="patina">Patina</button>
+            <button class="chip" type="button" aria-pressed="false" data-tag="comfort">Comfort</button>
+          </div>
+          <label class="sr-only" for="review-sort">Sort reviews</label>
+          <select class="select" id="review-sort">
+            <option>Most helpful</option>
+            <option>Newest</option>
+            <option>Highest rated</option>
+            <option>Lowest rated</option>
+          </select>
+        </div>
+
+        <article class="review-item" data-tags="patina photos">
+          <div class="reviewer">
+            <span class="avatar" aria-hidden="true">MO</span>
+            <div class="stack stack-1">
+              <span class="fw-semi">Maya Okafor</span>
+              <span class="text-xs verified cluster" style="--gap:var(--space-1)"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-circle-sm"></use></svg>Verified buyer</span>
+              <span class="text-xs text-muted">Chicago, IL</span>
+            </div>
+          </div>
+          <div class="stack stack-3">
+            <div class="bar">
+              <span class="rating-static ink" style="--value:100;--star:14px" role="img" aria-label="5 out of 5">
+                <span class="rating-fill">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                </span>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <time class="text-xs text-muted push" datetime="2026-09-21">Sep 21, 2026</time>
+            </div>
+            <h3 class="review-title">Three winters in and it looks better than new</h3>
+            <p class="review-body">Daily commute on the L, rain more often than not. The Cognac has gone from orange to a deep chestnut and the corners have softened without fraying. The perimeter zip is the best thing about it: packing for a weekend is like opening a small suitcase.</p>
+            <img class="review-photo" src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=176&h=176&q=70&auto=format&fit=crop&crop=focalpoint&fp-x=.42&fp-y=.66&fp-z=2" alt="Reviewer's photo of the front pocket after three years of use" width="88" height="88" loading="lazy" decoding="async">
+            <p class="review-meta"><span>Colour: <b>Cognac</b></span><span>Size: <b>22 L</b></span><span>Owned: <b>3 years</b></span></p>
+            <div class="cluster cluster-tight">
+              <span class="text-xs text-muted">Helpful?</span>
+              <button class="btn btn-sm helpful" type="button" aria-pressed="false" data-count="41"><svg class="icon" aria-hidden="true"><use href="#i-thumb"></use></svg><span>Yes (<span class="nums">41</span>)</span></button>
+              <button class="btn btn-sm btn-ghost" type="button">Report</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-item" data-tags="laptop comfort">
+          <div class="reviewer">
+            <span class="avatar" aria-hidden="true">JT</span>
+            <div class="stack stack-1">
+              <span class="fw-semi">Jonas Teller</span>
+              <span class="text-xs verified cluster" style="--gap:var(--space-1)"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-circle-sm"></use></svg>Verified buyer</span>
+              <span class="text-xs text-muted">Austin, TX</span>
+            </div>
+          </div>
+          <div class="stack stack-3">
+            <div class="bar">
+              <span class="rating-static ink" style="--value:100;--star:14px" role="img" aria-label="5 out of 5">
+                <span class="rating-fill">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                </span>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <time class="text-xs text-muted push" datetime="2026-08-30">Aug 30, 2026</time>
+            </div>
+            <h3 class="review-title">Carries a 16-inch MacBook with room to spare</h3>
+            <p class="review-body">The listing says 15-inch but my 16 slides in fine. The felt-lined straps are the difference between this and my old canvas pack; I walked 20,000 steps around Lisbon with it and my shoulders never noticed.</p>
+            <p class="review-meta"><span>Colour: <b>Oxblood</b></span><span>Size: <b>22 L</b></span><span>Owned: <b>4 months</b></span></p>
+            <div class="cluster cluster-tight">
+              <span class="text-xs text-muted">Helpful?</span>
+              <button class="btn btn-sm helpful" type="button" aria-pressed="false" data-count="27"><svg class="icon" aria-hidden="true"><use href="#i-thumb"></use></svg><span>Yes (<span class="nums">27</span>)</span></button>
+              <button class="btn btn-sm btn-ghost" type="button">Report</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-item" data-tags="comfort">
+          <div class="reviewer">
+            <span class="avatar" aria-hidden="true">AS</span>
+            <div class="stack stack-1">
+              <span class="fw-semi">Amara Sato</span>
+              <span class="text-xs verified cluster" style="--gap:var(--space-1)"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-circle-sm"></use></svg>Verified buyer</span>
+              <span class="text-xs text-muted">Portland, OR</span>
+            </div>
+          </div>
+          <div class="stack stack-3">
+            <div class="bar">
+              <span class="rating-static ink" style="--value:60;--star:14px" role="img" aria-label="3 out of 5">
+                <span class="rating-fill">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                </span>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <time class="text-xs text-muted push" datetime="2026-08-12">Aug 12, 2026</time>
+            </div>
+            <h3 class="review-title">Beautiful, but heavy when it's empty</h3>
+            <p class="review-body">No complaints about the build. It is 1.35 kg before you put anything in it, though, and on a long day with a laptop I felt it. If you mostly carry a tablet, the 18 L is the better buy.</p>
+            <p class="review-meta"><span>Colour: <b>Espresso</b></span><span>Size: <b>22 L</b></span><span>Owned: <b>6 weeks</b></span></p>
+            <div class="brand-reply">
+              <strong>Reply from Halden</strong> · Thanks, Amara. You're right that leather has weight to it. If you'd like to swap to the 18 L, reply to your order email and we'll cover the shipping both ways.
+            </div>
+            <div class="cluster cluster-tight">
+              <span class="text-xs text-muted">Helpful?</span>
+              <button class="btn btn-sm helpful" type="button" aria-pressed="false" data-count="19"><svg class="icon" aria-hidden="true"><use href="#i-thumb"></use></svg><span>Yes (<span class="nums">19</span>)</span></button>
+              <button class="btn btn-sm btn-ghost" type="button">Report</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-item" data-tags="patina laptop">
+          <div class="reviewer">
+            <span class="avatar" aria-hidden="true">RB</span>
+            <div class="stack stack-1">
+              <span class="fw-semi">Rafael Barros</span>
+              <span class="text-xs verified cluster" style="--gap:var(--space-1)"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-circle-sm"></use></svg>Verified buyer</span>
+              <span class="text-xs text-muted">Brooklyn, NY</span>
+            </div>
+          </div>
+          <div class="stack stack-3">
+            <div class="bar">
+              <span class="rating-static ink" style="--value:80;--star:14px" role="img" aria-label="4 out of 5">
+                <span class="rating-fill">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                </span>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <time class="text-xs text-muted push" datetime="2026-07-03">Jul 3, 2026</time>
+            </div>
+            <h3 class="review-title">Took a scratch on day two, and that's fine</h3>
+            <p class="review-body">Caught it on a bike rack and panicked. Rubbed it with my thumb like the card says and it mostly disappeared into the grain. Docking one star only because the laptop sleeve sits a little low for my taste.</p>
+            <p class="review-meta"><span>Colour: <b>Cognac</b></span><span>Size: <b>18 L</b></span><span>Owned: <b>1 year</b></span></p>
+            <div class="cluster cluster-tight">
+              <span class="text-xs text-muted">Helpful?</span>
+              <button class="btn btn-sm helpful" type="button" aria-pressed="false" data-count="12"><svg class="icon" aria-hidden="true"><use href="#i-thumb"></use></svg><span>Yes (<span class="nums">12</span>)</span></button>
+              <button class="btn btn-sm btn-ghost" type="button">Report</button>
+            </div>
+          </div>
+        </article>
+
+        <div class="bar" style="padding-block-start:var(--space-6);border-block-start:1px solid var(--line)">
+          <span class="text-sm text-muted">Showing <span class="nums">4</span> of <span class="nums">312</span></span>
+          <button class="btn push" type="button">Show more reviews</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Complete the look ===== -->
+  <section class="container section" aria-labelledby="look-title" style="padding-block-start:0">
+    <div class="section-head">
+      <div class="stack stack-2">
+        <p class="eyebrow">Complete the look</p>
+        <h2 id="look-title">Pairs well with <em>cognac</em></h2>
+      </div>
+      <a class="link-arrow" href="ecommerce.html#new">Shop new arrivals <svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></a>
+    </div>
+    <div class="products">
+      <article class="product">
+        <div class="product-media">
+          <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=600&h=750&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.5&fp-y=.5" alt="Linea 36 watch with a white dial and rose-gold case on a taupe leather strap" width="600" height="750" loading="lazy" decoding="async">
+          <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Linea 36 to your wishlist"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg></button>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name"><a href="product.html">Linea 36</a></h3>
+          <p class="product-meta">Rose-gold steel · 36 mm</p>
+          <div class="product-row"><span class="price">$265</span><span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.9</b>(86)</span></div>
+        </div>
+      </article>
+      <article class="product">
+        <div class="product-media">
+          <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&h=750&q=80&auto=format&fit=crop" alt="Bifold wallet in worn brown vegetable-tanned leather" width="600" height="750" loading="lazy" decoding="async">
+          <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Bifold Wallet to your wishlist"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg></button>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name"><a href="product.html">Bifold Wallet</a></h3>
+          <p class="product-meta">Vegetable-tanned · 6 cards</p>
+          <div class="product-row"><span class="price">$95</span><span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.9</b>(611)</span></div>
+        </div>
+      </article>
+      <article class="product">
+        <div class="product-media">
+          <img src="https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=600&h=750&q=80&auto=format&fit=crop" alt="Classic Derby shoes in polished tan leather with a pebbled toe" width="600" height="750" loading="lazy" decoding="async">
+          <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Classic Derby to your wishlist"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg></button>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name"><a href="product.html">Classic Derby</a></h3>
+          <p class="product-meta">Goodyear-welted · resoleable</p>
+          <div class="product-row"><span class="price">$260</span><span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.8</b>(297)</span></div>
+        </div>
+      </article>
+      <article class="product">
+        <div class="product-media">
+          <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&h=750&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.5&fp-y=.55&fp-z=1.3" alt="Orbit round sunglasses with a thin gold frame and green lenses" width="600" height="750" loading="lazy" decoding="async">
+          <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Orbit Sunglasses to your wishlist"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg></button>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name"><a href="product.html">Orbit Sunglasses</a></h3>
+          <p class="product-meta">Gold titanium · polarised</p>
+          <div class="product-row"><span class="price">$165</span><span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.8</b>(203)</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer (shared with ecommerce.html) ===== -->
+<footer class="footer site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a class="navbar-brand logo" href="ecommerce.html">
+          <svg class="icon logo-mark" aria-hidden="true"><use href="#i-halden"></use></svg>
+          Halden
+        </a>
+        <p>Leather goods, watches, audio and eyewear, made in small runs and repaired for life. Flagship and workshop at 41 Crosby Street, New York.</p>
+        <div class="social">
+          <a href="#" aria-label="Halden on Instagram"><svg class="icon" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
+          <a href="#" aria-label="Halden on Pinterest"><svg class="icon" aria-hidden="true"><use href="#i-pinterest"></use></svg></a>
+          <a href="#" aria-label="Halden on YouTube"><svg class="icon" aria-hidden="true"><use href="#i-youtube"></use></svg></a>
+        </div>
+      </div>
+      <nav class="footer-col" aria-label="Shop">
+        <p class="footer-heading">Shop</p>
+        <a href="ecommerce.html#new">New arrivals</a>
+        <a href="ecommerce.html#bestsellers">Bestsellers</a>
+        <a href="#">Bags</a>
+        <a href="#">Watches</a>
+        <a href="#">Gift cards</a>
+      </nav>
+      <nav class="footer-col" aria-label="Help">
+        <p class="footer-heading">Help</p>
+        <a href="#">Shipping</a>
+        <a href="#">Returns &amp; exchanges</a>
+        <a href="#">Warranty &amp; repairs</a>
+        <a href="#">Order status</a>
+        <a href="#">Contact us</a>
+      </nav>
+      <nav class="footer-col" aria-label="Company">
+        <p class="footer-heading">Halden</p>
+        <a href="#">Our workshops</a>
+        <a href="ecommerce.html#journal">Journal</a>
+        <a href="#">Stores</a>
+        <a href="#">Careers</a>
+        <a href="#">Sustainability report</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Halden Goods Co.</span>
+      <span class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></span>
+      <ul class="pay-marks push" aria-label="Payment methods we accept">
+        <li class="pm pm-visa">VISA</li>
+        <li class="pm pm-mc" aria-label="Mastercard"><i></i><i></i></li>
+        <li class="pm pm-amex">AMEX</li>
+        <li class="pm">Apple Pay</li>
+        <li class="pm pm-paypal">PayPal</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== Sticky buy bar (phones only) ===== -->
+<div class="buybar" data-buybar role="region" aria-label="Quick add to bag">
+  <img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=88&h=88&q=70&auto=format&fit=crop" alt="" width="44" height="44" loading="lazy" decoding="async">
+  <div class="buybar-text">
+    <span class="fw-semi text-sm">The Field Pack</span>
+    <span class="text-xs text-muted"><span data-bar-variant>Cognac · 22 L</span> · <span class="nums">$396</span></span>
+  </div>
+  <button class="btn btn-primary" type="button" data-add>Add to bag</button>
+</div>
+
+<!-- ===== Mobile navigation (shared) ===== -->
+<dialog class="drawer drawer-end" id="site-nav" aria-labelledby="site-nav-title">
+  <div class="drawer-header">
+    <h2 class="drawer-title" id="site-nav-title">Menu</h2>
+    <button class="btn btn-icon btn-sm btn-ghost push" type="button" data-drawer-close aria-label="Close menu">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x"></use></svg>
+    </button>
+  </div>
+  <div class="drawer-body">
+    <form class="search" role="search" action="#">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search"></use></svg>
+      <input class="input" type="search" name="q" placeholder="Search Halden" aria-label="Search the shop">
+    </form>
+    <nav class="sidebar" aria-label="Mobile" style="padding:0">
+      <p class="sidebar-group">Shop</p>
+      <a class="sidebar-link" href="ecommerce.html#new">New in</a>
+      <a class="sidebar-link" href="#" aria-current="page">Bags</a>
+      <a class="sidebar-link" href="#">Watches</a>
+      <a class="sidebar-link" href="#">Eyewear</a>
+      <a class="sidebar-link" href="#">Footwear</a>
+      <a class="sidebar-link" href="#">Audio</a>
+      <a class="sidebar-link" href="#">Small leather goods</a>
+      <p class="sidebar-group">Halden</p>
+      <a class="sidebar-link" href="ecommerce.html#journal">Journal</a>
+      <a class="sidebar-link" href="#">Stores</a>
+      <a class="sidebar-link" href="#">Repairs</a>
+    </nav>
+  </div>
+  <div class="drawer-footer">
+    <a class="btn" href="#">Sign in</a>
+    <a class="btn btn-primary" href="checkout.html">Bag (3)</a>
+  </div>
+</dialog>
+
+<script>
+  /* Gallery, variant pickers, add to bag, buy bar, review chips and helpful
+     buttons. All of it is progressive: without this script the form still
+     posts, the gallery still swipes and every review shows. */
+  (() => {
+    const $ = (s, r = document) => r.querySelector(s);
+    const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+    // Thumbnails drive the carousel (deck-extras.js puts go() on the element).
+    const gallery = $('[data-gallery]');
+    const thumbs = $$('[data-thumb]');
+    const go = (i) => {
+      if (gallery.carousel) return gallery.carousel.go(i);
+      $$('.carousel-slide', gallery)[i]?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+    };
+    thumbs.forEach((t, i) => t.addEventListener('click', () => go(i)));
+    gallery.addEventListener('deck:slide', (e) => {
+      thumbs.forEach((t, i) => t.setAttribute('aria-current', String(i === e.detail.index)));
+    });
+
+    // Variant names follow the radios; colour jumps to its photo.
+    const form = $('[data-buy-form]');
+    const variant = () => `${form.colour.value} · ${form.size.value}`;
+    const sync = () => {
+      $('[data-colour-name]').textContent = form.colour.value;
+      $('[data-size-name]').textContent = form.size.value;
+      $('[data-bar-variant]').textContent = variant();
+    };
+    form.addEventListener('change', (e) => {
+      if (e.target.name === 'colour' && e.target.dataset.slide) go(Number(e.target.dataset.slide));
+      if (e.target.name === 'size') $('[data-size-note]').textContent = e.target.dataset.note || '';
+      sync();
+    });
+
+    // Add to bag: a toast and a bumped badge instead of leaving the page.
+    const badge = $('[data-bag-count]');
+    const add = (e) => {
+      e.preventDefault();
+      const qty = Number(form.qty.value) || 1;
+      badge.textContent = Number(badge.textContent) + qty;
+      $('[data-bag-link]').setAttribute('aria-label', `Bag, ${badge.textContent} items`);
+      window.Deck?.toast?.({ kind: 'good', title: 'Added to your bag', text: `The Field Pack, ${variant()}${qty > 1 ? ` × ${qty}` : ''}` });
+    };
+    form.addEventListener('submit', add);
+    $$('.buybar [data-add]').forEach((b) => b.addEventListener('click', add));
+
+    // The buy bar only comes up once the real Add button has scrolled away.
+    // A sentinel runs from the top of the page to the bottom of that button:
+    // while any of it is on screen, the bar stays tucked. Watching the button
+    // itself would miss a jump straight back to the top, which never crosses it.
+    const bar = $('[data-buybar]');
+    const main = $('[data-add-main]');
+    if ('IntersectionObserver' in window) {
+      const sentinel = document.createElement('div');
+      sentinel.setAttribute('aria-hidden', 'true');
+      sentinel.style.cssText = 'position:absolute;inset-block-start:0;inset-inline-start:0;inline-size:1px;visibility:hidden;pointer-events:none';
+      const size = () => { sentinel.style.blockSize = Math.round(main.getBoundingClientRect().bottom + scrollY) + 'px'; };
+      document.body.prepend(sentinel);
+      size();
+      addEventListener('resize', size);
+      new IntersectionObserver(([en]) => bar.classList.toggle('is-tucked', en.isIntersecting)).observe(sentinel);
+    }
+
+    // Review filter chips and helpful votes.
+    const chips = $('[data-review-filter]');
+    chips.addEventListener('click', (e) => {
+      const chip = e.target.closest('[data-tag]');
+      if (!chip) return;
+      $$('[data-tag]', chips).forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      const tag = chip.dataset.tag;
+      $$('.review-item').forEach((r) => { r.hidden = tag !== 'all' && !r.dataset.tags.split(' ').includes(tag); });
+    });
+    document.addEventListener('click', (e) => {
+      const h = e.target.closest('.helpful');
+      if (h) {
+        const on = h.getAttribute('aria-pressed') !== 'true';
+        h.setAttribute('aria-pressed', String(on));
+        h.querySelector('.nums').textContent = Number(h.dataset.count) + (on ? 1 : 0);
+      }
+      const w = e.target.closest('.product-wish, .buy-wish');
+      if (w) w.setAttribute('aria-pressed', String(w.getAttribute('aria-pressed') !== 'true'));
+    });
+  })();
+</script>
+</body>
+</html>

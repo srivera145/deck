@@ -19,7 +19,7 @@ function demo_tiles(int $n = 8): string
     $out = '';
     for ($i = 0; $i < $n; $i++) {
         $out .= '  <div class="card" style="inline-size:12rem">' . "\n"
-            . '    <div class="card-body stack-1">' . "\n"
+            . '    <div class="card-body">' . "\n"
             . '      <h3 class="card-title">' . $names[$i % count($names)] . '</h3>' . "\n"
             . '      <p class="text-muted text-sm">' . (3 + $i) . ' bookings</p>' . "\n"
             . '    </div>' . "\n"
@@ -37,7 +37,7 @@ function demo_tiles(int $n = 8): string
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Scroller</h1>
   <p class="lede">
     <code>.scroller</code> is the third answer to "what happens when a row runs out of
@@ -48,7 +48,7 @@ function demo_tiles(int $n = 8): string
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it when there are more items than fit and they are all peers: a row of date
@@ -62,10 +62,10 @@ function demo_tiles(int $n = 8): string
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="how">What the eight declarations do</h2>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="h-flex">A flex row whose items do not shrink</h3>
     <p>
       <code>.scroller &gt; *</code> gets <code>flex: 0 0 auto</code>. Without it the
@@ -75,7 +75,7 @@ function demo_tiles(int $n = 8): string
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="h-snap">Snapping, proximity rather than mandatory</h3>
     <p>
       <code>scroll-snap-type: x proximity</code> with
@@ -87,7 +87,7 @@ function demo_tiles(int $n = 8): string
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="h-contain">The page does not scroll with it</h3>
     <p>
       <code>overscroll-behavior-inline: contain</code> stops a horizontal scroll that
@@ -97,7 +97,7 @@ function demo_tiles(int $n = 8): string
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="h-bleed">The bleed</h3>
     <pre class="dx-code"><code><?= e('margin-inline: calc(var(--space-gutter) * -1);
 padding-inline: var(--space-gutter);') ?></code></pre>
@@ -115,7 +115,7 @@ padding-inline: var(--space-gutter);') ?></code></pre>
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="h-scrollbar">The hidden scrollbar</h3>
     <p>
       <code>scrollbar-width: none</code> and a
@@ -127,7 +127,7 @@ padding-inline: var(--space-gutter);') ?></code></pre>
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="gap">Gap</h2>
   <p>
     Same <code>--gap</code> as the other primitives, defaulting to
@@ -145,7 +145,7 @@ padding-inline: var(--space-gutter);') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="chips">A row of chips</h2>
   <p>
     The other common use. Here the items are small, so the sliver at the edge is less
@@ -173,7 +173,7 @@ padding-inline: var(--space-gutter);') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     <code>.scroller</code> is a single class rather than a component root — the
@@ -185,14 +185,14 @@ padding-inline: var(--space-gutter);') ?></code></pre>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--space-2', '--space-3', '--space-gutter']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The hidden scrollbar is a real cost.</strong> A scrollbar is the only
       persistent, universal indication that a region scrolls. Hiding it means the
@@ -236,7 +236,7 @@ padding-inline: var(--space-gutter);') ?></code></pre>
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     <code>margin-inline</code>, <code>padding-inline</code> and
@@ -264,7 +264,7 @@ padding-inline: var(--space-gutter);') ?></code></pre>
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing in <code>.scroller</code> animates. Scroll snapping is a positioning rule
@@ -280,7 +280,7 @@ padding-inline: var(--space-gutter);') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     Deck's print stylesheet has no rule for <code>.scroller</code>, which means a printed
@@ -292,7 +292,7 @@ padding-inline: var(--space-gutter);') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Give the scrollbar back */
@@ -311,9 +311,9 @@ padding-inline: var(--space-gutter);') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not when the reader must see everything.</strong> Horizontal scrolling
       hides content behind a gesture many readers never make. If all the items matter

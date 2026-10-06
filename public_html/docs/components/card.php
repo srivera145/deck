@@ -41,7 +41,7 @@ $surfaces = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Card</h1>
   <p class="lede">
     <code>.card</code> is a surface: a background, a one-pixel border, a
@@ -53,7 +53,7 @@ $surfaces = [
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use a card when a group of content is a <em>thing</em> — one order, one product, one
@@ -79,14 +79,14 @@ $surfaces = [
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="regions">Header, body, footer</h2>
   <p>
     The three regions are the reason the card itself has no padding. Each one sets its
     own, and the borders between them come from the regions rather than from the card,
     so a card with only a body has no stray dividing lines.
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <code>.card-header</code> and <code>.card-footer</code> are both
       <code>flex</code> rows with <code>align-items: center</code>, so a title and a
@@ -155,14 +155,14 @@ $surfaces = [
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="surfaces">Surface variants</h2>
   <p>
     Four looks. Each changes the background, border and shadow and nothing else, so a
     variant never moves anything.
   </p>
   <?php foreach ($surfaces as [$cls, $label, $blurb]): ?>
-    <div class="stack-2">
+    <div class="stack stack-2">
       <h3 id="s-<?= e($cls) ?>"><?= e($label) ?></h3>
       <p class="text-muted"><?= e($blurb) ?></p>
       <?php
@@ -182,7 +182,7 @@ $surfaces = [
   <?php endforeach; ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="media">Media</h2>
   <p>
     <code>.card</code> sets <code>overflow: clip</code>, so an image inside it is
@@ -213,7 +213,7 @@ $surfaces = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="link">The whole card as a link</h2>
   <p>
     <code>.card-link</code> makes the card react to hover, and a
@@ -241,7 +241,7 @@ $surfaces = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="cq">Responds to its own width</h2>
   <p>
     This is the part of the card worth learning. <code>.card.cq</code> turns the card
@@ -279,7 +279,7 @@ $surfaces = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     Generated from the stylesheet source by <code>tools/docs/extract.mjs</code>. If a
@@ -289,7 +289,7 @@ $surfaces = [
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     The card reads global tokens directly rather than defining local
@@ -300,9 +300,9 @@ $surfaces = [
   <?php docs_token_table(['--surface', '--surface-2', '--line', '--line-strong', '--r-md', '--shadow-1', '--shadow-3', '--brand-200', '--brand-soft', '--text-md', '--space-5']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>A card is not a landmark.</strong> <code>.card</code> is a plain box with
       no implicit role. Use <code>&lt;article&gt;</code> when the contents stand alone,
@@ -341,7 +341,7 @@ $surfaces = [
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The card is written in logical properties throughout:
@@ -367,7 +367,7 @@ $surfaces = [
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     <code>.card-link</code> transitions <code>box-shadow</code> and
@@ -383,7 +383,7 @@ $surfaces = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> gives cards a plain <code>#bbb</code> hairline, drops
@@ -395,7 +395,7 @@ $surfaces = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <p>
     Deck reserves four empty <code>app.*</code> layers. A rule in
@@ -418,9 +418,9 @@ $surfaces = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a single block on a page.</strong> One card on an otherwise empty
       page is a border around the content. Use <code>.panel</code>, which goes edge to

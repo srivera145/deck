@@ -1,0 +1,1289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Halden · Deck template</title>
+<meta name="description" content="Halden, a storefront home page for a premium lifestyle-goods brand: mega menu, editorial split hero, category tiles, product grid with sale prices and ratings, bestsellers carousel, bento promos, reviews, journal and newsletter.">
+<meta name="theme-color" content="#a4503a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23a4503a'/%3E%3Cpath d='M9 26V14a7 7 0 0 1 14 0v12M13.5 26v-9a2.5 2.5 0 0 1 5 0v9' fill='none' stroke='%23fbeee8' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+<script src="../assets/deck/deck-extras.js" defer></script>   <!-- mega menu, mobile drawer, carousel and the banner dismiss -->
+
+<style>
+@layer app.pages {
+
+  /* ===== Brand =====
+     Every colour on the page comes from these. 32 is fired clay; the neutral
+     hue is pulled warm and nearly grey, so the page reads as paper rather
+     than screen. The same block opens product.html and checkout.html. */
+  :root {
+    --hue-brand: 32;
+    --chroma-brand: .125;
+    --hue-accent: 70;
+    --hue-neutral: 60;
+    --chroma-neutral: .007;
+    --font-display: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --hdr-h: 4.25rem;
+    /* Text laid over a photo stays light in both themes. */
+    --on-photo: oklch(98% .005 var(--hue-neutral));
+  }
+
+  /* A serif at regular weight is the editorial voice. Palatino has no 640,
+     so asking for Deck's heading weight would jump straight to bold. */
+  :is(h1, h2, .display, .serif) { font-weight: 500; letter-spacing: -.018em; }
+  .display { font-size: clamp(2.7rem, 1.5rem + 4.6vw, 5.1rem); line-height: 1.02; text-wrap: balance; }
+  .display em, h2 em { font-style: italic; color: var(--brand); }
+  .lede { text-wrap: pretty; }
+  .eyebrow {
+    font-size: var(--text-xs);
+    font-weight: 640;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+  .section-head {
+    display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between;
+    gap: var(--space-4) var(--space-8);
+    margin-block-end: var(--space-8);
+  }
+  .section-head h2 { font-size: clamp(1.9rem, 1.35rem + 1.9vw, 2.8rem); max-inline-size: 20ch; text-wrap: balance; }
+  .link-arrow { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: 560; font-size: var(--text-sm); color: var(--text); text-decoration: none; }
+  .link-arrow:hover { color: var(--brand); }
+  .link-arrow:hover .icon { translate: 3px 0; }
+  .link-arrow .icon { transition: translate var(--dur-2) var(--ease-spring); }
+
+  /* ===== Announcement =====
+     Deck's banner is sticky; here it scrolls away so it never stacks on top
+     of the sticky header. Three columns keep the message centred with the
+     close button at the end. */
+  .banner { position: relative; display: grid; grid-template-columns: var(--tap) 1fr var(--tap); padding-block: var(--space-2); }
+  .banner-text { grid-column: 2; text-align: center; font-size: var(--text-xs); letter-spacing: .02em; }
+  .banner-text a { color: inherit; font-weight: 600; }
+  .banner .banner-close { --btn-text: currentColor; justify-self: end; }
+  .banner .banner-close:hover { background: oklch(100% 0 0 / .1); }
+
+  /* ===== Header ===== */
+  .site-header {
+    position: sticky; inset-block-start: 0; z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid var(--line);
+  }
+  .site-header .navbar { border: 0; min-block-size: var(--hdr-h); padding-block: 0; gap: var(--space-2); }
+  .logo {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: 1.2rem; letter-spacing: .2em; text-transform: uppercase;
+    margin-inline-end: var(--space-4);
+  }
+  .logo-mark { inline-size: 1.35em; block-size: 1.35em; color: var(--brand); stroke-width: 2; }
+  .nav-trigger { display: inline-flex; align-items: center; gap: var(--space-1); background: none; cursor: pointer; }
+  .nav-trigger:popover-open, .nav-trigger[aria-expanded="true"] { color: var(--text); }
+  .header-search { inline-size: 15rem; display: none; }
+  .header-search .input { min-block-size: 38px; background: var(--surface-2); box-shadow: none; }
+  .menu-btn { display: inline-flex; }
+  .account-btn { display: none; }
+  @media (min-width: 48rem) {
+    .menu-btn { display: none; }
+    .account-btn { display: inline-flex; }
+  }
+  @media (min-width: 72rem) {
+    .header-search { display: flex; }
+    .search-btn { display: none; }
+  }
+  .bag-count { min-inline-size: 17px; block-size: 17px; line-height: 17px; }
+  /* One row on a phone: the tools never wrap under the logo. */
+  .header-tools { flex-wrap: nowrap; --gap: 0; }
+  @media (min-width: 48rem) { .header-tools { --gap: var(--space-1); } }
+
+  /* ===== Mega menu =====
+     Three link columns and a feature. The panel is a popover, so Escape,
+     outside-click and the top layer are the browser's; deck-extras.js adds
+     hover intent and positions it under the trigger. */
+  .shop-mega { inline-size: min(62rem, calc(100vw - var(--space-8))); padding: var(--space-6); }
+  /* Deck centres a mega panel on its trigger. A 62rem panel centred on a
+     button near the logo runs off the left edge, so anchor it to the whole
+     nav bar instead. Without anchor positioning, deck-extras.js places it. */
+  @supports (anchor-name: --a) {
+    .site-header .navbar { anchor-name: --halden-nav; }
+    .shop-mega { position-anchor: --halden-nav; position-area: block-end; justify-self: anchor-center; position-try-fallbacks: none; }
+  }
+  .shop-mega .mega-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.3fr); gap: var(--space-6); }
+  .shop-mega .mega-heading { text-transform: uppercase; letter-spacing: .14em; font-size: var(--text-2xs); }
+  .mega-item-text { display: flex; flex-direction: column; gap: 2px; }
+  .shop-mega .mega-feature {
+    padding: 0; overflow: hidden; display: flex; flex-direction: column;
+    background: var(--bg-sunken); color: var(--text); text-decoration: none;
+    border-radius: var(--r-md);
+  }
+  .mega-feature img { aspect-ratio: 16 / 10; inline-size: 100%; object-fit: cover; background: var(--bg-sunken); }
+  .mega-feature-copy { padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-1); }
+
+  /* ===== Hero ===== */
+  .hero {
+    display: grid; gap: var(--space-10); align-items: center;
+    padding-block: var(--space-10) var(--space-section);
+  }
+  .hero-copy .lede { max-inline-size: 44ch; }
+  .hero-proof { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); font-size: var(--text-sm); color: var(--text-muted); }
+  .hero-proof strong { color: var(--text); }
+  .hero-proof .sep { inline-size: 1px; block-size: 1.1em; background: var(--line-strong); }
+  @media (max-width: 30rem) {
+    .hero-proof .sep { display: none; }
+    .hero-ctas > .btn { flex: 1 1 100%; }
+  }
+  .hero-media { position: relative; isolation: isolate; }
+  .hero-photo {
+    position: relative; margin: 0; aspect-ratio: 4 / 5;
+    border-radius: var(--r-lg); overflow: hidden; background: var(--bg-sunken);
+    box-shadow: var(--shadow-3);
+  }
+  .hero-photo img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  /* A hotspot that names the product in the photo. */
+  .hero-tag {
+    position: absolute; inset-block-start: var(--space-4); inset-inline-start: var(--space-4);
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--r-full);
+    background: color-mix(in oklab, var(--surface) 86%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    color: var(--text); font-size: var(--text-xs); font-weight: 600; text-decoration: none;
+    box-shadow: var(--shadow-2);
+  }
+  .hero-tag::before { content: ""; inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 0 3px var(--brand-soft); }
+  .hero-float { position: relative; inline-size: min(19rem, 86%); margin: calc(var(--space-12) * -1) var(--space-4) 0 auto; }
+  .hero-float img { inline-size: 64px; block-size: 64px; border-radius: var(--r-sm); object-fit: cover; background: var(--bg-sunken); flex: 0 0 auto; }
+  @media (min-width: 56rem) {
+    .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr); gap: var(--space-16); padding-block-start: var(--space-12); }
+    /* The clay slab behind the photo: depth without another image. */
+    .hero-media::before {
+      content: ""; position: absolute; z-index: -1;
+      inset: 10% -5% -5% 14%;
+      border-radius: var(--r-lg);
+      background: light-dark(var(--brand-100), var(--brand-soft));
+    }
+    .hero-float { position: absolute; margin: 0; inset-inline-start: calc(var(--space-10) * -1); inset-block-end: var(--space-12); inline-size: 19rem; }
+  }
+
+  /* ===== Category tiles ===== */
+  .cats { display: grid; gap: var(--space-3); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 48rem) { .cats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); } }
+  @media (min-width: 72rem) { .cats { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+  .cat {
+    position: relative; isolation: isolate; display: block; overflow: hidden;
+    aspect-ratio: 4 / 5; border-radius: var(--r-md);
+    background: var(--bg-sunken); color: var(--on-photo); text-decoration: none;
+  }
+  @media (min-width: 72rem) { .cat { aspect-ratio: 3 / 4; } }
+  .cat img { position: absolute; inset: 0; z-index: -2; inline-size: 100%; block-size: 100%; object-fit: cover; transition: scale .7s var(--ease-out); }
+  /* .g-scrim paints under its children, so a photo child would cover it.
+     This one sits between the photo and the label instead. */
+  .cat::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--scrim); opacity: .9; }
+  .cat:hover img { scale: 1.05; }
+  .cat:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+  .cat-label { position: absolute; inset-inline: var(--space-4); inset-block-end: var(--space-4); display: flex; align-items: end; justify-content: space-between; gap: var(--space-2); }
+  .cat-name { font-family: var(--font-display); font-size: var(--text-xl); line-height: 1.1; }
+  .cat-count { display: block; font-size: var(--text-xs); opacity: .86; margin-block-start: 2px; }
+
+  /* ===== Product card =====
+     Borderless and photo-led. The name link is stretched over the whole card;
+     the wishlist and quick-add buttons sit above that layer so they stay
+     separately clickable. */
+  .products { display: grid; gap: var(--space-8) var(--space-3); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 48rem) { .products { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-10) var(--space-5); } }
+  @media (min-width: 64rem) { .products { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .product { position: relative; display: flex; flex-direction: column; gap: var(--space-3); min-inline-size: 0; }
+  .product[hidden] { display: none; }
+  .product-media { position: relative; aspect-ratio: 4 / 5; border-radius: var(--r-md); overflow: hidden; background: var(--bg-sunken); }
+  .product-media img {
+    position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover;
+    transition: opacity var(--dur-3) var(--ease-out), scale .7s var(--ease-out);
+  }
+  .product-media .img-alt { opacity: 0; }
+  @media (hover: hover) {
+    .product:hover .img-alt { opacity: 1; }
+    .product:hover .product-media img { scale: 1.035; }
+  }
+  .product-flags { position: absolute; z-index: 2; inset-block-start: var(--space-3); inset-inline-start: var(--space-3); display: flex; gap: var(--space-1); }
+  .product-flags .badge:not(.badge-solid) { background: var(--surface); }
+  .product-wish {
+    position: absolute; z-index: 2; inset-block-start: var(--space-2); inset-inline-end: var(--space-2);
+    --btn-bg: color-mix(in oklab, var(--surface) 84%, transparent);
+    --btn-border: transparent; --btn-shadow: var(--shadow-1);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .product-wish[aria-pressed="true"] { --btn-text: var(--brand); }
+  .product-wish[aria-pressed="true"] .icon { fill: currentColor; }
+  .product-quick {
+    position: absolute; z-index: 2; inset-inline: var(--space-3); inset-block-end: var(--space-3);
+    opacity: 0; translate: 0 8px;
+    transition: opacity var(--dur-2) var(--ease-out), translate var(--dur-2) var(--ease-out);
+  }
+  @media (hover: hover) { .product:is(:hover, :focus-within) .product-quick { opacity: 1; translate: 0; } }
+  @media (hover: none) { .product-quick { display: none; } }
+  .product-body { display: flex; flex-direction: column; gap: var(--space-1); }
+  .product-name { font-family: var(--font-sans); font-size: var(--text-base); font-weight: 600; letter-spacing: -.01em; line-height: 1.3; }
+  .product-name a { color: inherit; text-decoration: none; }
+  .product-name a::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: var(--r-md); }
+  .product-name a:focus-visible { outline: none; }
+  .product-name a:focus-visible::after { outline: 2px solid var(--focus); outline-offset: 4px; }
+  .product-meta { font-size: var(--text-sm); color: var(--text-muted); }
+  .product-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-1) var(--space-3); margin-block-start: var(--space-1); }
+  .price { display: inline-flex; align-items: baseline; gap: var(--space-2); font-weight: 620; font-variant-numeric: tabular-nums; }
+  .price-sale { color: var(--brand); }
+  .price s { color: var(--text-faint); font-weight: 400; font-size: var(--text-sm); }
+  .star-mini { display: inline-flex; align-items: center; gap: 3px; font-size: var(--text-xs); color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .star-mini .icon { inline-size: 13px; block-size: 13px; fill: currentColor; stroke: none; color: var(--text); }
+  .star-mini b { color: var(--text); font-weight: 600; }
+  /* Product colours, not UI colours: a cognac strap is cognac in both themes. */
+  .swatches { display: inline-flex; align-items: center; gap: 5px; font-size: var(--text-xs); color: var(--text-muted); }
+  .sw { inline-size: 12px; block-size: 12px; border-radius: 50%; background: var(--sw); box-shadow: inset 0 0 0 1px oklch(0% 0 0 / .16); }
+  .swatches .sw:last-of-type { margin-inline-end: var(--space-1); }
+
+  /* ===== Bestsellers carousel =====
+     .carousel-multi shows three per view; a product row wants four. */
+  @media (min-width: 64rem) {
+    .best .carousel-slide { flex-basis: calc((100% - var(--space-4) * 3) / 4); }
+  }
+  .best .carousel-slide { scroll-snap-align: start; }
+  .best .carousel-track { padding-block-end: var(--space-1); }
+  .best .product-media { aspect-ratio: 1; }
+
+  /* ===== Value strip ===== */
+  .values { border-block: 1px solid var(--line); background: var(--surface); }
+  .values-grid { display: grid; gap: var(--space-6) var(--space-4); grid-template-columns: repeat(2, minmax(0, 1fr)); padding-block: var(--space-8); }
+  @media (min-width: 64rem) { .values-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); padding-block: var(--space-10); } }
+  .value { display: flex; gap: var(--space-3); align-items: flex-start; }
+  .value p { font-size: var(--text-sm); color: var(--text-muted); text-wrap: pretty; }
+  .value strong { display: block; color: var(--text); font-size: var(--text-base); font-weight: 600; margin-block-end: 2px; }
+  @media (max-width: 30rem) { .value { flex-direction: column; } }
+
+  /* ===== Bento ===== */
+  .bento { display: grid; gap: var(--space-4); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 48rem) { .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); } .b-lead { grid-column: span 2; } }
+  @media (min-width: 64rem) {
+    .bento { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(15rem, auto); }
+    .b-lead { grid-column: span 2; grid-row: span 2; }
+    .b-wide { grid-column: span 2; }
+  }
+  .tile {
+    position: relative; isolation: isolate; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: flex-end; gap: var(--space-3);
+    min-block-size: 15rem; padding: var(--space-6);
+    border-radius: var(--r-lg); text-decoration: none; color: inherit;
+  }
+  .tile:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+  /* color: inherit, because Deck's h3 sets --text, which is dark ink on a
+     photo or a dark panel. */
+  .tile-title { color: inherit; font-family: var(--font-display); font-weight: 500; font-size: var(--text-2xl); line-height: 1.12; letter-spacing: -.015em; text-wrap: balance; max-inline-size: 22ch; }
+  .tile p { font-size: var(--text-sm); max-inline-size: 42ch; text-wrap: pretty; }
+  .tile-photo { color: var(--on-photo); background: var(--bg-sunken); min-block-size: 20rem; }
+  .tile-photo img { position: absolute; inset: 0; z-index: -2; inline-size: 100%; block-size: 100%; object-fit: cover; transition: scale .8s var(--ease-out); }
+  /* The shared --scrim fades out by 78%, which is too soon for three lines of
+     copy over a pale stone; this one holds its darkness higher. */
+  .tile-photo::after {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(to top,
+      oklch(14% .02 var(--hue-neutral) / .88) 0%,
+      oklch(14% .02 var(--hue-neutral) / .66) 35%,
+      oklch(14% .02 var(--hue-neutral) / .18) 70%,
+      transparent 90%);
+  }
+  .tile-photo:hover img { scale: 1.04; }
+  .tile-photo .eyebrow { color: var(--on-photo); opacity: .85; }
+  .tile-photo .btn { align-self: flex-start; --btn-bg: var(--on-photo); --btn-text: oklch(20% .02 var(--hue-neutral)); --btn-border: transparent; }
+  /* Always-dark panel: the ink is pinned, so it stays a dark card in light mode
+     and gets a hairline in dark mode where it would otherwise disappear. */
+  .tile-dark {
+    background: oklch(21% .012 var(--hue-neutral));
+    background-image: radial-gradient(120% 90% at 100% 0%, oklch(38% .07 var(--hue-brand) / .55), transparent 60%);
+    color: oklch(94% .006 var(--hue-neutral));
+    border: 1px solid oklch(100% 0 0 / .06);
+    justify-content: space-between;
+  }
+  .tile-dark p { color: oklch(80% .01 var(--hue-neutral)); }
+  .tile-dark a { color: oklch(86% .07 var(--hue-brand)); font-weight: 600; }
+  .tile-dark .icon-tile { background: oklch(100% 0 0 / .08); color: oklch(86% .07 var(--hue-brand)); }
+  .tile-brand { justify-content: space-between; color: var(--text-on-brand); }
+  .tile-brand p { opacity: .92; }
+  .tile-brand .tile-mark { font-family: var(--font-display); font-size: 3.4rem; line-height: 1; font-style: italic; opacity: .9; }
+
+  /* ===== Press and reviews ===== */
+  .press { padding-block-end: var(--space-10); border-block-end: 1px solid var(--line); margin-block-end: var(--space-2); }
+  .press-name { font-family: var(--font-display); font-size: var(--text-xl); font-style: italic; color: var(--text-muted); white-space: nowrap; }
+  .press-name.caps { font-style: normal; text-transform: uppercase; letter-spacing: .18em; font-size: var(--text-md); }
+  /* Deck only animates .marquee when motion is allowed. With reduced motion
+     the names become a still, centred row and the duplicate track goes. */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: var(--space-4) var(--space-8); }
+    .marquee-track[aria-hidden="true"] { display: none; }
+  }
+  .reviews-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-6); }
+  .score { font-family: var(--font-display); font-size: 3.5rem; line-height: 1; }
+  .reviews-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); }
+  .review { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-6); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); }
+  .review blockquote { margin: 0; padding: 0; border: 0; font-family: var(--font-display); font-size: var(--text-lg); line-height: 1.45; color: var(--text); text-wrap: pretty; }
+  .review footer { margin-block-start: auto; display: flex; align-items: center; gap: var(--space-3); padding-block-start: var(--space-4); border-block-start: 1px solid var(--line); }
+  .rating-static.ink > .rating-fill { color: var(--text); }
+  .rating-static.ink { color: var(--line-strong); }
+
+  /* ===== Journal ===== */
+  .journal-grid { display: grid; gap: var(--space-8) var(--space-5); grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr)); }
+  .post { position: relative; display: flex; flex-direction: column; gap: var(--space-3); }
+  .post-media { aspect-ratio: 3 / 2; border-radius: var(--r-md); overflow: hidden; background: var(--bg-sunken); }
+  .post-media img { inline-size: 100%; block-size: 100%; object-fit: cover; transition: scale .8s var(--ease-out); }
+  .post:hover .post-media img { scale: 1.04; }
+  .post h3 { font-size: var(--text-xl); font-weight: 500; text-wrap: balance; }
+  .post h3 a { color: inherit; text-decoration: none; }
+  .post h3 a::after { content: ""; position: absolute; inset: 0; }
+  .post:hover h3 a { color: var(--brand); }
+  .post-meta { font-size: var(--text-xs); color: var(--text-muted); display: flex; gap: var(--space-2); }
+
+  /* ===== Newsletter ===== */
+  .newsletter {
+    display: grid; gap: var(--space-6); align-items: center;
+    padding: clamp(var(--space-6), 4vw, var(--space-16));
+    border-radius: var(--r-lg);
+    background: var(--brand-soft);
+    border: 1px solid color-mix(in oklab, var(--brand-400) 22%, transparent);
+  }
+  @media (min-width: 56rem) { .newsletter { grid-template-columns: 1.1fr 1fr; gap: var(--space-12); } }
+  .newsletter h2 { font-size: clamp(1.9rem, 1.3rem + 2vw, 2.8rem); text-wrap: balance; }
+  .newsletter .input-group { background: var(--surface); }
+  .newsletter .input-group .btn { flex: 0 0 auto; }
+
+  /* ===== Footer ===== */
+  .site-footer { background: var(--surface); margin-block-start: var(--space-section); }
+  .site-footer .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-footer .footer-brand { grid-column: 1 / -1; max-inline-size: 34ch; }
+  @media (min-width: 56rem) {
+    .site-footer .footer-grid { grid-template-columns: 1.6fr repeat(3, minmax(0, 1fr)); }
+    .site-footer .footer-brand { grid-column: auto; }
+  }
+  .site-footer .logo { color: var(--text); }
+  .site-footer .footer-heading { text-transform: uppercase; letter-spacing: .14em; font-size: var(--text-2xs); }
+  .social { display: flex; gap: var(--space-1); margin-block-start: var(--space-2); }
+  .social a { inline-size: 36px; block-size: 36px; display: grid; place-items: center; border-radius: var(--r-full); border: 1px solid var(--line); color: var(--text-muted); }
+  .social a:hover { color: var(--brand); border-color: var(--brand); text-decoration: none; }
+  .footer-bottom .push { margin-inline-start: auto; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+  /* Generic payment marks drawn in CSS. Swap for your processor's official
+     artwork, which comes with its own usage rules. */
+  .pay-marks { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; padding: 0; margin: 0; }
+  .pm {
+    display: inline-flex; align-items: center; justify-content: center; gap: 3px;
+    min-inline-size: 46px; block-size: 28px; padding-inline: var(--space-2);
+    border: 1px solid var(--line-strong); border-radius: 5px; background: var(--surface);
+    color: var(--text); font-size: 10px; font-weight: 800; letter-spacing: .02em; line-height: 1;
+  }
+  .pm-visa { font-style: italic; font-size: 12px; letter-spacing: .04em; }
+  .pm-mc i { inline-size: 12px; block-size: 12px; border-radius: 50%; background: oklch(60% .2 28); }
+  .pm-mc i + i { margin-inline-start: -6px; background: oklch(80% .16 75 / .9); }
+  .pm-amex { font-size: 9px; letter-spacing: .08em; }
+  .pm-paypal { font-style: italic; }
+
+  /* ===== Drawer ===== */
+  /* Deck's .drawer sets display:flex, which beats the browser's own rule that hides a closed <dialog>, so a closed drawer would sit off-screen with its links still in the tab order. The transition on display is allow-discrete, so the slide-out still plays. */
+  .drawer:not([open]) { display: none; }
+  .drawer .sidebar-group { padding-inline: 0; text-transform: uppercase; letter-spacing: .14em; font-size: var(--text-2xs); }
+  .drawer .sidebar-link { padding-inline: var(--space-2); font-size: var(--text-base); }
+
+  .back-to-top .icon { rotate: -90deg; }
+}
+</style>
+</head>
+<body>
+
+<span id="top"></span>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Photos are hotlinked from Unsplash for the preview. Replace them with your own. -->
+
+<!-- Icons the Deck sprite does not have. Stroke-based, 24x24, same weight as the sprite. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5.5 8h13l-1 12.5h-11L5.5 8ZM9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-halden" viewBox="0 0 24 24"><path d="M5 21V10a7 7 0 0 1 14 0v11M9.5 21v-8a2.5 2.5 0 0 1 5 0v8" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><path d="M4 11h16v10H4zM3 7h18v4H3zM12 7v14M12 7S10.5 3 8 3.5 7 7 12 7Zm0 0s1.5-4 4-3.5S17 7 12 7Z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><path d="M17.2 6.8h.01"/></g></symbol>
+  <symbol id="i-pinterest" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m10.5 20.5 2-8.5M9.2 14.2C7.8 13.4 7.5 12 7.8 10.6 8.4 8 11 6.8 13.4 7.2c2.6.5 3.7 2.8 3 5.2-.5 1.8-1.9 3-3.4 2.7-1-.2-1.4-1-1.3-1.8"/></g></symbol>
+  <symbol id="i-youtube" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10.5 9.5 4 2.5-4 2.5z"/></g></symbol>
+</svg>
+
+<!-- ===== Announcement =====
+     data-dismiss-key makes the close stick across visits (localStorage, via
+     deck-extras.js). Change the key when the message changes. -->
+<div class="banner banner-dark" data-dismiss-key="halden-shipping-aw26" role="region" aria-label="Announcement">
+  <p class="banner-text">Free shipping on orders over $150, and free returns for 30 days. <a href="#">Details</a></p>
+  <button class="btn btn-icon btn-sm btn-ghost banner-close" type="button" aria-label="Dismiss announcement">
+    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x"></use></svg>
+  </button>
+</div>
+
+<!-- ===== Header =====
+     Identical on ecommerce.html and product.html. The menu button only shows
+     below 48rem, where .navbar-links hides itself. -->
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+      <button class="btn btn-icon btn-ghost menu-btn" type="button" data-deck-drawer="#site-nav" aria-label="Open menu">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#menu"></use></svg>
+      </button>
+      <a class="navbar-brand logo" href="ecommerce.html">
+        <svg class="icon logo-mark" aria-hidden="true"><use href="#i-halden"></use></svg>
+        Halden
+      </a>
+
+      <nav class="navbar-links" aria-label="Primary">
+        <button class="nav-link nav-trigger" type="button" popovertarget="shop-mega" data-deck-mega="#shop-mega">
+          Shop
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-down-sm"></use></svg>
+        </button>
+        <a class="nav-link" href="#new">New in</a>
+        <a class="nav-link" href="#bestsellers">Bestsellers</a>
+        <a class="nav-link" href="#journal">Journal</a>
+        <a class="nav-link" href="#">Stores</a>
+      </nav>
+
+      <div class="push cluster header-tools">
+        <form class="search header-search" role="search" action="#">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search"></use></svg>
+          <input class="input" type="search" name="q" placeholder="Search bags, watches…" aria-label="Search the shop">
+        </form>
+        <a class="btn btn-icon btn-ghost search-btn" href="#" aria-label="Search">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search"></use></svg>
+        </a>
+        <button class="btn btn-icon btn-ghost" type="button" data-deck-theme aria-label="Switch theme">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        </button>
+        <a class="btn btn-icon btn-ghost account-btn" href="#" aria-label="Your account">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#user"></use></svg>
+        </a>
+        <a class="btn btn-icon btn-ghost" href="checkout.html" aria-label="Bag, 3 items">
+          <span class="with-indicator">
+            <svg class="icon" aria-hidden="true"><use href="#i-bag"></use></svg>
+            <span class="indicator-badge indicator-badge-brand bag-count" aria-hidden="true">3</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- The mega panel. A popover, so it renders in the top layer wherever it
+       sits in the markup. -->
+  <div class="mega shop-mega" id="shop-mega" popover>
+    <div class="mega-grid">
+      <div class="mega-col">
+        <p class="mega-heading">Carry</p>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Backpacks</span><span class="mega-item-note">18 to 26 litres, laptop sleeves</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Totes &amp; shoulder bags</span><span class="mega-item-note">Woven, pebbled and smooth</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Crossbody</span><span class="mega-item-note">Hands-free, phone-sized up</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Weekenders</span><span class="mega-item-note">Cabin-size, 40 L</span></span></a>
+      </div>
+      <div class="mega-col">
+        <p class="mega-heading">Wear</p>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Watches</span><span class="mega-item-note">Swiss movements, 36 to 41 mm</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Eyewear</span><span class="mega-item-note">Sun and optical, titanium and acetate</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Footwear</span><span class="mega-item-note">Goodyear-welted, resoleable</span></span></a>
+      </div>
+      <div class="mega-col">
+        <p class="mega-heading">Everyday</p>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Audio</span><span class="mega-item-note">Over-ear and noise cancelling</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Small leather goods</span><span class="mega-item-note">Wallets, card holders, key rings</span></span></a>
+        <a class="mega-item" href="#"><span class="mega-item-text"><span class="mega-item-title">Gift cards</span><span class="mega-item-note">Delivered by email, never expire</span></span></a>
+      </div>
+      <a class="mega-feature" href="product.html">
+        <img src="https://images.unsplash.com/photo-1622560480654-d96214fdc887?w=560&h=350&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.5&fp-y=.55" alt="The Field Pack backpack in oxblood leather, side view" width="560" height="350" loading="lazy" decoding="async">
+        <span class="mega-feature-copy">
+          <span class="eyebrow">New colour</span>
+          <span class="fw-semi">The Field Pack in Oxblood</span>
+          <span class="text-sm text-muted">Full-grain leather that darkens as you carry it.</span>
+        </span>
+      </a>
+    </div>
+    <div class="mega-footer">
+      <a class="link-arrow" href="#">Shop everything <svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></a>
+      <a class="link-quiet" href="#">Repairs</a>
+      <a class="link-quiet" href="#">Find a store</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== Hero =====
+       Split: copy on the left, a large photo with a floating product card on
+       the right. On a phone the card tucks under the photo's corner. -->
+  <section class="container hero">
+    <div class="hero-copy stack stack-6 stagger">
+      <p class="eyebrow enter-rise">Autumn–Winter 2026</p>
+      <h1 class="display enter-rise">Made to be carried, <em>not replaced.</em></h1>
+      <p class="lede enter-rise">
+        Full-grain leather, machined steel and honest stitching. Everything we make is
+        built in small runs in Porto and Brooklyn, guaranteed for two years and repaired
+        for life.
+      </p>
+      <div class="cluster hero-ctas enter-rise">
+        <a class="btn btn-primary btn-lg" href="#new">
+          Shop new arrivals
+          <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+        </a>
+        <a class="btn btn-lg" href="product.html">Meet the Field Pack</a>
+      </div>
+      <div class="hero-proof enter-rise">
+        <span class="rating-static ink" style="--value:96;--star:15px" role="img" aria-label="Rated 4.8 out of 5">
+          <span class="rating-fill">
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+          </span>
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+        </span>
+        <span><strong class="nums">4.8</strong> from <span class="nums">12,431</span> reviews</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span>Free 30-day returns</span>
+      </div>
+    </div>
+
+    <div class="hero-media enter-rise">
+      <figure class="hero-photo">
+        <img src="https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?w=960&h=1200&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.56&fp-y=.6&fp-z=1.12" alt="A cognac woven-leather tote with a gold chain strap against a warm grey wall" width="960" height="1200" fetchpriority="high">
+        <a class="hero-tag" href="#"><span>The Weave Tote</span><span class="nums text-muted">$420</span></a>
+      </figure>
+      <div class="hero-float card card-raised">
+        <div class="card-body">
+          <div class="bar">
+            <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=128&h=128&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.52&fp-y=.5&fp-z=2.2" alt="" width="64" height="64">
+            <div class="stack stack-0">
+              <span class="eyebrow">Just in</span>
+              <span class="fw-semi">Linea 36</span>
+              <span class="text-sm text-muted">White dial · <span class="nums">$265</span></span>
+            </div>
+            <a class="btn btn-icon btn-sm btn-soft btn-round push" href="product.html" aria-label="View the Linea 36 watch">
+              <svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Categories =====
+       The label names the category, so the photos are decorative (alt=""). -->
+  <section class="container section" aria-labelledby="cats-title" style="padding-block-start:0">
+    <div class="section-head">
+      <div class="stack stack-2">
+        <p class="eyebrow">Shop by category</p>
+        <h2 id="cats-title">Six things, done properly</h2>
+      </div>
+      <a class="link-arrow" href="#">All categories <svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></a>
+    </div>
+    <div class="cats reveal">
+      <a class="cat" href="#">
+        <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=420&h=560&q=80&auto=format&fit=crop" alt="" width="420" height="560" loading="lazy" decoding="async">
+        <span class="cat-label"><span><span class="cat-name">Bags</span><span class="cat-count">64 pieces</span></span></span>
+      </a>
+      <a class="cat" href="#">
+        <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=420&h=560&q=80&auto=format&fit=crop" alt="" width="420" height="560" loading="lazy" decoding="async">
+        <span class="cat-label"><span><span class="cat-name">Audio</span><span class="cat-count">11 pieces</span></span></span>
+      </a>
+      <a class="cat" href="#">
+        <img src="https://images.unsplash.com/photo-1518131672697-613becd4fab5?w=420&h=560&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.6&fp-y=.55" alt="" width="420" height="560" loading="lazy" decoding="async">
+        <span class="cat-label"><span><span class="cat-name">Watches</span><span class="cat-count">23 pieces</span></span></span>
+      </a>
+      <a class="cat" href="#">
+        <img src="https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=420&h=560&q=80&auto=format&fit=crop" alt="" width="420" height="560" loading="lazy" decoding="async">
+        <span class="cat-label"><span><span class="cat-name">Footwear</span><span class="cat-count">18 pieces</span></span></span>
+      </a>
+      <a class="cat" href="#">
+        <img src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=420&h=560&q=80&auto=format&fit=crop" alt="" width="420" height="560" loading="lazy" decoding="async">
+        <span class="cat-label"><span><span class="cat-name">Eyewear</span><span class="cat-count">32 pieces</span></span></span>
+      </a>
+      <a class="cat" href="#">
+        <img src="https://images.unsplash.com/photo-1606503825008-909a67e63c3d?w=420&h=560&q=80&auto=format&fit=crop" alt="" width="420" height="560" loading="lazy" decoding="async">
+        <span class="cat-label"><span><span class="cat-name">Small leather</span><span class="cat-count">27 pieces</span></span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== New arrivals =====
+       The chips filter by data-cat with a few lines of script at the end of
+       the page; without it every product simply stays visible. Every card
+       links to product.html. -->
+  <section class="container section" id="new" aria-labelledby="new-title" style="padding-block-start:0">
+    <div class="section-head">
+      <div class="stack stack-2">
+        <p class="eyebrow">New arrivals</p>
+        <h2 id="new-title">Fresh off the bench</h2>
+      </div>
+      <div class="cluster cluster-tight" role="group" aria-label="Filter new arrivals" data-filter-group>
+        <button class="chip" type="button" aria-pressed="true" data-filter="all">All</button>
+        <button class="chip" type="button" aria-pressed="false" data-filter="bags">Bags</button>
+        <button class="chip" type="button" aria-pressed="false" data-filter="wear">Watches &amp; eyewear</button>
+        <button class="chip" type="button" aria-pressed="false" data-filter="audio">Audio</button>
+        <button class="chip" type="button" aria-pressed="false" data-filter="leather">Small leather</button>
+      </div>
+    </div>
+
+    <div class="products reveal" data-filter-target>
+      <article class="product" data-cat="bags">
+        <div class="product-media">
+          <img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=600&h=750&q=80&auto=format&fit=crop" alt="The Field Pack, a cognac full-grain leather backpack, front view" width="600" height="750" loading="lazy" decoding="async">
+          <img class="img-alt" src="https://images.unsplash.com/photo-1622560480654-d96214fdc887?w=600&h=750&q=80&auto=format&fit=crop" alt="" width="600" height="750" loading="lazy" decoding="async">
+          <div class="product-flags"><span class="badge badge-solid">−20%</span></div>
+          <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save The Field Pack to your wishlist">
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg>
+          </button>
+          <button class="btn btn-sm product-quick" type="button" aria-label="Quick add The Field Pack">Quick add</button>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name"><a href="product.html">The Field Pack</a></h3>
+          <p class="product-meta">Full-grain leather · 22 L</p>
+          <div class="product-row">
+            <span class="price"><span class="price-sale">$396</span><s>$495</s></span>
+            <span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.8</b>(312)</span>
+          </div>
+          <span class="swatches"><i class="sw" style="--sw:oklch(52% .11 45)"></i><i class="sw" style="--sw:oklch(36% .1 18)"></i><i class="sw" style="--sw:oklch(30% .04 50)"></i>3 colours</span>
+        </div>
+      </article>
+
+      <article class="product" data-cat="audio">
+        <div class="product-media">
+          <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&h=750&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.45&fp-y=.5" alt="Arc over-ear headphones in tan leather and brushed aluminium" width="600" height="750" loading="lazy" decoding="async">
+          <img class="img-alt" src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&h=750&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.78&fp-y=.4&fp-z=1.8" alt="" width="600" height="750" loading="lazy" decoding="async">
+          <div class="product-flags"><span class="badge">New</span></div>
+          <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Arc Over-Ear to your wishlist">
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg>
+          </button>
+          <button class="btn btn-sm product-quick" type="button" aria-label="Quick add Arc Over-Ear">Quick add</button>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name"><a href="product.html">Arc Over-Ear</a></h3>
+          <p class="product-meta">Lambskin · aluminium</p>
+          <div class="product-row">
+            <span class="price">$349</span>
+            <span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.7</b>(128)</span>
+          </div>
+          <span class="swatches"><i class="sw" style="--sw:oklch(62% .1 55)"></i><i class="sw" style="--sw:oklch(24% .01 60)"></i>2 finishes</span>
+        </div>
+      </article>
+
+      <article class="product" data-cat="wear">
+        <div class="product-media">
+          <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=600&h=750&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.5&fp-y=.5" alt="Linea 36 watch with a white dial and rose-gold case on a taupe leather strap, held between two fingers" width="600" height="750" loading="lazy" decoding="async">
+          <img class="img-alt" src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=600&h=750&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.52&fp-y=.5&fp-z=2" alt="" width="600" height="750" loading="lazy" decoding="async">
+          <div class="product-flags"><span class="badge">New</span></div>
+          <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Linea 36 to your wishlist">
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg>
+          </button>
+          <button class="btn btn-sm product-quick" type="button" aria-label="Quick add Linea 36">Quick add</button>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name"><a href="product.html">Linea 36</a></h3>
+          <p class="product-meta">Rose-gold steel · 36 mm</p>
+          <div class="product-row">
+            <span class="price">$265</span>
+            <span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.9</b>(86)</span>
+          </div>
+          <span class="swatches"><i class="sw" style="--sw:oklch(62% .025 60)"></i><i class="sw" style="--sw:oklch(22% .01 60)"></i><i class="sw" style="--sw:oklch(55% .1 50)"></i>3 straps</span>
+        </div>
+      </article>
+
+      <article class="product" data-cat="bags">
+        <div class="product-media">
+          <img src="https://images.unsplash.com/photo-1581605405669-fcdf81165afa?w=600&h=750&q=80&auto=format&fit=crop" alt="Waxed canvas daypack in charcoal, held up by its top handle" width="600" height="750" loading="lazy" decoding="async">
+          <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Waxed Daypack to your wishlist">
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg>
+          </button>
+          <button class="btn btn-sm product-quick" type="button" aria-label="Quick add Waxed Daypack">Quick add</button>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name"><a href="product.html">Waxed Daypack</a></h3>
+          <p class="product-meta">Waxed cotton canvas · 16 L</p>
+          <div class="product-row">
+            <span class="price">$165</span>
+            <span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.6</b>(97)</span>
+          </div>
+          <span class="swatches"><i class="sw" style="--sw:oklch(28% .01 60)"></i><i class="sw" style="--sw:oklch(45% .05 130)"></i>2 colours</span>
+        </div>
+      </article>
+
+      <article class="product" data-cat="wear">
+        <div class="product-media">
+          <img src="https://images.unsplash.com/photo-1560343090-f0409e92791a?w=600&h=750&q=80&auto=format&fit=crop" alt="Sage suede brogue with a crepe sole, set on a pale pink plinth beside ripe peaches" width="600" height="750" loading="lazy" decoding="async">
+          <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="true" aria-label="Save Sage Suede Brogue to your wishlist">
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg>
+          </button>
+          <button class="btn btn-sm product-quick" type="button" aria-label="Quick add Sage Suede Brogue">Quick add</button>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name"><a href="product.html">Sage Suede Brogue</a></h3>
+          <p class="product-meta">Italian suede · crepe sole</p>
+          <div class="product-row">
+            <span class="price">$240</span>
+            <span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.6</b>(54)</span>
+          </div>
+          <span class="swatches"><i class="sw" style="--sw:oklch(62% .07 175)"></i><i class="sw" style="--sw:oklch(58% .08 60)"></i>2 colours</span>
+        </div>
+      </article>
+
+      <article class="product" data-cat="wear">
+        <div class="product-media">
+          <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&h=750&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.5&fp-y=.55&fp-z=1.3" alt="Orbit round sunglasses with a thin gold frame and green lenses on white marble" width="600" height="750" loading="lazy" decoding="async">
+          <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Orbit Sunglasses to your wishlist">
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg>
+          </button>
+          <button class="btn btn-sm product-quick" type="button" aria-label="Quick add Orbit Sunglasses">Quick add</button>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name"><a href="product.html">Orbit Sunglasses</a></h3>
+          <p class="product-meta">Gold titanium · polarised</p>
+          <div class="product-row">
+            <span class="price">$165</span>
+            <span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.8</b>(203)</span>
+          </div>
+          <span class="swatches"><i class="sw" style="--sw:oklch(80% .1 85)"></i><i class="sw" style="--sw:oklch(72% .02 60)"></i>2 frames</span>
+        </div>
+      </article>
+
+      <article class="product" data-cat="bags">
+        <div class="product-media">
+          <img src="https://images.unsplash.com/photo-1605733513597-a8f8341084e6?w=600&h=750&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.5&fp-y=.5&fp-z=1.25" alt="Mini Satchel in dove grey pebbled leather with two buckled straps" width="600" height="750" loading="lazy" decoding="async">
+          <img class="img-alt" src="https://images.unsplash.com/photo-1605733513597-a8f8341084e6?w=600&h=750&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.5&fp-y=.55&fp-z=2.6" alt="" width="600" height="750" loading="lazy" decoding="async">
+          <div class="product-flags"><span class="badge badge-solid">−20%</span></div>
+          <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Mini Satchel to your wishlist">
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg>
+          </button>
+          <button class="btn btn-sm product-quick" type="button" aria-label="Quick add Mini Satchel">Quick add</button>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name"><a href="product.html">Mini Satchel</a></h3>
+          <p class="product-meta">Pebbled leather in Dove</p>
+          <div class="product-row">
+            <span class="price"><span class="price-sale">$236</span><s>$295</s></span>
+            <span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.7</b>(141)</span>
+          </div>
+          <span class="swatches"><i class="sw" style="--sw:oklch(74% .01 60)"></i><i class="sw" style="--sw:oklch(26% .01 60)"></i><i class="sw" style="--sw:oklch(55% .1 45)"></i>3 colours</span>
+        </div>
+      </article>
+
+      <article class="product" data-cat="leather">
+        <div class="product-media">
+          <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&h=750&q=80&auto=format&fit=crop" alt="Bifold wallet in worn brown vegetable-tanned leather, photographed mid-air" width="600" height="750" loading="lazy" decoding="async">
+          <div class="product-flags"><span class="badge">Restocked</span></div>
+          <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Bifold Wallet to your wishlist">
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg>
+          </button>
+          <button class="btn btn-sm product-quick" type="button" aria-label="Quick add Bifold Wallet">Quick add</button>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name"><a href="product.html">Bifold Wallet</a></h3>
+          <p class="product-meta">Vegetable-tanned · 6 cards</p>
+          <div class="product-row">
+            <span class="price">$95</span>
+            <span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.9</b>(611)</span>
+          </div>
+          <span class="swatches"><i class="sw" style="--sw:oklch(45% .08 50)"></i><i class="sw" style="--sw:oklch(24% .01 60)"></i>2 colours</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Bestsellers =====
+       .carousel-multi with arrows. Where the browser has ::scroll-button and
+       ::scroll-marker it draws its own and Deck hides these. Needs
+       deck-extras.js for the arrows elsewhere. -->
+  <section class="section bg-soft" id="bestsellers" aria-labelledby="best-title" style="background:var(--surface-2)">
+    <div class="container">
+      <div class="section-head">
+        <div class="stack stack-2">
+          <p class="eyebrow">Bestsellers</p>
+          <h2 id="best-title">The ones people <em>come back for</em></h2>
+        </div>
+        <a class="link-arrow" href="#">Shop bestsellers <svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></a>
+      </div>
+
+      <div class="carousel carousel-multi best" data-deck-carousel role="region" aria-roledescription="carousel" aria-label="Bestsellers">
+        <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous products">
+          <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-left"></use></svg>
+        </button>
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <article class="product">
+              <div class="product-media">
+                <img src="https://images.unsplash.com/photo-1508296695146-257a814070b4?w=520&h=520&q=80&auto=format&fit=crop" alt="Cleo cat-eye sunglasses with blush acetate frames and gradient lenses" width="520" height="520" loading="lazy" decoding="async">
+                <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Cleo Cat-Eye to your wishlist"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg></button>
+              </div>
+              <div class="product-body">
+                <h3 class="product-name"><a href="product.html">Cleo Cat-Eye</a></h3>
+                <div class="product-row"><span class="price">$175</span><span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.8</b>(402)</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="carousel-slide">
+            <article class="product">
+              <div class="product-media">
+                <img src="https://images.unsplash.com/photo-1557531365-e8b22d93dbd0?w=520&h=520&q=80&auto=format&fit=crop" alt="Chrono 41 watch with a white dial on a dark brown leather strap" width="520" height="520" loading="lazy" decoding="async">
+                <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Chrono 41 to your wishlist"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg></button>
+              </div>
+              <div class="product-body">
+                <h3 class="product-name"><a href="product.html">Chrono 41</a></h3>
+                <div class="product-row"><span class="price">$365</span><span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.9</b>(233)</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="carousel-slide">
+            <article class="product">
+              <div class="product-media">
+                <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=520&h=520&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.35&fp-y=.5" alt="Commuter Pack in navy recycled nylon, standing on a pale floor" width="520" height="520" loading="lazy" decoding="async">
+                <div class="product-flags"><span class="badge">#1 in bags</span></div>
+                <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Commuter Pack to your wishlist"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg></button>
+              </div>
+              <div class="product-body">
+                <h3 class="product-name"><a href="product.html">Commuter Pack</a></h3>
+                <div class="product-row"><span class="price">$225</span><span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.7</b>(518)</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="carousel-slide">
+            <article class="product">
+              <div class="product-media">
+                <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=520&h=520&q=80&auto=format&fit=crop" alt="Court Runner sneakers in cream, mint and orange panels on a white plinth" width="520" height="520" loading="lazy" decoding="async">
+                <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Court Runner to your wishlist"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg></button>
+              </div>
+              <div class="product-body">
+                <h3 class="product-name"><a href="product.html">Court Runner</a></h3>
+                <div class="product-row"><span class="price">$185</span><span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.7</b>(356)</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="carousel-slide">
+            <article class="product">
+              <div class="product-media">
+                <img src="https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=520&h=520&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.38&fp-y=.45" alt="Mono over-ear headphones in matte black on a white background" width="520" height="520" loading="lazy" decoding="async">
+                <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Mono Over-Ear to your wishlist"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg></button>
+              </div>
+              <div class="product-body">
+                <h3 class="product-name"><a href="product.html">Mono Over-Ear</a></h3>
+                <div class="product-row"><span class="price">$279</span><span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.6</b>(189)</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="carousel-slide">
+            <article class="product">
+              <div class="product-media">
+                <img src="https://images.unsplash.com/photo-1575032617751-6ddec2089882?w=520&h=520&q=80&auto=format&fit=crop" alt="Box Bag in bordeaux croc-embossed leather, held by its strap" width="520" height="520" loading="lazy" decoding="async">
+                <div class="product-flags"><span class="badge badge-solid">Low stock</span></div>
+                <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Box Bag to your wishlist"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg></button>
+              </div>
+              <div class="product-body">
+                <h3 class="product-name"><a href="product.html">Box Bag in Bordeaux</a></h3>
+                <div class="product-row"><span class="price">$340</span><span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.9</b>(77)</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="carousel-slide">
+            <article class="product">
+              <div class="product-media">
+                <img src="https://images.unsplash.com/photo-1628329567705-f8f7150c3cff?w=520&h=520&q=80&auto=format&fit=crop" alt="Hush noise-cancelling headphones in graphite with knit headband" width="520" height="520" loading="lazy" decoding="async">
+                <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Hush ANC to your wishlist"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg></button>
+              </div>
+              <div class="product-body">
+                <h3 class="product-name"><a href="product.html">Hush ANC</a></h3>
+                <div class="product-row"><span class="price">$449</span><span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.7</b>(261)</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="carousel-slide">
+            <article class="product">
+              <div class="product-media">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=520&h=520&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.42&fp-y=.5" alt="Pace hybrid watch with a white silicone strap and a black dial" width="520" height="520" loading="lazy" decoding="async">
+                <button class="btn btn-icon btn-sm btn-round product-wish" type="button" aria-pressed="false" aria-label="Save Pace Hybrid to your wishlist"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#heart"></use></svg></button>
+              </div>
+              <div class="product-body">
+                <h3 class="product-name"><a href="product.html">Pace Hybrid</a></h3>
+                <div class="product-row"><span class="price">$225</span><span class="star-mini"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg><b>4.5</b>(142)</span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <button class="carousel-arrow carousel-next" type="button" aria-label="Next products">
+          <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right"></use></svg>
+        </button>
+        <div class="carousel-dots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Value strip ===== -->
+  <section class="values" aria-label="Why buy from Halden">
+    <div class="container">
+      <ul class="values-grid" role="list" style="list-style:none;margin:0">
+        <li class="value">
+          <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#truck"></use></svg></span>
+          <p><strong>Free shipping over $150</strong>Tracked and carbon-neutral, usually two to four days.</p>
+        </li>
+        <li class="value">
+          <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#refresh"></use></svg></span>
+          <p><strong>30-day returns</strong>Free, with a printable label. Refunds within three days.</p>
+        </li>
+        <li class="value">
+          <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#shield"></use></svg></span>
+          <p><strong>2-year warranty</strong>Then repairs at cost, for as long as we exist.</p>
+        </li>
+        <li class="value">
+          <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#lock"></use></svg></span>
+          <p><strong>Secure checkout</strong>Cards, Apple Pay and PayPal. We never store card numbers.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Bento =====
+       Four promos, four shapes. The lead and wide cells only span from 64rem;
+       below that it is one or two plain columns. -->
+  <section class="container section" aria-labelledby="edit-title">
+    <h2 class="sr-only" id="edit-title">This season</h2>
+    <div class="bento reveal">
+      <a class="tile tile-photo b-lead" href="#">
+        <img src="https://images.unsplash.com/photo-1473188588951-666fce8e7c68?w=1100&h=900&q=80&auto=format&fit=crop" alt="" width="1100" height="900" loading="lazy" decoding="async">
+        <p class="eyebrow">The Leather Edit</p>
+        <h3 class="tile-title">Vegetable-tanned in Porto. Softer every year you carry it.</h3>
+        <span class="btn btn-sm">Shop leather goods <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></span>
+      </a>
+
+      <div class="tile tile-dark b-wide">
+        <span class="icon-tile icon-tile-lg" aria-hidden="true"><svg class="icon icon-lg"><use href="../assets/deck/deck-icons.svg#wrench"></use></svg></span>
+        <div class="stack stack-2">
+          <h3 class="tile-title">Repairs for life</h3>
+          <p>Broken zip, tired strap, scuffed corner: send it to our Brooklyn workshop. Free for two years, at cost after that. 4,812 pieces mended last year.</p>
+          <a href="#">Book a repair</a>
+        </div>
+      </div>
+
+      <a class="tile tile-brand g-brand" href="#">
+        <span class="tile-mark" aria-hidden="true">48h</span>
+        <div class="stack stack-2">
+          <h3 class="tile-title" style="font-size:var(--text-xl)">Halden Circle</h3>
+          <p>Members see new colours two days early. Free to join.</p>
+        </div>
+      </a>
+
+      <a class="tile tile-photo" href="#">
+        <img src="https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?w=600&h=600&q=80&auto=format&fit=crop" alt="" width="600" height="600" loading="lazy" decoding="async">
+        <span class="cluster cluster-tight"><svg class="icon" aria-hidden="true"><use href="#i-gift"></use></svg><span class="fw-semi">Gifts under $200</span></span>
+        <p>Wallets, sunglasses and the Pace Hybrid, wrapped free.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== Press and reviews =====
+       The marquee track is duplicated with aria-hidden for a seamless loop;
+       screen readers hear the list once. -->
+  <section class="section" aria-labelledby="reviews-title" style="padding-block-start:0">
+    <div class="container stack stack-8">
+      <div class="stack stack-4 press">
+        <p class="text-center text-xs text-muted uppercase" style="letter-spacing:.16em">As featured in</p>
+        <div class="marquee" style="--marquee-dur:38s">
+          <div class="marquee-track">
+            <span class="press-name">The Carry Edit</span>
+            <span class="press-name caps">Northbound</span>
+            <span class="press-name">Field &amp; Fold</span>
+            <span class="press-name caps">Gentry Weekly</span>
+            <span class="press-name">Atlas Review</span>
+            <span class="press-name caps">Common Thread</span>
+          </div>
+          <div class="marquee-track" aria-hidden="true">
+            <span class="press-name">The Carry Edit</span>
+            <span class="press-name caps">Northbound</span>
+            <span class="press-name">Field &amp; Fold</span>
+            <span class="press-name caps">Gentry Weekly</span>
+            <span class="press-name">Atlas Review</span>
+            <span class="press-name caps">Common Thread</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-block-end:0">
+        <div class="stack stack-2">
+          <p class="eyebrow">Reviews</p>
+          <h2 id="reviews-title">Twelve thousand people, one complaint: <em>it never wears out</em></h2>
+        </div>
+        <div class="reviews-head">
+          <span class="score nums">4.8</span>
+          <span class="stack stack-1">
+            <span class="rating-static ink" style="--value:96;--star:16px" role="img" aria-label="Rated 4.8 out of 5">
+              <span class="rating-fill">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            </span>
+            <span class="text-sm text-muted"><span class="nums">12,431</span> verified reviews</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="reviews-grid">
+        <figure class="review reveal">
+          <span class="rating-static ink rating-sm" style="--value:100;--star:14px" role="img" aria-label="5 out of 5">
+            <span class="rating-fill">
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            </span>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+          </span>
+          <blockquote>“Three winters of daily commuting and the Field Pack looks better than the day it came. The leather went from orange to a deep chestnut.”</blockquote>
+          <footer>
+            <span class="avatar avatar-sm" aria-hidden="true">MO</span>
+            <span class="stack stack-0">
+              <span class="fw-semi text-sm">Maya Okafor</span>
+              <span class="text-xs text-muted">Verified buyer · The Field Pack, Cognac</span>
+            </span>
+          </footer>
+        </figure>
+        <figure class="review reveal">
+          <span class="rating-static ink rating-sm" style="--value:100;--star:14px" role="img" aria-label="5 out of 5">
+            <span class="rating-fill">
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            </span>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+          </span>
+          <blockquote>“I snapped a strap lug on the Linea. They replaced the whole case under warranty and returned it in nine days with a handwritten note.”</blockquote>
+          <footer>
+            <span class="avatar avatar-sm" aria-hidden="true">DL</span>
+            <span class="stack stack-0">
+              <span class="fw-semi text-sm">Daniel Lindqvist</span>
+              <span class="text-xs text-muted">Verified buyer · Linea 36</span>
+            </span>
+          </footer>
+        </figure>
+        <figure class="review reveal">
+          <span class="rating-static ink rating-sm" style="--value:80;--star:14px" role="img" aria-label="4 out of 5">
+            <span class="rating-fill">
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            </span>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+          </span>
+          <blockquote>“The Orbits are the first sunglasses I haven't lost or sat on in a year. Docked a star because the case is a little bulky for a pocket.”</blockquote>
+          <footer>
+            <span class="avatar avatar-sm" aria-hidden="true">PR</span>
+            <span class="stack stack-0">
+              <span class="fw-semi text-sm">Priya Raman</span>
+              <span class="text-xs text-muted">Verified buyer · Orbit Sunglasses</span>
+            </span>
+          </footer>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Journal ===== -->
+  <section class="container section" id="journal" aria-labelledby="journal-title" style="padding-block-start:0">
+    <div class="section-head">
+      <div class="stack stack-2">
+        <p class="eyebrow">The Journal</p>
+        <h2 id="journal-title">Notes from the workshop</h2>
+      </div>
+      <a class="link-arrow" href="#">All stories <svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></a>
+    </div>
+    <div class="journal-grid">
+      <article class="post reveal">
+        <div class="post-media"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=640&h=427&q=80&auto=format&fit=crop" alt="A rail of linen and knit clothes in white, oat and brown on wooden hangers" width="640" height="427" loading="lazy" decoding="async"></div>
+        <p class="eyebrow">Travel</p>
+        <h3><a href="#">Ten days, one 22-litre bag: the packing list we actually use</a></h3>
+        <p class="post-meta"><span>Oct 2, 2026</span><span aria-hidden="true">·</span><span>6 min read</span></p>
+      </article>
+      <article class="post reveal">
+        <div class="post-media"><img src="https://images.unsplash.com/photo-1517254797898-04edd251bfb3?w=640&h=427&q=80&auto=format&fit=crop" alt="Rows of leather wallets in brown, black and green stacked on a market table" width="640" height="427" loading="lazy" decoding="async"></div>
+        <p class="eyebrow">Materials</p>
+        <h3><a href="#">What “full-grain” means, and why most wallets are not</a></h3>
+        <p class="post-meta"><span>Sep 18, 2026</span><span aria-hidden="true">·</span><span>8 min read</span></p>
+      </article>
+      <article class="post reveal">
+        <div class="post-media"><img src="https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=640&h=427&q=80&auto=format&fit=crop&crop=focalpoint&fp-x=.5&fp-y=.45" alt="Someone lacing a pair of worn tan leather boots on a city kerb" width="640" height="427" loading="lazy" decoding="async"></div>
+        <p class="eyebrow">Care</p>
+        <h3><a href="#">Breaking in leather without breaking your feet</a></h3>
+        <p class="post-meta"><span>Sep 4, 2026</span><span aria-hidden="true">·</span><span>5 min read</span></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Newsletter ===== -->
+  <section class="container" aria-labelledby="news-title">
+    <div class="newsletter reveal">
+      <div class="stack stack-3">
+        <p class="eyebrow">The Halden letter</p>
+        <h2 id="news-title">Ten percent off your <em>first order</em></h2>
+        <p class="text-muted">New colours, restocks and workshop notes, once a fortnight. Unsubscribe in one click.</p>
+      </div>
+      <form class="stack stack-2" action="#">
+        <label class="label" for="news-email">Email address</label>
+        <div class="input-group">
+          <input class="input" id="news-email" type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </div>
+        <p class="help">We send the code straight away. No spam, no selling your address.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="footer site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a class="navbar-brand logo" href="ecommerce.html">
+          <svg class="icon logo-mark" aria-hidden="true"><use href="#i-halden"></use></svg>
+          Halden
+        </a>
+        <p>Leather goods, watches, audio and eyewear, made in small runs and repaired for life. Flagship and workshop at 41 Crosby Street, New York.</p>
+        <div class="social">
+          <a href="#" aria-label="Halden on Instagram"><svg class="icon" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
+          <a href="#" aria-label="Halden on Pinterest"><svg class="icon" aria-hidden="true"><use href="#i-pinterest"></use></svg></a>
+          <a href="#" aria-label="Halden on YouTube"><svg class="icon" aria-hidden="true"><use href="#i-youtube"></use></svg></a>
+        </div>
+      </div>
+      <nav class="footer-col" aria-label="Shop">
+        <p class="footer-heading">Shop</p>
+        <a href="#new">New arrivals</a>
+        <a href="#bestsellers">Bestsellers</a>
+        <a href="#">Bags</a>
+        <a href="#">Watches</a>
+        <a href="#">Gift cards</a>
+      </nav>
+      <nav class="footer-col" aria-label="Help">
+        <p class="footer-heading">Help</p>
+        <a href="#">Shipping</a>
+        <a href="#">Returns &amp; exchanges</a>
+        <a href="#">Warranty &amp; repairs</a>
+        <a href="#">Order status</a>
+        <a href="#">Contact us</a>
+      </nav>
+      <nav class="footer-col" aria-label="Company">
+        <p class="footer-heading">Halden</p>
+        <a href="#">Our workshops</a>
+        <a href="#journal">Journal</a>
+        <a href="#">Stores</a>
+        <a href="#">Careers</a>
+        <a href="#">Sustainability report</a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Halden Goods Co.</span>
+      <span class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></span>
+      <ul class="pay-marks push" aria-label="Payment methods we accept">
+        <li class="pm pm-visa">VISA</li>
+        <li class="pm pm-mc" aria-label="Mastercard"><i></i><i></i></li>
+        <li class="pm pm-amex">AMEX</li>
+        <li class="pm">Apple Pay</li>
+        <li class="pm pm-paypal">PayPal</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<a class="back-to-top" href="#top" aria-label="Back to top">
+  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right"></use></svg>
+</a>
+
+<!-- ===== Mobile navigation =====
+     A drawer from the end edge; needs deck-extras.js. -->
+<dialog class="drawer drawer-end" id="site-nav" aria-labelledby="site-nav-title">
+  <div class="drawer-header">
+    <h2 class="drawer-title" id="site-nav-title">Menu</h2>
+    <button class="btn btn-icon btn-sm btn-ghost push" type="button" data-drawer-close aria-label="Close menu">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x"></use></svg>
+    </button>
+  </div>
+  <div class="drawer-body">
+    <form class="search" role="search" action="#">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search"></use></svg>
+      <input class="input" type="search" name="q" placeholder="Search Halden" aria-label="Search the shop">
+    </form>
+    <nav class="sidebar" aria-label="Mobile" style="padding:0">
+      <p class="sidebar-group">Shop</p>
+      <a class="sidebar-link" href="#new">New in</a>
+      <a class="sidebar-link" href="#">Bags</a>
+      <a class="sidebar-link" href="#">Watches</a>
+      <a class="sidebar-link" href="#">Eyewear</a>
+      <a class="sidebar-link" href="#">Footwear</a>
+      <a class="sidebar-link" href="#">Audio</a>
+      <a class="sidebar-link" href="#">Small leather goods</a>
+      <p class="sidebar-group">Halden</p>
+      <a class="sidebar-link" href="#journal">Journal</a>
+      <a class="sidebar-link" href="#">Stores</a>
+      <a class="sidebar-link" href="#">Repairs</a>
+    </nav>
+  </div>
+  <div class="drawer-footer">
+    <a class="btn" href="#">Sign in</a>
+    <a class="btn btn-primary" href="checkout.html">Bag (3)</a>
+  </div>
+</dialog>
+
+<script>
+  /* Filter chips and wishlist hearts. Both are progressive: without this,
+     every product shows and the hearts are plain buttons. */
+  (() => {
+    const group = document.querySelector('[data-filter-group]');
+    const grid = document.querySelector('[data-filter-target]');
+    group?.addEventListener('click', (e) => {
+      const chip = e.target.closest('[data-filter]');
+      if (!chip) return;
+      group.querySelectorAll('[data-filter]').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      const f = chip.dataset.filter;
+      grid.querySelectorAll('.product').forEach((p) => { p.hidden = f !== 'all' && p.dataset.cat !== f; });
+    });
+    document.addEventListener('click', (e) => {
+      const heart = e.target.closest('.product-wish');
+      if (heart) heart.setAttribute('aria-pressed', String(heart.getAttribute('aria-pressed') !== 'true'));
+    });
+  })();
+</script>
+</body>
+</html>

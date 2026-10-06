@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ledgerly pricing · Deck template</title>
+<meta name="description" content="A SaaS pricing page: monthly and annual billing toggle, four plans, a full comparison table that stays usable on a phone, add-ons, an enterprise band and a billing FAQ.">
+<meta name="theme-color" content="#0b7a55">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23087a55'/%3E%3Cpath d='M10 9v14h12' fill='none' stroke='%23ecfdf5' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 13h7M15 18h5' stroke='%23a7f3d0' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+<script src="../assets/deck/deck-extras.js" defer></script>   <!-- the mobile drawer -->
+
+<style>
+@layer app.pages {
+
+  /* Emerald. Every tint on the page, the glow on the highlighted plan
+     included, is derived from this one number. */
+  :root {
+    --hue-brand: 160;
+    --hue-accent: 84;
+    --hdr-h: 4rem;
+  }
+
+  .eyebrow { font-size: var(--text-xs); font-weight: 640; letter-spacing: .12em; text-transform: uppercase; color: var(--brand); }
+  .section-title { font-size: clamp(1.9rem, 1.35rem + 2vw, 2.75rem); letter-spacing: -.032em; }
+  .head-center { text-align: center; align-items: center; }
+  .head-center .lede { margin-inline: auto; max-inline-size: 54ch; text-wrap: pretty; }
+  /* --gap is inherited, so a .cluster inside a .stack-8 would pick up 2rem. */
+  .cluster:not(.cluster-tight) { --gap: var(--space-3); }
+  /* Deck's .drawer sets display:flex, which beats the browser's own rule that hides a closed <dialog>, so a closed drawer would sit off-screen with its links still in the tab order. The transition on display is allow-discrete, so the slide-out still plays. */
+  .drawer:not([open]) { display: none; }
+
+  /* ===== Header ===== */
+  .site-header {
+    position: sticky; inset-block-start: 0; z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid var(--line);
+  }
+  .site-header .navbar { border: 0; min-block-size: var(--hdr-h); padding-block: 0; }
+  .logo { inline-size: 1.75rem; block-size: 1.75rem; flex: 0 0 auto; }
+  .menu-btn { display: inline-flex; }
+  .signin { display: none; }
+  @media (min-width: 48rem) { .menu-btn { display: none; } .signin { display: inline-flex; } }
+
+  /* ===== Hero =====
+     Grid lines faded out with a radial mask, under a brand wash. No image. */
+  .hero { position: relative; isolation: isolate; overflow: clip; padding-block: clamp(3rem, 2rem + 5vw, 6.5rem) var(--space-12); }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background-image:
+      linear-gradient(to right, var(--line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+    background-size: 44px 44px;
+    background-position: center top;
+    mask-image: radial-gradient(70% 60% at 50% 0%, #000 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(70% 60% at 50% 0%, #000 20%, transparent 75%);
+    opacity: .7;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0; z-index: -2;
+    background: radial-gradient(55% 45% at 50% 0%, color-mix(in oklab, var(--brand-400) 22%, transparent), transparent 75%);
+  }
+  .hero h1 { font-size: clamp(2.4rem, 1.4rem + 4.2vw, 4.25rem); letter-spacing: -.045em; line-height: 1.02; max-inline-size: 18ch; margin-inline: auto; }
+
+  /* Billing toggle: real radios in a .segmented track. Deck styles the
+     aria-selected version; the radio version needs this one rule. */
+  .billing { inline-size: auto; padding: 4px; border-radius: var(--r-full); }
+  .billing > label { flex: 0 1 auto; min-block-size: 40px; padding-inline: var(--space-5); border-radius: var(--r-full); }
+  .billing > label:has(:checked) { background: var(--surface); color: var(--text); box-shadow: var(--shadow-2); }
+  .billing > label:has(:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .billing .badge { border-radius: var(--r-full); }
+
+  /* ===== Plans ===== */
+  .plans { display: grid; gap: var(--space-4); grid-template-columns: minmax(0, 1fr); align-items: stretch; }
+  @media (min-width: 42rem) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 72rem) { .plans { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .plan { position: relative; border-radius: var(--r-lg); }
+  .plan .card-body { padding: var(--space-6); gap: 0; flex: 1 1 auto; }
+  .plan-name { font-size: var(--text-lg); font-weight: 660; letter-spacing: -.02em; }
+  .plan-for { font-size: var(--text-sm); color: var(--text-muted); }
+  /* Two lines reserved only where cards sit side by side, so the prices align. */
+  @media (min-width: 42rem) { .plan-for { min-block-size: 2.6em; } }
+  /* Fixed height, content pinned to the bottom, so "Let's talk" sits on
+     the same line as the numbers and the buttons below stay level. */
+  .price { display: flex; flex-wrap: wrap; align-items: baseline; align-content: flex-end; gap: 2px; min-block-size: 3.4rem; font-variant-numeric: tabular-nums; }
+  .price .cur { font-size: var(--text-xl); font-weight: 600; align-self: flex-start; margin-block-start: .35em; color: var(--text-muted); }
+  .price .amount { font-size: clamp(2.6rem, 2.2rem + 1vw, 3.1rem); font-weight: 720; letter-spacing: -.045em; line-height: 1; }
+  .price .per { font-size: var(--text-sm); color: var(--text-muted); margin-inline-start: var(--space-1); }
+  .price .custom { font-size: clamp(2rem, 1.8rem + .6vw, 2.4rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.1; }
+  .price-note { font-size: var(--text-xs); color: var(--text-faint); min-block-size: 1.5em; }
+  .plan-features { display: flex; flex-direction: column; gap: var(--space-3); font-size: var(--text-sm); padding-block-start: var(--space-5); margin-block-start: var(--space-5); border-block-start: 1px solid var(--line); }
+  .plan-features li { display: flex; gap: var(--space-2); align-items: flex-start; }
+  .plan-features .icon { margin-block-start: 1px; color: var(--brand); }
+  .plan-features .no { color: var(--text-faint); }
+  .plan-features .no .icon { color: var(--text-faint); }
+  .plan-features .lead { font-weight: 600; color: var(--text); font-size: var(--text-xs); }
+  /* The highlighted plan: gradient border, a soft brand glow, a raised badge. */
+  .plan-pop { box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-500) 18%, transparent), 0 24px 60px -18px color-mix(in oklab, var(--brand-500) 55%, transparent), var(--shadow-3); --g-width: 2px; }
+  /* Taller at the top only, so the four prices still line up. */
+  @media (min-width: 72rem) {
+    .plan-pop { margin-block-start: calc(var(--space-4) * -1); }
+    .plan-pop .card-body { padding-block-start: calc(var(--space-6) + var(--space-4)); }
+  }
+  .plan-pop .badge-solid { position: absolute; inset-block-start: 0; inset-inline-end: var(--space-5); translate: 0 -50%; border-radius: var(--r-full); padding-inline: var(--space-3); box-shadow: var(--shadow-2); }
+  /* A .card clips its overflow, which would cut the badge in half. */
+  .plans .card { overflow: visible; }
+
+  /* ===== Logos ===== */
+  .logo-strip { color: var(--text-faint); --marquee-dur: 40s; }
+  .logo-strip .marquee-track { align-items: center; gap: var(--space-12); padding-inline-end: var(--space-12); }
+  .wm { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-lg); font-weight: 680; letter-spacing: -.03em; white-space: nowrap; }
+  .wm svg { inline-size: 1.4em; block-size: 1.4em; }
+  /* Deck only defines .marquee when motion is allowed. Otherwise show one
+     static, centred, wrapping row and drop the duplicate. */
+  @media (prefers-reduced-motion: reduce) {
+    .logo-strip .marquee-track { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4) var(--space-10); padding: 0; }
+    .logo-strip .marquee-track[aria-hidden="true"] { display: none; }
+  }
+  .wm-serif { font-family: ui-serif, Georgia, serif; font-weight: 600; letter-spacing: -.01em; }
+  .wm-caps { font-size: var(--text-sm); letter-spacing: .2em; font-weight: 760; }
+
+  /* ===== Comparison table =====
+     Below 64rem the wrap is its own scroll box: the header row sticks to its
+     top and the feature column to its start edge, so a phone can scroll both
+     ways without losing either. From 64rem everything fits, so the wrap
+     clips instead of scrolling and the header sticks under the site header. */
+  /* position: relative makes the wrap the containing block for the .sr-only
+     labels in the cells. Without it they are positioned against the page,
+     escape the scroll box and widen the whole document. */
+  .compare { position: relative; max-block-size: min(78svh, 44rem); overflow: auto; overscroll-behavior-inline: contain; border-radius: var(--r-lg); }
+  @media (min-width: 64rem) { .compare { max-block-size: none; overflow: clip; overflow-clip-margin: 0; } }
+  .compare .table { min-inline-size: 38rem; border-collapse: separate; border-spacing: 0; }
+  .compare :is(th, td) { padding: var(--space-3) var(--space-4); border-block-end: 1px solid var(--line); }
+  .compare tbody tr + tr { border: 0; }
+  .compare td { text-align: center; color: var(--text); }
+  .compare tbody th[scope="row"] { font-weight: 500; text-align: start; color: var(--text); background: var(--surface); }
+  .compare tbody tr:hover :is(th, td) { background: var(--surface-hover); }
+  /* Sticky column: the row header cells, plus the top-left corner. */
+  .compare :is(tbody th[scope="row"], thead th:first-child) {
+    position: sticky; inset-inline-start: 0; z-index: 2;
+    inline-size: 9.5rem; min-inline-size: 9.5rem;
+    box-shadow: inset -1px 0 0 var(--line);
+  }
+  @media (min-width: 64rem) { .compare :is(tbody th[scope="row"], thead th:first-child) { inline-size: 15rem; } }
+  .compare thead th { background: color-mix(in oklab, var(--surface) 92%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); vertical-align: bottom; padding-block: var(--space-4); color: var(--text); font-size: var(--text-sm); white-space: normal; }
+  .compare thead th:first-child { z-index: 3; background: var(--surface); }
+  @media (min-width: 64rem) { .compare thead th { inset-block-start: var(--hdr-h); } }
+  .col-plan { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); text-align: center; }
+  .col-plan .nm { font-size: var(--text-md); font-weight: 660; letter-spacing: -.015em; }
+  .col-plan .pr { font-size: var(--text-xs); font-weight: 500; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .compare .is-pop { background: color-mix(in oklab, var(--brand-soft) 55%, var(--surface)); }
+  .compare thead th.is-pop { background: color-mix(in oklab, var(--brand-soft) 80%, var(--surface)); box-shadow: inset 0 2px 0 var(--brand); }
+  .group-row th {
+    text-align: start; padding-block: var(--space-5) var(--space-2);
+    font-size: var(--text-xs); font-weight: 680; letter-spacing: .1em; text-transform: uppercase; color: var(--brand);
+    background: var(--surface);
+  }
+  .group-row th span { position: sticky; inset-inline-start: var(--space-4); }
+  .yes { color: var(--brand); display: inline-grid; place-items: center; inline-size: 22px; block-size: 22px; border-radius: var(--r-full); background: var(--brand-soft); }
+  .nope { color: var(--text-faint); display: inline-grid; }
+  .val { font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
+  .hint { display: inline-grid; place-items: center; vertical-align: middle; margin-inline-start: var(--space-1); color: var(--text-faint); cursor: help; border-radius: var(--r-full); }
+  .hint:hover { color: var(--brand); }
+  .hint.tooltip::after { white-space: normal; inline-size: 16rem; text-align: start; font-weight: 450; }
+  .compare tbody tr:last-child :is(th, td) { border-block-end: 0; }
+  .footnotes { font-size: var(--text-xs); color: var(--text-muted); display: grid; gap: var(--space-1); }
+  sup { font-size: .7em; color: var(--brand); font-weight: 640; }
+
+  /* ===== Add-ons ===== */
+  .addon-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); }
+  .addon-card .card-body { padding: var(--space-6); flex: 1 1 auto; }
+  .addon-price { margin-block-start: auto; padding-block-start: var(--space-2); font-size: var(--text-xl); font-weight: 700; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  .addon-price small { font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); letter-spacing: 0; }
+
+  /* ===== Enterprise band =====
+     color-scheme: dark on the band flips every light-dark() token inside it,
+     so the Deck buttons, badges and cards render their dark versions here in
+     both themes without a single override. */
+  .enterprise-band {
+    color-scheme: dark;
+    position: relative; overflow: clip; isolation: isolate;
+    border-radius: var(--r-lg);
+    padding: clamp(1.5rem, .8rem + 3.5vw, 4rem);
+    border: 1px solid oklch(100% 0 0 / .08);
+  }
+  .enterprise-band::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(50% 80% at 100% 0%, oklch(55% .13 var(--hue-brand) / .38), transparent 70%),
+      radial-gradient(40% 60% at 0% 100%, oklch(50% .1 calc(var(--hue-brand) + 40) / .25), transparent 70%);
+  }
+  .enterprise-grid { display: grid; gap: var(--space-10); }
+  @media (min-width: 64rem) { .enterprise-grid { grid-template-columns: 1.15fr 1fr; gap: var(--space-12); align-items: center; } }
+  .enterprise-band h2 { color: var(--ink-0); }
+  .enterprise-band .lede { color: var(--ink-300); }
+  .ent-list { display: grid; gap: var(--space-3) var(--space-6); grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); font-size: var(--text-sm); color: var(--ink-200); }
+  .ent-list li { display: flex; gap: var(--space-2); align-items: flex-start; }
+  .ent-list .icon { color: var(--brand-300); margin-block-start: 1px; }
+  .trust { display: grid; gap: var(--space-3); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .trust-item { display: flex; gap: var(--space-3); align-items: center; padding: var(--space-4); border-radius: var(--r-md); background: oklch(100% 0 0 / .04); border: 1px solid oklch(100% 0 0 / .1); }
+  .trust-item .icon-tile { background: oklch(60% .12 var(--hue-brand) / .16); color: var(--brand-300); }
+  .trust-item strong { display: block; font-size: var(--text-sm); color: var(--ink-50); font-weight: 620; }
+  .trust-item span { font-size: var(--text-xs); color: var(--ink-400); }
+  @media (max-width: 40rem) { .trust-item { flex-direction: column; align-items: flex-start; gap: var(--space-2); padding: var(--space-3); } }
+
+  /* ===== Testimonial ===== */
+  .quote-card { display: grid; gap: var(--space-8); align-items: center; padding: clamp(1.5rem, 1rem + 2.5vw, 3rem); border-radius: var(--r-lg); }
+  @media (min-width: 56rem) { .quote-card { grid-template-columns: auto 1fr auto; gap: var(--space-10); } }
+  .quote-photo { inline-size: 9rem; aspect-ratio: 1; object-fit: cover; border-radius: var(--r-lg); background: var(--bg-sunken); box-shadow: var(--shadow-3); }
+  .quote-card blockquote { border: 0; padding: 0; color: var(--text); font-size: clamp(1.15rem, 1rem + .6vw, 1.45rem); line-height: 1.5; letter-spacing: -.012em; font-weight: 500; text-wrap: pretty; }
+  .quote-stats { display: grid; gap: var(--space-5); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 56rem) { .quote-stats { grid-template-columns: 1fr; padding-inline-start: var(--space-8); border-inline-start: 1px solid var(--brand-200); } }
+  .quote-stats .stat-value { color: var(--brand); }
+
+  /* ===== FAQ ===== */
+  .faq { display: grid; gap: var(--space-8); }
+  @media (min-width: 64rem) { .faq { grid-template-columns: 22rem minmax(0, 1fr); gap: var(--space-16); align-items: start; } .faq-aside { position: sticky; inset-block-start: calc(var(--hdr-h) + var(--space-8)); } }
+  .faq .accordion summary { font-size: var(--text-md); padding-block: var(--space-5); padding-inline: var(--space-5); }
+  .faq .accordion .accordion-body { font-size: var(--text-base); line-height: var(--leading-loose); padding-inline: var(--space-5); padding-block-end: var(--space-5); max-inline-size: 68ch; }
+
+  /* ===== Closing CTA ===== */
+  .cta { position: relative; overflow: clip; isolation: isolate; border-radius: var(--r-lg); padding: clamp(2rem, 1rem + 4.5vw, 5rem) var(--space-6); text-align: center; border: 1px solid var(--line); }
+  .cta { background: var(--surface); }
+  .cta::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(60% 90% at 50% 110%, color-mix(in oklab, var(--brand-400) 24%, transparent), transparent 70%),
+      linear-gradient(to right, var(--line) 1px, transparent 1px) 0 0 / 44px 44px,
+      linear-gradient(to bottom, var(--line) 1px, transparent 1px) 0 0 / 44px 44px;
+    mask-image: radial-gradient(75% 90% at 50% 100%, #000 30%, transparent 85%);
+    -webkit-mask-image: radial-gradient(75% 90% at 50% 100%, #000 30%, transparent 85%);
+  }
+  .cta h2 { font-size: clamp(2rem, 1.3rem + 2.6vw, 3.25rem); letter-spacing: -.04em; max-inline-size: 18ch; margin-inline: auto; }
+
+  .site-footer .footer { border: 0; }
+  .site-footer .footer-brand .badge { align-self: flex-start; }
+  /* Workaround: Deck's --good-100 stays light in dark mode, which glares on
+     a dark footer. Deepen it for dark only. */
+  .site-footer .badge-good { background: light-dark(var(--good-100), oklch(30% .07 var(--hue-good))); color: light-dark(var(--good-700), oklch(86% .1 var(--hue-good))); }
+  .site-footer { border-block-start: 1px solid var(--line); background: var(--surface-2); }
+  @media (max-width: 40rem) {
+    .site-footer .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8) var(--space-4); }
+    .site-footer .footer-brand { grid-column: 1 / -1; max-inline-size: none; }
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- The logo and the customer marks are inline SVG, so they inherit colour
+     and there is nothing to download. Swap them for your own. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ledgerly" viewBox="0 0 28 28"><rect width="28" height="28" rx="7" fill="#087a55" style="fill:var(--brand-600)"/><path d="M9 7.5v13h11" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.5 11.5H20M13.5 16H18" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-mark-a" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 20h18z"/><path d="M8 13h8"/></symbol>
+  <symbol id="i-mark-b" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/></symbol>
+  <symbol id="i-mark-c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18c3-8 13-8 16 0"/><path d="M8 18c1.5-3.5 6.5-3.5 8 0"/></symbol>
+  <symbol id="i-mark-d" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="3.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.7 16H20L8.3 4z"/><path d="M4 20l6.8-6.8m2.4-2.4L20 4"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><path d="M2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/><path d="M9 18c-4.5 2-5-2-7-2"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="container">
+    <nav class="navbar" aria-label="Primary">
+      <a class="navbar-brand" href="#">
+        <svg class="logo" aria-hidden="true"><use href="#i-ledgerly"></use></svg>
+        Ledgerly
+      </a>
+      <div class="navbar-links">
+        <a class="nav-link" href="#">Product</a>
+        <a class="nav-link" href="#plans" aria-current="page">Pricing</a>
+        <a class="nav-link" href="#">Customers</a>
+        <a class="nav-link" href="#">Changelog</a>
+      </div>
+      <div class="push cluster cluster-tight">
+        <button class="btn btn-icon btn-ghost" data-deck-theme aria-label="Switch theme">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        </button>
+        <a class="btn btn-ghost btn-sm signin" href="#">Sign in</a>
+        <a class="btn btn-primary btn-sm" href="#plans">Start free</a>
+        <button class="btn btn-icon btn-ghost menu-btn" data-deck-drawer="#site-nav" aria-label="Open menu">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#menu"></use></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Mobile navigation. Needs deck-extras.js for the open/close wiring. -->
+<dialog class="drawer drawer-end" id="site-nav" aria-labelledby="site-nav-title">
+  <div class="drawer-header">
+    <h2 class="drawer-title" id="site-nav-title">Ledgerly</h2>
+    <button class="btn btn-sm btn-ghost btn-icon push" data-drawer-close aria-label="Close menu">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x"></use></svg>
+    </button>
+  </div>
+  <nav class="drawer-body" aria-label="Mobile">
+    <div class="stack stack-1">
+      <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#receipt"></use></svg> Product</a>
+      <a class="sidebar-link" href="#plans" aria-current="page"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#dollar"></use></svg> Pricing</a>
+      <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users"></use></svg> Customers</a>
+      <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#sparkle"></use></svg> Changelog</a>
+    </div>
+  </nav>
+  <div class="drawer-footer">
+    <a class="btn" href="#">Sign in</a>
+    <a class="btn btn-primary" href="#plans">Start free</a>
+  </div>
+</dialog>
+
+<main id="main">
+
+  <!-- ===== Hero + billing toggle =====
+       The toggle is two real radios. With no script the page shows monthly
+       prices, which is what the radios say is selected. -->
+  <section class="hero" aria-labelledby="page-title">
+    <div class="container stack stack-6 head-center enter-rise stagger">
+      <p class="eyebrow">Pricing</p>
+      <h1 id="page-title">Priced on invoices sent, not on heads counted.</h1>
+      <p class="lede">
+        Start free with five invoices a month. Upgrade when the money starts moving.
+        Every plan has unlimited clients, bank-grade security and exports you can take anywhere.
+      </p>
+      <div class="segmented billing" role="radiogroup" aria-label="Billing period">
+        <label>
+          <input class="sr-only" type="radio" name="billing" value="monthly" checked>
+          Monthly
+        </label>
+        <label>
+          <input class="sr-only" type="radio" name="billing" value="annual">
+          Annual <span class="badge badge-brand">Save 20%</span>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Plans =====
+       Each price carries both figures in data attributes; the script at the
+       bottom swaps them. .plan-pop is the highlighted tier. -->
+  <section class="container" id="plans" aria-label="Plans">
+    <div class="plans">
+
+      <article class="card plan reveal">
+        <div class="card-body">
+          <div class="stack stack-1">
+            <h2 class="plan-name">Free</h2>
+            <p class="plan-for">For freelancers sending their first invoices.</p>
+          </div>
+          <div class="stack stack-1 mt-6">
+            <p class="price"><span class="cur">$</span><span class="amount">0</span><span class="per">/ month</span></p>
+            <p class="price-note">Free for ever, no card needed</p>
+          </div>
+          <a class="btn btn-block mt-6" href="#">Start for free</a>
+          <ul class="plan-features">
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 5 invoices a month</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 1 user, unlimited clients</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Card and bank-transfer payments</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> PDF and CSV export</li>
+            <li class="no"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg> <span><span class="sr-only">Not included: </span>Automatic reminders</span></li>
+            <li class="no"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg> <span><span class="sr-only">Not included: </span>Bank feeds</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card plan reveal">
+        <div class="card-body">
+          <div class="stack stack-1">
+            <h2 class="plan-name">Starter</h2>
+            <p class="plan-for">For a small studio that bills every month.</p>
+          </div>
+          <div class="stack stack-1 mt-6">
+            <p class="price"><span class="cur">$</span><span class="amount" data-monthly="19" data-annual="15">19</span><span class="per">/ month</span></p>
+            <p class="price-note" data-monthly="Billed monthly" data-annual="$180 billed once a year">Billed monthly</p>
+          </div>
+          <a class="btn btn-outline btn-block mt-6" href="#">Start 14-day trial</a>
+          <ul class="plan-features">
+            <li class="lead">Everything in Free, plus:</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Unlimited invoices and quotes</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 3 users included</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Automatic payment reminders</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 2 bank feeds</li>
+            <li class="no"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg> <span><span class="sr-only">Not included: </span>Multi-currency</span></li>
+            <li class="no"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg> <span><span class="sr-only">Not included: </span>Approval workflows</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card plan plan-pop g-border reveal">
+        <span class="badge badge-solid">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill-sm"></use></svg>
+          Most popular
+        </span>
+        <div class="card-body">
+          <div class="stack stack-1">
+            <h2 class="plan-name">Growth</h2>
+            <p class="plan-for">For teams with more clients than fingers.</p>
+          </div>
+          <div class="stack stack-1 mt-6">
+            <p class="price"><span class="cur">$</span><span class="amount" data-monthly="49" data-annual="39">49</span><span class="per">/ month</span></p>
+            <p class="price-note" data-monthly="Billed monthly" data-annual="$468 billed once a year">Billed monthly</p>
+          </div>
+          <a class="btn btn-primary btn-block mt-6" href="#">
+            Start 14-day trial
+            <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+          </a>
+          <ul class="plan-features">
+            <li class="lead">Everything in Starter, plus:</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 10 users, then $6 each</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 40 currencies, auto FX rates</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Unlimited bank feeds</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Approval workflows</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Cash-flow forecasting</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Same-day support</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card plan reveal">
+        <div class="card-body">
+          <div class="stack stack-1">
+            <h2 class="plan-name">Enterprise</h2>
+            <p class="plan-for">For finance teams with an auditor to answer to.</p>
+          </div>
+          <div class="stack stack-1 mt-6">
+            <p class="price"><span class="custom">Let's talk</span></p>
+            <p class="price-note">Annual contract, invoiced</p>
+          </div>
+          <a class="btn btn-block mt-6" href="#enterprise">Talk to sales</a>
+          <ul class="plan-features">
+            <li class="lead">Everything in Growth, plus:</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> SAML SSO and SCIM</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Custom roles and audit log</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> EU or US data residency</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 99.95% uptime SLA</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Named account manager</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+    <p class="text-center text-sm text-muted mt-6">Prices in USD, before local sales tax. Non-profits get 50% off any paid plan — <a href="#faq">see the FAQ</a>.</p>
+  </section>
+
+  <!-- ===== Logos =====
+       Two identical tracks make the loop seamless; the second is
+       aria-hidden so a screen reader hears the list once. -->
+  <section class="section" aria-labelledby="logos-title">
+    <div class="container stack stack-6">
+      <p class="text-center text-sm text-muted" id="logos-title">Trusted by 12,000 small businesses to send $2.1bn of invoices a year</p>
+      <div class="marquee logo-strip">
+        <div class="marquee-track">
+          <span class="wm"><svg aria-hidden="true"><use href="#i-mark-a"></use></svg>Northwind</span>
+          <span class="wm wm-serif">Fernhill &amp; Co.</span>
+          <span class="wm"><svg aria-hidden="true"><use href="#i-mark-b"></use></svg>Parcel Labs</span>
+          <span class="wm wm-caps">KILN COFFEE</span>
+          <span class="wm"><svg aria-hidden="true"><use href="#i-mark-c"></use></svg>Brightline</span>
+          <span class="wm wm-serif">Oakwood Joinery</span>
+          <span class="wm"><svg aria-hidden="true"><use href="#i-mark-d"></use></svg>Moss Studio</span>
+          <span class="wm wm-caps">TIDEWATER</span>
+        </div>
+        <div class="marquee-track" aria-hidden="true">
+          <span class="wm"><svg><use href="#i-mark-a"></use></svg>Northwind</span>
+          <span class="wm wm-serif">Fernhill &amp; Co.</span>
+          <span class="wm"><svg><use href="#i-mark-b"></use></svg>Parcel Labs</span>
+          <span class="wm wm-caps">KILN COFFEE</span>
+          <span class="wm"><svg><use href="#i-mark-c"></use></svg>Brightline</span>
+          <span class="wm wm-serif">Oakwood Joinery</span>
+          <span class="wm"><svg><use href="#i-mark-d"></use></svg>Moss Studio</span>
+          <span class="wm wm-caps">TIDEWATER</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Comparison =====
+       A real table: the row headers are <th scope="row">, each category is a
+       <tbody> with a rowgroup header. Ticks and dashes carry a visually
+       hidden word so a screen reader does not just hear "image". -->
+  <section class="container section" id="compare" aria-labelledby="compare-title" style="padding-block-start:var(--space-8)">
+    <div class="stack stack-8">
+      <div class="stack stack-3 head-center reveal">
+        <p class="eyebrow">Compare plans</p>
+        <h2 class="section-title" id="compare-title">Every feature, side by side</h2>
+        <p class="lede">The fine print, without the fine print. Hover a <svg class="icon icon-sm" style="display:inline;vertical-align:-3px" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#info-sm"></use></svg> for what a feature actually does.</p>
+      </div>
+
+      <div class="table-wrap compare" tabindex="0" role="region" aria-labelledby="compare-title">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr-only">Feature</span></th>
+              <th scope="col"><div class="col-plan"><span class="nm">Free</span><span class="pr">$0</span></div></th>
+              <th scope="col"><div class="col-plan"><span class="nm">Starter</span><span class="pr"><span data-monthly="$19 / mo" data-annual="$15 / mo">$19 / mo</span></span></div></th>
+              <th scope="col" class="is-pop"><div class="col-plan"><span class="nm">Growth</span><span class="pr"><span data-monthly="$49 / mo" data-annual="$39 / mo">$49 / mo</span></span></div></th>
+              <th scope="col"><div class="col-plan"><span class="nm">Enterprise</span><span class="pr">Custom</span></div></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="group-row"><th scope="rowgroup" colspan="5"><span>Invoicing</span></th></tr>
+            <tr><th scope="row">Invoices per month</th><td><span class="val">5</span></td><td><span class="val">Unlimited</span></td><td class="is-pop"><span class="val">Unlimited</span></td><td><span class="val">Unlimited</span></td></tr>
+            <tr><th scope="row">Quotes and estimates</th><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td class="is-pop"><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td></tr>
+            <tr><th scope="row">Recurring invoices <button class="hint tooltip" type="button" data-tip="Schedule an invoice weekly, monthly or on custom terms. It drafts, sends and chases itself." aria-label="About recurring invoices: schedule an invoice weekly, monthly or on custom terms. It drafts, sends and chases itself."><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#info-sm"></use></svg></button></th><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td class="is-pop"><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td></tr>
+            <tr><th scope="row">Automatic reminders</th><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td><span class="val">3 per invoice</span></td><td class="is-pop"><span class="val">Custom cadence</span></td><td><span class="val">Custom cadence</span></td></tr>
+            <tr><th scope="row">Branded templates</th><td><span class="val">1</span></td><td><span class="val">5</span></td><td class="is-pop"><span class="val">Unlimited</span></td><td><span class="val">Unlimited</span></td></tr>
+            <tr><th scope="row">Multi-currency <button class="hint tooltip" type="button" data-tip="Invoice in 40 currencies. Rates update hourly and gains or losses post to your ledger." aria-label="About multi-currency: invoice in 40 currencies. Rates update hourly and gains or losses post to your ledger."><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#info-sm"></use></svg></button></th><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td class="is-pop"><span class="val">40 currencies</span></td><td><span class="val">40 currencies</span></td></tr>
+          </tbody>
+
+          <tbody>
+            <tr class="group-row"><th scope="rowgroup" colspan="5"><span>Payments</span></th></tr>
+            <tr><th scope="row">Card payments<sup>1</sup></th><td><span class="val">2.9% + 30¢</span></td><td><span class="val">2.4% + 20¢</span></td><td class="is-pop"><span class="val">1.9% + 20¢</span></td><td><span class="val">Negotiated</span></td></tr>
+            <tr><th scope="row">Bank transfer and ACH</th><td><span class="val">1% (max $5)</span></td><td><span class="val">0.8% (max $5)</span></td><td class="is-pop"><span class="val">Free</span></td><td><span class="val">Free</span></td></tr>
+            <tr><th scope="row">Bank feeds</th><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td><span class="val">2</span></td><td class="is-pop"><span class="val">Unlimited</span></td><td><span class="val">Unlimited</span></td></tr>
+            <tr><th scope="row">Payment plans and deposits</th><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td class="is-pop"><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td></tr>
+            <tr><th scope="row">Payouts<sup>2</sup></th><td><span class="val">3 days</span></td><td><span class="val">2 days</span></td><td class="is-pop"><span class="val">Next day</span></td><td><span class="val">Same day</span></td></tr>
+          </tbody>
+
+          <tbody>
+            <tr class="group-row"><th scope="rowgroup" colspan="5"><span>Reporting</span></th></tr>
+            <tr><th scope="row">Aged receivables</th><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td class="is-pop"><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td></tr>
+            <tr><th scope="row">Cash-flow forecasting <button class="hint tooltip" type="button" data-tip="A 90-day forecast built from open invoices, recurring bills and each client's real payment history." aria-label="About cash-flow forecasting: a 90-day forecast built from open invoices, recurring bills and each client's real payment history."><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#info-sm"></use></svg></button></th><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td class="is-pop"><span class="val">90 days</span></td><td><span class="val">12 months</span></td></tr>
+            <tr><th scope="row">Custom reports</th><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td><span class="val">3</span></td><td class="is-pop"><span class="val">Unlimited</span></td><td><span class="val">Unlimited</span></td></tr>
+            <tr><th scope="row">Accounting sync</th><td><span class="val">CSV</span></td><td><span class="val">CSV, 1 app</span></td><td class="is-pop"><span class="val">All apps</span></td><td><span class="val">All apps + API</span></td></tr>
+          </tbody>
+
+          <tbody>
+            <tr class="group-row"><th scope="rowgroup" colspan="5"><span>Security</span></th></tr>
+            <tr><th scope="row">Two-factor authentication</th><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td class="is-pop"><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td></tr>
+            <tr><th scope="row">Roles and permissions</th><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td><span class="val">3 fixed roles</span></td><td class="is-pop"><span class="val">3 fixed roles</span></td><td><span class="val">Custom roles</span></td></tr>
+            <tr><th scope="row">SAML SSO and SCIM</th><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td class="is-pop"><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td></tr>
+            <tr><th scope="row">Audit log</th><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td><span class="nope"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#minus-sm"></use></svg></span><span class="sr-only">Not included</span></td><td class="is-pop"><span class="val">90 days</span></td><td><span class="val">7 years</span></td></tr>
+            <tr><th scope="row">Data residency<sup>3</sup></th><td><span class="val">US</span></td><td><span class="val">US</span></td><td class="is-pop"><span class="val">US or EU</span></td><td><span class="val">US, EU or UK</span></td></tr>
+          </tbody>
+
+          <tbody>
+            <tr class="group-row"><th scope="rowgroup" colspan="5"><span>Support</span></th></tr>
+            <tr><th scope="row">Help centre and community</th><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td class="is-pop"><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td><td><span class="yes"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span><span class="sr-only">Included</span></td></tr>
+            <tr><th scope="row">Email support</th><td><span class="val">2 business days</span></td><td><span class="val">Next business day</span></td><td class="is-pop"><span class="val">Same day</span></td><td><span class="val">4-hour SLA</span></td></tr>
+            <tr><th scope="row">Onboarding</th><td><span class="val">Self-serve</span></td><td><span class="val">Self-serve</span></td><td class="is-pop"><span class="val">1 call</span></td><td><span class="val">Dedicated</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footnotes">
+        <p><sup>1</sup> Per successful card payment, US cards. International cards add 1%. Fees are deducted before payout; there is no separate charge.</p>
+        <p><sup>2</sup> Business days from the client paying to the money landing in your bank account.</p>
+        <p><sup>3</sup> Where your invoices, clients and documents are stored and processed. Backups stay in the same region.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Add-ons ===== -->
+  <section class="container section" aria-labelledby="addons-title" style="padding-block-start:0">
+    <div class="stack stack-8">
+      <div class="stack stack-3 reveal">
+        <p class="eyebrow">Add-ons</p>
+        <h2 class="section-title" id="addons-title">Pay for the extras you use, and nothing else</h2>
+      </div>
+      <div class="addon-grid">
+        <article class="card addon-card lift reveal">
+          <div class="card-body">
+            <div class="bar">
+              <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#folder"></use></svg></span>
+              <span class="badge push">Starter and up</span>
+            </div>
+            <h3 class="card-title mt-2">Extra entity</h3>
+            <p class="text-sm text-muted">Run a second company or trading name from the same login, with its own branding, numbering and bank feeds.</p>
+            <p class="addon-price">$12 <small>/ month each</small></p>
+          </div>
+        </article>
+        <article class="card addon-card lift reveal">
+          <div class="card-body">
+            <div class="bar">
+              <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#users"></use></svg></span>
+              <span class="badge push">Growth and up</span>
+            </div>
+            <h3 class="card-title mt-2">Payroll sync</h3>
+            <p class="text-sm text-muted">Push approved expenses and contractor payments to your payroll provider, and pull salaries back as ledger entries.</p>
+            <p class="addon-price">$8 <small>/ month</small></p>
+          </div>
+        </article>
+        <article class="card addon-card lift reveal">
+          <div class="card-body">
+            <div class="bar">
+              <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#clipboard"></use></svg></span>
+              <span class="badge push">Any paid plan</span>
+            </div>
+            <h3 class="card-title mt-2">Guided migration</h3>
+            <p class="text-sm text-muted">A specialist moves your clients, open invoices and two years of history across in a week, then checks the totals with you.</p>
+            <p class="addon-price">$499 <small>one-off</small></p>
+          </div>
+        </article>
+        <article class="card addon-card lift reveal">
+          <div class="card-body">
+            <div class="bar">
+              <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#receipt"></use></svg></span>
+              <span class="badge push">Growth and up</span>
+            </div>
+            <h3 class="card-title mt-2">Receipt capture</h3>
+            <p class="text-sm text-muted">Forward or photograph a receipt; it is read, matched to a bank line and filed against the right client.</p>
+            <p class="addon-price">$5 <small>/ user / month</small></p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Enterprise ===== -->
+  <section class="container" id="enterprise" aria-labelledby="ent-title">
+    <div class="enterprise-band g-dark reveal">
+      <div class="enterprise-grid">
+        <div class="stack stack-6">
+          <div class="stack stack-3">
+            <p class="eyebrow">Enterprise</p>
+            <h2 class="section-title" id="ent-title">For finance teams with an auditor on speed dial.</h2>
+            <p class="lede">Group entities, custom approval chains and a security review we will happily sit through. Priced on volume, contracted annually.</p>
+          </div>
+          <ul class="ent-list">
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> SAML SSO, SCIM and custom roles</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Consolidated multi-entity reporting</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 99.95% uptime SLA with credits</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Named account manager</li>
+          </ul>
+          <div class="cluster">
+            <a class="btn btn-primary btn-lg" href="#">
+              Talk to sales
+              <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+            </a>
+            <a class="btn btn-lg btn-ghost" href="#">
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#download"></use></svg>
+              Security pack (PDF)
+            </a>
+          </div>
+        </div>
+        <div class="trust">
+          <div class="trust-item">
+            <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#shield"></use></svg></span>
+            <div><strong>SOC 2 Type II</strong><span>Audited annually</span></div>
+          </div>
+          <div class="trust-item">
+            <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#check-circle"></use></svg></span>
+            <div><strong>ISO 27001</strong><span>Certified since 2022</span></div>
+          </div>
+          <div class="trust-item">
+            <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#credit-card"></use></svg></span>
+            <div><strong>PCI DSS Level 1</strong><span>Card data never stored</span></div>
+          </div>
+          <div class="trust-item">
+            <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#lock"></use></svg></span>
+            <div><strong>GDPR &amp; CCPA</strong><span>DPA on request</span></div>
+          </div>
+          <div class="trust-item">
+            <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#gauge"></use></svg></span>
+            <div><strong>99.95% SLA</strong><span>Status page, public</span></div>
+          </div>
+          <div class="trust-item">
+            <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#map-pin"></use></svg></span>
+            <div><strong>Data residency</strong><span>US, EU or UK</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Testimonial ===== -->
+  <section class="container section" aria-label="Customer story">
+    <figure class="quote-card g-brand-soft reveal">
+      <img class="quote-photo" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=288&amp;h=288&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" width="144" height="144" loading="lazy" decoding="async" alt="Portrait of Maya Castellanos">
+      <div class="stack stack-4">
+        <blockquote>“We used to lose the last Friday of every month to chasing invoices. Ledgerly's reminders do it now, politely, and nobody on the team has had to write ‘just following up’ since March.”</blockquote>
+        <figcaption class="stack stack-0">
+          <span class="fw-semi">Maya Castellanos</span>
+          <span class="text-sm text-muted">Founder, Fernhill &amp; Co. · Growth plan, 14 people</span>
+        </figcaption>
+      </div>
+      <dl class="quote-stats">
+        <div class="stat">
+          <dt class="stat-label">Average days to get paid</dt>
+          <dd class="stat-value m-0">41 → 17</dd>
+        </div>
+        <div class="stat">
+          <dt class="stat-label">Hours back each month</dt>
+          <dd class="stat-value m-0">11</dd>
+        </div>
+      </dl>
+    </figure>
+  </section>
+
+  <!-- ===== FAQ =====
+       Plain <details>. The shared name attribute makes it one-open-at-a-time
+       in browsers that support it, and harmlessly independent elsewhere. -->
+  <section class="container section" id="faq" aria-labelledby="faq-title" style="padding-block-start:0">
+    <div class="faq">
+      <div class="faq-aside stack stack-4">
+        <p class="eyebrow">Billing questions</p>
+        <h2 class="section-title" id="faq-title">Before you reach for the card</h2>
+        <p class="text-muted">Still unsure? A person on our billing team answers within the hour, weekdays 8am–8pm ET.</p>
+        <div class="cluster">
+          <a class="btn btn-soft" href="#">
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#message"></use></svg>
+            Chat with billing
+          </a>
+        </div>
+      </div>
+      <div class="accordion">
+        <details name="faq" open>
+          <summary>Can I change plans later?</summary>
+          <div class="accordion-body">Yes, whenever you like. Upgrades apply straight away and we charge only the difference for the rest of the period. Downgrades take effect at the next renewal, so you keep what you paid for.</div>
+        </details>
+        <details name="faq">
+          <summary>What counts as an invoice on the Free plan?</summary>
+          <div class="accordion-body">Any invoice you send in a calendar month, including recurring ones. Drafts, quotes and credit notes don't count, and the counter resets on the 1st.</div>
+        </details>
+        <details name="faq">
+          <summary>How does annual billing work?</summary>
+          <div class="accordion-body">You pay for twelve months up front at 20% less than monthly. Add users mid-year and they are prorated to your renewal date. If you cancel in the first 30 days we refund the lot.</div>
+        </details>
+        <details name="faq">
+          <summary>Are card fees on top of the plan price?</summary>
+          <div class="accordion-body">They are taken from each payment before it reaches you, never billed separately. You can pass them on to clients as a surcharge where local law allows it; Ledgerly adds the line for you.</div>
+        </details>
+        <details name="faq">
+          <summary>What happens to my data if I cancel?</summary>
+          <div class="accordion-body">Your account drops to Free. Every invoice, client and payment stays readable and exportable as CSV, PDF or JSON for as long as you want it. We delete it only when you ask us to.</div>
+        </details>
+        <details name="faq">
+          <summary>Do you offer discounts?</summary>
+          <div class="accordion-body">Registered non-profits and charities get 50% off any paid plan. Accountants managing five or more clients get a partner rate and a single bill. Ask billing for either.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Closing call to action ===== -->
+  <section class="container section" aria-labelledby="cta-title" style="padding-block-start:0">
+    <div class="cta reveal">
+      <div class="stack stack-6" style="align-items:center">
+        <h2 id="cta-title">Send your first invoice in about four minutes.</h2>
+        <p class="lede" style="margin-inline:auto;max-inline-size:44ch">Free for your first five invoices every month. No card, no sales call, no trial clock.</p>
+        <div class="cluster cluster-center">
+          <a class="btn btn-primary btn-lg" href="#">
+            Start free
+            <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+          </a>
+          <a class="btn btn-lg" href="#">Book a 20-minute demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <a class="navbar-brand" href="#">
+            <svg class="logo" aria-hidden="true"><use href="#i-ledgerly"></use></svg>
+            Ledgerly
+          </a>
+          <p>Invoicing and payments for small teams who would rather be doing the work.</p>
+          <span class="badge badge-good badge-dot">All systems normal</span>
+        </div>
+        <div class="footer-col">
+          <p class="footer-heading">Product</p>
+          <a href="#">Invoicing</a>
+          <a href="#">Payments</a>
+          <a href="#">Reporting</a>
+          <a href="#plans">Pricing</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-heading">Company</p>
+          <a href="#">About</a>
+          <a href="#">Customers</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-heading">Resources</p>
+          <a href="#">Help centre</a>
+          <a href="#">API docs</a>
+          <a href="#">Invoice templates</a>
+          <a href="#">Security</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-heading">Legal</p>
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+          <a href="#">DPA</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Ledgerly, Inc. Payments processed by licensed partners.</span>
+        <div class="footer-social">
+          <a href="#" aria-label="Ledgerly on X"><svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg></a>
+          <a href="#" aria-label="Ledgerly on LinkedIn"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"></use></svg></a>
+          <a href="#" aria-label="Ledgerly on GitHub"><svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Billing toggle. Every element with data-monthly / data-annual gets the
+     matching text. Without this script the monthly figures simply stay. -->
+<script>
+  (() => {
+    const swap = (period) => {
+      document.querySelectorAll('[data-monthly]').forEach((n) => { n.textContent = n.dataset[period]; });
+    };
+    document.querySelectorAll('input[name="billing"]').forEach((r) => {
+      r.addEventListener('change', () => r.checked && swap(r.value));
+      if (r.checked) swap(r.value);
+    });
+  })();
+</script>
+
+</body>
+</html>

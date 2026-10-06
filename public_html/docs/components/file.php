@@ -22,7 +22,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>File</h1>
   <p class="lede">
     <code>.file</code> is a dashed, centred drop zone that goes on a
@@ -32,7 +32,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it when uploading is a primary action on the page: an import screen, an avatar
@@ -53,7 +53,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="hiding">Hiding the input without losing it</h2>
   <pre class="dx-code"><code><?= e('.file input[type="file"] {
   position: absolute;
@@ -66,7 +66,7 @@ require __DIR__ . '/../_layout.php';
     not yours to change. Every custom upload control therefore hides the real input and
     puts something else on top. <em>How</em> it is hidden is the part that matters:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong><code>display: none</code> removes it from the tab order.</strong> The
       control becomes mouse-only. This is the most common upload defect there is.
@@ -86,7 +86,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="focus">:focus-within is the focus ring</h2>
   <p>
     The input is invisible, so focusing it would show nothing. <code>.file:hover,
@@ -100,7 +100,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-3" style="max-inline-size:26rem">' . "\n" .
+      '<div class="stack stack-3" style="max-inline-size:26rem">' . "\n" .
       '  <label class="file">' . "\n" .
       '    <span>Tab into this one</span>' . "\n" .
       '    <input type="file">' . "\n" .
@@ -116,7 +116,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="dropping">Dropping is not implemented</h2>
   <p>
     <code>.file</code> draws the visual vocabulary of a drop target — a dashed border, a
@@ -156,7 +156,7 @@ zone.addEventListener(\'drop\', e => {
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     <code>.file</code> has no <code>.file-*</code> variants, so the extractor does not
@@ -165,14 +165,14 @@ zone.addEventListener(\'drop\', e => {
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--line-strong', '--brand-500', '--brand-soft', '--surface-2', '--text-muted', '--r-md', '--space-2', '--space-6', '--dur-1']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The input keeps its tab stop</strong>, which is the whole reason it is 1px
       and transparent rather than <code>display: none</code>. Tab reaches it, Enter and
@@ -215,7 +215,7 @@ zone.addEventListener(\'drop\', e => {
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The zone is a grid with <code>place-items: center</code> and symmetrical padding, so
@@ -235,7 +235,7 @@ zone.addEventListener(\'drop\', e => {
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The border and background transition over
@@ -245,7 +245,7 @@ zone.addEventListener(\'drop\', e => {
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.file</code> is not named in <code>src/99-print.css</code>, so it prints as a
@@ -259,7 +259,7 @@ zone.addEventListener(\'drop\', e => {
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* A compact zone for a sidebar */
@@ -279,9 +279,9 @@ zone.addEventListener(\'drop\', e => {
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not when uploading is a minor action.</strong> A drop zone is large and
       demands attention. For an optional attachment on a long form, a

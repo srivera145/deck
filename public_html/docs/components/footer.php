@@ -28,7 +28,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Footer</h1>
   <p class="lede">
     The bottom of a site: a few columns of links, a brand block, and a bar underneath for
@@ -37,7 +37,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     On a public site, where the footer is a real navigation surface — the place people go
@@ -89,7 +89,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="grid">The column grid</h2>
   <p>
     <code>.footer-grid</code> is <code>repeat(auto-fit, minmax(min(11rem, 100%), 1fr))</code>
@@ -109,7 +109,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="links">Footer links are not underlined, and take the body colour</h2>
   <p>
     This is the thing to decide about before you use the component. The footer sets its text
@@ -149,7 +149,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="bottom">The bottom bar</h2>
   <p>
     <code>.footer-bottom</code> is a wrapping flex row above a hairline: copyright, the legal
@@ -172,20 +172,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/22-nav.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--line', '--text-sm', '--text-xs', '--text', '--text-muted', '--brand', '--surface-hover', '--r-sm', '--space-8', '--space-10']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Use the <code>&lt;footer&gt;</code> element.</strong> At the top level of the
       document it is a <code>contentinfo</code> landmark, which is a region screen reader
@@ -227,7 +227,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Everything mirrors on its own. The grid flows from the correct edge, the bottom bar's
@@ -261,7 +261,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing in the footer is transitioned or animated. The link hover and the social square's
@@ -270,7 +270,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.footer</code> is not in <code>src/99-print.css</code>, so it prints in full. That
@@ -290,7 +290,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Underline links that sit in sentences */
@@ -309,9 +309,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not in an application.</strong> A dashboard does not need a sitemap under
       every screen. Put the legal links in a <a href="menu.php">menu</a> off the account

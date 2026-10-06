@@ -37,7 +37,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Colour and surface</h1>
   <p class="lede">
     Everything that decides what a box looks like: its background, its text colour,
@@ -48,7 +48,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="background">Background</h2>
   <p>
     The three neutral backgrounds are a depth order, not a palette:
@@ -69,7 +69,7 @@ require __DIR__ . '/../_layout.php';
   <?php docs_token_table(['--bg', '--bg-sunken', '--surface', '--surface-2', '--surface-hover', '--brand-soft']); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="text">Text colour</h2>
   <p>
     Three neutrals and four status colours. The neutrals are a hierarchy —
@@ -99,7 +99,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="border">Border</h2>
   <p>
     One hairline, in <code>--line</code>, which is a low-contrast neutral that reads as
@@ -114,7 +114,7 @@ require __DIR__ . '/../_layout.php';
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="radius">Radius</h2>
   <p>
     Five steps and two logical halves. The steps are in <code>px</code> rather than
@@ -143,7 +143,7 @@ require __DIR__ . '/../_layout.php';
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="shadow">Shadow</h2>
   <p>
     Four elevations and a reset. The shadow colour is a token,
@@ -164,7 +164,7 @@ require __DIR__ . '/../_layout.php';
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="tone">Tone</h2>
   <p>
     Three classes driven by a style query rather than by their own name. Set
@@ -188,9 +188,9 @@ require __DIR__ . '/../_layout.php';
   <?php docs_utility_table(['tone-surface', 'tone-text', 'tone-icon'], 'Style-query tone utilities'); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use these</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not to build a component that already exists.</strong>
       <code>.bg-surface .border .r-md .shadow-1</code> is a <code>.card</code>. The

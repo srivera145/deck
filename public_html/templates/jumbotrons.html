@@ -1,0 +1,1107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jumbotrons · Deck template</title>
+<meta name="description" content="Eight hero sections built with Deck: centred on a mesh, split with a photo, an always-dark product hero, a full-bleed photo, an announcement strip, a stats band, a video hero and a newsletter sign-up. Copy any one.">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e7490'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+<script src="../assets/deck/deck-extras.js" defer></script>   <!-- only if you use carousel, drawer, number stepper, banner dismiss, speed dial or mega menu -->
+
+<style>
+@layer app.pages {
+  /* Deck lets a .btn inside an .input-group shrink along with the input, so a
+     nowrap label runs into its own padding on a narrow row. The input is the
+     one that should give. */
+  .input-group > .btn { flex: none; }
+
+  /* How this block is laid out: "Showcase chrome" is this page only (top bar,
+     intro, the frames around each demo) and is not part of any jumbotron.
+     "Shared" is the handful of rules the variants lean on. After that there
+     is one group per variant, prefixed like its HTML (.jt-centered-…, .jt-dark-…).
+     Copying a variant? Take its group plus "Shared". */
+
+  /* ===== Showcase chrome (this page only) ===== */
+  .topbar {
+    position: sticky; inset-block-start: 0; z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid var(--line);
+  }
+  .topbar .navbar { border: 0; }
+  .topbar nav[aria-label="Breadcrumb"] { padding-inline-start: var(--space-4); border-inline-start: 1px solid var(--line); }
+  .topbar .range { inline-size: 7rem; }
+  @media (max-width: 39.99rem) {
+    .topbar nav[aria-label="Breadcrumb"], .topbar .range { display: none; }
+  }
+
+  .intro { padding-block-end: var(--space-10); }
+  .intro .display { max-inline-size: 15ch; text-wrap: balance; }
+  .intro .lede { text-wrap: pretty; }
+  .intro .chip { text-decoration: none; color: var(--text); }
+
+  .variants { display: flex; flex-direction: column; gap: var(--space-16); padding-block-end: var(--space-section); }
+  .variant { display: flex; flex-direction: column; gap: var(--space-5); scroll-margin-block-start: var(--space-20); }
+  /* .bar does not wrap; this one does, so on a phone the copy button drops
+     under the description, lined up with the title rather than the badge. */
+  .variant-head { flex-wrap: wrap; align-items: flex-start; row-gap: var(--space-3); }
+  .variant-head > .badge { min-inline-size: 2rem; justify-content: center; margin-block-start: .2rem; font-variant-numeric: tabular-nums; }
+  .variant-head > .stack { flex: 1 1 16rem; min-inline-size: 0; }
+  @media (max-width: 39.99rem) { .variant-head > .push { margin-inline-start: calc(2rem + var(--space-3)); } }
+  @media (min-width: 40rem) { .variant-head { align-items: center; } .variant-head > .badge { margin: 0; } }
+  .variant-frame {
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: clip;
+    background: var(--bg);
+    box-shadow: var(--shadow-2);
+  }
+
+  .page-foot { padding-block: var(--space-6); }
+  .page-foot .footer-bottom { border: 0; padding: 0; }
+
+  /* ===== Shared by every jumbotron ===== */
+  /* The small label above a headline. */
+  .eyebrow { font-size: var(--text-sm); font-weight: 640; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); }
+
+  /* Workaround: Deck's status tints (--good-100, --bad-100) stay light in
+     dark mode, so these badges glare on dark surfaces. light-dark() follows
+     the element's colour scheme, data-theme="dark" subtrees included. */
+  .badge-good { background: light-dark(var(--good-100), color-mix(in oklab, var(--good-500) 20%, transparent)); color: light-dark(var(--good-700), oklch(from var(--good-500) 82% c h)); }
+  .badge-bad  { background: light-dark(var(--bad-100), color-mix(in oklab, var(--bad-500) 24%, transparent)); color: light-dark(var(--bad-700), oklch(from var(--bad-500) 82% c h)); }
+  .icon-tile-good { background: light-dark(var(--good-100), color-mix(in oklab, var(--good-500) 20%, transparent)); color: light-dark(var(--good-700), oklch(from var(--good-500) 82% c h)); }
+  .stat-delta-up { color: light-dark(var(--good-700), oklch(from var(--good-500) 78% c h)); }
+
+  /* ===== 01 Centered (.jt-centered-…) =====
+     .g-mesh paints three brand blooms; the grid-lines layer is masked to a
+     soft ellipse so it only shows behind the headline. */
+  .jt-centered {
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    border: 0;
+    border-radius: 0;
+    gap: var(--space-6);
+    padding-block: clamp(4rem, 2.5rem + 6vw, 7.5rem);
+  }
+  .jt-centered-bg {
+    position: absolute; inset: 0; z-index: -1;
+    --cell: 44px;
+    mask-image: radial-gradient(ellipse 55% 60% at 50% 38%, #000 10%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse 55% 60% at 50% 38%, #000 10%, transparent 72%);
+  }
+  /* Bigger tiles than .g-mesh's default make the blooms broad and soft
+     instead of three distinct spots; the drift still moves them. */
+  .jt-centered.g-mesh { background-size: 115% 100%, 100% 90%, 120% 110%; }
+  .jt-centered .display { font-size: clamp(2.5rem, 1.5rem + 4.6vw, 4.75rem); max-inline-size: 15ch; text-wrap: balance; }
+  /* Lift the gradient phrase in dark mode, where .g-text's 600 stop is dim. */
+  .jt-centered .g-text {
+    background-image: linear-gradient(in oklab 92deg, var(--brand),
+      light-dark(oklch(from var(--brand-500) l c calc(h + 52)), oklch(from var(--brand-300) l c calc(h + 52))));
+  }
+  .jt-centered .lede { font-size: var(--text-lg); max-inline-size: 52ch; text-wrap: pretty; }
+  .jt-centered .jumbotron-actions { justify-content: center; }
+  .jt-centered-pill {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    padding: 4px var(--space-3) 4px 4px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-full);
+    background: color-mix(in oklab, var(--surface) 78%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-1);
+    color: var(--text);
+    font-size: var(--text-sm);
+    text-decoration: none;
+  }
+  .jt-centered-pill:hover { border-color: var(--line-strong); }
+  .jt-centered-pill .badge { border-radius: var(--r-full); }
+  .jt-centered-trust { justify-content: center; align-items: center; gap: var(--space-3); }
+  .jt-centered-trust .avatar { --size: 30px; }
+  .jt-centered-logos {
+    list-style: none; margin: var(--space-6) 0 0; padding: var(--space-6) 0 0;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4) var(--space-8);
+    border-block-start: 1px solid var(--line);
+    inline-size: min(100%, 52rem);
+    color: var(--text-faint);
+  }
+  .jt-centered-logos li {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    font-size: var(--text-lg); font-weight: 700; letter-spacing: -.03em;
+  }
+
+  /* ===== 02 Split with media (.jt-split-…) =====
+     .jumbotron-media is the two-column grid (one column below 56rem). The
+     chips hang off the photo's edges; the media wrapper's padding is the
+     room they hang into, so nothing pokes out of the section. */
+  .jt-split {
+    border: 0;
+    border-radius: 0;
+    padding-block: clamp(3rem, 2rem + 5vw, 6.5rem);
+  }
+  .jt-split .display { font-size: clamp(2.25rem, 1.5rem + 3.4vw, 4rem); max-inline-size: 13ch; text-wrap: balance; }
+  .jt-split .lede { max-inline-size: 46ch; text-wrap: pretty; }
+  .jt-split-points {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5);
+    font-size: var(--text-sm); color: var(--text-muted);
+  }
+  .jt-split-points li { display: inline-flex; align-items: center; gap: var(--space-2); }
+  .jt-split-points .icon { color: var(--good-600); }
+  .jt-split-media {
+    position: relative;
+    isolation: isolate;
+    margin: 0;
+    padding: var(--space-6) 0 var(--space-10) var(--space-6);
+  }
+  .jt-split-photo {
+    inline-size: 100%;
+    block-size: auto;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    border-radius: var(--r-lg);
+    background: var(--bg-sunken);
+    box-shadow: var(--shadow-3), 0 0 0 1px color-mix(in oklab, var(--ink-900) 8%, transparent);
+  }
+  /* Decorative dot field peeking out behind the photo's corner. */
+  .jt-split-dots {
+    position: absolute; z-index: -1;
+    inset-block-end: var(--space-4); inset-inline-end: calc(var(--space-6) * -1);
+    inline-size: 45%; block-size: 55%;
+    --cell: 14px;
+    background-image: radial-gradient(color-mix(in oklab, var(--brand) 55%, transparent) 1.5px, transparent 1.5px);
+    border-radius: var(--r-lg);
+    mask-image: linear-gradient(135deg, transparent 10%, #000 70%);
+    -webkit-mask-image: linear-gradient(135deg, transparent 10%, #000 70%);
+  }
+  .jt-split-chip {
+    position: absolute;
+    display: flex; align-items: center; gap: var(--space-3);
+    padding: var(--space-3) var(--space-4) var(--space-3) var(--space-3);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: color-mix(in oklab, var(--surface) 92%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-4);
+    line-height: 1.25;
+  }
+  .jt-split-chip-stat { inset-block-start: 14%; inset-inline-start: 0; }
+  .jt-split-chip-offer { inset-block-end: var(--space-2); inset-inline-end: var(--space-6); max-inline-size: calc(100% - var(--space-8)); }
+  .jt-split-chip-value { font-size: var(--text-xl); font-weight: 700; letter-spacing: -.03em; }
+  .jt-split-chip-offer .icon { color: var(--good-600); flex: 0 0 auto; }
+  @media (max-width: 30rem) {
+    .jt-split-media { padding-inline-start: var(--space-3); }
+    .jt-split-chip-offer { inset-inline-end: var(--space-3); }
+  }
+
+  /* ===== 03 Dark product (.jt-dark-…) =====
+     data-theme="dark" on the section is what keeps it dark in both themes:
+     Deck's colour tokens are light-dark() pairs resolved per element, so the
+     buttons, sidebar and chart inside all take their dark values with no
+     extra CSS. The app window is a picture of the product made from Deck
+     components, so it is one role="img" with a description. */
+  .jt-dark {
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    background: var(--bg);
+    color: var(--text);
+    padding: clamp(4rem, 2.5rem + 6vw, 7rem) var(--space-gutter) 0;
+  }
+  .jt-dark-grid {
+    position: absolute; inset: 0; z-index: -1;
+    --cell: 56px;
+    mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, #000 25%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, #000 25%, transparent 80%);
+  }
+  .jt-dark-glow {
+    position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(40% 45% at 50% 0%, oklch(62% .16 var(--hue-brand) / .42), transparent 70%),
+      radial-gradient(35% 30% at 50% 78%, oklch(62% .16 calc(var(--hue-brand) + 60) / .22), transparent 70%);
+  }
+  .jt-dark-copy { background: none; border: 0; padding: 0; gap: var(--space-6); }
+  .jt-dark .display { font-size: clamp(2.5rem, 1.4rem + 4.8vw, 4.75rem); max-inline-size: 14ch; text-wrap: balance; }
+  .jt-dark .lede { max-inline-size: 54ch; text-wrap: pretty; }
+  /* .g-text's default ramp is tuned for a light page; lift it on the dark one. */
+  .jt-dark .g-text {
+    background-image: linear-gradient(in oklab 92deg, var(--brand-300), oklch(from var(--brand-300) l c calc(h + 60)));
+  }
+  .jt-dark-copy .jumbotron-actions { justify-content: center; }
+  .jt-dark-pill {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    padding: 4px var(--space-3) 4px 4px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-full);
+    background: color-mix(in oklab, var(--surface) 70%, transparent);
+    color: var(--text); font-size: var(--text-sm); text-decoration: none;
+  }
+  .jt-dark-pill:hover { border-color: var(--brand); }
+  .jt-dark-pill .badge { border-radius: var(--r-full); }
+  .jt-dark-meta { color: var(--text-faint); }
+  /* The window: cut off by the section's bottom edge and faded into it. */
+  .jt-dark-window {
+    margin: clamp(3rem, 2rem + 4vw, 5rem) auto 0;
+    max-inline-size: 68rem;
+    block-size: clamp(19rem, 12rem + 20vw, 27rem);
+    overflow: clip;
+    border: 1px solid var(--line-strong);
+    border-block-end: 0;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+    background: var(--surface);
+    box-shadow: 0 -24px 90px -30px oklch(62% .16 var(--hue-brand) / .55);
+    mask-image: linear-gradient(to bottom, #000 58%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent);
+  }
+  .jt-dark-chrome {
+    display: flex; align-items: center; gap: 6px;
+    padding: var(--space-3) var(--space-4);
+    border-block-end: 1px solid var(--line);
+  }
+  .jt-dark-dot { inline-size: 10px; block-size: 10px; border-radius: var(--r-full); background: var(--line-strong); }
+  .jt-dark-url {
+    margin-inline: auto;
+    padding: 2px var(--space-4);
+    border-radius: var(--r-full);
+    background: var(--bg-sunken);
+    color: var(--text-faint);
+    font-size: var(--text-xs);
+    min-inline-size: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .jt-dark-app { display: grid; text-align: start; }
+  .jt-dark-app .sidebar { display: none; border-inline-end: 1px solid var(--line); font-size: var(--text-sm); }
+  @media (min-width: 48rem) {
+    .jt-dark-app { grid-template-columns: 13rem 1fr; }
+    .jt-dark-app .sidebar { display: flex; }
+  }
+  .jt-dark-main { display: flex; flex-direction: column; gap: var(--space-5); padding: var(--space-5); min-inline-size: 0; }
+  .jt-dark-main .bar { flex-wrap: wrap; }
+  .jt-dark-main .segmented { inline-size: auto; }
+  .jt-dark-main .segmented > * { flex: none; min-block-size: 26px; padding-inline: var(--space-3); font-size: var(--text-xs); }
+  .jt-dark-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }
+  .jt-dark-stats .stat {
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface-2);
+  }
+  .jt-dark-stats .stat-value { font-size: var(--text-xl); }
+  /* Two tiles on a phone; the third would squeeze every label onto two lines. */
+  @media (max-width: 30rem) {
+    .jt-dark-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .jt-dark-stats .stat:nth-child(3) { display: none; }
+  }
+  .jt-dark-chart { --chart-h: 150px; }
+
+  /* ===== 04 Full-bleed photo (.jt-photo-…) =====
+     Two scrims stacked in .g-scrim's ::after: Deck's --scrim from the bottom,
+     plus one from the start edge because the type is left-aligned. */
+  .jt-photo {
+    justify-content: flex-end;
+    min-block-size: clamp(32rem, 24rem + 22vw, 44rem);
+    border: 0;
+    border-radius: 0;
+    background: var(--bg-sunken);
+    color: oklch(98% 0 0);
+    padding-block: clamp(3rem, 2rem + 4vw, 5rem) var(--space-6);
+    gap: var(--space-10);
+  }
+  .jt-photo.g-scrim::after {
+    background:
+      linear-gradient(to right, oklch(14% .02 var(--hue-neutral) / .7), oklch(14% .02 var(--hue-neutral) / .18) 62%, transparent),
+      var(--scrim);
+  }
+  .jt-photo-img {
+    position: absolute; inset: 0; z-index: -2;
+    inline-size: 100%; block-size: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+  .jt-photo-copy { max-inline-size: 38rem; }
+  .jt-photo .eyebrow { color: var(--brand-200); }
+  .jt-photo .display { font-size: clamp(3rem, 1.6rem + 6vw, 6rem); line-height: .98; text-wrap: balance; }
+  .jt-photo .lede { color: oklch(92% .01 var(--hue-neutral)); font-size: var(--text-lg); text-wrap: pretty; }
+  /* A frosted secondary button that reads on any photo. */
+  .jt-photo-glass {
+    --btn-bg: oklch(100% 0 0 / .14);
+    --btn-border: oklch(100% 0 0 / .32);
+    --btn-text: oklch(99% 0 0);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .jt-photo-glass:hover { background: oklch(100% 0 0 / .24); }
+  .jt-photo-foot {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: var(--space-2) var(--space-6);
+    padding-block-start: var(--space-4);
+    border-block-start: 1px solid oklch(100% 0 0 / .2);
+    font-size: var(--text-xs);
+    color: oklch(92% 0 0 / .85);
+  }
+  .jt-photo-foot .icon { color: var(--accent-500); }
+
+  /* ===== 05 Announcement (.jt-announce-…) =====
+     One line of news in three sizes: Deck's .banner across the top of the
+     page, a gradient-bordered strip, and a pill for the space above a
+     headline. The strip's border is .g-border; .g-border-spin turns it. */
+  /* The wrapper only groups the three for the preview. */
+  .jt-announce { display: grid; }
+  /* .banner is sticky by default. It is static here only so it stays inside
+     the preview frame: delete this rule on your page. */
+  .jt-announce-banner { position: relative; z-index: 1; }
+  .jt-announce-banner a { color: inherit; font-weight: 600; text-underline-offset: 3px; }
+  .jt-announce-banner .banner-close { color: inherit; }
+  .jt-announce-stage {
+    position: relative;
+    isolation: isolate;
+    display: grid; justify-items: center; gap: var(--space-6);
+    padding: clamp(2.5rem, 1.5rem + 4vw, 4.5rem) var(--space-gutter);
+  }
+  .jt-announce-bg {
+    position: absolute; inset: 0; z-index: -1;
+    mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000, transparent 75%);
+  }
+  .jt-announce-strip {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-4);
+    inline-size: min(100%, 50rem);
+    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-3);
+  }
+  .jt-announce-strip p { flex: 1 1 18rem; margin: 0; font-size: var(--text-sm); }
+  .jt-announce-strip strong { font-weight: 640; }
+  .jt-announce-pill {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    max-inline-size: 100%;
+    padding: 4px var(--space-3) 4px 4px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-full);
+    background: var(--surface);
+    box-shadow: var(--shadow-1);
+    color: var(--text-muted); font-size: var(--text-sm); text-decoration: none;
+  }
+  .jt-announce-pill:hover { color: var(--text); border-color: var(--line-strong); }
+  .jt-announce-pill .badge { border-radius: var(--r-full); }
+
+  /* ===== 06 Stats (.jt-stats-…) =====
+     A <dl>: each figure is a dd under its dt, so a screen reader hears
+     "Shipments tracked, 2.4 million". order puts the number on top visually. */
+  .jt-stats {
+    border: 0;
+    border-radius: 0;
+    gap: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+    padding-block: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+  }
+  .jt-stats-head { display: grid; gap: var(--space-4) var(--space-12); align-items: end; }
+  @media (min-width: 56rem) { .jt-stats-head { grid-template-columns: 1.15fr 1fr; } }
+  .jt-stats-title { font-size: clamp(2rem, 1.4rem + 2.6vw, 3.25rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.08; max-inline-size: 16ch; text-wrap: balance; }
+  .jt-stats-head .lede { text-wrap: pretty; }
+  .jt-stats-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; }
+  .jt-stats-item {
+    display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2);
+    padding: var(--space-5) var(--space-4) var(--space-2) 0;
+    border-block-start: 1px solid var(--line);
+  }
+  .jt-stats-item dt { order: 2; font-weight: 600; color: var(--text); }
+  .jt-stats-item dd { margin: 0; }
+  .jt-stats-num { order: 1; font-size: clamp(2.5rem, 1.7rem + 3.2vw, 4.25rem); font-weight: 700; letter-spacing: -.045em; line-height: 1; }
+  .jt-stats-note { order: 3; }
+  .jt-stats .g-text {
+    background-image: linear-gradient(in oklab 92deg, var(--brand),
+      light-dark(oklch(from var(--brand-500) l c calc(h + 52)), oklch(from var(--brand-300) l c calc(h + 52))));
+  }
+  @media (min-width: 56rem) {
+    .jt-stats-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .jt-stats-item { border-block-start: 0; border-inline-start: 1px solid var(--line); padding: var(--space-2) var(--space-6); }
+    .jt-stats-item:first-child { border-inline-start: 0; padding-inline-start: 0; }
+  }
+
+  /* ===== 07 Video (.jt-video-…) =====
+     Deck draws the poster and the play disc; it ships no player script. On
+     click, swap .video-poster for your <iframe> (docs/components/video.php). */
+  .jt-video {
+    border: 0;
+    border-radius: 0;
+    padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+  }
+  .jt-video-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(2rem, 1rem + 4vw, 4.5rem); align-items: center; }
+  @media (min-width: 56rem) { .jt-video-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); } }
+  .jt-video-frame {
+    border-radius: var(--r-lg);
+    background: var(--bg-sunken);
+    box-shadow: var(--shadow-4), 0 0 0 1px color-mix(in oklab, var(--ink-900) 8%, transparent);
+  }
+  /* .video-poster is a grid; put the photo and the disc in the same cell. */
+  .jt-video-frame .video-poster > * { grid-area: 1 / 1; }
+  /* The disc sits low, over the worktop, so it does not cover anyone's face. */
+  .jt-video-frame .video-play {
+    align-self: end;
+    margin-block-end: 16%;
+    inline-size: 76px; block-size: 76px;
+    background: var(--brand-600);
+    color: var(--text-on-brand);
+    box-shadow: 0 0 0 10px oklch(100% 0 0 / .18), var(--shadow-4);
+  }
+  .jt-video-frame .video-poster:hover .video-play { background: var(--brand-700); }
+  @media (max-width: 30rem) {
+    .jt-video-frame .video-play { inline-size: 56px; block-size: 56px; margin-block-end: 10%; box-shadow: 0 0 0 6px oklch(100% 0 0 / .18), var(--shadow-3); }
+  }
+  .jt-video .display { font-size: clamp(2.125rem, 1.4rem + 3vw, 3.5rem); max-inline-size: 15ch; text-wrap: balance; }
+  .jt-video .lede { text-wrap: pretty; }
+  .jt-video-chapters { list-style: none; margin: 0; padding: 0; border-block-start: 1px solid var(--line); }
+  .jt-video-chapters li {
+    display: flex; gap: var(--space-4); align-items: baseline;
+    padding-block: var(--space-3);
+    border-block-end: 1px solid var(--line);
+    font-size: var(--text-sm);
+  }
+  .jt-video-chapters .mono { color: var(--brand); font-size: var(--text-xs); }
+
+  /* ===== 08 Sign-up (.jt-signup-…) =====
+     A serif display face for character: --font-display set on the section
+     only, so the rest of the page keeps the system sans. */
+  .jt-signup {
+    --font-display: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    border: 0;
+    border-radius: 0;
+    gap: var(--space-6);
+    padding-block: clamp(3.5rem, 2.5rem + 5vw, 7rem);
+    background: radial-gradient(ellipse 70% 55% at 50% 105%, var(--brand-soft), transparent 70%), var(--surface);
+  }
+  .jt-signup-bg {
+    position: absolute; inset: 0; z-index: -1;
+    mask-image: radial-gradient(ellipse 60% 70% at 50% 100%, #000, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 100%, #000, transparent 70%);
+  }
+  .jt-signup .display {
+    font-size: clamp(2.25rem, 1.4rem + 3.8vw, 4.25rem);
+    font-weight: 600;
+    letter-spacing: -.025em;
+    line-height: 1.06;
+    max-inline-size: 17ch;
+    text-wrap: balance;
+  }
+  .jt-signup .display em { font-style: italic; color: var(--brand); }
+  .jt-signup .lede { max-inline-size: 50ch; text-wrap: pretty; }
+  .jt-signup-form { display: grid; gap: var(--space-2); inline-size: min(100%, 31rem); text-align: start; }
+  .jt-signup-form .input-group { padding: 4px; border-radius: var(--r-md); box-shadow: var(--shadow-3); }
+  .jt-signup-form .addon { background: none; border: 0; padding-inline: var(--space-2) 0; }
+  .jt-signup-form .input-group > .btn { border-radius: calc(var(--r-md) - 4px); }
+  .jt-signup-form .help { text-align: center; }
+  .jt-signup-proof { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-3); }
+  .jt-signup-proof .avatar { --size: 32px; }
+  .jt-signup-proof .avatar-stack > .avatar { box-shadow: 0 0 0 2px var(--bg); }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Photos are hotlinked from Unsplash for the preview. Replace them with your own. -->
+
+<!-- Icons the Deck sprite does not have. Referenced as <use href="#i-play">. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13a.6.6 0 0 0 .9.5l10.2-6.5a.6.6 0 0 0 0-1L8.9 5a.6.6 0 0 0-.9.5z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ===== Top bar (showcase chrome) ===== -->
+<header class="topbar">
+  <div class="container">
+    <div class="navbar">
+      <a class="navbar-brand" href="index.php">
+        <svg class="icon icon-lg icon-fill" style="color:var(--brand)" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#deck-mark"></use></svg>Deck
+      </a>
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb">
+          <li><a href="index.php">Templates</a></li>
+          <li><span aria-current="page">Jumbotrons</span></li>
+        </ol>
+      </nav>
+      <div class="push cluster cluster-tight">
+        <!-- Deck.hue() rewrites --hue-brand on the root, so every variant below retints live. -->
+        <label class="sr-only" for="hue">Brand hue</label>
+        <input id="hue" class="range" type="range" min="0" max="360" value="196" oninput="Deck.hue(this.value)">
+        <button class="btn btn-icon btn-ghost" type="button" data-deck-theme aria-label="Switch theme">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== Intro ===== -->
+  <section class="container section intro">
+    <div class="stack stack-4 enter-rise stagger">
+      <p class="eyebrow">Section templates</p>
+      <h1 class="display">Jumbotrons, eight ways.</h1>
+      <p class="lede">
+        Eight hero sections, each one a self-contained block of markup you can copy
+        straight into a page. Drag the hue slider to retint all of them at once, flip
+        the theme to check the dark side, and resize the window: every one is responsive.
+      </p>
+      <div class="cluster cluster-tight">
+        <a class="chip" href="#jt-centered">Centered</a>
+        <a class="chip" href="#jt-split">Split with media</a>
+        <a class="chip" href="#jt-dark">Dark product</a>
+        <a class="chip" href="#jt-photo">Full-bleed photo</a>
+        <a class="chip" href="#jt-announce">Announcement</a>
+        <a class="chip" href="#jt-stats">Stats</a>
+        <a class="chip" href="#jt-video">Video</a>
+        <a class="chip" href="#jt-signup">Sign-up</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container variants">
+
+    <!-- ===== 01 Centered ===== -->
+    <section class="variant" id="jt-centered" aria-labelledby="jt-centered-title">
+      <div class="bar variant-head">
+        <span class="badge">01</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="jt-centered-title">Centered</h2>
+          <p class="text-sm text-muted">A mesh wash, a gradient phrase, two calls to action and a trust line. Best for a product home page.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#jt-centered-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="jt-centered-demo">
+        <!-- The headline is an h3 only because this showcase owns the h1. Make it your page's h1. -->
+        <section class="jumbotron jumbotron-center jt-centered g-mesh g-mesh-drift stagger" aria-labelledby="jt-centered-heading">
+          <div class="jt-centered-bg g-grid-lines" aria-hidden="true"></div>
+          <a class="jt-centered-pill enter-rise" href="#">
+            <span class="badge badge-solid">New</span>
+            Recurring invoices, on autopilot
+            <svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right-sm"></use></svg>
+          </a>
+          <h3 class="display enter-rise" id="jt-centered-heading">Get paid for the work, <span class="g-text">not the chasing.</span></h3>
+          <p class="lede enter-rise">
+            Halyard sends the invoice, nudges late payers politely and matches every
+            payment to your bank feed. You only hear about it when the money lands.
+          </p>
+          <div class="jumbotron-actions enter-rise">
+            <a class="btn btn-primary btn-lg" href="#">
+              Start free for 30 days
+              <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+            </a>
+            <a class="btn btn-lg" href="#">Book a 15-minute demo</a>
+          </div>
+          <div class="cluster jt-centered-trust enter-rise">
+            <span class="avatar-stack" aria-hidden="true">
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&amp;h=80&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="80" height="80" decoding="async"></span>
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&amp;h=80&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="80" height="80" decoding="async"></span>
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&amp;h=80&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="80" height="80" decoding="async"></span>
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&amp;h=80&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="80" height="80" decoding="async"></span>
+            </span>
+            <span class="rating-static" style="--value:98;--star:15px" role="img" aria-label="Rated 4.9 out of 5">
+              <span class="rating-fill">
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+            </span>
+            <span class="text-sm text-muted"><span class="fw-semi" style="color:var(--text)">4.9</span> from 1,300 reviews · No card needed</span>
+          </div>
+          <!-- Customer wordmarks. Real logos would be <img> or inline SVG here. -->
+          <ul class="jt-centered-logos enter-rise" aria-label="Studios that use Halyard">
+            <li><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#sparkle"></use></svg>Fieldnote</li>
+            <li><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#sun"></use></svg>Morrow&amp;Co</li>
+            <li><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#map-pin"></use></svg>Parcel+Pine</li>
+            <li><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#gauge"></use></svg>Kiln</li>
+            <li><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#shield"></use></svg>Ostra</li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== 02 Split with media ===== -->
+    <section class="variant" id="jt-split" aria-labelledby="jt-split-title">
+      <div class="bar variant-head">
+        <span class="badge">02</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="jt-split-title">Split with media</h2>
+          <p class="text-sm text-muted">Copy on the left, a photo with floating UI chips on the right; stacks on a phone. Best for a product with a human story.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#jt-split-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="jt-split-demo">
+        <!-- The headline is an h3 only because this showcase owns the h1. Make it your page's h1. -->
+        <section class="jumbotron jumbotron-media jt-split" aria-labelledby="jt-split-heading">
+          <div class="stack stack-6">
+            <p class="eyebrow">Crewline for engineering teams</p>
+            <h3 class="display" id="jt-split-heading">Hire the people you'd want to ship with.</h3>
+            <p class="lede">
+              Structured interviews, one shared scorecard and offers that go out the same
+              afternoon. Teams on Crewline close a senior role in 18 days instead of 60.
+            </p>
+            <div class="jumbotron-actions">
+              <a class="btn btn-primary btn-lg" href="#">
+                Start hiring free
+                <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+              </a>
+              <a class="btn btn-lg" href="#">See a sample scorecard</a>
+            </div>
+            <ul class="jt-split-points">
+              <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>Free for three open roles</li>
+              <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>Imports from any ATS</li>
+              <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>SOC 2 Type II</li>
+            </ul>
+          </div>
+
+          <figure class="jt-split-media">
+            <div class="jt-split-dots g-dots" aria-hidden="true"></div>
+            <img class="jt-split-photo" src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&amp;h=720&amp;q=80&amp;auto=format&amp;fit=crop" alt="Two engineers reviewing code together at a shared monitor" width="900" height="720" loading="lazy" decoding="async">
+            <!-- The chips are illustrative UI, not live data. -->
+            <div class="jt-split-chip jt-split-chip-stat">
+              <span class="icon-tile icon-tile-good" aria-hidden="true">
+                <svg class="icon"><use href="../assets/deck/deck-icons.svg#trend-down"></use></svg>
+              </span>
+              <span class="stack stack-0">
+                <span class="text-xs text-muted">Median time to hire</span>
+                <span class="cluster cluster-tight"><span class="jt-split-chip-value nums">18 days</span><span class="badge badge-good nums">−41%</span></span>
+              </span>
+            </div>
+            <div class="jt-split-chip jt-split-chip-offer">
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=80&amp;h=80&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="80" height="80" loading="lazy" decoding="async"></span>
+              <span class="stack stack-0">
+                <span class="text-sm fw-semi">Amara Okafor accepted</span>
+                <span class="text-xs text-muted">Senior Platform Engineer · 2 min ago</span>
+              </span>
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-circle"></use></svg>
+            </div>
+          </figure>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== 03 Dark product ===== -->
+    <section class="variant" id="jt-dark" aria-labelledby="jt-dark-title">
+      <div class="bar variant-head">
+        <span class="badge">03</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="jt-dark-title">Dark product</h2>
+          <p class="text-sm text-muted">Dark in both themes, with a grid, a brand glow and an app window built from Deck components. Best for developer tools.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#jt-dark-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="jt-dark-demo">
+        <!-- The headline is an h3 only because this showcase owns the h1. Make it your page's h1.
+             data-theme="dark" scopes Deck's dark tokens to this section. -->
+        <section class="jt-dark" data-theme="dark" aria-labelledby="jt-dark-heading">
+          <div class="jt-dark-grid g-grid-lines" aria-hidden="true"></div>
+          <div class="jt-dark-glow" aria-hidden="true"></div>
+
+          <div class="jumbotron jumbotron-center jt-dark-copy stagger">
+            <a class="jt-dark-pill enter-rise" href="#">
+              <span class="badge badge-brand">v4.2</span>
+              Plain-English queries are live
+              <svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-right-sm"></use></svg>
+            </a>
+            <h3 class="display enter-rise" id="jt-dark-heading">Find the slow span <span class="g-text">before your users do.</span></h3>
+            <p class="lede enter-rise">
+              Tracewell turns a million spans into the three lines that explain an outage:
+              plain-English queries, one-click root cause and alerts that wake the right person.
+            </p>
+            <div class="jumbotron-actions enter-rise">
+              <a class="btn btn-primary btn-lg" href="#">
+                Start tracing free
+                <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+              </a>
+              <a class="btn btn-ghost btn-lg" href="#">Read the docs</a>
+            </div>
+            <p class="text-sm jt-dark-meta enter-rise">OpenTelemetry-native · Self-host or cloud · 14 days of retention free</p>
+          </div>
+
+          <!-- A picture of the product, built from .sidebar, .stat, .segmented and an
+               SVG .chart. Nothing in it is interactive, so it is one image to a screen reader. -->
+          <div class="jt-dark-window" role="img" aria-label="Tracewell dashboard: p95 latency for checkout-api falling from 240 to 118 milliseconds over 24 hours">
+            <div class="jt-dark-chrome">
+              <span class="jt-dark-dot"></span><span class="jt-dark-dot"></span><span class="jt-dark-dot"></span>
+              <span class="jt-dark-url mono">app.tracewell.dev/checkout-api</span>
+            </div>
+            <div class="jt-dark-app">
+              <div class="sidebar">
+                <span class="sidebar-group">Workspace</span>
+                <span class="sidebar-link" aria-current="page"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home-sm"></use></svg>Overview</span>
+                <span class="sidebar-link"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#list-sm"></use></svg>Traces</span>
+                <span class="sidebar-link"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#grid-sm"></use></svg>Services</span>
+                <span class="sidebar-link"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#bell-sm"></use></svg>Alerts<span class="badge badge-bad push">3</span></span>
+                <span class="sidebar-link"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart-sm"></use></svg>Dashboards</span>
+                <span class="sidebar-group">Saved queries</span>
+                <span class="sidebar-link"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search-sm"></use></svg>Slow checkouts</span>
+                <span class="sidebar-link"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search-sm"></use></svg>5xx by region</span>
+              </div>
+              <div class="jt-dark-main">
+                <div class="bar">
+                  <span class="fw-semi">checkout-api</span>
+                  <span class="badge badge-good badge-dot">Healthy</span>
+                  <span class="segmented push">
+                    <span>1h</span><span class="is-active">24h</span><span>7d</span>
+                  </span>
+                </div>
+                <div class="jt-dark-stats">
+                  <div class="stat">
+                    <span class="stat-label">Requests</span>
+                    <span class="stat-value">1.28M</span>
+                    <span class="stat-delta stat-delta-up">+4.1%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">p95 latency</span>
+                    <span class="stat-value">118 ms</span>
+                    <span class="stat-delta stat-delta-up">−51%</span>
+                  </div>
+                  <div class="stat">
+                    <span class="stat-label">Error rate</span>
+                    <span class="stat-value">0.04%</span>
+                    <span class="stat-delta stat-delta-up">−0.3 pts</span>
+                  </div>
+                </div>
+                <figure class="chart jt-dark-chart">
+                  <div class="chart-head">
+                    <span class="chart-title">p95 latency, last 24 hours</span>
+                    <span class="chart-note">Dashed line: 200 ms SLO</span>
+                  </div>
+                  <svg class="chart-svg" viewBox="0 0 600 150" preserveAspectRatio="none" aria-hidden="true">
+                    <line class="chart-gridline" x1="0" y1="30" x2="600" y2="30"/>
+                    <line class="chart-gridline" x1="0" y1="75" x2="600" y2="75"/>
+                    <line class="chart-gridline" x1="0" y1="120" x2="600" y2="120"/>
+                    <path class="chart-area" d="M0 34 L50 30 L100 40 L150 26 L200 38 L250 52 L300 48 L350 70 L400 66 L450 84 L500 80 L550 92 L600 88 L600 150 L0 150 Z"/>
+                    <path class="chart-line chart-line-dashed" d="M0 50 L600 50" style="--series: var(--c3)"/>
+                    <path class="chart-line" d="M0 34 L50 30 L100 40 L150 26 L200 38 L250 52 L300 48 L350 70 L400 66 L450 84 L500 80 L550 92 L600 88"/>
+                  </svg>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== 04 Full-bleed photo ===== -->
+    <section class="variant" id="jt-photo" aria-labelledby="jt-photo-title">
+      <div class="bar variant-head">
+        <span class="badge">04</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="jt-photo-title">Full-bleed photo</h2>
+          <p class="text-sm text-muted">A photo edge to edge, a two-way scrim and big left-aligned type. Best for travel, hospitality and events.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#jt-photo-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="jt-photo-demo">
+        <!-- The headline is an h3 only because this showcase owns the h1. Make it your page's h1.
+             If this is your page's first section, swap loading="lazy" for fetchpriority="high". -->
+        <section class="jumbotron jt-photo g-scrim" data-theme="dark" aria-labelledby="jt-photo-heading">
+          <img class="jt-photo-img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&amp;h=1000&amp;q=80&amp;auto=format&amp;fit=crop" alt="Snow-dusted peaks rising out of a sea of cloud at sunset" width="1800" height="1000" loading="lazy" decoding="async">
+          <div class="stack stack-6 jt-photo-copy">
+            <p class="eyebrow">Dolomites · 7 days · Groups of eight</p>
+            <h3 class="display" id="jt-photo-heading">Walk above the weather.</h3>
+            <p class="lede">
+              Hut-to-hut treks led by guides who know which pass the cloud burns off
+              first. Beds, meals and luggage transfers are booked before you land.
+            </p>
+            <div class="jumbotron-actions">
+              <a class="btn btn-primary btn-lg" href="#">
+                See summer dates
+                <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+              </a>
+              <a class="btn btn-lg jt-photo-glass" href="#">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#download-sm"></use></svg>
+                Itinerary (PDF, 2 MB)
+              </a>
+            </div>
+          </div>
+          <div class="jt-photo-foot">
+            <span class="cluster cluster-tight">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill-sm"></use></svg>
+              4.9 from 860 trekkers · Next departure 14 June
+            </span>
+            <span>Above the inversion, 2,400 m · Photo: Unsplash</span>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== 05 Announcement ===== -->
+    <section class="variant" id="jt-announce" aria-labelledby="jt-announce-title">
+      <div class="bar variant-head">
+        <span class="badge">05</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="jt-announce-title">Announcement</h2>
+          <p class="text-sm text-muted">One line of news three ways: a dismissible top bar, a gradient-bordered strip and a pill. Best for launches and events.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#jt-announce-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="jt-announce-demo">
+        <div class="jt-announce">
+          <!-- 1. Site-wide bar. The close button is wired by deck-extras.js; add
+               data-dismiss-key="summit-2027" to remember the dismissal. -->
+          <div class="banner banner-dark jt-announce-banner" role="region" aria-label="Announcement">
+            <span class="badge badge-solid">Live</span>
+            <span>Tally Summit, 12 March in Lisbon. Early-bird tickets end Friday. <a href="#">Get a ticket</a></span>
+            <button class="banner-close btn btn-icon btn-ghost btn-sm" type="button" aria-label="Dismiss announcement">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x-sm"></use></svg>
+            </button>
+          </div>
+
+          <div class="jt-announce-stage">
+            <div class="jt-announce-bg g-dots" aria-hidden="true"></div>
+
+            <!-- 2. The strip. .g-border-spin turns the gradient border slowly; it stops under reduced motion. -->
+            <div class="jt-announce-strip g-border g-border-spin">
+              <span class="badge badge-solid">New</span>
+              <p><strong>Scheduled exports.</strong> Send any Tally report to S3, Drive or an inbox every Monday at 9.</p>
+              <a class="btn btn-sm btn-soft" href="#">
+                See how it works
+                <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+              </a>
+            </div>
+
+            <!-- 3. The pill, for the space above a headline. -->
+            <a class="jt-announce-pill" href="#">
+              <span class="badge badge-brand">Beta</span>
+              <span class="truncate">Tally for iPad is in public beta</span>
+              <svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 06 Stats ===== -->
+    <section class="variant" id="jt-stats" aria-labelledby="jt-stats-title">
+      <div class="bar variant-head">
+        <span class="badge">06</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="jt-stats-title">Stats</h2>
+          <p class="text-sm text-muted">A headline and four big numbers with hairline dividers. Best for a proof band or an annual report.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#jt-stats-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="jt-stats-demo">
+        <section class="jumbotron jt-stats g-surface" aria-labelledby="jt-stats-heading">
+          <div class="jt-stats-head">
+            <div class="stack stack-3">
+              <p class="eyebrow">2026 in numbers</p>
+              <h3 class="jt-stats-title" id="jt-stats-heading">A year of freight, minus the phone calls.</h3>
+            </div>
+            <div class="stack stack-3">
+              <p class="lede">
+                Every figure here comes from live shipments on Portline, not a survey.
+                Updated on the first of each month.
+              </p>
+              <a class="text-sm fw-semi" href="#">Read the methodology</a>
+            </div>
+          </div>
+          <dl class="jt-stats-grid">
+            <div class="jt-stats-item">
+              <dt>Shipments tracked</dt>
+              <dd class="jt-stats-num nums"><span class="g-text">2.4M</span></dd>
+              <dd class="jt-stats-note"><span class="badge badge-good">+38% on 2025</span></dd>
+            </div>
+            <div class="jt-stats-item">
+              <dt>Platform uptime</dt>
+              <dd class="jt-stats-num nums">99.98%</dd>
+              <dd class="jt-stats-note text-sm text-muted">Trailing 12 months</dd>
+            </div>
+            <div class="jt-stats-item">
+              <dt>Median claim reply</dt>
+              <dd class="jt-stats-num nums">11 min</dd>
+              <dd class="jt-stats-note text-sm text-muted">Down from three days</dd>
+            </div>
+            <div class="jt-stats-item">
+              <dt>Detention fees avoided</dt>
+              <dd class="jt-stats-num nums">$38M</dd>
+              <dd class="jt-stats-note text-sm text-muted">Across 1,900 shippers</dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== 07 Video ===== -->
+    <section class="variant" id="jt-video" aria-labelledby="jt-video-title">
+      <div class="bar variant-head">
+        <span class="badge">07</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="jt-video-title">Video</h2>
+          <p class="text-sm text-muted">A click-to-play poster beside the pitch and a chapter list. Best for courses, demos and launches.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#jt-video-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="jt-video-demo">
+        <!-- The headline is an h3 only because this showcase owns the h1. Make it your page's h1.
+             The play button needs the #i-play symbol from this page's inline sprite. -->
+        <section class="jumbotron jt-video g-brand-soft" aria-labelledby="jt-video-heading">
+          <div class="jt-video-grid">
+            <div class="video jt-video-frame">
+              <!-- Deck ships no player script: on click, replace this button with your <iframe>. -->
+              <button type="button" class="video-poster" aria-label="Play lesson one: knife skills in twelve minutes">
+                <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=960&amp;h=540&amp;q=80&amp;auto=format&amp;fit=crop" alt="" width="960" height="540" loading="lazy" decoding="async">
+                <span class="video-play">
+                  <svg class="icon icon-lg" aria-hidden="true"><use href="#i-play"></use></svg>
+                </span>
+              </button>
+              <span class="video-meta">
+                <span class="video-duration">12:04</span>
+                <span>Lesson 1 of 24</span>
+              </span>
+            </div>
+
+            <div class="stack stack-6">
+              <p class="eyebrow">Mise · Online cooking school</p>
+              <h3 class="display" id="jt-video-heading">Cook along with a chef who can see your pan.</h3>
+              <p class="lede">
+                Live classes of twelve, twice a week. The chef calls you by name, the shopping
+                list arrives a day early and every class is recorded.
+              </p>
+              <ol class="jt-video-chapters" aria-label="Chapters in lesson one">
+                <li><span class="mono nums">00:00</span>Holding the knife</li>
+                <li><span class="mono nums">03:40</span>The claw grip, slowly</li>
+                <li><span class="mono nums">08:15</span>Onions without tears</li>
+              </ol>
+              <div class="jumbotron-actions">
+                <a class="btn btn-primary btn-lg" href="#">Watch lesson one free</a>
+                <a class="btn btn-lg" href="#">See the syllabus</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== 08 Sign-up ===== -->
+    <section class="variant" id="jt-signup" aria-labelledby="jt-signup-title">
+      <div class="bar variant-head">
+        <span class="badge">08</span>
+        <div class="stack stack-1">
+          <h2 class="h4" id="jt-signup-title">Sign-up</h2>
+          <p class="text-sm text-muted">A serif headline, an inline email field and avatar social proof. Best for newsletters and waitlists.</p>
+        </div>
+        <button class="btn btn-sm btn-soft push" type="button" data-copy="#jt-signup-demo">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy HTML</button>
+      </div>
+      <div class="variant-frame" id="jt-signup-demo">
+        <!-- The headline is an h3 only because this showcase owns the h1. Make it your page's h1. -->
+        <section class="jumbotron jumbotron-center jt-signup" aria-labelledby="jt-signup-heading">
+          <div class="jt-signup-bg g-dots" aria-hidden="true"></div>
+          <p class="eyebrow">The Margin · every Thursday</p>
+          <h3 class="display" id="jt-signup-heading">A short letter about type, layout and <em>the space between.</em></h3>
+          <p class="lede">
+            One idea, three examples and a tool worth stealing. Read in six minutes by
+            18,400 designers and front-end developers.
+          </p>
+          <!-- Point action at your list provider. The label is visually hidden, not missing. -->
+          <form class="jt-signup-form" action="#" method="post">
+            <label class="sr-only" for="jt-signup-email">Email address</label>
+            <div class="input-group">
+              <span class="addon" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#mail-sm"></use></svg></span>
+              <input class="input" id="jt-signup-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@studio.com" required aria-describedby="jt-signup-help">
+              <button class="btn btn-primary" type="submit">Subscribe</button>
+            </div>
+            <p class="help" id="jt-signup-help">Free and weekly. One-click unsubscribe; we never share your address.</p>
+          </form>
+          <div class="jt-signup-proof">
+            <span class="avatar-stack" aria-hidden="true">
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&amp;h=80&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="80" height="80" loading="lazy" decoding="async"></span>
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=80&amp;h=80&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="80" height="80" loading="lazy" decoding="async"></span>
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&amp;h=80&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="80" height="80" loading="lazy" decoding="async"></span>
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=80&amp;h=80&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="80" height="80" loading="lazy" decoding="async"></span>
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&amp;h=80&amp;q=80&amp;auto=format&amp;fit=crop&amp;crop=faces" alt="" width="80" height="80" loading="lazy" decoding="async"></span>
+            </span>
+            <span class="text-sm text-muted">Join Hannah, Kofi and 18,400 other readers</span>
+          </div>
+        </section>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ===== Page footer (showcase chrome) ===== -->
+<footer class="footer page-foot">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>Deck templates · MIT</span>
+      <span class="push cluster">
+        <a href="index.php">Templates</a>
+        <a href="../docs/index.php">Docs</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- Copy buttons. The markup is snapshotted now, before deck.js runs, so the
+     copied HTML has none of the attributes deck.js adds at runtime. -->
+<script>
+  (() => {
+    const pristine = new Map();
+    document.querySelectorAll('[data-copy]').forEach((btn) => {
+      const target = document.querySelector(btn.dataset.copy);
+      if (target) pristine.set(btn, target.innerHTML);
+    });
+
+    const dedent = (html) => {
+      const lines = html.replace(/^\s*\n/, '').replace(/\s+$/, '').split('\n');
+      const indent = Math.min(...lines.filter((l) => l.trim()).map((l) => l.match(/^ */)[0].length));
+      return lines.map((l) => l.slice(indent)).join('\n') + '\n';
+    };
+
+    document.addEventListener('click', async (event) => {
+      const btn = event.target.closest('[data-copy]');
+      if (!btn || !pristine.has(btn)) return;
+      const name = btn.closest('.variant')?.querySelector('h2')?.textContent.trim() || 'Variant';
+      const label = [...btn.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
+      if (!navigator.clipboard?.writeText) {
+        Deck.toast({ title: 'Copy unavailable', text: 'This browser blocks clipboard access here. View source instead.', kind: 'warn' });
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(dedent(pristine.get(btn)));
+      } catch {
+        Deck.toast({ title: 'Copy failed', text: 'The clipboard refused the write. View source instead.', kind: 'bad' });
+        return;
+      }
+      Deck.toast({ title: 'Copied', text: `${name} HTML is on your clipboard.`, kind: 'good', duration: 2500 });
+      if (label) {
+        label.textContent = ' Copied';
+        clearTimeout(btn._reset);
+        btn._reset = setTimeout(() => { label.textContent = ' Copy HTML'; }, 1500);
+      }
+    });
+  })();
+</script>
+</body>
+</html>

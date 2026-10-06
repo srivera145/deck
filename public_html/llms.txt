@@ -24,6 +24,8 @@ If that use case ever disappears, delete this file rather than keeping it for it
 
 - [Documentation site](https://get-deck.dev/docs/index.php): Tutorials, task guides, a page per component with its markup, reference tables for every class and token, and the JavaScript, PHP and CLI APIs. Every Deck class shown on it is checked against the stylesheet when Deck builds.
 - [Install page](https://get-deck.dev/docs/start/install.php): The four ways to install Deck — CDN, npm, npx and Composer — each with the exact command and the output it prints.
+- [Templates](https://get-deck.dev/templates/index.php): Nineteen complete single-file pages — a store with product and checkout pages, agency and local business sites, an app shell, a dashboard, settings, sign-in, pricing, and sets of sidebars, footers, heroes and carousels. Every class in them is checked against the stylesheet when Deck builds, so they are real markup to copy rather than invent.
+- [Editor setup page](https://get-deck.dev/docs/start/editor.php): Installing Deck IntelliSense, the extension that completes Deck's classes, tokens and icon names in Visual Studio Code and the editors built on it, and flags misspelt and off-scale class names.
 - [README](https://raw.githubusercontent.com/srivera145/deck/main/README.md): The complete documentation in one file — install, theming, every component, the JS API, motion, print, and browser support.
 - [Component reference](https://github.com/srivera145/deck/blob/main/README.md#components): The list of component classes and the markup each one expects.
 - [Repository](https://github.com/srivera145/deck): Source, issue tracker, and the demo page under `public_html/index.php` with every component rendered and its markup visible.

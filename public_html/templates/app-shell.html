@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>App shell · Deck template</title>
+<meta name="description" content="The skeleton every Deck app starts from: a sticky top bar with search and menus, a sidebar on desktop, a tab bar and a drawer on phones.">
+<meta name="theme-color" content="#0b7d98">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b7d98'/%3E%3Cpath d='M16 6.5 26 25h-5.4L16 15.8 11.4 25H6Z' fill='white'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+<script src="../assets/deck/deck-extras.js" defer></script>   <!-- only for the phone drawer -->
+
+<style>
+@layer app.pages {
+  /* Deck lets a .btn inside an .input-group shrink along with the input, so a
+     nowrap label runs into its own padding on a narrow row. The input is the
+     one that should give. */
+  .input-group > .btn { flex: none; }
+
+
+  /* ===========================================================================
+     SHARED CHROME
+     This block is identical in app-shell.html, dashboard.html and
+     settings.html. Lift it into your own stylesheet once and delete it from
+     the pages. Two numbers drive the whole frame.
+     =========================================================================== */
+  :root {
+    --topbar-h: 3.5rem;   /* the sidebar's sticky offset reads this, so it never slides under the bar */
+    --side-w: 16rem;
+  }
+
+  /* ----- Top bar: sticks, and blurs what scrolls under it ----- */
+  .topbar {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: var(--z-sticky);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    block-size: var(--topbar-h);
+    padding-inline: max(var(--space-3), env(safe-area-inset-left)) max(var(--space-4), env(safe-area-inset-right));
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid var(--line);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-inline: var(--space-1);
+    color: var(--text);
+    font-size: var(--text-md);
+    font-weight: 680;
+    letter-spacing: -.024em;
+    text-decoration: none;
+  }
+  .brand:hover { color: var(--text); }
+  .brand-mark {
+    inline-size: 28px;
+    block-size: 28px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    box-shadow: var(--shadow-inset), var(--shadow-1);
+  }
+  .brand-mark svg { inline-size: 15px; block-size: 15px; }
+
+  /* The "/ Northwind" workspace switcher after the logo. */
+  .topbar-slash {
+    inline-size: 1px;
+    block-size: 20px;
+    margin-inline: var(--space-1);
+    background: var(--line-strong);
+    rotate: 20deg;
+  }
+  .ws-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    block-size: 36px;
+    padding-inline: var(--space-2);
+    border-radius: var(--r-sm);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--dur-1) var(--ease-out);
+  }
+  .ws-switch:hover { background: var(--surface-hover); }
+  .ws-switch .icon { color: var(--text-faint); }
+  .ws-logo { background: var(--g-ws, var(--brand-600)); color: var(--text-on-brand); font-weight: 700; }
+
+  /* Search: centred in the space left over, with a keyboard hint inside it. */
+  .topbar-search { flex: 0 1 26rem; margin-inline: auto; }
+  .topbar-search .input {
+    min-block-size: 36px;
+    padding-block: 0;
+    padding-inline-end: 4.5rem;
+    border-color: var(--line);
+    background: var(--surface);
+    box-shadow: none;
+    font-size: var(--text-sm);
+  }
+  .topbar-search kbd { position: absolute; inset-inline-end: var(--space-3); pointer-events: none; }
+
+  .topbar-end { display: flex; align-items: center; gap: var(--space-1); margin-inline-start: auto; }
+  .topbar-search + .topbar-end { margin-inline-start: 0; }
+  .avatar-btn { display: grid; padding: 3px; margin-inline-start: var(--space-1); border-radius: var(--r-full); cursor: pointer; }
+  .avatar-btn .avatar { transition: box-shadow var(--dur-1) var(--ease-out); }
+  .avatar-btn:hover .avatar { box-shadow: 0 0 0 2px var(--line-strong); }
+
+  /* Menus: muted icons, a header row for the account menu. */
+  .menu-item > .icon { color: var(--text-faint); }
+  .menu-item[aria-current] .push { color: var(--brand); }
+  .menu-head { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3) var(--space-3); }
+  .menu-note { display: flex; flex-direction: column; gap: 2px; white-space: normal; line-height: 1.35; }
+  .menu-note small { color: var(--text-faint); font-size: var(--text-xs); }
+
+  /* ----- Shell: sidebar beside main from 48rem, main alone below it -----
+     48rem is deliberate: it is the width at which .tabbar hides itself. Using
+     the same number means there is never a moment with both navigations, or
+     neither. */
+  .shell-side { display: none; }
+  @media (min-width: 48rem) {
+    .shell { display: grid; grid-template-columns: var(--side-w) minmax(0, 1fr); }
+    /* The <aside> runs the full height of the page and carries the border;
+       the panel inside it is what sticks. */
+    .shell-side { display: block; border-inline-end: 1px solid var(--line); }
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      inset-block-start: var(--topbar-h);          /* parks below the top bar, not under it */
+      block-size: calc(100dvh - var(--topbar-h));  /* and fills exactly what is left */
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+  }
+  .shell-main {
+    container: main / inline-size;   /* the page grids below query this, not the viewport */
+    min-inline-size: 0;
+    padding: var(--space-6) var(--space-gutter) var(--space-12);
+  }
+  .page { max-inline-size: 76rem; margin-inline: auto; }
+
+  /* ----- Sidebar ----- */
+  .shell-side .sidebar { gap: 1px; }
+  .shell-side .sidebar-link { min-block-size: 36px; }
+  /* The -sm cut is drawn to hold up at 16px, so the icons are set to exactly that. */
+  .sidebar-link > .icon { font-size: 1rem; color: var(--text-faint); transition: color var(--dur-1) var(--ease-out); }
+  .sidebar-link:hover > .icon { color: var(--text-muted); }
+  .sidebar-link[aria-current] > .icon { color: var(--brand); }
+  .sidebar-link .badge { font-size: var(--text-2xs); padding-block: 0; }
+  .sidebar-group { margin-block-start: var(--space-3); }
+  .dot {
+    inline-size: 8px;
+    block-size: 8px;
+    margin-inline: 4px;
+    flex: none;
+    border-radius: 3px;
+    background: var(--dot, var(--brand-500));
+  }
+  .side-foot { margin-block-start: auto; padding: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); }
+  .usage {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface);
+    box-shadow: var(--shadow-1);
+  }
+  .usage .progress { block-size: 6px; }
+  .user-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2);
+    border-radius: var(--r-sm);
+    color: var(--text);
+    text-decoration: none;
+    line-height: 1.3;
+  }
+  .user-row:hover { background: var(--surface-hover); color: var(--text); }
+  .user-row > .icon { color: var(--text-faint); }
+
+  /* ----- Phone drawer: the same sidebar, in a dialog ----- */
+  /* Deck's .drawer sets display:flex, which beats the browser's own rule that hides a closed <dialog>, so a closed drawer would sit off-screen with its links still in the tab order. The transition on display is allow-discrete, so the slide-out still plays. */
+  .drawer:not([open]) { display: none; }
+  .drawer .sidebar { padding: 0; margin-inline: calc(var(--space-2) * -1); }
+  .drawer .usage { box-shadow: none; }
+  .drawer-footer { align-items: center; }
+  .drawer-footer > .user-row { flex: 1 1 auto; min-inline-size: 0; padding: 0; }
+  .drawer-footer > .btn-icon { flex: none; }
+
+  /* ----- Page header: breadcrumb, title and actions in one row ----- */
+  .page-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-4) var(--space-6);
+    padding-block-end: var(--space-6);
+  }
+  .page-head > :first-child { flex: 1 1 22rem; min-inline-size: 0; }
+  .page-head h1 { text-wrap: balance; }
+
+  /* Workaround for a Deck issue: the status tints (--good-100, --warn-100,
+     --bad-100) and the .progress track are light in both themes, so badges,
+     alerts and deltas glow on a dark card. light-dark() keeps Deck's values
+     in light mode and gives each a dark-mode one. Identical in all three
+     pages. */
+  .progress { background: light-dark(var(--ink-200), var(--ink-800)); }
+  .progress::-webkit-progress-bar { background: light-dark(var(--ink-200), var(--ink-800)); }
+  .badge-good, .icon-tile-good { background: light-dark(var(--good-100), color-mix(in oklab, var(--good-500) 16%, transparent)); color: light-dark(var(--good-700), oklch(80% .12 var(--hue-good))); }
+  .badge-warn, .icon-tile-warn { background: light-dark(var(--warn-100), color-mix(in oklab, var(--warn-500) 16%, transparent)); color: light-dark(var(--warn-700), oklch(84% .12 var(--hue-warn))); }
+  .badge-bad, .icon-tile-bad { background: light-dark(var(--bad-100), color-mix(in oklab, var(--bad-500) 18%, transparent)); color: light-dark(var(--bad-700), oklch(78% .13 var(--hue-bad))); }
+  .alert-good { background: light-dark(var(--good-100), color-mix(in oklab, var(--good-500) 12%, transparent)); color: light-dark(var(--good-700), oklch(84% .1 var(--hue-good))); }
+  .alert-warn { background: light-dark(var(--warn-100), color-mix(in oklab, var(--warn-500) 12%, transparent)); color: light-dark(var(--warn-700), oklch(86% .1 var(--hue-warn))); }
+  .alert-bad { background: light-dark(var(--bad-100), color-mix(in oklab, var(--bad-500) 14%, transparent)); color: light-dark(var(--bad-700), oklch(82% .1 var(--hue-bad))); }
+  .stat-delta-up { color: light-dark(var(--good-700), oklch(80% .13 var(--hue-good))); }
+  .stat-delta-down { color: light-dark(var(--bad-700), oklch(77% .13 var(--hue-bad))); }
+
+  /* Between the two layouts the bar is tight: the plan badge and the
+     shortcut hint wait until 64rem. */
+  @media (max-width: 63.999rem) {
+    .ws-switch .badge, .topbar-search kbd { display: none; }
+    .topbar-search .input { padding-inline-end: var(--space-3); }
+  }
+
+  /* Visibility either side of the 48rem line. Last in the block so they win. */
+  @media (max-width: 47.999rem) { .desk-only { display: none; } }
+  @media (min-width: 48rem) { .phone-only { display: none; } }
+
+  /* ===========================================================================
+     THIS PAGE: placeholder content. Everything below is yours to replace.
+     =========================================================================== */
+  .bento { display: grid; gap: var(--space-4); }
+  @container main (min-width: 52rem) {
+    .bento { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); }
+    .wide { grid-column: span 2; }
+  }
+
+  .eyebrow { font-size: var(--text-xs); font-weight: 640; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); }
+
+  /* Getting started: a washed header over a checklist. */
+  .setup-intro { padding: var(--space-6); border-block-end: 1px solid var(--line); }
+  .setup-intro .progress { block-size: 6px; }
+  .tasks { display: flex; flex-direction: column; }
+  .task {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-2) var(--space-4);
+    padding: var(--space-3) var(--space-6);
+    min-block-size: 4rem;
+  }
+  .task + .task { border-block-start: 1px solid var(--line); }
+  .task-mark {
+    inline-size: 24px;
+    block-size: 24px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-full);
+    border: 1.5px dashed var(--line-strong);
+    color: var(--text-faint);
+    font-size: 13px;
+  }
+  .task-done .task-mark { border: 0; background: var(--good-500); color: var(--text-on-good); }
+  .task-next .task-mark { border-style: solid; border-color: var(--brand-500); box-shadow: 0 0 0 4px var(--brand-soft); }
+  .task-main { min-inline-size: 0; }
+  .task-title { font-weight: 580; }
+  .task-done .task-title { color: var(--text-muted); text-decoration: line-through; text-decoration-color: var(--line-strong); }
+  .task-note { font-size: var(--text-sm); color: var(--text-muted); }
+  /* On a phone the button drops under the text rather than squeezing it. */
+  @container main (max-width: 30rem) {
+    .task { padding-inline: var(--space-4); align-items: start; }
+    .task > .btn { grid-column: 2; justify-self: start; }
+    .setup-intro { padding: var(--space-5) var(--space-4); }
+  }
+
+  /* Quick-start cards: the whole card is the link. Icon above the text
+     where there is room, beside it on a phone. */
+  .quick .card-body { flex-direction: row; align-items: flex-start; gap: var(--space-4); block-size: 100%; }
+  .quick-text { display: flex; flex-direction: column; gap: var(--space-2); block-size: 100%; }
+  @container main (min-width: 52rem) {
+    .quick .card-body { flex-direction: column; }
+  }
+  .quick-more { margin-block-start: auto; padding-block-start: var(--space-2); display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--text-sm); font-weight: 600; color: var(--brand); }
+
+  /* Lists that sit flush inside a card lose their own frame. */
+  .card > .list { border: 0; border-radius: 0; background: none; }
+  .team .card-body { block-size: 100%; gap: var(--space-5); }
+  .team form { margin-block-start: auto; }
+  .team .list { border: 0; background: none; border-radius: 0; }
+  .team .list-row { padding-inline: 0; min-block-size: 0; }
+  .team .list-row:hover { background: none; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Photos are hotlinked from Unsplash for the preview. Replace them with your own. -->
+
+<!-- ======================================================================
+     TOP BAR · shared chrome
+     One row at every width. On phones the menu button opens the drawer and
+     the search field folds into an icon; from 48rem the workspace switcher,
+     search, help and theme buttons appear.
+     ====================================================================== -->
+<header class="topbar">
+  <button class="btn btn-icon btn-ghost phone-only" type="button" data-deck-drawer="#app-nav" aria-label="Open navigation">
+    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#menu"></use></svg>
+  </button>
+
+  <a class="brand" href="app-shell.html">
+    <span class="brand-mark g-brand" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 3.5 20.5 20h-4.7L12 12.4 8.2 20H3.5Z" fill="currentColor"/></svg>
+    </span>
+    Acme
+  </a>
+
+  <span class="topbar-slash desk-only" aria-hidden="true"></span>
+  <button class="ws-switch desk-only" type="button" popovertarget="ws-menu">
+    <span class="sr-only">Switch workspace, current:</span>
+    <span class="avatar avatar-xs avatar-square ws-logo" aria-hidden="true">N</span>
+    Northwind
+    <span class="badge badge-brand">Pro trial</span>
+    <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-down-sm"></use></svg>
+  </button>
+  <div class="menu" popover id="ws-menu">
+    <div class="menu-label">Workspaces</div>
+    <button class="menu-item" type="button" aria-current="true">
+      <span class="avatar avatar-xs avatar-square ws-logo" aria-hidden="true">N</span>
+      Northwind
+      <svg class="icon icon-sm push" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>
+    </button>
+    <button class="menu-item" type="button">
+      <span class="avatar avatar-xs avatar-square ws-logo" style="--g-ws: var(--accent-700)" aria-hidden="true">H</span>
+      Harbor Supply Co.
+    </button>
+    <button class="menu-item" type="button">
+      <span class="avatar avatar-xs avatar-square ws-logo" style="--g-ws: var(--ink-600)" aria-hidden="true">A</span>
+      Alex's sandbox
+    </button>
+    <div class="menu-sep"></div>
+    <button class="menu-item" type="button">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus"></use></svg>
+      Create workspace
+    </button>
+  </div>
+
+  <!-- Search. The <kbd> is a hint; the script at the bottom makes ⌘K / Ctrl K focus the field. -->
+  <form class="search topbar-search desk-only" role="search" action="#">
+    <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search-sm"></use></svg>
+    <input class="input" type="search" name="q" placeholder="Search orders, people, reports…" aria-label="Search" autocomplete="off">
+    <kbd aria-hidden="true" data-shortcut>⌘K</kbd>
+  </form>
+
+  <div class="topbar-end">
+    <button class="btn btn-icon btn-ghost phone-only" type="button" aria-label="Search">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search"></use></svg>
+    </button>
+    <button class="btn btn-icon btn-ghost desk-only" type="button" aria-label="Help">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help"></use></svg>
+    </button>
+    <!-- .with-indicator pins the dot to the icon's corner. The dot says nothing
+         to a screen reader, so the count lives in the button's label. -->
+    <button class="btn btn-icon btn-ghost" type="button" popovertarget="notes-menu" aria-label="Notifications, 3 unread">
+      <span class="with-indicator">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#bell"></use></svg>
+        <span class="indicator-badge indicator-badge-dot" aria-hidden="true"></span>
+      </span>
+    </button>
+    <div class="menu" popover id="notes-menu">
+      <div class="menu-label">Notifications</div>
+      <a class="menu-item" href="#">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#dollar"></use></svg>
+        <span class="menu-note">Payout of $12,480 sent<small>2 hours ago</small></span>
+      </a>
+      <a class="menu-item" href="#">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#user"></use></svg>
+        <span class="menu-note">Priya Raman joined Northwind<small>5 hours ago</small></span>
+      </a>
+      <a class="menu-item" href="#">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#credit-card"></use></svg>
+        <span class="menu-note">Card ending 4242 expires next month<small>Yesterday</small></span>
+      </a>
+      <div class="menu-sep"></div>
+      <a class="menu-item" href="#">View all notifications</a>
+    </div>
+    <button class="btn btn-icon btn-ghost desk-only" type="button" data-deck-theme aria-label="Switch theme">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+    </button>
+    <button class="avatar-btn" type="button" popovertarget="user-menu" aria-label="Your account">
+      <span class="avatar avatar-sm">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="">
+      </span>
+    </button>
+    <div class="menu" popover id="user-menu">
+      <div class="menu-head">
+        <span class="avatar avatar-sm" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="">
+        </span>
+        <span class="menu-note"><strong class="text-sm">Alex Rivera</strong><small>alex@northwind.co</small></span>
+      </div>
+      <div class="menu-sep"></div>
+      <a class="menu-item" href="settings.html#profile">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#user"></use></svg>
+        Your profile
+      </a>
+      <a class="menu-item" href="settings.html">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings"></use></svg>
+        Settings
+      </a>
+      <a class="menu-item" href="settings.html#billing">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#credit-card"></use></svg>
+        Billing
+      </a>
+      <button class="menu-item" type="button" data-deck-theme>
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        Switch theme
+      </button>
+      <div class="menu-sep"></div>
+      <a class="menu-item" href="#">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#log-out"></use></svg>
+        Log out
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+
+  <!-- ======================================================================
+       SIDEBAR · shared chrome, desktop only
+       Sticky below the top bar and exactly as tall as what is left, so the
+       usage card and your name stay pinned to the bottom while the page
+       scrolls. Move aria-current="page" to whichever link this page is, here
+       and in the drawer and tab bar below.
+       ====================================================================== -->
+  <aside class="shell-side" aria-label="Sidebar">
+    <div class="side-panel">
+      <nav class="sidebar" aria-label="Main">
+        <a class="sidebar-link" href="app-shell.html" aria-current="page">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home-sm"></use></svg>
+          Overview
+        </a>
+        <a class="sidebar-link" href="dashboard.html">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart-sm"></use></svg>
+          Dashboard
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail-sm"></use></svg>
+          Inbox
+          <span class="badge badge-brand push">4<span class="sr-only"> unread</span></span>
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#receipt-sm"></use></svg>
+          Orders
+          <span class="badge push">12<span class="sr-only"> open</span></span>
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users-sm"></use></svg>
+          Customers
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#file-sm"></use></svg>
+          Reports
+        </a>
+
+        <p class="sidebar-group">Projects</p>
+        <a class="sidebar-link" href="#"><span class="dot" aria-hidden="true"></span>Website relaunch</a>
+        <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--accent-500)" aria-hidden="true"></span>Mobile app 2.0</a>
+        <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--good-500)" aria-hidden="true"></span>Q4 campaign</a>
+        <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--bad-500)" aria-hidden="true"></span>Partner portal</a>
+
+        <p class="sidebar-group">Workspace</p>
+        <a class="sidebar-link" href="settings.html">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings-sm"></use></svg>
+          Settings
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help-sm"></use></svg>
+          Help &amp; docs
+        </a>
+      </nav>
+
+      <div class="side-foot">
+        <div class="usage">
+          <div class="bar">
+            <span class="text-sm fw-semi">Pro trial</span>
+            <span class="badge badge-warn push">9 days left</span>
+          </div>
+          <progress class="progress" value="3412" max="5000" aria-label="Orders this month">68%</progress>
+          <span class="text-xs text-muted nums">3,412 of 5,000 orders this month</span>
+          <a class="btn btn-soft btn-sm btn-block" href="settings.html#billing">Upgrade plan</a>
+        </div>
+        <a class="user-row" href="settings.html#profile">
+          <span class="avatar avatar-sm presence" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="">
+          </span>
+          <span class="grow min-is-0">
+            <span class="block text-sm fw-semi truncate">Alex Rivera</span>
+            <span class="block text-xs text-muted truncate">alex@northwind.co</span>
+          </span>
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings-sm"></use></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================
+       MAIN
+       What to keep: the top bar above, the sidebar, the drawer and tab bar
+       at the end of the file, the SHARED CHROME block of CSS, and the
+       .shell-main and .page wrappers here. dashboard.html and settings.html
+       use exactly the same chrome.
+       What to replace: everything inside .page, and the THIS PAGE block of
+       CSS. Keep a .page-head if you want the breadcrumb and title row.
+       ====================================================================== -->
+  <main id="main" class="shell-main">
+    <div class="page">
+
+      <header class="page-head">
+        <div class="stack stack-2">
+          <nav aria-label="Breadcrumb">
+            <ol class="breadcrumb">
+              <li><a href="#">Northwind</a></li>
+              <li><a href="app-shell.html" aria-current="page">Overview</a></li>
+            </ol>
+          </nav>
+          <h1 class="h2">Good morning, Alex</h1>
+          <p class="text-muted">Two steps left to finish setting up Northwind. Nothing is blocking you.</p>
+        </div>
+        <div class="cluster cluster-tight">
+          <button class="btn" type="button">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users-sm"></use></svg>
+            Invite
+          </button>
+          <button class="btn btn-primary" type="button">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus-sm"></use></svg>
+            New project
+          </button>
+        </div>
+      </header>
+
+      <!-- ===== Placeholder content: replace from here to the end of .page =====
+           .bento is one column on a phone and three from 52rem of *main* width
+           (a container query), so it reflows the same with or without the
+           sidebar beside it. -->
+      <div class="bento">
+
+        <!-- Getting started -->
+        <section class="card wide overflow-hidden" aria-labelledby="setup-title">
+          <div class="setup-intro g-surface">
+            <div class="stack stack-3">
+              <div class="bar">
+                <span class="eyebrow">Getting started</span>
+                <span class="push text-sm text-muted nums">3 of 5 done</span>
+              </div>
+              <h2 class="h4" id="setup-title">Finish setting up Northwind</h2>
+              <p class="text-muted text-sm max-w-prose">Ten minutes now saves a lot of copying and pasting later. Each step can be undone from Settings.</p>
+              <progress class="progress" value="3" max="5" aria-label="Setup progress">3 of 5</progress>
+            </div>
+          </div>
+          <ol class="tasks">
+            <li class="task task-done">
+              <span class="task-mark" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span>
+              <div class="task-main">
+                <p class="task-title"><span class="sr-only">Done: </span>Create the workspace</p>
+                <p class="task-note">Created by you on Sep 28</p>
+              </div>
+            </li>
+            <li class="task task-done">
+              <span class="task-mark" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span>
+              <div class="task-main">
+                <p class="task-title"><span class="sr-only">Done: </span>Invite your team</p>
+                <p class="task-note">6 people joined, 1 invite pending</p>
+              </div>
+            </li>
+            <li class="task task-done">
+              <span class="task-mark" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span>
+              <div class="task-main">
+                <p class="task-title"><span class="sr-only">Done: </span>Connect a payment provider</p>
+                <p class="task-note">Stripe · payouts every Friday</p>
+              </div>
+            </li>
+            <li class="task task-next">
+              <span class="task-mark" aria-hidden="true"></span>
+              <div class="task-main">
+                <p class="task-title">Import your customers</p>
+                <p class="task-note">A CSV export from anywhere works. About two minutes.</p>
+              </div>
+              <a class="btn btn-primary btn-sm" href="#">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#upload-sm"></use></svg>
+                Import
+              </a>
+            </li>
+            <li class="task">
+              <span class="task-mark" aria-hidden="true"></span>
+              <div class="task-main">
+                <p class="task-title">Build your first report</p>
+                <p class="task-note">Start from a template or a blank page.</p>
+              </div>
+              <a class="btn btn-sm" href="#">Start</a>
+            </li>
+          </ol>
+        </section>
+
+        <!-- Team -->
+        <section class="card team" aria-labelledby="team-title">
+          <div class="card-header">
+            <h2 class="card-title" id="team-title">Your team</h2>
+            <a class="btn btn-ghost btn-sm push" href="#">Manage</a>
+          </div>
+          <div class="card-body">
+            <div class="stack stack-2">
+              <div class="bar text-sm">
+                <span class="text-muted">Seats</span>
+                <span class="push nums fw-semi">7 of 10</span>
+              </div>
+              <progress class="progress" value="7" max="10" aria-label="Seats used">7 of 10</progress>
+            </div>
+            <div class="list">
+              <div class="list-row">
+                <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="" loading="lazy" decoding="async"></span>
+                <span class="list-main">
+                  <span class="list-title text-sm">Priya Raman</span>
+                  <span class="list-sub text-xs">Joined 5 hours ago</span>
+                </span>
+                <span class="badge badge-brand">Admin</span>
+              </div>
+              <div class="list-row">
+                <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="" loading="lazy" decoding="async"></span>
+                <span class="list-main">
+                  <span class="list-title text-sm">Marco Pereira</span>
+                  <span class="list-sub text-xs">Joined Sep 30</span>
+                </span>
+                <span class="badge">Member</span>
+              </div>
+              <div class="list-row">
+                <span class="avatar avatar-sm" aria-hidden="true">SO</span>
+                <span class="list-main">
+                  <span class="list-title text-sm truncate">samuel@harborsupply.com</span>
+                  <span class="list-sub text-xs">Invited 2 days ago</span>
+                </span>
+                <button class="btn btn-ghost btn-sm" type="button">Resend</button>
+              </div>
+            </div>
+            <form class="field" action="#">
+              <label class="label" for="invite-email">Invite by email</label>
+              <div class="input-group">
+                <input class="input" id="invite-email" type="email" name="email" placeholder="name@northwind.co" autocomplete="off">
+                <button class="btn" type="submit">Invite</button>
+              </div>
+              <span class="help">They join as Members. You can change that later.</span>
+            </form>
+          </div>
+        </section>
+
+        <!-- Quick starts: the whole card is the link (.card-link + .stretch). -->
+        <article class="card card-link lift quick">
+          <div class="card-body">
+            <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#upload"></use></svg></span>
+            <div class="quick-text">
+              <h2 class="card-title"><a class="stretch link-quiet" href="#">Import customers</a></h2>
+              <p class="text-sm text-muted">Bring a CSV from your old tool. Columns are matched for you, and nothing is saved until you confirm.</p>
+              <span class="quick-more" aria-hidden="true">Start import <svg class="icon icon-sm mirror-rtl"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></span>
+            </div>
+          </div>
+        </article>
+        <article class="card card-link lift quick">
+          <div class="card-body">
+            <span class="icon-tile icon-tile-good" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#dollar"></use></svg></span>
+            <div class="quick-text">
+              <h2 class="card-title"><a class="stretch link-quiet" href="#">Set up payouts</a></h2>
+              <p class="text-sm text-muted">Add the account revenue should land in. Payouts run every Friday once it is verified.</p>
+              <span class="quick-more" aria-hidden="true">Add a bank account <svg class="icon icon-sm mirror-rtl"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></span>
+            </div>
+          </div>
+        </article>
+        <article class="card card-link lift quick">
+          <div class="card-body">
+            <span class="icon-tile icon-tile-warn" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#sparkle"></use></svg></span>
+            <div class="quick-text">
+              <h2 class="card-title"><a class="stretch link-quiet" href="#">Explore templates</a></h2>
+              <p class="text-sm text-muted">Twelve starter reports for sales, refunds and cohorts. Copy one and change what you need.</p>
+              <span class="quick-more" aria-hidden="true">Browse templates <svg class="icon icon-sm mirror-rtl"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Recently viewed -->
+        <section class="card wide" aria-labelledby="recent-title">
+          <div class="card-header">
+            <h2 class="card-title" id="recent-title">Recently viewed</h2>
+            <a class="btn btn-ghost btn-sm push" href="#">View all</a>
+          </div>
+          <div class="list">
+            <a class="list-row" href="#">
+              <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#file"></use></svg></span>
+              <span class="list-main">
+                <span class="list-title truncate">Q3 revenue review</span>
+                <span class="list-sub truncate">Report · edited by Priya Raman</span>
+              </span>
+              <span class="list-trail">2h ago</span>
+            </a>
+            <a class="list-row" href="#">
+              <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#folder"></use></svg></span>
+              <span class="list-main">
+                <span class="list-title truncate">Website relaunch</span>
+                <span class="list-sub truncate">Project · 14 open tasks, 3 due this week</span>
+              </span>
+              <span class="list-trail">Yesterday</span>
+            </a>
+            <a class="list-row" href="#">
+              <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#receipt"></use></svg></span>
+              <span class="list-main">
+                <span class="list-title truncate">Order #4821 · Dana Whitfield</span>
+                <span class="list-sub truncate">$320.00 · paid by card</span>
+              </span>
+              <span class="list-trail">Yesterday</span>
+            </a>
+            <a class="list-row" href="#">
+              <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#mail"></use></svg></span>
+              <span class="list-main">
+                <span class="list-title truncate">Weekly sales digest</span>
+                <span class="list-sub truncate">Email · sent to 7 people</span>
+              </span>
+              <span class="list-trail">Mon</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- Empty state: for a list with no rows yet. -->
+        <section class="card" aria-labelledby="empty-title">
+          <div class="empty">
+            <span class="empty-art" aria-hidden="true">
+              <svg class="icon icon-lg"><use href="../assets/deck/deck-icons.svg#chart"></use></svg>
+            </span>
+            <h2 class="empty-title" id="empty-title">No saved views yet</h2>
+            <p class="text-sm">Filter any list, then save it here so the whole team sees the same numbers.</p>
+            <button class="btn btn-soft btn-sm" type="button">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus-sm"></use></svg>
+              Save a view
+            </button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ======================================================================
+     DRAWER · shared chrome, phones only (needs deck-extras.js)
+     The sidebar again, in a native <dialog>. The menu button in the top bar
+     opens it with data-deck-drawer; Escape, the backdrop and the close
+     button shut it. It holds everything the tab bar has no room for.
+     ====================================================================== -->
+<dialog class="drawer" id="app-nav" aria-labelledby="app-nav-title">
+  <div class="drawer-header">
+    <span class="avatar avatar-sm avatar-square ws-logo" aria-hidden="true">N</span>
+    <div class="grow min-is-0">
+      <h2 class="drawer-title" id="app-nav-title">Northwind</h2>
+      <p class="text-xs text-muted">Acme · Pro trial, 9 days left</p>
+    </div>
+    <button class="btn btn-sm btn-ghost btn-icon" type="button" data-drawer-close aria-label="Close navigation">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x"></use></svg>
+    </button>
+  </div>
+  <div class="drawer-body">
+    <nav class="sidebar" aria-label="Main">
+      <a class="sidebar-link" href="app-shell.html" aria-current="page">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home-sm"></use></svg>
+        Overview
+      </a>
+      <a class="sidebar-link" href="dashboard.html">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart-sm"></use></svg>
+        Dashboard
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail-sm"></use></svg>
+        Inbox
+        <span class="badge badge-brand push">4<span class="sr-only"> unread</span></span>
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#receipt-sm"></use></svg>
+        Orders
+        <span class="badge push">12<span class="sr-only"> open</span></span>
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users-sm"></use></svg>
+        Customers
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#file-sm"></use></svg>
+        Reports
+      </a>
+
+      <p class="sidebar-group">Projects</p>
+      <a class="sidebar-link" href="#"><span class="dot" aria-hidden="true"></span>Website relaunch</a>
+      <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--accent-500)" aria-hidden="true"></span>Mobile app 2.0</a>
+      <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--good-500)" aria-hidden="true"></span>Q4 campaign</a>
+      <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--bad-500)" aria-hidden="true"></span>Partner portal</a>
+
+      <p class="sidebar-group">Workspace</p>
+      <a class="sidebar-link" href="settings.html">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings-sm"></use></svg>
+        Settings
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help-sm"></use></svg>
+        Help &amp; docs
+      </a>
+    </nav>
+    <div class="usage">
+      <div class="bar">
+        <span class="text-sm fw-semi">Pro trial</span>
+        <span class="badge badge-warn push">9 days left</span>
+      </div>
+      <progress class="progress" value="3412" max="5000" aria-label="Orders this month">68%</progress>
+      <span class="text-xs text-muted nums">3,412 of 5,000 orders this month</span>
+      <a class="btn btn-soft btn-sm btn-block" href="settings.html#billing">Upgrade plan</a>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <a class="user-row" href="settings.html#profile">
+      <span class="avatar avatar-sm" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="" loading="lazy" decoding="async">
+      </span>
+      <span class="grow min-is-0">
+        <span class="block text-sm fw-semi truncate">Alex Rivera</span>
+        <span class="block text-xs text-muted truncate">alex@northwind.co</span>
+      </span>
+    </a>
+    <button class="btn btn-icon btn-ghost" type="button" data-deck-theme aria-label="Switch theme">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+    </button>
+  </div>
+</dialog>
+
+<!-- ======================================================================
+     TAB BAR · shared chrome, phones only
+     Deck hides it at 48rem and pads the bottom of the page so it never
+     covers the last row: you do not have to do either.
+     ====================================================================== -->
+<nav class="tabbar" aria-label="Primary">
+  <a class="tabbar-item" href="app-shell.html" aria-current="page">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home"></use></svg>
+    Overview
+  </a>
+  <a class="tabbar-item" href="dashboard.html">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart"></use></svg>
+    Dashboard
+  </a>
+  <a class="tabbar-item" href="#">
+    <span class="with-indicator">
+      <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail"></use></svg>
+      <span class="indicator-badge indicator-badge-brand" aria-hidden="true">4</span>
+    </span>
+    Inbox<span class="sr-only">, 4 unread</span>
+  </a>
+  <a class="tabbar-item" href="#">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#receipt"></use></svg>
+    Orders
+  </a>
+  <a class="tabbar-item" href="settings.html">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings"></use></svg>
+    Settings
+  </a>
+</nav>
+
+<script>
+  /* Shared chrome: ⌘K (Ctrl K off a Mac) focuses the search field. */
+  (() => {
+    const q = document.querySelector('.topbar-search .input');
+    const mac = /Mac|iPhone|iPad/.test(navigator.platform);
+    if (!mac) document.querySelectorAll('[data-shortcut]').forEach((k) => { k.textContent = 'Ctrl K'; });
+    addEventListener('keydown', (e) => {
+      if ((mac ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === 'k' && q && q.offsetParent) {
+        e.preventDefault();
+        q.focus();
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

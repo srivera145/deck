@@ -28,7 +28,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Range</h1>
   <p class="lede">
     <code>.range</code> styles a real <code>&lt;input type="range"&gt;</code>. A slider
@@ -39,7 +39,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use a slider when the reader is choosing approximately — a price ceiling, a volume,
@@ -63,7 +63,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="engines">Two engines, two sets of rules</h2>
   <p>
     Every declaration is written twice:
@@ -101,7 +101,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="pair">Two handles</h2>
   <p>
     <code>.range-pair</code> is the interesting one. It stacks two real
@@ -152,7 +152,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="readout">Readout and ticks</h2>
   <p>
     <code>.range-readout</code> is a tabular-figure display for the current value.
@@ -191,20 +191,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from the stylesheet source by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--tap', '--ink-0', '--ink-200', '--brand-500', '--brand-600', '--r-full', '--shadow-2']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The input is real, so the keyboard works.</strong> Arrow keys step by
       <code>step</code>, Page Up and Page Down jump, Home and End go to the ends. None of
@@ -256,7 +256,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The browser mirrors a range input under <code>dir="rtl"</code> on its own — the
@@ -279,7 +279,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The only movement is <code>scale: 1.08</code> on the WebKit thumb while it is being
@@ -289,7 +289,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     Deck's print stylesheet has no rule for <code>.range</code>. A slider prints as
@@ -299,7 +299,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <p>
     Remember to write both engines. Overriding only the WebKit pseudo-element leaves
@@ -318,9 +318,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not when the exact value matters.</strong> Hitting 37 on a 0–100 slider is
       hard with a mouse and harder with a thumb. Use <code>.number</code>, or pair the

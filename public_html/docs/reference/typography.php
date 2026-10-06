@@ -39,7 +39,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Typography</h1>
   <p class="lede">
     Deck styles the heading elements directly, so a page written in plain HTML is
@@ -50,7 +50,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="headings">Headings</h2>
   <p>
     <code>.h1</code> through <code>.h6</code> apply a heading's appearance to any
@@ -83,7 +83,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="size">Size</h2>
   <p>
     Eight steps, each reading a <code>--text-*</code> token. The scale is a ratio
@@ -98,7 +98,7 @@ require __DIR__ . '/../_layout.php';
   ], 'Font size utilities'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="weight">Weight</h2>
   <p>
     Four weights, and two of them are not round numbers. Deck's default face is
@@ -109,7 +109,7 @@ require __DIR__ . '/../_layout.php';
   <?php docs_utility_table(['fw-normal', 'fw-medium', 'fw-semi', 'fw-bold'], 'Font weight utilities'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="alignment">Alignment and casing</h2>
   <p>
     <code>.text-start</code> and <code>.text-end</code> are logical: they follow the
@@ -129,7 +129,7 @@ require __DIR__ . '/../_layout.php';
   ], 'Alignment, casing and numeral utilities'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="overflow">Truncation</h2>
   <p>
     <code>.truncate</code> is one line with an ellipsis; <code>.clamp-2</code> and
@@ -145,7 +145,7 @@ require __DIR__ . '/../_layout.php';
   <?php docs_utility_table(['truncate', 'clamp-2', 'clamp-3'], 'Truncation utilities'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="writing">Writing modes</h2>
   <p>
     Six classes for vertical text — Japanese and Mongolian setting, and the rotated
@@ -160,7 +160,7 @@ require __DIR__ . '/../_layout.php';
   ], 'Writing mode utilities'); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="bidi">Direction and bidi</h2>
   <p>
     These are for text whose direction differs from the page around it: an English
@@ -181,9 +181,9 @@ require __DIR__ . '/../_layout.php';
   ], 'Direction and bidi utilities'); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use these</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not instead of a heading element.</strong> <code>.h2</code> on a
       <code>&lt;div&gt;</code> looks like a heading and is not one. Screen reader

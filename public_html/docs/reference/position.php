@@ -28,7 +28,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Position</h1>
   <p class="lede">
     Ten classes: the four <code>position</code> values, the five insets, and one
@@ -38,7 +38,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="position">The four values</h2>
   <p>
     The pairing you will use most is <code>.relative</code> on a parent and
@@ -66,7 +66,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="inset">Insets</h2>
   <p>
     <code>.inset-0</code> pins all four edges, which with <code>.absolute</code> is the
@@ -88,7 +88,7 @@ require __DIR__ . '/../_layout.php';
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="z">Stacking</h2>
   <p>
     There is exactly one <code>z-index</code> utility, and it is
@@ -109,9 +109,9 @@ require __DIR__ . '/../_layout.php';
   <?php docs_token_table(['--z-sticky', '--z-nav', '--z-sheet', '--z-modal', '--z-toast']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use these</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not to build an overlay.</strong> <code>.modal</code>,
       <code>.drawer</code> and <code>.sheet</code> use the top layer, so they sit above

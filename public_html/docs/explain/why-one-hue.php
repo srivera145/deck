@@ -35,7 +35,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Why Deck themes from one hue</h1>
   <p class="lede">
     Deck builds its whole brand palette from one number, a hue angle between 0 and 360, so it
@@ -46,7 +46,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="cost">What one hue cannot do</h2>
   <p>
     A brand with two equally important colours has nowhere in Deck to put the second one.
@@ -116,7 +116,7 @@ require __DIR__ . '/../_layout.php';
 }</code></pre>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="why">Why one number is enough</h2>
   <p>
     One number can drive a whole palette because Deck generates the palette in OKLCH, a
@@ -144,7 +144,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="buys">What one number buys</h2>
   <p>
     Theming from one number makes per-customer branding a value in a database instead of a
@@ -185,7 +185,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="not-for">Who this model does not suit</h2>
   <p>
     Deck's one-hue model does not suit a brand defined by two co-equal primary colours that
@@ -209,7 +209,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="case">The case in one paragraph</h2>
   <p>
     Deck's argument for theming from one hue is that, for multi-tenant and white-labelled

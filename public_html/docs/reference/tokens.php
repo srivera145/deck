@@ -172,7 +172,7 @@ ksort($byFile);
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>All tokens</h1>
   <p class="lede">
     All <?= (int) count($api['tokens']) ?> custom properties Deck declares on
@@ -182,7 +182,7 @@ ksort($byFile);
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="using">Using a token</h2>
   <p>
     Tokens are plain CSS custom properties. Read one with <code>var()</code> in your own
@@ -223,14 +223,14 @@ ksort($byFile);
 
 <?php foreach ($GROUPS as $g): ?>
   <?php if ($assigned[$g['id']] === []) { continue; } ?>
-  <section class="stack-4">
+  <section class="stack stack-4">
     <h2 id="<?= e($g['id']) ?>"><?= e($g['title']) ?></h2>
     <p><?= e($g['note']) ?></p>
     <?php docs_token_table($assigned[$g['id']], true); ?>
   </section>
 <?php endforeach; ?>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="ungrouped">Ungrouped</h2>
   <?php if ($ungrouped === []): ?>
     <div class="alert alert-good">
@@ -260,7 +260,7 @@ ksort($byFile);
   <?php endif; ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding a token</h2>
   <p>
     Custom properties inherit, so where you set one decides how far the change reaches.

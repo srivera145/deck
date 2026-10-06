@@ -32,7 +32,7 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Change your brand colour</h1>
   <p class="lede">
     You want the buttons, links, focus rings, charts and shadows to be your colour instead
@@ -42,7 +42,7 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="answer">The short answer</h2>
   <p>
     Put a hue angle on the <code>&lt;html&gt;</code> tag. That is the whole thing.
@@ -83,7 +83,7 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="why-number">Why a number and not a hex code</h2>
   <p>
     Most frameworks ask for <code>#0f766e</code> and then ask for the ten shades around it
@@ -112,7 +112,7 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
   <?php docs_token_table($SWATCHES); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="chroma">Turning the saturation down</h2>
   <p>
     The second knob is <code>--chroma-brand</code>: how colourful, independent of which
@@ -137,7 +137,7 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="tenant">One theme per tenant, from PHP</h2>
   <p>
     This is the case Deck was built for. The tenant's colour is a column in your database,
@@ -168,7 +168,7 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="runtime">Letting a person choose, at runtime</h2>
   <p>
     <code>Deck.hue(n)</code> sets the same property from JavaScript. It is not persisted
@@ -194,7 +194,7 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="scope">The one that will catch you: it has to be on the root</h2>
   <div class="alert alert-warn">
     <svg class="icon"><use href="../../assets/deck/deck-icons.svg#alert-triangle"></use></svg>
@@ -238,7 +238,7 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="dark">Dark mode is already done</h2>
   <p>
     You do not theme twice. Deck's semantic tokens are declared with
@@ -263,7 +263,7 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="contrast">Text on a coloured surface, and where contrast-color() fits</h2>
   <p>
     Generating a palette from one number has one genuinely hard problem in it: what colour
@@ -304,7 +304,7 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="beyond">When one hue is not enough</h2>
   <p>
     There are five more, and they work exactly the same way. Set them on the root together:
@@ -336,9 +336,9 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="dont">What not to override</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not the ramp steps, one at a time.</strong> Setting
       <code>--brand-600</code> and leaving the other ten alone gives you a button that no

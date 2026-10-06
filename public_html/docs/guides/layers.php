@@ -45,7 +45,7 @@ $LAYERS = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Override Deck without <code>!important</code></h1>
   <p class="lede">
     You wrote a rule, it is not being applied, and the framework's rule is winning in dev
@@ -55,7 +55,7 @@ $LAYERS = [
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="answer">The short answer</h2>
   <p>
     Wrap your CSS in <code>@layer app.pages</code>. That is it.
@@ -80,7 +80,7 @@ $LAYERS = [
   app.base, app.components, app.pages, app.overrides;</code></pre>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="why">Why that works when specificity says it should not</h2>
   <p>
     The cascade decides a winner by asking a series of questions in order, and stopping at
@@ -119,7 +119,7 @@ $LAYERS = [
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="slots">Which of the four slots to use</h2>
   <p>
     All four beat all of Deck. They exist to order your own CSS against itself, which is
@@ -148,40 +148,48 @@ $LAYERS = [
       </tbody>
     </table>
   </div>
-  <dl class="stack-3">
-    <dt><strong><code>app.base</code></strong></dt>
-    <dd>
-      Element styles and token overrides. A different body font, a custom
-      <code>--brand</code>, your own <code>&lt;table&gt;</code> defaults. Things that
-      should lose to your components.
-    </dd>
-    <dt><strong><code>app.components</code></strong></dt>
-    <dd>
-      Your own components, and your permanent changes to Deck's. If every card in your
-      product has square corners, that rule lives here, once. This is where most of your
-      CSS belongs.
-    </dd>
-    <dt><strong><code>app.pages</code></strong></dt>
-    <dd>
-      One page or one view. The hero on the marketing home page, a dashboard that needs a
-      wider rail. Rules that would be wrong applied everywhere.
-    </dd>
-    <dt><strong><code>app.overrides</code></strong></dt>
-    <dd>
-      The escape hatch. Something has to win right now and you will come back to it. Keeping
-      it as a named layer rather than an <code>!important</code> means it is greppable —
-      you can find every one of them in a second, which is not true of importance scattered
-      through a codebase.
-    </dd>
+  <dl class="stack stack-3">
+    <div class="stack stack-1">
+      <dt><strong><code>app.base</code></strong></dt>
+      <dd>
+        Element styles and token overrides. A different body font, a custom
+        <code>--brand</code>, your own <code>&lt;table&gt;</code> defaults. Things that
+        should lose to your components.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong><code>app.components</code></strong></dt>
+      <dd>
+        Your own components, and your permanent changes to Deck's. If every card in your
+        product has square corners, that rule lives here, once. This is where most of your
+        CSS belongs.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong><code>app.pages</code></strong></dt>
+      <dd>
+        One page or one view. The hero on the marketing home page, a dashboard that needs a
+        wider rail. Rules that would be wrong applied everywhere.
+      </dd>
+    </div>
+    <div class="stack stack-1">
+      <dt><strong><code>app.overrides</code></strong></dt>
+      <dd>
+        The escape hatch. Something has to win right now and you will come back to it. Keeping
+        it as a named layer rather than an <code>!important</code> means it is greppable —
+        you can find every one of them in a second, which is not true of importance scattered
+        through a codebase.
+      </dd>
+    </div>
   </dl>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="debug">When your rule still is not winning</h2>
   <p>
     Work down this list. It is in order of how often each one turns out to be the answer.
   </p>
-  <ol class="stack-3">
+  <ol class="stack stack-3">
     <li>
       <strong>Your stylesheet loads before Deck's.</strong> The <em>order</em> is declared
       by Deck, but a layer only exists once something declares it. If your CSS is the first
@@ -228,7 +236,7 @@ $LAYERS = [
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="import">Loading your CSS into a layer</h2>
   <p>
     If you would rather not wrap every file, assign it at import time:
@@ -257,9 +265,9 @@ $LAYERS = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to reach for a layer</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>When a token would do it.</strong> Changing
       <code>--r-md</code> restyles every rounded corner in the framework at once; a rule

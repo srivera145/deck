@@ -1,0 +1,1103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meridian Partners · Deck template</title>
+<meta name="description" content="A strategy and management consulting firm site: serif editorial hero, numbered practice list, impact band, four-phase approach, case studies, partners, insights and a consultation form.">
+<meta name="theme-color" content="#1c2a44">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231c2a44'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23d9c08f' stroke-width='2'/%3E%3Cellipse cx='16' cy='16' rx='4' ry='9' fill='none' stroke='%23d9c08f' stroke-width='2'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+<script src="../assets/deck/deck-extras.js" defer></script>   <!-- the mobile nav drawer -->
+
+<style>
+@layer app.pages {
+
+  /* ===== Brand =====
+     Navy at low chroma reads as expensive; the same hue at Deck's default
+     chroma reads as a SaaS app. The warm accent is used in four places only:
+     the eyebrow rule, the practice numbers, italic emphasis and the quote mark. */
+  :root {
+    --hue-brand: 252;
+    --chroma-brand: .085;
+    --hue-accent: 70;
+    --chroma-accent: .095;
+    --font-display: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --accent-ink: light-dark(var(--accent-700), var(--accent-500));
+    --navy: oklch(23.5% .052 var(--hue-brand));
+    /* Neutrals pulled toward warm paper. Navy on ivory is the whole mood;
+       on Deck's default cool grey the same navy looks like a dashboard. */
+    --hue-neutral: 78;
+    --chroma-neutral: .007;
+  }
+
+  /* A serif at a regular weight looks set; at 640 it looks shouted. */
+  :is(h1, h2, h3, .display) { font-weight: 500; letter-spacing: -.012em; }
+  h2 { font-size: var(--text-3xl); line-height: 1.08; }
+
+  /* Navy primary instead of mid blue. Dark mode keeps a lighter step so the
+     button still separates from the page. */
+  .btn-primary { --btn-bg: light-dark(var(--brand-800), var(--brand-600)); }
+  .btn-primary:hover { background: light-dark(var(--brand-900), var(--brand-700)); }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: var(--space-3);
+    font-size: var(--text-xs); font-weight: 640; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--brand);
+  }
+  .eyebrow::before {
+    content: ""; inline-size: 1.75rem; block-size: 1px; background: var(--accent-500);
+  }
+  .section-head { display: flex; flex-direction: column; gap: var(--space-4); max-inline-size: 42rem; }
+  .section-head .lede { text-wrap: pretty; }
+  .section-head.center-head { margin-inline: auto; align-items: center; text-align: center; }
+  em.accent { font-style: italic; color: var(--accent-ink); }
+
+  /* ===== Top bar ===== */
+  .topbar {
+    position: sticky; inset-block-start: 0; z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid var(--line);
+  }
+  .topbar .navbar { border: 0; min-block-size: 4.25rem; }
+  .brand-mark { inline-size: 1.75rem; block-size: 1.75rem; color: var(--brand); }
+  .brand-name { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 500; letter-spacing: -.01em; white-space: nowrap; }
+  .navbar-links { margin-inline-start: var(--space-6); }
+  .topbar .push { flex-wrap: nowrap; }
+  /* Five links, a serif wordmark and a CTA need about 62rem, so the drawer
+     covers tablets too, not only Deck's 48rem phone breakpoint. The CTA
+     itself moves into the drawer below 40rem. */
+  @media (max-width: 61.99rem) { .topbar .navbar-links { display: none; } }
+  @media (min-width: 62rem) { .menu-btn { display: none; } }
+  .nav-cta { display: none; }
+  @media (min-width: 40rem) { .nav-cta { display: inline-flex; } }
+  /* Deck's .drawer sets display:flex, which beats the browser's own rule that hides a closed <dialog>, so a closed drawer would sit off-screen with its links still in the tab order. The transition on display is allow-discrete, so the slide-out still plays. */
+  .drawer:not([open]) { display: none; }
+  .drawer .sidebar { padding: 0; }
+  .drawer .sidebar-link { font-family: var(--font-display); font-size: var(--text-lg); color: var(--text); min-block-size: 3rem; }
+  .drawer-note { padding-inline: var(--space-3); font-size: var(--text-sm); color: var(--text-muted); border-block-start: 1px solid var(--line); padding-block-start: var(--space-4); }
+
+  /* ===== Hero ===== */
+  /* Two soft blooms sized in rem, not percent: a percentage-sized radial
+     turns into a sliver when the section gets tall on a phone. */
+  .hero {
+    padding-block: clamp(2.5rem, 1rem + 5vw, 5.5rem) var(--space-section);
+    background:
+      radial-gradient(48rem 32rem at 88% -12%, color-mix(in oklab, light-dark(var(--brand-300), var(--brand-700)) 22%, transparent), transparent 70%),
+      radial-gradient(36rem 28rem at -8% 30%, color-mix(in oklab, var(--accent-500) 10%, transparent), transparent 70%);
+  }
+  .hero-grid { display: grid; gap: var(--space-12); align-items: center; }
+  @media (min-width: 64rem) {
+    .hero-grid { grid-template-columns: 1.1fr .9fr; gap: var(--space-16); }
+  }
+  .hero-title {
+    font-size: clamp(2.6rem, 1.45rem + 4.3vw, 4.75rem);
+    line-height: 1.02; letter-spacing: -.024em; max-inline-size: 15ch;
+  }
+  .hero-title em { display: block; }
+  .hero .lede { font-size: var(--text-lg); max-inline-size: 36rem; }
+  .trust { display: flex; align-items: center; gap: var(--space-3); color: var(--text-muted); font-size: var(--text-sm); }
+  .trust .avatar-stack > .avatar { box-shadow: 0 0 0 2px var(--bg); }
+
+  .hero-media { position: relative; }
+  .hero-photo {
+    aspect-ratio: 4 / 5; border-radius: var(--r-lg); overflow: hidden;
+    background: var(--bg-sunken); box-shadow: var(--shadow-4);
+  }
+  @media (min-width: 40rem) and (max-width: 63.99rem) { .hero-photo { aspect-ratio: 4 / 3; } }
+  @media (max-width: 30rem) { .hero-ctas > .btn { flex: 1 1 100%; } }
+  .hero-photo img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  /* Floating cards sit inside the photo on a phone and hang off its edges
+     on a desktop, where there is margin to hang into. */
+  .float-stat {
+    position: absolute; inset-inline-start: var(--space-3); inset-block-end: var(--space-3);
+    inline-size: min(16.5rem, calc(100% - var(--space-6)));
+  }
+  .float-chip {
+    position: absolute; inset-block-start: var(--space-3); inset-inline-end: var(--space-3);
+    display: flex; align-items: center; gap: var(--space-2);
+    padding: var(--space-2) var(--space-3); border-radius: var(--r-full);
+    background: color-mix(in oklab, var(--surface) 92%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-3); font-size: var(--text-xs); font-weight: 600;
+  }
+  @media (min-width: 64rem) {
+    .float-stat { inset-inline-start: calc(var(--space-12) * -1); inset-block-end: var(--space-10); }
+    .float-chip { inset-inline-end: calc(var(--space-6) * -1); inset-block-start: var(--space-8); }
+  }
+  .big-num {
+    font-family: var(--font-display); font-weight: 500; line-height: 1;
+    letter-spacing: -.02em; font-variant-numeric: lining-nums tabular-nums;
+  }
+  .float-stat .big-num { font-size: 2.5rem; }
+  .float-stat .sparkline { --series: var(--brand); --spark-w: 100%; --spark-h: 40px; }
+  .float-stat .stat-delta { color: light-dark(var(--good-700), var(--good-500)); }
+
+  /* ===== Client wordmarks =====
+     Text set in different faces so the row reads as logos. Swap each span
+     for an <img> of the real mark; keep the muted colour. */
+  .logos {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--line); border-block: 1px solid var(--line);
+  }
+  @media (min-width: 40rem) { .logos { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 64rem) { .logos { grid-template-columns: repeat(6, 1fr); } }
+  .logo {
+    display: flex; align-items: center; justify-content: center; gap: var(--space-2);
+    min-block-size: 5.5rem; padding-inline: var(--space-3); background: var(--bg);
+    color: var(--text-faint); white-space: nowrap;
+    transition: color var(--dur-2) var(--ease-out);
+  }
+  .logo:hover { color: var(--text); }
+  .logo .icon { inline-size: 1.1em; block-size: 1.1em; }
+  .wm-a { font-weight: 700; letter-spacing: .26em; font-size: var(--text-sm); }
+  .wm-b { font-family: var(--font-display); font-style: italic; font-size: var(--text-xl); }
+  .wm-c { font-weight: 800; letter-spacing: -.04em; font-size: var(--text-xl); }
+  .wm-d { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .12em; font-size: var(--text-base); }
+  .wm-e { font-weight: 300; letter-spacing: .02em; font-size: var(--text-lg); }
+  .wm-f { font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); }
+
+  /* ===== Practices ===== */
+  .services { display: grid; gap: var(--space-10); }
+  @media (min-width: 64rem) {
+    .services { grid-template-columns: 23rem 1fr; gap: var(--space-16); }
+    .services-intro { position: sticky; inset-block-start: 7rem; align-self: start; }
+  }
+  .svc-grid { display: grid; border-block-start: 1px solid var(--line); }
+  @media (min-width: 40rem) { .svc-grid { grid-template-columns: 1fr 1fr; } }
+  .svc {
+    position: relative; display: flex; flex-direction: column; gap: var(--space-3);
+    padding: var(--space-6) var(--space-4) var(--space-8);
+    border-block-end: 1px solid var(--line);
+    transition: background-color var(--dur-2) var(--ease-out);
+  }
+  @media (min-width: 40rem) {
+    .svc:nth-child(odd) { border-inline-end: 1px solid var(--line); }
+    .svc { padding-inline: var(--space-6); }
+  }
+  .svc:hover { background: var(--surface); }
+  .svc-num { font-family: var(--font-display); color: var(--accent-ink); font-size: var(--text-md); font-variant-numeric: lining-nums; }
+  .svc h3 { font-size: var(--text-xl); }
+  .svc h3 a { color: inherit; text-decoration: none; }
+  .svc h3 a::after { content: ""; position: absolute; inset: 0; }
+  .svc p { color: var(--text-muted); font-size: var(--text-sm); max-inline-size: 38ch; }
+  .svc-more {
+    margin-block-start: auto; display: inline-flex; align-items: center; gap: var(--space-2);
+    font-size: var(--text-sm); font-weight: 580; color: var(--brand);
+  }
+  .svc:hover .icon-follow { translate: 4px 0; }
+
+  /* ===== Impact band =====
+     Always navy. color-scheme: dark makes every Deck token inside it resolve
+     to its dark value, so text, lines and badges need no overrides. */
+  .band {
+    color-scheme: dark; position: relative; isolation: isolate; overflow: hidden;
+    background: var(--navy); color: var(--text);
+  }
+  .band::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(50% 80% at 100% 0%, oklch(45% .09 var(--hue-brand) / .55), transparent 70%),
+      radial-gradient(40% 60% at 0% 100%, oklch(55% .08 var(--hue-accent) / .16), transparent 70%);
+  }
+  .band .eyebrow { color: var(--brand-200); }
+  .band-head { display: grid; gap: var(--space-6); align-items: end; }
+  .band-head p { max-inline-size: 34ch; }
+  .band-head a { color: var(--brand-200); }
+  @media (min-width: 64rem) { .band-head { grid-template-columns: 1fr auto; } }
+  .kpis { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-10) var(--space-6); }
+  @media (min-width: 64rem) { .kpis { grid-template-columns: repeat(4, 1fr); gap: 0; } }
+  .kpi { display: flex; flex-direction: column; gap: var(--space-3); }
+  @media (min-width: 64rem) {
+    .kpi { padding-inline: var(--space-8); border-inline-start: 1px solid var(--line); }
+    .kpi:first-child { padding-inline-start: 0; border: 0; }
+  }
+  .kpi .big-num { font-size: clamp(2.5rem, 1.7rem + 2.8vw, 4rem); color: var(--ink-0); }
+  .kpi p { color: var(--text-muted); font-size: var(--text-sm); max-inline-size: 26ch; }
+
+  /* ===== Approach =====
+     Deck's .stepper-auto, restyled: bigger serif markers, a brand connector,
+     and full-strength labels because no phase is "upcoming" here. */
+  .approach { gap: var(--space-6); overflow: visible; }
+  .approach .step { min-inline-size: 0; gap: var(--space-5); }
+  .approach .step-marker::before {
+    content: "0" counter(step); inline-size: 3rem; block-size: 3rem;
+    font-family: var(--font-display); font-size: var(--text-md); font-weight: 500;
+    color: var(--brand); border-color: color-mix(in oklab, var(--brand) 55%, transparent);
+    background: var(--bg);
+  }
+  .approach .step-marker::after { background: linear-gradient(90deg, color-mix(in oklab, var(--brand) 45%, transparent), var(--line)); }
+  .approach .step-label { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 500; color: var(--text); }
+  .phase { display: flex; flex-direction: column; gap: var(--space-3); }
+  .phase p { color: var(--text-muted); font-size: var(--text-sm); }
+  .phase-out { display: flex; flex-direction: column; gap: var(--space-2); font-size: var(--text-sm); }
+  .phase-out li { display: flex; gap: var(--space-2); align-items: flex-start; }
+  .phase-out .icon { color: var(--accent-ink); margin-block-start: .1em; }
+  @media (max-width: 40rem) { .approach .step-marker::after { background: var(--line); } }
+
+  /* ===== Case studies ===== */
+  .cases { display: grid; gap: var(--space-6); }
+  @media (min-width: 64rem) {
+    .cases { grid-template-columns: 1.2fr 1fr; }
+    .case-feature { grid-row: span 2; }
+  }
+  .case h3 { font-size: var(--text-xl); line-height: 1.18; }
+  .case h3 a { color: inherit; text-decoration: none; }
+  .case .card-media { background: var(--bg-sunken); }
+  .case .card-media img { block-size: 100%; }
+  .case-sub { font-size: var(--text-xs); color: var(--text-muted); }
+  .metrics { display: flex; flex-wrap: wrap; gap: var(--space-4) var(--space-8); padding-block-start: var(--space-4); border-block-start: 1px solid var(--line); }
+  .metric { display: flex; flex-direction: column; gap: var(--space-1); }
+  .metric .big-num { font-size: var(--text-2xl); color: var(--text); }
+  .metric span:last-child { font-size: var(--text-xs); color: var(--text-muted); }
+  .label-sm { font-size: var(--text-2xs); font-weight: 680; letter-spacing: .12em; text-transform: uppercase; color: var(--text-faint); }
+
+  /* The featured case: photo fills the card, copy sits on Deck's scrim.
+     color-scheme: dark flips the tokens inside so the copy reads on the photo. */
+  .case-feature { color-scheme: dark; min-block-size: 32rem; justify-content: flex-end; background: var(--navy); color: var(--text); }
+  /* Desaturated under a navy wash, so a bright sky in the photo cannot
+     punch a white hole in the card, in either theme. */
+  .case-feature > img {
+    position: absolute; inset: 0; z-index: -2; inline-size: 100%; block-size: 100%;
+    object-fit: cover; object-position: 65% 40%; filter: grayscale(.9) contrast(1.08);
+  }
+  .case-feature::after {
+    background: linear-gradient(to top,
+      oklch(16% .04 var(--hue-brand) / .97) 0%,
+      oklch(16% .04 var(--hue-brand) / .84) 45%,
+      oklch(20% .05 var(--hue-brand) / .5) 100%);
+  }
+  .case-feature .case-sub { color: oklch(100% 0 0 / .78); }
+  .case-feature .card-body { padding: var(--space-8); gap: var(--space-4); }
+  .case-feature h3 { font-size: var(--text-2xl); max-inline-size: 22ch; }
+  .case-feature p { color: var(--text-muted); max-inline-size: 48ch; }
+  .case-feature .metrics { border-color: oklch(100% 0 0 / .18); }
+  @media (min-width: 40rem) {
+    .case-side { display: grid; grid-template-columns: 38% 1fr; }
+    .case-side .card-media { block-size: 100%; }
+  }
+  .case-side .card-media img { aspect-ratio: 16 / 10; }
+  @media (min-width: 40rem) { .case-side .card-media img { aspect-ratio: auto; } }
+  .case-side .card-body { padding: var(--space-6); }
+
+  /* ===== Industries ===== */
+  .industries { display: grid; gap: var(--space-8); align-items: center; }
+  @media (min-width: 64rem) { .industries { grid-template-columns: 1fr 1.35fr; gap: var(--space-16); } }
+  .ind-chips { gap: var(--space-3); }
+  .ind-chips .chip {
+    min-block-size: 3rem; padding-inline: var(--space-4) var(--space-5);
+    font-size: var(--text-base); color: var(--text); text-decoration: none;
+    transition: border-color var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out), translate var(--dur-2) var(--ease-out);
+  }
+  .ind-chips .chip:hover { border-color: var(--brand); translate: 0 -2px; }
+  .ind-chips .chip .icon { color: var(--brand); }
+  .ind-chips .chip span { color: var(--text-faint); font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
+
+  /* ===== Partners =====
+     Black and white until hovered: it also evens out four photos shot in
+     four different rooms. */
+  .team { display: grid; gap: var(--space-8) var(--space-4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 64rem) { .team { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-8) var(--space-6); } }
+  .member { display: flex; flex-direction: column; gap: var(--space-3); }
+  .portrait { aspect-ratio: 4 / 5; border-radius: var(--r-lg); overflow: hidden; background: var(--bg-sunken); }
+  .portrait img {
+    inline-size: 100%; block-size: 100%; object-fit: cover;
+    filter: grayscale(1) contrast(1.04);
+    transition: filter var(--dur-4) var(--ease-out), scale var(--dur-5) var(--ease-out);
+  }
+  .member:hover .portrait img { filter: none; scale: 1.03; }
+  .member h3 { font-size: var(--text-lg); }
+  .member-role { font-size: var(--text-sm); color: var(--brand); font-weight: 560; }
+  .member p { font-size: var(--text-sm); color: var(--text-muted); }
+
+  /* ===== Pull quote ===== */
+  .quote-band { background: var(--surface); border-block: 1px solid var(--line); }
+  .quote { display: flex; flex-direction: column; align-items: center; gap: var(--space-6); text-align: center; max-inline-size: 54rem; margin-inline: auto; }
+  .quote-mark { font-family: var(--font-display); font-size: 6rem; line-height: .5; block-size: 2.25rem; color: var(--accent-500); }
+  .quote blockquote {
+    border: 0; padding: 0; color: var(--text);
+    font-family: var(--font-display); font-size: clamp(1.45rem, 1.05rem + 1.7vw, 2.4rem);
+    line-height: 1.28; letter-spacing: -.012em; text-wrap: balance;
+  }
+  .quote figcaption { display: flex; align-items: center; gap: var(--space-3); text-align: start; }
+
+  /* ===== Insights =====
+     Three across on a desktop, one per row with the photo beside the text
+     on a tablet, where three would not fit and two would orphan the third. */
+  .posts { display: grid; gap: var(--space-6); }
+  @media (min-width: 64rem) { .posts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 40rem) and (max-width: 63.99rem) {
+    .post { display: grid; grid-template-columns: 38% 1fr; grid-template-rows: 1fr auto; }
+    .post .card-media { grid-row: span 2; }
+    .post .card-media img { block-size: 100%; aspect-ratio: auto; }
+  }
+  .post .card-media img { aspect-ratio: 16 / 10; transition: scale var(--dur-5) var(--ease-out); }
+  .post:hover .card-media img { scale: 1.04; }
+  .post h3 { font-size: var(--text-xl); line-height: 1.2; }
+  .post h3 a { color: inherit; text-decoration: none; }
+  .post .card-footer { font-size: var(--text-xs); color: var(--text-muted); background: none; }
+
+  /* ===== Consultation ===== */
+  .contact { display: grid; gap: var(--space-8); align-items: start; }
+  @media (min-width: 64rem) { .contact { grid-template-columns: 1.3fr 1fr; gap: var(--space-12); } }
+  .contact .card-body { padding: clamp(1.25rem, .8rem + 2vw, 2.5rem); }
+  .next-steps { counter-reset: next; display: flex; flex-direction: column; gap: var(--space-4); }
+  .next-steps li { counter-increment: next; display: grid; grid-template-columns: 2rem 1fr; gap: var(--space-3); font-size: var(--text-sm); color: var(--text-muted); }
+  .next-steps li::before {
+    content: counter(next); inline-size: 2rem; block-size: 2rem; display: grid; place-items: center;
+    border-radius: var(--r-full); border: 1px solid var(--line-strong);
+    font-family: var(--font-display); color: var(--brand); font-size: var(--text-sm);
+  }
+  .next-steps strong { color: var(--text); display: block; }
+  .office .avatar { border-radius: var(--r-sm); }
+  .office .list-trail { color: var(--text-muted); text-decoration: none; }
+  .office .list-trail:hover { color: var(--brand); }
+
+  /* ===== Footer ===== */
+  .site-footer { background: var(--surface); }
+  .site-footer .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 64rem) { .site-footer .footer-grid { grid-template-columns: 1.6fr repeat(4, 1fr); } }
+  .site-footer .footer-brand { grid-column: 1 / -1; max-inline-size: 30ch; }
+  @media (min-width: 64rem) { .site-footer .footer-brand { grid-column: auto; } }
+  .footer-office { font-style: normal; line-height: 1.6; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Photos are hotlinked from Unsplash for the preview. Replace them with your own. -->
+
+<!-- Icons the Deck sprite does not have. Same 24px grid and stroke as the sprite. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-meridian" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9.25"/><ellipse cx="12" cy="12" rx="4" ry="9.25"/><path d="M2.75 12h18.5"/></g></symbol>
+  <symbol id="i-landmark" viewBox="0 0 24 24"><path d="M3 21h18M6 17v-6M10 17v-6M14 17v-6M18 17v-6M12 3l8 5H4z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-factory" viewBox="0 0 24 24"><path d="M2 20V9l6 4V9l6 4V4h4l2 16zM2 20h20M7 17h1M12 17h1M17 17h1" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7zM3.5 12h5l1.5-2.5 2.5 5 2-3.5h6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM9 9h6v6H9zM9 1.5V4M15 1.5V4M9 20v2.5M15 20v2.5M1.5 9H4M1.5 15H4M20 9h2.5M20 15h2.5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><path d="M4 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2zM16 20V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-signal" viewBox="0 0 24 24"><path d="M4.9 19.1a10 10 0 0 1 0-14.2M7.8 16.2a6 6 0 0 1 0-8.4M16.2 7.8a6 6 0 0 1 0 8.4M19.1 4.9a10 10 0 0 1 0 14.2M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-tri" viewBox="0 0 24 24"><path d="M12 3 22 20H2z" fill="currentColor"/></symbol>
+  <symbol id="i-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="3.5"/></symbol>
+  <symbol id="i-bars" viewBox="0 0 24 24"><path d="M3 21h4V10H3zM10 21h4V3h-4zM17 21h4v-7h-4z" fill="currentColor"/></symbol>
+</svg>
+
+<!-- ===== Top bar ===== -->
+<header class="topbar">
+  <div class="container">
+    <nav class="navbar" aria-label="Primary">
+      <a class="navbar-brand" href="#">
+        <svg class="brand-mark" aria-hidden="true"><use href="#i-meridian"></use></svg>
+        <span class="brand-name">Meridian Partners</span>
+      </a>
+      <div class="navbar-links">
+        <a class="nav-link" href="#services">Practices</a>
+        <a class="nav-link" href="#approach">Approach</a>
+        <a class="nav-link" href="#work">Work</a>
+        <a class="nav-link" href="#team">Partners</a>
+        <a class="nav-link" href="#insights">Insights</a>
+      </div>
+      <div class="push cluster cluster-tight">
+        <button class="btn btn-icon btn-ghost" data-deck-theme aria-label="Switch theme">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        </button>
+        <a class="btn btn-primary btn-sm nav-cta" href="#contact">Book a consultation</a>
+        <!-- Phones only. deck-extras.js opens the drawer below. -->
+        <button class="btn btn-icon btn-ghost menu-btn" data-deck-drawer="#site-nav" aria-label="Open menu">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#menu"></use></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== Mobile navigation =====
+     A native <dialog>. data-drawer-close on each link closes it as the page
+     scrolls to the section. -->
+<dialog class="drawer drawer-end" id="site-nav" aria-labelledby="site-nav-title">
+  <div class="drawer-header">
+    <span class="drawer-title brand-name" id="site-nav-title">Meridian Partners</span>
+    <button class="btn btn-sm btn-ghost btn-icon push" data-drawer-close aria-label="Close menu">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x"></use></svg>
+    </button>
+  </div>
+  <nav class="drawer-body" aria-label="Mobile">
+    <div class="sidebar">
+      <a class="sidebar-link" href="#services" data-drawer-close>Practices</a>
+      <a class="sidebar-link" href="#approach" data-drawer-close>Approach</a>
+      <a class="sidebar-link" href="#work" data-drawer-close>Work</a>
+      <a class="sidebar-link" href="#team" data-drawer-close>Partners</a>
+      <a class="sidebar-link" href="#insights" data-drawer-close>Insights</a>
+      <a class="sidebar-link" href="#offices" data-drawer-close>Offices</a>
+    </div>
+    <p class="drawer-note">New York · London · Singapore<br><a href="tel:+12125550147">+1 (212) 555-0147</a></p>
+  </nav>
+  <div class="drawer-footer">
+    <a class="btn btn-primary" href="#contact" data-drawer-close>Book a consultation</a>
+  </div>
+</dialog>
+
+<main id="main">
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div class="stack stack-6 stagger">
+        <p class="eyebrow enter-rise">Strategy &amp; management consulting</p>
+        <h1 class="display hero-title enter-rise" id="hero-title">The few decisions that matter, <em class="accent">made well.</em></h1>
+        <p class="lede enter-rise">
+          Meridian Partners advises boards and executive teams on strategy,
+          operations and transformation. A partner on every engagement, fees
+          tied to outcomes, and no two-hundred-page decks.
+        </p>
+        <div class="cluster hero-ctas enter-rise">
+          <a class="btn btn-primary btn-lg" href="#contact">
+            Book a consultation
+            <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+          </a>
+          <a class="btn btn-lg" href="#work">See our work</a>
+        </div>
+        <div class="trust enter-rise">
+          <span class="avatar-stack" aria-hidden="true">
+            <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&q=80&auto=format&fit=crop" width="32" height="32" alt=""></span>
+            <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=96&h=96&q=80&auto=format&fit=crop" width="32" height="32" alt=""></span>
+            <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=96&h=96&q=80&auto=format&fit=crop" width="32" height="32" alt=""></span>
+          </span>
+          <span>14 partners, average 21 years in the chair you sit in</span>
+        </div>
+      </div>
+
+      <div class="hero-media enter-rise">
+        <div class="hero-photo">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=820&h=1025&q=80&auto=format&fit=crop"
+               width="820" height="1025" fetchpriority="high"
+               alt="Glass office towers seen from street level against a pale sky">
+        </div>
+
+        <div class="card card-raised float-stat">
+          <div class="card-body">
+            <span class="label-sm">Value unlocked for clients</span>
+            <span class="big-num nums">$4.2B</span>
+            <svg class="sparkline" viewBox="0 0 120 32" preserveAspectRatio="none" aria-hidden="true">
+              <path class="chart-area" d="M0 29 12 27 24 28 36 23 48 24 60 19 72 16 84 17 96 11 108 8 120 3V32H0Z"/>
+              <path class="chart-line" d="M0 29 12 27 24 28 36 23 48 24 60 19 72 16 84 17 96 11 108 8 120 3"/>
+            </svg>
+            <span class="stat-delta stat-delta-up text-xs">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#trend-up-sm"></use></svg>
+              $610M of it in 2025, audited
+            </span>
+          </div>
+        </div>
+
+        <div class="float-chip">
+          <span class="indicator indicator-good" aria-hidden="true"></span>
+          Taking two new engagements for Q1
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Client wordmarks ===== -->
+  <section class="container" aria-label="Clients">
+    <p class="text-center label-sm mb-4">Trusted by leadership teams at</p>
+    <div class="logos reveal-fade">
+      <span class="logo wm-a">HALVORSEN</span>
+      <span class="logo wm-b">Arden &amp; Pike</span>
+      <span class="logo wm-c"><svg class="icon" aria-hidden="true"><use href="#i-dot"></use></svg>kinsale</span>
+      <span class="logo wm-d">Ostrava Group</span>
+      <span class="logo wm-e"><svg class="icon" aria-hidden="true"><use href="#i-tri"></use></svg>Brightwater</span>
+      <span class="logo wm-f"><svg class="icon" aria-hidden="true"><use href="#i-bars"></use></svg>Calder Bank</span>
+    </div>
+  </section>
+
+  <!-- ===== Practices =====
+       Each tile is one link: the ::after on the heading link covers the tile,
+       so it is one tab stop with a short accessible name. -->
+  <section class="section container" id="services" aria-labelledby="services-title">
+    <div class="services">
+      <header class="section-head services-intro reveal">
+        <p class="eyebrow">What we do</p>
+        <h2 id="services-title">Six practices, one senior team.</h2>
+        <p class="lede">
+          Most engagements draw on two or three of these. The partner who scopes
+          the work is the partner who presents it to your board.
+        </p>
+        <a class="btn btn-outline mt-2" href="#contact" style="align-self:flex-start">Discuss a mandate</a>
+      </header>
+
+      <div class="svc-grid">
+        <article class="svc reveal">
+          <span class="svc-num">01</span>
+          <h3><a href="#">Corporate strategy</a></h3>
+          <p>Where to play, how to win, and what to stop doing. Portfolio reviews, growth strategy and the capital allocation that follows from them.</p>
+          <span class="svc-more">Explore the practice <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></span>
+        </article>
+        <article class="svc reveal">
+          <span class="svc-num">02</span>
+          <h3><a href="#">Operations &amp; cost</a></h3>
+          <p>Cost programmes that are still holding in year three. Procurement, footprint, supply chain and shared services, measured against your peers.</p>
+          <span class="svc-more">Explore the practice <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></span>
+        </article>
+        <article class="svc reveal">
+          <span class="svc-num">03</span>
+          <h3><a href="#">Mergers &amp; integration</a></h3>
+          <p>From target screen to day 100. Commercial diligence, synergy cases you can defend, and integration offices that keep the base business running.</p>
+          <span class="svc-more">Explore the practice <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></span>
+        </article>
+        <article class="svc reveal">
+          <span class="svc-num">04</span>
+          <h3><a href="#">Digital transformation</a></h3>
+          <p>Deciding where technology changes the economics of the business and where it is theatre. Then building the operating model to deliver it.</p>
+          <span class="svc-more">Explore the practice <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></span>
+        </article>
+        <article class="svc reveal">
+          <span class="svc-num">05</span>
+          <h3><a href="#">People &amp; organisation</a></h3>
+          <p>Spans, layers and decision rights. Org design that survives contact with the people in it, plus leadership assessment and succession.</p>
+          <span class="svc-more">Explore the practice <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></span>
+        </article>
+        <article class="svc reveal">
+          <span class="svc-num">06</span>
+          <h3><a href="#">Risk &amp; resilience</a></h3>
+          <p>Scenario planning, regulatory readiness and the operational resilience work boards now ask about first. Practical, not a compliance binder.</p>
+          <span class="svc-more">Explore the practice <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Impact band ===== -->
+  <section class="band section" aria-labelledby="impact-title">
+    <div class="container stack stack-8">
+      <div class="band-head reveal">
+        <header class="section-head">
+          <p class="eyebrow">Impact</p>
+          <h2 id="impact-title">Measured the way your board will measure us.</h2>
+        </header>
+        <p class="text-sm text-muted">
+          Figures are checked each year by an independent accountant against
+          what clients reported, not against what we projected.
+          <a href="#">Read the methodology</a>
+        </p>
+      </div>
+      <div class="kpis">
+        <div class="kpi reveal">
+          <span class="big-num nums">$4.2B</span>
+          <p>Value unlocked for clients since 2015, verified against reported results</p>
+        </div>
+        <div class="kpi reveal">
+          <span class="big-num nums">310+</span>
+          <p>Engagements delivered across 24 countries and 11 industries</p>
+        </div>
+        <div class="kpi reveal">
+          <span class="big-num nums">92%</span>
+          <p>Of clients bring us back within two years of the first engagement</p>
+        </div>
+        <div class="kpi reveal">
+          <span class="big-num nums">1&#8239;:&#8239;4</span>
+          <p>Partner-to-consultant ratio, roughly double the industry norm</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Approach =====
+       .stepper-auto goes vertical below 40rem, so four phases with notes
+       still read on a phone. -->
+  <section class="section container stack stack-8" id="approach" aria-labelledby="approach-title">
+    <header class="section-head reveal">
+      <p class="eyebrow">How we work</p>
+      <h2 id="approach-title">Sixteen weeks from question to running change.</h2>
+      <p class="lede">A typical strategy engagement. Operations and integration work runs longer, but the shape is the same.</p>
+    </header>
+
+    <ol class="stepper stepper-auto approach">
+      <li class="step reveal">
+        <span class="step-marker"></span>
+        <div class="phase">
+          <span class="label-sm">Weeks 1–3</span>
+          <h3 class="step-label">Diagnose</h3>
+          <p>Build the fact base with your numbers, not ours. Interview the top forty people and the customers who left.</p>
+          <ul class="phase-out">
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>Value map and baseline</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>Three questions worth answering</li>
+          </ul>
+        </div>
+      </li>
+      <li class="step reveal">
+        <span class="step-marker"></span>
+        <div class="phase">
+          <span class="label-sm">Weeks 4–8</span>
+          <h3 class="step-label">Decide</h3>
+          <p>Options with real trade-offs, tested with your executive team in working sessions rather than read-outs.</p>
+          <ul class="phase-out">
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>Board-ready recommendation</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>Financial case, by quarter</li>
+          </ul>
+        </div>
+      </li>
+      <li class="step reveal">
+        <span class="step-marker"></span>
+        <div class="phase">
+          <span class="label-sm">Weeks 9–14</span>
+          <h3 class="step-label">Design</h3>
+          <p>Turn the decision into owners, budgets and a ninety-day plan. The plan is written by your managers, with us.</p>
+          <ul class="phase-out">
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>Initiative charters and KPIs</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>Transformation office set-up</li>
+          </ul>
+        </div>
+      </li>
+      <li class="step reveal">
+        <span class="step-marker"></span>
+        <div class="phase">
+          <span class="label-sm">Week 15 onward</span>
+          <h3 class="step-label">Deliver</h3>
+          <p>We stay through the first results, then step back. Fees from here are tied to the value the plan promised.</p>
+          <ul class="phase-out">
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>Monthly value tracking</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>A team that runs it without us</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ===== Case studies ===== -->
+  <section class="section container stack stack-8" id="work" aria-labelledby="work-title">
+    <div class="bar reveal" style="align-items:flex-end;flex-wrap:wrap">
+      <header class="section-head">
+        <p class="eyebrow">Selected work</p>
+        <h2 id="work-title">Results our clients reported, not ones we estimated.</h2>
+      </header>
+      <a class="btn btn-ghost push" href="#">
+        All case studies
+        <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+      </a>
+    </div>
+
+    <div class="cases">
+      <article class="card card-link case case-feature g-scrim reveal">
+        <img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?w=1000&h=1000&q=80&auto=format&fit=crop"
+             width="1000" height="1000" loading="lazy" decoding="async"
+             alt="Stone facade of a classical bank building with tall columns">
+        <div class="card-body">
+          <div class="cluster cluster-tight">
+            <span class="badge badge-brand">Financial services</span>
+            <span class="case-sub">Regional bank, $38B in assets</span>
+          </div>
+          <h3><a class="stretch" href="#">Taking $182M out of a bank’s cost base without closing a branch</a></h3>
+          <p>The board had ruled out branch closures and the cost-to-income ratio sat eleven points above peers. We rebuilt the back office instead.</p>
+          <div class="metrics">
+            <div class="metric"><span class="big-num nums">−9.4 pts</span><span>Cost-to-income in 18 months</span></div>
+            <div class="metric"><span class="big-num nums">$182M</span><span>Run-rate savings</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card card-link case case-side lift reveal">
+        <figure class="card-media">
+          <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=560&h=520&q=80&auto=format&fit=crop"
+               width="560" height="520" loading="lazy" decoding="async"
+               alt="Long aisle of a distribution warehouse stacked with boxed stock">
+        </figure>
+        <div class="card-body">
+          <div class="cluster cluster-tight">
+            <span class="badge">Industrials</span>
+            <span class="case-sub">Distributor, 40 sites</span>
+          </div>
+          <h3><a class="stretch" href="#">One network out of three acquisitions</a></h3>
+          <div class="metrics">
+            <div class="metric"><span class="big-num nums">+31%</span><span>On-time in full</span></div>
+            <div class="metric"><span class="big-num nums">$64M</span><span>Working capital freed</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card card-link case case-side lift reveal">
+        <figure class="card-media">
+          <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=560&h=520&q=80&auto=format&fit=crop"
+               width="560" height="520" loading="lazy" decoding="async"
+               alt="Wind turbines on open farmland at sunset">
+        </figure>
+        <div class="card-body">
+          <div class="cluster cluster-tight">
+            <span class="badge">Energy</span>
+            <span class="case-sub">Utility, 2.3M customers</span>
+          </div>
+          <h3><a class="stretch" href="#">A transition plan the regulator approved first time</a></h3>
+          <div class="metrics">
+            <div class="metric"><span class="big-num nums">$2.1B</span><span>Capex plan approved</span></div>
+            <div class="metric"><span class="big-num nums">14 mo</span><span>Ahead of schedule</span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Industries ===== -->
+  <section class="section container" aria-labelledby="industries-title">
+    <div class="industries">
+      <header class="section-head reveal">
+        <p class="eyebrow">Industries</p>
+        <h2 id="industries-title">Deep in eleven sectors, fluent in the rest.</h2>
+        <p class="lede">Every partner leads one sector. Numbers are engagements since 2020.</p>
+      </header>
+      <div class="cluster ind-chips reveal">
+        <a class="chip" href="#"><svg class="icon" aria-hidden="true"><use href="#i-landmark"></use></svg>Banking &amp; capital markets <span>48</span></a>
+        <a class="chip" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#shield"></use></svg>Insurance <span>21</span></a>
+        <a class="chip" href="#"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"></use></svg>Private equity <span>37</span></a>
+        <a class="chip" href="#"><svg class="icon" aria-hidden="true"><use href="#i-pulse"></use></svg>Healthcare &amp; life sciences <span>29</span></a>
+        <a class="chip" href="#"><svg class="icon" aria-hidden="true"><use href="#i-zap"></use></svg>Energy &amp; utilities <span>24</span></a>
+        <a class="chip" href="#"><svg class="icon" aria-hidden="true"><use href="#i-factory"></use></svg>Industrials <span>33</span></a>
+        <a class="chip" href="#"><svg class="icon" aria-hidden="true"><use href="#i-bag"></use></svg>Consumer &amp; retail <span>26</span></a>
+        <a class="chip" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#truck"></use></svg>Transport &amp; logistics <span>18</span></a>
+        <a class="chip" href="#"><svg class="icon" aria-hidden="true"><use href="#i-cpu"></use></svg>Technology <span>22</span></a>
+        <a class="chip" href="#"><svg class="icon" aria-hidden="true"><use href="#i-signal"></use></svg>Telecoms &amp; media <span>12</span></a>
+        <a class="chip" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users"></use></svg>Public sector <span>15</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Partners ===== -->
+  <section class="section container stack stack-8" id="team" aria-labelledby="team-title">
+    <header class="section-head reveal">
+      <p class="eyebrow">Leadership</p>
+      <h2 id="team-title">The people who will be in the room.</h2>
+      <p class="lede">Four of our fourteen partners. Each one has run a business, not only advised one.</p>
+    </header>
+
+    <div class="team">
+      <article class="member reveal">
+        <div class="portrait">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=480&h=600&q=80&auto=format&fit=crop"
+               width="480" height="600" loading="lazy" decoding="async"
+               alt="Portrait of Richard Hale, a grey-haired man in glasses and an olive shirt">
+        </div>
+        <div class="stack stack-1">
+          <h3>Richard Hale</h3>
+          <span class="member-role">Managing Partner, New York</span>
+        </div>
+        <p>Founded Meridian in 2009 after eighteen years at a global firm. Advises boards on portfolio strategy and CEO succession.</p>
+      </article>
+      <article class="member reveal">
+        <div class="portrait">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=480&h=600&q=80&auto=format&fit=crop"
+               width="480" height="600" loading="lazy" decoding="async"
+               alt="Portrait of Lucía Ferrer, a smiling woman in a striped jacket">
+        </div>
+        <div class="stack stack-1">
+          <h3>Lucía Ferrer</h3>
+          <span class="member-role">Partner, Operations</span>
+        </div>
+        <p>Ran operations for a 9,000-person manufacturer before consulting. Leads our cost and supply-chain work.</p>
+      </article>
+      <article class="member reveal">
+        <div class="portrait">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=480&h=600&q=80&auto=format&fit=crop"
+               width="480" height="600" loading="lazy" decoding="async"
+               alt="Portrait of Tobias Brandt, a man in glasses and a dark blazer">
+        </div>
+        <div class="stack stack-1">
+          <h3>Tobias Brandt</h3>
+          <span class="member-role">Partner, M&amp;A, London</span>
+        </div>
+        <p>Has led integration on more than thirty deals worth a combined $40B, most of them cross-border.</p>
+      </article>
+      <article class="member reveal">
+        <div class="portrait">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=480&h=600&q=80&auto=format&fit=crop"
+               width="480" height="600" loading="lazy" decoding="async"
+               alt="Portrait of Sophie Marchetti, a woman in a grey blazer seated by a window">
+        </div>
+        <div class="stack stack-1">
+          <h3>Sophie Marchetti</h3>
+          <span class="member-role">Partner, Digital, Singapore</span>
+        </div>
+        <p>Former CTO of a European insurer. Helps leadership teams decide where technology changes the economics.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Pull quote ===== -->
+  <section class="quote-band section" aria-label="Client testimonial">
+    <figure class="container quote reveal">
+      <span class="quote-mark" aria-hidden="true">“</span>
+      <blockquote>
+        They didn’t hand us a strategy and leave. Their partners sat on our
+        operating committee for eighteen months, argued with us when we needed
+        it, and left behind a team that can do this without them.
+      </blockquote>
+      <figcaption>
+        <span class="avatar avatar-lg">
+          <img src="https://images.unsplash.com/photo-1590086782957-93c06ef21604?w=160&h=160&q=80&auto=format&fit=crop"
+               width="56" height="56" loading="lazy" decoding="async" alt="">
+        </span>
+        <span class="stack stack-0">
+          <span class="fw-semi">Daniel Mercer</span>
+          <span class="text-sm text-muted">Chief Executive, Calder Bank</span>
+        </span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ===== Insights ===== -->
+  <section class="section container stack stack-8" id="insights" aria-labelledby="insights-title">
+    <div class="bar reveal" style="align-items:flex-end;flex-wrap:wrap">
+      <header class="section-head">
+        <p class="eyebrow">Insights</p>
+        <h2 id="insights-title">Short essays, written by the partners.</h2>
+      </header>
+      <a class="btn btn-ghost push" href="#">
+        All insights
+        <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+      </a>
+    </div>
+
+    <div class="posts">
+      <article class="card card-link post lift reveal">
+        <figure class="card-media overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=640&h=400&q=80&auto=format&fit=crop"
+               width="640" height="400" loading="lazy" decoding="async"
+               alt="Two people in shirtsleeves shaking hands across a table">
+        </figure>
+        <div class="card-body">
+          <span class="label-sm text-brand">Mergers &amp; integration</span>
+          <h3><a class="stretch" href="#">The first hundred days after close are mostly about the next thousand</a></h3>
+          <p class="text-sm text-muted clamp-2">Synergy cases are won or lost on decisions made before signing. Six we see skipped.</p>
+        </div>
+        <div class="card-footer">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#clock-sm"></use></svg>
+          8 min read <span class="push">Tobias Brandt · 22 Sep 2026</span>
+        </div>
+      </article>
+      <article class="card card-link post lift reveal">
+        <figure class="card-media overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=640&h=400&q=80&auto=format&fit=crop"
+               width="640" height="400" loading="lazy" decoding="async"
+               alt="Laptop on a desk showing an analytics dashboard with charts">
+        </figure>
+        <div class="card-body">
+          <span class="label-sm text-brand">Digital</span>
+          <h3><a class="stretch" href="#">Where AI actually moves the P&amp;L, and where it is still a demo</a></h3>
+          <p class="text-sm text-muted clamp-2">We looked at 64 deployments across our clients. Eleven paid back inside a year.</p>
+        </div>
+        <div class="card-footer">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#clock-sm"></use></svg>
+          11 min read <span class="push">Sophie Marchetti · 9 Sep 2026</span>
+        </div>
+      </article>
+      <article class="card card-link post lift reveal">
+        <figure class="card-media overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=640&h=400&q=80&auto=format&fit=crop"
+               width="640" height="400" loading="lazy" decoding="async"
+               alt="Hands annotating printed figures beside a laptop">
+        </figure>
+        <div class="card-body">
+          <span class="label-sm text-brand">Operations</span>
+          <h3><a class="stretch" href="#">Why cost programmes stall in year two, and how to stop it</a></h3>
+          <p class="text-sm text-muted clamp-2">Savings rarely leak through one big decision. They leak through four hundred small exceptions.</p>
+        </div>
+        <div class="card-footer">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#clock-sm"></use></svg>
+          6 min read <span class="push">Lucía Ferrer · 26 Aug 2026</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Consultation =====
+       A plain POST form. autocomplete tokens let the browser fill name,
+       email and company in one tap. -->
+  <section class="section container" id="contact" aria-labelledby="contact-title">
+    <div class="contact">
+      <div class="card card-raised reveal">
+        <div class="card-body">
+          <form class="stack stack-6" action="#" method="post">
+            <header class="stack stack-3">
+              <p class="eyebrow">Book a consultation</p>
+              <h2 id="contact-title">Tell us about the decision in front of you.</h2>
+              <p class="text-muted">A partner reads every enquiry. Expect a reply within one business day.</p>
+            </header>
+
+            <div class="field-row">
+              <div class="field">
+                <label class="label" for="c-name">Full name</label>
+                <input class="input" id="c-name" name="name" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label class="label" for="c-email">Work email</label>
+                <input class="input" id="c-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@company.com" required>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label class="label" for="c-company">Company</label>
+                <input class="input" id="c-company" name="company" autocomplete="organization" required>
+              </div>
+              <div class="field">
+                <label class="label" for="c-size">Company size</label>
+                <select class="select" id="c-size" name="size" required>
+                  <option value="">Choose a range</option>
+                  <option>Under 250 people</option>
+                  <option>250 – 1,000</option>
+                  <option>1,000 – 5,000</option>
+                  <option>5,000 – 20,000</option>
+                  <option>More than 20,000</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="c-area">Area of interest</label>
+              <select class="select" id="c-area" name="area">
+                <option>Corporate strategy</option>
+                <option>Operations &amp; cost</option>
+                <option>Mergers &amp; integration</option>
+                <option>Digital transformation</option>
+                <option>People &amp; organisation</option>
+                <option>Risk &amp; resilience</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="label" for="c-msg">What are you trying to decide? <span class="optional">Optional</span></label>
+              <textarea class="textarea" id="c-msg" name="message" rows="4" aria-describedby="c-msg-help"></textarea>
+              <p class="help" id="c-msg-help">Two or three sentences is plenty. Please leave out anything market-sensitive.</p>
+            </div>
+
+            <label class="check">
+              <input type="checkbox" name="consent" required>
+              <span class="check-text">
+                <span>I agree to Meridian Partners storing these details to reply to my enquiry.</span>
+                <span class="check-note">We never share them. Read the <a href="#">privacy notice</a>.</span>
+              </span>
+            </label>
+
+            <div class="cluster">
+              <button class="btn btn-primary btn-lg" type="submit">
+                Request a consultation
+                <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+              </button>
+              <span class="text-sm text-muted">No sales team. No newsletter unless you ask.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <aside class="stack stack-8 reveal" id="offices" aria-label="What happens next and our offices">
+        <div class="stack stack-4">
+          <h3 class="h4">What happens next</h3>
+          <ol class="next-steps">
+            <li><span><strong>A partner replies within a day</strong>The one closest to your sector, not a business-development team.</span></li>
+            <li><span><strong>A 45-minute conversation</strong>No charge and no deck. We ask questions and say what we would look at first.</span></li>
+            <li><span><strong>A two-page proposal in a week</strong>Scope, team, timeline and a fee, part of it tied to results.</span></li>
+          </ol>
+        </div>
+
+        <div class="stack stack-4">
+          <h3 class="h4">Offices</h3>
+          <div class="list">
+            <div class="list-row office">
+              <span class="avatar avatar-lg"><img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=160&h=160&q=80&auto=format&fit=crop" width="56" height="56" loading="lazy" decoding="async" alt=""></span>
+              <span class="list-main">
+                <span class="list-title">New York</span>
+                <span class="list-sub">88 Pine Street, Floor 31, NY 10005</span>
+              </span>
+              <a class="list-trail nums" href="tel:+12125550147">+1 212 555 0147</a>
+            </div>
+            <div class="list-row office">
+              <span class="avatar avatar-lg"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=160&h=160&q=80&auto=format&fit=crop" width="56" height="56" loading="lazy" decoding="async" alt=""></span>
+              <span class="list-main">
+                <span class="list-title">London</span>
+                <span class="list-sub">12 Moorgate Place, EC2R 6EA</span>
+              </span>
+              <a class="list-trail nums" href="tel:+442079460318">+44 20 7946 0318</a>
+            </div>
+            <div class="list-row office">
+              <span class="avatar avatar-lg"><img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=160&h=160&q=80&auto=format&fit=crop" width="56" height="56" loading="lazy" decoding="async" alt=""></span>
+              <span class="list-main">
+                <span class="list-title">Singapore</span>
+                <span class="list-sub">9 Raffles Link, #21-04, 039394</span>
+              </span>
+              <a class="list-trail nums" href="tel:+6565550192">+65 6555 0192</a>
+            </div>
+          </div>
+          <p class="cluster cluster-tight text-sm text-muted">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail-sm"></use></svg>
+            <span>New mandates: <a href="mailto:hello@meridian.example">hello@meridian.example</a></span>
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="footer site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a class="navbar-brand" href="#">
+          <svg class="brand-mark" aria-hidden="true"><use href="#i-meridian"></use></svg>
+          <span class="brand-name">Meridian Partners</span>
+        </a>
+        <p>Independent strategy and management consultants to boards and executive teams since 2009.</p>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">Practices</p>
+        <a href="#services">Corporate strategy</a>
+        <a href="#services">Operations &amp; cost</a>
+        <a href="#services">Mergers &amp; integration</a>
+        <a href="#services">Digital transformation</a>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">Firm</p>
+        <a href="#team">Partners</a>
+        <a href="#approach">Approach</a>
+        <a href="#">Careers</a>
+        <a href="#">Alumni</a>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">New York</p>
+        <address class="footer-office">88 Pine Street, Floor 31<br>New York, NY 10005<br>+1 212 555 0147</address>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">London · Singapore</p>
+        <address class="footer-office">12 Moorgate Place, EC2R 6EA<br>9 Raffles Link, #21-04<br>Singapore 039394</address>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Meridian Partners LLP</span>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Modern slavery statement</a>
+      <div class="footer-social">
+        <a href="#" aria-label="Meridian Partners on LinkedIn"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"></use></svg></a>
+        <a href="mailto:hello@meridian.example" aria-label="Email us"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail"></use></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -31,7 +31,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>3D space</h1>
   <p class="lede">
     The file opens with its own argument, and it is the right one to start from:
@@ -41,7 +41,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     When the thing on screen genuinely has a third dimension. A card with a front and a
@@ -62,14 +62,14 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="scene">Scene and space</h2>
   <p>
     Nothing looks three-dimensional without a vanishing point.
     <code>.scene</code> establishes one; <code>.space</code> tells the children to stay in
     it rather than being flattened.
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li><code>.scene</code> — <code>perspective: var(--perspective, 1000px)</code>, with the
       vanishing point at <code>--vanish</code>, defaulting to the centre.</li>
     <li><code>.scene-near</code> — 560px. Stronger perspective, more dramatic.</li>
@@ -87,7 +87,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="flip">Flip card</h2>
   <p>
     Two faces in one grid cell, so the card is exactly as tall as its taller side and
@@ -98,11 +98,11 @@ require __DIR__ . '/../_layout.php';
   docs_example(
       '<div class="scene" style="max-inline-size:18rem">' . "\n" .
       '  <button type="button" class="flip flip-hover card" aria-label="Card, hover to see the back">' . "\n" .
-      '    <span class="flip-front stack-1">' . "\n" .
+      '    <span class="flip-front stack stack-1">' . "\n" .
       '      <strong>Standard</strong>' . "\n" .
       '      <span class="text-muted">£12 a month</span>' . "\n" .
       '    </span>' . "\n" .
-      '    <span class="flip-back stack-1">' . "\n" .
+      '    <span class="flip-back stack stack-1">' . "\n" .
       '      <strong>Includes</strong>' . "\n" .
       '      <span class="text-muted">5 seats, 20GB, email support</span>' . "\n" .
       '    </span>' . "\n" .
@@ -121,7 +121,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tilt">Tilt</h2>
   <p>
     <code>.tilt</code> leans toward the pointer. <code>deck.js</code> writes
@@ -137,7 +137,7 @@ require __DIR__ . '/../_layout.php';
   <?php
   docs_example(
       '<div class="scene scene-near" style="max-inline-size:20rem">' . "\n" .
-      '  <div class="tilt card stack-2" data-tilt="12">' . "\n" .
+      '  <div class="tilt card stack stack-2" data-tilt="12">' . "\n" .
       '    <strong class="tilt-lift">Deploy</strong>' . "\n" .
       '    <p class="text-muted tilt-lift-sm">Ships to production in about 40 seconds.</p>' . "\n" .
       '  </div>' . "\n" .
@@ -154,7 +154,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="pile">Pile</h2>
   <p>
     A stack of records you work down through. Each child's <code>--i</code> is its position
@@ -172,9 +172,9 @@ require __DIR__ . '/../_layout.php';
   <?php
   docs_example(
       '<div class="pile" style="max-inline-size:20rem">' . "\n" .
-      '  <div class="card stack-1"><strong>Invoice 4417</strong><span class="text-muted">£1,240 · due Friday</span></div>' . "\n" .
-      '  <div class="card stack-1"><strong>Invoice 4418</strong><span class="text-muted">£860 · due Monday</span></div>' . "\n" .
-      '  <div class="card stack-1"><strong>Invoice 4419</strong><span class="text-muted">£3,100 · due next week</span></div>' . "\n" .
+      '  <div class="card stack stack-1"><strong>Invoice 4417</strong><span class="text-muted">£1,240 · due Friday</span></div>' . "\n" .
+      '  <div class="card stack stack-1"><strong>Invoice 4418</strong><span class="text-muted">£860 · due Monday</span></div>' . "\n" .
+      '  <div class="card stack stack-1"><strong>Invoice 4419</strong><span class="text-muted">£3,100 · due next week</span></div>' . "\n" .
       '</div>',
       'Only the top three are visible — the fourth onward are opacity 0 until fanned',
       'stack'
@@ -187,7 +187,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="coverflow">Coverflow</h2>
   <p>
     A horizontal scroller where off-centre items rotate away. The mechanics are scroll snap
@@ -208,7 +208,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="cube">Cube</h2>
   <p>
     Six faces, positioned by <code>translateZ</code> at half the cube's size.
@@ -245,7 +245,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="btn-3d">Depressible buttons</h2>
   <p>
     <code>.btn-3d</code> gives a <a href="button.php">button</a> real thickness with a solid
@@ -269,7 +269,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="parallax">Parallax, and page turns</h2>
   <p>
     <code>.parallax</code> is genuine 3D parallax rather than a scroll handler: layers sit
@@ -303,7 +303,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     These are nine separate effects in <code>src/21-space3d.css</code> rather than one
@@ -312,7 +312,7 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--line', '--surface', '--brand-600', '--ink-900', '--space-4', '--space-6', '--dur-3', '--ease-spring']); ?>
   <p class="dx-note text-muted">
@@ -332,9 +332,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>A flip card hides half its content from everybody.</strong> Both faces are in
       the DOM and both are in the accessibility tree, so a screen reader reads the front and
@@ -379,7 +379,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Mostly handled, with one deliberate exception and one unavoidable one.
@@ -404,13 +404,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     This is the best-guarded file in Deck, and it is worth reading as a model rather than
     just a caveat. There are <strong>five</strong> separate provisions:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Hover effects are gated at the source.</strong>
       <code>.flip-hover</code>, <code>.tilt:hover</code>, <code>.tilt-lift</code> and
@@ -450,7 +450,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     Nothing in <code>src/21-space3d.css</code> has a print rule, in either print layer. What
@@ -481,7 +481,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One scene, no layer needed */
 <div class="scene" style="--perspective:700px;--vanish:30% 40%"> … </div>
@@ -501,9 +501,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for decoration.</strong> The file says so in its first paragraph, and it
       is right. A tilting card on a marketing page costs GPU memory and legibility to say

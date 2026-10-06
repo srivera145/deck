@@ -27,7 +27,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Phone input</h1>
   <p class="lede">
     A country select welded to a number field. Choosing a country sets the dial code, the
@@ -37,7 +37,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Where you need a number you will actually dial or text: a delivery contact, two-factor
@@ -52,7 +52,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="markup">The markup</h2>
   <p>
     Three parts, and the data lives on the <code>&lt;option&gt;</code> elements rather than
@@ -90,9 +90,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="behaviour">Formatting and validity</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Everything that is not a digit is discarded, then re-added from the
       mask.</strong> Paste <code>+44 7700 900123</code> and you get the digits laid back out
@@ -123,7 +123,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
   <?php
   docs_example(
-      '<div class="stack-2" style="max-inline-size:24rem">' . "\n" .
+      '<div class="stack stack-2" style="max-inline-size:24rem">' . "\n" .
       '  <div class="phone">' . "\n" .
       '    <span class="phone-country">' . "\n" .
       '      <span class="phone-flag" aria-hidden="true">🇺🇸</span>' . "\n" .
@@ -151,20 +151,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/23-inputs.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--line', '--line-strong', '--surface', '--surface-2', '--surface-hover', '--focus', '--ring', '--good-500', '--r-sm', '--text-sm', '--text-base']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The country select needs its own label.</strong> It is visually a flag and a
       dial code, and neither is its accessible name.
@@ -206,7 +206,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     This is the one Deck component that deliberately refuses to mirror its contents. The row
@@ -243,7 +243,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing on this component animates. The only transitions in the row belong to the
@@ -253,7 +253,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.phone</code> is not in <code>src/99-print.css</code>, and it prints acceptably:
@@ -268,7 +268,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Room for a longer country code list */
@@ -283,9 +283,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a single-country form.</strong> If every number is British, the
       country cell is a select with one option. Use an

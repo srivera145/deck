@@ -29,7 +29,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Indicator</h1>
   <p class="lede">
     Two related things. <code>.indicator</code> is a status dot that sits in the flow of
@@ -39,7 +39,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="dot">The status dot</h2>
   <p>
     A small circle in one of four tones, sized to sit beside text. Use it where a
@@ -48,7 +48,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-2">' . "\n" .
+      '<div class="stack stack-2">' . "\n" .
       '  <p class="cluster cluster-tight"><span class="indicator indicator-good"></span> API — operational</p>' . "\n" .
       '  <p class="cluster cluster-tight"><span class="indicator indicator-warn"></span> Exports — degraded</p>' . "\n" .
       '  <p class="cluster cluster-tight"><span class="indicator indicator-bad"></span> Webhooks — down</p>' . "\n" .
@@ -65,7 +65,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="badge">The corner badge</h2>
   <p>
     <code>.with-indicator</code> is the positioning wrapper: <code>position:
@@ -107,20 +107,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/22-nav.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--good-500', '--warn-500', '--bad-500', '--brand-500', '--brand-600', '--text-on-brand', '--surface', '--r-full']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Both are invisible to a screen reader.</strong> A dot is an empty
       <code>&lt;span&gt;</code> with a background; a badge is a number floating beside a
@@ -156,7 +156,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The badge is positioned with logical insets, so it moves to the opposite corner under
@@ -177,7 +177,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing here animates. If you want a new notification to pulse, that is
@@ -187,7 +187,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     Neither is in <code>src/99-print.css</code>, and both are backgrounds — so a printed
@@ -197,7 +197,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* A larger badge for two-digit counts */
@@ -208,9 +208,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a status with a name.</strong> "Paid", "Overdue" — that is a
       <a href="badge.php"><code>.badge</code></a>, which shows the word.

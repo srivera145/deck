@@ -49,7 +49,7 @@ function demo_columns(): string
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Charts</h1>
   <p class="lede">
     There is no charting library. Bars, columns, donuts and heatmaps are plain CSS driven
@@ -59,7 +59,7 @@ function demo_columns(): string
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use these for the charts an application actually needs: a bar per month, a donut of
@@ -74,7 +74,7 @@ function demo_columns(): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="value">--value is the whole idea</h2>
   <p>
     A column's height is <code>calc(var(--value) * 1%)</code>. A bar's width is the same
@@ -104,7 +104,7 @@ function demo_columns(): string
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="palette">The palette</h2>
   <p>
     <code>.chart</code> declares six series colours as custom properties, and five of them
@@ -148,7 +148,7 @@ function demo_columns(): string
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="contrast">Text on a series colour</h2>
   <p>
     A value printed inside a bar has to be readable against whatever colour that series
@@ -169,10 +169,10 @@ function demo_columns(): string
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="types">The chart types</h2>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="t-bars">Horizontal bars</h3>
     <p>
       <code>.chart-bars</code> holds rows of <code>.chart-bar</code>, each a
@@ -207,7 +207,7 @@ function demo_columns(): string
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="t-donut">Donut</h3>
     <p>
       <code>.donut</code> is a conic gradient driven by <code>--value</code>, with
@@ -229,7 +229,7 @@ function demo_columns(): string
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="t-heat">Heatmap</h3>
     <p>
       <code>.chart-heat</code> is a grid of <code>--cols</code> columns whose cells mix the
@@ -252,7 +252,7 @@ function demo_columns(): string
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="t-svg">Lines and areas</h3>
     <p>
       These are the one place you write SVG. <code>.chart-svg</code> is the element,
@@ -268,7 +268,7 @@ function demo_columns(): string
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="t-spark">Sparklines and meters</h3>
     <p>
       <code>.sparkline</code> is a tiny inline chart for a table cell or a stat, with
@@ -279,13 +279,13 @@ function demo_columns(): string
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/14-charts.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     The six series colours and <code>--chart-h</code> are local to <code>.chart</code>
@@ -295,9 +295,9 @@ function demo_columns(): string
   <?php docs_token_table(['--hue-brand', '--brand-500', '--good-500', '--warn-500', '--bad-500', '--line', '--bg-sunken', '--text-muted', '--text-xs', '--space-2', '--space-3']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>A chart made of <code>&lt;div&gt;</code>s is invisible.</strong> None of
       these classes carry semantics. A screen-reader user gets nothing at all unless you
@@ -347,7 +347,7 @@ function demo_columns(): string
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Bars grow from the starting edge, which means <code>transform-origin</code> has to be
@@ -365,7 +365,7 @@ function demo_columns(): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Bars, columns, lines, areas and donuts all animate in when they first render. Under
@@ -382,7 +382,7 @@ function demo_columns(): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     Ten rules. Chart fills are in the <code>print-color-adjust: exact</code> list —
@@ -397,7 +397,7 @@ function demo_columns(): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One chart, no layer needed */
 <figure class="chart" style="--chart-h:180px;--c1:var(--good-500)">
@@ -419,9 +419,9 @@ function demo_columns(): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not without an accessible alternative.</strong> A table beside the chart, or
       <code>role="img"</code> with a real summary. Without one the chart does not exist for

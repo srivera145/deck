@@ -64,7 +64,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Data grid</h1>
   <p class="lede">
     <code>.dg</code> is a real <code>&lt;table&gt;</code> with a frozen header, columns
@@ -74,7 +74,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it when the reader <em>operates</em> on data rather than reading it: sorting,
@@ -90,7 +90,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   <?php docs_example(demo_grid(), 'The wrapper scrolls; the header stays', 'stack'); ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="pinning">Frozen header and pinned columns</h2>
   <p>
     The header is <code>position: sticky</code> with
@@ -118,7 +118,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
     font changes.
   </p>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="p-shadow">The shadow that appears only when it should</h3>
     <p>
       A pinned column should cast a shadow when content has scrolled underneath it, and
@@ -147,7 +147,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="sorting">Sorting</h2>
   <p>
     Put <code>data-sort="num"</code>, <code>"text"</code> or <code>"date"</code> on a
@@ -179,7 +179,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="density">Density</h2>
   <p>
     <code>--dg-row-h</code> drives the row height, and two classes set it:
@@ -197,7 +197,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="selection">Selection</h2>
   <p>
     Row selection is <code>tr[aria-selected="true"]</code> — again the accessible state
@@ -237,7 +237,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="cards">Cards on a phone</h2>
   <p>
     <code>.dg-cards</code> restacks each row into a labelled card below a breakpoint,
@@ -253,7 +253,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   <?php docs_example(demo_grid('dg-wrap dg-cards-wrap', 'dg dg-cards', true), 'Narrow the window to see it restack', 'stack'); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="long">Long grids</h2>
   <p>
     <code>.dg-virtual</code> puts <code>content-visibility: auto</code> on every row, with
@@ -270,7 +270,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="states">Loading, empty and new</h2>
   <p>
     <code>.is-loading</code> on the wrapper dims the body, disables pointer events and
@@ -286,13 +286,13 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from the stylesheet source by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     Four local properties on <code>.dg-wrap</code> shape the grid:
@@ -302,9 +302,9 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   <?php docs_token_table(['--surface', '--surface-2', '--surface-hover', '--line', '--line-strong', '--brand', '--brand-soft', '--brand-soft-text', '--brand-200', '--brand-500', '--good-100', '--text-sm', '--text-xs', '--text-muted', '--r-md', '--r-sm', '--space-2', '--space-3', '--space-4', '--hue-neutral']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>It is a real table, so the semantics are free.</strong> Header association,
       row and column navigation, and the row count all come from the element. Every
@@ -361,7 +361,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Pinning uses <code>inset-inline-start</code> and <code>inset-inline-end</code>, cells
@@ -382,7 +382,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   <?php docs_example('<div dir="rtl">' . "\n" . demo_grid() . "\n" . '</div>', 'Columns fill from the right; the numeric column aligns to the left', 'stack'); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Two animations: the <code>.is-new</code> row flash and the <code>.is-loading</code>
@@ -397,7 +397,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     Sixteen rules, the most of any component. The grid becomes a plain table:
@@ -413,7 +413,7 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One grid, no layer needed */
 <div class="dg-wrap" style="--dg-height:40dvh;--dg-row-h:38px">
@@ -436,9 +436,9 @@ function demo_grid(string $wrapClasses = 'dg-wrap', string $gridClasses = 'dg', 
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for data you only present.</strong> Use
       <a href="table.php"><code>.table</code></a>. The grid brings a scroll container, a

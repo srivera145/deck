@@ -1,0 +1,1363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dashboard · Deck template</title>
+<meta name="description" content="A sales dashboard drawn without a charting library: stat tiles with sparklines, an area chart with a date range, columns, bars, a donut, goal rings and a table that restacks on phones.">
+<meta name="theme-color" content="#0b7d98">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b7d98'/%3E%3Cpath d='M16 6.5 26 25h-5.4L16 15.8 11.4 25H6Z' fill='white'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+<script src="../assets/deck/deck-extras.js" defer></script>   <!-- only for the phone drawer -->
+
+<style>
+@layer app.pages {
+
+  /* ===========================================================================
+     SHARED CHROME
+     This block is identical in app-shell.html, dashboard.html and
+     settings.html. Lift it into your own stylesheet once and delete it from
+     the pages. Two numbers drive the whole frame.
+     =========================================================================== */
+  :root {
+    --topbar-h: 3.5rem;   /* the sidebar's sticky offset reads this, so it never slides under the bar */
+    --side-w: 16rem;
+  }
+
+  /* ----- Top bar: sticks, and blurs what scrolls under it ----- */
+  .topbar {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: var(--z-sticky);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    block-size: var(--topbar-h);
+    padding-inline: max(var(--space-3), env(safe-area-inset-left)) max(var(--space-4), env(safe-area-inset-right));
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid var(--line);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-inline: var(--space-1);
+    color: var(--text);
+    font-size: var(--text-md);
+    font-weight: 680;
+    letter-spacing: -.024em;
+    text-decoration: none;
+  }
+  .brand:hover { color: var(--text); }
+  .brand-mark {
+    inline-size: 28px;
+    block-size: 28px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    box-shadow: var(--shadow-inset), var(--shadow-1);
+  }
+  .brand-mark svg { inline-size: 15px; block-size: 15px; }
+
+  /* The "/ Northwind" workspace switcher after the logo. */
+  .topbar-slash {
+    inline-size: 1px;
+    block-size: 20px;
+    margin-inline: var(--space-1);
+    background: var(--line-strong);
+    rotate: 20deg;
+  }
+  .ws-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    block-size: 36px;
+    padding-inline: var(--space-2);
+    border-radius: var(--r-sm);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--dur-1) var(--ease-out);
+  }
+  .ws-switch:hover { background: var(--surface-hover); }
+  .ws-switch .icon { color: var(--text-faint); }
+  .ws-logo { background: var(--g-ws, var(--brand-600)); color: var(--text-on-brand); font-weight: 700; }
+
+  /* Search: centred in the space left over, with a keyboard hint inside it. */
+  .topbar-search { flex: 0 1 26rem; margin-inline: auto; }
+  .topbar-search .input {
+    min-block-size: 36px;
+    padding-block: 0;
+    padding-inline-end: 4.5rem;
+    border-color: var(--line);
+    background: var(--surface);
+    box-shadow: none;
+    font-size: var(--text-sm);
+  }
+  .topbar-search kbd { position: absolute; inset-inline-end: var(--space-3); pointer-events: none; }
+
+  .topbar-end { display: flex; align-items: center; gap: var(--space-1); margin-inline-start: auto; }
+  .topbar-search + .topbar-end { margin-inline-start: 0; }
+  .avatar-btn { display: grid; padding: 3px; margin-inline-start: var(--space-1); border-radius: var(--r-full); cursor: pointer; }
+  .avatar-btn .avatar { transition: box-shadow var(--dur-1) var(--ease-out); }
+  .avatar-btn:hover .avatar { box-shadow: 0 0 0 2px var(--line-strong); }
+
+  /* Menus: muted icons, a header row for the account menu. */
+  .menu-item > .icon { color: var(--text-faint); }
+  .menu-item[aria-current] .push { color: var(--brand); }
+  .menu-head { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3) var(--space-3); }
+  .menu-note { display: flex; flex-direction: column; gap: 2px; white-space: normal; line-height: 1.35; }
+  .menu-note small { color: var(--text-faint); font-size: var(--text-xs); }
+
+  /* ----- Shell: sidebar beside main from 48rem, main alone below it -----
+     48rem is deliberate: it is the width at which .tabbar hides itself. Using
+     the same number means there is never a moment with both navigations, or
+     neither. */
+  .shell-side { display: none; }
+  @media (min-width: 48rem) {
+    .shell { display: grid; grid-template-columns: var(--side-w) minmax(0, 1fr); }
+    /* The <aside> runs the full height of the page and carries the border;
+       the panel inside it is what sticks. */
+    .shell-side { display: block; border-inline-end: 1px solid var(--line); }
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      inset-block-start: var(--topbar-h);          /* parks below the top bar, not under it */
+      block-size: calc(100dvh - var(--topbar-h));  /* and fills exactly what is left */
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+  }
+  .shell-main {
+    container: main / inline-size;   /* the page grids below query this, not the viewport */
+    min-inline-size: 0;
+    padding: var(--space-6) var(--space-gutter) var(--space-12);
+  }
+  .page { max-inline-size: 76rem; margin-inline: auto; }
+
+  /* ----- Sidebar ----- */
+  .shell-side .sidebar { gap: 1px; }
+  .shell-side .sidebar-link { min-block-size: 36px; }
+  /* The -sm cut is drawn to hold up at 16px, so the icons are set to exactly that. */
+  .sidebar-link > .icon { font-size: 1rem; color: var(--text-faint); transition: color var(--dur-1) var(--ease-out); }
+  .sidebar-link:hover > .icon { color: var(--text-muted); }
+  .sidebar-link[aria-current] > .icon { color: var(--brand); }
+  .sidebar-link .badge { font-size: var(--text-2xs); padding-block: 0; }
+  .sidebar-group { margin-block-start: var(--space-3); }
+  .dot {
+    inline-size: 8px;
+    block-size: 8px;
+    margin-inline: 4px;
+    flex: none;
+    border-radius: 3px;
+    background: var(--dot, var(--brand-500));
+  }
+  .side-foot { margin-block-start: auto; padding: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); }
+  .usage {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface);
+    box-shadow: var(--shadow-1);
+  }
+  .usage .progress { block-size: 6px; }
+  .user-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2);
+    border-radius: var(--r-sm);
+    color: var(--text);
+    text-decoration: none;
+    line-height: 1.3;
+  }
+  .user-row:hover { background: var(--surface-hover); color: var(--text); }
+  .user-row > .icon { color: var(--text-faint); }
+
+  /* ----- Phone drawer: the same sidebar, in a dialog ----- */
+  /* Deck's .drawer sets display:flex, which beats the browser's own rule that hides a closed <dialog>, so a closed drawer would sit off-screen with its links still in the tab order. The transition on display is allow-discrete, so the slide-out still plays. */
+  .drawer:not([open]) { display: none; }
+  .drawer .sidebar { padding: 0; margin-inline: calc(var(--space-2) * -1); }
+  .drawer .usage { box-shadow: none; }
+  .drawer-footer { align-items: center; }
+  .drawer-footer > .user-row { flex: 1 1 auto; min-inline-size: 0; padding: 0; }
+  .drawer-footer > .btn-icon { flex: none; }
+
+  /* ----- Page header: breadcrumb, title and actions in one row ----- */
+  .page-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-4) var(--space-6);
+    padding-block-end: var(--space-6);
+  }
+  .page-head > :first-child { flex: 1 1 22rem; min-inline-size: 0; }
+  .page-head h1 { text-wrap: balance; }
+
+  /* Workaround for a Deck issue: the status tints (--good-100, --warn-100,
+     --bad-100) and the .progress track are light in both themes, so badges,
+     alerts and deltas glow on a dark card. light-dark() keeps Deck's values
+     in light mode and gives each a dark-mode one. Identical in all three
+     pages. */
+  .progress { background: light-dark(var(--ink-200), var(--ink-800)); }
+  .progress::-webkit-progress-bar { background: light-dark(var(--ink-200), var(--ink-800)); }
+  .badge-good, .icon-tile-good { background: light-dark(var(--good-100), color-mix(in oklab, var(--good-500) 16%, transparent)); color: light-dark(var(--good-700), oklch(80% .12 var(--hue-good))); }
+  .badge-warn, .icon-tile-warn { background: light-dark(var(--warn-100), color-mix(in oklab, var(--warn-500) 16%, transparent)); color: light-dark(var(--warn-700), oklch(84% .12 var(--hue-warn))); }
+  .badge-bad, .icon-tile-bad { background: light-dark(var(--bad-100), color-mix(in oklab, var(--bad-500) 18%, transparent)); color: light-dark(var(--bad-700), oklch(78% .13 var(--hue-bad))); }
+  .alert-good { background: light-dark(var(--good-100), color-mix(in oklab, var(--good-500) 12%, transparent)); color: light-dark(var(--good-700), oklch(84% .1 var(--hue-good))); }
+  .alert-warn { background: light-dark(var(--warn-100), color-mix(in oklab, var(--warn-500) 12%, transparent)); color: light-dark(var(--warn-700), oklch(86% .1 var(--hue-warn))); }
+  .alert-bad { background: light-dark(var(--bad-100), color-mix(in oklab, var(--bad-500) 14%, transparent)); color: light-dark(var(--bad-700), oklch(82% .1 var(--hue-bad))); }
+  .stat-delta-up { color: light-dark(var(--good-700), oklch(80% .13 var(--hue-good))); }
+  .stat-delta-down { color: light-dark(var(--bad-700), oklch(77% .13 var(--hue-bad))); }
+
+  /* Between the two layouts the bar is tight: the plan badge and the
+     shortcut hint wait until 64rem. */
+  @media (max-width: 63.999rem) {
+    .ws-switch .badge, .topbar-search kbd { display: none; }
+    .topbar-search .input { padding-inline-end: var(--space-3); }
+  }
+
+  /* Visibility either side of the 48rem line. Last in the block so they win. */
+  @media (max-width: 47.999rem) { .desk-only { display: none; } }
+  @media (min-width: 48rem) { .phone-only { display: none; } }
+
+  /* ===========================================================================
+     THIS PAGE: the dashboard. No charting library anywhere: every chart is
+     Deck CSS driven by custom properties, or a few lines of inline SVG.
+     =========================================================================== */
+
+  /* ----- The grid -----
+     Two-up stat tiles and full-width cards on a phone, a 6-column grid from
+     44rem of main width and a 12-column one from 62rem. They are container
+     queries on <main>, so the sidebar's width is already accounted for. */
+  .dash { display: grid; gap: var(--space-4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dash > * { grid-column: 1 / -1; min-inline-size: 0; }
+  .dash > .c-kpi { grid-column: auto; }
+  @container main (min-width: 44rem) {
+    .dash { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-5); }
+    .dash > :is(.c-kpi, .c-mix, .c-third) { grid-column: span 3; }
+  }
+  @container main (min-width: 62rem) {
+    .dash { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .dash > .c-kpi { grid-column: span 3; }
+    .dash > :is(.c-rev, .c-table) { grid-column: span 8; }
+    .dash > :is(.c-mix, .c-third, .c-feed) { grid-column: span 4; }
+  }
+  .dash .card-header { min-block-size: 3.5rem; padding-block: var(--space-3); }
+  .card-note { margin-inline-start: auto; font-size: var(--text-sm); color: var(--text-muted); }
+
+  /* The date range sits beside the title on a wide screen and fills the row on a phone. */
+  .range { inline-size: auto; }
+  .range > * { min-inline-size: 3.25rem; }
+  @container main (max-width: 40rem) {
+    .head-actions { inline-size: 100%; }
+    .range { flex: 1 1 auto; }
+  }
+
+  /* ----- Stat tiles -----
+     A narrow tile (two-up on a phone) gives the sparkline a row of its own
+     under the figure; from 15rem of tile width it moves up beside the label,
+     leaving the figure the full width. The tile is its own container, so this
+     follows the tile rather than the screen. display: contents on .stat lets
+     its label and value join the tile's grid. */
+  .c-kpi { container-type: inline-size; }
+  .kpi-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "label" "value" "spark" "foot";
+    gap: var(--space-2);
+    block-size: 100%;
+  }
+  .kpi-body .stat { display: contents; }
+  .kpi-body .stat-label { grid-area: label; }
+  .kpi-body .stat-value { grid-area: value; white-space: nowrap; }
+  .kpi-body .sparkline { grid-area: spark; --spark-w: 100%; --spark-h: 1.75rem; margin-block: var(--space-1); }
+  .kpi-foot { grid-area: foot; align-self: end; display: flex; align-items: center; gap: var(--space-2); }
+  .kpi-vs { display: none; font-size: var(--text-xs); color: var(--text-muted); }
+  @container (min-width: 15rem) {
+    .kpi-body { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "label spark" "value value" "foot foot"; }
+    .kpi-body .sparkline { --spark-w: 5.5rem; --spark-h: 1.75rem; margin: 0; align-self: center; }
+    .kpi-foot { margin-block-start: var(--space-2); }
+    .kpi-vs { display: inline; }
+  }
+  /* A delta reads as a pill. currentColor tints the background, so the one
+     class that picks the colour also picks the fill. */
+  .stat-delta {
+    padding: 1px var(--space-2) 1px 6px;
+    border-radius: var(--r-full);
+    background: color-mix(in oklab, currentColor 12%, transparent);
+    font-size: var(--text-xs);
+    font-weight: 620;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  /* ----- Revenue: SVG area + line ----- */
+  .rev { --chart-h: 13rem; }
+  @container main (min-width: 62rem) { .rev { --chart-h: 18.5rem; } }
+  .rev-head { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-3) var(--space-6); }
+  .rev-total { font-size: var(--text-2xl); font-weight: 660; letter-spacing: -.03em; line-height: 1.1; }
+  .rev .chart-legend { margin-inline-start: auto; }
+  .rev .chart-legend > *::before { inline-size: 14px; block-size: 3px; border-radius: 2px; }
+  .rev .chart-legend > .legend-dashed::before { background: repeating-linear-gradient(90deg, var(--series) 0 4px, transparent 4px 7px); }
+  /* The y labels are a flex column with space-between, so the first and last
+     sit flush with the plot's edges. Half a line of negative margin centres
+     each one on its gridline instead. */
+  .rev .chart-y { margin-block: -.5lh; }
+  .rev .chart-plot > .chart-x { grid-column: 2; }
+  .plot { position: relative; }
+  /* Deck draws a line in with a fixed 1200px dash, which leaves a gap on a
+     chart wider than that. This one is drawn solid, and the script at the
+     bottom animates it in using its measured on-screen length instead. */
+  .rev .chart-line { stroke-dasharray: none; animation: none; --stroke: 2.25; }
+  .rev .chart-line-dashed { stroke-dasharray: 5 4; --stroke: 1.5; }
+  .rev .chart-area-g { animation: chart-fade var(--dur-3) var(--ease-out); }
+  .rev-now {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: var(--y);
+    inline-size: 11px;
+    block-size: 11px;
+    translate: 50% -50%;
+    border-radius: var(--r-full);
+    background: var(--surface);
+    border: 2.5px solid var(--c1);
+    box-shadow: 0 0 0 5px color-mix(in oklab, var(--c1) 22%, transparent);
+  }
+  .rev-tip {
+    position: absolute;
+    inset-inline-end: var(--space-3);
+    inset-block-start: calc(var(--y) - 2.4rem);
+    padding: 3px var(--space-2);
+    border-radius: var(--r-xs);
+    background: var(--ink-900);
+    color: var(--ink-50);
+    font-size: var(--text-2xs);
+    font-weight: 620;
+    white-space: nowrap;
+    box-shadow: var(--shadow-2);
+  }
+
+  /* ----- Plan mix: one conic-gradient donut ----- */
+  .mix-body { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-5) var(--space-6); }
+  .mix .donut { --size: 9.5rem; --thickness: 1.25rem; }
+  .mix-legend { flex: 1 1 10rem; display: flex; flex-direction: column; gap: var(--space-1); font-size: var(--text-sm); }
+  .mix-legend li { display: flex; align-items: center; gap: var(--space-2); min-block-size: 2rem; }
+  .mix-legend li + li { border-block-start: 1px solid var(--line); }
+  .legend-swatch { inline-size: 10px; block-size: 10px; border-radius: 3px; background: var(--series); flex: none; }
+  .mix-pct { inline-size: 2.75rem; text-align: end; color: var(--text-muted); }
+
+  /* ----- Orders by weekday: the peak keeps the series colour, the rest step back ----- */
+  .col-quiet { --series: color-mix(in oklab, var(--c1) 38%, var(--bg-sunken)); }
+  .c-third .chart { --chart-h: 11rem; }
+
+  /* ----- Goal rings ----- */
+  .goals .list-row { padding-inline: var(--space-5); }
+  .goals .ring { --size: 46px; --thickness: 5px; }
+  .goals .ring-label { font-size: var(--text-2xs); }
+  /* Deck's ring is brand-on-light-grey. --ring-fill lets one ring warn, and the
+     track gets a dark-mode value. */
+  .ring { background: conic-gradient(var(--ring-fill, var(--brand-500)) calc(var(--value) * 1%), light-dark(var(--ink-200), var(--ink-800)) 0); }
+
+  /* ----- Orders table ----- */
+  .card > .table-wrap { border: 0; border-radius: 0; }
+  .card > .list { border: 0; border-radius: 0; background: none; }
+  .who { display: flex; align-items: center; gap: var(--space-3); min-inline-size: 0; }
+  .who-text { display: flex; flex-direction: column; min-inline-size: 0; line-height: 1.35; }
+  .who-text small { font-size: var(--text-xs); color: var(--text-muted); }
+  .table .row-act { inline-size: 3rem; padding-inline: var(--space-2); }
+  .table td { white-space: nowrap; }
+  /* Restacked rows on a phone: the customer cell's own layout keeps the
+     avatar beside the name, and the action button sits at the end. */
+  @media (max-width: 39.999rem) {
+    .card > .table-wrap { padding: var(--space-3); }
+    .table-stack td { align-items: center; padding-block: 6px; }
+    .table-stack .row-act { inline-size: 100%; padding-inline: var(--space-3); }
+    .who-text { align-items: flex-end; }
+  }
+
+  /* ----- Activity ----- */
+  .feed { padding: var(--space-5); }
+  .feed .timeline-dot { font-size: 11px; color: var(--text-muted); }
+  .feed .timeline-item:last-child { padding-block-end: 0; }
+  .feed .tone-good { border-color: var(--good-500); color: var(--good-500); }
+  .feed .tone-brand { border-color: var(--brand-500); color: var(--brand); }
+  .feed .tone-warn { border-color: var(--warn-500); color: var(--warn-500); }
+  .feed .tone-bad { border-color: var(--bad-500); color: var(--bad-500); }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Photos are hotlinked from Unsplash for the preview. Replace them with your own. -->
+
+<!-- ======================================================================
+     TOP BAR · shared chrome
+     One row at every width. On phones the menu button opens the drawer and
+     the search field folds into an icon; from 48rem the workspace switcher,
+     search, help and theme buttons appear.
+     ====================================================================== -->
+<header class="topbar">
+  <button class="btn btn-icon btn-ghost phone-only" type="button" data-deck-drawer="#app-nav" aria-label="Open navigation">
+    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#menu"></use></svg>
+  </button>
+
+  <a class="brand" href="app-shell.html">
+    <span class="brand-mark g-brand" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 3.5 20.5 20h-4.7L12 12.4 8.2 20H3.5Z" fill="currentColor"/></svg>
+    </span>
+    Acme
+  </a>
+
+  <span class="topbar-slash desk-only" aria-hidden="true"></span>
+  <button class="ws-switch desk-only" type="button" popovertarget="ws-menu">
+    <span class="sr-only">Switch workspace, current:</span>
+    <span class="avatar avatar-xs avatar-square ws-logo" aria-hidden="true">N</span>
+    Northwind
+    <span class="badge badge-brand">Pro trial</span>
+    <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-down-sm"></use></svg>
+  </button>
+  <div class="menu" popover id="ws-menu">
+    <div class="menu-label">Workspaces</div>
+    <button class="menu-item" type="button" aria-current="true">
+      <span class="avatar avatar-xs avatar-square ws-logo" aria-hidden="true">N</span>
+      Northwind
+      <svg class="icon icon-sm push" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>
+    </button>
+    <button class="menu-item" type="button">
+      <span class="avatar avatar-xs avatar-square ws-logo" style="--g-ws: var(--accent-700)" aria-hidden="true">H</span>
+      Harbor Supply Co.
+    </button>
+    <button class="menu-item" type="button">
+      <span class="avatar avatar-xs avatar-square ws-logo" style="--g-ws: var(--ink-600)" aria-hidden="true">A</span>
+      Alex's sandbox
+    </button>
+    <div class="menu-sep"></div>
+    <button class="menu-item" type="button">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus"></use></svg>
+      Create workspace
+    </button>
+  </div>
+
+  <!-- Search. The <kbd> is a hint; the script at the bottom makes ⌘K / Ctrl K focus the field. -->
+  <form class="search topbar-search desk-only" role="search" action="#">
+    <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search-sm"></use></svg>
+    <input class="input" type="search" name="q" placeholder="Search orders, people, reports…" aria-label="Search" autocomplete="off">
+    <kbd aria-hidden="true" data-shortcut>⌘K</kbd>
+  </form>
+
+  <div class="topbar-end">
+    <button class="btn btn-icon btn-ghost phone-only" type="button" aria-label="Search">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search"></use></svg>
+    </button>
+    <button class="btn btn-icon btn-ghost desk-only" type="button" aria-label="Help">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help"></use></svg>
+    </button>
+    <!-- .with-indicator pins the dot to the icon's corner. The dot says nothing
+         to a screen reader, so the count lives in the button's label. -->
+    <button class="btn btn-icon btn-ghost" type="button" popovertarget="notes-menu" aria-label="Notifications, 3 unread">
+      <span class="with-indicator">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#bell"></use></svg>
+        <span class="indicator-badge indicator-badge-dot" aria-hidden="true"></span>
+      </span>
+    </button>
+    <div class="menu" popover id="notes-menu">
+      <div class="menu-label">Notifications</div>
+      <a class="menu-item" href="#">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#dollar"></use></svg>
+        <span class="menu-note">Payout of $12,480 sent<small>2 hours ago</small></span>
+      </a>
+      <a class="menu-item" href="#">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#user"></use></svg>
+        <span class="menu-note">Priya Raman joined Northwind<small>5 hours ago</small></span>
+      </a>
+      <a class="menu-item" href="#">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#credit-card"></use></svg>
+        <span class="menu-note">Card ending 4242 expires next month<small>Yesterday</small></span>
+      </a>
+      <div class="menu-sep"></div>
+      <a class="menu-item" href="#">View all notifications</a>
+    </div>
+    <button class="btn btn-icon btn-ghost desk-only" type="button" data-deck-theme aria-label="Switch theme">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+    </button>
+    <button class="avatar-btn" type="button" popovertarget="user-menu" aria-label="Your account">
+      <span class="avatar avatar-sm">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="">
+      </span>
+    </button>
+    <div class="menu" popover id="user-menu">
+      <div class="menu-head">
+        <span class="avatar avatar-sm" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="">
+        </span>
+        <span class="menu-note"><strong class="text-sm">Alex Rivera</strong><small>alex@northwind.co</small></span>
+      </div>
+      <div class="menu-sep"></div>
+      <a class="menu-item" href="settings.html#profile">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#user"></use></svg>
+        Your profile
+      </a>
+      <a class="menu-item" href="settings.html">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings"></use></svg>
+        Settings
+      </a>
+      <a class="menu-item" href="settings.html#billing">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#credit-card"></use></svg>
+        Billing
+      </a>
+      <button class="menu-item" type="button" data-deck-theme>
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        Switch theme
+      </button>
+      <div class="menu-sep"></div>
+      <a class="menu-item" href="#">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#log-out"></use></svg>
+        Log out
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+
+  <!-- ======================================================================
+       SIDEBAR · shared chrome, desktop only
+       Sticky below the top bar and exactly as tall as what is left, so the
+       usage card and your name stay pinned to the bottom while the page
+       scrolls. Move aria-current="page" to whichever link this page is, here
+       and in the drawer and tab bar below.
+       ====================================================================== -->
+  <aside class="shell-side" aria-label="Sidebar">
+    <div class="side-panel">
+      <nav class="sidebar" aria-label="Main">
+        <a class="sidebar-link" href="app-shell.html">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home-sm"></use></svg>
+          Overview
+        </a>
+        <a class="sidebar-link" href="dashboard.html" aria-current="page">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart-sm"></use></svg>
+          Dashboard
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail-sm"></use></svg>
+          Inbox
+          <span class="badge badge-brand push">4<span class="sr-only"> unread</span></span>
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#receipt-sm"></use></svg>
+          Orders
+          <span class="badge push">12<span class="sr-only"> open</span></span>
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users-sm"></use></svg>
+          Customers
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#file-sm"></use></svg>
+          Reports
+        </a>
+
+        <p class="sidebar-group">Projects</p>
+        <a class="sidebar-link" href="#"><span class="dot" aria-hidden="true"></span>Website relaunch</a>
+        <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--accent-500)" aria-hidden="true"></span>Mobile app 2.0</a>
+        <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--good-500)" aria-hidden="true"></span>Q4 campaign</a>
+        <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--bad-500)" aria-hidden="true"></span>Partner portal</a>
+
+        <p class="sidebar-group">Workspace</p>
+        <a class="sidebar-link" href="settings.html">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings-sm"></use></svg>
+          Settings
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help-sm"></use></svg>
+          Help &amp; docs
+        </a>
+      </nav>
+
+      <div class="side-foot">
+        <div class="usage">
+          <div class="bar">
+            <span class="text-sm fw-semi">Pro trial</span>
+            <span class="badge badge-warn push">9 days left</span>
+          </div>
+          <progress class="progress" value="3412" max="5000" aria-label="Orders this month">68%</progress>
+          <span class="text-xs text-muted nums">3,412 of 5,000 orders this month</span>
+          <a class="btn btn-soft btn-sm btn-block" href="settings.html#billing">Upgrade plan</a>
+        </div>
+        <a class="user-row" href="settings.html#profile">
+          <span class="avatar avatar-sm presence" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="">
+          </span>
+          <span class="grow min-is-0">
+            <span class="block text-sm fw-semi truncate">Alex Rivera</span>
+            <span class="block text-xs text-muted truncate">alex@northwind.co</span>
+          </span>
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings-sm"></use></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================
+       MAIN
+       ====================================================================== -->
+  <main id="main" class="shell-main">
+    <div class="page">
+
+      <header class="page-head">
+        <div class="stack stack-2">
+          <nav aria-label="Breadcrumb">
+            <ol class="breadcrumb">
+              <li><a href="#">Northwind</a></li>
+              <li><a href="dashboard.html" aria-current="page">Dashboard</a></li>
+            </ol>
+          </nav>
+          <h1 class="h2">Dashboard</h1>
+          <p class="text-muted"><span data-caption>Last 30 days · Sep 7 – Oct 6, 2026</span> · all channels</p>
+        </div>
+        <div class="cluster cluster-tight head-actions">
+          <!-- Deck's .segmented styles and wires aria-selected (not aria-pressed):
+               deck.js moves it on click and fires a deck:change event, which
+               the script at the bottom listens for to redraw the page. -->
+          <div class="segmented range" role="group" aria-label="Date range">
+            <button type="button" aria-selected="false" data-value="7d">7d</button>
+            <button type="button" aria-selected="true" data-value="30d">30d</button>
+            <button type="button" aria-selected="false" data-value="90d">90d</button>
+          </div>
+          <button class="btn" type="button">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#download-sm"></use></svg>
+            Export
+          </button>
+        </div>
+      </header>
+
+      <div class="dash">
+
+        <!-- ===== Stat tiles =====
+             The class on .stat-delta picks the colour (good or bad news); the
+             icon picks the direction. They usually agree. Refunds is the one
+             where down is good, so it wears the "up" colour with a down arrow. -->
+        <section class="card c-kpi" aria-labelledby="k-revenue">
+          <div class="card-body kpi-body">
+            <div class="stat">
+              <span class="stat-label" id="k-revenue">Revenue</span>
+              <span class="stat-value" data-kpi="revenue">$48,210</span>
+            </div>
+            <svg class="sparkline sparkline-good" viewBox="0 0 88 28" preserveAspectRatio="none" aria-hidden="true"><path class="chart-line" d="M0,25C1.6,23.9 6.5,19.5 9.8,18.6C13,17.8 16.3,20.5 19.6,20C22.8,19.5 26.1,16.2 29.3,15.6C32.6,15 35.9,16.8 39.1,16.3C42.4,15.8 45.6,13 48.9,12.6C52.1,12.2 55.4,14.5 58.7,13.9C61.9,13.4 65.2,10.5 68.4,9.6C71.7,8.7 75,9.7 78.2,8.6C81.5,7.5 86.4,3.9 88,3"/></svg>
+            <div class="kpi-foot">
+              <span class="stat-delta stat-delta-up" data-delta="revenue">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#trend-up-sm"></use></svg>
+                <span class="sr-only">Up</span>
+                <span>12.4%</span>
+              </span>
+              <span class="kpi-vs" data-vs>vs previous 30 days</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="card c-kpi" aria-labelledby="k-orders">
+          <div class="card-body kpi-body">
+            <div class="stat">
+              <span class="stat-label" id="k-orders">Orders</span>
+              <span class="stat-value" data-kpi="orders">1,284</span>
+            </div>
+            <svg class="sparkline sparkline-good" viewBox="0 0 88 28" preserveAspectRatio="none" aria-hidden="true"><path class="chart-line" d="M0,25C1.6,22.9 6.5,13 9.8,12.4C13,11.9 16.3,21.3 19.6,21.9C22.8,22.4 26.1,18.2 29.3,15.6C32.6,13 35.9,5.6 39.1,6.1C42.4,6.7 45.6,18.2 48.9,18.7C52.1,19.2 55.4,10.3 58.7,9.3C61.9,8.2 65.2,13.5 68.4,12.4C71.7,11.4 75,4 78.2,3C81.5,2 86.4,5.6 88,6.1"/></svg>
+            <div class="kpi-foot">
+              <span class="stat-delta stat-delta-up" data-delta="orders">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#trend-up-sm"></use></svg>
+                <span class="sr-only">Up</span>
+                <span>3.1%</span>
+              </span>
+              <span class="kpi-vs" data-vs>vs previous 30 days</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="card c-kpi" aria-labelledby="k-refunds">
+          <div class="card-body kpi-body">
+            <div class="stat">
+              <span class="stat-label" id="k-refunds">Refunds</span>
+              <span class="stat-value" data-kpi="refunds">37</span>
+            </div>
+            <svg class="sparkline sparkline-good" viewBox="0 0 88 28" preserveAspectRatio="none" aria-hidden="true"><path class="chart-line" d="M0,3C1.6,3.9 6.5,8.5 9.8,8.5C13,8.5 16.3,2.1 19.6,3C22.8,3.9 26.1,13.1 29.3,14C32.6,14.9 35.9,7.6 39.1,8.5C42.4,9.4 45.6,18.6 48.9,19.5C52.1,20.4 55.4,14 58.7,14C61.9,14 65.2,17.7 68.4,19.5C71.7,21.3 75,24.1 78.2,25C81.5,25.9 86.4,25 88,25"/></svg>
+            <div class="kpi-foot">
+              <span class="stat-delta stat-delta-up" data-delta="refunds">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#trend-down-sm"></use></svg>
+                <span class="sr-only">Down</span>
+                <span>8.2%</span>
+              </span>
+              <span class="kpi-vs" data-vs>vs previous 30 days</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="card c-kpi" aria-labelledby="k-conversion">
+          <div class="card-body kpi-body">
+            <div class="stat">
+              <span class="stat-label" id="k-conversion">Conversion</span>
+              <span class="stat-value" data-kpi="conversion">3.24%</span>
+            </div>
+            <svg class="sparkline sparkline-bad" viewBox="0 0 88 28" preserveAspectRatio="none" aria-hidden="true"><path class="chart-line" d="M0,3C1.6,3.5 6.5,5 9.8,6.1C13,7.1 16.3,8.8 19.6,9.1C22.8,9.4 26.1,6.9 29.3,7.9C32.6,8.9 35.9,13.8 39.1,15.2C42.4,16.6 45.6,15.4 48.9,16.4C52.1,17.5 55.4,20.7 58.7,21.3C61.9,21.9 65.2,19.6 68.4,20.1C71.7,20.6 75,23.6 78.2,24.4C81.5,25.2 86.4,24.9 88,25"/></svg>
+            <div class="kpi-foot">
+              <span class="stat-delta stat-delta-down" data-delta="conversion">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#trend-down-sm"></use></svg>
+                <span class="sr-only">Down</span>
+                <span>0.4 pts</span>
+              </span>
+              <span class="kpi-vs" data-vs>vs previous 30 days</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Revenue =====
+             Inline SVG in a 600×240 viewBox with preserveAspectRatio="none",
+             so it stretches to any width while vector-effect keeps the strokes
+             at 1–2px. The paths below are the 30-day view; the script at the
+             bottom rebuilds them for 7d and 90d. With no JavaScript this is
+             simply the 30-day chart. -->
+        <section class="card c-rev" aria-labelledby="rev-title">
+          <div class="card-body">
+            <figure class="chart rev" aria-labelledby="rev-title" aria-describedby="rev-note">
+              <div class="rev-head">
+                <div class="stack stack-1">
+                  <h2 class="card-title" id="rev-title">Revenue</h2>
+                  <div class="cluster cluster-tight">
+                    <span class="rev-total nums" data-kpi="revenue">$48,210</span>
+                    <span class="stat-delta stat-delta-up" data-delta="revenue">
+                      <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#trend-up-sm"></use></svg>
+                      <span class="sr-only">Up</span>
+                      <span>12.4%</span>
+                    </span>
+                  </div>
+                  <p class="text-sm text-muted" id="rev-note" data-note>Daily revenue, compared with the previous 30 days</p>
+                </div>
+                <div class="chart-legend" aria-hidden="true">
+                  <span class="s1">This period</span>
+                  <span class="s-muted legend-dashed">Previous period</span>
+                </div>
+              </div>
+              <div class="chart-plot">
+                <div class="chart-y" aria-hidden="true" data-y>
+                  <span>$0</span><span>$500</span><span>$1k</span><span>$1.5k</span><span>$2k</span><span>$2.5k</span>
+                </div>
+                <div class="plot">
+                  <svg class="chart-svg" viewBox="0 0 600 240" preserveAspectRatio="none" aria-hidden="true">
+                    <!-- .chart-area-g fills with #deck-area-gradient; Deck leaves defining it to the page. -->
+                    <defs>
+                      <linearGradient id="deck-area-gradient" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0" style="stop-color: var(--c1); stop-opacity: .3"/>
+                        <stop offset="1" style="stop-color: var(--c1); stop-opacity: 0"/>
+                      </linearGradient>
+                    </defs>
+                    <line class="chart-gridline" x1="0" x2="600" y1="0" y2="0"/>
+                    <line class="chart-gridline" x1="0" x2="600" y1="48" y2="48"/>
+                    <line class="chart-gridline" x1="0" x2="600" y1="96" y2="96"/>
+                    <line class="chart-gridline" x1="0" x2="600" y1="144" y2="144"/>
+                    <line class="chart-gridline" x1="0" x2="600" y1="192" y2="192"/>
+                    <line class="chart-baseline" x1="0" x2="600" y1="240" y2="240"/>
+                    <path class="chart-line chart-line-dashed s-muted" data-path="prev" d="M0,96.4C3.4,97.4 13.8,105.3 20.7,102.4C27.6,99.6 34.5,74.5 41.4,79.2C48.3,83.9 55.2,120.2 62.1,130.7C69,141.1 75.9,145.8 82.8,142C89.7,138.1 96.6,115.3 103.4,107.6C110.3,99.9 117.2,97.5 124.1,95.7C131,93.9 137.9,98.9 144.8,96.8C151.7,94.7 158.6,85 165.5,83.1C172.4,81.3 179.3,79.4 186.2,85.5C193.1,91.7 200,113.4 206.9,120C213.8,126.6 220.7,126.4 227.6,125.2C234.5,123.9 241.4,116.9 248.3,112.4C255.2,107.9 262.1,102.6 269,98.3C275.9,94 282.8,87.5 289.7,86.7C296.6,85.9 303.4,93.3 310.3,93.5C317.2,93.7 324.1,81.4 331,87.6C337.9,93.9 344.8,125 351.7,130.8C358.6,136.7 365.5,126.2 372.4,122.9C379.3,119.5 386.2,115.7 393.1,110.8C400,105.9 406.9,96.8 413.8,93.6C420.7,90.4 427.6,92.4 434.5,91.3C441.4,90.2 448.3,90.5 455.2,86.9C462.1,83.3 469,64 475.9,69.8C482.8,75.6 489.7,110.4 496.6,121.7C503.4,133 510.3,141.5 517.2,137.7C524.1,133.9 531,106.2 537.9,99C544.8,91.7 551.7,95.9 558.6,94.2C565.5,92.4 572.4,89 579.3,88.6C586.2,88.2 596.6,91.4 600,92"/>
+                    <path class="chart-area-g" data-path="area" d="M0,112.3C3.4,106.3 13.8,79.6 20.7,76.1C27.6,72.7 34.5,87.9 41.4,91.7C48.3,95.4 55.2,101.7 62.1,98.6C69,95.5 75.9,69.8 82.8,73.2C89.7,76.5 96.6,109.1 103.4,118.8C110.3,128.6 117.2,137.1 124.1,131.4C131,125.7 137.9,94.2 144.8,84.7C151.7,75.2 158.6,75.7 165.5,74.5C172.4,73.3 179.3,76.8 186.2,77.4C193.1,78 200,79.3 206.9,78C213.8,76.6 220.7,64.6 227.6,69.4C234.5,74.2 241.4,96.9 248.3,106.8C255.2,116.8 262.1,131.9 269,129.1C275.9,126.3 282.8,100 289.7,90C296.6,80.1 303.4,73.5 310.3,69.4C317.2,65.3 324.1,61.9 331,65.7C337.9,69.4 344.8,92.8 351.7,92.1C358.6,91.3 365.5,58 372.4,61.1C379.3,64.2 386.2,102.8 393.1,110.7C400,118.5 406.9,114.9 413.8,108.2C420.7,101.5 427.6,74.7 434.5,70.5C441.4,66.2 448.3,83.6 455.2,82.8C462.1,81.9 469,69.8 475.9,65.5C482.8,61.2 489.7,58.9 496.6,57C503.4,55.1 510.3,46.7 517.2,54C524.1,61.4 531,91.4 537.9,101.1C544.8,110.7 551.7,118.7 558.6,111.9C565.5,105.2 572.4,71.1 579.3,60.7C586.2,50.2 596.6,51.2 600,49.2L600,240L0,240Z"/>
+                    <path class="chart-line s1" data-path="line" d="M0,112.3C3.4,106.3 13.8,79.6 20.7,76.1C27.6,72.7 34.5,87.9 41.4,91.7C48.3,95.4 55.2,101.7 62.1,98.6C69,95.5 75.9,69.8 82.8,73.2C89.7,76.5 96.6,109.1 103.4,118.8C110.3,128.6 117.2,137.1 124.1,131.4C131,125.7 137.9,94.2 144.8,84.7C151.7,75.2 158.6,75.7 165.5,74.5C172.4,73.3 179.3,76.8 186.2,77.4C193.1,78 200,79.3 206.9,78C213.8,76.6 220.7,64.6 227.6,69.4C234.5,74.2 241.4,96.9 248.3,106.8C255.2,116.8 262.1,131.9 269,129.1C275.9,126.3 282.8,100 289.7,90C296.6,80.1 303.4,73.5 310.3,69.4C317.2,65.3 324.1,61.9 331,65.7C337.9,69.4 344.8,92.8 351.7,92.1C358.6,91.3 365.5,58 372.4,61.1C379.3,64.2 386.2,102.8 393.1,110.7C400,118.5 406.9,114.9 413.8,108.2C420.7,101.5 427.6,74.7 434.5,70.5C441.4,66.2 448.3,83.6 455.2,82.8C462.1,81.9 469,69.8 475.9,65.5C482.8,61.2 489.7,58.9 496.6,57C503.4,55.1 510.3,46.7 517.2,54C524.1,61.4 531,91.4 537.9,101.1C544.8,110.7 551.7,118.7 558.6,111.9C565.5,105.2 572.4,71.1 579.3,60.7C586.2,50.2 596.6,51.2 600,49.2"/>
+                  </svg>
+                  <!-- The latest point, as HTML: a circle inside a stretched SVG would be stretched into an ellipse. -->
+                  <span class="rev-now" style="--y: 20.5%" aria-hidden="true"></span>
+                  <span class="rev-tip nums" style="--y: 20.5%" aria-hidden="true" data-tip>Today · $1,987</span>
+                </div>
+                <div class="chart-x" aria-hidden="true" data-x>
+                  <span>Sep 7</span><span>Sep 14</span><span>Sep 21</span><span>Sep 28</span><span>Oct 6</span>
+                </div>
+              </div>
+            </figure>
+          </div>
+        </section>
+
+        <!-- ===== Plan mix =====
+             One element. --stops is the conic gradient's colour stops, so the
+             segment boundaries are the running totals: 46, 46+32, 46+32+16. -->
+        <section class="card c-mix" aria-labelledby="mix-title">
+          <div class="card-header">
+            <h2 class="card-title" id="mix-title">Plan mix</h2>
+            <span class="card-note">Active subscriptions</span>
+          </div>
+          <div class="card-body">
+            <figure class="chart mix mix-body">
+              <div class="donut-wrap">
+                <div class="donut" style="--stops: var(--c1) 0 46%, var(--c2) 0 78%, var(--c3) 0 94%, var(--c4) 0 100%" role="img" aria-label="2,418 subscriptions: Starter 46%, Pro 32%, Team 16%, Enterprise 6%"></div>
+                <div class="donut-center" aria-hidden="true">
+                  <span class="donut-value">2,418</span>
+                  <span class="donut-label">subscriptions</span>
+                </div>
+              </div>
+              <ul class="mix-legend" aria-hidden="true">
+                <li class="s1"><span class="legend-swatch"></span>Starter<span class="push nums">1,112</span><span class="mix-pct nums">46%</span></li>
+                <li class="s2"><span class="legend-swatch"></span>Pro<span class="push nums">774</span><span class="mix-pct nums">32%</span></li>
+                <li class="s3"><span class="legend-swatch"></span>Team<span class="push nums">387</span><span class="mix-pct nums">16%</span></li>
+                <li class="s4"><span class="legend-swatch"></span>Enterprise<span class="push nums">145</span><span class="mix-pct nums">6%</span></li>
+              </ul>
+            </figure>
+          </div>
+          <div class="card-footer text-sm text-muted">
+            <span class="stat-delta stat-delta-up">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#trend-up-sm"></use></svg>
+              <span>4 pts</span>
+            </span>
+            Pro's share since August
+          </div>
+        </section>
+
+        <!-- ===== Orders by weekday =====
+             Pure CSS columns: each height is one number in a --value custom
+             property. data-label and data-value are drawn as generated
+             content, so the role="img" label carries the numbers for a
+             screen reader. -->
+        <section class="card c-third" aria-labelledby="dow-title">
+          <div class="card-header">
+            <h2 class="card-title" id="dow-title">Orders by weekday</h2>
+            <span class="card-note">Avg. per day</span>
+          </div>
+          <div class="card-body">
+            <figure class="chart">
+              <div class="chart-columns" role="img" aria-label="Average orders per day: Monday 44, Tuesday 46, Wednesday 47, Thursday 45, Friday 49, Saturday 35, Sunday 32">
+                <div class="chart-col col-quiet" style="--value:88" data-label="Mon" data-value="44"></div>
+                <div class="chart-col col-quiet" style="--value:92" data-label="Tue" data-value="46"></div>
+                <div class="chart-col col-quiet" style="--value:94" data-label="Wed" data-value="47"></div>
+                <div class="chart-col col-quiet" style="--value:90" data-label="Thu" data-value="45"></div>
+                <div class="chart-col" style="--value:98" data-label="Fri" data-value="49"></div>
+                <div class="chart-col col-quiet" style="--value:70" data-label="Sat" data-value="35"></div>
+                <div class="chart-col col-quiet" style="--value:64" data-label="Sun" data-value="32"></div>
+              </div>
+            </figure>
+          </div>
+          <div class="card-footer text-sm text-muted">Fridays are busiest; weekends run 26% lower.</div>
+        </section>
+
+        <!-- ===== Traffic sources ===== -->
+        <section class="card c-third" aria-labelledby="src-title">
+          <div class="card-header">
+            <h2 class="card-title" id="src-title">Traffic sources</h2>
+            <span class="card-note nums">18,240 visits</span>
+          </div>
+          <div class="card-body">
+            <figure class="chart">
+              <div class="chart-bars">
+                <div class="chart-bar">
+                  <span class="chart-bar-label">Organic search</span>
+                  <span class="chart-bar-track"><span class="chart-bar-fill" style="--value:41"></span></span>
+                  <span class="chart-bar-value nums">41%</span>
+                </div>
+                <div class="chart-bar">
+                  <span class="chart-bar-label">Direct</span>
+                  <span class="chart-bar-track"><span class="chart-bar-fill" style="--value:23"></span></span>
+                  <span class="chart-bar-value nums">23%</span>
+                </div>
+                <div class="chart-bar">
+                  <span class="chart-bar-label">Referral</span>
+                  <span class="chart-bar-track"><span class="chart-bar-fill" style="--value:16"></span></span>
+                  <span class="chart-bar-value nums">16%</span>
+                </div>
+                <div class="chart-bar">
+                  <span class="chart-bar-label">Social</span>
+                  <span class="chart-bar-track"><span class="chart-bar-fill" style="--value:12"></span></span>
+                  <span class="chart-bar-value nums">12%</span>
+                </div>
+                <div class="chart-bar">
+                  <span class="chart-bar-label">Email</span>
+                  <span class="chart-bar-track"><span class="chart-bar-fill" style="--value:8"></span></span>
+                  <span class="chart-bar-value nums">8%</span>
+                </div>
+              </div>
+            </figure>
+          </div>
+          <div class="card-footer text-sm text-muted">Referral doubled after the Harbor Supply partnership.</div>
+        </section>
+
+        <!-- ===== Goals: .ring-wrap stacks the label over the ring as a sibling,
+             because the ring's mask would hide anything inside it. ===== -->
+        <section class="card c-third" aria-labelledby="goal-title">
+          <div class="card-header">
+            <h2 class="card-title" id="goal-title">October goals</h2>
+            <span class="card-note">25 days left</span>
+          </div>
+          <div class="list goals">
+            <div class="list-row">
+              <span class="ring-wrap">
+                <span class="ring" style="--value:80" aria-hidden="true"></span>
+                <span class="ring-label">80%</span>
+              </span>
+              <span class="list-main">
+                <span class="list-title">Revenue</span>
+                <span class="list-sub nums">$48.2k of $60k</span>
+              </span>
+              <span class="badge badge-good">On track</span>
+            </div>
+            <div class="list-row">
+              <span class="ring-wrap">
+                <span class="ring" style="--value:71; --ring-fill: var(--warn-500)" aria-hidden="true"></span>
+                <span class="ring-label">71%</span>
+              </span>
+              <span class="list-main">
+                <span class="list-title">New customers</span>
+                <span class="list-sub nums">212 of 300</span>
+              </span>
+              <span class="badge badge-warn">Behind</span>
+            </div>
+            <div class="list-row">
+              <span class="ring-wrap">
+                <span class="ring" style="--value:86" aria-hidden="true"></span>
+                <span class="ring-label">86%</span>
+              </span>
+              <span class="list-main">
+                <span class="list-title">Repeat purchases</span>
+                <span class="list-sub nums">34.4% of a 40% target</span>
+              </span>
+              <span class="badge badge-good">On track</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Recent orders =====
+             .table-stack is the important part. Below 40rem each row becomes a
+             labelled block instead of a sideways scroll, reading the column name
+             from data-label on every cell. Every cell needs one. -->
+        <section class="card c-table" aria-labelledby="orders-title">
+          <div class="card-header">
+            <h2 class="card-title" id="orders-title">Recent orders</h2>
+            <span class="badge nums">12 open</span>
+            <a class="btn btn-ghost btn-sm push" href="#">
+              View all
+              <svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+            </a>
+          </div>
+          <div class="table-wrap">
+            <table class="table table-stack">
+              <thead>
+                <tr>
+                  <th scope="col">Order</th>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col" class="num">Total</th>
+                  <th scope="col" class="row-act"><span class="sr-only">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Order"><span class="mono">#4821</span></td>
+                  <td data-label="Customer">
+                    <span class="who">
+                      <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="" loading="lazy" decoding="async"></span>
+                      <span class="who-text">Dana Whitfield<small>dana@whitfield.studio</small></span>
+                    </span>
+                  </td>
+                  <td data-label="Date" class="text-muted">Oct 6, 09:42</td>
+                  <td data-label="Status"><span class="badge badge-good badge-dot">Paid</span></td>
+                  <td data-label="Total" class="num">$320.00</td>
+                  <td data-label="Actions" class="row-act">
+                    <button class="btn btn-icon btn-ghost btn-sm" type="button" popovertarget="row-4821" aria-label="Actions for order 4821">
+                      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#more-horizontal"></use></svg>
+                    </button>
+                    <div class="menu" popover id="row-4821">
+                      <a class="menu-item" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#eye"></use></svg>View order</a>
+                      <a class="menu-item" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#download"></use></svg>Download invoice</a>
+                      <div class="menu-sep"></div>
+                      <button class="menu-item menu-item-danger" type="button"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#refresh"></use></svg>Refund…</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-label="Order"><span class="mono">#4820</span></td>
+                  <td data-label="Customer">
+                    <span class="who">
+                      <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="" loading="lazy" decoding="async"></span>
+                      <span class="who-text">Marco Pereira<small>marco@lisbonlabs.pt</small></span>
+                    </span>
+                  </td>
+                  <td data-label="Date" class="text-muted">Oct 6, 08:15</td>
+                  <td data-label="Status"><span class="badge badge-warn badge-dot">Pending</span></td>
+                  <td data-label="Total" class="num">$89.50</td>
+                  <td data-label="Actions" class="row-act">
+                    <button class="btn btn-icon btn-ghost btn-sm" type="button" popovertarget="row-4820" aria-label="Actions for order 4820">
+                      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#more-horizontal"></use></svg>
+                    </button>
+                    <div class="menu" popover id="row-4820">
+                      <a class="menu-item" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#eye"></use></svg>View order</a>
+                      <a class="menu-item" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail"></use></svg>Send payment reminder</a>
+                      <div class="menu-sep"></div>
+                      <button class="menu-item menu-item-danger" type="button"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x-circle"></use></svg>Cancel order…</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-label="Order"><span class="mono">#4819</span></td>
+                  <td data-label="Customer">
+                    <span class="who">
+                      <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="" loading="lazy" decoding="async"></span>
+                      <span class="who-text">Aiko Tanaka<small>aiko@kumo.design</small></span>
+                    </span>
+                  </td>
+                  <td data-label="Date" class="text-muted">Oct 5, 17:03</td>
+                  <td data-label="Status"><span class="badge badge-brand badge-dot">Shipped</span></td>
+                  <td data-label="Total" class="num">$1,240.00</td>
+                  <td data-label="Actions" class="row-act">
+                    <button class="btn btn-icon btn-ghost btn-sm" type="button" popovertarget="row-4819" aria-label="Actions for order 4819">
+                      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#more-horizontal"></use></svg>
+                    </button>
+                    <div class="menu" popover id="row-4819">
+                      <a class="menu-item" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#eye"></use></svg>View order</a>
+                      <a class="menu-item" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#truck"></use></svg>Track shipment</a>
+                      <div class="menu-sep"></div>
+                      <button class="menu-item menu-item-danger" type="button"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#refresh"></use></svg>Refund…</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-label="Order"><span class="mono">#4818</span></td>
+                  <td data-label="Customer">
+                    <span class="who">
+                      <span class="avatar avatar-sm" aria-hidden="true">SO</span>
+                      <span class="who-text">Samuel Oyelaran<small>sam@oyelaran.co</small></span>
+                    </span>
+                  </td>
+                  <td data-label="Date" class="text-muted">Oct 5, 11:20</td>
+                  <td data-label="Status"><span class="badge badge-bad badge-dot">Refunded</span></td>
+                  <td data-label="Total" class="num">$64.00</td>
+                  <td data-label="Actions" class="row-act">
+                    <button class="btn btn-icon btn-ghost btn-sm" type="button" popovertarget="row-4818" aria-label="Actions for order 4818">
+                      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#more-horizontal"></use></svg>
+                    </button>
+                    <div class="menu" popover id="row-4818">
+                      <a class="menu-item" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#eye"></use></svg>View order</a>
+                      <a class="menu-item" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#receipt"></use></svg>View refund receipt</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-label="Order"><span class="mono">#4817</span></td>
+                  <td data-label="Customer">
+                    <span class="who">
+                      <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="" loading="lazy" decoding="async"></span>
+                      <span class="who-text">Elena Petrova<small>elena@petrova.dev</small></span>
+                    </span>
+                  </td>
+                  <td data-label="Date" class="text-muted">Oct 4, 15:48</td>
+                  <td data-label="Status"><span class="badge badge-good badge-dot">Paid</span></td>
+                  <td data-label="Total" class="num">$412.80</td>
+                  <td data-label="Actions" class="row-act">
+                    <button class="btn btn-icon btn-ghost btn-sm" type="button" popovertarget="row-4817" aria-label="Actions for order 4817">
+                      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#more-horizontal"></use></svg>
+                    </button>
+                    <div class="menu" popover id="row-4817">
+                      <a class="menu-item" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#eye"></use></svg>View order</a>
+                      <a class="menu-item" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#download"></use></svg>Download invoice</a>
+                      <div class="menu-sep"></div>
+                      <button class="menu-item menu-item-danger" type="button"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#refresh"></use></svg>Refund…</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ===== Activity ===== -->
+        <section class="card c-feed" aria-labelledby="feed-title">
+          <div class="card-header">
+            <h2 class="card-title" id="feed-title">Activity</h2>
+            <a class="btn btn-ghost btn-sm push" href="#">See all</a>
+          </div>
+          <ol class="timeline feed">
+            <li class="timeline-item">
+              <span class="timeline-dot tone-good" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#dollar-sm"></use></svg></span>
+              <div>
+                <p class="text-sm"><strong>Payout of $12,480</strong> sent to Operating ••4410</p>
+                <p class="text-xs text-muted">2 hours ago</p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-dot tone-brand" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#user-sm"></use></svg></span>
+              <div>
+                <p class="text-sm"><strong>Priya Raman</strong> joined the workspace as Admin</p>
+                <p class="text-xs text-muted">5 hours ago</p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-dot tone-bad" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#refresh-sm"></use></svg></span>
+              <div>
+                <p class="text-sm"><strong>Order #4818</strong> refunded to Samuel Oyelaran</p>
+                <p class="text-xs text-muted">Yesterday at 11:20</p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-dot tone-warn" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#credit-card-sm"></use></svg></span>
+              <div>
+                <p class="text-sm"><strong>Card ending 4242</strong> expires next month</p>
+                <p class="text-xs text-muted">Yesterday at 08:00</p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-dot" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#file-sm"></use></svg></span>
+              <div>
+                <p class="text-sm"><strong>September report</strong> generated and sent to 7 people</p>
+                <p class="text-xs text-muted">Oct 1</p>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ======================================================================
+     DRAWER · shared chrome, phones only (needs deck-extras.js)
+     The sidebar again, in a native <dialog>. The menu button in the top bar
+     opens it with data-deck-drawer; Escape, the backdrop and the close
+     button shut it. It holds everything the tab bar has no room for.
+     ====================================================================== -->
+<dialog class="drawer" id="app-nav" aria-labelledby="app-nav-title">
+  <div class="drawer-header">
+    <span class="avatar avatar-sm avatar-square ws-logo" aria-hidden="true">N</span>
+    <div class="grow min-is-0">
+      <h2 class="drawer-title" id="app-nav-title">Northwind</h2>
+      <p class="text-xs text-muted">Acme · Pro trial, 9 days left</p>
+    </div>
+    <button class="btn btn-sm btn-ghost btn-icon" type="button" data-drawer-close aria-label="Close navigation">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x"></use></svg>
+    </button>
+  </div>
+  <div class="drawer-body">
+    <nav class="sidebar" aria-label="Main">
+      <a class="sidebar-link" href="app-shell.html">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home-sm"></use></svg>
+        Overview
+      </a>
+      <a class="sidebar-link" href="dashboard.html" aria-current="page">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart-sm"></use></svg>
+        Dashboard
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail-sm"></use></svg>
+        Inbox
+        <span class="badge badge-brand push">4<span class="sr-only"> unread</span></span>
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#receipt-sm"></use></svg>
+        Orders
+        <span class="badge push">12<span class="sr-only"> open</span></span>
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users-sm"></use></svg>
+        Customers
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#file-sm"></use></svg>
+        Reports
+      </a>
+
+      <p class="sidebar-group">Projects</p>
+      <a class="sidebar-link" href="#"><span class="dot" aria-hidden="true"></span>Website relaunch</a>
+      <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--accent-500)" aria-hidden="true"></span>Mobile app 2.0</a>
+      <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--good-500)" aria-hidden="true"></span>Q4 campaign</a>
+      <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--bad-500)" aria-hidden="true"></span>Partner portal</a>
+
+      <p class="sidebar-group">Workspace</p>
+      <a class="sidebar-link" href="settings.html">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings-sm"></use></svg>
+        Settings
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help-sm"></use></svg>
+        Help &amp; docs
+      </a>
+    </nav>
+    <div class="usage">
+      <div class="bar">
+        <span class="text-sm fw-semi">Pro trial</span>
+        <span class="badge badge-warn push">9 days left</span>
+      </div>
+      <progress class="progress" value="3412" max="5000" aria-label="Orders this month">68%</progress>
+      <span class="text-xs text-muted nums">3,412 of 5,000 orders this month</span>
+      <a class="btn btn-soft btn-sm btn-block" href="settings.html#billing">Upgrade plan</a>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <a class="user-row" href="settings.html#profile">
+      <span class="avatar avatar-sm" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="" loading="lazy" decoding="async">
+      </span>
+      <span class="grow min-is-0">
+        <span class="block text-sm fw-semi truncate">Alex Rivera</span>
+        <span class="block text-xs text-muted truncate">alex@northwind.co</span>
+      </span>
+    </a>
+    <button class="btn btn-icon btn-ghost" type="button" data-deck-theme aria-label="Switch theme">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+    </button>
+  </div>
+</dialog>
+
+<!-- ======================================================================
+     TAB BAR · shared chrome, phones only
+     Deck hides it at 48rem and pads the bottom of the page so it never
+     covers the last row: you do not have to do either.
+     ====================================================================== -->
+<nav class="tabbar" aria-label="Primary">
+  <a class="tabbar-item" href="app-shell.html">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home"></use></svg>
+    Overview
+  </a>
+  <a class="tabbar-item" href="dashboard.html" aria-current="page">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart"></use></svg>
+    Dashboard
+  </a>
+  <a class="tabbar-item" href="#">
+    <span class="with-indicator">
+      <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail"></use></svg>
+      <span class="indicator-badge indicator-badge-brand" aria-hidden="true">4</span>
+    </span>
+    Inbox<span class="sr-only">, 4 unread</span>
+  </a>
+  <a class="tabbar-item" href="#">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#receipt"></use></svg>
+    Orders
+  </a>
+  <a class="tabbar-item" href="settings.html">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings"></use></svg>
+    Settings
+  </a>
+</nav>
+
+<script>
+  /* Shared chrome: ⌘K (Ctrl K off a Mac) focuses the search field. */
+  (() => {
+    const q = document.querySelector('.topbar-search .input');
+    const mac = /Mac|iPhone|iPad/.test(navigator.platform);
+    if (!mac) document.querySelectorAll('[data-shortcut]').forEach((k) => { k.textContent = 'Ctrl K'; });
+    addEventListener('keydown', (e) => {
+      if ((mac ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === 'k' && q && q.offsetParent) {
+        e.preventDefault();
+        q.focus();
+      }
+    });
+  })();
+</script>
+
+<script>
+  /* ===== Date range =====
+     Listens for the deck:change event that deck.js fires from .segmented,
+     then rewrites the numbers, the axis labels and the three SVG paths. Each
+     range is a plain array of values: swap these for a fetch() of your own. */
+  (() => {
+    const R = {
+      '7d': {
+        cur: [1818, 1906, 1937, 1447, 1334, 1868, 1987],
+        prev: [1816, 1541, 1864, 1347, 1373, 1766, 1638],
+        max: 2500, y: ['$0', '$500', '$1k', '$1.5k', '$2k', '$2.5k'],
+        x: ['Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue'],
+        span: '7 days', caption: 'Last 7 days · Sep 30 – Oct 6, 2026', unit: 'Daily', tip: 'Today',
+        kpi: { revenue: ['$12,297', '8.4%', 1, 1], orders: ['326', '2.2%', 1, 1], refunds: ['9', '10.0%', 1, 0], conversion: ['3.20%', '0.3 pts', 0, 0] }
+      },
+      '30d': {
+        cur: [1330, 1707, 1545, 1473, 1738, 1262, 1131, 1618, 1724, 1694, 1688, 1777, 1387, 1155, 1562, 1777, 1816, 1541, 1864, 1347, 1373, 1766, 1638, 1818, 1906, 1937, 1447, 1334, 1868, 1987],
+        prev: [1496, 1433, 1675, 1139, 1021, 1379, 1503, 1492, 1634, 1609, 1250, 1196, 1329, 1476, 1597, 1526, 1587, 1137, 1220, 1346, 1525, 1549, 1595, 1773, 1232, 1066, 1469, 1519, 1577, 1542],
+        max: 2500, y: ['$0', '$500', '$1k', '$1.5k', '$2k', '$2.5k'],
+        x: ['Sep 7', 'Sep 14', 'Sep 21', 'Sep 28', 'Oct 6'],
+        span: '30 days', caption: 'Last 30 days · Sep 7 – Oct 6, 2026', unit: 'Daily', tip: 'Today',
+        kpi: { revenue: ['$48,210', '12.4%', 1, 1], orders: ['1,284', '3.1%', 1, 1], refunds: ['37', '8.2%', 1, 0], conversion: ['3.24%', '0.4 pts', 0, 0] }
+      },
+      '90d': {
+        cur: [9272, 10394, 10939, 9916, 12161, 8496, 8667, 11019, 11842, 11960, 11668, 12966, 10340],
+        prev: [8931, 10120, 9460, 9819, 9953, 7479, 7074, 10073, 10896, 9572, 10702, 9788, 7913],
+        max: 15000, y: ['$0', '$3k', '$6k', '$9k', '$12k', '$15k'],
+        x: ['Jul 8', 'Aug 5', 'Sep 2', 'Sep 30'],
+        span: '90 days', caption: 'Last 90 days · Jul 8 – Oct 6, 2026', unit: 'Weekly', tip: 'This week',
+        kpi: { revenue: ['$139,640', '14.7%', 1, 1], orders: ['3,712', '6.8%', 1, 1], refunds: ['118', '5.6%', 1, 0], conversion: ['3.18%', '0.2 pts', 0, 0] }
+      }
+    };
+
+    /* Catmull-Rom through the points, written as cubic Béziers, in the
+       600×240 space of the SVG's viewBox. */
+    const W = 600, H = 240, f = (n) => +n.toFixed(1);
+    const curve = (v, max) => {
+      const p = v.map((n, i) => [i / (v.length - 1) * W, H - n / max * H]);
+      return p.reduce((d, [x, y], i) => {
+        if (!i) return `M${f(x)},${f(y)}`;
+        const a = p[i - 2] || p[i - 1], b = p[i - 1], c = p[i + 1] || p[i];
+        return d + `C${f(b[0] + (x - a[0]) / 6)},${f(b[1] + (y - a[1]) / 6)} ${f(x - (c[0] - b[0]) / 6)},${f(y - (c[1] - b[1]) / 6)} ${f(x)},${f(y)}`;
+      }, '');
+    };
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => document.querySelectorAll(s);
+    const money = (n) => '$' + n.toLocaleString('en-US');
+    const spans = (el, list) => { el.replaceChildren(...list.map((t) => Object.assign(document.createElement('span'), { textContent: t }))); };
+
+    /* Draw the line in. The SVG is stretched, so its length on screen is
+       measured by sampling points through the screen matrix, then used as
+       the dash for one pass of the animation. */
+    const draw = (path) => {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const m = path.getScreenCTM(), total = path.getTotalLength();
+      let len = 0, prev;
+      for (let i = 0; i <= 80; i++) {
+        const pt = path.getPointAtLength(total * i / 80).matrixTransform(m);
+        if (prev) len += Math.hypot(pt.x - prev.x, pt.y - prev.y);
+        prev = pt;
+      }
+      path.animate([{ strokeDasharray: len, strokeDashoffset: len }, { strokeDasharray: len, strokeDashoffset: 0 }],
+        { duration: 900, easing: 'cubic-bezier(.22, 1, .36, 1)' });
+    };
+
+    function show(key) {
+      const r = R[key];
+      if (!r) return;
+      const line = curve(r.cur, r.max);
+      $('[data-path="line"]').setAttribute('d', line);
+      $('[data-path="area"]').setAttribute('d', `${line}L${W},${H}L0,${H}Z`);
+      $('[data-path="prev"]').setAttribute('d', curve(r.prev, r.max));
+      draw($('[data-path="line"]'));
+      const last = r.cur.at(-1), y = (100 - last / r.max * 100).toFixed(1) + '%';
+      $$('.rev-now, .rev-tip').forEach((n) => n.style.setProperty('--y', y));
+      $('[data-tip]').textContent = `${r.tip} · ${money(last)}`;
+      spans($('[data-y]'), r.y);
+      spans($('[data-x]'), r.x);
+      $('[data-caption]').textContent = r.caption;
+      $('[data-note]').textContent = `${r.unit} revenue, compared with the previous ${r.span}`;
+      $$('[data-vs]').forEach((n) => { n.textContent = `vs previous ${r.span}`; });
+      for (const [name, [value, delta, good, up]] of Object.entries(r.kpi)) {
+        $$(`[data-kpi="${name}"]`).forEach((n) => { n.textContent = value; });
+        $$(`[data-delta="${name}"]`).forEach((n) => {
+          n.className = 'stat-delta ' + (good ? 'stat-delta-up' : 'stat-delta-down');
+          const use = n.querySelector('use');
+          use.setAttribute('href', use.getAttribute('href').replace(/#.*/, up ? '#trend-up-sm' : '#trend-down-sm'));
+          n.querySelector('.sr-only').textContent = up ? 'Up' : 'Down';
+          n.lastElementChild.textContent = delta;
+          n.closest('.c-kpi')?.querySelector('.sparkline')?.setAttribute('class', 'sparkline ' + (good ? 'sparkline-good' : 'sparkline-bad'));
+        });
+      }
+    }
+
+    document.addEventListener('deck:change', (e) => {
+      if (e.target.closest('.range')) show(e.detail.value);
+    });
+    draw($('[data-path="line"]'));
+  })();
+</script>
+
+</body>
+</html>

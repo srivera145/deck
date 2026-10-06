@@ -1,0 +1,1664 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Torque &amp; Co. Auto Care · Deck template</title>
+<meta name="description" content="An independent auto repair shop: live opening status, a quick-booking card, services with honest from-prices, a parts-and-labour price table, reviews, coupons, hours and a CSS-drawn map.">
+<meta name="theme-color" content="#b23a1e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23b23a1e'/%3E%3Cpath d='M16 6.8 24 11.4v9.2L16 25.2 8 20.6v-9.2Z' fill='none' stroke='white' stroke-width='2.4' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='16' r='3.4' fill='none' stroke='white' stroke-width='2.4'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+<script src="../assets/deck/deck-extras.js" defer></script>   <!-- the mobile drawer and the coupon copy buttons -->
+
+<style>
+@layer app.pages {
+
+  /* --- Brand -----------------------------------------------------------------
+     A workshop red with an amber accent (the stars and the tow band use it).
+     Bahnschrift ships with Windows and DIN Alternate with macOS: a condensed,
+     road-sign face for headings and prices, falling back to the system sans. */
+  :root {
+    --hue-brand: 24;
+    --chroma-brand: .16;
+    --hue-accent: 68;
+    /* Warm the greys a touch: concrete and steel rather than the default cool slate. */
+    --hue-neutral: 55;
+    --chroma-neutral: .005;
+
+    /* Workaround: Deck's status tints (-100 fills, -700 inks behind the good,
+       warn and bad badges and tiles) stay light in dark mode and glare on a
+       dark page. Same values in light; a dim fill and a bright ink in dark. */
+    --good-100: light-dark(oklch(94% calc(var(--chroma-status) * .3) var(--hue-good)), oklch(31% .06 var(--hue-good)));
+    --good-700: light-dark(oklch(44% var(--chroma-status) var(--hue-good)), oklch(82% .12 var(--hue-good)));
+    --warn-100: light-dark(oklch(95% calc(var(--chroma-status) * .32) var(--hue-warn)), oklch(33% .06 var(--hue-warn)));
+    --warn-700: light-dark(oklch(50% var(--chroma-status) var(--hue-warn)), oklch(86% .12 var(--hue-warn)));
+    --bad-100: light-dark(oklch(94.5% calc(var(--chroma-status) * .3) var(--hue-bad)), oklch(31% .07 var(--hue-bad)));
+    --bad-700: light-dark(oklch(44% calc(var(--chroma-status) * 1.1) var(--hue-bad)), oklch(80% .12 var(--hue-bad)));
+    --font-display: "Bahnschrift", "DIN Alternate", "DIN Next", "Roboto Condensed", "Arial Narrow", system-ui, sans-serif;
+
+    /* The utility strip, the hero and the tow band are dark in both themes on
+       purpose, so they get their own ink rather than --bg and --text. */
+    --night: oklch(17% .012 var(--hue-neutral));
+    --night-2: oklch(23% .014 var(--hue-neutral));
+    --on-night: oklch(97% .004 var(--hue-neutral));
+    --on-night-muted: oklch(83% .01 var(--hue-neutral));
+  }
+  body { background: var(--bg); }
+
+  /* Deck's .drawer sets display:flex, which beats the browser's own rule that hides a closed <dialog>, so a closed drawer would sit off-screen with its links still in the tab order. The transition on display is allow-discrete, so the slide-out still plays. */
+  .drawer:not([open]) { display: none; }
+  [id] { scroll-margin-block-start: 5.5rem; }
+
+  .display, h2 { text-wrap: balance; }
+  .lede { text-wrap: pretty; }
+  /* Section headings only; card titles keep Deck's size. */
+  main h2:not([class]) { font-size: clamp(1.75rem, 1.3rem + 1.9vw, 2.75rem); font-weight: 700; letter-spacing: -.02em; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    font-size: var(--text-xs); font-weight: 640; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--brand);
+  }
+  .eyebrow::before { content: ""; inline-size: 1.25rem; block-size: 2px; border-radius: 2px; background: currentColor; }
+  .section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-4) var(--space-8); }
+  .section-head > :first-child { max-inline-size: 42rem; }
+  .band { background: var(--surface); border-block: 1px solid var(--line); }
+  .figure { font-family: var(--font-display); font-weight: 700; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+
+  /* ===== Utility strip ===== */
+  .utility { background: var(--night); color: var(--on-night-muted); font-size: var(--text-sm); }
+  .utility .container { display: flex; align-items: center; gap: var(--space-6); min-block-size: 2.5rem; white-space: nowrap; }
+  .utility .container > * { flex: none; }
+  .utility .status-line { color: var(--on-night); font-weight: 560; }
+  /* .ping draws its halo in currentColor, so the dot needs a colour as well as a background. */
+  .utility .indicator-good { color: var(--good-500); }
+  .utility .indicator-bad { color: var(--bad-500); }
+  .utility-item { display: none; align-items: center; gap: var(--space-2); }
+  .utility-item .icon { color: var(--on-night-muted); }
+  .utility-phone { margin-inline-start: auto; display: inline-flex; align-items: center; gap: var(--space-2); color: var(--on-night); font-weight: 620; text-decoration: none; }
+  .utility-phone:hover { color: oklch(80% .12 var(--hue-accent)); }
+  @media (min-width: 48rem) { .utility-item.u-hours { display: inline-flex; } }
+  @media (min-width: 64rem) { .utility-item.u-addr { display: inline-flex; } }
+
+  /* ===== Header ===== */
+  .site-header {
+    position: sticky; inset-block-start: 0; z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid var(--line);
+  }
+  .site-header .navbar { border: 0; min-block-size: 4.25rem; }
+  .brand-mark {
+    inline-size: 2.4rem; block-size: 2.4rem; border-radius: var(--r-sm);
+    display: grid; place-items: center;
+    background: linear-gradient(160deg, var(--brand-500), var(--brand-700));
+    color: var(--text-on-brand); box-shadow: var(--shadow-2), var(--shadow-inset);
+  }
+  .brand-mark .icon { inline-size: 1.45rem; block-size: 1.45rem; stroke-width: 2.2; }
+  .brand-name { display: flex; flex-direction: column; font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; line-height: 1; letter-spacing: -.01em; }
+  .brand-name small { font-family: var(--font-sans); font-size: .625rem; font-weight: 640; letter-spacing: .2em; text-transform: uppercase; color: var(--text-muted); margin-block-start: 3px; }
+  .site-header .navbar-brand { white-space: nowrap; }
+  /* Five links, a theme switch and a CTA do not fit a 768px tablet, so the
+     links wait until 64rem (Deck shows them from 48rem) and the drawer covers
+     the gap. The call and menu buttons are the small-screen furniture. */
+  .site-header .navbar-links { display: none; margin-inline-start: var(--space-6); }
+  .phone-only { display: inline-flex; }
+  .wide-only { display: none; }
+  @media (min-width: 64rem) { .site-header .navbar-links { display: flex; } .phone-only { display: none; } }
+  @media (min-width: 36rem) { .wide-only { display: inline-flex; } }
+
+  /* ===== Hero ===== */
+  .hero { position: relative; isolation: isolate; overflow: clip; background: var(--night); color: var(--on-night); }
+  .hero-photo { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: 62% 40%; z-index: -2; }
+  /* The scrim. On a phone the copy sits over the whole photo, so it is an even
+     wash; on a wide screen it falls off left to right and the car shows through
+     beside the booking card. */
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(to bottom, oklch(15% .015 var(--hue-neutral) / .78), oklch(15% .015 var(--hue-neutral) / .9) 45%, oklch(15% .015 var(--hue-neutral) / .96));
+  }
+  @media (min-width: 64rem) {
+    .hero::before {
+      background:
+        linear-gradient(90deg, oklch(15% .015 var(--hue-neutral) / .95) 0%, oklch(15% .015 var(--hue-neutral) / .86) 36%, oklch(15% .015 var(--hue-neutral) / .42) 68%, oklch(15% .015 var(--hue-neutral) / .3)),
+        linear-gradient(to top, oklch(15% .015 var(--hue-neutral) / .7), transparent 40%);
+    }
+  }
+  /* A low red glow, like a brake light on a wet floor. Decorative. */
+  .hero::after {
+    content: ""; position: absolute; z-index: -1; pointer-events: none;
+    inset-block-end: -30%; inset-inline-start: -12%; inline-size: min(60rem, 90%); aspect-ratio: 1;
+    background: radial-gradient(closest-side, oklch(55% .19 var(--hue-brand) / .32), transparent);
+  }
+  .hero-grid { display: grid; gap: var(--space-10); padding-block: var(--space-12) var(--space-16); align-items: center; }
+  @media (min-width: 64rem) {
+    .hero-grid { grid-template-columns: minmax(0, 1fr) 25.5rem; gap: var(--space-16); padding-block: var(--space-20) var(--space-24); }
+  }
+  /* Re-point the text tokens for the copy column only. The booking card keeps the page's. */
+  .hero-copy { --text: var(--on-night); --text-muted: var(--on-night-muted); }
+  .hero .display { font-size: clamp(2.6rem, 1.5rem + 4.6vw, 5rem); line-height: .96; letter-spacing: -.025em; }
+  .hero .display em { font-style: normal; color: oklch(70% .18 var(--hue-brand)); }
+  .hero .lede { color: var(--on-night-muted); font-size: var(--text-lg); max-inline-size: 36rem; }
+  .hero-pill {
+    display: inline-flex; align-items: center; gap: var(--space-2); align-self: flex-start;
+    padding: var(--space-1) var(--space-3) var(--space-1) var(--space-1);
+    border-radius: var(--r-full); font-size: var(--text-sm); font-weight: 560;
+    background: oklch(100% 0 0 / .08); border: 1px solid oklch(100% 0 0 / .16);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .hero-pill .tag { white-space: nowrap; }
+  .hero-pill .tag { padding: 2px var(--space-2); border-radius: var(--r-full); background: var(--brand-600); color: var(--text-on-brand); font-size: var(--text-xs); font-weight: 680; letter-spacing: .04em; }
+  .btn-glass {
+    --btn-bg: oklch(100% 0 0 / .08); --btn-text: var(--on-night); --btn-border: oklch(100% 0 0 / .26); --btn-shadow: none;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .btn-glass:hover { background: oklch(100% 0 0 / .16); border-color: oklch(100% 0 0 / .42); }
+  @media (max-width: 39.999rem) { .hero-ctas > .btn { flex: 1 1 100%; } }
+  .hero-proof { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-6); padding-block-start: var(--space-6); border-block-start: 1px solid oklch(100% 0 0 / .14); }
+  .hero-proof .rating-static { --star: 20px; color: oklch(100% 0 0 / .25); }
+  .proof-score { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; line-height: 1; }
+  .proof-chip { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--on-night-muted); }
+  .proof-chip .icon { color: oklch(80% .13 var(--hue-accent)); }
+
+  /* The booking card. It is the one light surface in the hero. */
+  .book-card { box-shadow: var(--shadow-4); border-color: transparent; }
+  .book-card .card-header { background: var(--surface-2); }
+  .vehicle-row { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: var(--space-3); }
+  .when-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-3); }
+
+  /* ===== Trust strip ===== */
+  .trust { background: var(--surface); border-block-end: 1px solid var(--line); }
+  .trust-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .trust-item { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-6) var(--space-3); }
+  .trust-item:nth-child(odd) { padding-inline-start: 0; }
+  .trust-item:nth-child(-n+2) { border-block-end: 1px solid var(--line); }
+  .trust-title { font-weight: 640; line-height: 1.25; }
+  @media (min-width: 64rem) {
+    .trust-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .trust-item { flex-direction: row; padding: var(--space-8) var(--space-6); }
+    .trust-item:nth-child(-n+2) { border-block-end: 0; }
+    .trust-item:first-child { padding-inline-start: 0; }
+    .trust-item + .trust-item { border-inline-start: 1px solid var(--line); }
+  }
+
+  /* ===== Services ===== */
+  .svc-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(min(15.5rem, 100%), 1fr)); }
+  .svc { transition: border-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out), translate var(--dur-2) var(--ease-out); }
+  .svc:hover { border-color: color-mix(in oklab, var(--brand) 55%, var(--line)); }
+  .svc .icon-tile { transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out); }
+  .svc:hover .icon-tile { background: var(--brand-600); color: var(--text-on-brand); }
+  .svc .card-body { padding: var(--space-6); flex: 1 1 auto; }
+  .icon-tile-lg .icon { inline-size: 1.6rem; block-size: 1.6rem; }
+  .svc-tag { margin-inline-start: auto; }
+  .svc-price {
+    display: flex; align-items: center; gap: var(--space-2);
+    margin-block-start: auto; padding-block-start: var(--space-4);
+    border-block-start: 1px dashed var(--line-strong);
+  }
+  .svc-price .figure { font-size: var(--text-2xl); line-height: 1; color: var(--text); }
+  .svc-price .icon { margin-inline-start: auto; color: var(--brand); }
+  /* Below 40rem a card becomes a row: tile, name and price on one line. Eight
+     tall cards on a phone is a lot of thumb work for a price list. */
+  @media (max-width: 39.999rem) {
+    .svc .card-body { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: var(--space-4); row-gap: 2px; align-items: center; padding: var(--space-4); }
+    .svc .svc-top { display: contents; }
+    .svc .svc-top .icon-tile { grid-row: 1 / span 2; }
+    .svc .svc-tag { display: none; }
+    .svc .card-title { grid-column: 2; }
+    .svc .svc-desc { grid-column: 2; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; }
+    .svc .svc-price { grid-column: 3; grid-row: 1 / span 2; margin: 0; padding: 0; border: 0; flex-direction: column; align-items: end; gap: 0; }
+    .svc .svc-price .icon { display: none; }
+    .svc .svc-price .figure { font-size: var(--text-xl); }
+  }
+
+  /* ===== How it works ===== */
+  .how-grid { display: grid; gap: var(--space-12); align-items: start; }
+  @media (min-width: 64rem) { .how-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: var(--space-16); } }
+  .howto { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+  .step-item { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); position: relative; padding-block-end: var(--space-6); }
+  /* The rail between the numbered tiles. */
+  .step-item:not(:last-child)::before {
+    content: ""; position: absolute; inset-block: 3.5rem 0; inset-inline-start: calc(1.5rem - 1px);
+    inline-size: 2px; border-radius: 2px; background: linear-gradient(var(--brand-300), var(--line));
+  }
+  .step-num {
+    inline-size: 3rem; block-size: 3rem; border-radius: var(--r-md);
+    display: grid; place-items: center; position: relative;
+    background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-1); color: var(--brand);
+  }
+  .step-num b {
+    position: absolute; inset-block-start: -.5rem; inset-inline-end: -.5rem;
+    inline-size: 1.35rem; block-size: 1.35rem; border-radius: var(--r-full);
+    display: grid; place-items: center; font-size: var(--text-2xs); font-weight: 700;
+    background: var(--brand-600); color: var(--text-on-brand); box-shadow: 0 0 0 2px var(--surface);
+  }
+  /* The mock inspection report. Built from cards, lists and badges; swap the photo for one of yours. */
+  .report { position: relative; }
+  .report-photo { position: relative; margin: 0; background: var(--bg-sunken); }
+  .report-photo img { display: block; inline-size: 100%; block-size: 13rem; object-fit: cover; }
+  .report-photo figcaption {
+    position: absolute; inset-block-end: var(--space-3); inset-inline-start: var(--space-3);
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    padding: var(--space-1) var(--space-3); border-radius: var(--r-full);
+    background: oklch(16% .015 var(--hue-neutral) / .78); color: oklch(97% 0 0);
+    font-size: var(--text-xs); font-weight: 600; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .report-photo figcaption .indicator { background: var(--bad-500); }
+  .report .list { border: 0; border-radius: 0; }
+  .report .list-row { align-items: flex-start; padding-block: var(--space-4); }
+  .report .list-trail { color: var(--text); font-weight: 620; font-variant-numeric: tabular-nums; }
+  .report-total { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; }
+  .report-float {
+    position: absolute; inset-block-start: -1.25rem; inset-inline-end: -1rem; z-index: 1;
+    display: none; align-items: center; gap: var(--space-2);
+    padding: var(--space-2) var(--space-3); border-radius: var(--r-full);
+    background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-3);
+    font-size: var(--text-sm); font-weight: 600;
+  }
+  .report-float .icon { color: var(--good-600); }
+  @media (min-width: 48rem) { .report-float { display: inline-flex; } }
+
+  /* ===== Price table ===== */
+  .price-table td:first-child { font-weight: 600; }
+  /* On a phone each job is a compact card: name and total on top, the
+     breakdown underneath. Same cells, same data-labels, just a grid. */
+  @media (max-width: 39.999rem) {
+    .price-wrap { border: 0; background: none; }
+    .price-table tr {
+      display: grid; grid-template-columns: auto auto auto minmax(0, 1fr) auto; gap: var(--space-3) var(--space-5);
+      align-items: end; padding: var(--space-4); background: var(--surface); border-radius: var(--r-md);
+    }
+    .price-table td { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 0; text-align: start; }
+    .price-table td::before { font-size: var(--text-2xs); font-weight: 600; color: var(--text-faint); }
+    .price-table td:nth-child(1) { grid-column: 1 / 5; }
+    .price-table td:nth-child(5) { grid-column: 5; grid-row: 1; align-items: flex-end; }
+    .price-table td:nth-child(6) { grid-column: 5; grid-row: 2; align-items: flex-end; }
+    .price-table :is(td:nth-child(1), td:nth-child(5), td:nth-child(6))::before { display: none; }
+    .price-table .total { font-size: var(--text-xl); }
+  }
+  .price-table .job-note { display: block; font-size: var(--text-xs); font-weight: 400; color: var(--text-muted); }
+  .price-table .total { font-family: var(--font-display); font-size: var(--text-md); font-weight: 700; color: var(--text); }
+  .price-notes { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); font-size: var(--text-sm); color: var(--text-muted); }
+  .price-notes span { display: inline-flex; align-items: center; gap: var(--space-2); }
+  .price-notes .icon { color: var(--good-600); }
+  .match-card { border-style: dashed; border-color: color-mix(in oklab, var(--brand) 40%, var(--line)); }
+
+  /* ===== Why us ===== */
+  .why-grid { display: grid; gap: var(--space-12); align-items: center; }
+  @media (min-width: 64rem) { .why-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-16); } }
+  .why-photos { position: relative; display: grid; grid-template-columns: 1.2fr 1fr; grid-template-rows: 1fr 1fr; gap: var(--space-3); block-size: clamp(24rem, 18rem + 22vw, 36rem); }
+  .why-photos figure { margin: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--bg-sunken); box-shadow: inset 0 0 0 1px var(--line); }
+  .why-photos figure:first-child { grid-row: span 2; }
+  .why-photos img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  .why-badge {
+    position: absolute; inset-block-end: var(--space-4); inset-inline-start: var(--space-4);
+    display: flex; align-items: center; gap: var(--space-3);
+    padding: var(--space-3) var(--space-4); border-radius: var(--r-md);
+    background: color-mix(in oklab, var(--surface) 92%, transparent); box-shadow: var(--shadow-3);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  @media (max-width: 39.999rem) { .why-badge { inset-inline-end: 48%; } .why-badge .sub { display: none; } }
+  .why-badge .figure { font-size: 2.25rem; line-height: 1; color: var(--brand); }
+  .why-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
+  .why-list li { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr); gap: var(--space-3); }
+  .why-list .tick-dot { inline-size: 1.75rem; block-size: 1.75rem; border-radius: var(--r-full); display: grid; place-items: center; background: var(--brand-soft); color: var(--brand); }
+  .stat-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6) var(--space-4); padding-block-start: var(--space-8); border-block-start: 1px solid var(--line); }
+  @media (min-width: 40rem) { .stat-row { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .stat-row .stat-value { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 700; }
+
+  /* ===== Reviews ===== */
+  .reviews-grid { display: grid; gap: var(--space-4); }
+  @media (min-width: 48rem) { .reviews-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .review-summary { grid-column: 1 / -1; } }
+  @media (min-width: 72rem) {
+    .reviews-grid { grid-template-columns: 21rem repeat(2, minmax(0, 1fr)); }
+    .review-summary { grid-column: auto; grid-row: span 2; }
+  }
+  .review-summary { background: var(--night); color: var(--on-night); border-color: transparent; box-shadow: var(--shadow-3), inset 0 0 0 1px oklch(100% 0 0 / .07); --text: var(--on-night); --text-muted: var(--on-night-muted); }
+  .review-summary .big { font-family: var(--font-display); font-size: 4.5rem; font-weight: 700; line-height: .9; letter-spacing: -.03em; }
+  .review-summary .rating-static { --star: 22px; color: oklch(100% 0 0 / .22); }
+  .review-summary .chart { --chart-grid: oklch(100% 0 0 / .1); }
+  .review-summary .chart-bar-track { background: oklch(100% 0 0 / .12); }
+  .review-summary .chart-bar-fill { background: var(--accent-500); }
+  .review-summary .chart-bar-label, .review-summary .chart-bar-value { color: var(--on-night-muted); }
+  .review-summary .btn { --btn-bg: oklch(100% 0 0 / .08); --btn-text: var(--on-night); --btn-border: oklch(100% 0 0 / .22); --btn-shadow: none; }
+  .review-summary .btn:hover { background: oklch(100% 0 0 / .16); }
+  .review .rating-static { --star: 16px; }
+  .review blockquote { border: 0; padding: 0; margin: 0; color: var(--text); font-size: var(--text-base); line-height: var(--leading-normal); text-wrap: pretty; }
+  .review .card-footer { background: none; }
+  .review-job { display: inline-flex; align-items: center; gap: var(--space-1); }
+
+  /* ===== Offers ===== */
+  .coupon-grid { display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr)); }
+  /* The ticket: two punched notches cut with a mask at the line where the
+     perforation sits. --foot is the stub height, so the holes land on the line. */
+  .coupon {
+    --foot: 6.75rem;
+    position: relative; display: flex; flex-direction: column;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg);
+    box-shadow: var(--shadow-2);
+    -webkit-mask: radial-gradient(circle 13px at 0 calc(100% - var(--foot)), #0000 12px, #000 12.5px) left / 51% 100% no-repeat,
+                  radial-gradient(circle 13px at 100% calc(100% - var(--foot)), #0000 12px, #000 12.5px) right / 51% 100% no-repeat;
+            mask: radial-gradient(circle 13px at 0 calc(100% - var(--foot)), #0000 12px, #000 12.5px) left / 51% 100% no-repeat,
+                  radial-gradient(circle 13px at 100% calc(100% - var(--foot)), #0000 12px, #000 12.5px) right / 51% 100% no-repeat;
+  }
+  .coupon-main { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-6); flex: 1 1 auto; }
+  .coupon-main > .badge { align-self: flex-start; }
+  /* Deck hides .copy-done until .is-copied; only the visible half gets flex. */
+  .copy-btn:not(.is-copied) > .copy-idle, .copy-btn.is-copied > .copy-done { display: inline-flex; align-items: center; gap: var(--space-1); }
+  .coupon-amount { font-family: var(--font-display); font-size: 3.25rem; font-weight: 700; line-height: 1; letter-spacing: -.02em; color: var(--brand); }
+  .coupon-amount small { font-size: var(--text-xl); color: var(--text-muted); font-weight: 600; margin-inline-start: .15em; }
+  .coupon-foot {
+    block-size: var(--foot); display: flex; flex-direction: column; justify-content: center; gap: var(--space-2);
+    padding-inline: var(--space-6); border-block-start: 2px dashed var(--line-strong);
+    background: var(--surface-2); border-end-start-radius: var(--r-lg); border-end-end-radius: var(--r-lg);
+  }
+  .coupon-foot .copy code { letter-spacing: .08em; font-weight: 600; }
+  .coupon-featured { border-color: transparent; background: linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(140deg, var(--brand-500), var(--accent-500)) border-box; border: 1.5px solid transparent; }
+
+  /* ===== Visit: hours + map ===== */
+  .visit-grid { display: grid; gap: var(--space-6); }
+  @media (min-width: 64rem) { .visit-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); } }
+  .hours { inline-size: 100%; font-size: var(--text-sm); }
+  .hours :is(th, td) { padding: var(--space-2) var(--space-3); }
+  .hours th { font-weight: 560; text-align: start; }
+  .hours td { text-align: end; font-variant-numeric: tabular-nums; color: var(--text-muted); }
+  .hours tr { border-radius: var(--r-sm); }
+  .hours tr + tr :is(th, td) { border-block-start: 1px solid var(--line); }
+  /* Today's row. The script below sets aria-current="date" from the shop's clock. */
+  .hours tr[aria-current="date"] :is(th, td) { background: var(--brand-soft); color: var(--brand-soft-text); font-weight: 640; border-color: transparent; }
+  .hours tr[aria-current="date"] th { border-start-start-radius: var(--r-sm); border-end-start-radius: var(--r-sm); }
+  .hours tr[aria-current="date"] td { border-start-end-radius: var(--r-sm); border-end-end-radius: var(--r-sm); }
+  .hours tr[aria-current="date"] + tr :is(th, td) { border-color: transparent; }
+  .hours tr[aria-current="date"] th::after {
+    content: "Today"; margin-inline-start: var(--space-2); padding: 1px 7px; border-radius: var(--r-full);
+    background: var(--brand-600); color: var(--text-on-brand); font-size: var(--text-2xs); font-weight: 680; vertical-align: 1px;
+  }
+  .contact-row { display: flex; gap: var(--space-3); align-items: flex-start; }
+  .contact-row .icon-tile { inline-size: 36px; block-size: 36px; }
+
+  /* The map. No tiles and no embed: land, water, a park, a grid of side
+     streets and three arterials, all gradients. Change the street names and
+     move .map-pin to taste. Every colour has a dark-mode twin via light-dark(). */
+  .map {
+    --land: light-dark(oklch(95.6% .01 85), oklch(21% .012 var(--hue-neutral)));
+    --street: light-dark(oklch(100% 0 0 / .95), oklch(30% .012 var(--hue-neutral)));
+    --arterial: light-dark(oklch(89% .075 80), oklch(40% .06 70));
+    --arterial-edge: light-dark(oklch(80% .08 70), oklch(34% .05 70));
+    --water: light-dark(oklch(87% .05 232), oklch(30% .05 240));
+    --park: light-dark(oklch(90% .06 145), oklch(29% .05 150));
+    position: relative; overflow: hidden; isolation: isolate;
+    min-block-size: 26rem; block-size: 100%;
+    border-radius: var(--r-lg); border: 1px solid var(--line); box-shadow: var(--shadow-2);
+    background-color: var(--land);
+  }
+  .map > * { position: absolute; }
+  .map-streets {
+    inset: 0;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 58px, var(--street) 58px 64px),
+      repeating-linear-gradient(0deg, transparent 0 46px, var(--street) 46px 52px);
+  }
+  .map-texture { inset: 0; --cell: 13px; opacity: .28; }
+  .map-park { inset-block-start: 27%; inset-inline-end: 6%; inline-size: 26%; block-size: 22%; border-radius: var(--r-md); background: var(--park); box-shadow: 0 0 0 6px var(--land); }
+  .map-river {
+    inset-block-start: -18%; inset-inline-start: -14%; inline-size: 34%; block-size: 150%;
+    background: var(--water); rotate: 24deg; border-radius: 40%;
+  }
+  .map-road { background: var(--arterial); box-shadow: 0 0 0 1.5px var(--arterial-edge); border-radius: 2px; }
+  .road-h { inset-inline: 0; inset-block-start: 58%; block-size: 14px; }
+  .road-v { inset-block: 0; inset-inline-start: 56%; inline-size: 12px; }
+  /* The diagonal is a gradient stripe across the whole map rather than a
+     rotated bar, so nothing pokes past the map's edges. --at moves it. */
+  .road-d {
+    --at: 68%; inset: 0; background: linear-gradient(-16deg,
+      transparent calc(var(--at) - 6.5px), var(--arterial-edge) calc(var(--at) - 6.5px),
+      var(--arterial-edge) calc(var(--at) - 5px), var(--arterial) calc(var(--at) - 5px),
+      var(--arterial) calc(var(--at) + 5px), var(--arterial-edge) calc(var(--at) + 5px),
+      var(--arterial-edge) calc(var(--at) + 6.5px), transparent calc(var(--at) + 6.5px));
+    box-shadow: none; border-radius: 0;
+  }
+  .map-label {
+    font-size: .625rem; font-weight: 680; letter-spacing: .14em; text-transform: uppercase;
+    color: light-dark(oklch(48% .03 70), oklch(72% .03 70)); white-space: nowrap;
+  }
+  .label-h { inset-block-start: calc(58% + 18px); inset-inline-start: 30%; }
+  .label-v { inset-block-start: 8%; inset-inline-start: calc(56% + 16px); writing-mode: vertical-rl; }
+  .label-d { inset-block-start: 20%; inset-inline-start: 12%; rotate: -16deg; }
+  .label-park { inset-block-start: calc(27% + var(--space-3)); inset-inline-end: calc(6% + var(--space-3)); color: light-dark(oklch(42% .07 150), oklch(78% .06 150)); }
+  .label-water { inset-block-start: 38%; inset-inline-start: 4%; rotate: -66deg; color: light-dark(oklch(45% .06 235), oklch(76% .05 235)); }
+  /* The pin: a rotated rounded square makes the teardrop; .ping under it pulses. */
+  .map-pin { inset-block-start: calc(58% + 7px); inset-inline-start: calc(56% + 6px); translate: -50% -100%; display: grid; justify-items: center; z-index: 2; }
+  .map-pin .drop {
+    inline-size: 2.6rem; block-size: 2.6rem; border-radius: 50% 50% 50% 0; rotate: -45deg;
+    display: grid; place-items: center;
+    background: var(--brand-600); box-shadow: var(--shadow-3), 0 0 0 3px var(--surface);
+  }
+  .map-pin .drop .icon { rotate: 45deg; color: var(--text-on-brand); inline-size: 1.25rem; block-size: 1.25rem; stroke-width: 2.4; }
+  .map-pin .pulse-dot {
+    inline-size: 14px; block-size: 14px; border-radius: var(--r-full); margin-block-start: 4px;
+    background: var(--brand-500); color: var(--brand-500); box-shadow: 0 0 0 3px var(--surface);
+  }
+  .map-card {
+    inset-block-end: var(--space-4); inset-inline-start: var(--space-4); z-index: 3;
+    display: flex; align-items: center; gap: var(--space-3); max-inline-size: calc(100% - var(--space-8));
+    padding: var(--space-3) var(--space-4) var(--space-3) var(--space-3); border-radius: var(--r-md);
+    background: color-mix(in oklab, var(--surface) 94%, transparent); box-shadow: var(--shadow-3); border: 1px solid var(--line);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .map-card .brand-mark { inline-size: 2.25rem; block-size: 2.25rem; }
+  .map-compass {
+    inset-block-start: var(--space-4); inset-inline-start: var(--space-4); z-index: 3;
+    inline-size: 2.25rem; block-size: 2.25rem; border-radius: var(--r-full); display: grid; place-items: center;
+    background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-2);
+    font-size: var(--text-xs); font-weight: 700; color: var(--brand);
+  }
+  .map-scale { inset-block-start: var(--space-5); inset-inline-end: var(--space-4); z-index: 3; display: none; align-items: center; gap: var(--space-2); font-size: var(--text-2xs); color: var(--text-muted); font-weight: 600; }
+  .map-scale::before { content: ""; inline-size: 3.5rem; block-size: 6px; border: 2px solid var(--text-muted); border-block-start: 0; }
+  @media (min-width: 40rem) { .map-scale { display: inline-flex; } }
+
+  /* ===== Tow band ===== */
+  .tow {
+    position: relative; overflow: hidden; isolation: isolate;
+    display: grid; gap: var(--space-6); align-items: center;
+    padding: var(--space-10) var(--space-6) var(--space-8);
+    border-radius: var(--r-lg); background: var(--night); color: var(--on-night);
+    box-shadow: var(--shadow-3), inset 0 0 0 1px oklch(100% 0 0 / .07);
+    --text: var(--on-night); --text-muted: var(--on-night-muted);
+  }
+  /* Hazard tape along the top edge. Tasteful, not a construction site. */
+  .tow::before {
+    content: ""; position: absolute; inset-inline: 0; inset-block-start: 0; block-size: 10px;
+    background: repeating-linear-gradient(-45deg, var(--accent-500) 0 14px, var(--night) 14px 28px);
+  }
+  .tow::after {
+    content: ""; position: absolute; z-index: -1; inset-block: -40% auto; inset-inline-end: -10%;
+    inline-size: 32rem; aspect-ratio: 1; border-radius: 50%;
+    background: radial-gradient(closest-side, oklch(70% .15 var(--hue-accent) / .22), transparent);
+  }
+  .tow .icon-tile-lg { inline-size: 64px; block-size: 64px; background: var(--accent-500); color: var(--text-on-accent); }
+  .tow .icon-tile-lg .icon { inline-size: 30px; block-size: 30px; }
+  @media (min-width: 64rem) {
+    .tow { grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--space-8); padding: var(--space-12) var(--space-12) var(--space-10); }
+  }
+  .tow-number { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; color: oklch(84% .13 var(--hue-accent)); }
+
+  /* ===== Footer ===== */
+  .site-footer { background: var(--surface); }
+  @media (max-width: 39.999rem) {
+    .site-footer .footer-grid { grid-template-columns: 1fr 1fr; }
+    .site-footer .footer-brand { grid-column: 1 / -1; max-inline-size: none; }
+  }
+  .footer-brand .brand-name { color: var(--text); }
+  .footer-badges { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Photos are hotlinked from Unsplash for the preview. Replace them with your own. -->
+
+<!-- Icons the Deck sprite does not have. Stroke-based, 24x24, inherit currentColor. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-nut" viewBox="0 0 24 24"><path d="M12 2.8 20 7.4v9.2L12 21.2 4 16.6V7.4Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3c-3.2 3.9-6 7.3-6 10.6a6 6 0 0 0 12 0C18 10.3 15.2 6.9 12 3Z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/><path d="M9.2 14.2a2.9 2.9 0 0 0 2.4 2.6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-disc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.75"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M12 6.6v.01M16.7 10.2v.01M15 15.8v.01M9 15.8v.01M7.3 10.2v.01" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M18.6 5.4a9.6 9.6 0 0 1 2.2 4.2" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-wheel" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.75" fill="none" stroke="currentColor" stroke-width="1.75"/><circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M12 7.4V3.3M12 20.7v-4.1M7.4 12H3.3M20.7 12h-4.1" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="12" cy="12" r="1" fill="currentColor"/></symbol>
+  <symbol id="i-snow" viewBox="0 0 24 24"><path d="M12 2.5v19M3.8 7.25l16.4 9.5M3.8 16.75l16.4-9.5M9.3 4.4 12 6.2l2.7-1.8M9.3 19.6l2.7-1.8 2.7 1.8M4.3 10.7l2.9.6-.9 3M19.7 13.3l-2.9-.6.9-3" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M6.5 7.5V5.2h3v2.3M14.5 7.5V5.2h3v2.3M6.8 13.5h3.4M14 13.5h3.4M15.7 11.8v3.4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-gearbox" viewBox="0 0 24 24"><path d="M5 5v14M12 5v14M19 5v7H5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="5" cy="4" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="4" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="19" cy="4" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="5" cy="20" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="20" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><path d="M3.5 11.2 20.5 3.5l-7.7 17-2-7.3Z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M10 6.5H6.2A1.7 1.7 0 0 0 4.5 8.2v3.6a1.7 1.7 0 0 0 1.7 1.7H9V15a3.5 3.5 0 0 1-3.5 3.5M19.5 6.5h-3.8A1.7 1.7 0 0 0 14 8.2v3.6a1.7 1.7 0 0 0 1.7 1.7h2.8V15a3.5 3.5 0 0 1-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.75"/><circle cx="12" cy="12" r="3.9" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M17.2 6.8v.01" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14.5 21v-7.2h2.6l.4-3h-3V8.9c0-.9.3-1.5 1.5-1.5h1.6V4.7a20 20 0 0 0-2.4-.1c-2.4 0-4 1.4-4 4.1v2.1H8.6v3h2.6V21" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ===== Utility strip =====
+     Status, hours and the phone number, before anything else. The "Open now"
+     text is the no-JavaScript default; the script at the end recomputes it from
+     the hours table in the shop's own timezone. -->
+<div class="utility">
+  <div class="container">
+    <span class="status-line" data-open-status>
+      <span class="indicator indicator-good ping" aria-hidden="true"></span>
+      <span data-open-text>Open now · until 6 pm</span>
+    </span>
+    <span class="utility-item u-hours">
+      <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#clock-sm"></use></svg>
+      Mon–Fri 7:30–6 · Sat 8–3
+    </span>
+    <span class="utility-item u-addr">
+      <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#map-pin-sm"></use></svg>
+      2140 Harmon Street, Eastport
+    </span>
+    <a class="utility-phone nums" href="tel:+15035550148">
+      <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#phone-sm"></use></svg>
+      (503) 555-0148
+    </a>
+  </div>
+</div>
+
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+      <a class="navbar-brand" href="#" aria-label="Torque &amp; Co. Auto Care, home">
+        <span class="brand-mark" aria-hidden="true"><svg class="icon"><use href="#i-nut"></use></svg></span>
+        <span class="brand-name">Torque &amp; Co.<small>Auto Care</small></span>
+      </a>
+
+      <nav class="navbar-links" aria-label="Primary">
+        <a class="nav-link" href="#services" aria-current="page">Services</a>
+        <a class="nav-link" href="#pricing">Pricing</a>
+        <a class="nav-link" href="#reviews">Reviews</a>
+        <a class="nav-link" href="#offers">Offers</a>
+        <a class="nav-link" href="#visit">Visit</a>
+      </nav>
+
+      <div class="push cluster cluster-tight">
+        <button class="btn btn-icon btn-ghost" data-deck-theme aria-label="Switch theme">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        </button>
+        <!-- Click-to-call. The number is the one thing a phone visitor came for. -->
+        <a class="btn btn-icon btn-soft phone-only" href="tel:+15035550148" aria-label="Call Torque &amp; Co. on (503) 555-0148">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#phone"></use></svg>
+        </a>
+        <a class="btn btn-primary wide-only" href="#book">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#calendar-sm"></use></svg>
+          Book service
+        </a>
+        <!-- Mobile menu. Shown below 48rem, opens the drawer at the end of the page (deck-extras.js). -->
+        <button class="btn btn-icon btn-ghost phone-only" data-deck-drawer="#site-nav" aria-label="Open menu">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#menu"></use></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== Hero =====
+       Full-bleed photo under a strong scrim, so the copy passes contrast
+       whatever photo you swap in. The booking card is the page's main form. -->
+  <section class="hero" aria-labelledby="hero-title">
+    <img class="hero-photo"
+         src="https://images.unsplash.com/photo-1771340012319-0b4fca008b54?w=2000&q=80&auto=format&fit=crop"
+         width="2000" height="1333" fetchpriority="high" decoding="async"
+         alt="A technician leans into the engine bay of a grey sedan beside a two-post lift in a bright, tidy workshop">
+
+    <div class="container hero-grid">
+      <div class="hero-copy stack stack-6 stagger">
+        <span class="hero-pill enter-rise">
+          <span class="tag">Since 1998</span>
+          Family-owned &amp; independent
+        </span>
+
+        <h1 class="display enter-rise" id="hero-title">Honest repairs.<br> <em>No&nbsp;surprises</em> on&nbsp;the&nbsp;bill.</h1>
+
+        <p class="lede enter-rise">
+          Twelve ASE-certified technicians, nine bays and one rule: we text you photos
+          of what we find and a fixed quote, and nothing gets touched until you say yes.
+        </p>
+
+        <div class="cluster hero-ctas enter-rise">
+          <a class="btn btn-primary btn-lg" href="#book">
+            Book a service
+            <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+          </a>
+          <a class="btn btn-glass btn-lg nums" href="tel:+15035550148">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#phone-sm"></use></svg>
+            (503) 555-0148
+          </a>
+        </div>
+
+        <div class="hero-proof enter-rise">
+          <div class="cluster">
+            <span class="proof-score nums">4.9</span>
+            <div class="stack stack-1">
+              <span class="rating-static" style="--value:98" role="img" aria-label="Rated 4.9 out of 5">
+                <span class="rating-fill">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                </span>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <span class="text-sm text-muted nums">4.9 · 1,280 Google reviews</span>
+            </div>
+          </div>
+          <span class="proof-chip">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#clock-sm"></use></svg>
+            Same-day on most jobs
+          </span>
+          <span class="proof-chip">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#car-sm"></use></svg>
+            Free loaner cars
+          </span>
+        </div>
+      </div>
+
+      <!-- Quick booking. Real form semantics: labels, autocomplete, inputmode.
+           Point the action at your booking endpoint or scheduling tool. -->
+      <form class="card book-card enter-rise" id="book" action="#" method="post" aria-labelledby="book-title">
+        <div class="card-header">
+          <div class="stack stack-1">
+            <h2 class="card-title" id="book-title">Book a service</h2>
+            <span class="text-xs text-muted">About a minute. We text to confirm.</span>
+          </div>
+          <span class="badge badge-good mis-auto">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#clock-sm"></use></svg>
+            Replies in ~12 min
+          </span>
+        </div>
+        <div class="card-body">
+          <div class="stack stack-4">
+            <div class="field">
+              <label class="label" for="b-service">What does it need?</label>
+              <select class="select" id="b-service" name="service">
+                <option>Oil &amp; filter change</option>
+                <option>Brakes: noise, pull or vibration</option>
+                <option>Check-engine light / diagnostics</option>
+                <option>Tires &amp; alignment</option>
+                <option>A/C not cooling</option>
+                <option>Transmission service</option>
+                <option>Battery or starting trouble</option>
+                <option>Pre-purchase inspection</option>
+                <option>Something else, I'll explain</option>
+              </select>
+            </div>
+
+            <fieldset class="field m-0 p-0 border-0">
+              <legend class="label mb-2">Vehicle</legend>
+              <div class="vehicle-row">
+                <label class="sr-only" for="b-year">Year</label>
+                <select class="select" id="b-year" name="year">
+                  <option>2026</option><option>2025</option><option>2024</option><option>2023</option>
+                  <option>2022</option><option selected>2021</option><option>2020</option><option>2019</option>
+                  <option>2018</option><option>2017</option><option>2016</option><option>2015</option>
+                  <option>2014</option><option>2013</option><option>2012</option><option>Older</option>
+                </select>
+                <label class="sr-only" for="b-make">Make and model</label>
+                <input class="input" id="b-make" name="vehicle" placeholder="Make &amp; model" autocomplete="off">
+              </div>
+            </fieldset>
+
+            <div class="when-row">
+              <div class="field">
+                <label class="label" for="b-date">Preferred day</label>
+                <input class="input" id="b-date" name="date" type="date" value="2026-10-08">
+              </div>
+              <div class="field">
+                <label class="label" for="b-slot">Drop-off</label>
+                <select class="select" id="b-slot" name="slot">
+                  <option>7:30–9 am</option>
+                  <option>9–11 am</option>
+                  <option>Wait in lounge</option>
+                  <option>Afternoon</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="b-phone">Mobile number</label>
+              <input class="input" id="b-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(503) 555-0123" required>
+              <span class="help">For the confirmation text and the inspection photos.</span>
+            </div>
+
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Request appointment</button>
+            <p class="text-xs text-muted text-center">No payment now · Free loaner on jobs over 3 hours</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== Trust strip ===== -->
+  <section class="trust" aria-label="Our guarantees">
+    <div class="container trust-grid">
+      <div class="trust-item">
+        <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#shield"></use></svg></span>
+        <div class="stack stack-1">
+          <p class="trust-title">ASE-certified technicians</p>
+          <p class="text-sm text-muted">All twelve, re-tested every two years.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#check-circle"></use></svg></span>
+        <div class="stack stack-1">
+          <p class="trust-title">24-month warranty</p>
+          <p class="text-sm text-muted">Or 24,000 miles. Parts and labour, nationwide.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#clipboard"></use></svg></span>
+        <div class="stack stack-1">
+          <p class="trust-title">Free 30-point inspection</p>
+          <p class="text-sm text-muted">With every visit, photos included.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#car"></use></svg></span>
+        <div class="stack stack-1">
+          <p class="trust-title">Free loaner cars</p>
+          <p class="text-sm text-muted">Or a ride anywhere within 5 miles.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Services =====
+       Each card is one link (.card-link + .stretch). The "from" price is the
+       honest floor for a typical car; the table further down shows the maths. -->
+  <section class="section" id="services" aria-labelledby="services-title">
+    <div class="container stack stack-8">
+      <div class="section-head">
+        <div class="stack stack-3">
+          <span class="eyebrow">Services</span>
+          <h2 id="services-title">Everything your car needs, under one roof</h2>
+          <p class="lede">Domestic, Asian and European, petrol, diesel and hybrid. If it has four wheels and a VIN, we have probably fixed one this week.</p>
+        </div>
+        <a class="btn btn-outline" href="#pricing">
+          See the full price list
+          <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+        </a>
+      </div>
+
+      <div class="svc-grid">
+        <article class="card card-link svc reveal">
+          <div class="card-body">
+            <div class="bar svc-top">
+              <span class="icon-tile icon-tile-lg" aria-hidden="true"><svg class="icon"><use href="#i-drop"></use></svg></span>
+              <span class="badge badge-brand svc-tag">Most booked</span>
+            </div>
+            <h3 class="card-title"><a class="stretch link-quiet" href="#book">Oil &amp; filter</a></h3>
+            <p class="text-sm text-muted svc-desc">Full synthetic up to 5 qt, new filter, fluids topped up, tyre pressures set.</p>
+            <p class="svc-price"><span class="text-xs text-muted">from</span> <span class="figure">$49</span>
+              <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></p>
+          </div>
+        </article>
+
+        <article class="card card-link svc reveal">
+          <div class="card-body">
+            <div class="bar svc-top">
+              <span class="icon-tile icon-tile-lg" aria-hidden="true"><svg class="icon"><use href="#i-disc"></use></svg></span>
+            </div>
+            <h3 class="card-title"><a class="stretch link-quiet" href="#book">Brakes</a></h3>
+            <p class="text-sm text-muted svc-desc">Pads, rotors, calipers and fluid. We measure and photograph before we quote.</p>
+            <p class="svc-price"><span class="text-xs text-muted">from</span> <span class="figure">$149</span>
+              <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></p>
+          </div>
+        </article>
+
+        <article class="card card-link svc reveal">
+          <div class="card-body">
+            <div class="bar svc-top">
+              <span class="icon-tile icon-tile-lg" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#gauge"></use></svg></span>
+            </div>
+            <h3 class="card-title"><a class="stretch link-quiet" href="#book">Diagnostics</a></h3>
+            <p class="text-sm text-muted svc-desc">Check-engine light, warning lamps, odd noises. Fee waived if we do the repair.</p>
+            <p class="svc-price"><span class="text-xs text-muted">from</span> <span class="figure">$89</span>
+              <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></p>
+          </div>
+        </article>
+
+        <article class="card card-link svc reveal">
+          <div class="card-body">
+            <div class="bar svc-top">
+              <span class="icon-tile icon-tile-lg" aria-hidden="true"><svg class="icon"><use href="#i-wheel"></use></svg></span>
+            </div>
+            <h3 class="card-title"><a class="stretch link-quiet" href="#book">Tires &amp; alignment</a></h3>
+            <p class="text-sm text-muted svc-desc">Fitting, balancing, rotation and four-wheel laser alignment with a printout.</p>
+            <p class="svc-price"><span class="text-xs text-muted">from</span> <span class="figure">$99</span>
+              <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></p>
+          </div>
+        </article>
+
+        <article class="card card-link svc reveal">
+          <div class="card-body">
+            <div class="bar svc-top">
+              <span class="icon-tile icon-tile-lg" aria-hidden="true"><svg class="icon"><use href="#i-snow"></use></svg></span>
+              <span class="badge badge-warn svc-tag">Seasonal</span>
+            </div>
+            <h3 class="card-title"><a class="stretch link-quiet" href="#book">A/C &amp; heating</a></h3>
+            <p class="text-sm text-muted svc-desc">Leak test, evacuate and recharge, R-134a or R-1234yf, cabin filter swap.</p>
+            <p class="svc-price"><span class="text-xs text-muted">from</span> <span class="figure">$129</span>
+              <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></p>
+          </div>
+        </article>
+
+        <article class="card card-link svc reveal">
+          <div class="card-body">
+            <div class="bar svc-top">
+              <span class="icon-tile icon-tile-lg" aria-hidden="true"><svg class="icon"><use href="#i-gearbox"></use></svg></span>
+            </div>
+            <h3 class="card-title"><a class="stretch link-quiet" href="#book">Transmission</a></h3>
+            <p class="text-sm text-muted svc-desc">Fluid exchange, CVT service and clutch work. Rebuilds quoted after a road test.</p>
+            <p class="svc-price"><span class="text-xs text-muted">from</span> <span class="figure">$189</span>
+              <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></p>
+          </div>
+        </article>
+
+        <article class="card card-link svc reveal">
+          <div class="card-body">
+            <div class="bar svc-top">
+              <span class="icon-tile icon-tile-lg" aria-hidden="true"><svg class="icon"><use href="#i-battery"></use></svg></span>
+            </div>
+            <h3 class="card-title"><a class="stretch link-quiet" href="#book">Battery &amp; electrical</a></h3>
+            <p class="text-sm text-muted svc-desc">Load test is free. Replacement includes registering the battery where needed.</p>
+            <p class="svc-price"><span class="text-xs text-muted">from</span> <span class="figure">$159</span>
+              <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></p>
+          </div>
+        </article>
+
+        <article class="card card-link svc reveal">
+          <div class="card-body">
+            <div class="bar svc-top">
+              <span class="icon-tile icon-tile-lg" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#clipboard"></use></svg></span>
+            </div>
+            <h3 class="card-title"><a class="stretch link-quiet" href="#book">Inspections</a></h3>
+            <p class="text-sm text-muted svc-desc">Pre-purchase, emissions and road-trip checks, with a written report you keep.</p>
+            <p class="svc-price"><span class="text-xs text-muted">from</span> <span class="figure">$39</span>
+              <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg></p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== How it works =====
+       Four steps on the left, the inspection report a customer actually receives
+       on the right. The report is a mock built from Deck components. -->
+  <section class="section band" id="how" aria-labelledby="how-title">
+    <div class="container how-grid">
+      <div class="stack stack-8">
+        <div class="stack stack-3">
+          <span class="eyebrow">How it works</span>
+          <h2 id="how-title">You see what we see, before you pay a cent</h2>
+          <p class="lede">Most shop bills are a surprise because the customer never saw the car. Ours come with photos, measurements and a price you approve line by line.</p>
+        </div>
+
+        <ol class="howto">
+          <li class="step-item reveal">
+            <span class="step-num" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#calendar"></use></svg><b>1</b></span>
+            <div class="stack stack-1">
+              <h3 class="h5">Book online or call</h3>
+              <p class="text-sm text-muted">Pick a slot that suits you; most weekdays have same-day space. Drop the keys in the box if you're early.</p>
+            </div>
+          </li>
+          <li class="step-item reveal">
+            <span class="step-num" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#camera"></use></svg><b>2</b></span>
+            <div class="stack stack-1">
+              <h3 class="h5">We inspect, with photos</h3>
+              <p class="text-sm text-muted">Your technician texts a link: photos and measurements of everything worn, rated urgent, soon or fine.</p>
+            </div>
+          </li>
+          <li class="step-item reveal">
+            <span class="step-num" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#receipt"></use></svg><b>3</b></span>
+            <div class="stack stack-1">
+              <h3 class="h5">Approve the quote</h3>
+              <p class="text-sm text-muted">Tick what you want done, skip what can wait. The price you approve is the price you pay.</p>
+            </div>
+          </li>
+          <li class="step-item reveal">
+            <span class="step-num" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#car"></use></svg><b>4</b></span>
+            <div class="stack stack-1">
+              <h3 class="h5">Drive away covered</h3>
+              <p class="text-sm text-muted">Old parts in a bag if you want them, a 24-month warranty on the new ones, and a free exterior wash.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="report reveal">
+        <span class="report-float">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-circle-sm"></use></svg>
+          Sent to your phone at 10:42 am
+        </span>
+        <article class="card card-raised" aria-label="Example digital inspection report">
+          <div class="card-header">
+            <span class="avatar avatar-sm" aria-hidden="true">DM</span>
+            <div class="stack stack-0">
+              <span class="text-sm fw-semi">Diego M. · Master Tech</span>
+              <span class="text-xs text-muted nums">2016 Outback · RO #48213</span>
+            </div>
+            <span class="badge badge-bad mis-auto">2 need attention</span>
+          </div>
+          <figure class="report-photo">
+            <img src="https://images.unsplash.com/photo-1760317890314-e964ffd7e6a6?w=900&h=420&q=80&auto=format&fit=crop"
+                 width="900" height="420" loading="lazy" decoding="async"
+                 alt="Close-up of a drilled front brake rotor and white caliper with the wheel removed">
+            <figcaption><span class="indicator" aria-hidden="true"></span> Front left · pad at 2 mm</figcaption>
+          </figure>
+          <div class="list">
+            <div class="list-row">
+              <span class="icon-tile icon-tile-bad" aria-hidden="true"><svg class="icon"><use href="#i-disc"></use></svg></span>
+              <span class="list-main">
+                <span class="list-title">Front pads &amp; rotors</span>
+                <span class="list-sub">Pads 2 mm, rotors scored. Replace now.</span>
+              </span>
+              <span class="list-trail stack stack-1 items-end">
+                <span>$286.40</span>
+                <span class="badge badge-bad">Urgent</span>
+              </span>
+            </div>
+            <div class="list-row">
+              <span class="icon-tile icon-tile-warn" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#wrench"></use></svg></span>
+              <span class="list-main">
+                <span class="list-title">Engine air filter</span>
+                <span class="list-sub">Dirty but working. Fine until spring.</span>
+              </span>
+              <span class="list-trail stack stack-1 items-end">
+                <span>$34.00</span>
+                <span class="badge badge-warn">Soon</span>
+              </span>
+            </div>
+            <div class="list-row">
+              <span class="icon-tile icon-tile-good" aria-hidden="true"><svg class="icon"><use href="#i-wheel"></use></svg></span>
+              <span class="list-main">
+                <span class="list-title">Tyres</span>
+                <span class="list-sub">6/32 in, wearing evenly. Nothing to do.</span>
+              </span>
+              <span class="list-trail stack stack-1 items-end">
+                <span>$0.00</span>
+                <span class="badge badge-good">Good</span>
+              </span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="stack stack-0">
+              <span class="text-xs text-muted">Approved so far</span>
+              <span class="report-total nums">$286.40</span>
+            </div>
+            <span class="cluster cluster-tight mis-auto">
+              <span class="btn btn-sm btn-ghost" aria-hidden="true">Ask a question</span>
+              <span class="btn btn-sm btn-soft" aria-hidden="true">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>
+                Approve
+              </span>
+            </span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Transparent pricing =====
+       .table-stack is the important part: below 40rem each row becomes a
+       labelled block instead of a sideways scroll. Every td needs data-label. -->
+  <section class="section" id="pricing" aria-labelledby="pricing-title">
+    <div class="container stack stack-8">
+      <div class="section-head">
+        <div class="stack stack-3">
+          <span class="eyebrow">Transparent pricing</span>
+          <h2 id="pricing-title">Common jobs, parts and labour shown separately</h2>
+          <p class="lede">Labour is $142 an hour against the same time guide the dealers use. Totals include shop supplies and disposal; tax is extra.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap price-wrap reveal">
+        <table class="table table-stack price-table">
+          <caption class="sr-only">Typical prices for common jobs on a mid-size car</caption>
+          <thead>
+            <tr>
+              <th scope="col">Job</th>
+              <th scope="col">Time</th>
+              <th scope="col" class="num">Parts</th>
+              <th scope="col" class="num">Labour</th>
+              <th scope="col" class="num">Total</th>
+              <th scope="col" class="num">vs. dealer average</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Job"><span>Full-synthetic oil change<span class="job-note">Up to 5 qt, OEM-spec filter</span></span></td>
+              <td data-label="Time">30 min</td>
+              <td data-label="Parts" class="num">$31</td>
+              <td data-label="Labour" class="num">$18</td>
+              <td data-label="Total" class="num"><span class="total">$49</span></td>
+              <td data-label="vs. dealer" class="num"><span class="badge badge-good">Save $40</span></td>
+            </tr>
+            <tr>
+              <td data-label="Job"><span>Front pads &amp; rotors<span class="job-note">Ceramic pads, coated rotors, per axle</span></span></td>
+              <td data-label="Time">1.5 hr</td>
+              <td data-label="Parts" class="num">$168</td>
+              <td data-label="Labour" class="num">$118</td>
+              <td data-label="Total" class="num"><span class="total">$286</span></td>
+              <td data-label="vs. dealer" class="num"><span class="badge badge-good">Save $234</span></td>
+            </tr>
+            <tr>
+              <td data-label="Job"><span>Four-wheel alignment<span class="job-note">Before-and-after printout</span></span></td>
+              <td data-label="Time">1 hr</td>
+              <td data-label="Parts" class="num">—</td>
+              <td data-label="Labour" class="num">$99</td>
+              <td data-label="Total" class="num"><span class="total">$99</span></td>
+              <td data-label="vs. dealer" class="num"><span class="badge badge-good">Save $70</span></td>
+            </tr>
+            <tr>
+              <td data-label="Job"><span>A/C recharge<span class="job-note">R-1234yf, leak dye included</span></span></td>
+              <td data-label="Time">45 min</td>
+              <td data-label="Parts" class="num">$74</td>
+              <td data-label="Labour" class="num">$55</td>
+              <td data-label="Total" class="num"><span class="total">$129</span></td>
+              <td data-label="vs. dealer" class="num"><span class="badge badge-good">Save $90</span></td>
+            </tr>
+            <tr>
+              <td data-label="Job"><span>Battery replacement<span class="job-note">AGM, 3-year free replacement</span></span></td>
+              <td data-label="Time">30 min</td>
+              <td data-label="Parts" class="num">$129</td>
+              <td data-label="Labour" class="num">$30</td>
+              <td data-label="Total" class="num"><span class="total">$159</span></td>
+              <td data-label="vs. dealer" class="num"><span class="badge badge-good">Save $85</span></td>
+            </tr>
+            <tr>
+              <td data-label="Job"><span>Transmission fluid exchange<span class="job-note">Automatic or CVT, OEM fluid</span></span></td>
+              <td data-label="Time">1 hr</td>
+              <td data-label="Parts" class="num">$96</td>
+              <td data-label="Labour" class="num">$93</td>
+              <td data-label="Total" class="num"><span class="total">$189</span></td>
+              <td data-label="vs. dealer" class="num"><span class="badge badge-good">Save $110</span></td>
+            </tr>
+            <tr>
+              <td data-label="Job"><span>Spark plugs<span class="job-note">4-cylinder, iridium</span></span></td>
+              <td data-label="Time">1 hr</td>
+              <td data-label="Parts" class="num">$48</td>
+              <td data-label="Labour" class="num">$91</td>
+              <td data-label="Total" class="num"><span class="total">$139</span></td>
+              <td data-label="vs. dealer" class="num"><span class="badge badge-good">Save $121</span></td>
+            </tr>
+            <tr>
+              <td data-label="Job"><span>Pre-purchase inspection<span class="job-note">150 points, road test, written report</span></span></td>
+              <td data-label="Time">1 hr</td>
+              <td data-label="Parts" class="num">—</td>
+              <td data-label="Labour" class="num">$129</td>
+              <td data-label="Total" class="num"><span class="total">$129</span></td>
+              <td data-label="vs. dealer" class="num"><span class="badge">Dealers don't offer it</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bar wrap gap-4">
+        <div class="price-notes">
+          <span><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Shop supplies &amp; disposal included</span>
+          <span><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Fixed once you approve</span>
+          <span><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> OEM-quality parts only</span>
+        </div>
+        <div class="card match-card push">
+          <div class="card-body py-3">
+            <div class="cluster cluster-tight">
+              <svg class="icon text-brand" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#tag"></use></svg>
+              <span class="text-sm"><strong>Got a written dealer quote?</strong> We'll beat it by 10%.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Why us ===== -->
+  <section class="section band" aria-labelledby="why-title">
+    <div class="container why-grid">
+      <div class="why-photos reveal">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1687462970787-61d953508926?w=760&h=1000&q=80&auto=format&fit=crop"
+               width="760" height="1000" loading="lazy" decoding="async"
+               alt="A smiling technician in a navy T-shirt rests a wrench on her shoulder in the middle of the workshop">
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1786198984387-b63cdf520602?w=640&h=520&q=80&auto=format&fit=crop"
+               width="640" height="520" loading="lazy" decoding="async"
+               alt="A red hatchback with its bonnet open on a red two-post lift in a clean bay">
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1645445522156-9ac06bc7a767?w=640&h=520&q=80&auto=format&fit=crop"
+               width="640" height="520" loading="lazy" decoding="async"
+               alt="Gloved hands fitting a tyre and alloy wheel to a car on a lift">
+        </figure>
+        <div class="why-badge">
+          <span class="figure nums">27</span>
+          <span class="text-sm"><strong>years on Harmon St</strong><br><span class="text-muted sub">Three generations of Reyes</span></span>
+        </div>
+      </div>
+
+      <div class="stack stack-8">
+        <div class="stack stack-3">
+          <span class="eyebrow">Why Torque &amp; Co.</span>
+          <h2 id="why-title">A shop that would rather lose a job than oversell one</h2>
+          <p class="lede">Marisol Reyes took over her father's two-bay garage in 2011. It is nine bays now, and the rules on the wall have not changed.</p>
+        </div>
+
+        <ul class="why-list">
+          <li>
+            <span class="tick-dot" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span>
+            <div class="stack stack-1"><strong>We show you the worn part</strong><span class="text-sm text-muted">On your phone during the job, and in your hand afterwards if you ask.</span></div>
+          </li>
+          <li>
+            <span class="tick-dot" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span>
+            <div class="stack stack-1"><strong>Nothing is done without a yes</strong><span class="text-sm text-muted">If we find more mid-job, the car waits while we call. No "while we were in there".</span></div>
+          </li>
+          <li>
+            <span class="tick-dot" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span>
+            <div class="stack stack-1"><strong>OEM-quality parts, never mystery brands</strong><span class="text-sm text-muted">Every part on the invoice has a brand and a part number you can look up.</span></div>
+          </li>
+          <li>
+            <span class="tick-dot" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span>
+            <div class="stack stack-1"><strong>Techs are salaried, not on commission</strong><span class="text-sm text-muted">Nobody here earns more by finding more wrong with your car.</span></div>
+          </li>
+        </ul>
+
+        <div class="stat-row">
+          <div class="stat"><span class="stat-value nums">38k</span><span class="stat-label">cars serviced</span></div>
+          <div class="stat"><span class="stat-value nums">94%</span><span class="stat-label">fixed same day</span></div>
+          <div class="stat"><span class="stat-value nums">12</span><span class="stat-label">ASE techs</span></div>
+          <div class="stat"><span class="stat-value nums">0.4%</span><span class="stat-label">warranty comebacks</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Reviews ===== -->
+  <section class="section" id="reviews" aria-labelledby="reviews-title">
+    <div class="container stack stack-8">
+      <div class="section-head">
+        <div class="stack stack-3">
+          <span class="eyebrow">Reviews</span>
+          <h2 id="reviews-title">1,280 neighbours can't all be wrong</h2>
+        </div>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="card review-summary reveal">
+          <div class="card-body">
+            <div class="stack stack-6">
+              <div class="stack stack-2">
+                <span class="text-sm text-muted">Google rating</span>
+                <div class="cluster">
+                  <span class="big nums">4.9</span>
+                  <span class="rating-static" style="--value:98" role="img" aria-label="4.9 out of 5">
+                    <span class="rating-fill">
+                      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                    </span>
+                    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  </span>
+                </div>
+                <span class="text-sm text-muted nums">From 1,280 reviews since 2014</span>
+              </div>
+
+              <figure class="chart m-0">
+                <figcaption class="sr-only">Share of reviews by star rating</figcaption>
+                <div class="chart-bars">
+                  <div class="chart-bar"><span class="chart-bar-label">5 stars</span><span class="chart-bar-track"><span class="chart-bar-fill" style="--value:91"></span></span><span class="chart-bar-value nums">91%</span></div>
+                  <div class="chart-bar"><span class="chart-bar-label">4 stars</span><span class="chart-bar-track"><span class="chart-bar-fill" style="--value:6"></span></span><span class="chart-bar-value nums">6%</span></div>
+                  <div class="chart-bar"><span class="chart-bar-label">3 stars</span><span class="chart-bar-track"><span class="chart-bar-fill" style="--value:2"></span></span><span class="chart-bar-value nums">2%</span></div>
+                  <div class="chart-bar"><span class="chart-bar-label">1–2 stars</span><span class="chart-bar-track"><span class="chart-bar-fill" style="--value:1"></span></span><span class="chart-bar-value nums">1%</span></div>
+                </div>
+              </figure>
+
+              <p class="text-sm text-muted">We answer every review, including the bad ones. Marisol reads all of them.</p>
+              <a class="btn btn-block" href="#">
+                Read them on Google
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#external-sm"></use></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <article class="card review reveal">
+          <div class="card-body">
+            <div class="bar">
+              <span class="rating-static" style="--value:100" role="img" aria-label="5 out of 5">
+                <span class="rating-fill">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                </span>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <span class="text-xs text-muted push">2 weeks ago</span>
+            </div>
+            <blockquote>“They texted me a photo of my actual brake pads before touching anything. The dealer had quoted $780; Torque did pads and rotors for $286 and had it back by lunch.”</blockquote>
+          </div>
+          <div class="card-footer">
+            <span class="avatar">
+              <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=96&h=96&q=80&auto=format&fit=crop&crop=faces" width="96" height="96" loading="lazy" decoding="async" alt="">
+            </span>
+            <div class="stack stack-0">
+              <span class="fw-semi">Renée Alvarez</span>
+              <span class="text-xs text-muted review-job">2016 Subaru Outback · Brakes</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card review reveal">
+          <div class="card-body">
+            <div class="bar">
+              <span class="rating-static" style="--value:100" role="img" aria-label="5 out of 5">
+                <span class="rating-fill">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                </span>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <span class="text-xs text-muted push">1 month ago</span>
+            </div>
+            <blockquote>“Check-engine light on a road trip. Diego found a cracked vacuum hose in twenty minutes, charged me for the hose and waived the diagnostic. Who does that?”</blockquote>
+          </div>
+          <div class="card-footer">
+            <span class="avatar">
+              <img src="https://images.unsplash.com/photo-1576558656222-ba66febe3dec?w=96&h=96&q=80&auto=format&fit=crop&crop=faces" width="96" height="96" loading="lazy" decoding="async" alt="">
+            </span>
+            <div class="stack stack-0">
+              <span class="fw-semi">Mark Halvorsen</span>
+              <span class="text-xs text-muted review-job">2019 Ford F-150 · Diagnostics</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card review reveal">
+          <div class="card-body">
+            <div class="bar">
+              <span class="rating-static" style="--value:100" role="img" aria-label="5 out of 5">
+                <span class="rating-fill">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                </span>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <span class="text-xs text-muted push">3 months ago</span>
+            </div>
+            <blockquote>“Had them inspect a used Prius before I bought it. The report found a failing inverter pump the seller 'didn't know about'. Best $129 I've spent.”</blockquote>
+          </div>
+          <div class="card-footer">
+            <span class="avatar">
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&q=80&auto=format&fit=crop&crop=faces" width="96" height="96" loading="lazy" decoding="async" alt="">
+            </span>
+            <div class="stack stack-0">
+              <span class="fw-semi">Tom Becker</span>
+              <span class="text-xs text-muted review-job">2015 Toyota Prius · Inspection</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card review reveal">
+          <div class="card-body">
+            <div class="bar">
+              <span class="rating-static" style="--value:80" role="img" aria-label="4 out of 5">
+                <span class="rating-fill">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                </span>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <span class="text-xs text-muted push">5 months ago</span>
+            </div>
+            <blockquote>“Booked out two days in July, so not instant. But the A/C job was half the dealer price, the loaner was clean and the car came back washed.”</blockquote>
+          </div>
+          <div class="card-footer">
+            <span class="avatar" aria-hidden="true">JK</span>
+            <div class="stack stack-0">
+              <span class="fw-semi">Jordan Kim</span>
+              <span class="text-xs text-muted review-job">2018 Honda CR-V · A/C service</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Offers =====
+       The copy buttons need deck-extras.js ([data-deck-copy]). With a
+       .copy-done inside, the label swaps in place and no toast fires. -->
+  <section class="section band g-mesh-subtle" id="offers" aria-labelledby="offers-title">
+    <div class="container stack stack-8">
+      <div class="section-head">
+        <div class="stack stack-3">
+          <span class="eyebrow">This month's offers</span>
+          <h2 id="offers-title">Coupons, minus the small print</h2>
+        </div>
+        <p class="text-sm text-muted max-w-sm">Quote the code when you book or show this page at the counter. One coupon per visit.</p>
+      </div>
+
+      <div class="coupon-grid">
+        <article class="coupon coupon-featured reveal">
+          <div class="coupon-main">
+            <span class="badge badge-brand">New customers</span>
+            <p class="coupon-amount nums">$20<small>off</small></p>
+            <h3 class="h5">Any service over $150</h3>
+            <p class="text-sm text-muted">First visit only. Works on parts and labour, not on tyres sold at cost.</p>
+          </div>
+          <div class="coupon-foot">
+            <div class="copy">
+              <code>TORQUE20</code>
+              <button type="button" class="copy-btn" data-deck-copy aria-label="Copy code TORQUE20">
+                <span class="copy-idle"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy</span>
+                <span class="copy-done"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Copied</span>
+              </button>
+            </div>
+            <span class="text-xs text-muted">Valid through November 30, 2026</span>
+          </div>
+        </article>
+
+        <article class="coupon reveal">
+          <div class="coupon-main">
+            <span class="badge badge-warn">Before winter</span>
+            <p class="coupon-amount">Free</p>
+            <h3 class="h5">Heating &amp; battery check</h3>
+            <p class="text-sm text-muted">Load test, heater-core flow, coolant strength and wipers. Fifteen minutes, no appointment.</p>
+          </div>
+          <div class="coupon-foot">
+            <div class="copy">
+              <code>WARMUP</code>
+              <button type="button" class="copy-btn" data-deck-copy aria-label="Copy code WARMUP">
+                <span class="copy-idle"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy</span>
+                <span class="copy-done"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Copied</span>
+              </button>
+            </div>
+            <span class="text-xs text-muted">Valid through December 20, 2026</span>
+          </div>
+        </article>
+
+        <article class="coupon reveal">
+          <div class="coupon-main">
+            <span class="badge">Thank you</span>
+            <p class="coupon-amount nums">15%<small>off</small></p>
+            <h3 class="h5">Brakes, for those who serve</h3>
+            <p class="text-sm text-muted">Teachers, nurses, first responders and veterans. Bring any staff or service ID.</p>
+          </div>
+          <div class="coupon-foot">
+            <div class="copy">
+              <code>THANKYOU15</code>
+              <button type="button" class="copy-btn" data-deck-copy aria-label="Copy code THANKYOU15">
+                <span class="copy-idle"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy-sm"></use></svg> Copy</span>
+                <span class="copy-done"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Copied</span>
+              </button>
+            </div>
+            <span class="text-xs text-muted">Ongoing</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Hours & location ===== -->
+  <section class="section" id="visit" aria-labelledby="visit-title">
+    <div class="container stack stack-8">
+      <div class="section-head">
+        <div class="stack stack-3">
+          <span class="eyebrow">Visit</span>
+          <h2 id="visit-title">Two blocks off the Foundry Road exit</h2>
+        </div>
+      </div>
+
+      <div class="visit-grid">
+        <div class="card reveal">
+          <div class="card-body">
+            <div class="stack stack-6">
+              <div class="bar">
+                <h3 class="h5">Opening hours</h3>
+                <span class="status-line push" data-open-status>
+                  <span class="indicator indicator-good" aria-hidden="true"></span>
+                  <span class="text-sm" data-open-text>Open now · until 6 pm</span>
+                </span>
+              </div>
+
+              <table class="hours">
+                <caption class="sr-only">Opening hours, Pacific time</caption>
+                <tbody>
+                  <tr data-day="1"><th scope="row">Monday</th><td>7:30 am – 6:00 pm</td></tr>
+                  <tr data-day="2" aria-current="date"><th scope="row">Tuesday</th><td>7:30 am – 6:00 pm</td></tr>
+                  <tr data-day="3"><th scope="row">Wednesday</th><td>7:30 am – 6:00 pm</td></tr>
+                  <tr data-day="4"><th scope="row">Thursday</th><td>7:30 am – 6:00 pm</td></tr>
+                  <tr data-day="5"><th scope="row">Friday</th><td>7:30 am – 6:00 pm</td></tr>
+                  <tr data-day="6"><th scope="row">Saturday</th><td>8:00 am – 3:00 pm</td></tr>
+                  <tr data-day="0"><th scope="row">Sunday</th><td>Closed · tow line open</td></tr>
+                </tbody>
+              </table>
+
+              <div class="stack stack-4 border-t pbs-6">
+                <div class="contact-row">
+                  <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#map-pin"></use></svg></span>
+                  <address class="text-sm" style="font-style:normal"><strong>2140 Harmon Street</strong><br><span class="text-muted">Eastport, OR 97214 · free customer parking</span></address>
+                </div>
+                <div class="contact-row">
+                  <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#phone"></use></svg></span>
+                  <p class="text-sm"><a class="link-quiet fw-semi nums" href="tel:+15035550148">(503) 555-0148</a><br><span class="text-muted">Texts welcome on the same number</span></p>
+                </div>
+              </div>
+
+              <div class="cluster">
+                <a class="btn btn-outline" href="#">
+                  <svg class="icon" aria-hidden="true"><use href="#i-route"></use></svg>
+                  Get directions
+                </a>
+                <a class="btn btn-ghost" href="mailto:hello@torque.example">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail"></use></svg>
+                  Email us
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The map is decorative (role="img" with a label). Link "Get directions"
+             to a real maps URL for the working version. -->
+        <div class="map reveal" role="img" aria-label="Map: Torque &amp; Co. is at Harmon Street and 21st Avenue, by Foundry Park and two blocks east of the river">
+          <div class="map-streets"></div>
+          <div class="map-texture g-grid-lines"></div>
+          <div class="map-river"></div>
+          <div class="map-park"></div>
+          <div class="map-road road-d"></div>
+          <div class="map-road road-h"></div>
+          <div class="map-road road-v"></div>
+          <span class="map-label label-h">Harmon St</span>
+          <span class="map-label label-v">21st Ave</span>
+          <span class="map-label label-d">Foundry Rd</span>
+          <span class="map-label label-park">Foundry Park</span>
+          <span class="map-label label-water">Eastport River</span>
+          <span class="map-compass">N</span>
+          <span class="map-pin">
+            <span class="drop"><svg class="icon"><use href="#i-nut"></use></svg></span>
+            <span class="pulse-dot ping"></span>
+          </span>
+          <span class="map-card">
+            <span class="brand-mark"><svg class="icon"><use href="#i-nut"></use></svg></span>
+            <span class="stack stack-0">
+              <span class="text-sm fw-semi">Torque &amp; Co. Auto Care</span>
+              <span class="text-xs text-muted">4.9 ★ · 2140 Harmon St · 6 min from I-84</span>
+            </span>
+          </span>
+          <span class="map-scale">500 ft</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Emergency towing ===== -->
+  <section class="pbe-8" aria-labelledby="tow-title">
+    <div class="container">
+      <div class="tow reveal">
+        <span class="icon-tile icon-tile-lg" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#truck"></use></svg></span>
+        <div class="stack stack-2">
+          <h2 class="h3" id="tow-title">Broken down? We'll come and get you.</h2>
+          <p class="text-muted">24/7 towing within 25 miles of Harmon Street. The tow is free when we do the repair, and we'll drop you home on the way.</p>
+        </div>
+        <div class="stack stack-2">
+          <a class="btn btn-accent btn-lg" href="tel:+15035550199">
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#phone"></use></svg>
+            Call the tow line
+          </a>
+          <span class="text-sm text-muted text-center nums">(503) 555-0199 · answered 24/7</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="footer site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a class="navbar-brand" href="#">
+          <span class="brand-mark" aria-hidden="true"><svg class="icon"><use href="#i-nut"></use></svg></span>
+          <span class="brand-name">Torque &amp; Co.<small>Auto Care</small></span>
+        </a>
+        <p class="text-sm">Independent, family-owned repair for every make since 1998.</p>
+        <div class="footer-badges">
+          <span class="badge"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#shield-sm"></use></svg> ASE Blue Seal shop</span>
+          <span class="badge">AAA approved</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">Services</p>
+        <a href="#services">Oil &amp; filter</a>
+        <a href="#services">Brakes</a>
+        <a href="#services">Diagnostics</a>
+        <a href="#services">Tires &amp; alignment</a>
+        <a href="#services">Fleet accounts</a>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">The shop</p>
+        <a href="#pricing">Price list</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#offers">Offers</a>
+        <a href="#">Warranty terms</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">Visit</p>
+        <span>2140 Harmon Street<br>Eastport, OR 97214</span>
+        <a class="nums" href="tel:+15035550148">(503) 555-0148</a>
+        <span>Mon–Fri 7:30–6 · Sat 8–3</span>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Torque &amp; Co. Auto Care LLC · Oregon auto repair reg. AR-20471</span>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
+        <a href="#" aria-label="Facebook"><svg class="icon" aria-hidden="true"><use href="#i-facebook"></use></svg></a>
+        <a href="mailto:hello@torque.example" aria-label="Email"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail"></use></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== Mobile menu (deck-extras.js wires [data-deck-drawer]) ===== -->
+<dialog class="drawer drawer-end" id="site-nav" aria-labelledby="site-nav-title">
+  <div class="drawer-header">
+    <p class="drawer-title" id="site-nav-title">Torque &amp; Co.</p>
+    <button class="btn btn-icon btn-ghost mis-auto" data-drawer-close aria-label="Close menu">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x"></use></svg>
+    </button>
+  </div>
+  <nav class="drawer-body" aria-label="Mobile">
+    <div class="stack stack-1">
+      <a class="sidebar-link" href="#services" aria-current="page" data-drawer-close><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#wrench"></use></svg> Services</a>
+      <a class="sidebar-link" href="#pricing" data-drawer-close><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#receipt"></use></svg> Pricing</a>
+      <a class="sidebar-link" href="#reviews" data-drawer-close><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star"></use></svg> Reviews</a>
+      <a class="sidebar-link" href="#offers" data-drawer-close><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#tag"></use></svg> Offers</a>
+      <a class="sidebar-link" href="#visit" data-drawer-close><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#map-pin"></use></svg> Hours &amp; location</a>
+    </div>
+    <div class="card bg-sunken">
+      <div class="card-body">
+        <span class="status-line" data-open-status>
+          <span class="indicator indicator-good" aria-hidden="true"></span>
+          <span data-open-text>Open now · until 6 pm</span>
+        </span>
+        <span class="text-sm text-muted">2140 Harmon Street, Eastport</span>
+      </div>
+    </div>
+  </nav>
+  <div class="drawer-footer">
+    <a class="btn" href="tel:+15035550148">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#phone"></use></svg>
+      Call
+    </a>
+    <a class="btn btn-primary" href="#book" data-drawer-close>Book service</a>
+  </div>
+</dialog>
+
+<!-- Open/closed status and today's row, computed in the shop's timezone rather
+     than the visitor's. Edit HOURS (minutes after midnight, 0 = Sunday) and TZ.
+     Without JavaScript the static "Open now" and Tuesday highlight stay put. -->
+<script>
+(() => {
+  const TZ = 'America/Los_Angeles';
+  const HOURS = { 1: [450, 1080], 2: [450, 1080], 3: [450, 1080], 4: [450, 1080], 5: [450, 1080], 6: [480, 900] };
+  const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: TZ, weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' })
+    .formatToParts(new Date()).map(x => [x.type, x.value]));
+  const day = DAYS.indexOf(p.weekday), now = +p.hour * 60 + +p.minute, today = HOURS[day];
+  const fmt = m => { const h = Math.floor(m / 60), mm = m % 60; return (h % 12 || 12) + (mm ? ':' + String(mm).padStart(2, '0') : '') + (h < 12 ? ' am' : ' pm'); };
+  const open = !!today && now >= today[0] && now < today[1];
+  let label = `Open now · until ${today ? fmt(today[1]) : ''}`;
+  if (!open) {
+    if (today && now < today[0]) label = `Closed · opens ${fmt(today[0])}`;
+    else { let d = day; do d = (d + 1) % 7; while (!HOURS[d]); label = `Closed · opens ${DAYS[d]} ${fmt(HOURS[d][0])}`; }
+  }
+  document.querySelectorAll('[data-open-status]').forEach(el => {
+    el.querySelector('[data-open-text]').textContent = label;
+    const dot = el.querySelector('.indicator');
+    dot.classList.toggle('indicator-good', open);
+    dot.classList.toggle('indicator-bad', !open);
+    if (!open) dot.classList.remove('ping');
+  });
+  document.querySelectorAll('tr[data-day]').forEach(row =>
+    +row.dataset.day === day ? row.setAttribute('aria-current', 'date') : row.removeAttribute('aria-current'));
+})();
+</script>
+
+</body>
+</html>

@@ -110,7 +110,7 @@ $FLAGS = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>CLI</h1>
   <p class="lede">
     One command, three subcommands, four flags. It exists because Deck has no build step
@@ -119,7 +119,7 @@ $FLAGS = [
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="quickstart">The whole thing</h2>
   <pre class="dx-code"><code>npx @echodial/deck init public_html/assets/deck
 npx @echodial/deck starter public_html/index.html</code></pre>
@@ -137,32 +137,38 @@ npx @echodial/deck starter public_html/index.html</code></pre>
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="commands">Commands</h2>
   <?php foreach ($COMMANDS as $c): ?>
-    <article class="stack-3" id="<?= e($c['id']) ?>">
+    <article class="stack stack-3" id="<?= e($c['id']) ?>">
       <h3><code><?= e($c['usage']) ?></code></h3>
       <p><?= $c['summary'] ?></p>
-      <dl class="stack-2">
-        <dt><strong>Default argument</strong></dt>
-        <dd><?= e($c['default']) ?></dd>
-        <dt><strong>What it does</strong></dt>
-        <dd>
-          <ul class="stack-1">
-            <?php foreach ($c['behaviour'] as $b): ?>
-              <li><?= $b ?></li>
-            <?php endforeach; ?>
-          </ul>
-        </dd>
-        <dt><strong>Worth knowing</strong></dt>
-        <dd><?= $c['gotcha'] ?></dd>
+      <dl class="stack stack-2">
+        <div class="stack stack-1">
+          <dt><strong>Default argument</strong></dt>
+          <dd><?= e($c['default']) ?></dd>
+        </div>
+        <div class="stack stack-1">
+          <dt><strong>What it does</strong></dt>
+          <dd>
+            <ul class="stack stack-1">
+              <?php foreach ($c['behaviour'] as $b): ?>
+                <li><?= $b ?></li>
+              <?php endforeach; ?>
+            </ul>
+          </dd>
+        </div>
+        <div class="stack stack-1">
+          <dt><strong>Worth knowing</strong></dt>
+          <dd><?= $c['gotcha'] ?></dd>
+        </div>
       </dl>
       <pre class="dx-code"><code><?= e($c['example']) ?></code></pre>
     </article>
   <?php endforeach; ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="flags">Flags</h2>
   <p>
     Flags are position-independent — anywhere after the subcommand is fine — and unknown
@@ -187,7 +193,7 @@ npx @echodial/deck starter public_html/index.html</code></pre>
   </div>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="files">What init copies</h2>
   <p>
     The set depends on the flags. <code>deck-icons.svg</code> is always included, because
@@ -233,7 +239,7 @@ npx @echodial/deck starter public_html/index.html</code></pre>
   <pre class="dx-code"><code>&lt;script src="/assets/deck/deck.js" data-deck-icons="/cdn/deck-icons.abc123.svg" defer&gt;&lt;/script&gt;</code></pre>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="composer">The Composer equivalent</h2>
   <p>
     A PHP project does not need the Node CLI at all. <code>composer require
@@ -245,7 +251,7 @@ npx @echodial/deck starter public_html/index.html</code></pre>
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="scripts">Scripts in the package itself</h2>
   <p>
     These are for working <em>on</em> Deck rather than with it, and they run in a clone of
@@ -287,9 +293,9 @@ npx @echodial/deck starter public_html/index.html</code></pre>
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="troubleshooting">When it does not do what you expected</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>It says files are "not built".</strong> The installed package has no
       <code>dist/</code>. That is normal in a git clone — run <code>npm run build</code>

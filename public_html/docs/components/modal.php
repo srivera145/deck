@@ -27,7 +27,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Modal</h1>
   <p class="lede">
     <code>.modal</code> goes on a native <code>&lt;dialog&gt;</code>. That single
@@ -38,7 +38,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use a modal when the reader must deal with something before continuing: confirming a
@@ -56,7 +56,7 @@ require __DIR__ . '/../_layout.php';
   docs_example(
       '<button class="btn btn-primary" onclick="document.getElementById(\'dx-modal\').showModal()">Delete project</button>' . "\n" .
       '<dialog class="modal" id="dx-modal">' . "\n" .
-      '  <form method="dialog" class="stack-0">' . "\n" .
+      '  <form method="dialog" class="stack stack-0">' . "\n" .
       '    <div class="modal-header">' . "\n" .
       '      <h3 class="modal-title">Delete this project?</h3>' . "\n" .
       '    </div>' . "\n" .
@@ -82,7 +82,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="animation">Animating a dialog</h2>
   <p>
     A dialog goes from <code>display: none</code> to <code>display: block</code>, and
@@ -92,7 +92,7 @@ require __DIR__ . '/../_layout.php';
     JavaScript.
   </p>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="a-starting">@starting-style — the state to animate from</h3>
     <p>
       A <code>@starting-style</code> block gives an element the styles it should have for
@@ -104,7 +104,7 @@ require __DIR__ . '/../_layout.php';
 @starting-style { .modal[open] { opacity: 0; scale: .97; translate: 0 8px; } }') ?></code></pre>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="a-discrete">transition-behavior: allow-discrete — staying visible to close</h3>
     <p>
       <code>display</code> and <code>overlay</code> are discrete properties: they flip
@@ -125,7 +125,7 @@ require __DIR__ . '/../_layout.php';
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="a-backdrop">The backdrop animates separately</h3>
     <p>
       <code>::backdrop</code> is its own pseudo-element with its own transition, so it
@@ -135,7 +135,7 @@ require __DIR__ . '/../_layout.php';
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="regions">Header, body, footer</h2>
   <p>
     The same three-region pattern as <a href="card.php">card</a>, with one addition that
@@ -148,7 +148,7 @@ require __DIR__ . '/../_layout.php';
   docs_example(
       '<button class="btn" onclick="document.getElementById(\'dx-modal-long\').showModal()">Open a long modal</button>' . "\n" .
       '<dialog class="modal" id="dx-modal-long">' . "\n" .
-      '  <form method="dialog" class="stack-0">' . "\n" .
+      '  <form method="dialog" class="stack stack-0">' . "\n" .
       '    <div class="modal-header"><h3 class="modal-title">Terms</h3></div>' . "\n" .
       '    <div class="modal-body">' . "\n" .
       '      <p>The header and footer stay; this region scrolls.</p>' . "\n" .
@@ -170,20 +170,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/07-components.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--surface', '--surface-2', '--line', '--text', '--text-lg', '--r-lg', '--shadow-4', '--space-3', '--space-4', '--space-5', '--space-8', '--dur-2', '--ease-spring', '--hue-neutral']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The element does the hard parts.</strong> <code>showModal()</code> traps
       focus inside the dialog, makes everything else inert, closes on Escape and exposes
@@ -231,7 +231,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The dialog is centred by the browser and its regions use logical padding and borders,
@@ -244,7 +244,7 @@ require __DIR__ . '/../_layout.php';
   docs_example(
       '<button class="btn" onclick="document.getElementById(\'dx-modal-rtl\').showModal()">افتح النافذة</button>' . "\n" .
       '<dialog dir="rtl" class="modal" id="dx-modal-rtl">' . "\n" .
-      '  <form method="dialog" class="stack-0">' . "\n" .
+      '  <form method="dialog" class="stack stack-0">' . "\n" .
       '    <div class="modal-header"><h3 class="modal-title">حذف المشروع؟</h3></div>' . "\n" .
       '    <div class="modal-body"><p>لا يمكن التراجع عن هذا الإجراء.</p></div>' . "\n" .
       '    <div class="modal-footer">' . "\n" .
@@ -259,7 +259,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The modal scales, translates and fades over
@@ -276,7 +276,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> sets <code>dialog::backdrop { display: none }</code>, so
@@ -290,7 +290,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One modal, no layer needed */
 <dialog class="modal" style="inline-size:min(48rem, calc(100vw - 2rem))">
@@ -309,9 +309,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a message.</strong> A modal demands a response. Something the
       reader only needs to know is an <a href="alert.php"><code>.alert</code></a> in the

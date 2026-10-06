@@ -22,7 +22,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Breadcrumb</h1>
   <p class="lede">
     Where the current page sits in the hierarchy, and a way back up it. Four rules and a
@@ -31,7 +31,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     On a site with real depth, where a page has ancestors someone might want to go back to:
@@ -63,7 +63,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="separator">The separator is generated content</h2>
   <p>
     The slash between items is not in your markup. It is a pseudo-element on every item
@@ -79,7 +79,7 @@ require __DIR__ . '/../_layout.php';
     means it gets copied, translated and read aloud as content. Two things follow from
     generated content, though, and both are worth knowing:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Some screen readers announce it.</strong> CSS <code>content</code> is exposed
       by most engines, so the trail may be read as "Docs slash Components slash Breadcrumb".
@@ -98,7 +98,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="current">The last item</h2>
   <p>
     The current page belongs in the trail — it is the "you are here" — but it should not be
@@ -107,7 +107,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div class="stack-3">' . "\n" .
+      '<div class="stack stack-3">' . "\n" .
       '  <nav aria-label="Breadcrumb">' . "\n" .
       '    <ol class="breadcrumb">' . "\n" .
       '      <li><a href="#">Catalogue</a></li>' . "\n" .
@@ -136,7 +136,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     <code>.breadcrumb</code> is a single class with no members — everything else is
@@ -145,14 +145,14 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--space-2', '--text-sm', '--text', '--text-muted', '--text-faint', '--brand']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Wrap it in <code>&lt;nav aria-label="Breadcrumb"&gt;</code>.</strong>
       <code>.breadcrumb</code> is a class and confers no role. The label is what
@@ -187,7 +187,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The row is flex and every offset is logical, so the trail runs from the right and the
@@ -214,7 +214,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing here animates. The hover colour change on a link is instant, and there are no
@@ -223,7 +223,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.breadcrumb</code> is not in <code>src/99-print.css</code>, so it prints — unlike
@@ -246,7 +246,7 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* A chevron instead of a slash */
@@ -267,9 +267,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not on a flat site.</strong> One ancestor is not a trail, and it competes with
       the <a href="nav.php">nav bar</a> for the same job.

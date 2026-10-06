@@ -1,0 +1,1590 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Settings · Deck template</title>
+<meta name="description" content="A settings page with every form control Deck ships, in label-left rows, a save bar that clears the tab bar and the home indicator, a live hue slider and a danger zone.">
+<meta name="theme-color" content="#0b7d98">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b7d98'/%3E%3Cpath d='M16 6.5 26 25h-5.4L16 15.8 11.4 25H6Z' fill='white'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+<script src="../assets/deck/deck-extras.js" defer></script>   <!-- the phone drawer, the number stepper and the copy button -->
+
+<style>
+@layer app.pages {
+  /* Deck lets a .btn inside an .input-group shrink along with the input, so a
+     nowrap label runs into its own padding on a narrow row. The input is the
+     one that should give. */
+  .input-group > .btn { flex: none; }
+
+
+  /* ===========================================================================
+     SHARED CHROME
+     This block is identical in app-shell.html, dashboard.html and
+     settings.html. Lift it into your own stylesheet once and delete it from
+     the pages. Two numbers drive the whole frame.
+     =========================================================================== */
+  :root {
+    --topbar-h: 3.5rem;   /* the sidebar's sticky offset reads this, so it never slides under the bar */
+    --side-w: 16rem;
+  }
+
+  /* ----- Top bar: sticks, and blurs what scrolls under it ----- */
+  .topbar {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: var(--z-sticky);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    block-size: var(--topbar-h);
+    padding-inline: max(var(--space-3), env(safe-area-inset-left)) max(var(--space-4), env(safe-area-inset-right));
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid var(--line);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-inline: var(--space-1);
+    color: var(--text);
+    font-size: var(--text-md);
+    font-weight: 680;
+    letter-spacing: -.024em;
+    text-decoration: none;
+  }
+  .brand:hover { color: var(--text); }
+  .brand-mark {
+    inline-size: 28px;
+    block-size: 28px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    box-shadow: var(--shadow-inset), var(--shadow-1);
+  }
+  .brand-mark svg { inline-size: 15px; block-size: 15px; }
+
+  /* The "/ Northwind" workspace switcher after the logo. */
+  .topbar-slash {
+    inline-size: 1px;
+    block-size: 20px;
+    margin-inline: var(--space-1);
+    background: var(--line-strong);
+    rotate: 20deg;
+  }
+  .ws-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    block-size: 36px;
+    padding-inline: var(--space-2);
+    border-radius: var(--r-sm);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--dur-1) var(--ease-out);
+  }
+  .ws-switch:hover { background: var(--surface-hover); }
+  .ws-switch .icon { color: var(--text-faint); }
+  .ws-logo { background: var(--g-ws, var(--brand-600)); color: var(--text-on-brand); font-weight: 700; }
+
+  /* Search: centred in the space left over, with a keyboard hint inside it. */
+  .topbar-search { flex: 0 1 26rem; margin-inline: auto; }
+  .topbar-search .input {
+    min-block-size: 36px;
+    padding-block: 0;
+    padding-inline-end: 4.5rem;
+    border-color: var(--line);
+    background: var(--surface);
+    box-shadow: none;
+    font-size: var(--text-sm);
+  }
+  .topbar-search kbd { position: absolute; inset-inline-end: var(--space-3); pointer-events: none; }
+
+  .topbar-end { display: flex; align-items: center; gap: var(--space-1); margin-inline-start: auto; }
+  .topbar-search + .topbar-end { margin-inline-start: 0; }
+  .avatar-btn { display: grid; padding: 3px; margin-inline-start: var(--space-1); border-radius: var(--r-full); cursor: pointer; }
+  .avatar-btn .avatar { transition: box-shadow var(--dur-1) var(--ease-out); }
+  .avatar-btn:hover .avatar { box-shadow: 0 0 0 2px var(--line-strong); }
+
+  /* Menus: muted icons, a header row for the account menu. */
+  .menu-item > .icon { color: var(--text-faint); }
+  .menu-item[aria-current] .push { color: var(--brand); }
+  .menu-head { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3) var(--space-3); }
+  .menu-note { display: flex; flex-direction: column; gap: 2px; white-space: normal; line-height: 1.35; }
+  .menu-note small { color: var(--text-faint); font-size: var(--text-xs); }
+
+  /* ----- Shell: sidebar beside main from 48rem, main alone below it -----
+     48rem is deliberate: it is the width at which .tabbar hides itself. Using
+     the same number means there is never a moment with both navigations, or
+     neither. */
+  .shell-side { display: none; }
+  @media (min-width: 48rem) {
+    .shell { display: grid; grid-template-columns: var(--side-w) minmax(0, 1fr); }
+    /* The <aside> runs the full height of the page and carries the border;
+       the panel inside it is what sticks. */
+    .shell-side { display: block; border-inline-end: 1px solid var(--line); }
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      inset-block-start: var(--topbar-h);          /* parks below the top bar, not under it */
+      block-size: calc(100dvh - var(--topbar-h));  /* and fills exactly what is left */
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+  }
+  .shell-main {
+    container: main / inline-size;   /* the page grids below query this, not the viewport */
+    min-inline-size: 0;
+    padding: var(--space-6) var(--space-gutter) var(--space-12);
+  }
+  .page { max-inline-size: 76rem; margin-inline: auto; }
+
+  /* ----- Sidebar ----- */
+  .shell-side .sidebar { gap: 1px; }
+  .shell-side .sidebar-link { min-block-size: 36px; }
+  /* The -sm cut is drawn to hold up at 16px, so the icons are set to exactly that. */
+  .sidebar-link > .icon { font-size: 1rem; color: var(--text-faint); transition: color var(--dur-1) var(--ease-out); }
+  .sidebar-link:hover > .icon { color: var(--text-muted); }
+  .sidebar-link[aria-current] > .icon { color: var(--brand); }
+  .sidebar-link .badge { font-size: var(--text-2xs); padding-block: 0; }
+  .sidebar-group { margin-block-start: var(--space-3); }
+  .dot {
+    inline-size: 8px;
+    block-size: 8px;
+    margin-inline: 4px;
+    flex: none;
+    border-radius: 3px;
+    background: var(--dot, var(--brand-500));
+  }
+  .side-foot { margin-block-start: auto; padding: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); }
+  .usage {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface);
+    box-shadow: var(--shadow-1);
+  }
+  .usage .progress { block-size: 6px; }
+  .user-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2);
+    border-radius: var(--r-sm);
+    color: var(--text);
+    text-decoration: none;
+    line-height: 1.3;
+  }
+  .user-row:hover { background: var(--surface-hover); color: var(--text); }
+  .user-row > .icon { color: var(--text-faint); }
+
+  /* ----- Phone drawer: the same sidebar, in a dialog ----- */
+  /* Deck's .drawer sets display:flex, which beats the browser's own rule that hides a closed <dialog>, so a closed drawer would sit off-screen with its links still in the tab order. The transition on display is allow-discrete, so the slide-out still plays. */
+  .drawer:not([open]) { display: none; }
+  .drawer .sidebar { padding: 0; margin-inline: calc(var(--space-2) * -1); }
+  .drawer .usage { box-shadow: none; }
+  .drawer-footer { align-items: center; }
+  .drawer-footer > .user-row { flex: 1 1 auto; min-inline-size: 0; padding: 0; }
+  .drawer-footer > .btn-icon { flex: none; }
+
+  /* ----- Page header: breadcrumb, title and actions in one row ----- */
+  .page-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-4) var(--space-6);
+    padding-block-end: var(--space-6);
+  }
+  .page-head > :first-child { flex: 1 1 22rem; min-inline-size: 0; }
+  .page-head h1 { text-wrap: balance; }
+
+  /* Workaround for a Deck issue: the status tints (--good-100, --warn-100,
+     --bad-100) and the .progress track are light in both themes, so badges,
+     alerts and deltas glow on a dark card. light-dark() keeps Deck's values
+     in light mode and gives each a dark-mode one. Identical in all three
+     pages. */
+  .progress { background: light-dark(var(--ink-200), var(--ink-800)); }
+  .progress::-webkit-progress-bar { background: light-dark(var(--ink-200), var(--ink-800)); }
+  .badge-good, .icon-tile-good { background: light-dark(var(--good-100), color-mix(in oklab, var(--good-500) 16%, transparent)); color: light-dark(var(--good-700), oklch(80% .12 var(--hue-good))); }
+  .badge-warn, .icon-tile-warn { background: light-dark(var(--warn-100), color-mix(in oklab, var(--warn-500) 16%, transparent)); color: light-dark(var(--warn-700), oklch(84% .12 var(--hue-warn))); }
+  .badge-bad, .icon-tile-bad { background: light-dark(var(--bad-100), color-mix(in oklab, var(--bad-500) 18%, transparent)); color: light-dark(var(--bad-700), oklch(78% .13 var(--hue-bad))); }
+  .alert-good { background: light-dark(var(--good-100), color-mix(in oklab, var(--good-500) 12%, transparent)); color: light-dark(var(--good-700), oklch(84% .1 var(--hue-good))); }
+  .alert-warn { background: light-dark(var(--warn-100), color-mix(in oklab, var(--warn-500) 12%, transparent)); color: light-dark(var(--warn-700), oklch(86% .1 var(--hue-warn))); }
+  .alert-bad { background: light-dark(var(--bad-100), color-mix(in oklab, var(--bad-500) 14%, transparent)); color: light-dark(var(--bad-700), oklch(82% .1 var(--hue-bad))); }
+  .stat-delta-up { color: light-dark(var(--good-700), oklch(80% .13 var(--hue-good))); }
+  .stat-delta-down { color: light-dark(var(--bad-700), oklch(77% .13 var(--hue-bad))); }
+
+  /* Between the two layouts the bar is tight: the plan badge and the
+     shortcut hint wait until 64rem. */
+  @media (max-width: 63.999rem) {
+    .ws-switch .badge, .topbar-search kbd { display: none; }
+    .topbar-search .input { padding-inline-end: var(--space-3); }
+  }
+
+  /* Visibility either side of the 48rem line. Last in the block so they win. */
+  @media (max-width: 47.999rem) { .desk-only { display: none; } }
+  @media (min-width: 48rem) { .phone-only { display: none; } }
+
+  /* ===========================================================================
+     THIS PAGE: settings
+     =========================================================================== */
+
+  /* Anchor links land below the sticky top bar and section tabs, not under them. */
+  html { scroll-padding-block-start: calc(var(--topbar-h) + var(--space-4)); }
+  @media (min-width: 48rem) { html { scroll-padding-block-start: calc(var(--topbar-h) + 3.75rem); } }
+  :target { scroll-margin-block-start: 0; }
+
+  .page-narrow { max-inline-size: 60rem; }
+
+  /* ----- Section tabs: in-page links, sticky under the top bar from 48rem ----- */
+  .subnav { margin-block-end: var(--space-6); }
+  @media (min-width: 48rem) {
+    .subnav {
+      position: sticky;
+      inset-block-start: var(--topbar-h);
+      z-index: 5;
+      background: color-mix(in oklab, var(--bg) 86%, transparent);
+      backdrop-filter: saturate(1.6) blur(14px);
+      -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    }
+  }
+  .subnav .tab { padding-inline: var(--space-3); }
+
+  .set-form { display: flex; flex-direction: column; gap: var(--space-6); }
+
+  /* ----- Label-left, control-right rows -----
+     One column on a phone. From 46rem of main width the label and its help
+     text take a fixed column, and every control lines up in the second. */
+  .set-head { display: block; padding-block: var(--space-5); }
+  .set-head p { margin-block-start: 2px; }
+  .set-row { display: grid; gap: var(--space-3); padding: var(--space-5); }
+  .set-row + .set-row { border-block-start: 1px solid var(--line); }
+  @container main (min-width: 46rem) {
+    .set-row { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: var(--space-8); padding-inline: var(--space-6); }
+  }
+  .set-label { display: flex; flex-direction: column; gap: var(--space-1); }
+  .set-title { font-size: var(--text-sm); font-weight: 580; display: flex; align-items: center; gap: var(--space-2); }
+  .set-label .help { font-size: var(--text-sm); }
+  .set-control { display: flex; flex-direction: column; gap: var(--space-3); min-inline-size: 0; }
+  .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+
+  /* Profile */
+  .photo-row { display: flex; align-items: center; gap: var(--space-4); }
+  .photo-row .file { flex: 1 1 auto; padding: var(--space-4); gap: 2px; font-size: var(--text-sm); }
+  .photo-row .file strong { color: var(--brand); }
+  .count-row { display: flex; gap: var(--space-3); }
+
+  /* Switch rows: the text is the label, the switch sits at the end. */
+  .switch-list { display: flex; flex-direction: column; }
+  .switch-row { justify-content: space-between; align-items: flex-start; gap: var(--space-6); padding-block: var(--space-3); }
+  .switch-row:first-child { padding-block-start: 0; }
+  .switch-row + .switch-row { border-block-start: 1px solid var(--line); }
+  .switch-row input { margin-block-start: 2px; }
+  .switch-text { display: flex; flex-direction: column; gap: 2px; }
+  .switch-text .help { font-size: var(--text-sm); }
+
+  /* The channel matrix: a real table, so each checkbox has a row and a column. */
+  .matrix th[scope="row"] { font-weight: 540; color: var(--text); }
+  .matrix :is(th, td):not(:first-child) { text-align: center; inline-size: 4.5rem; }
+  .matrix .check { justify-content: center; min-block-size: 0; padding: 0; }
+  .matrix td { padding-block: var(--space-2); }
+
+  /* Theme cards: the preview is drawn from Deck's fixed ink ramp, so the
+     light card stays light and the dark card stays dark in either theme. */
+  .theme-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); }
+  @container main (min-width: 30rem) { .theme-grid { gap: var(--space-3); } }
+  .theme-opt { display: grid; grid-template-columns: auto 1fr; gap: var(--space-3); padding: var(--space-2) var(--space-2) var(--space-3); min-block-size: 0; }
+  .theme-opt input { margin-inline-start: var(--space-2); }
+  .theme-opt .check-text { font-size: var(--text-sm); font-weight: 560; }
+  .theme-preview {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    display: flex;
+    block-size: clamp(3.75rem, 14cqi, 4.75rem);
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  .tp {
+    flex: 1 1 0;
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    grid-template-rows: 8px 1fr;
+    gap: 6px;
+    padding: 8px;
+    background: var(--tp-bg);
+  }
+  .tp > i:nth-child(1) { grid-row: 1 / -1; border-radius: 4px; background: var(--tp-side); }
+  .tp > i:nth-child(2) { inline-size: 55%; border-radius: 4px; background: var(--brand-500); }
+  .tp > i:nth-child(3) { border-radius: 4px; background: var(--tp-card); box-shadow: inset 0 0 0 1px var(--tp-line); }
+  .tp-light { --tp-bg: var(--ink-50); --tp-side: var(--ink-200); --tp-card: var(--ink-0); --tp-line: var(--ink-200); }
+  .tp-dark { --tp-bg: var(--ink-1000); --tp-side: var(--ink-800); --tp-card: var(--ink-900); --tp-line: var(--ink-800); }
+
+  /* Accent: presets and a slider with the whole hue circle painted on its track. */
+  .swatches { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+  .swatch-btn {
+    inline-size: 28px;
+    block-size: 28px;
+    border-radius: var(--r-full);
+    background: oklch(58% .13 var(--h));
+    box-shadow: inset 0 0 0 1px oklch(0% 0 0 / .12);
+    cursor: pointer;
+    transition: box-shadow var(--dur-1) var(--ease-out), scale var(--dur-2) var(--ease-spring);
+  }
+  .swatch-btn:hover { scale: 1.08; }
+  .swatch-btn[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px oklch(58% .13 var(--h)); }
+  .hue-row { display: flex; align-items: center; gap: var(--space-3); }
+  .hue-row output { inline-size: 3rem; text-align: end; font-size: var(--text-sm); color: var(--text-muted); }
+  .range-hue::-webkit-slider-runnable-track { block-size: 8px; background: linear-gradient(to right in oklch longer hue, oklch(64% .13 0), oklch(64% .13 360)); }
+  .range-hue::-moz-range-track { block-size: 8px; background: linear-gradient(to right in oklch longer hue, oklch(64% .13 0), oklch(64% .13 360)); }
+
+  /* Deck styles .segmented from aria-selected; built from radios it needs
+     this one rule instead, and gets arrow keys and form submission free. */
+  .segmented > label:has(:checked) { background: var(--surface); color: var(--text); box-shadow: var(--shadow-1); }
+  .segmented > label:has(:focus-visible) { outline: 2px solid var(--focus); outline-offset: 1px; }
+
+  /* Security */
+  .card > .list, .set-control > .list { background: none; }
+  .session .list-trail { display: flex; align-items: center; gap: var(--space-2); }
+  .copy { max-inline-size: 26rem; }
+
+  /* Billing */
+  .plan {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    border-radius: var(--r-md);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand-500) 30%, transparent);
+  }
+  .plan-price { font-size: var(--text-2xl); font-weight: 660; letter-spacing: -.03em; line-height: 1; }
+  .plan-price small { font-size: var(--text-sm); font-weight: 500; letter-spacing: 0; color: var(--text-muted); }
+  .meter { display: flex; flex-direction: column; gap: var(--space-2); }
+  .meter .progress { block-size: 6px; }
+  .pay-card .btn { flex: none; }
+  .pay-card { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); border: 1px solid var(--line); border-radius: var(--r-md); }
+  .card-brand-mark { flex: none; inline-size: 42px; block-size: 28px; border-radius: 5px; display: grid; place-items: center; font-size: var(--text-2xs); font-weight: 800; font-style: italic; letter-spacing: .02em; }
+  .invoices td, .invoices th { white-space: nowrap; }
+  @container main (max-width: 30rem) { .invoices .col-plan { display: none; } }
+  .invoices .act { inline-size: 3rem; padding-inline: var(--space-2); text-align: end; }
+
+  /* Danger zone */
+  .danger { border-color: color-mix(in oklab, var(--bad-500) 45%, var(--line)); }
+  .danger .card-header { border-block-end-color: color-mix(in oklab, var(--bad-500) 25%, var(--line)); }
+  .danger-alert { margin: var(--space-5) var(--space-5) 0; }
+  @container main (min-width: 46rem) { .danger-alert { margin-inline: var(--space-6); } }
+
+  /* ----- The save bar -----
+     It pins to the bottom of the viewport and clears the home indicator on a
+     phone. env(safe-area-inset-bottom) is the whole reason it does not sit
+     underneath it. Below 48rem it also has the tab bar to clear, so it sits
+     on exactly the space Deck reserves for the tab bar (which already
+     includes the inset). */
+  .savebar {
+    position: sticky;
+    inset-block-end: calc(var(--tap) + var(--space-4) + env(safe-area-inset-bottom));
+    z-index: var(--z-sticky);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+    background: color-mix(in oklab, var(--surface) 90%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-3);
+    transition: border-color var(--dur-2) var(--ease-out);
+  }
+  @media (min-width: 48rem) {
+    .savebar { inset-block-end: calc(var(--space-4) + env(safe-area-inset-bottom)); }
+  }
+  .savebar[data-dirty] { border-color: color-mix(in oklab, var(--warn-500) 60%, var(--line)); }
+  .savebar-status { flex: 1 1 0; min-inline-size: 0; display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); line-height: 1.3; color: var(--text-muted); }
+  .savebar[data-dirty] .savebar-status { color: var(--text); font-weight: 580; }
+  .savebar .cluster { flex: none; flex-wrap: nowrap; }
+
+  /* The delete dialog. Deck's reset zeroes every margin, including the auto
+     margin the browser uses to centre a modal dialog, so it goes back here. */
+  .modal { margin: auto; }
+  .modal-header .icon-tile { inline-size: 36px; block-size: 36px; }
+  .confirm-list { display: flex; flex-direction: column; gap: var(--space-1); padding-inline-start: var(--space-5); list-style: disc; font-size: var(--text-sm); color: var(--text-muted); }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Photos are hotlinked from Unsplash for the preview. Replace them with your own. -->
+
+<!-- Icons the Deck sprite does not have: three devices for the session list. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-laptop" viewBox="0 0 24 24"><path d="M5 5.5A1.5 1.5 0 0 1 6.5 4h11A1.5 1.5 0 0 1 19 5.5V15H5ZM2.5 19h19l-1.5-4H4Z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M8.5 2.5h7a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2v-15a2 2 0 0 1 2-2ZM11 18.5h2" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><path d="M4.5 3.5h15a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2ZM8 20.5h8M12 16.5v4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ======================================================================
+     TOP BAR · shared chrome
+     One row at every width. On phones the menu button opens the drawer and
+     the search field folds into an icon; from 48rem the workspace switcher,
+     search, help and theme buttons appear.
+     ====================================================================== -->
+<header class="topbar">
+  <button class="btn btn-icon btn-ghost phone-only" type="button" data-deck-drawer="#app-nav" aria-label="Open navigation">
+    <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#menu"></use></svg>
+  </button>
+
+  <a class="brand" href="app-shell.html">
+    <span class="brand-mark g-brand" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 3.5 20.5 20h-4.7L12 12.4 8.2 20H3.5Z" fill="currentColor"/></svg>
+    </span>
+    Acme
+  </a>
+
+  <span class="topbar-slash desk-only" aria-hidden="true"></span>
+  <button class="ws-switch desk-only" type="button" popovertarget="ws-menu">
+    <span class="sr-only">Switch workspace, current:</span>
+    <span class="avatar avatar-xs avatar-square ws-logo" aria-hidden="true">N</span>
+    Northwind
+    <span class="badge badge-brand">Pro trial</span>
+    <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-down-sm"></use></svg>
+  </button>
+  <div class="menu" popover id="ws-menu">
+    <div class="menu-label">Workspaces</div>
+    <button class="menu-item" type="button" aria-current="true">
+      <span class="avatar avatar-xs avatar-square ws-logo" aria-hidden="true">N</span>
+      Northwind
+      <svg class="icon icon-sm push" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>
+    </button>
+    <button class="menu-item" type="button">
+      <span class="avatar avatar-xs avatar-square ws-logo" style="--g-ws: var(--accent-700)" aria-hidden="true">H</span>
+      Harbor Supply Co.
+    </button>
+    <button class="menu-item" type="button">
+      <span class="avatar avatar-xs avatar-square ws-logo" style="--g-ws: var(--ink-600)" aria-hidden="true">A</span>
+      Alex's sandbox
+    </button>
+    <div class="menu-sep"></div>
+    <button class="menu-item" type="button">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus"></use></svg>
+      Create workspace
+    </button>
+  </div>
+
+  <!-- Search. The <kbd> is a hint; the script at the bottom makes ⌘K / Ctrl K focus the field. -->
+  <form class="search topbar-search desk-only" role="search" action="#">
+    <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search-sm"></use></svg>
+    <input class="input" type="search" name="q" placeholder="Search orders, people, reports…" aria-label="Search" autocomplete="off">
+    <kbd aria-hidden="true" data-shortcut>⌘K</kbd>
+  </form>
+
+  <div class="topbar-end">
+    <button class="btn btn-icon btn-ghost phone-only" type="button" aria-label="Search">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#search"></use></svg>
+    </button>
+    <button class="btn btn-icon btn-ghost desk-only" type="button" aria-label="Help">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help"></use></svg>
+    </button>
+    <!-- .with-indicator pins the dot to the icon's corner. The dot says nothing
+         to a screen reader, so the count lives in the button's label. -->
+    <button class="btn btn-icon btn-ghost" type="button" popovertarget="notes-menu" aria-label="Notifications, 3 unread">
+      <span class="with-indicator">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#bell"></use></svg>
+        <span class="indicator-badge indicator-badge-dot" aria-hidden="true"></span>
+      </span>
+    </button>
+    <div class="menu" popover id="notes-menu">
+      <div class="menu-label">Notifications</div>
+      <a class="menu-item" href="#">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#dollar"></use></svg>
+        <span class="menu-note">Payout of $12,480 sent<small>2 hours ago</small></span>
+      </a>
+      <a class="menu-item" href="#">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#user"></use></svg>
+        <span class="menu-note">Priya Raman joined Northwind<small>5 hours ago</small></span>
+      </a>
+      <a class="menu-item" href="#">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#credit-card"></use></svg>
+        <span class="menu-note">Card ending 4242 expires next month<small>Yesterday</small></span>
+      </a>
+      <div class="menu-sep"></div>
+      <a class="menu-item" href="#">View all notifications</a>
+    </div>
+    <button class="btn btn-icon btn-ghost desk-only" type="button" data-deck-theme aria-label="Switch theme">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+    </button>
+    <button class="avatar-btn" type="button" popovertarget="user-menu" aria-label="Your account">
+      <span class="avatar avatar-sm">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="">
+      </span>
+    </button>
+    <div class="menu" popover id="user-menu">
+      <div class="menu-head">
+        <span class="avatar avatar-sm" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="">
+        </span>
+        <span class="menu-note"><strong class="text-sm">Alex Rivera</strong><small>alex@northwind.co</small></span>
+      </div>
+      <div class="menu-sep"></div>
+      <a class="menu-item" href="settings.html#profile">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#user"></use></svg>
+        Your profile
+      </a>
+      <a class="menu-item" href="settings.html" aria-current="page">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings"></use></svg>
+        Settings
+      </a>
+      <a class="menu-item" href="settings.html#billing">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#credit-card"></use></svg>
+        Billing
+      </a>
+      <button class="menu-item" type="button" data-deck-theme>
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        Switch theme
+      </button>
+      <div class="menu-sep"></div>
+      <a class="menu-item" href="#">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#log-out"></use></svg>
+        Log out
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+
+  <!-- ======================================================================
+       SIDEBAR · shared chrome, desktop only
+       Sticky below the top bar and exactly as tall as what is left, so the
+       usage card and your name stay pinned to the bottom while the page
+       scrolls. Move aria-current="page" to whichever link this page is, here
+       and in the drawer and tab bar below.
+       ====================================================================== -->
+  <aside class="shell-side" aria-label="Sidebar">
+    <div class="side-panel">
+      <nav class="sidebar" aria-label="Main">
+        <a class="sidebar-link" href="app-shell.html">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home-sm"></use></svg>
+          Overview
+        </a>
+        <a class="sidebar-link" href="dashboard.html">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart-sm"></use></svg>
+          Dashboard
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail-sm"></use></svg>
+          Inbox
+          <span class="badge badge-brand push">4<span class="sr-only"> unread</span></span>
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#receipt-sm"></use></svg>
+          Orders
+          <span class="badge push">12<span class="sr-only"> open</span></span>
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users-sm"></use></svg>
+          Customers
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#file-sm"></use></svg>
+          Reports
+        </a>
+
+        <p class="sidebar-group">Projects</p>
+        <a class="sidebar-link" href="#"><span class="dot" aria-hidden="true"></span>Website relaunch</a>
+        <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--accent-500)" aria-hidden="true"></span>Mobile app 2.0</a>
+        <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--good-500)" aria-hidden="true"></span>Q4 campaign</a>
+        <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--bad-500)" aria-hidden="true"></span>Partner portal</a>
+
+        <p class="sidebar-group">Workspace</p>
+        <a class="sidebar-link" href="settings.html" aria-current="page">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings-sm"></use></svg>
+          Settings
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help-sm"></use></svg>
+          Help &amp; docs
+        </a>
+      </nav>
+
+      <div class="side-foot">
+        <div class="usage">
+          <div class="bar">
+            <span class="text-sm fw-semi">Pro trial</span>
+            <span class="badge badge-warn push">9 days left</span>
+          </div>
+          <progress class="progress" value="3412" max="5000" aria-label="Orders this month">68%</progress>
+          <span class="text-xs text-muted nums">3,412 of 5,000 orders this month</span>
+          <a class="btn btn-soft btn-sm btn-block" href="settings.html#billing">Upgrade plan</a>
+        </div>
+        <a class="user-row" href="settings.html#profile">
+          <span class="avatar avatar-sm presence" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="">
+          </span>
+          <span class="grow min-is-0">
+            <span class="block text-sm fw-semi truncate">Alex Rivera</span>
+            <span class="block text-xs text-muted truncate">alex@northwind.co</span>
+          </span>
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings-sm"></use></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================
+       MAIN
+       ====================================================================== -->
+  <main id="main" class="shell-main">
+    <div class="page page-narrow">
+
+      <header class="page-head">
+        <div class="stack stack-2">
+          <nav aria-label="Breadcrumb">
+            <ol class="breadcrumb">
+              <li><a href="#">Northwind</a></li>
+              <li><a href="settings.html" aria-current="page">Settings</a></li>
+            </ol>
+          </nav>
+          <h1 class="h2">Settings</h1>
+          <p class="text-muted">Your profile, how Acme gets hold of you, and the Northwind workspace.</p>
+        </div>
+        <a class="btn" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#external-sm"></use></svg>
+          View public profile
+        </a>
+      </header>
+
+      <!-- Section tabs. In-page links rather than a tablist: every section is
+           on the page, and the script at the bottom moves .is-active as you
+           scroll. Without it, they are plain anchors. -->
+      <nav class="tabs subnav" aria-label="Settings sections">
+        <a class="tab is-active" href="#profile" aria-current="true">Profile</a>
+        <a class="tab" href="#notifications">Notifications</a>
+        <a class="tab" href="#appearance">Appearance</a>
+        <a class="tab" href="#security">Security</a>
+        <a class="tab" href="#billing">Billing</a>
+        <a class="tab" href="#danger">Danger zone</a>
+      </nav>
+
+      <form class="set-form" id="settings-form" method="post" action="#">
+
+        <!-- ===== Profile ===== -->
+        <section class="card" id="profile" aria-labelledby="profile-h">
+          <div class="card-header set-head">
+            <h2 class="card-title" id="profile-h">Profile</h2>
+            <p class="text-sm text-muted">How you appear to the rest of Northwind.</p>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title">Photo</p>
+              <p class="help">Shown beside your name in comments and the activity feed.</p>
+            </div>
+            <div class="set-control">
+              <div class="photo-row">
+                <span class="avatar avatar-xl">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&h=160&q=80&auto=format&fit=crop&crop=faces" width="80" height="80" alt="Your current photo">
+                </span>
+                <!-- .file is a real file input under a dashed drop zone. Deck
+                     styles the zone; dropping needs a handler of your own. -->
+                <label class="file">
+                  <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#upload"></use></svg>
+                  <span><strong>Upload a photo</strong> or drop one here</span>
+                  <span class="text-xs text-muted">PNG or JPG, square, up to 2 MB</span>
+                  <input type="file" name="photo" accept="image/png, image/jpeg">
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title">Name</p>
+              <p class="help">Use the name your team knows you by.</p>
+            </div>
+            <div class="set-control">
+              <div class="field-row">
+                <div class="field">
+                  <label class="label" for="first">First name</label>
+                  <input class="input" id="first" name="first" type="text" value="Alex" autocomplete="given-name" required>
+                </div>
+                <div class="field">
+                  <label class="label" for="last">Last name</label>
+                  <input class="input" id="last" name="last" type="text" value="Rivera" autocomplete="family-name">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <label class="label" for="email">Email address</label>
+              <p class="help" id="email-help">Used to sign in, and where receipts go.</p>
+            </div>
+            <div class="set-control">
+              <div class="input-group">
+                <input class="input" id="email" name="email" type="email" value="alex@northwind.co" autocomplete="email" aria-describedby="email-help email-ok">
+                <span class="addon" id="email-ok">
+                  <span class="badge badge-good">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg>
+                    Verified
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <label class="label" for="username">Username</label>
+              <p class="help" id="username-help">Letters, numbers and dashes. Changing it breaks links to your old profile.</p>
+            </div>
+            <div class="set-control">
+              <div class="input-group">
+                <span class="addon">acme.app/</span>
+                <input class="input" id="username" name="username" type="text" value="alex-rivera" autocomplete="username" pattern="[a-z0-9\-]+" spellcheck="false" aria-describedby="username-help">
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <label class="label" for="bio">Bio <span class="optional">Optional</span></label>
+              <p class="help" id="bio-help">A line or two for your profile card.</p>
+            </div>
+            <div class="set-control">
+              <textarea class="textarea" id="bio" name="bio" rows="3" maxlength="200" aria-describedby="bio-help bio-count">Runs operations at Northwind. Usually found in the orders queue, or in Denver with a bike.</textarea>
+              <div class="count-row help">
+                <span>Plain text. Links become clickable.</span>
+                <span class="push nums" id="bio-count" data-count>90 / 200</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title">Region</p>
+              <p class="help">Dates, times and reports follow these.</p>
+            </div>
+            <div class="set-control">
+              <div class="field-row">
+                <div class="field">
+                  <label class="label" for="tz">Time zone</label>
+                  <select class="select" id="tz" name="tz">
+                    <option>Pacific Time (UTC−7)</option>
+                    <option selected>Mountain Time (UTC−6)</option>
+                    <option>Central Time (UTC−5)</option>
+                    <option>Eastern Time (UTC−4)</option>
+                    <option>London (UTC+1)</option>
+                    <option>Lisbon (UTC+1)</option>
+                    <option>Tokyo (UTC+9)</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label" for="lang">Language</label>
+                  <select class="select" id="lang" name="lang">
+                    <option selected>English (US)</option>
+                    <option>English (UK)</option>
+                    <option>Español</option>
+                    <option>Português</option>
+                    <option>日本語</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Notifications ===== -->
+        <section class="card" id="notifications" aria-labelledby="notifications-h">
+          <div class="card-header set-head">
+            <h2 class="card-title" id="notifications-h">Notifications</h2>
+            <p class="text-sm text-muted">Decide what is worth an interruption.</p>
+          </div>
+
+          <div class="set-row" role="group" aria-labelledby="n-activity">
+            <div class="set-label">
+              <p class="set-title" id="n-activity">Activity</p>
+              <p class="help">About you and the things you own.</p>
+            </div>
+            <!-- role="switch" makes a screen reader say on/off rather than
+                 checked/not checked, which is what a switch means. -->
+            <div class="set-control switch-list">
+              <label class="switch switch-row">
+                <span class="switch-text">
+                  <span class="fw-medium">Mentions and replies</span>
+                  <span class="help">When someone @mentions you, or replies in a thread you follow.</span>
+                </span>
+                <input type="checkbox" role="switch" name="notify_mentions" checked>
+              </label>
+              <label class="switch switch-row">
+                <span class="switch-text">
+                  <span class="fw-medium">Assigned to me</span>
+                  <span class="help">Orders, refunds and tasks that land on your plate.</span>
+                </span>
+                <input type="checkbox" role="switch" name="notify_assign" checked>
+              </label>
+              <label class="switch switch-row">
+                <span class="switch-text">
+                  <span class="fw-medium">Weekly digest</span>
+                  <span class="help">Revenue, orders and goals, every Monday at 8:00.</span>
+                </span>
+                <input type="checkbox" role="switch" name="notify_digest">
+              </label>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title" id="n-channels">Channels</p>
+              <p class="help">Where each kind of event reaches you. Push goes to the iOS and Android apps.</p>
+            </div>
+            <div class="set-control">
+              <div class="table-wrap">
+                <table class="table table-compact matrix" aria-labelledby="n-channels">
+                  <thead>
+                    <tr>
+                      <th scope="col">Event</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Push</th>
+                      <th scope="col">SMS</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">New order</th>
+                      <td><label class="check"><input type="checkbox" name="ch_order_email" aria-label="New order, email"></label></td>
+                      <td><label class="check"><input type="checkbox" name="ch_order_push" aria-label="New order, push" checked></label></td>
+                      <td><label class="check"><input type="checkbox" name="ch_order_sms" aria-label="New order, SMS"></label></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Refund requested</th>
+                      <td><label class="check"><input type="checkbox" name="ch_refund_email" aria-label="Refund requested, email" checked></label></td>
+                      <td><label class="check"><input type="checkbox" name="ch_refund_push" aria-label="Refund requested, push" checked></label></td>
+                      <td><label class="check"><input type="checkbox" name="ch_refund_sms" aria-label="Refund requested, SMS"></label></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Payout sent</th>
+                      <td><label class="check"><input type="checkbox" name="ch_payout_email" aria-label="Payout sent, email" checked></label></td>
+                      <td><label class="check"><input type="checkbox" name="ch_payout_push" aria-label="Payout sent, push"></label></td>
+                      <td><label class="check"><input type="checkbox" name="ch_payout_sms" aria-label="Payout sent, SMS"></label></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Failed payment</th>
+                      <td><label class="check"><input type="checkbox" name="ch_failed_email" aria-label="Failed payment, email" checked></label></td>
+                      <td><label class="check"><input type="checkbox" name="ch_failed_push" aria-label="Failed payment, push" checked></label></td>
+                      <td><label class="check"><input type="checkbox" name="ch_failed_sms" aria-label="Failed payment, SMS" checked></label></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title">Quiet hours</p>
+              <p class="help" id="quiet-help">Nothing but failed payments is sent between these times, in your time zone.</p>
+            </div>
+            <div class="set-control">
+              <div class="pair">
+                <div class="field">
+                  <label class="label" for="quiet-from">From</label>
+                  <input class="input" id="quiet-from" name="quiet_from" type="time" value="22:00" aria-describedby="quiet-help">
+                </div>
+                <div class="field">
+                  <label class="label" for="quiet-to">Until</label>
+                  <input class="input" id="quiet-to" name="quiet_to" type="time" value="08:00" aria-describedby="quiet-help">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Appearance ===== -->
+        <section class="card" id="appearance" aria-labelledby="appearance-h">
+          <div class="card-header set-head">
+            <h2 class="card-title" id="appearance-h">Appearance</h2>
+            <p class="text-sm text-muted">Applies on this device as soon as you choose.</p>
+          </div>
+
+          <div class="set-row" role="radiogroup" aria-labelledby="theme-t">
+            <div class="set-label">
+              <p class="set-title" id="theme-t">Theme</p>
+              <p class="help">System follows your device's light and dark setting.</p>
+            </div>
+            <!-- .check-card is a .check drawn as a selectable card; it
+                 highlights itself with :has(input:checked). -->
+            <div class="set-control">
+              <div class="theme-grid">
+                <label class="check check-card theme-opt">
+                  <input type="radio" name="theme" value="system" checked>
+                  <span class="check-text">System</span>
+                  <span class="theme-preview" aria-hidden="true"><span class="tp tp-light"><i></i><i></i><i></i></span><span class="tp tp-dark"><i></i><i></i><i></i></span></span>
+                </label>
+                <label class="check check-card theme-opt">
+                  <input type="radio" name="theme" value="light">
+                  <span class="check-text">Light</span>
+                  <span class="theme-preview" aria-hidden="true"><span class="tp tp-light"><i></i><i></i><i></i></span></span>
+                </label>
+                <label class="check check-card theme-opt">
+                  <input type="radio" name="theme" value="dark">
+                  <span class="check-text">Dark</span>
+                  <span class="theme-preview" aria-hidden="true"><span class="tp tp-dark"><i></i><i></i><i></i></span></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <label class="label" for="hue">Accent colour</label>
+              <p class="help" id="hue-help">Drag it. Every colour on the page follows.</p>
+            </div>
+            <!-- Deck.hue() retunes the entire palette from one number. Every
+                 colour in the framework derives from it, so this one slider
+                 rebrands the whole page live. The presets just set the slider. -->
+            <div class="set-control">
+              <div class="swatches" role="group" aria-label="Preset accents">
+                <button class="swatch-btn" type="button" style="--h: 196" data-hue="196" aria-pressed="true" aria-label="Harbor teal"></button>
+                <button class="swatch-btn" type="button" style="--h: 262" data-hue="262" aria-pressed="false" aria-label="Indigo"></button>
+                <button class="swatch-btn" type="button" style="--h: 300" data-hue="300" aria-pressed="false" aria-label="Violet"></button>
+                <button class="swatch-btn" type="button" style="--h: 12" data-hue="12" aria-pressed="false" aria-label="Rose"></button>
+                <button class="swatch-btn" type="button" style="--h: 58" data-hue="58" aria-pressed="false" aria-label="Amber"></button>
+                <button class="swatch-btn" type="button" style="--h: 150" data-hue="150" aria-pressed="false" aria-label="Green"></button>
+              </div>
+              <div class="hue-row">
+                <input class="range range-hue" id="hue" name="hue" type="range"
+                       min="0" max="360" value="196" aria-describedby="hue-help"
+                       oninput="Deck.hue(this.value)">
+                <output class="nums" for="hue" data-hue-out>196°</output>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row" role="radiogroup" aria-labelledby="density-t">
+            <div class="set-label">
+              <p class="set-title" id="density-t">Density</p>
+              <p class="help">Compact fits more rows on a screen; comfortable is easier to tap.</p>
+            </div>
+            <div class="set-control">
+              <div class="segmented">
+                <label><input class="sr-only" type="radio" name="density" value="comfortable">Comfortable</label>
+                <label><input class="sr-only" type="radio" name="density" value="default" checked>Default</label>
+                <label><input class="sr-only" type="radio" name="density" value="compact">Compact</label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Security ===== -->
+        <section class="card" id="security" aria-labelledby="security-h">
+          <div class="card-header set-head">
+            <h2 class="card-title" id="security-h">Security</h2>
+            <p class="text-sm text-muted">Sign-in, sessions and API access.</p>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title">Password</p>
+              <p class="help">Last changed on July 2, 2026.</p>
+            </div>
+            <div class="set-control">
+              <div class="field">
+                <label class="label" for="pw-now">Current password</label>
+                <input class="input" id="pw-now" name="password_current" type="password" autocomplete="current-password">
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="label" for="pw-new">New password</label>
+                  <input class="input" id="pw-new" name="password_new" type="password" autocomplete="new-password" minlength="12" aria-describedby="pw-help">
+                </div>
+                <div class="field">
+                  <label class="label" for="pw-again">Confirm</label>
+                  <input class="input" id="pw-again" name="password_again" type="password" autocomplete="new-password" minlength="12">
+                </div>
+              </div>
+              <p class="help" id="pw-help">At least 12 characters. A long passphrase beats a clever one.</p>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title">Two-factor <span class="badge badge-good badge-dot">On</span></p>
+              <p class="help">A code from your authenticator app, every time you sign in on a new device.</p>
+            </div>
+            <div class="set-control">
+              <label class="switch switch-row">
+                <span class="switch-text">
+                  <span class="fw-medium">Authenticator app</span>
+                  <span class="help">1Password · added March 12, 2026</span>
+                </span>
+                <input type="checkbox" role="switch" name="twofa" checked>
+              </label>
+              <div class="cluster cluster-tight">
+                <button class="btn btn-sm" type="button">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#eye-sm"></use></svg>
+                  Recovery codes
+                </button>
+                <button class="btn btn-sm btn-ghost" type="button">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#plus-sm"></use></svg>
+                  Add a security key
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <label class="label" for="idle">Sign out when idle</label>
+              <p class="help" id="idle-help">Applies to every browser you are signed in on.</p>
+            </div>
+            <!-- .number is the stepper from deck-extras.js: press and hold
+                 either button to repeat. -->
+            <div class="set-control">
+              <div class="number">
+                <button type="button" aria-label="One day fewer">−</button>
+                <input id="idle" name="idle_days" type="number" value="14" min="1" max="90" aria-describedby="idle-help">
+                <button type="button" aria-label="One day more">+</button>
+                <span class="number-unit">days</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title">Active sessions</p>
+              <p class="help">Anywhere you are signed in right now. Do not recognise one? Sign it out, then change your password.</p>
+            </div>
+            <div class="set-control">
+              <div class="list session">
+                <div class="list-row">
+                  <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="#i-laptop"></use></svg></span>
+                  <span class="list-main">
+                    <span class="list-title">MacBook Pro · Chrome</span>
+                    <span class="list-sub">Denver, US · active now</span>
+                  </span>
+                  <span class="list-trail"><span class="badge badge-good">This device</span></span>
+                </div>
+                <div class="list-row">
+                  <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="#i-phone"></use></svg></span>
+                  <span class="list-main">
+                    <span class="list-title">iPhone 15 · Acme app</span>
+                    <span class="list-sub">Denver, US · 2 hours ago</span>
+                  </span>
+                  <span class="list-trail"><button class="btn btn-sm" type="button" aria-label="Sign out iPhone 15">Sign out</button></span>
+                </div>
+                <div class="list-row">
+                  <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="#i-monitor"></use></svg></span>
+                  <span class="list-main">
+                    <span class="list-title">Windows · Edge</span>
+                    <span class="list-sub">Austin, US · Sep 29</span>
+                  </span>
+                  <span class="list-trail"><button class="btn btn-sm" type="button" aria-label="Sign out Windows, Edge">Sign out</button></span>
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-sm btn-ghost" type="button">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#log-out-sm"></use></svg>
+                  Sign out of all other sessions
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title">API token</p>
+              <p class="help">For scripts and integrations. Treat it like a password.</p>
+            </div>
+            <!-- .copy and data-deck-copy come from deck-extras.js. -->
+            <div class="set-control">
+              <div class="copy">
+                <code>acme_test_8f2c41d0e97b5a36</code>
+                <button type="button" class="copy-btn" data-deck-copy aria-label="Copy API token">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#copy"></use></svg>
+                  <span>Copy</span>
+                </button>
+              </div>
+              <div>
+                <button class="btn btn-sm btn-ghost" type="button">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#refresh-sm"></use></svg>
+                  Regenerate
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Billing ===== -->
+        <section class="card" id="billing" aria-labelledby="billing-h">
+          <div class="card-header set-head">
+            <h2 class="card-title" id="billing-h">Billing</h2>
+            <p class="text-sm text-muted">For the whole Northwind workspace. Only owners and admins see this.</p>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title">Plan</p>
+              <p class="help">Your trial ends on October 15. Nothing is charged until you choose.</p>
+            </div>
+            <div class="set-control">
+              <div class="plan g-brand-soft">
+                <div class="stack stack-2 grow">
+                  <div class="cluster cluster-tight">
+                    <span class="fw-semi">Pro</span>
+                    <span class="badge badge-warn">Trial · 9 days left</span>
+                  </div>
+                  <p class="plan-price nums">$49 <small>per month after the trial</small></p>
+                </div>
+                <div class="cluster cluster-tight">
+                  <button class="btn btn-sm btn-ghost" type="button">Compare plans</button>
+                  <button class="btn btn-sm btn-outline" type="button">Upgrade now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title">Usage this month</p>
+              <p class="help">Resets on November 1.</p>
+            </div>
+            <div class="set-control">
+              <div class="meter">
+                <div class="bar text-sm"><span>Orders</span><span class="push nums text-muted">3,412 of 5,000</span></div>
+                <progress class="progress" value="3412" max="5000" aria-label="Orders this month">68%</progress>
+              </div>
+              <div class="meter">
+                <div class="bar text-sm"><span>Team seats</span><span class="push nums text-muted">7 of 10</span></div>
+                <progress class="progress" value="7" max="10" aria-label="Team seats">70%</progress>
+              </div>
+              <div class="meter">
+                <div class="bar text-sm"><span>File storage</span><span class="push nums text-muted">6.2 of 10 GB</span></div>
+                <progress class="progress" value="62" max="100" aria-label="File storage">62%</progress>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title">Payment method</p>
+              <p class="help">Charged on the 1st of each month.</p>
+            </div>
+            <div class="set-control">
+              <div class="pay-card">
+                <span class="card-brand-mark g-brand" aria-hidden="true">VISA</span>
+                <span class="grow min-is-0">
+                  <span class="block text-sm fw-semi">Visa ending 4242</span>
+                  <span class="cluster cluster-tight text-xs text-muted">Expires 11/2026 <span class="badge badge-warn">Expires soon</span></span>
+                </span>
+                <button class="btn btn-sm" type="button">Update</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title" id="inv-t">Invoices</p>
+              <p class="help">Sent to billing@northwind.co as well.</p>
+            </div>
+            <div class="set-control">
+              <div class="table-wrap">
+                <table class="table table-compact invoices" aria-labelledby="inv-t">
+                  <thead>
+                    <tr>
+                      <th scope="col">Date</th>
+                      <th scope="col" class="col-plan">Plan</th>
+                      <th scope="col" class="num">Amount</th>
+                      <th scope="col">Status</th>
+                      <th scope="col" class="act"><span class="sr-only">Download</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Sep 1, 2026</td>
+                      <td class="text-muted col-plan">Starter</td>
+                      <td class="num">$19.00</td>
+                      <td><span class="badge badge-good">Paid</span></td>
+                      <td class="act"><a class="btn btn-icon btn-ghost btn-sm" href="#" aria-label="Download the September 2026 invoice"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#download-sm"></use></svg></a></td>
+                    </tr>
+                    <tr>
+                      <td>Aug 1, 2026</td>
+                      <td class="text-muted col-plan">Starter</td>
+                      <td class="num">$19.00</td>
+                      <td><span class="badge badge-good">Paid</span></td>
+                      <td class="act"><a class="btn btn-icon btn-ghost btn-sm" href="#" aria-label="Download the August 2026 invoice"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#download-sm"></use></svg></a></td>
+                    </tr>
+                    <tr>
+                      <td>Jul 1, 2026</td>
+                      <td class="text-muted col-plan">Starter</td>
+                      <td class="num">$19.00</td>
+                      <td><span class="badge badge-good">Paid</span></td>
+                      <td class="act"><a class="btn btn-icon btn-ghost btn-sm" href="#" aria-label="Download the July 2026 invoice"><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#download-sm"></use></svg></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Danger zone ===== -->
+        <section class="card danger" id="danger" aria-labelledby="danger-h">
+          <div class="card-header set-head">
+            <h2 class="card-title" id="danger-h">Danger zone</h2>
+            <p class="text-sm text-muted">Workspace-wide actions. Only the owner can do these.</p>
+          </div>
+
+          <div class="alert alert-warn danger-alert">
+            <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#alert-triangle"></use></svg>
+            <div>
+              <div class="alert-title">Deleting is permanent</div>
+              <p class="alert-body">
+                Everything in this workspace goes with it, and we cannot get it
+                back. Export first if there is any doubt.
+              </p>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title">Export workspace data</p>
+              <p class="help">Orders, customers and reports as CSV files, emailed to you within the hour.</p>
+            </div>
+            <div class="set-control">
+              <div>
+                <button class="btn" type="button">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#download-sm"></use></svg>
+                  Export everything
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-row">
+            <div class="set-label">
+              <p class="set-title">Delete this workspace</p>
+              <p class="help">Removes Northwind for all 7 members, cancels the plan and stops payouts.</p>
+            </div>
+            <div class="set-control">
+              <div>
+                <button class="btn btn-danger" type="button" data-open-delete>
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#trash-sm"></use></svg>
+                  Delete workspace…
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Save bar ===== -->
+        <div class="savebar" role="region" aria-label="Save settings">
+          <p class="savebar-status" aria-live="polite">
+            <span class="indicator" data-dot aria-hidden="true"></span>
+            <span data-status>Changes apply when you save</span>
+          </p>
+          <div class="cluster cluster-tight">
+            <button class="btn btn-ghost" type="reset">Discard</button>
+            <button class="btn btn-primary" type="submit"><span>Save<span class="desk-only"> changes</span></span></button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </main>
+</div>
+
+<!-- ======================================================================
+     DELETE DIALOG
+     A native <dialog>, outside the settings form (forms do not nest). Opened
+     with showModal(), which gives it the backdrop, the focus trap and an inert
+     page behind it. method="dialog" closes it with no script; the delete
+     button stays disabled until the workspace name is typed.
+     ====================================================================== -->
+<dialog class="modal" id="delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-desc">
+  <form method="dialog">
+    <div class="modal-header">
+      <span class="icon-tile icon-tile-bad" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#trash"></use></svg></span>
+      <div class="grow">
+        <h2 class="modal-title" id="delete-title">Delete Northwind?</h2>
+        <p class="text-sm text-muted" id="delete-desc">This cannot be undone.</p>
+      </div>
+      <button class="btn btn-icon btn-ghost btn-sm" value="cancel" aria-label="Close">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x"></use></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p class="text-sm">Deleting the workspace removes, for everyone:</p>
+      <ul class="confirm-list">
+        <li>1,284 orders and 2,418 customers</li>
+        <li>6 projects, 14 saved reports and every file</li>
+        <li>Access for all 7 members, immediately</li>
+      </ul>
+      <div class="field">
+        <label class="label" for="confirm-name">Type <strong class="mono">northwind</strong> to confirm</label>
+        <input class="input" id="confirm-name" type="text" autocomplete="off" spellcheck="false" data-confirm="northwind" autofocus>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" value="cancel">Cancel</button>
+      <button class="btn btn-danger" value="delete" data-confirm-btn disabled>Delete workspace</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ======================================================================
+     DRAWER · shared chrome, phones only (needs deck-extras.js)
+     The sidebar again, in a native <dialog>. The menu button in the top bar
+     opens it with data-deck-drawer; Escape, the backdrop and the close
+     button shut it. It holds everything the tab bar has no room for.
+     ====================================================================== -->
+<dialog class="drawer" id="app-nav" aria-labelledby="app-nav-title">
+  <div class="drawer-header">
+    <span class="avatar avatar-sm avatar-square ws-logo" aria-hidden="true">N</span>
+    <div class="grow min-is-0">
+      <h2 class="drawer-title" id="app-nav-title">Northwind</h2>
+      <p class="text-xs text-muted">Acme · Pro trial, 9 days left</p>
+    </div>
+    <button class="btn btn-sm btn-ghost btn-icon" type="button" data-drawer-close aria-label="Close navigation">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x"></use></svg>
+    </button>
+  </div>
+  <div class="drawer-body">
+    <nav class="sidebar" aria-label="Main">
+      <a class="sidebar-link" href="app-shell.html">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home-sm"></use></svg>
+        Overview
+      </a>
+      <a class="sidebar-link" href="dashboard.html">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart-sm"></use></svg>
+        Dashboard
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail-sm"></use></svg>
+        Inbox
+        <span class="badge badge-brand push">4<span class="sr-only"> unread</span></span>
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#receipt-sm"></use></svg>
+        Orders
+        <span class="badge push">12<span class="sr-only"> open</span></span>
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users-sm"></use></svg>
+        Customers
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#file-sm"></use></svg>
+        Reports
+      </a>
+
+      <p class="sidebar-group">Projects</p>
+      <a class="sidebar-link" href="#"><span class="dot" aria-hidden="true"></span>Website relaunch</a>
+      <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--accent-500)" aria-hidden="true"></span>Mobile app 2.0</a>
+      <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--good-500)" aria-hidden="true"></span>Q4 campaign</a>
+      <a class="sidebar-link" href="#"><span class="dot" style="--dot: var(--bad-500)" aria-hidden="true"></span>Partner portal</a>
+
+      <p class="sidebar-group">Workspace</p>
+      <a class="sidebar-link" href="settings.html" aria-current="page">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings-sm"></use></svg>
+        Settings
+      </a>
+      <a class="sidebar-link" href="#">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help-sm"></use></svg>
+        Help &amp; docs
+      </a>
+    </nav>
+    <div class="usage">
+      <div class="bar">
+        <span class="text-sm fw-semi">Pro trial</span>
+        <span class="badge badge-warn push">9 days left</span>
+      </div>
+      <progress class="progress" value="3412" max="5000" aria-label="Orders this month">68%</progress>
+      <span class="text-xs text-muted nums">3,412 of 5,000 orders this month</span>
+      <a class="btn btn-soft btn-sm btn-block" href="settings.html#billing">Upgrade plan</a>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <a class="user-row" href="settings.html#profile">
+      <span class="avatar avatar-sm" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&q=80&auto=format&fit=crop&crop=faces" width="32" height="32" alt="" loading="lazy" decoding="async">
+      </span>
+      <span class="grow min-is-0">
+        <span class="block text-sm fw-semi truncate">Alex Rivera</span>
+        <span class="block text-xs text-muted truncate">alex@northwind.co</span>
+      </span>
+    </a>
+    <button class="btn btn-icon btn-ghost" type="button" data-deck-theme aria-label="Switch theme">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+    </button>
+  </div>
+</dialog>
+
+<!-- ======================================================================
+     TAB BAR · shared chrome, phones only
+     Deck hides it at 48rem and pads the bottom of the page so it never
+     covers the last row: you do not have to do either.
+     ====================================================================== -->
+<nav class="tabbar" aria-label="Primary">
+  <a class="tabbar-item" href="app-shell.html">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#home"></use></svg>
+    Overview
+  </a>
+  <a class="tabbar-item" href="dashboard.html">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart"></use></svg>
+    Dashboard
+  </a>
+  <a class="tabbar-item" href="#">
+    <span class="with-indicator">
+      <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#mail"></use></svg>
+      <span class="indicator-badge indicator-badge-brand" aria-hidden="true">4</span>
+    </span>
+    Inbox<span class="sr-only">, 4 unread</span>
+  </a>
+  <a class="tabbar-item" href="#">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#receipt"></use></svg>
+    Orders
+  </a>
+  <a class="tabbar-item" href="settings.html" aria-current="page">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings"></use></svg>
+    Settings
+  </a>
+</nav>
+
+<script>
+  /* Shared chrome: ⌘K (Ctrl K off a Mac) focuses the search field. */
+  (() => {
+    const q = document.querySelector('.topbar-search .input');
+    const mac = /Mac|iPhone|iPad/.test(navigator.platform);
+    if (!mac) document.querySelectorAll('[data-shortcut]').forEach((k) => { k.textContent = 'Ctrl K'; });
+    addEventListener('keydown', (e) => {
+      if ((mac ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === 'k' && q && q.offsetParent) {
+        e.preventDefault();
+        q.focus();
+      }
+    });
+  })();
+</script>
+
+<script>
+  /* ===== Settings page behaviour. All of it is optional: without this the
+     form still submits, the tabs still jump, and the hue slider still works. */
+  (() => {
+    const form = document.getElementById('settings-form');
+    const bar = form.querySelector('.savebar');
+    const status = bar.querySelector('[data-status]');
+    const dot = bar.querySelector('[data-dot]');
+
+    /* Save bar: "Unsaved changes" only once something has changed. */
+    const mark = (dirty, text) => {
+      bar.toggleAttribute('data-dirty', dirty);
+      status.textContent = text;
+      dot.className = 'indicator ' + (dirty ? 'indicator-warn' : 'indicator-good');
+    };
+    mark(false, 'No unsaved changes');
+    form.addEventListener('input', () => mark(true, 'Unsaved changes'));
+    form.addEventListener('change', () => mark(true, 'Unsaved changes'));
+    form.addEventListener('reset', () => setTimeout(() => {
+      Deck.hue(hue.value);
+      sync();
+      count();
+      mark(false, 'Changes discarded');
+    }));
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();   /* a demo: post it for real in your app */
+      mark(false, 'Saved just now');
+      Deck.toast({ kind: 'good', title: 'Settings saved', text: 'Your changes are live for this workspace.' });
+    });
+
+    /* Bio character count. */
+    const bio = document.getElementById('bio');
+    const out = document.querySelector('[data-count]');
+    const count = () => { out.textContent = `${bio.value.length} / ${bio.maxLength}`; };
+    bio.addEventListener('input', count);
+    count();
+
+    /* Accent: presets set the slider, the slider calls Deck.hue(). */
+    const hue = document.getElementById('hue');
+    const hueOut = document.querySelector('[data-hue-out]');
+    const swatches = document.querySelectorAll('[data-hue]');
+    const sync = () => {
+      hueOut.textContent = hue.value + '°';
+      swatches.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.hue === hue.value)));
+    };
+    hue.addEventListener('input', sync);
+    swatches.forEach((b) => b.addEventListener('click', () => {
+      hue.value = b.dataset.hue;
+      hue.dispatchEvent(new Event('input', { bubbles: true }));
+    }));
+
+    /* Theme radios drive Deck.theme(); "system" clears the stored choice. */
+    const radios = form.querySelectorAll('input[name="theme"]');
+    radios.forEach((r) => r.addEventListener('change', () => {
+      if (r.value === 'system') {
+        document.documentElement.removeAttribute('data-theme');
+        try { localStorage.removeItem('deck-theme'); } catch (e) {}
+      } else {
+        Deck.theme(r.value);
+      }
+    }));
+    const showTheme = () => {
+      const t = document.documentElement.getAttribute('data-theme') || 'system';
+      radios.forEach((r) => { r.checked = r.value === t; });
+    };
+    document.addEventListener('click', (e) => { if (e.target.closest('[data-deck-theme]')) setTimeout(showTheme); });
+    addEventListener('DOMContentLoaded', () => setTimeout(showTheme));   /* after deck.js restores a saved theme */
+
+    /* Section tabs follow the scroll. */
+    const tabs = [...document.querySelectorAll('.subnav .tab')];
+    const strip = document.querySelector('.subnav');
+    const spy = new IntersectionObserver((entries) => {
+      entries.filter((en) => en.isIntersecting).forEach((en) => {
+        tabs.forEach((t) => {
+          const on = t.hash === '#' + en.target.id;
+          t.classList.toggle('is-active', on);
+          on ? t.setAttribute('aria-current', 'true') : t.removeAttribute('aria-current');
+          if (on) strip.scrollTo({ left: t.offsetLeft - 16, behavior: 'smooth' });
+        });
+      });
+    }, { rootMargin: '-25% 0px -70% 0px' });
+    tabs.forEach((t) => { const s = document.querySelector(t.hash); if (s) spy.observe(s); });
+
+    /* Delete dialog: showModal(), and a typed confirmation. */
+    const dlg = document.getElementById('delete-dialog');
+    const confirmInput = dlg.querySelector('[data-confirm]');
+    const confirmBtn = dlg.querySelector('[data-confirm-btn]');
+    document.querySelector('[data-open-delete]').addEventListener('click', () => {
+      confirmInput.value = '';
+      confirmBtn.disabled = true;
+      dlg.showModal();
+    });
+    confirmInput.addEventListener('input', () => {
+      confirmBtn.disabled = confirmInput.value.trim().toLowerCase() !== confirmInput.dataset.confirm;
+    });
+    dlg.addEventListener('close', () => {
+      if (dlg.returnValue === 'delete') {
+        Deck.toast({ kind: 'warn', title: 'Northwind is scheduled for deletion', text: 'You have 24 hours to change your mind.' });
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Checkout · Halden · Deck template</title>
+<meta name="description" content="Halden's one-page checkout: express wallets, contact and address fields with the autocomplete tokens browsers fill, shipping options as cards, card payment, and an order summary that folds into the top of the page on a phone.">
+<meta name="theme-color" content="#a4503a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23a4503a'/%3E%3Cpath d='M9 26V14a7 7 0 0 1 14 0v12M13.5 26v-9a2.5 2.5 0 0 1 5 0v9' fill='none' stroke='%23fbeee8' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+
+<style>
+@layer app.pages {
+  /* Deck lets a .btn inside an .input-group shrink along with the input, so a
+     nowrap label runs into its own padding on a narrow row. The input is the
+     one that should give. */
+  .input-group > .btn { flex: none; }
+
+
+  /* ===== Brand =====
+     Same block as ecommerce.html and product.html: fired clay on warm paper. */
+  :root {
+    --hue-brand: 32;
+    --chroma-brand: .125;
+    --hue-accent: 70;
+    --hue-neutral: 60;
+    --chroma-neutral: .007;
+    --font-display: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    /* Deck's --good-700 is a light-mode ink; on the dark surface it needs
+       lifting, so the savings line and the lock icons use this instead. */
+    --good-ink: light-dark(var(--good-700), oklch(78% .12 var(--hue-good)));
+  }
+  :is(h1, .serif) { font-weight: 500; letter-spacing: -.018em; }
+
+  /* ===== Minimal header =====
+     Checkout drops the navigation on purpose: the only ways out are the logo
+     and "Back to bag". */
+  .co-header { border-block-end: 1px solid var(--line); background: var(--surface); }
+  .co-header-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-3); min-block-size: 4.25rem; }
+  .logo { font-family: var(--font-display); font-weight: 500; font-size: 1.2rem; letter-spacing: .2em; text-transform: uppercase; }
+  .logo-mark { inline-size: 1.35em; block-size: 1.35em; color: var(--brand); stroke-width: 2; }
+  .co-secure { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); font-weight: 560; color: var(--text-muted); }
+  .co-secure .icon { color: var(--good-ink); }
+  .co-header-end { justify-self: end; display: flex; align-items: center; gap: var(--space-1); }
+  .back-link { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); font-weight: 560; color: var(--text); text-decoration: none; padding: var(--space-2); }
+  .back-link:hover { color: var(--brand); }
+  @media (max-width: 40rem) {
+    .co-header-row { grid-template-columns: auto 1fr auto; }
+    /* Visually hidden, not display:none, so the words still name the link. */
+    .co-secure-text, .back-text { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .co-secure { justify-self: center; }
+  }
+
+  /* ===== Page top: title and stepper ===== */
+  .co-top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-4) var(--space-8); padding-block: var(--space-8) var(--space-6); }
+  .co-top h1 { font-size: clamp(2rem, 1.5rem + 1.6vw, 2.75rem); }
+  .co-steps { flex: 1 1 28rem; max-inline-size: 34rem; padding: 0; margin: 0; list-style: none; }
+  .co-steps .step { min-inline-size: 0; }
+  .co-steps .step-label a { color: inherit; }
+  /* Deck draws a done step as a filled disc with a square in it; a real
+     check reads better at a checkout, so the square goes and an icon sits
+     on the disc instead. */
+  .co-steps .step-marker { position: relative; }
+  .co-steps .step.is-done .step-marker::before { background-image: none; }
+  .step-check { position: absolute; inset-inline-start: 5px; inset-block-start: 50%; translate: 0 -50%; inline-size: 16px; block-size: 16px; color: var(--text-on-brand); stroke-width: 2.5; }
+  @media (max-width: 40rem) { .co-steps .step-note { display: none; } }
+
+  /* ===== Layout =====
+     The summary comes first in the markup so a phone shows it at the top;
+     from 64rem .split's rail is moved to the end column with grid placement,
+     which leaves the reading order alone. */
+  .co-grid { --gap: var(--space-6); }
+  @media (min-width: 64rem) {
+    .co-grid { --gap: var(--space-12); align-items: start; }
+    .co-summary { grid-column: 2; grid-row: 1; position: sticky; inset-block-start: var(--space-6); }
+    .co-form { grid-column: 1; grid-row: 1; }
+  }
+
+  /* ===== Order summary =====
+     A native <details>: closed on a phone, with the total in the summary
+     line; open and toggle-less from 64rem. The script opens it at that width
+     and the ::details-content rule covers browsers that can style it. */
+  .order-panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); overflow: clip; }
+  .order-panel > summary {
+    display: flex; align-items: center; gap: var(--space-3);
+    min-block-size: 3.5rem; padding: var(--space-3) var(--space-4);
+    list-style: none; cursor: pointer; font-weight: 600;
+  }
+  .order-panel > summary::-webkit-details-marker { display: none; }
+  .order-panel > summary:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+  .order-chev { transition: rotate var(--dur-2) var(--ease-out); color: var(--text-muted); }
+  .order-panel[open] .order-chev { rotate: 180deg; }
+  .order-show { color: var(--brand); }
+  .order-panel[open] .order-show-closed, .order-panel:not([open]) .order-show-open { display: none; }
+  .order-total { margin-inline-start: auto; font-size: var(--text-md); font-variant-numeric: tabular-nums; }
+  .order-body { padding: var(--space-5); border-block-start: 1px solid var(--line); display: flex; flex-direction: column; gap: var(--space-5); }
+  .order-title { display: none; font-family: var(--font-display); font-weight: 500; font-size: var(--text-xl); }
+  @media (min-width: 64rem) {
+    .order-panel { background: var(--surface-2); }
+    .order-panel > summary { display: none; }
+    .order-panel::details-content { content-visibility: visible; block-size: auto; }
+    .order-body { border: 0; padding: var(--space-6); }
+    .order-title { display: block; }
+  }
+
+  .lines { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-4); }
+  .line { display: flex; align-items: center; gap: var(--space-4); }
+  .line-thumb { flex: 0 0 auto; }
+  .line-thumb img { inline-size: 64px; block-size: 64px; border-radius: var(--r-sm); object-fit: cover; background: var(--bg-sunken); border: 1px solid var(--line); }
+  /* The quantity badge: Deck's .indicator-badge, re-inked so it reads as a
+     count rather than an alert. */
+  .line-thumb .indicator-badge { background: var(--ink-600); color: var(--ink-0); inset-block-start: -7px; inset-inline-end: -7px; box-shadow: 0 0 0 2px var(--surface-2); }
+  .line-main { min-inline-size: 0; flex: 1 1 auto; display: flex; flex-direction: column; gap: 2px; }
+  .line-name { font-weight: 600; font-size: var(--text-sm); }
+  .line-variant { font-size: var(--text-xs); color: var(--text-muted); }
+  .line-price { text-align: end; font-size: var(--text-sm); font-weight: 600; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; }
+  .line-price s { font-weight: 400; color: var(--text-faint); font-size: var(--text-xs); }
+
+  .totals { display: grid; grid-template-columns: 1fr auto; gap: var(--space-2) 0; margin: 0; font-size: var(--text-sm); }
+  .totals dt { color: var(--text-muted); }
+  .totals dd { margin: 0; padding-inline-start: var(--space-4); text-align: end; font-variant-numeric: tabular-nums; }
+  .totals .is-discount { color: var(--good-ink); }
+  .totals .grand { padding-block-start: var(--space-4); margin-block-start: var(--space-2); border-block-start: 1px solid var(--line); color: var(--text); font-weight: 600; font-size: var(--text-md); }
+  /* Both halves of the total row stretch to the same height, so the rule
+     above them is one line rather than two at different heights. */
+  .totals dt.grand { display: flex; align-items: center; }
+  .totals dd.grand { display: flex; align-items: baseline; justify-content: flex-end; font-size: var(--text-xl); font-weight: 650; letter-spacing: -.02em; }
+  .totals dd.grand small { font-size: var(--text-xs); font-weight: 500; color: var(--text-faint); margin-inline-end: var(--space-2); letter-spacing: 0; }
+  .save-note { font-size: var(--text-xs); color: var(--good-ink); display: flex; align-items: center; gap: var(--space-1); }
+  .trust { list-style: none; padding: var(--space-4) 0 0; margin: 0; border-block-start: 1px solid var(--line); display: grid; gap: var(--space-3); }
+  .trust li { display: flex; gap: var(--space-3); align-items: flex-start; font-size: var(--text-xs); color: var(--text-muted); }
+  .trust .icon { color: var(--text); flex: 0 0 auto; }
+  .trust strong { display: block; color: var(--text); font-size: var(--text-sm); font-weight: 600; }
+
+  /* ===== Form ===== */
+  .co-form { display: flex; flex-direction: column; gap: var(--space-10); }
+  .co-section { display: flex; flex-direction: column; gap: var(--space-4); border: 0; padding: 0; margin: 0; min-inline-size: 0; }
+  .co-h2 { font-family: var(--font-display); font-weight: 500; font-size: var(--text-xl); letter-spacing: -.012em; padding: 0; display: flex; align-items: baseline; gap: var(--space-3); inline-size: 100%; }
+  .co-h2 .num { font-family: var(--font-sans); font-size: var(--text-xs); font-weight: 650; color: var(--brand); letter-spacing: .1em; }
+  .co-h2 .push { font-family: var(--font-sans); font-size: var(--text-sm); }
+  legend.co-h2 { margin-block-end: var(--space-4); }
+  .row-3 { display: grid; gap: var(--space-4); }
+  .row-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row-3 > :first-child { grid-column: 1 / -1; }
+  @media (min-width: 40rem) { .row-3 { grid-template-columns: 1.3fr 1fr .8fr; } .row-3 > :first-child { grid-column: auto; } }
+  .label .optional { font-size: var(--text-xs); }
+  /* Label plus a help button, kept to the label's own line height so this
+     field's input lines up with its neighbour's. */
+  .label-row { display: flex; align-items: center; gap: var(--space-1); block-size: 1.25rem; }
+  .label-row .btn { block-size: 20px; inline-size: 20px; min-inline-size: 20px; color: var(--text-muted); }
+  /* Deck centres its tooltip on the trigger; this one opens toward the start
+     so it never pokes past the viewport edge on a narrow screen, and it wraps:
+     it inherits the button's nowrap otherwise. */
+  .label-row .tooltip::after { inset-inline-start: auto; inset-inline-end: -8px; translate: 0 4px; max-inline-size: min(16rem, 70vw); white-space: normal; text-align: start; }
+  .label-row .tooltip:is(:hover, :focus-visible)::after { translate: 0 0; }
+  /* Short pairs stay side by side on a phone, where Deck's .field-row stacks. */
+  .pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* Express wallets keep their own colours in both themes, like the real
+     buttons do. These are generic stand-ins: use each provider's SDK button
+     in production, which comes with its own rules about size and colour. */
+  .express { display: flex; flex-direction: column; gap: var(--space-3); }
+  .express-title { text-align: center; font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 560; letter-spacing: 0; color: var(--text-muted); }
+  .express-row { display: grid; gap: var(--space-2); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .wallet { block-size: 48px; border-radius: var(--r-sm); font-weight: 650; font-size: var(--text-md); letter-spacing: -.01em; --btn-shadow: none; }
+  .wallet-apple { --btn-bg: light-dark(oklch(15% 0 0), oklch(98% 0 0)); --btn-text: light-dark(oklch(99% 0 0), oklch(15% 0 0)); --btn-border: transparent; }
+  .wallet-apple:hover { background: light-dark(oklch(26% 0 0), oklch(90% 0 0)); }
+  .wallet-google { --btn-bg: var(--surface); --btn-border: var(--line-strong); }
+  .wallet-google b { font-weight: 650; color: oklch(55% .17 255); }
+  .wallet-paypal { --btn-bg: oklch(84% .155 85); --btn-text: oklch(30% .12 262); --btn-border: transparent; font-style: italic; font-weight: 800; }
+  .wallet-paypal:hover { background: oklch(80% .155 85); }
+  .wallet-paypal i { color: oklch(52% .14 245); font-style: italic; }
+  .or { display: flex; align-items: center; gap: var(--space-4); font-size: var(--text-xs); color: var(--text-faint); text-transform: uppercase; letter-spacing: .14em; }
+  .or::before, .or::after { content: ""; flex: 1 1 auto; block-size: 1px; background: var(--line); }
+
+  /* Shipping methods: Deck's .check-card highlights the checked one with
+     :has(), no script. The price sits at the far end of each card. */
+  .ship-options { display: flex; flex-direction: column; gap: var(--space-2); }
+  .check-card { align-items: center; }
+  .check-card .check-text { flex: 1 1 auto; }
+  .ship-price { font-weight: 650; font-variant-numeric: tabular-nums; }
+
+  .card-panel { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-5); border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-2); }
+  .card-panel-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); font-weight: 600; font-size: var(--text-sm); }
+  .pay-marks { display: flex; gap: var(--space-1); list-style: none; padding: 0; margin: 0; }
+  .pm { display: inline-flex; align-items: center; justify-content: center; gap: 3px; min-inline-size: 40px; block-size: 24px; padding-inline: 6px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--surface); color: var(--text); font-size: 9px; font-weight: 800; line-height: 1; }
+  .pm-visa { font-style: italic; font-size: 11px; letter-spacing: .04em; }
+  .pm-mc i { inline-size: 10px; block-size: 10px; border-radius: 50%; background: oklch(60% .2 28); }
+  .pm-mc i + i { margin-inline-start: -5px; background: oklch(80% .16 75 / .9); }
+  .pm-amex { letter-spacing: .08em; }
+  .input-group .addon .icon { color: var(--good-ink); }
+  .mono-input { font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+
+  /* The billing block only shows when the switch is off. :has() does it with
+     no script, and the fields stay in the form either way. */
+  .co-billing { display: none; }
+  .co-form:has(#same-billing:not(:checked)) .co-billing { display: flex; }
+
+  .place { display: flex; flex-direction: column; gap: var(--space-3); }
+  .place .btn-lg { block-size: 56px; font-size: var(--text-md); }
+  .fine { font-size: var(--text-xs); color: var(--text-muted); text-wrap: pretty; }
+  .fine a { color: inherit; }
+
+  .co-footer { margin-block-start: var(--space-section); padding-block: var(--space-6); border-block-start: 1px solid var(--line); font-size: var(--text-xs); color: var(--text-muted); }
+  .co-footer a { color: inherit; }
+  .co-footer-links { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Photos are hotlinked from Unsplash for the preview. Replace them with your own. -->
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5.5 8h13l-1 12.5h-11L5.5 8ZM9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-halden" viewBox="0 0 24 24"><path d="M5 21V10a7 7 0 0 1 14 0v11M9.5 21v-8a2.5 2.5 0 0 1 5 0v8" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ===== Minimal header ===== -->
+<header class="co-header">
+  <div class="container co-header-row">
+    <a class="navbar-brand logo" href="ecommerce.html">
+      <svg class="icon logo-mark" aria-hidden="true"><use href="#i-halden"></use></svg>
+      Halden
+    </a>
+    <span class="co-secure">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#lock"></use></svg>
+      <span class="co-secure-text">Secure checkout</span>
+    </span>
+    <div class="co-header-end">
+      <button class="btn btn-icon btn-ghost" type="button" data-deck-theme aria-label="Switch theme">
+        <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+      </button>
+      <a class="back-link" href="ecommerce.html">
+        <svg class="icon mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-left"></use></svg>
+        <span class="back-text">Back to bag</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="container">
+
+  <div class="co-top">
+    <h1>Checkout</h1>
+    <!-- An <ol> so the step count is announced; aria-current="step" marks
+         where the reader is. Done steps link back, upcoming ones do not. -->
+    <ol class="stepper co-steps" aria-label="Checkout progress">
+      <li class="step is-done">
+        <span class="step-marker"><svg class="icon icon-sm step-check" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span>
+        <span class="step-label"><a href="ecommerce.html">Bag</a><span class="sr-only">, completed</span></span>
+        <span class="step-note">3 items</span>
+      </li>
+      <li class="step is-current" aria-current="step">
+        <span class="step-marker"></span>
+        <span class="step-label">Details</span>
+        <span class="step-note">Contact, address</span>
+      </li>
+      <li class="step">
+        <span class="step-marker"></span>
+        <span class="step-label">Shipping</span>
+        <span class="step-note">Pick a speed</span>
+      </li>
+      <li class="step">
+        <span class="step-marker"></span>
+        <span class="step-label">Payment</span>
+        <span class="step-note">Card or wallet</span>
+      </li>
+    </ol>
+  </div>
+
+  <div class="split co-grid" style="--rail:26rem">
+
+    <!-- ===== Order summary ===== -->
+    <aside class="co-summary" aria-label="Order summary">
+      <details class="order-panel" id="order">
+        <summary>
+          <svg class="icon" aria-hidden="true"><use href="#i-bag"></use></svg>
+          <span class="order-show"><span class="order-show-closed">Show</span><span class="order-show-open">Hide</span> order summary</span>
+          <svg class="icon icon-sm order-chev" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chevron-down-sm"></use></svg>
+          <span class="order-total" data-total>$823.10</span>
+        </summary>
+        <div class="order-body">
+          <h2 class="order-title">Order summary</h2>
+          <ul class="lines">
+            <li class="line">
+              <span class="line-thumb with-indicator">
+                <img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=128&h=128&q=75&auto=format&fit=crop" alt="" width="64" height="64">
+                <span class="indicator-badge" aria-label="Quantity 1">1</span>
+              </span>
+              <span class="line-main">
+                <span class="line-name">The Field Pack</span>
+                <span class="line-variant">Cognac · 22 L</span>
+              </span>
+              <span class="line-price"><span>$396.00</span><s>$495.00</s></span>
+            </li>
+            <li class="line">
+              <span class="line-thumb with-indicator">
+                <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=128&h=128&q=75&auto=format&fit=crop&crop=focalpoint&fp-x=.52&fp-y=.5&fp-z=2" alt="" width="64" height="64">
+                <span class="indicator-badge" aria-label="Quantity 1">1</span>
+              </span>
+              <span class="line-main">
+                <span class="line-name">Linea 36</span>
+                <span class="line-variant">White dial · Taupe strap</span>
+              </span>
+              <span class="line-price"><span>$265.00</span></span>
+            </li>
+            <li class="line">
+              <span class="line-thumb with-indicator">
+                <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?w=128&h=128&q=75&auto=format&fit=crop" alt="" width="64" height="64">
+                <span class="indicator-badge" aria-label="Quantity 1">1</span>
+              </span>
+              <span class="line-main">
+                <span class="line-name">Bifold Wallet</span>
+                <span class="line-variant">Cognac · Monogram: M.O.</span>
+              </span>
+              <span class="line-price"><span>$95.00</span></span>
+            </li>
+          </ul>
+
+          <form class="stack stack-2" action="#" data-discount>
+            <label class="label" for="discount">Discount code or gift card</label>
+            <div class="input-group">
+              <input class="input" id="discount" name="discount" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Try WELCOME10">
+              <button class="btn" type="submit">Apply</button>
+            </div>
+            <p class="help" data-discount-msg hidden></p>
+          </form>
+
+          <dl class="totals">
+            <dt>Subtotal · 3 items</dt><dd data-subtotal>$756.00</dd>
+            <dt class="is-discount" data-discount-row hidden>Discount · WELCOME10</dt><dd class="is-discount" data-discount-amount hidden>−$0.00</dd>
+            <dt>Shipping</dt><dd data-shipping>Free</dd>
+            <dt>Estimated tax</dt><dd data-tax>$67.10</dd>
+            <dt class="grand">Total</dt><dd class="grand"><small>USD</small><span data-total>$823.10</span></dd>
+          </dl>
+          <p class="save-note">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#tag-sm"></use></svg>
+            You're saving <span class="nums">$99.00</span> on the Field Pack.
+          </p>
+
+          <ul class="trust">
+            <li><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#shield"></use></svg><span><strong>Two-year warranty</strong>Then repairs at cost, for life, at our Brooklyn workshop.</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#refresh"></use></svg><span><strong>Free 30-day returns</strong>We email a prepaid label. Refunds within three business days.</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#phone"></use></svg><span><strong>Questions?</strong><a href="#">(212) 555-0143</a>, Monday to Saturday, 9 to 7 ET.</span></li>
+          </ul>
+        </div>
+      </details>
+    </aside>
+
+    <!-- ===== Checkout form =====
+         Every field has the autocomplete token a browser or password manager
+         fills from, and the inputmode that brings up the right phone keyboard.
+         novalidate leaves validation messages to you; the ZIP shows one. -->
+    <form class="co-form" action="#" novalidate>
+
+      <!-- Express wallets -->
+      <section class="express" aria-labelledby="express-title">
+        <h2 class="express-title" id="express-title">Express checkout</h2>
+        <div class="express-row">
+          <button class="btn wallet wallet-apple" type="button" aria-label="Pay with Apple Pay">Apple Pay</button>
+          <button class="btn wallet wallet-google" type="button" aria-label="Pay with Google Pay"><b>G</b>&nbsp;Pay</button>
+          <button class="btn wallet wallet-paypal" type="button" aria-label="Pay with PayPal">Pay<i>Pal</i></button>
+        </div>
+      </section>
+      <p class="or">Or pay with card</p>
+
+      <!-- Contact -->
+      <section class="co-section" id="contact" aria-labelledby="contact-title">
+        <h2 class="co-h2" id="contact-title"><span class="num">01</span>Contact <a class="push" href="#">Have an account? Sign in</a></h2>
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <input class="input" id="email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" value="maya.okafor@example.com" required>
+        </div>
+        <label class="check">
+          <input type="checkbox" name="marketing">
+          <span class="check-text">
+            <span>Email me when new colours and restocks land</span>
+            <span class="check-note">Twice a month at most. Unsubscribe in one click.</span>
+          </span>
+        </label>
+      </section>
+
+      <!-- Shipping address -->
+      <section class="co-section" id="details" aria-labelledby="address-title">
+        <h2 class="co-h2" id="address-title"><span class="num">02</span>Shipping address</h2>
+        <div class="field">
+          <label class="label" for="country">Country or region</label>
+          <select class="select" id="country" name="country" autocomplete="country">
+            <option value="US" selected>United States</option>
+            <option value="CA">Canada</option>
+            <option value="GB">United Kingdom</option>
+            <option value="PT">Portugal</option>
+            <option value="DE">Germany</option>
+            <option value="JP">Japan</option>
+          </select>
+        </div>
+        <div class="field-row pair">
+          <div class="field">
+            <label class="label" for="given">First name</label>
+            <input class="input" id="given" name="given-name" type="text" autocomplete="given-name" value="Maya" required>
+          </div>
+          <div class="field">
+            <label class="label" for="family">Last name</label>
+            <input class="input" id="family" name="family-name" type="text" autocomplete="family-name" value="Okafor" required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="line1">Address</label>
+          <input class="input" id="line1" name="address-line1" type="text" autocomplete="address-line1" value="214 Mulberry Street" required>
+        </div>
+        <div class="field">
+          <label class="label" for="line2">Apartment, suite, etc. <span class="optional">Optional</span></label>
+          <input class="input" id="line2" name="address-line2" type="text" autocomplete="address-line2" placeholder="Apartment 4B">
+        </div>
+        <div class="row-3">
+          <div class="field">
+            <label class="label" for="city">City</label>
+            <input class="input" id="city" name="address-level2" type="text" autocomplete="address-level2" value="New York" required>
+          </div>
+          <div class="field">
+            <label class="label" for="state">State</label>
+            <select class="select" id="state" name="address-level1" autocomplete="address-level1">
+              <option value="CA">California</option>
+              <option value="IL">Illinois</option>
+              <option value="MA">Massachusetts</option>
+              <option value="NY" selected>New York</option>
+              <option value="OR">Oregon</option>
+              <option value="TX">Texas</option>
+              <option value="WA">Washington</option>
+            </select>
+          </div>
+          <!-- The error state: .is-invalid on the field, aria-invalid on the
+               input and the message tied to it with aria-describedby. -->
+          <div class="field is-invalid">
+            <label class="label" for="zip">ZIP code</label>
+            <input class="input" id="zip" name="postal-code" type="text" autocomplete="postal-code" inputmode="numeric" value="1001" aria-invalid="true" aria-describedby="zip-error" required>
+            <p class="error" id="zip-error">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#alert-circle-sm"></use></svg>
+              Enter a 5-digit ZIP code.
+            </p>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="tel">Phone <span class="optional">For delivery questions only</span></label>
+          <input class="input" id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="(212) 555-0143">
+        </div>
+        <label class="check">
+          <input type="checkbox" name="remember" checked>
+          <span class="check-text"><span>Save this information for next time</span></span>
+        </label>
+      </section>
+
+      <!-- Shipping method -->
+      <fieldset class="co-section" id="shipping">
+        <legend class="co-h2"><span class="num">03</span>Shipping method</legend>
+        <div class="ship-options" data-ship>
+          <label class="check check-card">
+            <input type="radio" name="ship" value="standard" data-cost="0" checked>
+            <span class="check-text">
+              <span class="fw-semi">Standard</span>
+              <span class="check-note">3–5 business days · Fri, Oct 9 – Tue, Oct 13</span>
+            </span>
+            <span class="ship-price">Free</span>
+          </label>
+          <label class="check check-card">
+            <input type="radio" name="ship" value="express" data-cost="18">
+            <span class="check-text">
+              <span class="fw-semi">Express</span>
+              <span class="check-note">1–2 business days · Wed, Oct 7 – Thu, Oct 8</span>
+            </span>
+            <span class="ship-price">$18.00</span>
+          </label>
+          <label class="check check-card">
+            <input type="radio" name="ship" value="next-day" data-cost="32">
+            <span class="check-text">
+              <span class="fw-semi">Next business day</span>
+              <span class="check-note">Wed, Oct 7 if you order by 2 pm ET</span>
+            </span>
+            <span class="ship-price">$32.00</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Payment -->
+      <section class="co-section" id="payment" aria-labelledby="payment-title">
+        <h2 class="co-h2" id="payment-title"><span class="num">04</span>Payment</h2>
+        <p class="text-sm text-muted" style="margin-block-start:calc(var(--space-2) * -1)">All transactions are encrypted. We never see or store your full card number.</p>
+        <div class="card-panel">
+          <div class="card-panel-head">
+            <span>Credit or debit card</span>
+            <ul class="pay-marks" aria-label="Accepted cards">
+              <li class="pm pm-visa">VISA</li>
+              <li class="pm pm-mc" aria-label="Mastercard"><i></i><i></i></li>
+              <li class="pm pm-amex">AMEX</li>
+            </ul>
+          </div>
+          <div class="field">
+            <label class="label" for="cc-number">Card number</label>
+            <div class="input-group">
+              <input class="input mono-input" id="cc-number" name="cc-number" type="text" autocomplete="cc-number" inputmode="numeric" placeholder="1234 1234 1234 1234" required>
+              <span class="addon" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#lock"></use></svg></span>
+            </div>
+          </div>
+          <div class="field-row pair">
+            <div class="field">
+              <label class="label" for="cc-exp">Expiry date</label>
+              <input class="input mono-input" id="cc-exp" name="cc-exp" type="text" autocomplete="cc-exp" inputmode="numeric" placeholder="MM / YY" required>
+            </div>
+            <div class="field">
+              <div class="label-row">
+                <label class="label" for="cc-csc">Security code</label>
+                <!-- .tooltip is CSS only and hidden on touch screens, so the
+                     same words are the button's accessible name. -->
+                <button class="btn btn-icon btn-sm btn-ghost btn-round tooltip" type="button" data-tip="The 3 digits on the back of your card. Amex has 4 on the front." aria-label="The 3 digits on the back of your card. Amex has 4 on the front.">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help-sm"></use></svg>
+                </button>
+              </div>
+              <input class="input mono-input" id="cc-csc" name="cc-csc" type="text" autocomplete="cc-csc" inputmode="numeric" maxlength="4" placeholder="CVC" required>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="cc-name">Name on card</label>
+            <input class="input" id="cc-name" name="cc-name" type="text" autocomplete="cc-name" value="Maya Okafor" required>
+          </div>
+        </div>
+
+        <label class="switch">
+          <input type="checkbox" role="switch" id="same-billing" name="same-billing" checked>
+          <span>Billing address is the same as shipping</span>
+        </label>
+
+        <div class="co-billing co-section">
+          <div class="field">
+            <label class="label" for="b-line1">Billing address</label>
+            <input class="input" id="b-line1" name="billing-address-line1" type="text" autocomplete="billing address-line1">
+          </div>
+          <div class="row-3">
+            <div class="field"><label class="label" for="b-city">City</label><input class="input" id="b-city" name="billing-city" type="text" autocomplete="billing address-level2"></div>
+            <div class="field"><label class="label" for="b-state">State</label><input class="input" id="b-state" name="billing-state" type="text" autocomplete="billing address-level1"></div>
+            <div class="field"><label class="label" for="b-zip">ZIP code</label><input class="input" id="b-zip" name="billing-zip" type="text" autocomplete="billing postal-code" inputmode="numeric"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="place">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#lock"></use></svg>
+          Pay <span class="nums" data-total>$823.10</span>
+        </button>
+        <p class="fine">
+          By placing this order you agree to Halden's <a href="#">Terms of Sale</a> and
+          <a href="#">Privacy Policy</a>. We'll email a receipt to maya.okafor@example.com and
+          a tracking link when your order ships, usually the same day.
+        </p>
+      </div>
+    </form>
+  </div>
+</main>
+
+<footer class="co-footer">
+  <div class="container bar" style="flex-wrap:wrap">
+    <span>© 2026 Halden Goods Co.</span>
+    <nav class="co-footer-links push" aria-label="Policies">
+      <a href="#">Refund policy</a>
+      <a href="#">Shipping</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms of Sale</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  /* The summary opens itself at desktop width; shipping and the discount
+     code recalculate the totals. Without this script the summary is a
+     working disclosure and the form still posts. */
+  (() => {
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => [...document.querySelectorAll(s)];
+    const order = $('#order');
+    const wide = matchMedia('(min-width: 64rem)');
+    const sync = () => { if (wide.matches) order.open = true; };
+    sync();
+    wide.addEventListener('change', sync);
+
+    const SUBTOTAL = 756, TAX = 0.08875;
+    let discount = 0;
+    const usd = (n) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const recalc = () => {
+      const ship = Number(document.querySelector('[name="ship"]:checked')?.dataset.cost || 0);
+      const taxable = SUBTOTAL - discount + ship;
+      const tax = Math.round(taxable * TAX * 100) / 100;
+      $('[data-shipping]').textContent = ship ? usd(ship) : 'Free';
+      $('[data-tax]').textContent = usd(tax);
+      $$('[data-total]').forEach((n) => { n.textContent = usd(taxable + tax); });
+    };
+    $('[data-ship]').addEventListener('change', recalc);
+
+    $('[data-discount]').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = e.target.discount.value.trim().toUpperCase();
+      const msg = $('[data-discount-msg]');
+      msg.hidden = false;
+      if (code === 'WELCOME10') {
+        discount = Math.round(SUBTOTAL * 10) / 100;
+        $('[data-discount-amount]').textContent = '−' + usd(discount);
+        $('[data-discount-row]').hidden = false;
+        $('[data-discount-amount]').hidden = false;
+        msg.textContent = 'WELCOME10 applied: 10% off your first order.';
+      } else {
+        msg.textContent = code ? `“${code}” isn't a code we recognise.` : 'Enter a code first.';
+      }
+      recalc();
+    });
+  })();
+</script>
+</body>
+</html>

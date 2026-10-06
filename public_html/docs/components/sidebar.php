@@ -29,7 +29,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Sidebar</h1>
   <p class="lede">
     A column of destinations, optionally under group headings, for an application with more
@@ -39,7 +39,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     For the primary navigation of an application: a dashboard, an admin area, a settings
@@ -83,7 +83,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="collapsing">Collapsing to icons</h2>
   <p>
     Below <code>15rem</code> the labels are hidden, the icons centre, and the group headings
@@ -133,7 +133,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="collapsed-names">The collapsed state loses the link names</h2>
   <p>
     This deserves its own heading because it is a real defect rather than a caveat.
@@ -164,20 +164,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/07-components.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--text-xs', '--text-sm', '--text-faint', '--text-muted', '--surface-hover', '--brand-soft', '--brand-soft-text', '--r-sm', '--dur-1']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Wrap it in <code>&lt;nav&gt;</code> with a label.</strong> Most applications
       have at least two navigation regions; unlabelled they are announced identically.
@@ -213,7 +213,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The column mirrors correctly with no rule in <code>src/19-logical.css</code>: padding
@@ -241,7 +241,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     <code>.sidebar-link</code> transitions its background and colour over
@@ -255,7 +255,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>.sidebar</code> is in the "chrome that should never print" list in
@@ -265,7 +265,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* Give the rail a surface without wrapping it in a card */
@@ -290,9 +290,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for five destinations.</strong> A <a href="nav.php">nav bar</a> costs less
       space and less structure.

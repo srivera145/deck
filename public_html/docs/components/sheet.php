@@ -28,7 +28,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Sheet</h1>
   <p class="lede">
     <code>.sheet</code> is one <code>&lt;dialog&gt;</code> that is two components. Below
@@ -38,7 +38,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it for the things a phone reader reaches for with a thumb: a share menu, a set of
@@ -69,7 +69,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="two-shapes">One dialog, two shapes</h2>
   <p>
     The two states are worth reading side by side, because the difference is not only
@@ -120,7 +120,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="grip">The grip</h2>
   <p>
     <code>.sheet-grip</code> is a 38&times;4 pill centred at the top of the sheet. It is
@@ -143,7 +143,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="regions">Header and body</h2>
   <p>
     <code>.sheet-body</code> scrolls, with <code>overscroll-behavior: contain</code> so
@@ -179,20 +179,20 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/08-mobile.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--surface', '--ink-300', '--text', '--text-md', '--r-lg', '--r-full', '--shadow-4', '--space-1', '--space-2', '--space-3', '--space-5', '--space-6', '--space-8', '--dur-2', '--dur-3', '--ease-spring', '--hue-neutral']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>It is a dialog, so it behaves like one</strong> — focus trapped, Escape
       closes, background inert, focus returned to the trigger. All from
@@ -232,7 +232,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The mobile sheet's radii are <code>border-start-start-radius</code> and
@@ -258,7 +258,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Both animations — the slide below <code>40rem</code>, the fade-and-scale above — are
@@ -274,7 +274,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     Two things happen. <code>dialog::backdrop { display: none }</code> stops an open
@@ -288,7 +288,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* A taller sheet on a phone */
@@ -312,9 +312,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a confirmation.</strong> Use <a href="modal.php"><code>.modal</code></a>.
       A sheet is a surface for choosing; a confirmation is a question, and it should be

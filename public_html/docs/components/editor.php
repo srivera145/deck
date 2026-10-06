@@ -29,7 +29,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Editor</h1>
   <p class="lede">
     <code>.editor</code> is a small rich-text field: a toolbar over a
@@ -40,7 +40,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it where a reader needs bold, a list and a link in a short piece of text — a
@@ -76,7 +76,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="toolbar">The toolbar</h2>
   <p>
     <code>.editor-tool</code> is a square button carrying <code>data-cmd</code>;
@@ -93,14 +93,14 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="execcommand">The execCommand problem</h2>
   <p>
     <code>document.execCommand</code> is how this component applies formatting, and it is
     <strong>deprecated</strong>. It is worth being plain about what that means, because
     the component is useful and the caveat is real.
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>It is not going away soon.</strong> Every browser implements it and the web
       depends on it too heavily to remove. Deprecated here means unmaintained, not
@@ -128,7 +128,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="content">Content styling</h2>
   <p>
     <code>.editor-content</code> styles what is inside it the way
@@ -147,7 +147,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="count">The character count</h2>
   <p>
     <code>.editor-count</code> shows the length, and <code>.is-over</code> turns it red
@@ -162,20 +162,20 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/23-inputs.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--surface', '--surface-2', '--surface-hover', '--line', '--text', '--text-muted', '--focus', '--ring', '--brand-soft', '--brand-soft-text', '--bad-700', '--r-sm', '--space-1', '--space-2', '--space-3', '--space-5', '--space-6']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The region is given a role by the script.</strong>
       <code>deck-extras.js</code> sets <code>role="textbox"</code> and
@@ -223,7 +223,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The toolbar is a flex row, the separator uses <code>margin-inline</code>, and the
@@ -247,7 +247,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Tools transition their background on hover, and the frame transitions its border and
@@ -256,7 +256,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     The editor prints as prose, and it is handled deliberately. There is no
@@ -278,7 +278,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* A taller editing area */
@@ -292,9 +292,9 @@ require __DIR__ . '/../_layout.php';
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for plain text.</strong> Use
       <a href="textarea.php"><code>.textarea</code></a>. It is a real form control with

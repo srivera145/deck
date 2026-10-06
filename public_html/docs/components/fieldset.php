@@ -22,7 +22,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Fieldset</h1>
   <p class="lede">
     <code>.fieldset</code> goes on a real <code>&lt;fieldset&gt;</code>: a border, a
@@ -34,7 +34,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it whenever several controls answer <em>one</em> question. A radio group is the
@@ -60,7 +60,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="legend">Why the legend cannot be a heading instead</h2>
   <p>
     A <code>&lt;h3&gt;</code> above a group of radios looks identical and does nothing.
@@ -80,7 +80,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="styling">Styling a legend</h2>
   <p>
     <code>&lt;legend&gt;</code> is one of the last elements in HTML that resists CSS. It
@@ -107,7 +107,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="nested">Fields inside a fieldset</h2>
   <p>
     A fieldset is a flex column, so <a href="field.php"><code>.field</code></a> children
@@ -147,7 +147,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="disabled">Disabling a whole group</h2>
   <p>
     <code>&lt;fieldset disabled&gt;</code> disables every control inside it, including
@@ -181,7 +181,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     <code>.fieldset</code> has no <code>.fieldset-*</code> variants, so the extractor
@@ -191,14 +191,14 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--line', '--r-md', '--space-2', '--space-4', '--space-5', '--text-sm', '--text-muted']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>This is an accessibility component first.</strong> Everything else about it
       is a border. A radio group without a legend is the most common serious form defect
@@ -235,7 +235,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The legend's <code>padding-inline</code> is logical and the border is symmetrical, so
@@ -256,7 +256,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing about a fieldset animates or transitions, so
@@ -265,7 +265,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> lists <code>.fieldset</code> with the other surfaces —
@@ -276,7 +276,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   /* No box, just the grouping and the legend */
@@ -293,9 +293,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not around a single control.</strong> Two names for one input. Use
       <a href="field.php"><code>.field</code></a> with a

@@ -40,7 +40,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Input</h1>
   <p class="lede">
     <code>.input</code>, <code>.textarea</code> and <code>.select</code> are declared in
@@ -52,7 +52,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Put <code>.input</code> on a real <code>&lt;input&gt;</code>,
@@ -78,14 +78,14 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="types">The three controls</h2>
   <p>
     One shared rule sets the size, border, radius, shadow and transition. Each control
     then adds only what makes it itself.
   </p>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="t-input">Input</h3>
     <p class="text-muted">
       The shared rule, unmodified. Every <code>type</code> works — the class does not
@@ -103,7 +103,7 @@ require __DIR__ . '/../_layout.php';
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="t-textarea">Textarea</h3>
     <p class="text-muted">
       <code>field-sizing: content</code> makes it grow with what is typed, from two rows
@@ -125,7 +125,7 @@ require __DIR__ . '/../_layout.php';
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="t-select">Select</h3>
     <p class="text-muted">
       <code>appearance: none</code> plus two CSS gradients draw the chevron, so there is
@@ -153,7 +153,7 @@ require __DIR__ . '/../_layout.php';
   </div>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="states">States</h2>
   <p>
     Hover darkens the border. Focus swaps it for <code>--focus</code> and adds
@@ -201,7 +201,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="group">Input groups</h2>
   <p>
     <code>.input-group</code> is a flex row that takes over the border, radius, shadow
@@ -239,7 +239,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="search">Search</h2>
   <p>
     <code>.search</code> positions an icon inside the control with
@@ -260,7 +260,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="float">Floating labels</h2>
   <p>
     <code>.float</code> wraps an <code>.input</code> and lifts its label out of the field
@@ -287,13 +287,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="other">In other components</h2>
   <p>
     <code>.input</code> appears inside components that are documented elsewhere, and
     each adjusts it rather than restyling it:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <code>.datefield &gt; .input</code> in <code>src/10-datepicker.css</code> makes
       room for the calendar trigger.
@@ -309,7 +309,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
     Generated from the stylesheet source. <code>.textarea</code>,
@@ -320,7 +320,7 @@ require __DIR__ . '/../_layout.php';
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     <code>--control-h</code> is shared with <code>.btn</code>, which is why a button and
@@ -329,9 +329,9 @@ require __DIR__ . '/../_layout.php';
   <?php docs_token_table(['--control-h', '--surface', '--surface-2', '--bg-sunken', '--line', '--line-strong', '--ink-400', '--focus', '--ring', '--r-sm', '--r-full', '--shadow-1', '--text-base', '--text-sm', '--text', '--text-muted', '--text-faint', '--bad-500', '--space-2', '--space-3', '--space-10', '--dur-1']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Every control needs a label.</strong> A <code>&lt;label
       class="label" for="id"&gt;</code> is the right answer.
@@ -386,14 +386,14 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Padding, the addon dividers and the search icon are all logical, so they mirror with
     no extra rules at all. Two things cannot, and
     <code>src/19-logical.css</code> handles both by hand:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The select's chevron.</strong> It is drawn with
       <code>background-position</code>, which has no logical form, so the rule
@@ -416,7 +416,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <?php
   docs_example(
-      '<div dir="rtl" class="stack-3" style="max-inline-size:22rem">' . "\n" .
+      '<div dir="rtl" class="stack stack-3" style="max-inline-size:22rem">' . "\n" .
       '  <div class="field">' . "\n" .
       '    <label class="label" for="ex-rtl">البريد الإلكتروني</label>' . "\n" .
       '    <input class="input" id="ex-rtl" placeholder="you@example.com">' . "\n" .
@@ -436,7 +436,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Controls transition <code>border-color</code>, <code>box-shadow</code> and
@@ -453,7 +453,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> gives <code>.input</code>, <code>.textarea</code>,
@@ -472,7 +472,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('@layer app.components {
   .input, .textarea, .select {
@@ -490,9 +490,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a number the reader will step.</strong> Use
       <code>.number</code>, which has real increment and decrement buttons.

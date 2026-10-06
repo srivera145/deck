@@ -1,0 +1,1275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Signal &amp; Bloom · Deck template</title>
+<meta name="description" content="A performance marketing agency site: a results dashboard drawn from Deck charts, a services bento, case studies, a channel switcher in pure CSS, retainer pricing and a free-audit form.">
+<meta name="theme-color" content="#b0216f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23c0267a'/%3E%3Cstop offset='1' stop-color='%23e0563b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='9' fill='url(%23g)'/%3E%3Ccircle cx='10.5' cy='21.5' r='2.6' fill='white'/%3E%3Cpath d='M9 14a9 9 0 0 1 9 9M9 8a15 15 0 0 1 15 15' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- Change these paths to wherever Deck lives in your project. The icon sprite
+     referenced below must be served from your own origin: a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+<script src="../assets/deck/deck-extras.js" defer></script>   <!-- only for the mobile drawer -->
+
+<style>
+@layer app.pages {
+  /* Deck lets a .btn inside an .input-group shrink along with the input, so a
+     nowrap label runs into its own padding on a narrow row. The input is the
+     one that should give. */
+  .input-group > .btn { flex: none; }
+
+
+  /* --- Brand -----------------------------------------------------------------
+     Magenta, with a citrus accent for the stars and highlights. The neutrals
+     lean slightly violet so the greys sit in the same family as the brand.
+     The chart series (--c1..--c6) rotate off the brand hue, so the dashboard
+     goes magenta, coral, amber, violet, green, teal without being told to. */
+  :root {
+    --hue-brand: 340;
+    --chroma-brand: .19;
+    --hue-accent: 84;
+    --hue-neutral: 290;
+    --chroma-neutral: .009;
+
+    /* Workaround: Deck's status tints (-100 fills, -700 inks behind the good,
+       warn and bad badges and tiles) stay light in dark mode and glare on a
+       dark page. Same values in light; a dim fill and a bright ink in dark. */
+    --good-100: light-dark(oklch(94% calc(var(--chroma-status) * .3) var(--hue-good)), oklch(31% .06 var(--hue-good)));
+    --good-700: light-dark(oklch(44% var(--chroma-status) var(--hue-good)), oklch(82% .12 var(--hue-good)));
+    --warn-100: light-dark(oklch(95% calc(var(--chroma-status) * .32) var(--hue-warn)), oklch(33% .06 var(--hue-warn)));
+    --warn-700: light-dark(oklch(50% var(--chroma-status) var(--hue-warn)), oklch(86% .12 var(--hue-warn)));
+    --bad-100: light-dark(oklch(94.5% calc(var(--chroma-status) * .3) var(--hue-bad)), oklch(31% .07 var(--hue-bad)));
+    --bad-700: light-dark(oklch(44% calc(var(--chroma-status) * 1.1) var(--hue-bad)), oklch(80% .12 var(--hue-bad)));
+  }
+  body { background: var(--bg); }
+
+  /* Deck's .drawer sets display:flex, which beats the browser's own rule that hides a closed <dialog>, so a closed drawer would sit off-screen with its links still in the tab order. The transition on display is allow-discrete, so the slide-out still plays. */
+  .drawer:not([open]) { display: none; }
+  [id] { scroll-margin-block-start: 5rem; }
+
+  .display { font-weight: 760; letter-spacing: -.045em; text-wrap: balance; }
+  main h2:not([class]) { font-size: clamp(1.9rem, 1.35rem + 2.2vw, 3rem); font-weight: 720; letter-spacing: -.035em; text-wrap: balance; }
+  .lede { text-wrap: pretty; }
+  .eyebrow { font-size: var(--text-sm); font-weight: 640; letter-spacing: .02em; color: var(--brand); }
+  .section-head { display: flex; flex-direction: column; gap: var(--space-3); max-inline-size: 44rem; }
+  .section-head.center { margin-inline: auto; align-items: center; text-align: center; }
+  /* Alternate bands. In dark mode surface-2 is a big step up from the page, so it is mixed back down. */
+  .band-soft { background: light-dark(var(--surface-2), color-mix(in oklab, var(--surface-2) 45%, var(--bg))); border-block: 1px solid var(--line); }
+  .figure { font-weight: 740; letter-spacing: -.035em; font-variant-numeric: tabular-nums; line-height: 1; }
+
+  /* ===== Header ===== */
+  .site-header {
+    position: sticky; inset-block-start: 0; z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 82%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid color-mix(in oklab, var(--line) 70%, transparent);
+  }
+  .site-header .navbar { border: 0; min-block-size: 4rem; }
+  /* Links from 64rem rather than Deck's 48rem: with the login and the CTA they
+     do not fit a tablet, and the drawer covers the gap. */
+  .site-header .navbar-links { display: none; margin-inline: auto; }
+  @media (min-width: 64rem) { .site-header .navbar-links { display: flex; } }
+  .logo-mark { inline-size: 2rem; block-size: 2rem; border-radius: 9px; display: grid; place-items: center; box-shadow: var(--shadow-2); }
+  .logo-mark .icon { inline-size: 1.15rem; block-size: 1.15rem; stroke-width: 2.4; }
+  .logo-amp { color: var(--brand); font-weight: 500; }
+  .phone-only { display: inline-flex; }
+  .wide-only { display: none; }
+  @media (min-width: 64rem) { .phone-only { display: none; } }
+  @media (min-width: 48rem) { .wide-only { display: inline-flex; } }
+
+  /* ===== Hero ===== */
+  .hero { position: relative; isolation: isolate; overflow: clip; }
+  /* Two decorative layers: the brand mesh, and a grid that fades out from the top. */
+  .hero-bg { position: absolute; inset: 0; z-index: -1; }
+  .hero-grid-lines {
+    position: absolute; inset: 0; z-index: -1; --cell: 44px; opacity: .7;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+  }
+  .hero-inner { display: grid; gap: var(--space-12); align-items: center; padding-block: var(--space-12) var(--space-16); }
+  @media (min-width: 64rem) { .hero-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: var(--space-12); padding-block: var(--space-20) var(--space-24); } }
+  .hero .display { font-size: clamp(2.5rem, 1.4rem + 4.3vw, 4.6rem); line-height: 1; }
+  .hero .lede { font-size: var(--text-lg); max-inline-size: 34rem; }
+  .news-pill {
+    align-self: flex-start; display: inline-flex; align-items: center; gap: var(--space-2);
+    padding: 3px var(--space-3) 3px 3px; border-radius: var(--r-full);
+    background: color-mix(in oklab, var(--surface) 80%, transparent); border: 1px solid var(--line);
+    font-size: var(--text-sm); color: var(--text-muted); text-decoration: none; box-shadow: var(--shadow-1);
+  }
+  .news-pill:hover { color: var(--text); border-color: var(--line-strong); }
+  .news-pill .badge { border-radius: var(--r-full); }
+  @media (max-width: 39.999rem) { .hero-ctas > .btn { flex: 1 1 100%; } }
+  .proof { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-4); }
+  .proof .avatar-stack .avatar { box-shadow: 0 0 0 2px var(--bg); }
+  .proof .rating-static { --star: 16px; }
+
+  /* The dashboard. Every number in it is markup; swap them for your own.
+     On a phone the floating cards fall into a two-column grid under the
+     main chart; from 64rem they float over its corners. */
+  .dash { position: relative; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+  .dash-main, .dash-mix { grid-column: 1 / -1; }
+  @media (min-width: 64rem) {
+    .dash { gap: 0 var(--space-4); padding-block-start: var(--space-12); align-items: start; }
+    .dash-main { margin-inline-end: var(--space-10); }
+    .dash-main .card-body { padding-block-end: var(--space-12); }
+    .dash-float { position: relative; z-index: 2; box-shadow: var(--shadow-4); }
+    .dash-roas { position: absolute; inset-block-start: 0; inset-inline-end: 0; inline-size: 12.5rem; }
+    .dash-cpa { grid-column: 1; margin-block-start: calc(var(--space-10) * -1); margin-inline: calc(var(--space-8) * -1) var(--space-4); }
+    .dash-mix { grid-column: 2; margin-block-start: calc(var(--space-6) * -1); margin-inline-end: calc(var(--space-4) * -1); }
+  }
+  .dash-main { box-shadow: var(--shadow-4); border-color: color-mix(in oklab, var(--line) 70%, transparent); }
+  .dash-main .card-header { padding-block: var(--space-3); }
+  .dash-value { font-size: clamp(2rem, 1.6rem + 1.4vw, 2.6rem); }
+  .dash-plot { position: relative; }
+  .dash-plot .chart-svg { --chart-h: 168px; }
+  .dash-plot .chart-line { --stroke: 2.5; }
+  /* The end-of-line marker is HTML, not an SVG circle: the SVG stretches with
+     preserveAspectRatio="none" and would squash a circle into an ellipse. */
+  .dash-tip { position: absolute; inset-block-start: calc(34 / 160 * 100%); inset-inline-end: 0; translate: 50% -50%; display: grid; place-items: center; }
+  .dash-tip .dot { inline-size: 12px; block-size: 12px; border-radius: var(--r-full); background: var(--c1); color: var(--c1); box-shadow: 0 0 0 3px var(--surface); }
+  .dash-tip .tip-label {
+    position: absolute; inset-block-end: calc(100% + 8px); inset-inline-end: 50%; translate: 18% 0;
+    white-space: nowrap; padding: 4px 8px; border-radius: var(--r-xs);
+    background: var(--ink-900); color: var(--ink-50); font-size: var(--text-2xs); font-weight: 620;
+  }
+  .dash-float .card-body { padding: var(--space-4); gap: var(--space-2); }
+  .dash-float .stat-value { font-size: var(--text-xl); }
+  .dash-float .sparkline { --spark-w: 100%; --spark-h: 30px; display: block; }
+  .mini-legend { display: grid; gap: 6px; font-size: var(--text-xs); color: var(--text-muted); }
+  .mini-legend span { display: flex; align-items: center; gap: var(--space-2); }
+  .mini-legend span::before { content: ""; inline-size: 8px; block-size: 8px; border-radius: 2px; background: var(--series); }
+  .mini-legend b { margin-inline-start: auto; color: var(--text); font-weight: 620; font-variant-numeric: tabular-nums; }
+
+  /* ===== Logo marquee ===== */
+  .logos { border-block: 1px solid var(--line); background: var(--surface); }
+  .logos .marquee { --marquee-dur: 38s; padding-block: var(--space-6); }
+  /* Deck only styles .marquee when motion is allowed. Under reduced motion the
+     row would wrap and the aria-hidden copy would show as a second set of
+     logos, so drop the copy and let the real track wrap, centred. */
+  @media (prefers-reduced-motion: reduce) {
+    .logos .marquee { display: block; }
+    .logos .marquee-track[aria-hidden="true"] { display: none; }
+    .logos .marquee-track { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4) var(--space-8); }
+  }
+  .logo { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--text-muted); font-size: 1.2rem; font-weight: 680; letter-spacing: -.02em; }
+  .logo .icon { inline-size: 1.5rem; block-size: 1.5rem; }
+  .logo-serif { font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-weight: 600; letter-spacing: 0; }
+  .logo-mono { font-family: var(--font-mono); font-weight: 600; letter-spacing: -.04em; font-size: 1.1rem; }
+  .logo-caps { text-transform: uppercase; letter-spacing: .16em; font-size: .95rem; font-weight: 720; }
+  .logo-light { font-weight: 420; letter-spacing: -.01em; }
+
+  /* ===== Services bento ===== */
+  .bento { display: grid; gap: var(--space-4); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 40rem) { .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); } .b-seo, .b-cro { grid-column: 1 / -1; } }
+  @media (min-width: 64rem) {
+    .bento { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .b-seo { grid-column: span 4; } .b-search { grid-column: span 2; }
+    .b-social, .b-content, .b-email { grid-column: span 2; }
+    .b-cro { grid-column: 1 / -1; }
+  }
+  .bento .card { transition: border-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out), translate var(--dur-2) var(--ease-out); }
+  .bento .card:hover { border-color: color-mix(in oklab, var(--brand) 40%, var(--line)); }
+  .bento .card-body { padding: var(--space-6); flex: 1 1 auto; }
+  .bento .icon-tile { background: linear-gradient(140deg, var(--brand-soft), color-mix(in oklab, var(--brand-soft) 50%, var(--surface))); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand) 18%, transparent); }
+  .metric { margin-block-start: auto; padding-block-start: var(--space-5); display: grid; gap: var(--space-3); }
+  .metric-row { display: flex; align-items: baseline; gap: var(--space-2); flex-wrap: wrap; }
+  .metric-row .figure { font-size: var(--text-2xl); }
+  .b-seo .chart-columns { --gap: 5px; }
+  .b-seo-grid { display: grid; gap: var(--space-6); }
+  @media (min-width: 40rem) { .b-seo-grid { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: end; } }
+  .b-cro-grid { display: grid; gap: var(--space-8); align-items: center; }
+  @media (min-width: 48rem) { .b-cro-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) auto; } }
+  .b-cro .ring { --size: 112px; --thickness: 10px; }
+  .b-cro .ring-label { display: grid; justify-items: center; gap: 2px; }
+  .b-cro .ring-label .figure { font-size: var(--text-xl); }
+
+  /* ===== Case studies ===== */
+  .case-grid { display: grid; gap: var(--space-5); }
+  @media (min-width: 48rem) { .case-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .case-feature { grid-column: 1 / -1; } }
+  .case-feature { display: grid; }
+  @media (min-width: 56rem) { .case-feature { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); } }
+  .case-media { position: relative; margin: 0; background: var(--bg-sunken); overflow: hidden; }
+  .case-media img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  .case .case-media { aspect-ratio: 16 / 10; }
+  .case-feature .case-media { aspect-ratio: auto; min-block-size: 18rem; }
+  .case-feature .case-media img { position: absolute; inset: 0; }
+  .result-chip {
+    position: absolute; inset-block-end: var(--space-4); inset-inline-start: var(--space-4);
+    display: grid; gap: 2px; padding: var(--space-3) var(--space-4); border-radius: var(--r-md);
+    background: color-mix(in oklab, var(--surface) 90%, transparent); box-shadow: var(--shadow-3);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .result-chip .figure { font-size: var(--text-2xl); color: var(--brand); }
+  .case-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); padding-block: var(--space-5); border-block: 1px solid var(--line); }
+  .case-stats .figure { font-size: clamp(1.5rem, 1.2rem + 1vw, 2.1rem); }
+  .case-feature .card-body { padding: clamp(1.5rem, 1rem + 2vw, 2.75rem); justify-content: center; }
+  .case-feature blockquote { margin: 0; border: 0; padding: 0; font-size: var(--text-base); color: var(--text); }
+
+  /* ===== Channel performance =====
+     Three radios and :has() switch the panels, so the tabs work with
+     JavaScript off and get arrow-key navigation from the browser for free.
+     The radios are visually hidden; their labels are styled as a .segmented. */
+  .perf-grid { display: grid; gap: var(--space-10); align-items: center; }
+  @media (min-width: 64rem) { .perf-grid { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: var(--space-16); } }
+  .perf-switch { max-inline-size: 24rem; position: relative; }
+  .perf-switch input { position: absolute; opacity: 0; pointer-events: none; }
+  .perf-switch label:has(:checked) { background: var(--surface); color: var(--text); box-shadow: var(--shadow-1); }
+  .perf-switch label:has(:focus-visible) { outline: 2px solid var(--focus); outline-offset: 1px; }
+  .perf-panel { display: none; }
+  .perf:has(#m-rev:checked) .p-rev,
+  .perf:has(#m-roas:checked) .p-roas,
+  .perf:has(#m-cpa:checked) .p-cpa { display: flex; }
+  .perf .chart-bar { grid-template-columns: 7.5rem minmax(0, 1fr) 3.5rem; }
+  .perf .chart-bar-track { block-size: 14px; }
+  .perf .chart-bar-value { text-align: end; }
+  .perf-foot { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+  .insights { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
+  .insights li { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-3); align-items: start; }
+  .insights .icon-tile { inline-size: 2.25rem; block-size: 2.25rem; }
+
+  /* ===== Process (always dark) ===== */
+  .process { position: relative; isolation: isolate; overflow: clip; }
+  .process::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(40rem 22rem at 85% 0%, oklch(55% .2 var(--hue-brand) / .32), transparent 70%),
+      radial-gradient(30rem 20rem at 0% 100%, oklch(62% .16 calc(var(--hue-brand) + 50) / .2), transparent 70%);
+  }
+  .process { --text: var(--ink-50); --text-muted: var(--ink-300); --line: oklch(100% 0 0 / .12); }
+  .process .eyebrow { color: oklch(78% .14 var(--hue-brand)); }
+  .steps-row { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); counter-reset: step; }
+  @media (min-width: 48rem) { .steps-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 72rem) { .steps-row { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .step-card {
+    position: relative; display: flex; flex-direction: column; gap: var(--space-3);
+    padding: var(--space-6); border-radius: var(--r-lg);
+    background: oklch(100% 0 0 / .04); border: 1px solid oklch(100% 0 0 / .1);
+    counter-increment: step;
+  }
+  .step-card::before {
+    content: "0" counter(step); font-size: var(--text-sm); font-weight: 700; letter-spacing: .04em;
+    inline-size: 2.5rem; block-size: 2.5rem; border-radius: var(--r-full); display: grid; place-items: center;
+    background: linear-gradient(140deg, var(--brand-500), oklch(from var(--brand-500) l c calc(h + 40)));
+    color: var(--text-on-brand); box-shadow: 0 0 0 6px oklch(100% 0 0 / .05);
+  }
+  .step-card .badge { position: absolute; inset-block-start: var(--space-6); inset-inline-end: var(--space-6); background: oklch(100% 0 0 / .08); color: var(--ink-200); border-color: transparent; }
+  .step-card ul { list-style: none; margin: 0; padding: var(--space-3) 0 0; border-block-start: 1px solid oklch(100% 0 0 / .1); display: grid; gap: var(--space-2); font-size: var(--text-sm); color: var(--text-muted); }
+  .step-card li { display: flex; gap: var(--space-2); align-items: center; }
+  .step-card li .icon { color: oklch(78% .14 var(--hue-brand)); }
+
+  /* ===== Testimonials ===== */
+  .quotes { display: grid; gap: var(--space-4); }
+  @media (min-width: 48rem) { .quotes { grid-template-columns: repeat(2, minmax(0, 1fr)); } .q-feature { grid-column: 1 / -1; } }
+  /* Two columns leave the fifth small quote alone on its row; let it span. */
+  @media (min-width: 48rem) and (max-width: 71.999rem) { .quotes > :last-child { grid-column: 1 / -1; } }
+  @media (min-width: 72rem) { .quotes { grid-template-columns: repeat(3, minmax(0, 1fr)); } .q-feature { grid-column: span 2; grid-row: span 2; } }
+  .quote .card-body { justify-content: space-between; gap: var(--space-5); }
+  .quote blockquote { margin: 0; padding: 0; border: 0; color: var(--text); font-size: var(--text-base); line-height: var(--leading-normal); text-wrap: pretty; }
+  .q-feature blockquote { font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem); line-height: 1.4; letter-spacing: -.015em; font-weight: 520; }
+  .q-feature .card-body { padding: clamp(1.5rem, 1rem + 2.5vw, 3rem); justify-content: space-between; gap: var(--space-8); }
+  .q-mark { color: var(--brand); inline-size: 2.5rem; block-size: 2.5rem; }
+  .quote-metric { display: inline-flex; align-items: center; gap: var(--space-2); }
+
+  /* ===== Pricing ===== */
+  .tiers { display: grid; gap: var(--space-5); align-items: stretch; max-inline-size: 34rem; margin-inline: auto; inline-size: 100%; }
+  @media (min-width: 64rem) { .tiers { grid-template-columns: repeat(3, minmax(0, 1fr)); max-inline-size: none; } }
+  .tier .card-body { padding: var(--space-8) var(--space-6); flex: 1 1 auto; }
+  .tier-featured { box-shadow: var(--shadow-4); --g-width: 2px; }
+  @media (min-width: 64rem) { .tier-featured { scale: 1.03; } }
+  .price { display: flex; align-items: baseline; gap: var(--space-2); }
+  .price .figure { font-size: 2.75rem; }
+  .tier-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); font-size: var(--text-sm); }
+  .tier-list li { display: flex; gap: var(--space-3); align-items: flex-start; }
+  .tier-list .icon { color: var(--brand); margin-block-start: 1px; }
+  .tier .btn { margin-block-start: auto; }
+
+  /* ===== Free audit band ===== */
+  .audit { position: relative; isolation: isolate; overflow: clip; border-radius: var(--r-lg); }
+  .audit::after {
+    content: ""; position: absolute; inset: 0; z-index: -1; opacity: .18;
+    background-image: linear-gradient(to right, oklch(100% 0 0 / .5) 1px, transparent 1px), linear-gradient(to bottom, oklch(100% 0 0 / .5) 1px, transparent 1px);
+    background-size: 36px 36px;
+    -webkit-mask-image: radial-gradient(ellipse at 0% 0%, #000, transparent 70%);
+            mask-image: radial-gradient(ellipse at 0% 0%, #000, transparent 70%);
+  }
+  .audit-grid { display: grid; gap: var(--space-10); align-items: center; padding: clamp(1.5rem, 1rem + 4vw, 4.5rem); }
+  @media (min-width: 64rem) { .audit-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 27rem); gap: var(--space-16); } }
+  .audit h2 { color: inherit; }
+  .audit .lede { color: inherit; opacity: .9; }
+  .audit-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+  .audit-list li { display: flex; gap: var(--space-3); align-items: center; font-weight: 540; }
+  .audit-list .tick-dot { inline-size: 1.6rem; block-size: 1.6rem; border-radius: var(--r-full); display: grid; place-items: center; background: oklch(100% 0 0 / .2); flex: none; }
+  .audit-form { box-shadow: var(--shadow-4); border-color: transparent; color: var(--text); }
+  .audit-form .card-body { padding: var(--space-6); }
+
+  /* ===== FAQ ===== */
+  .faq-grid { display: grid; gap: var(--space-10); }
+  @media (min-width: 64rem) { .faq-grid { grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); gap: var(--space-16); } }
+  .talk-card { max-inline-size: 28rem; }
+  .talk-card .card-media { background: var(--bg-sunken); }
+  .talk-card .card-media img { aspect-ratio: 16 / 10; }
+
+  /* ===== Footer ===== */
+  .site-footer { background: var(--surface); }
+  .site-footer .navbar-brand { color: var(--text); }
+  .site-header .navbar-brand { white-space: nowrap; }
+  .site-footer .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-footer .footer-brand { grid-column: 1 / -1; max-inline-size: 28rem; }
+  @media (min-width: 64rem) {
+    .site-footer .footer-grid { grid-template-columns: minmax(0, 1.8fr) repeat(3, minmax(0, 1fr)); }
+    .site-footer .footer-brand { grid-column: auto; }
+  }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Photos are hotlinked from Unsplash for the preview. Replace them with your own. -->
+
+<!-- Icons the Deck sprite does not have, plus the fictional client marks in
+     the logo strip. Stroke-based, 24x24, inherit currentColor. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-signal" viewBox="0 0 24 24"><circle cx="6.5" cy="17.5" r="2" fill="currentColor"/><path d="M5 11.2a7.8 7.8 0 0 1 7.8 7.8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.75"/><circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.75"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l8 4.5V4.5L7 9H5a1 1 0 0 0-1 1ZM18.5 9a4 4 0 0 1 0 6M7.5 15l1.2 4.5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="m14.5 5.5 4 4M4 20l1.2-4.6L16 4.6a1.9 1.9 0 0 1 2.8 0l.6.6a1.9 1.9 0 0 1 0 2.8L8.6 18.8Z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9.5 3.5h5M10.5 3.5v5.3L5 18.2A1.6 1.6 0 0 0 6.4 20.5h11.2a1.6 1.6 0 0 0 1.4-2.3l-5.5-9.4V3.5M7.5 14h9" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M10 6.5H6.2A1.7 1.7 0 0 0 4.5 8.2v3.6a1.7 1.7 0 0 0 1.7 1.7H9V15a3.5 3.5 0 0 1-3.5 3.5M19.5 6.5h-3.8A1.7 1.7 0 0 0 14 8.2v3.6a1.7 1.7 0 0 0 1.7 1.7h2.8V15a3.5 3.5 0 0 1-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="3" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M8 10.5V16M8 7.8v.01M11.5 16v-5.5M11.5 13a2.5 2.5 0 0 1 5 0v3" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.75"/><circle cx="12" cy="12" r="3.9" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M17.2 6.8v.01" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M4.5 4.5h4.2l10.8 15H15.3ZM19 4.5l-5.8 6.4M5 19.5l5.9-6.4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <!-- Client marks: decorative, fictional. -->
+  <symbol id="l-loop" viewBox="0 0 24 24"><path d="M8 8a4 4 0 1 0 0 8c4 0 4-8 8-8a4 4 0 1 1 0 8c-4 0-4-8-8-8Z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="l-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14M5 19l7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="l-prism" viewBox="0 0 24 24"><path d="M12 3 21 19H3Z M12 3v16" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="l-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2" fill="currentColor"/><rect x="13" y="4" width="7" height="7" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="4" y="13" width="7" height="7" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13" y="13" width="7" height="7" rx="2" fill="currentColor"/></symbol>
+  <symbol id="l-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="l-arch" viewBox="0 0 24 24"><path d="M5 20V11a7 7 0 0 1 14 0v9M9.5 20v-8a2.5 2.5 0 0 1 5 0v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="l-wave" viewBox="0 0 24 24"><path d="M3 9c3-3 6 3 9 0s6 3 9 0M3 15c3-3 6 3 9 0s6 3 9 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="l-drop" viewBox="0 0 24 24"><path d="M12 3c-3.2 3.9-6 7.3-6 10.6a6 6 0 0 0 12 0C18 10.3 15.2 6.9 12 3Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+      <a class="navbar-brand" href="#" aria-label="Signal &amp; Bloom, home">
+        <span class="logo-mark g-brand" aria-hidden="true"><svg class="icon"><use href="#i-signal"></use></svg></span>
+        <span>Signal <span class="logo-amp">&amp;</span> Bloom</span>
+      </a>
+
+      <nav class="navbar-links" aria-label="Primary">
+        <a class="nav-link" href="#services" aria-current="page">Services</a>
+        <a class="nav-link" href="#work">Work</a>
+        <a class="nav-link" href="#results">Results</a>
+        <a class="nav-link" href="#pricing">Pricing</a>
+        <a class="nav-link" href="#faq">FAQ</a>
+      </nav>
+
+      <div class="push cluster cluster-tight">
+        <!-- On phones the theme switch lives in the drawer, so the header keeps room for the CTA. -->
+        <button class="btn btn-icon btn-ghost wide-only" data-deck-theme aria-label="Switch theme">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        </button>
+        <a class="btn btn-ghost wide-only" href="#">Client login</a>
+        <a class="btn btn-primary" href="#audit">Free audit</a>
+        <!-- Mobile menu. Shown below 48rem, opens the drawer at the end of the page (deck-extras.js). -->
+        <button class="btn btn-icon btn-ghost phone-only" data-deck-drawer="#site-nav" aria-label="Open menu">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#menu"></use></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-bg g-mesh g-mesh-drift" aria-hidden="true"></div>
+    <div class="hero-grid-lines g-grid-lines" aria-hidden="true"></div>
+
+    <div class="container hero-inner">
+      <div class="stack stack-6 stagger">
+        <a class="news-pill enter-rise" href="#">
+          <span class="badge badge-solid">New</span>
+          2026 holiday ad benchmarks are out
+          <svg class="icon icon-sm mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+        </a>
+
+        <h1 class="display enter-rise" id="hero-title">Growth marketing that <span class="g-text">pays for itself</span>, and proves it.</h1>
+
+        <p class="lede enter-rise">
+          Signal &amp; Bloom runs paid search, paid social, SEO and lifecycle for
+          ambitious e-commerce and B2B brands. Every dollar is tied to revenue and
+          reported weekly, in plain English.
+        </p>
+
+        <div class="cluster hero-ctas enter-rise">
+          <a class="btn btn-primary btn-lg" href="#audit">
+            Get a free audit
+            <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+          </a>
+          <a class="btn btn-lg" href="#work">See case studies</a>
+        </div>
+
+        <div class="proof enter-rise">
+          <span class="avatar-stack" aria-hidden="true">
+            <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1651684215020-f7a5b6610f23?w=72&h=72&q=80&auto=format&fit=crop&crop=faces" width="72" height="72" alt=""></span>
+            <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=72&h=72&q=80&auto=format&fit=crop&crop=faces" width="72" height="72" alt=""></span>
+            <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=72&h=72&q=80&auto=format&fit=crop&crop=faces" width="72" height="72" alt=""></span>
+            <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1627161683077-e34782c24d81?w=72&h=72&q=80&auto=format&fit=crop&crop=faces" width="72" height="72" alt=""></span>
+            <span class="avatar avatar-sm"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=72&h=72&q=80&auto=format&fit=crop&crop=faces" width="72" height="72" alt=""></span>
+          </span>
+          <div class="stack stack-0">
+            <span class="cluster cluster-tight">
+              <span class="rating-static" style="--value:98" role="img" aria-label="Rated 4.9 out of 5">
+                <span class="rating-fill">
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                  <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                </span>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+                <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#star-fill"></use></svg>
+              </span>
+              <span class="text-sm fw-semi nums">4.9</span>
+            </span>
+            <span class="text-sm text-muted nums">140+ clients · $310M in tracked revenue</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- The results dashboard: a Deck card, an SVG line chart, two stat cards
+           with sparklines and a CSS donut. Decorative numbers; replace freely. -->
+      <figure class="dash enter-rise">
+        <figcaption class="sr-only">Example client dashboard: revenue up 38% over 90 days, return on ad spend up 312%, cost per acquisition down 41%.</figcaption>
+
+        <div class="card dash-main">
+          <div class="card-header">
+            <span class="text-sm fw-semi">Revenue</span>
+            <span class="text-xs text-muted">Last 90 days</span>
+            <span class="status-line text-xs text-muted">
+              <span class="indicator indicator-good ping" style="color:var(--good-500)" aria-hidden="true"></span> Live
+            </span>
+          </div>
+          <div class="card-body">
+            <div class="cluster items-end">
+              <span class="figure dash-value">$1.84M</span>
+              <span class="stat-delta stat-delta-up">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#trend-up-sm"></use></svg>
+                38.2%
+              </span>
+              <span class="text-xs text-muted">vs prior period</span>
+            </div>
+            <div class="chart">
+              <div class="dash-plot">
+                <svg class="chart-svg" viewBox="0 0 400 160" preserveAspectRatio="none" role="img" aria-label="Revenue rising from $11k to $31k a week over 90 days">
+                  <line class="chart-gridline" x1="0" x2="400" y1="40" y2="40"></line>
+                  <line class="chart-gridline" x1="0" x2="400" y1="80" y2="80"></line>
+                  <line class="chart-gridline" x1="0" x2="400" y1="120" y2="120"></line>
+                  <path class="chart-area" d="M0 128 L36 120 L72 124 L109 108 L145 112 L181 96 L218 90 L254 94 L290 72 L327 60 L363 52 L400 34 L400 160 L0 160 Z"></path>
+                  <path class="chart-line chart-line-dashed s-muted" d="M0 136 L36 132 L72 134 L109 126 L145 128 L181 120 L218 118 L254 116 L290 108 L327 104 L363 100 L400 92"></path>
+                  <path class="chart-line" d="M0 128 L36 120 L72 124 L109 108 L145 112 L181 96 L218 90 L254 94 L290 72 L327 60 L363 52 L400 34"></path>
+                </svg>
+                <span class="dash-tip" aria-hidden="true"><span class="dot ping"></span><span class="tip-label nums">Oct 4 · $31.2k</span></span>
+              </div>
+              <div class="chart-x" aria-hidden="true"><span>Jul 7</span><span>Aug 4</span><span>Sep 1</span><span>Oct 4</span></div>
+              <div class="chart-legend"><span class="s1">This period</span><span class="s-muted">Prior period</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card dash-float dash-roas">
+          <div class="card-body">
+            <span class="stat-label">Return on ad spend</span>
+            <div class="bar">
+              <span class="stat-value nums">4.12×</span>
+              <span class="badge badge-good push nums">+312%</span>
+            </div>
+            <svg class="sparkline sparkline-good" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true"><path class="chart-line" d="M0 24 L12 22 L25 23 L37 18 L50 19 L62 13 L75 11 L87 7 L100 3"></path></svg>
+          </div>
+        </div>
+
+        <div class="card dash-float dash-cpa">
+          <div class="card-body">
+            <span class="stat-label">Cost per acquisition</span>
+            <div class="bar">
+              <span class="stat-value nums">$18.40</span>
+              <span class="badge badge-good push nums">−41%</span>
+            </div>
+            <svg class="sparkline sparkline-good" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true"><path class="chart-line" d="M0 4 L12 6 L25 5 L37 10 L50 9 L62 14 L75 17 L87 20 L100 24"></path></svg>
+          </div>
+        </div>
+
+        <div class="card dash-float dash-mix">
+          <figure class="card-body chart m-0">
+            <figcaption class="stat-label">Revenue by channel</figcaption>
+            <div class="cluster" style="--gap:var(--space-4);flex-wrap:nowrap">
+              <div class="donut-wrap">
+                <div class="donut" role="img" aria-label="Search 46%, Social 26%, Email 14%, Organic 14%" style="--size:76px;--thickness:11px;--stops: var(--c1) 0 46%, var(--c2) 0 72%, var(--c3) 0 86%, var(--c4) 0 100%"></div>
+                <div class="donut-center"><span class="donut-value text-sm nums">46%</span></div>
+              </div>
+              <div class="mini-legend grow">
+                <span class="s1">Search <b>46%</b></span>
+                <span class="s2">Social <b>26%</b></span>
+                <span class="s3">Email <b>14%</b></span>
+                <span class="s4">Organic <b>14%</b></span>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== Client logos =====
+       The track is duplicated with aria-hidden so the loop is seamless and
+       a screen reader hears the list once. Swap the spans for <img> logos. -->
+  <section class="logos" aria-label="Clients">
+    <div class="container">
+      <p class="text-center text-sm text-muted pbs-6">Trusted by 140+ brands spending $10k to $400k a month on ads</p>
+      <div class="marquee">
+        <div class="marquee-track">
+          <span class="logo"><svg class="icon" aria-hidden="true"><use href="#l-loop"></use></svg>Northloop</span>
+          <span class="logo logo-serif"><svg class="icon" aria-hidden="true"><use href="#l-leaf"></use></svg>Fernhill</span>
+          <span class="logo logo-caps"><svg class="icon" aria-hidden="true"><use href="#l-prism"></use></svg>Pellucid</span>
+          <span class="logo logo-mono"><svg class="icon" aria-hidden="true"><use href="#l-grid"></use></svg>tallyform</span>
+          <span class="logo logo-light"><svg class="icon" aria-hidden="true"><use href="#l-sun"></use></svg>Lumen Botanics</span>
+          <span class="logo logo-serif"><svg class="icon" aria-hidden="true"><use href="#l-arch"></use></svg>Hollis &amp; Pine</span>
+          <span class="logo"><svg class="icon" aria-hidden="true"><use href="#l-wave"></use></svg>Quantra</span>
+          <span class="logo logo-caps"><svg class="icon" aria-hidden="true"><use href="#l-drop"></use></svg>Forge</span>
+        </div>
+        <div class="marquee-track" aria-hidden="true">
+          <span class="logo"><svg class="icon"><use href="#l-loop"></use></svg>Northloop</span>
+          <span class="logo logo-serif"><svg class="icon"><use href="#l-leaf"></use></svg>Fernhill</span>
+          <span class="logo logo-caps"><svg class="icon"><use href="#l-prism"></use></svg>Pellucid</span>
+          <span class="logo logo-mono"><svg class="icon"><use href="#l-grid"></use></svg>tallyform</span>
+          <span class="logo logo-light"><svg class="icon"><use href="#l-sun"></use></svg>Lumen Botanics</span>
+          <span class="logo logo-serif"><svg class="icon"><use href="#l-arch"></use></svg>Hollis &amp; Pine</span>
+          <span class="logo"><svg class="icon"><use href="#l-wave"></use></svg>Quantra</span>
+          <span class="logo logo-caps"><svg class="icon"><use href="#l-drop"></use></svg>Forge</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Services bento =====
+       A six-column grid with spanning cells from 64rem, two columns from 40rem,
+       one below. Each card carries one real-looking metric. -->
+  <section class="section" id="services" aria-labelledby="services-title">
+    <div class="container stack stack-8">
+      <div class="section-head">
+        <span class="eyebrow">What we do</span>
+        <h2 id="services-title">Six disciplines, one P&amp;L</h2>
+        <p class="lede">Most agencies optimise their own channel and argue with the others. We run them as one budget, judged by one number: profitable revenue.</p>
+      </div>
+
+      <div class="bento">
+        <article class="card b-seo reveal">
+          <div class="card-body">
+            <div class="b-seo-grid">
+              <div class="stack stack-3">
+                <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#search"></use></svg></span>
+                <h3 class="card-title">SEO &amp; content strategy</h3>
+                <p class="text-sm text-muted">Technical fixes first, then pages that answer what buyers actually search. No 2,000-word posts written for robots.</p>
+                <div class="metric-row pbs-3">
+                  <span class="figure nums">+184%</span>
+                  <span class="text-sm text-muted">organic sessions, year on year</span>
+                </div>
+              </div>
+              <figure class="chart chart-sm m-0">
+                <figcaption class="sr-only">Monthly organic sessions for a client, rising across twelve months</figcaption>
+                <div class="chart-columns">
+                  <div class="chart-col" style="--value:24" data-label="N" data-value="31k"></div>
+                  <div class="chart-col" style="--value:27" data-label="D" data-value="34k"></div>
+                  <div class="chart-col" style="--value:30" data-label="J" data-value="38k"></div>
+                  <div class="chart-col" style="--value:34" data-label="F" data-value="43k"></div>
+                  <div class="chart-col" style="--value:39" data-label="M" data-value="49k"></div>
+                  <div class="chart-col" style="--value:44" data-label="A" data-value="56k"></div>
+                  <div class="chart-col" style="--value:52" data-label="M" data-value="66k"></div>
+                  <div class="chart-col" style="--value:58" data-label="J" data-value="73k"></div>
+                  <div class="chart-col" style="--value:66" data-label="J" data-value="83k"></div>
+                  <div class="chart-col" style="--value:74" data-label="A" data-value="94k"></div>
+                  <div class="chart-col" style="--value:86" data-label="S" data-value="109k"></div>
+                  <div class="chart-col" style="--value:100" data-label="O" data-value="127k"></div>
+                </div>
+              </figure>
+            </div>
+          </div>
+        </article>
+
+        <article class="card b-search reveal">
+          <div class="card-body">
+            <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="#i-target"></use></svg></span>
+            <h3 class="card-title">Paid search</h3>
+            <p class="text-sm text-muted">Google and Microsoft Ads, Shopping and Performance Max with the guardrails left on.</p>
+            <div class="metric">
+              <div class="metric-row"><span class="figure nums">5.2×</span><span class="text-sm text-muted">median ROAS</span></div>
+              <svg class="sparkline sparkline-good" style="--spark-w:100%;--spark-h:34px;display:block" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path class="chart-line" d="M0 30 L10 27 L20 28 L30 22 L40 24 L50 17 L60 15 L70 16 L80 9 L90 7 L100 3"></path></svg>
+            </div>
+          </div>
+        </article>
+
+        <article class="card b-social reveal">
+          <div class="card-body">
+            <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="#i-megaphone"></use></svg></span>
+            <h3 class="card-title">Paid social</h3>
+            <p class="text-sm text-muted">Meta, TikTok, Pinterest and LinkedIn, bought on incrementality rather than platform-reported ROAS.</p>
+            <figure class="chart metric m-0">
+              <figcaption class="sr-only">Return on ad spend by platform</figcaption>
+              <div class="chart-bars">
+                <div class="chart-bar"><span class="chart-bar-label">Meta</span><span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:88"></span></span><span class="chart-bar-value nums">4.1×</span></div>
+                <div class="chart-bar"><span class="chart-bar-label">TikTok</span><span class="chart-bar-track"><span class="chart-bar-fill s2" style="--value:76"></span></span><span class="chart-bar-value nums">3.6×</span></div>
+                <div class="chart-bar"><span class="chart-bar-label">Pinterest</span><span class="chart-bar-track"><span class="chart-bar-fill s4" style="--value:60"></span></span><span class="chart-bar-value nums">2.8×</span></div>
+              </div>
+            </figure>
+          </div>
+        </article>
+
+        <article class="card b-content reveal">
+          <div class="card-body">
+            <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="#i-pen"></use></svg></span>
+            <h3 class="card-title">Content &amp; creative</h3>
+            <p class="text-sm text-muted">Static, video and UGC, briefed from what the data says is working, refreshed before it fatigues.</p>
+            <div class="metric">
+              <div class="metric-row"><span class="figure nums">312</span><span class="text-sm text-muted">ad variants a month</span></div>
+              <div class="cluster cluster-tight">
+                <span class="avatar-stack" aria-hidden="true">
+                  <span class="avatar avatar-xs"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=48&h=48&q=80&auto=format&fit=crop&crop=faces" width="48" height="48" loading="lazy" decoding="async" alt=""></span>
+                  <span class="avatar avatar-xs"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=48&h=48&q=80&auto=format&fit=crop&crop=faces" width="48" height="48" loading="lazy" decoding="async" alt=""></span>
+                  <span class="avatar avatar-xs"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=48&h=48&q=80&auto=format&fit=crop&crop=faces" width="48" height="48" loading="lazy" decoding="async" alt=""></span>
+                  <span class="avatar avatar-xs"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=48&h=48&q=80&auto=format&fit=crop&crop=faces" width="48" height="48" loading="lazy" decoding="async" alt=""></span>
+                </span>
+                <span class="text-xs text-muted">62 UGC creators on call</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card b-email reveal">
+          <div class="card-body">
+            <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="../assets/deck/deck-icons.svg#mail"></use></svg></span>
+            <h3 class="card-title">Email &amp; lifecycle</h3>
+            <p class="text-sm text-muted">Flows, campaigns and SMS in Klaviyo or HubSpot, built around margin rather than send volume.</p>
+            <div class="chart metric">
+              <div class="metric-row"><span class="figure nums">31%</span><span class="text-sm text-muted">of revenue from owned channels</span></div>
+              <div class="chart-meter" role="img" aria-label="Flows 19%, campaigns 8%, SMS 4%">
+                <span class="s1" style="--value:19"></span><span class="s2" style="--value:8"></span><span class="s3" style="--value:4"></span>
+              </div>
+              <div class="chart-legend"><span class="s1">Flows</span><span class="s2">Campaigns</span><span class="s3">SMS</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card b-cro reveal">
+          <div class="card-body">
+            <div class="b-cro-grid">
+              <div class="stack stack-3">
+                <span class="icon-tile" aria-hidden="true"><svg class="icon"><use href="#i-flask"></use></svg></span>
+                <h3 class="card-title">Analytics &amp; conversion rate optimisation</h3>
+                <p class="text-sm text-muted">Server-side tracking, GA4 that agrees with Shopify, and two A/B tests a month on the pages that leak the most money.</p>
+                <div class="metric-row pbs-3">
+                  <span class="figure nums">+22%</span>
+                  <span class="text-sm text-muted">median conversion-rate lift</span>
+                </div>
+              </div>
+              <figure class="chart m-0">
+                <figcaption class="chart-head"><span class="chart-title">Checkout funnel, after</span><span class="chart-note">sessions reaching each step</span></figcaption>
+                <div class="chart-bars">
+                  <div class="chart-bar"><span class="chart-bar-label">Product view</span><span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:100"></span></span><span class="chart-bar-value nums">100%</span></div>
+                  <div class="chart-bar"><span class="chart-bar-label">Add to cart</span><span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:38"></span></span><span class="chart-bar-value nums">38%</span></div>
+                  <div class="chart-bar"><span class="chart-bar-label">Checkout</span><span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:21"></span></span><span class="chart-bar-value nums">21%</span></div>
+                  <div class="chart-bar"><span class="chart-bar-label">Purchase</span><span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:9"></span></span><span class="chart-bar-value nums">9%</span></div>
+                </div>
+              </figure>
+              <div class="ring-wrap">
+                <div class="ring" style="--value:72" role="img" aria-label="72 percent of tests shipped a winner"></div>
+                <span class="ring-label" aria-hidden="true"><span class="figure nums">72%</span><span class="text-2xs text-muted">tests won</span></span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Case studies ===== -->
+  <section class="section band-soft" id="work" aria-labelledby="work-title">
+    <div class="container stack stack-8">
+      <div class="bar wrap gap-4">
+        <div class="section-head">
+          <span class="eyebrow">Case studies</span>
+          <h2 id="work-title">Numbers our clients put in board decks</h2>
+        </div>
+        <a class="btn push" href="#">
+          All 38 case studies
+          <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+        </a>
+      </div>
+
+      <div class="case-grid">
+        <article class="card card-link case case-feature reveal">
+          <figure class="case-media">
+            <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=820&h=760&q=80&auto=format&fit=crop"
+                 width="820" height="760" loading="lazy" decoding="async"
+                 alt="An amber glass dropper bottle on a turned wooden pedestal, palm-leaf shadows on the wall behind">
+          </figure>
+          <div class="card-body">
+            <div class="stack stack-6">
+              <div class="cluster cluster-tight">
+                <span class="badge badge-brand">DTC skincare</span>
+                <span class="badge">Paid social</span>
+                <span class="badge">Email &amp; SMS</span>
+              </div>
+              <div class="stack stack-2">
+                <p class="text-sm text-muted">Lumen Botanics</p>
+                <h3 class="h2"><a class="stretch link-quiet" href="#">From $90k to $410k a month in eleven months</a></h3>
+              </div>
+              <div class="case-stats">
+                <div class="stack stack-1"><span class="figure nums">+356%</span><span class="text-xs text-muted">monthly revenue</span></div>
+                <div class="stack stack-1"><span class="figure nums">4.8×</span><span class="text-xs text-muted">blended ROAS</span></div>
+                <div class="stack stack-1"><span class="figure nums">−38%</span><span class="text-xs text-muted">acquisition cost</span></div>
+              </div>
+              <blockquote>“They cut two of our five channels in week three. Revenue went up the next month.”</blockquote>
+              <span class="cluster cluster-tight text-sm fw-semi text-brand">
+                Read the case study
+                <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card-link case reveal">
+          <figure class="case-media">
+            <img src="https://images.unsplash.com/photo-1623874514711-0f321325f318?w=900&h=560&q=80&auto=format&fit=crop"
+                 width="900" height="560" loading="lazy" decoding="async"
+                 alt="Benches and squat racks under the steel roof trusses of a large industrial-style gym">
+            <span class="result-chip"><span class="figure nums">−52%</span><span class="text-xs text-muted">cost per lead</span></span>
+          </figure>
+          <div class="card-body">
+            <div class="cluster cluster-tight">
+              <span class="badge badge-brand">Multi-site fitness</span>
+              <span class="badge">Paid search</span>
+              <span class="badge">Local SEO</span>
+            </div>
+            <h3 class="card-title"><a class="stretch link-quiet" href="#">Forge Athletic filled 14 new clubs before opening day</a></h3>
+            <p class="text-sm text-muted">Location-level budgets, call tracking and a pre-sale landing page per club.</p>
+          </div>
+        </article>
+
+        <article class="card card-link case reveal">
+          <figure class="case-media">
+            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&h=560&q=80&auto=format&fit=crop"
+                 width="900" height="560" loading="lazy" decoding="async"
+                 alt="A mustard-yellow armchair beside a brass floor lamp and framed print in a bright living room">
+            <span class="result-chip"><span class="figure nums">4.6×</span><span class="text-xs text-muted">ROAS on Shopping</span></span>
+          </figure>
+          <div class="card-body">
+            <div class="cluster cluster-tight">
+              <span class="badge badge-brand">Home &amp; furniture</span>
+              <span class="badge">Shopping</span>
+              <span class="badge">CRO</span>
+            </div>
+            <h3 class="card-title"><a class="stretch link-quiet" href="#">Hollis &amp; Pine made $1,800 sofas sell on a phone</a></h3>
+            <p class="text-sm text-muted">Feed rebuild, margin-based bidding and a checkout that stopped asking for things twice.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Channel performance ===== -->
+  <section class="section" id="results" aria-labelledby="results-title">
+    <div class="container perf-grid">
+      <div class="stack stack-8">
+        <div class="section-head">
+          <span class="eyebrow">Channel performance</span>
+          <h2 id="results-title">Every channel, on one honest scoreboard</h2>
+          <p class="lede">Aggregated across our e-commerce clients over the last 90 days, measured with the same attribution model for every channel.</p>
+        </div>
+        <ul class="insights">
+          <li>
+            <span class="icon-tile" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#trend-up-sm"></use></svg></span>
+            <div class="stack stack-1"><strong>Search still does the heavy lifting</strong><span class="text-sm text-muted">33% of revenue at the lowest cost per order of any paid channel.</span></div>
+          </li>
+          <li>
+            <span class="icon-tile" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#users-sm"></use></svg></span>
+            <div class="stack stack-1"><strong>Meta finds the new customers</strong><span class="text-sm text-muted">61% of first-time buyers touched a Meta ad before they bought.</span></div>
+          </li>
+          <li>
+            <span class="icon-tile" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#alert-circle-sm"></use></svg></span>
+            <div class="stack stack-1"><strong>LinkedIn is for B2B only</strong><span class="text-sm text-muted">For consumer brands it was the most expensive way to buy an order.</span></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card card-raised perf reveal">
+        <div class="card-header wrap">
+          <div class="stack stack-0">
+            <h3 class="card-title">By channel</h3>
+            <span class="text-xs text-muted">Last 90 days · 112 accounts</span>
+          </div>
+          <div class="segmented perf-switch mis-auto" role="radiogroup" aria-label="Metric">
+            <label><input type="radio" name="metric" id="m-rev" checked> Revenue</label>
+            <label><input type="radio" name="metric" id="m-roas"> ROAS</label>
+            <label><input type="radio" name="metric" id="m-cpa"> CPA</label>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="stack stack-6">
+            <figure class="chart chart-bars perf-panel p-rev m-0">
+              <figcaption class="sr-only">Attributed revenue by channel, in thousands of dollars</figcaption>
+              <div class="chart-bar"><span class="chart-bar-label">Google Search</span><span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:100"></span></span><span class="chart-bar-value nums">$612k</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">Meta</span><span class="chart-bar-track"><span class="chart-bar-fill s2" style="--value:80"></span></span><span class="chart-bar-value nums">$488k</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">Shopping</span><span class="chart-bar-track"><span class="chart-bar-fill s3" style="--value:56"></span></span><span class="chart-bar-value nums">$341k</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">TikTok</span><span class="chart-bar-track"><span class="chart-bar-fill s4" style="--value:19"></span></span><span class="chart-bar-value nums">$118k</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">YouTube</span><span class="chart-bar-track"><span class="chart-bar-fill s5" style="--value:16"></span></span><span class="chart-bar-value nums">$96k</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">LinkedIn</span><span class="chart-bar-track"><span class="chart-bar-fill s6" style="--value:12"></span></span><span class="chart-bar-value nums">$74k</span></div>
+            </figure>
+            <figure class="chart chart-bars perf-panel p-roas m-0">
+              <figcaption class="sr-only">Return on ad spend by channel</figcaption>
+              <div class="chart-bar"><span class="chart-bar-label">Google Search</span><span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:100"></span></span><span class="chart-bar-value nums">5.2×</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">Meta</span><span class="chart-bar-track"><span class="chart-bar-fill s2" style="--value:79"></span></span><span class="chart-bar-value nums">4.1×</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">Shopping</span><span class="chart-bar-track"><span class="chart-bar-fill s3" style="--value:88"></span></span><span class="chart-bar-value nums">4.6×</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">TikTok</span><span class="chart-bar-track"><span class="chart-bar-fill s4" style="--value:69"></span></span><span class="chart-bar-value nums">3.6×</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">YouTube</span><span class="chart-bar-track"><span class="chart-bar-fill s5" style="--value:56"></span></span><span class="chart-bar-value nums">2.9×</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">LinkedIn</span><span class="chart-bar-track"><span class="chart-bar-fill s6" style="--value:42"></span></span><span class="chart-bar-value nums">2.2×</span></div>
+            </figure>
+            <figure class="chart chart-bars perf-panel p-cpa m-0">
+              <figcaption class="sr-only">Cost per acquisition by channel, lower is better</figcaption>
+              <div class="chart-bar"><span class="chart-bar-label">Google Search</span><span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:33"></span></span><span class="chart-bar-value nums">$21</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">Meta</span><span class="chart-bar-track"><span class="chart-bar-fill s2" style="--value:42"></span></span><span class="chart-bar-value nums">$27</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">Shopping</span><span class="chart-bar-track"><span class="chart-bar-fill s3" style="--value:38"></span></span><span class="chart-bar-value nums">$24</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">TikTok</span><span class="chart-bar-track"><span class="chart-bar-fill s4" style="--value:48"></span></span><span class="chart-bar-value nums">$31</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">YouTube</span><span class="chart-bar-track"><span class="chart-bar-fill s5" style="--value:59"></span></span><span class="chart-bar-value nums">$38</span></div>
+              <div class="chart-bar"><span class="chart-bar-label">LinkedIn</span><span class="chart-bar-track"><span class="chart-bar-fill s6" style="--value:100"></span></span><span class="chart-bar-value nums">$64</span></div>
+            </figure>
+
+            <div class="perf-foot border-t pbs-6">
+              <div class="stat"><span class="stat-label">Blended ROAS</span><span class="stat-value nums">4.3×</span></div>
+              <div class="stat"><span class="stat-label">New customers</span><span class="stat-value nums">18,420</span></div>
+              <div class="stat"><span class="stat-label">CAC payback</span><span class="stat-value nums">41 days</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Process ===== -->
+  <section class="section g-dark process" aria-labelledby="process-title">
+    <div class="container stack stack-8">
+      <div class="section-head">
+        <span class="eyebrow">How we work</span>
+        <h2 id="process-title">Live in four weeks, accountable every Monday</h2>
+        <p class="lede">No six-month discovery phase. You get a plan in week two and spend going out in week three.</p>
+      </div>
+
+      <ol class="steps-row">
+        <li class="step-card reveal">
+          <span class="badge">Week 1</span>
+          <h3 class="h5">Audit</h3>
+          <p class="text-sm text-muted">We get read access to everything and find where the money is leaking: tracking, wasted spend, missing demand.</p>
+          <ul>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Tracking and attribution review</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Wasted-spend report</li>
+          </ul>
+        </li>
+        <li class="step-card reveal">
+          <span class="badge">Week 2</span>
+          <h3 class="h5">Strategy</h3>
+          <p class="text-sm text-muted">A one-page plan: which channels, what budget, which creative, and the number we expect to hit by day 90.</p>
+          <ul>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Budget model by channel</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 90-day target, in writing</li>
+          </ul>
+        </li>
+        <li class="step-card reveal">
+          <span class="badge">Weeks 3–4</span>
+          <h3 class="h5">Launch</h3>
+          <p class="text-sm text-muted">Clean account structures, the first round of creative and server-side tracking, all live inside a fortnight.</p>
+          <ul>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> First 40 creative variants</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Live dashboard access</li>
+          </ul>
+        </li>
+        <li class="step-card reveal">
+          <span class="badge">Ongoing</span>
+          <h3 class="h5">Optimise</h3>
+          <p class="text-sm text-muted">Weekly memo, monthly review, quarterly re-plan. Budget moves to whatever is working, including away from us.</p>
+          <ul>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Monday one-page memo</li>
+            <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Two CRO tests a month</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== Testimonials ===== -->
+  <section class="section" aria-labelledby="quotes-title">
+    <div class="container stack stack-8">
+      <div class="section-head center">
+        <span class="eyebrow">Clients</span>
+        <h2 id="quotes-title">The reviews we would have written ourselves</h2>
+      </div>
+
+      <div class="quotes">
+        <figure class="card g-border quote q-feature m-0 reveal">
+          <div class="card-body">
+            <svg class="q-mark" aria-hidden="true"><use href="#i-quote"></use></svg>
+            <blockquote>We had burned through two agencies that sent forty-slide decks and no answers. Signal &amp; Bloom send one page every Monday, and they tripled our revenue in under a year. For the first time I know which dollar did what.</blockquote>
+            <figcaption class="bar wrap gap-4">
+              <span class="avatar avatar-lg"><img src="https://images.unsplash.com/photo-1701096374092-bb70915fdc5c?w=112&h=112&q=80&auto=format&fit=crop&crop=faces" width="112" height="112" loading="lazy" decoding="async" alt=""></span>
+              <span class="stack stack-0">
+                <span class="fw-semi">Danielle Okafor</span>
+                <span class="text-sm text-muted">Founder &amp; CEO, Lumen Botanics</span>
+              </span>
+              <span class="badge badge-good push quote-metric nums">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#trend-up-sm"></use></svg>
+                +356% revenue
+              </span>
+            </figcaption>
+          </div>
+        </figure>
+
+        <figure class="card quote m-0 reveal">
+          <div class="card-body">
+            <blockquote>“Cost per lead halved in the first quarter, and they flagged the three clubs wasting budget before we asked.”</blockquote>
+            <figcaption class="cluster cluster-tight mt-2">
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&q=80&auto=format&fit=crop&crop=faces" width="80" height="80" loading="lazy" decoding="async" alt=""></span>
+              <span class="stack stack-0"><span class="fw-semi text-sm">Marco Reyes</span><span class="text-xs text-muted">VP Growth, Forge Athletic</span></span>
+            </figcaption>
+          </div>
+        </figure>
+
+        <figure class="card quote m-0 reveal">
+          <div class="card-body">
+            <blockquote>“The CRO work paid for the entire retainer in month two. Everything after that was profit.”</blockquote>
+            <figcaption class="cluster cluster-tight mt-2">
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&q=80&auto=format&fit=crop&crop=faces" width="80" height="80" loading="lazy" decoding="async" alt=""></span>
+              <span class="stack stack-0"><span class="fw-semi text-sm">Priya Shah</span><span class="text-xs text-muted">CMO, Hollis &amp; Pine</span></span>
+            </figcaption>
+          </div>
+        </figure>
+
+        <figure class="card quote m-0 reveal">
+          <div class="card-body">
+            <blockquote>“Our LinkedIn pipeline used to be a guess. Now it is a line item with a CAC beside it.”</blockquote>
+            <figcaption class="cluster cluster-tight mt-2">
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1595211877493-41a4e5f236b3?w=80&h=80&q=80&auto=format&fit=crop&crop=faces" width="80" height="80" loading="lazy" decoding="async" alt=""></span>
+              <span class="stack stack-0"><span class="fw-semi text-sm">Jordan Ellis</span><span class="text-xs text-muted">Head of Marketing, Tallyform</span></span>
+            </figcaption>
+          </div>
+        </figure>
+
+        <figure class="card quote m-0 reveal">
+          <div class="card-body">
+            <blockquote>“The first agency that has ever argued for spending <em>less</em> on a channel. That is why they still have the account.”</blockquote>
+            <figcaption class="cluster cluster-tight mt-2">
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1699899657680-421c2c2d5064?w=80&h=80&q=80&auto=format&fit=crop&crop=faces" width="80" height="80" loading="lazy" decoding="async" alt=""></span>
+              <span class="stack stack-0"><span class="fw-semi text-sm">Hannah Lindqvist</span><span class="text-xs text-muted">E-commerce Director, Fernhill</span></span>
+            </figcaption>
+          </div>
+        </figure>
+
+        <figure class="card quote m-0 reveal">
+          <div class="card-body">
+            <blockquote>“They rebuilt our tracking before touching a campaign. Annoying in week one, the reason we trust every number since.”</blockquote>
+            <figcaption class="cluster cluster-tight mt-2">
+              <span class="avatar"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&q=80&auto=format&fit=crop&crop=faces" width="80" height="80" loading="lazy" decoding="async" alt=""></span>
+              <span class="stack stack-0"><span class="fw-semi text-sm">Sam Whitaker</span><span class="text-xs text-muted">Founder, Quantra</span></span>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Pricing / engagement models ===== -->
+  <section class="section band-soft" id="pricing" aria-labelledby="pricing-title">
+    <div class="container stack stack-8">
+      <div class="section-head center">
+        <span class="eyebrow">Engagement models</span>
+        <h2 id="pricing-title">A flat retainer, sized to your ad spend</h2>
+        <p class="lede">Ninety days to start, then rolling monthly. Ad spend is billed by the platforms straight to you; we never mark it up.</p>
+      </div>
+
+      <div class="tiers">
+        <div class="card tier reveal">
+          <div class="card-body">
+            <div class="stack stack-6 h-full">
+              <div class="stack stack-2">
+                <h3 class="h5">Launch</h3>
+                <p class="text-sm text-muted">For brands spending $10k–$40k a month on ads.</p>
+              </div>
+              <p class="price"><span class="figure nums">$4,500</span><span class="text-sm text-muted">/ month</span></p>
+              <ul class="tier-list">
+                <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Two paid channels</li>
+                <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 8 new creative assets a month</li>
+                <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Tracking and GA4 clean-up</li>
+                <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Weekly memo, monthly call</li>
+              </ul>
+              <a class="btn btn-block" href="#audit">Start with Launch</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card tier tier-featured g-border reveal">
+          <div class="card-body">
+            <div class="stack stack-6 h-full">
+              <div class="stack stack-2">
+                <div class="bar">
+                  <h3 class="h5">Scale</h3>
+                  <span class="badge badge-solid push">Most chosen</span>
+                </div>
+                <p class="text-sm text-muted">For $40k–$250k a month across several channels.</p>
+              </div>
+              <p class="price"><span class="figure nums g-text">$8,900</span><span class="text-sm text-muted">/ month</span></p>
+              <ul class="tier-list">
+                <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Every paid channel, one budget</li>
+                <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> 30 creative variants a month, UGC included</li>
+                <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Email and SMS lifecycle</li>
+                <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Two CRO tests a month</li>
+                <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Dedicated strategist on Slack</li>
+              </ul>
+              <a class="btn btn-primary btn-block" href="#audit">
+                Start with a free audit
+                <svg class="icon icon-sm icon-follow mirror-rtl" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right-sm"></use></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card tier reveal">
+          <div class="card-body">
+            <div class="stack stack-6 h-full">
+              <div class="stack stack-2">
+                <h3 class="h5">Partner</h3>
+                <p class="text-sm text-muted">For $250k a month and up, or a team that wants us embedded.</p>
+              </div>
+              <p class="price"><span class="figure nums">8%</span><span class="text-sm text-muted">of spend, $20k minimum</span></p>
+              <ul class="tier-list">
+                <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Everything in Scale</li>
+                <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Dedicated creative pod</li>
+                <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Media mix modelling</li>
+                <li><svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg> Quarterly on-site planning</li>
+              </ul>
+              <a class="btn btn-block" href="#">Talk to a partner</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Free audit =====
+       The one form that matters. Point the action at your CRM or form tool. -->
+  <section class="section" id="audit" aria-labelledby="audit-title">
+    <div class="container">
+      <div class="audit g-brand reveal">
+        <div class="audit-grid">
+          <div class="stack stack-6">
+            <h2 id="audit-title">Get a free 20&#8209;point growth audit</h2>
+            <p class="lede">A senior strategist goes through your ad accounts, tracking and site, then sends a 12-minute video of what they would fix first. Yours to keep, whether or not we work together.</p>
+            <ul class="audit-list">
+              <li><span class="tick-dot" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span> Wasted spend, itemised by campaign</li>
+              <li><span class="tick-dot" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span> Tracking gaps and what they cost you</li>
+              <li><span class="tick-dot" aria-hidden="true"><svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#check-sm"></use></svg></span> Three changes to make this month</li>
+            </ul>
+          </div>
+
+          <form class="card audit-form" action="#" method="post" aria-labelledby="audit-form-title">
+            <div class="card-body">
+              <div class="stack stack-4">
+                <div class="stack stack-1">
+                  <h3 class="card-title" id="audit-form-title">Request your audit</h3>
+                  <p class="text-sm text-muted">Delivered within five working days.</p>
+                </div>
+                <div class="field">
+                  <label class="label" for="a-site">Website</label>
+                  <div class="input-group">
+                    <span class="addon">https://</span>
+                    <input class="input" id="a-site" name="website" type="text" inputmode="url" autocomplete="url" placeholder="yourbrand.com" required>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label" for="a-spend">Monthly ad spend</label>
+                  <select class="select" id="a-spend" name="spend">
+                    <option>Under $10k</option>
+                    <option selected>$10k – $40k</option>
+                    <option>$40k – $100k</option>
+                    <option>$100k – $250k</option>
+                    <option>$250k+</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label" for="a-email">Work email</label>
+                  <input class="input" id="a-email" name="email" type="email" autocomplete="email" placeholder="you@yourbrand.com" required>
+                </div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Get my free audit</button>
+                <p class="text-xs text-muted text-center">No sales call unless you ask for one.</p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ =====
+       Native <details> with a shared name, so one opens at a time. -->
+  <section class="section pbs-0" id="faq" aria-labelledby="faq-title">
+    <div class="container faq-grid">
+      <div class="stack stack-6">
+        <div class="section-head">
+          <span class="eyebrow">FAQ</span>
+          <h2 id="faq-title">Straight answers</h2>
+        </div>
+        <div class="card talk-card">
+          <figure class="card-media">
+            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=720&h=450&q=80&auto=format&fit=crop"
+                 width="720" height="450" loading="lazy" decoding="async"
+                 alt="A strategist presents sticky notes on a whiteboard to three colleagues on a sofa in a brick-walled office">
+          </figure>
+          <div class="card-body">
+            <h3 class="card-title">Rather talk it through?</h3>
+            <p class="text-sm text-muted">Twenty minutes with a strategist, not a salesperson. Bring your numbers.</p>
+            <a class="btn btn-outline" href="#">
+              <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#calendar"></use></svg>
+              Book a call
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <details name="faq" open>
+          <summary>Do you lock clients into long contracts?</summary>
+          <div class="accordion-body">The first term is 90 days, because that is how long it takes to judge paid media fairly. After that it is rolling monthly with 30 days' notice. Our longest client has been with us since 2017 without a contract renewal.</div>
+        </details>
+        <details name="faq">
+          <summary>Who owns the ad accounts and the data?</summary>
+          <div class="accordion-body">You do, always. We work inside your accounts with user access you can revoke at any time. If we part ways you keep every campaign, audience, creative file and dashboard.</div>
+        </details>
+        <details name="faq">
+          <summary>How soon will we see results?</summary>
+          <div class="accordion-body">Paid channels usually show a clear signal in four to six weeks and a fair read at 90 days. SEO takes four to six months to move meaningfully. We put the 90-day target in writing in week two.</div>
+        </details>
+        <details name="faq">
+          <summary>What is the minimum ad spend?</summary>
+          <div class="accordion-body">Around $10k a month across all channels. Below that, a retainer eats too much of the budget and we will tell you so, along with what we would do in your shoes.</div>
+        </details>
+        <details name="faq">
+          <summary>Do you work with B2B and SaaS?</summary>
+          <div class="accordion-body">Yes, about a third of our clients. We connect LinkedIn, Google and review sites to HubSpot or Salesforce so pipeline and revenue, not form fills, are the number we report.</div>
+        </details>
+        <details name="faq">
+          <summary>How do you report?</summary>
+          <div class="accordion-body">A one-page memo every Monday (what happened, why, what we are changing), a live dashboard you can open any time, and a monthly review call. No forty-slide decks.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="footer site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a class="navbar-brand" href="#">
+          <span class="logo-mark g-brand" aria-hidden="true"><svg class="icon"><use href="#i-signal"></use></svg></span>
+          <span>Signal <span class="logo-amp">&amp;</span> Bloom</span>
+        </a>
+        <p class="text-sm">Performance marketing for e-commerce and B2B brands. Brooklyn, Lisbon and remote.</p>
+        <form class="stack stack-2 mt-2" action="#" method="post" aria-labelledby="nl-title">
+          <p class="footer-heading" id="nl-title">The Monday Signal</p>
+          <p class="text-xs">One chart and one idea from our client data, every week. 21,000 marketers read it.</p>
+          <div class="input-group">
+            <label class="sr-only" for="nl-email">Email address</label>
+            <input class="input" id="nl-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">Services</p>
+        <a href="#services">SEO</a>
+        <a href="#services">Paid search</a>
+        <a href="#services">Paid social</a>
+        <a href="#services">Creative</a>
+        <a href="#services">Lifecycle</a>
+        <a href="#services">CRO &amp; analytics</a>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">Company</p>
+        <a href="#work">Case studies</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#">About</a>
+        <a href="#">Careers <span class="badge badge-brand">4 open</span></a>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">Resources</p>
+        <a href="#">Benchmarks 2026</a>
+        <a href="#">Attribution guide</a>
+        <a href="#">Creative library</a>
+        <a href="#">Client login</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Signal &amp; Bloom LLC · <a href="#">Privacy</a> · <a href="#">Terms</a></span>
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"></use></svg></a>
+        <a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
+        <a href="#" aria-label="X"><svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== Mobile menu (deck-extras.js wires [data-deck-drawer]) ===== -->
+<dialog class="drawer drawer-end" id="site-nav" aria-labelledby="site-nav-title">
+  <div class="drawer-header">
+    <p class="drawer-title" id="site-nav-title">Signal &amp; Bloom</p>
+    <button class="btn btn-icon btn-ghost mis-auto" data-deck-theme aria-label="Switch theme">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+    </button>
+    <button class="btn btn-icon btn-ghost" data-drawer-close aria-label="Close menu">
+      <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#x"></use></svg>
+    </button>
+  </div>
+  <nav class="drawer-body" aria-label="Mobile">
+    <div class="stack stack-1">
+      <a class="sidebar-link" href="#services" aria-current="page" data-drawer-close><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#grid"></use></svg> Services</a>
+      <a class="sidebar-link" href="#work" data-drawer-close><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#folder"></use></svg> Case studies</a>
+      <a class="sidebar-link" href="#results" data-drawer-close><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart"></use></svg> Results</a>
+      <a class="sidebar-link" href="#pricing" data-drawer-close><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#tag"></use></svg> Pricing</a>
+      <a class="sidebar-link" href="#faq" data-drawer-close><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#help"></use></svg> FAQ</a>
+      <a class="sidebar-link" href="#"><svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#lock"></use></svg> Client login</a>
+    </div>
+  </nav>
+  <div class="drawer-footer">
+    <a class="btn btn-primary" href="#audit" data-drawer-close>Get a free audit</a>
+  </div>
+</dialog>
+
+</body>
+</html>

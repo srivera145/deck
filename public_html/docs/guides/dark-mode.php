@@ -29,7 +29,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Add a dark mode switch</h1>
   <p class="lede">
     Dark mode is already on. Deck follows the operating system with no configuration, so
@@ -39,7 +39,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="switch">The switch</h2>
   <p>
     One attribute on a button. No handler, no state, no code.
@@ -82,7 +82,7 @@ Deck.theme('light');</code></pre>
   ); ?>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="how">Why it works without a second stylesheet</h2>
   <p>
     Deck declares its semantic tokens with <code>light-dark()</code>, so each one carries
@@ -111,13 +111,13 @@ Deck.theme('light');</code></pre>
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="your-css">Making your own CSS follow</h2>
   <p>
     One rule: <strong>reference the roles, not the ramps.</strong>
   </p>
   <div class="split">
-    <div class="stack-2">
+    <div class="stack stack-2">
       <p class="text-sm fw-semi text-bad">Hard-codes white into the page</p>
       <pre class="dx-code"><code>@layer app.components {
   .invoice {
@@ -127,7 +127,7 @@ Deck.theme('light');</code></pre>
   }
 }</code></pre>
     </div>
-    <div class="stack-2">
+    <div class="stack stack-2">
       <p class="text-sm fw-semi text-good">Follows the theme for free</p>
       <pre class="dx-code"><code>@layer app.components {
   .invoice {
@@ -153,7 +153,7 @@ Deck.theme('light');</code></pre>
   <pre class="dx-code"><code>.chart-gridline { stroke: light-dark(oklch(90% .01 232), oklch(30% .01 232)); }</code></pre>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="server">Rendering the choice server-side</h2>
   <p>
     <code>localStorage</code> is read by a script, which means it is read after the HTML
@@ -170,7 +170,7 @@ Deck.theme('light');</code></pre>
   </p>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="caveats">Three things that are not automatic yet</h2>
   <p>
     Measured on a real page rather than assumed. None of these will stop you shipping, and
@@ -261,9 +261,9 @@ Deck.theme('light');</code></pre>
 &lt;/picture&gt;</code></pre>
 </section>
 
-<section class="stack-4">
+<section class="stack stack-4">
   <h2 id="testing">Testing it</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       In Chrome dev tools: the three-dot menu, More tools, Rendering, then
       <em>Emulate prefers-color-scheme</em>. Firefox has a light/dark toggle directly in
@@ -286,7 +286,7 @@ Deck.theme('light');</code></pre>
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="next">Next</h2>
   <p>
     <a href="theming.php">Changing your brand colour</a> uses the same token system and the

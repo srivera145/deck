@@ -40,7 +40,7 @@ $steps = [
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Stack</h1>
   <p class="lede">
     <code>.stack</code> is a flex column with a gap. That is the whole component — five
@@ -49,7 +49,7 @@ $steps = [
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it whenever two or more things sit one above another and need space between
@@ -68,7 +68,7 @@ $steps = [
   ?>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="why">Why gap instead of margins</h2>
   <p>
     This is the argument the rest of Deck rests on, so it is worth making properly.
@@ -78,7 +78,7 @@ $steps = [
     problems that a gap does not.
   </p>
 
-  <div class="stack-3">
+  <div class="stack stack-3">
     <h3 id="why-collapse">Margins collapse; gaps do not</h3>
     <p>
       Adjacent vertical margins merge into the larger of the two, so a
@@ -94,7 +94,7 @@ $steps = [
     </p>
   </div>
 
-  <div class="stack-3">
+  <div class="stack stack-3">
     <h3 id="why-first-last">Margins need exceptions; gaps have none</h3>
     <p>
       A margin below every child puts a margin below the <em>last</em> child too, which
@@ -109,14 +109,14 @@ $steps = [
     <?php
     docs_example(
         '<div class="split">' . "\n" .
-        '  <div class="card"><div class="card-body stack-2">' . "\n" .
+        '  <div class="card"><div class="card-body"><div class="stack stack-2">' . "\n" .
         '    <span class="badge">Three items</span>' . "\n" .
         '    <p>First</p><p>Second</p><p>Third</p>' . "\n" .
-        '  </div></div>' . "\n" .
-        '  <div class="card"><div class="card-body stack-2">' . "\n" .
+        '  </div></div></div>' . "\n" .
+        '  <div class="card"><div class="card-body"><div class="stack stack-2">' . "\n" .
         '    <span class="badge">Last one hidden</span>' . "\n" .
         '    <p>First</p><p>Second</p><p hidden>Third</p>' . "\n" .
-        '  </div></div>' . "\n" .
+        '  </div></div></div>' . "\n" .
         '</div>',
         'The card on the right has no trailing space to trim',
         'stack'
@@ -124,7 +124,7 @@ $steps = [
     ?>
   </div>
 
-  <div class="stack-3">
+  <div class="stack stack-3">
     <h3 id="why-owner">The parent owns the spacing, not the child</h3>
     <p>
       With margins, a heading carries its spacing wherever it goes — so the same
@@ -140,7 +140,7 @@ $steps = [
     </p>
   </div>
 
-  <div class="stack-3">
+  <div class="stack stack-3">
     <h3 id="why-direction">A gap is direction-agnostic</h3>
     <p>
       <code>margin-block-start</code> is fine, but the moment a stack becomes a row —
@@ -160,7 +160,7 @@ $steps = [
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="scale">The spacing scale</h2>
   <p>
     Every spacing utility in Deck uses the same seven steps. A step that exists in one
@@ -194,13 +194,13 @@ $steps = [
   docs_example(
       '<div class="grid grid-tight">' . "\n" .
       '  <div class="card"><div class="card-body">' . "\n" .
-      '    <div class="stack-1"><span class="badge">stack-1</span><div class="skeleton" style="block-size:1.5rem"></div><div class="skeleton" style="block-size:1.5rem"></div><div class="skeleton" style="block-size:1.5rem"></div></div>' . "\n" .
+      '    <div class="stack stack-1"><span class="badge">stack-1</span><div class="skeleton" style="block-size:1.5rem"></div><div class="skeleton" style="block-size:1.5rem"></div><div class="skeleton" style="block-size:1.5rem"></div></div>' . "\n" .
       '  </div></div>' . "\n" .
       '  <div class="card"><div class="card-body">' . "\n" .
-      '    <div class="stack-3"><span class="badge">stack-3</span><div class="skeleton" style="block-size:1.5rem"></div><div class="skeleton" style="block-size:1.5rem"></div><div class="skeleton" style="block-size:1.5rem"></div></div>' . "\n" .
+      '    <div class="stack stack-3"><span class="badge">stack-3</span><div class="skeleton" style="block-size:1.5rem"></div><div class="skeleton" style="block-size:1.5rem"></div><div class="skeleton" style="block-size:1.5rem"></div></div>' . "\n" .
       '  </div></div>' . "\n" .
       '  <div class="card"><div class="card-body">' . "\n" .
-      '    <div class="stack-6"><span class="badge">stack-6</span><div class="skeleton" style="block-size:1.5rem"></div><div class="skeleton" style="block-size:1.5rem"></div><div class="skeleton" style="block-size:1.5rem"></div></div>' . "\n" .
+      '    <div class="stack stack-6"><span class="badge">stack-6</span><div class="skeleton" style="block-size:1.5rem"></div><div class="skeleton" style="block-size:1.5rem"></div><div class="skeleton" style="block-size:1.5rem"></div></div>' . "\n" .
       '  </div></div>' . "\n" .
       '</div>',
       'The same three bars at three steps',
@@ -208,7 +208,7 @@ $steps = [
   );
   ?>
 
-  <div class="stack-3">
+  <div class="stack stack-3">
     <h3 id="no-five">Why there is no step 5</h3>
     <p>
       The steps are 0, 1, 2, 3, 4, 6, 8. Five is missing on purpose. At
@@ -232,14 +232,14 @@ $steps = [
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="gap-var">How one class is configurable</h2>
   <p>
     <code>.stack</code> declares <code>gap: var(--gap, var(--space-4))</code>, and every
     step class sets nothing but <code>--gap</code>. Three consequences follow, and they
     are what make the pattern worth copying:
   </p>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       The step classes are one declaration each, so the whole family costs almost
       nothing in the stylesheet.
@@ -253,6 +253,15 @@ $steps = [
       <code>.split</code>, <code>.scroller</code> and <code>.center</code> — so
       <code>.stack-6</code> on a <code>.grid</code> works, because both read the same
       property.
+    </li>
+    <li>
+      A step class on its own does <strong>nothing</strong>. It sets a property and
+      nothing reads it, so <code>class=&quot;stack-3&quot;</code> without <code>.stack</code>
+      renders as an ordinary block with no gap at all — and fails silently, because the
+      class is real. Write both: <code>class=&quot;stack stack-3&quot;</code>. The same goes for
+      <code>.card-body</code>, which sets a fixed gap of its own that a step class
+      cannot change; nest a <code>.stack</code> inside it instead, as the example below
+      does.
     </li>
   </ul>
   <?php
@@ -273,7 +282,7 @@ $steps = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="center">Centred columns</h2>
   <p>
     <code>.center</code> is <code>.stack</code> with
@@ -299,13 +308,13 @@ $steps = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/04-layout.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     The seven steps the utilities use, plus the two computed spacings that the page-level
@@ -314,9 +323,9 @@ $steps = [
   <?php docs_token_table(['--space-0', '--space-1', '--space-2', '--space-3', '--space-4', '--space-6', '--space-8', '--space-section', '--space-gutter']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>A stack has no semantics.</strong> It is a <code>&lt;div&gt;</code> with
       <code>display: flex</code> and no role. Put it on a <code>&lt;ul&gt;</code>,
@@ -353,7 +362,7 @@ $steps = [
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Nothing to do. <code>gap</code> is not a directional property, and a column stack has
@@ -364,7 +373,7 @@ $steps = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     Nothing about a stack animates or transitions, so
@@ -372,7 +381,7 @@ $steps = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> has no rule for <code>.stack</code>, which is
@@ -383,7 +392,7 @@ $steps = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One stack, no layer needed */
 <div class="stack" style="--gap:3.5rem">
@@ -402,9 +411,9 @@ $steps = [
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for a row.</strong> Use <code>.cluster</code>, which wraps, or
       <code>.bar</code>, which does not. A <code>.stack</code> with

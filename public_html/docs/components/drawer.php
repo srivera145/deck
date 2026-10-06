@@ -29,7 +29,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Drawer</h1>
   <p class="lede">
     <code>.drawer</code> is a native <code>&lt;dialog&gt;</code> pinned to one inline edge
@@ -39,7 +39,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use a drawer for a panel of secondary controls that the reader opens, works in, and
@@ -77,7 +77,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="edge">Which edge</h2>
   <p>
     By default the drawer is pinned to the <strong>starting</strong> edge —
@@ -108,7 +108,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="size">Size</h2>
   <p>
     <code>--drawer-size</code> defaults to <code>min(22rem, 88vw)</code>. The
@@ -132,7 +132,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="regions">Header, body, footer</h2>
   <p>
     The drawer is a flex column, so the three regions divide the full height between
@@ -153,13 +153,13 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/22-nav.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     <code>--drawer-size</code> is local to the component rather than a global token,
@@ -168,9 +168,9 @@ require __DIR__ . '/../_layout.php';
   <?php docs_token_table(['--surface', '--line', '--text', '--text-md', '--shadow-4', '--space-3', '--space-4', '--space-5', '--dur-3', '--ease-emphasized', '--hue-neutral']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Everything a modal gets, a drawer gets</strong> — focus trap, Escape,
       inert background, focus returned to the trigger — because it is the same element
@@ -212,7 +212,7 @@ require __DIR__ . '/../_layout.php';
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     <code>inset-inline-start</code>, <code>border-inline-end</code> and
@@ -243,7 +243,7 @@ require __DIR__ . '/../_layout.php';
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The panel translates over <?= e(api_token('--dur-3')['value'] ?? '320ms') ?> and the
@@ -259,7 +259,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     An open drawer does not print at all. There is no <code>.drawer</code> rule in
@@ -276,7 +276,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One drawer, no layer needed */
 <dialog class="drawer" style="--drawer-size:min(28rem, 90vw)">
@@ -300,9 +300,9 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not on a phone, for most things.</strong> A side panel is a desktop shape.
       On a phone <a href="sheet.php"><code>.sheet</code></a> comes from the bottom, where

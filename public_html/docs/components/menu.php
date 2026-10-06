@@ -30,7 +30,7 @@ require __DIR__ . '/../_layout.php';
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Menu</h1>
   <p class="lede">
     <code>.menu</code> is a native popover. <code>popover</code> on the panel and
@@ -41,7 +41,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use a menu for a list of actions attached to a control: an overflow menu, a row's
@@ -69,7 +69,7 @@ require __DIR__ . '/../_layout.php';
   </p>
 </section>
 
-<section class="stack-6">
+<section class="stack stack-6">
   <h2 id="positioning">Positioning</h2>
   <p>
     Placing a floating panel used to mean <code>getBoundingClientRect</code>, a scroll
@@ -79,7 +79,7 @@ require __DIR__ . '/../_layout.php';
     <code>src/25-anchor.css</code> is where Deck uses it.
   </p>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="p-naming">Naming the pair</h3>
     <p>
       An anchor needs a name, and each trigger/panel pair needs a unique one. Rather than
@@ -96,7 +96,7 @@ panel.style.setProperty(\'--anchor\', name);') ?></code></pre>
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="p-fallbacks">The fallback chain</h3>
     <pre class="dx-code"><code><?= e('position-area: block-end span-inline-end;
 position-try-fallbacks:
@@ -119,7 +119,7 @@ position-try-order: most-block-size;') ?></code></pre>
     </p>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="p-size">Sizing from the anchor</h3>
     <p>
       <code>anchor-size()</code> lets the panel read its trigger's dimensions.
@@ -148,7 +148,7 @@ position-try-order: most-block-size;') ?></code></pre>
     ?>
   </div>
 
-  <div class="stack-2">
+  <div class="stack stack-2">
     <h3 id="p-fallback-browsers">Where anchor positioning is missing</h3>
     <p>
       The whole block is inside <code>@supports (anchor-name: --a)</code>. Without
@@ -160,7 +160,7 @@ position-try-order: most-block-size;') ?></code></pre>
   </div>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="parts">Items, separators and labels</h2>
   <p>
     <code>.menu-item</code> is a full-width flex row,
@@ -202,7 +202,7 @@ position-try-order: most-block-size;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="animation">Opening</h2>
   <p>
     Same mechanism as <a href="modal.php#animation">modal</a>:
@@ -218,20 +218,20 @@ position-try-order: most-block-size;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from the stylesheet source by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <?php docs_token_table(['--surface', '--surface-hover', '--line', '--text', '--text-faint', '--text-sm', '--text-xs', '--bad-100', '--bad-700', '--r-md', '--r-xs', '--shadow-4', '--space-1', '--space-2', '--space-3', '--space-8', '--dur-1', '--dur-2']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>The popover attribute does a lot for free.</strong> Light dismiss, Escape,
       closing when another popover opens, and <code>aria-expanded</code> on the trigger
@@ -281,7 +281,7 @@ position-try-order: most-block-size;') ?></code></pre>
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     Everything positional here is logical: <code>position-area</code> uses
@@ -308,7 +308,7 @@ position-try-order: most-block-size;') ?></code></pre>
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The panel fades and rises over
@@ -326,7 +326,7 @@ position-try-order: most-block-size;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> drops menus from print along with the rest of the page
@@ -335,7 +335,7 @@ position-try-order: most-block-size;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One menu, no layer needed */
 <div class="menu" popover style="--anchor:--my-menu;min-inline-size:18rem">
@@ -353,9 +353,9 @@ position-try-order: most-block-size;') ?></code></pre>
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not for site navigation.</strong> Use <code>.navbar</code> with
       <code>.nav-link</code>, or <code>.mega</code> for a large panel. A menu is for

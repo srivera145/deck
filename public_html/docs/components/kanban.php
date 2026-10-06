@@ -36,7 +36,7 @@ function demo_card(string $title, string $meta): string
   </ol>
 </nav>
 
-<header class="stack-3">
+<header class="stack stack-3">
   <h1>Kanban</h1>
   <p class="lede">
     <code>.kanban</code> is a horizontally scrolling row of columns, each a sunken panel
@@ -45,7 +45,7 @@ function demo_card(string $title, string $meta): string
   </p>
 </header>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when">When to use it</h2>
   <p>
     Use it when items move between a small number of named states and seeing the whole
@@ -82,7 +82,7 @@ function demo_card(string $title, string $meta): string
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="scrolling">Two scroll containers</h2>
   <p>
     The board scrolls on the inline axis and each column scrolls on the block axis. Both
@@ -105,7 +105,7 @@ function demo_card(string $title, string $meta): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="parts">Head, body, card</h2>
   <p>
     <code>.kanban-head</code> is pinned outside the scrolling area, so a column's name and
@@ -120,7 +120,7 @@ function demo_card(string $title, string $meta): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="dragging">Dragging</h2>
   <p>
     <code>src/26-perf.css</code> styles the drag states this board shares with
@@ -144,13 +144,13 @@ function demo_card(string $title, string $meta): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/26-perf.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
   <p>
     <code>--kanban-height</code> caps a column and defaults to <code>70dvh</code>. It is
@@ -159,9 +159,9 @@ function demo_card(string $title, string $meta): string
   <?php docs_token_table(['--bg-sunken', '--surface', '--line', '--text-sm', '--text-xs', '--text-faint', '--r-md', '--r-sm', '--shadow-2', '--space-1', '--space-3', '--space-4']); ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="accessibility">Accessibility</h2>
-  <ul class="stack-2">
+  <ul class="stack stack-2">
     <li>
       <strong>Drag-and-drop with no keyboard equivalent is the headline problem.</strong>
       See <a href="#dragging">above</a>. Ship a move control as well; a board without one
@@ -204,7 +204,7 @@ function demo_card(string $title, string $meta): string
   </ul>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="rtl">Right to left</h2>
   <p>
     The board is a flex row that reverses under <code>dir="rtl"</code>, columns use
@@ -231,7 +231,7 @@ function demo_card(string $title, string $meta): string
   ?>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="motion">Reduced motion</h2>
   <p>
     The only transition is a card's shadow on hover, collapsed to <code>.01ms</code> by
@@ -244,7 +244,7 @@ function demo_card(string $title, string $meta): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
     No print rule. A printed board shows the columns that fit on the page and clips the
@@ -260,7 +260,7 @@ function demo_card(string $title, string $meta): string
   </p>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="overriding">Overriding it</h2>
   <pre class="dx-code"><code><?= e('/* One board, no layer needed */
 <div class="kanban" style="--kanban-height:60vh">
@@ -277,9 +277,9 @@ function demo_card(string $title, string $meta): string
 }') ?></code></pre>
 </section>
 
-<section class="stack-3">
+<section class="stack stack-3">
   <h2 id="when-not">When not to use it</h2>
-  <ul class="stack-3">
+  <ul class="stack stack-3">
     <li>
       <strong>Not without a non-drag way to move cards.</strong> The board's purpose is
       moving things, and dragging is the one interaction Deck does not make accessible.
