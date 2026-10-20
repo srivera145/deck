@@ -141,7 +141,7 @@ require __DIR__ . '/../_layout.php';
       '          aria-label="Play: Building a component library in an afternoon">' . "\n" .
       '    <img src="/assets/deck/docs/sample-1.jpg" alt="">' . "\n" .
       '    <span class="video-play">' . "\n" .
-      '      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>' . "\n" .
+      '      <svg class="icon" aria-hidden="true"><use href="/assets/deck/deck-icons.svg#play"></use></svg>' . "\n" .
       '    </span>' . "\n" .
       '  </button>' . "\n" .
       '  <span class="video-meta">' . "\n" .
@@ -153,12 +153,13 @@ require __DIR__ . '/../_layout.php';
   );
   ?>
   <p class="dx-note text-muted">
-    <strong>Deck's sprite has no transport icons.</strong> There is no play, pause, stop,
-    mute or fullscreen symbol in <code>deck-icons.svg</code> — the 77 icons are interface
-    and status glyphs, and media controls are not among them. The examples here use an
-    inline triangle. That is not a workaround so much as the honest answer: the native
-    <code>controls</code> attribute draws its own, and a poster façade needs exactly one
-    custom glyph.
+    <strong>The sprite has the transport icons a poster or a custom player needs:</strong>
+    <code>#play</code>, <code>#pause</code>, <code>#skip</code> and
+    <code>#fullscreen</code>, alongside <code>#tv</code>, <code>#film</code>,
+    <code>#music</code> and <code>#broadcast</code> for labelling media. There is no stop,
+    mute or volume glyph. <code>#skip</code> points forward; a previous-track button flips
+    it with <code>scale: -1 1</code>. The native <code>controls</code> attribute still draws
+    its own set, so a poster façade needs only <code>#play</code>.
   </p>
   <p class="text-muted">
     <code>.video-play</code> is a 64px disc using <code>backdrop-filter: blur(8px)</code>
@@ -239,9 +240,10 @@ require __DIR__ . '/../_layout.php';
   </p>
   <p>
     The play triangle keeps pointing right, and that is deliberate.
-    <code>src/19-logical.css</code> auto-mirrors ten icons from Deck's sprite by name —
-    the chevrons, the arrows, <code>#external</code>, <code>#log-out</code>,
-    <code>#send</code> and the two trend icons — and <code>#play</code> is not one of them.
+    <code>src/19-logical.css</code> auto-mirrors the pointing icons in Deck's sprite by
+    name — the chevrons, the arrows, <code>#external</code>, <code>#log-out</code>,
+    <code>#send</code> and the two trend icons, each in both cuts — and <code>#play</code>
+    and <code>#skip</code> are not among them.
     A media transport is a timeline rather than a sentence, and it runs left to right in
     every locale, so a mirrored play button would be pointing at the wrong end of the
     video.
@@ -257,7 +259,7 @@ require __DIR__ . '/../_layout.php';
       '  <button type="button" class="video-poster" aria-label="تشغيل: بناء مكتبة مكوّنات">' . "\n" .
       '    <img src="/assets/deck/docs/sample-4.jpg" alt="">' . "\n" .
       '    <span class="video-play">' . "\n" .
-      '      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>' . "\n" .
+      '      <svg class="icon" aria-hidden="true"><use href="/assets/deck/deck-icons.svg#play"></use></svg>' . "\n" .
       '    </span>' . "\n" .
       '  </button>' . "\n" .
       '  <span class="video-meta"><span class="video-duration">١٢:٠٤</span></span>' . "\n" .

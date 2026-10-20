@@ -14,6 +14,11 @@
  *
  * The version rides along. README.md and llms.txt both state it, it was typed
  * into both by hand, and sizes.json already carries it from package.json.
+ *
+ * So do the sprite's counts. "152 symbols: 75 icons" was typed into both files
+ * and into a rule here, so adding an icon meant editing all three, and nothing
+ * failed when one was missed. They are counted from src/deck-icons.svg now:
+ * every icon has exactly one -sm cut, so the -sm symbols are the icons.
  */
 
 import { readFile, writeFile } from 'node:fs/promises';
@@ -31,8 +36,9 @@ const N = String.raw`[\d.]+ KB`;
 const anchor = pattern => new RegExp(pattern.replace(/ /g, String.raw`\s+`), 'g');
 
 /** Rules per file: [name, anchor, replacement]. Each must match exactly once. */
-function rules(s) {
+function rules(s, sprite) {
   const f = s.files;
+  const { symbols, icons } = sprite;
   const br = n => kb(f[n].brotli);
   const gz = n => kb(f[n].gzip);
   const { sample, totals } = s;
@@ -80,6 +86,9 @@ function rules(s) {
     ['sample in the icons section',
       anchor(String.raw`or a twelve icon one at ${N} Brotli`),
       () => `or a twelve icon one at ${kb(sample.brotli)} Brotli`],
+    ['icon count',
+      anchor(String.raw`The \d+ icons are a default`),
+      () => `The ${icons} icons are a default`],
 
     ['package table css', row('deck.min.css', false, 'The whole framework'),
       () => `| \`deck.min.css\` | ${br('deck.min.css')} | ${gz('deck.min.css')} | The whole framework`],
@@ -91,8 +100,8 @@ function rules(s) {
       () => `| \`deck-adapters.min.js\` | ${br('deck-adapters.min.js')} | ${gz('deck-adapters.min.js')} | Optional library`],
     ['package table bundle', row('deck.bundle.min.js', false, 'All three scripts'),
       () => `| \`deck.bundle.min.js\` | ${br('deck.bundle.min.js')} | ${gz('deck.bundle.min.js')} | All three scripts`],
-    ['package table sprite', row('deck-icons.svg', false, '152 symbols'),
-      () => `| \`deck-icons.svg\` | ${br('deck-icons.svg')} | ${gz('deck-icons.svg')} | 152 symbols`],
+    ['package table sprite', row('deck-icons.svg', false, String.raw`\d+ symbols: \d+ icons`),
+      () => `| \`deck-icons.svg\` | ${br('deck-icons.svg')} | ${gz('deck-icons.svg')} | ${symbols} symbols: ${icons} icons`],
   ];
 
   const llms = [
@@ -102,9 +111,13 @@ function rules(s) {
     ['blockquote stylesheet size',
       anchor(String.raw`ships as a single ${N} Brotli \(${N} gzip\) stylesheet`),
       () => `ships as a single ${br('deck.min.css')} Brotli (${gz('deck.min.css')} gzip) stylesheet`],
+    ['icon names line',
+      anchor(String.raw`The \d+ icon names in the sprite`),
+      () => `The ${icons} icon names in the sprite`],
     ['sprite line',
-      anchor(String.raw`brand marks, ${N} Brotli \(${N} gzip\)\. Trim it`),
-      () => `brand marks, ${br('deck-icons.svg')} Brotli (${gz('deck-icons.svg')} gzip). Trim it`],
+      anchor(String.raw`The generated sprite, \d+ symbols — \d+ icons at two weights plus two brand marks, ${N} Brotli \(${N} gzip\)\. Trim it`),
+      () => `The generated sprite, ${symbols} symbols — ${icons} icons at two weights plus two brand marks, ` +
+            `${br('deck-icons.svg')} Brotli (${gz('deck-icons.svg')} gzip). Trim it`],
     ['sample line',
       anchor(String.raw`twelve icons measure ${N}\.`),
       () => `twelve icons measure ${kb(sample.brotli)}.`],
@@ -121,8 +134,14 @@ export async function syncDocs(sizes, root) {
     );
   }
 
+  const svg = await readFile(path.join(root, 'src', 'deck-icons.svg'), 'utf8');
+  const sprite = {
+    symbols: (svg.match(/<symbol\b/g) || []).length,
+    icons: (svg.match(/<symbol\b[^>]*\bid="[^"]+-sm"/g) || []).length,
+  };
+
   const touched = [];
-  for (const [rel, list] of Object.entries(rules(sizes))) {
+  for (const [rel, list] of Object.entries(rules(sizes, sprite))) {
     const file = path.join(root, rel);
     let text = await readFile(file, 'utf8');
 

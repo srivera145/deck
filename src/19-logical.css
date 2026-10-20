@@ -132,18 +132,23 @@
      ---------------------------------------------------------------------- */
   [dir="rtl"] .mirror-rtl { scale: -1 1; }
 
-  /* The pointing icons in Deck's own sprite, mirrored automatically */
+  /* The pointing icons in Deck's own sprite, mirrored automatically. Each is
+     listed with its -sm cut: $= matches the end of the href, so #chevron-left
+     does not match #chevron-left-sm, and a small chevron stayed pointing the
+     wrong way. The transport icons (#play, #skip) are left out on purpose: a
+     media timeline runs left to right in every locale. */
   [dir="rtl"] :is(
-    .icon:has(use[href$="#chevron-left"]),
-    .icon:has(use[href$="#chevron-right"]),
-    .icon:has(use[href$="#arrow-left"]),
-    .icon:has(use[href$="#arrow-right"]),
-    .icon:has(use[href$="#arrow-up-right"]),
-    .icon:has(use[href$="#external"]),
-    .icon:has(use[href$="#log-out"]),
-    .icon:has(use[href$="#send"]),
-    .icon:has(use[href$="#trend-up"]),
-    .icon:has(use[href$="#trend-down"])
+    .icon:has(use[href$="#chevron-left"]),     .icon:has(use[href$="#chevron-left-sm"]),
+    .icon:has(use[href$="#chevron-right"]),    .icon:has(use[href$="#chevron-right-sm"]),
+    .icon:has(use[href$="#arrow-left"]),       .icon:has(use[href$="#arrow-left-sm"]),
+    .icon:has(use[href$="#arrow-right"]),      .icon:has(use[href$="#arrow-right-sm"]),
+    .icon:has(use[href$="#arrow-up-right"]),   .icon:has(use[href$="#arrow-up-right-sm"]),
+    .icon:has(use[href$="#arrow-down-right"]), .icon:has(use[href$="#arrow-down-right-sm"]),
+    .icon:has(use[href$="#external"]),         .icon:has(use[href$="#external-sm"]),
+    .icon:has(use[href$="#log-out"]),          .icon:has(use[href$="#log-out-sm"]),
+    .icon:has(use[href$="#send"]),             .icon:has(use[href$="#send-sm"]),
+    .icon:has(use[href$="#trend-up"]),         .icon:has(use[href$="#trend-up-sm"]),
+    .icon:has(use[href$="#trend-down"]),       .icon:has(use[href$="#trend-down-sm"])
   ) { scale: -1 1; }
 
   /* Things that must never mirror, even inside a flipped ancestor */

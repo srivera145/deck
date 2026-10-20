@@ -33,25 +33,25 @@ Version 0.1.4 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
 ## What Deck weighs
 
-A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **66.2 KB** Brotli, or **80.3 KB** gzip. Every browser Deck supports sends `br` in
+A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **69.3 KB** Brotli, or **84.3 KB** gzip. Every browser Deck supports sends `br` in
 `Accept-Encoding`, and Cloudflare, Vercel, Netlify, and nginx with `ngx_brotli` negotiate
 it for text by default, so Brotli is what most users actually receive.
 
 | File | Brotli | gzip |
 | --- | --- | --- |
 | `deck.min.css` | **27.1 KB** | 33.2 KB |
-| `deck-icons.svg` | **28.2 KB** | 35.0 KB |
+| `deck-icons.svg` | **31.3 KB** | 38.9 KB |
 | `deck.min.js` | **10.9 KB** | 12.2 KB |
-| **All three** | **66.2 KB** | **80.3 KB** |
+| **All three** | **69.3 KB** | **84.3 KB** |
 
 The sprite is the largest single file, slightly bigger than the stylesheet — worth stating
 plainly rather than leaving you to find it in devtools. Swapping `deck.min.js` for the full
 `deck.bundle.min.js` (adds the carousel, drawer, mega menu, copy button, QR encoder, editor and library adapters)
-makes the JavaScript 19.2 KB and the total 74.6 KB Brotli (89.9 KB gzip).
+makes the JavaScript 19.2 KB and the total 77.7 KB Brotli (93.8 KB gzip).
 
 ### The sprite is a manifest, not a fixed cost
 
-The 75 icons are a default so the demo works out of the box, not a floor. `tools/icons/icons.txt`
+The 86 icons are a default so the demo works out of the box, not a floor. `tools/icons/icons.txt`
 lists what to extract — delete the lines you do not need and rebuild:
 
 ```bash
@@ -68,7 +68,7 @@ $ npm run icons
 ```
 
 **A twelve-icon sprite measures 5.7 KB Brotli (6.9 KB gzip)** — generated and measured, not
-estimated. Against 28.2 KB for the full set, trimming the manifest is the difference between the
+estimated. Against 31.3 KB for the full set, trimming the manifest is the difference between the
 sprite dominating page weight and disappearing into it.
 
 This matters because an external sprite is all-or-nothing per request: the browser fetches
@@ -85,7 +85,7 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 | `deck-extras.min.js` | 5.7 KB | 6.5 KB | Carousel, drawer, mega menu, copy button, QR encoder, editor |
 | `deck-adapters.min.js` | 4.0 KB | 4.5 KB | Optional library integrations, inert unless one is loaded |
 | `deck.bundle.min.js` | 19.2 KB | 21.7 KB | All three scripts in one file |
-| `deck-icons.svg` | 28.2 KB | 35.0 KB | 152 symbols: 75 icons at two weights, plus two brand marks |
+| `deck-icons.svg` | 31.3 KB | 38.9 KB | 174 symbols: 86 icons at two weights, plus two brand marks |
 | `src/` | — | — | The 26 source stylesheets, concatenated to build `deck.css` |
 | `dist/layers/` | — | — | One file per layer, if you only want part of Deck |
 | `php/` | — | — | Optional PHP helper for Composer users |

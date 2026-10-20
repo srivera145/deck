@@ -34,6 +34,7 @@ chevron-right      = chevron_right
 arrow-right        = arrow_forward
 arrow-left         = arrow_back
 arrow-up-right     = north_east
+arrow-down-right   = south_east
 
 # --- Navigation and controls ---------------------------------------------
 search             = search
@@ -65,8 +66,13 @@ phone              = call
 message            = chat_bubble
 calendar           = calendar_month
 clock              = schedule
+inbox              = inbox
 
 # --- Files and content ---------------------------------------------------
+# menu-book was added to src/deck-icons.svg by hand after 0.1.3, without a
+# line here, so the next `npm run icons` would have dropped it. It is listed
+# now; the generated symbol is the same as the hand-copied one.
+menu-book          = menu_book
 file               = description
 folder             = folder
 clipboard          = content_paste
@@ -80,6 +86,19 @@ external           = open_in_new
 tag                = sell
 image              = image
 camera             = photo_camera
+
+# --- Media ---------------------------------------------------------------
+# `film` is the film strip (theaters) rather than the clapperboard (movie),
+# and `broadcast` is the on-air mark (sensors). `skip` points forward; flip it
+# with a page-local `scale: -1 1` for a previous-track button.
+play               = play_arrow
+pause              = pause
+skip               = skip_next
+fullscreen         = fullscreen
+tv                 = tv
+film               = theaters
+music              = music_note
+broadcast          = sensors
 
 # --- Visibility and security ---------------------------------------------
 eye                = visibility

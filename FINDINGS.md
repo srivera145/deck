@@ -2316,3 +2316,68 @@ variable too. `.fab`, `.speed-dial` and `.back-to-top` add `--space-3` on top of
 all 20 templates at 375px and 1280px, before and after. Apart from these rules, the only
 difference was animation noise on a spinner, confirmed by a run that diffed the old build
 against itself.
+
+## 100. Templates reached for icons the sprite did not have — FIXED
+
+Building templates hit `#inbox` and `#arrow-down-right`, neither of which existed, and a
+media app needed transport and media glyphs the sprite had none of. A `<use>` that names
+a missing symbol renders nothing and raises nothing, so each of these was an empty box
+found by looking.
+
+**Fixed:** `tools/icons/icons.txt` gained `inbox`, `arrow-down-right` (`south_east`, the
+pair of `arrow-up-right`) and a Media section: `play`, `pause`, `skip`, `fullscreen`,
+`tv`, `film`, `music` and `broadcast`. The generator writes both cuts of each, so 86
+icons and 174 symbols. `film` is the film strip (`theaters`), not the clapperboard, and
+`broadcast` is the on-air mark (`sensors`). There is one `skip`, pointing forward; a
+previous-track button flips it with `scale: -1 1`. The docs icon page now lists the whole
+set, read from the sprite when the page renders.
+
+**Found on the way:** `menu-book` was in `src/deck-icons.svg` but not in `icons.txt`. It
+had been copied into the generated file by hand after 0.1.3, so the next `npm run icons`
+would have dropped it silently. It is in the manifest now. Regenerating changed no
+existing symbol by a byte: the only difference is the 20 new ones.
+
+## 101. The `-sm` cut of a pointing icon did not mirror under `dir="rtl"` — FIXED
+
+`src/19-logical.css` mirrors the sprite's pointing icons with
+`.icon:has(use[href$="#chevron-right"])` and so on. `$=` matches the end of the href, so
+`#chevron-right-sm` never matched, and a small chevron or arrow kept pointing the
+reading-order-wrong way. Nobody noticed because nothing rendered the `-sm` cuts with
+`.icon-sm` automatically: `Deck::icon()` and deck.js's own icon helper both used the
+regular cut, which is fixed later in this release. Making them pick the `-sm` cut would
+have turned this latent miss into a regression in every date picker under RTL.
+
+**Fixed:** every pointing icon is listed with its `-sm` cut, and `arrow-down-right` joined
+the list. `#play` and `#skip` are deliberately not in it; a media timeline runs left to
+right in every locale. Covered by a test in `tests/layout.test.mjs`.
+
+## 102. The sprite's counts were typed into six files — FIXED where it matters
+
+"152 symbols: 75 icons" was in README.md and llms.txt, and `tools/sync-sizes.mjs` matched
+the README row with the literal `152 symbols`. The docs pages for the footer and the video
+said 77, the adapters said 56 in one comment and 74 in `Deck.adapters.report()`, and the
+real count was 76. Nothing failed when they drifted, because only the KB figures were
+synced.
+
+**Fixed:** `sync-sizes.mjs` counts the symbols and the `-sm` cuts in `src/deck-icons.svg`
+and stamps both into README.md and llms.txt. Adding an icon no longer means editing the
+tool. The two docs pages say it without a number, the icon page counts the sprite at
+render time, and the remaining hand-kept figures (the comment in `public_html/index.php`,
+`tools/vscode/README.md`, `deck-adapters.js`) were corrected to 86 and 174.
+
+## 103. The brand hash check depends on how git wrote the sprite's line endings — NOT FIXED
+
+`build.mjs` refuses to build when the sha256 of `src/deck-icons.svg` differs from the
+hash in `src/brand/sources.json`. The hash is taken over the file's text as it is on disk.
+This repository has no `eol` rule for the sprite, and with `core.autocrlf=true` (the Git
+for Windows default) a checkout writes it with CRLF, which hashes differently (`4aa4c7…`
+against the recorded `b9a909…` for the current sprite). So a fresh Windows clone, or any
+`git checkout` or `git stash` that rewrites the file, fails the build with "Brand assets
+are stale" when nothing about the artwork changed. The generator writes LF, which is why
+the working copy here passes.
+
+**Recommended:** hash the text with line endings normalised (`.replace(/\r\n/g, '\n')`) in
+both `build.mjs` and `tools/make-brand.mjs`, or add `src/deck-icons.svg text eol=lf` and the
+same for `src/brand/*.svg` to `.gitattributes`. Left alone because it is unrelated to the
+icons, but the icon change is what would expose it first: the new hash was written from
+an LF file, as the previous one was.

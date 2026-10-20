@@ -159,7 +159,7 @@ require __DIR__ . '/../_layout.php';
   </p>
   <p class="dx-note text-muted">
     <strong>Deck ships no brand marks.</strong> There is no Mastodon, GitHub or LinkedIn
-    glyph in <code>deck-icons.svg</code> — 77 icons and not a logo among them, which is
+    glyph in <code>deck-icons.svg</code> — not a logo among its icons, which is
     deliberate: brand marks have licence terms and change without warning. Supply your own
     <code>&lt;svg&gt;</code> for a social row; the examples here borrow
     <code>#link</code> and <code>#external</code> to show the layout.

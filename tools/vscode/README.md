@@ -66,7 +66,7 @@ with no prose, `position: absolute` says everything `.absolute` does.
 **Tokens** inside `var(`, with a colour swatch on the 76 colour tokens and the
 resolved value on all 144. A token that dark mode redefines says so.
 
-**Icons** after `deck-icons.svg#`, all 152 symbols, each with the markup to paste
+**Icons** after `deck-icons.svg#`, all 174 symbols, each with the markup to paste
 and a reminder that the sprite has to be served from your own origin — a
 cross-origin `<use href>` renders nothing at all.
 

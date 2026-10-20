@@ -7,12 +7,12 @@
     "unused": 7
   },
   "uses": {
-    "stack": 4194,
-    "icon": 3352,
-    "stack-3": 2244,
+    "stack": 4196,
+    "icon": 3355,
+    "stack-3": 2246,
     "text-muted": 1575,
     "btn": 1221,
-    "icon-sm": 1182,
+    "icon-sm": 1183,
     "text-sm": 717,
     "badge": 637,
     "cluster": 610,
@@ -28,7 +28,7 @@
     "sr-only": 376,
     "container": 349,
     "avatar": 348,
-    "text-xs": 334,
+    "text-xs": 336,
     "btn-ghost": 330,
     "lede": 323,
     "label": 315,
@@ -51,7 +51,7 @@
     "chart-col": 164,
     "icon-follow": 153,
     "chip": 153,
-    "icon-lg": 150,
+    "icon-lg": 152,
     "num": 143,
     "table": 141,
     "table-wrap": 139,
@@ -65,8 +65,8 @@
     "badge-good": 118,
     "list-row": 118,
     "help": 114,
+    "grid": 109,
     "list-main": 109,
-    "grid": 107,
     "footer-heading": 106,
     "stat-label": 106,
     "chart-bar-fill": 105,
@@ -238,6 +238,7 @@
     "copy-done": 19,
     "dg": 19,
     "error": 19,
+    "center": 19,
     "kanban-col": 19,
     "kanban-body": 19,
     "alert-warn": 18,
@@ -257,7 +258,6 @@
     "cq": 17,
     "spinner": 17,
     "qr": 17,
-    "center": 17,
     "toast-main": 17,
     "toast-title": 17,
     "h5": 17,
@@ -291,6 +291,8 @@
     "editor": 14,
     "emoji-tile": 14,
     "required": 14,
+    "p-3": 14,
+    "r-md": 14,
     "indicator-badge-dot": 14,
     "phone": 14,
     "pop": 14,
@@ -321,8 +323,6 @@
     "fade-swap": 12,
     "stepper": 12,
     "timeline": 12,
-    "p-3": 12,
-    "r-md": 12,
     "cq-tone": 12,
     "tone-text": 12,
     "clamp-3": 12,
@@ -454,6 +454,7 @@
     "g-warn": 7,
     "g-bad": 7,
     "g-dark": 7,
+    "gap-2": 7,
     "list-header": 7,
     "sweep": 7,
     "dur-4": 7,
@@ -475,6 +476,7 @@
     "mega-grid": 7,
     "mega-feature": 7,
     "mega-footer": 7,
+    "md": 7,
     "scene-near": 6,
     "tilt-lift": 6,
     "is-flipped": 6,
@@ -493,6 +495,7 @@
     "masonry-3": 6,
     "g-fade-block": 6,
     "g-border-spin": 6,
+    "border": 6,
     "menu-match": 6,
     "is-animating": 6,
     "scroll-progress": 6,
@@ -520,7 +523,6 @@
     "banner-dark": 6,
     "h6": 6,
     "sortable-chosen": 6,
-    "md": 6,
     "tilt-lift-sm": 5,
     "face-front": 5,
     "face-end": 5,
@@ -572,7 +574,6 @@
     "toast-timer": 5,
     "is-dragging": 5,
     "mb-4": 5,
-    "gap-2": 5,
     "w-full": 5,
     "border-0": 5,
     "border-t": 5,
@@ -618,7 +619,6 @@
     "video-square": 4,
     "video-portrait": 4,
     "video-wide": 4,
-    "border": 4,
     "dir-ltr": 4,
     "dir-rtl": 4,
     "bidi-isolate": 4,
@@ -3541,6 +3541,7 @@
       "public_html/docs/components/footer.php",
       "public_html/docs/components/gradients.php",
       "public_html/docs/components/grid.php",
+      "public_html/docs/components/icon.php",
       "public_html/docs/components/motion.php",
       "public_html/docs/components/stack.php",
       "public_html/docs/guides/layout.php",
@@ -5663,6 +5664,64 @@
       "public_html/docs/components/icon.php",
       "public_html/index.php"
     ],
+    "center": [
+      "FINDINGS.md",
+      "README.md",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/components/stack.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/index.php",
+      "public_html/templates/carousels.html",
+      "public_html/templates/digital-marketing.html",
+      "public_html/templates/footers.html",
+      "public_html/templates/landing.html",
+      "public_html/templates/product.html"
+    ],
+    "gap-2": [
+      "FINDINGS.md",
+      "public_html/docs/components/icon.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/spacing.php"
+    ],
+    "p-3": [
+      "public_html/docs/components/icon.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/templates/dashboard.html"
+    ],
+    "border": [
+      "public_html/docs/components/icon.php",
+      "public_html/docs/guides/migrating-from-tailwind.php",
+      "public_html/docs/reference/color.php"
+    ],
+    "r-md": [
+      "public_html/docs/components/icon.php",
+      "public_html/docs/guides/layout.php",
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/position.php"
+    ],
+    "text-xs": [
+      "public_html/docs/components/icon.php",
+      "public_html/docs/reference/typography.php",
+      "public_html/templates/app-shell.html",
+      "public_html/templates/auto-repair.html",
+      "public_html/templates/carousels.html",
+      "public_html/templates/consulting.html",
+      "public_html/templates/dashboard.html",
+      "public_html/templates/digital-marketing.html",
+      "public_html/templates/ecommerce.html",
+      "public_html/templates/footers.html",
+      "public_html/templates/index.php",
+      "public_html/templates/it-agency.html",
+      "public_html/templates/jumbotrons.html",
+      "public_html/templates/landing.html",
+      "public_html/templates/product.html",
+      "public_html/templates/settings.html",
+      "public_html/templates/sidebars.html",
+      "public_html/templates/sign-in.html",
+      "public_html/templates/test.html",
+      "public_html/templates/travel.html"
+    ],
     "icon-fill": [
       "README.md",
       "public_html/docs/_layout.php",
@@ -6908,18 +6967,6 @@
       "public_html/docs/start/first-page.php",
       "public_html/templates/dashboard.html"
     ],
-    "center": [
-      "FINDINGS.md",
-      "README.md",
-      "public_html/docs/components/stack.php",
-      "public_html/docs/guides/layout.php",
-      "public_html/index.php",
-      "public_html/templates/carousels.html",
-      "public_html/templates/digital-marketing.html",
-      "public_html/templates/footers.html",
-      "public_html/templates/landing.html",
-      "public_html/templates/product.html"
-    ],
     "stack-8": [
       "FINDINGS.md",
       "bin/deck.mjs",
@@ -7217,16 +7264,6 @@
       "public_html/docs/reference/color.php",
       "public_html/templates/auto-repair.html"
     ],
-    "p-3": [
-      "public_html/docs/guides/layout.php",
-      "public_html/docs/reference/spacing.php",
-      "public_html/templates/dashboard.html"
-    ],
-    "r-md": [
-      "public_html/docs/guides/layout.php",
-      "public_html/docs/reference/color.php",
-      "public_html/docs/reference/position.php"
-    ],
     "bg-surface": [
       "public_html/docs/guides/layout.php",
       "public_html/docs/guides/migrating-from-tailwind.php",
@@ -7238,10 +7275,6 @@
     ],
     "r-sm": [
       "public_html/docs/guides/layout.php",
-      "public_html/docs/reference/color.php"
-    ],
-    "border": [
-      "public_html/docs/guides/migrating-from-tailwind.php",
       "public_html/docs/reference/color.php"
     ],
     "p-6": [
@@ -7272,11 +7305,6 @@
       "public_html/docs/guides/migrating-from-tailwind.php",
       "public_html/docs/reference/display.php",
       "public_html/index.php"
-    ],
-    "gap-2": [
-      "FINDINGS.md",
-      "public_html/docs/guides/migrating-from-tailwind.php",
-      "public_html/docs/reference/spacing.php"
     ],
     "block": [
       "public_html/docs/guides/migrating-from-tailwind.php",
@@ -8079,27 +8107,6 @@
     "text-2xs": [
       "public_html/docs/reference/typography.php",
       "public_html/templates/digital-marketing.html"
-    ],
-    "text-xs": [
-      "public_html/docs/reference/typography.php",
-      "public_html/templates/app-shell.html",
-      "public_html/templates/auto-repair.html",
-      "public_html/templates/carousels.html",
-      "public_html/templates/consulting.html",
-      "public_html/templates/dashboard.html",
-      "public_html/templates/digital-marketing.html",
-      "public_html/templates/ecommerce.html",
-      "public_html/templates/footers.html",
-      "public_html/templates/index.php",
-      "public_html/templates/it-agency.html",
-      "public_html/templates/jumbotrons.html",
-      "public_html/templates/landing.html",
-      "public_html/templates/product.html",
-      "public_html/templates/settings.html",
-      "public_html/templates/sidebars.html",
-      "public_html/templates/sign-in.html",
-      "public_html/templates/test.html",
-      "public_html/templates/travel.html"
     ],
     "text-base": [
       "public_html/docs/reference/typography.php",

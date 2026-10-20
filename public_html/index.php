@@ -21,7 +21,7 @@
    only hand-kept numbers; reproduce them with:
 
        ls src/*.css | wc -l                   -> 26      source_files
-       grep -c '<symbol' src/deck-icons.svg    -> 152 symbols (75 x 2 + 2 marks)
+       grep -c '<symbol' src/deck-icons.svg    -> 174 symbols (86 x 2 + 2 marks)
        grep -rhoE '\.[a-zA-Z][\w-]*' src/*.css | sort -u | wc -l   -> classes
    ============================================================================= */
 

@@ -340,3 +340,16 @@ test('.form-actions-sticky sits above a .tabbar, not under it', async () => {
     await page.setViewportSize({ width: 1280, height: 800 });
   }
 });
+
+test('the -sm cut of a pointing icon mirrors under dir="rtl", and a transport icon does not', async () => {
+  await render(`
+    <div dir="rtl">
+      <svg class="icon" id="regular"><use href="#chevron-right"></use></svg>
+      <svg class="icon icon-sm" id="small"><use href="#chevron-right-sm"></use></svg>
+      <svg class="icon" id="new"><use href="#arrow-down-right-sm"></use></svg>
+      <svg class="icon" id="play"><use href="#play-sm"></use></svg>
+    </div>`);
+  const scale = await page.evaluate(() => Object.fromEntries(['regular', 'small', 'new', 'play']
+    .map((id) => [id, getComputedStyle(document.getElementById(id)).scale])));
+  assert.deepEqual(scale, { regular: '-1 1', small: '-1 1', new: '-1 1', play: 'none' });
+});

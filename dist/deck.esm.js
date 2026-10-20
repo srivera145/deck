@@ -2483,7 +2483,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
  *    Tiptap        window.Tiptap          document.execCommand editor
  *    Chart.js      window.Chart           real axes, tooltips, time scales
  *    SortableJS    window.Sortable        drag reordering and kanban
- *    Lucide        window.lucide          1500 icons instead of Deck's 56
+ *    Lucide        window.lucide          1500 icons instead of Deck's 86
  *
  *  Nothing here is required and nothing here is bundled. Add a script tag for
  *  the ones you want.
@@ -2875,7 +2875,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
   }
 
   /* ======================================================================
-     5. Lucide — 1500 icons instead of Deck's 56
+     5. Lucide — 1500 icons instead of Deck's 86
      Deck's sprite covers the framework's own needs and the automotive set it
      was built for. For anything beyond that, write the Lucide name and this
      swaps in the path data, keeping Deck's .icon sizing and stroke rules.
@@ -2933,7 +2933,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
         editor: a.tiptap ? 'Tiptap' : a.quill ? 'Quill' : 'Deck built-in (execCommand)',
         charts: a.chart ? 'Chart.js, themed by Deck' : 'Deck CSS charts',
         dragDrop: a.sortable ? 'SortableJS' : 'native drag and drop',
-        icons: a.lucide ? 'Lucide + Deck sprite' : 'Deck sprite (74 icons)',
+        icons: a.lucide ? 'Lucide + Deck sprite' : 'Deck sprite (86 icons)',
         virtualization: CSS.supports('content-visibility: auto')
           ? 'content-visibility (engine)' : 'none'
       };

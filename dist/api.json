@@ -829,7 +829,7 @@
         {
           "selector": "[dir=\"rtl\"] .btn:hover .icon-follow",
           "file": "19-logical.css",
-          "line": 163,
+          "line": 168,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -1201,7 +1201,7 @@
         {
           "selector": "[dir=\"rtl\"] .card-link:hover .icon-follow",
           "file": "19-logical.css",
-          "line": 163,
+          "line": 168,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -1905,7 +1905,7 @@
         {
           "selector": "[dir=\"rtl\"] :is(.chart-bar-fill, .progress::-webkit-progress-value, .toast-timer)",
           "file": "19-logical.css",
-          "line": 213,
+          "line": 218,
           "conditions": []
         },
         {
@@ -4373,7 +4373,7 @@
         {
           "selector": "[dir=\"rtl\"] .dg-wrap",
           "file": "19-logical.css",
-          "line": 189,
+          "line": 194,
           "conditions": []
         },
         {
@@ -5178,7 +5178,7 @@
         {
           "selector": "[dir=\"rtl\"] .enter-start",
           "file": "19-logical.css",
-          "line": 157,
+          "line": 162,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -5186,7 +5186,7 @@
         {
           "selector": "[dir=\"rtl\"] .enter-end",
           "file": "19-logical.css",
-          "line": 158,
+          "line": 163,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -6209,15 +6209,15 @@
           ]
         },
         {
-          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-down\"]) )",
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
           "file": "19-logical.css",
-          "line": 136,
+          "line": 140,
           "conditions": []
         },
         {
           "selector": "[dir=\"rtl\"] .icon-follow",
           "file": "19-logical.css",
-          "line": 162,
+          "line": 167,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -6225,7 +6225,7 @@
         {
           "selector": "[dir=\"rtl\"] .btn:hover .icon-follow",
           "file": "19-logical.css",
-          "line": 163,
+          "line": 168,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -6233,7 +6233,7 @@
         {
           "selector": "[dir=\"rtl\"] .list-row:hover .icon-follow",
           "file": "19-logical.css",
-          "line": 163,
+          "line": 168,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -6241,7 +6241,7 @@
         {
           "selector": "[dir=\"rtl\"] .card-link:hover .icon-follow",
           "file": "19-logical.css",
-          "line": 163,
+          "line": 168,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -6249,7 +6249,7 @@
         {
           "selector": "[dir=\"rtl\"] .search > .icon",
           "file": "19-logical.css",
-          "line": 183,
+          "line": 188,
           "conditions": []
         },
         {
@@ -6928,7 +6928,7 @@
         {
           "selector": "[dir=\"rtl\"] .list-row:hover .icon-follow",
           "file": "19-logical.css",
-          "line": 163,
+          "line": 168,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -7037,7 +7037,7 @@
         {
           "selector": "[dir=\"rtl\"] .marquee-track",
           "file": "19-logical.css",
-          "line": 168,
+          "line": 173,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -10853,7 +10853,7 @@
         {
           "selector": "[dir=\"rtl\"] :is(.chart-bar-fill, .progress::-webkit-progress-value, .toast-timer)",
           "file": "19-logical.css",
-          "line": 213,
+          "line": 218,
           "conditions": []
         },
         {
@@ -13470,7 +13470,7 @@
         {
           "selector": "[dir=\"rtl\"] .breadcrumb li + li::before",
           "file": "19-logical.css",
-          "line": 219,
+          "line": 224,
           "conditions": []
         }
       ],
@@ -13797,7 +13797,7 @@
         {
           "selector": "[dir=\"rtl\"] .btn:hover .icon-follow",
           "file": "19-logical.css",
-          "line": 163,
+          "line": 168,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -15460,7 +15460,7 @@
         {
           "selector": "[dir=\"rtl\"] .card-link:hover .icon-follow",
           "file": "19-logical.css",
-          "line": 163,
+          "line": 168,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -16663,7 +16663,7 @@
         {
           "selector": "[dir=\"rtl\"] :is(.chart-bar-fill, .progress::-webkit-progress-value, .toast-timer)",
           "file": "19-logical.css",
-          "line": 213,
+          "line": 218,
           "conditions": []
         },
         {
@@ -25138,7 +25138,7 @@
         {
           "selector": "[dir=\"rtl\"] .dg-wrap",
           "file": "19-logical.css",
-          "line": 189,
+          "line": 194,
           "conditions": []
         },
         {
@@ -27875,7 +27875,7 @@
         {
           "selector": "[dir=\"rtl\"] .enter-end",
           "file": "19-logical.css",
-          "line": 158,
+          "line": 163,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -27976,7 +27976,7 @@
         {
           "selector": "[dir=\"rtl\"] .enter-start",
           "file": "19-logical.css",
-          "line": 157,
+          "line": 162,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -32386,69 +32386,141 @@
           "conditions": []
         },
         {
-          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-down\"]) )",
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
           "file": "19-logical.css",
-          "line": 136,
+          "line": 140,
           "conditions": []
         },
         {
-          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-down\"]) )",
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
           "file": "19-logical.css",
-          "line": 136,
+          "line": 140,
           "conditions": []
         },
         {
-          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-down\"]) )",
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
           "file": "19-logical.css",
-          "line": 136,
+          "line": 140,
           "conditions": []
         },
         {
-          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-down\"]) )",
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
           "file": "19-logical.css",
-          "line": 136,
+          "line": 140,
           "conditions": []
         },
         {
-          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-down\"]) )",
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
           "file": "19-logical.css",
-          "line": 136,
+          "line": 140,
           "conditions": []
         },
         {
-          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-down\"]) )",
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
           "file": "19-logical.css",
-          "line": 136,
+          "line": 140,
           "conditions": []
         },
         {
-          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-down\"]) )",
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
           "file": "19-logical.css",
-          "line": 136,
+          "line": 140,
           "conditions": []
         },
         {
-          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-down\"]) )",
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
           "file": "19-logical.css",
-          "line": 136,
+          "line": 140,
           "conditions": []
         },
         {
-          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-down\"]) )",
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
           "file": "19-logical.css",
-          "line": 136,
+          "line": 140,
           "conditions": []
         },
         {
-          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-down\"]) )",
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
           "file": "19-logical.css",
-          "line": 136,
+          "line": 140,
+          "conditions": []
+        },
+        {
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
+          "file": "19-logical.css",
+          "line": 140,
+          "conditions": []
+        },
+        {
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
+          "file": "19-logical.css",
+          "line": 140,
+          "conditions": []
+        },
+        {
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
+          "file": "19-logical.css",
+          "line": 140,
+          "conditions": []
+        },
+        {
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
+          "file": "19-logical.css",
+          "line": 140,
+          "conditions": []
+        },
+        {
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
+          "file": "19-logical.css",
+          "line": 140,
+          "conditions": []
+        },
+        {
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
+          "file": "19-logical.css",
+          "line": 140,
+          "conditions": []
+        },
+        {
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
+          "file": "19-logical.css",
+          "line": 140,
+          "conditions": []
+        },
+        {
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
+          "file": "19-logical.css",
+          "line": 140,
+          "conditions": []
+        },
+        {
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
+          "file": "19-logical.css",
+          "line": 140,
+          "conditions": []
+        },
+        {
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
+          "file": "19-logical.css",
+          "line": 140,
+          "conditions": []
+        },
+        {
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
+          "file": "19-logical.css",
+          "line": 140,
+          "conditions": []
+        },
+        {
+          "selector": "[dir=\"rtl\"] :is( .icon:has(use[href$=\"#chevron-left\"]), .icon:has(use[href$=\"#chevron-left-sm\"]), .icon:has(use[href$=\"#chevron-right\"]), .icon:has(use[href$=\"#chevron-right-sm\"]), .icon:has(use[href$=\"#arrow-left\"]), .icon:has(use[href$=\"#arrow-left-sm\"]), .icon:has(use[href$=\"#arrow-right\"]), .icon:has(use[href$=\"#arrow-right-sm\"]), .icon:has(use[href$=\"#arrow-up-right\"]), .icon:has(use[href$=\"#arrow-up-right-sm\"]), .icon:has(use[href$=\"#arrow-down-right\"]), .icon:has(use[href$=\"#arrow-down-right-sm\"]), .icon:has(use[href$=\"#external\"]), .icon:has(use[href$=\"#external-sm\"]), .icon:has(use[href$=\"#log-out\"]), .icon:has(use[href$=\"#log-out-sm\"]), .icon:has(use[href$=\"#send\"]), .icon:has(use[href$=\"#send-sm\"]), .icon:has(use[href$=\"#trend-up\"]), .icon:has(use[href$=\"#trend-up-sm\"]), .icon:has(use[href$=\"#trend-down\"]), .icon:has(use[href$=\"#trend-down-sm\"]) )",
+          "file": "19-logical.css",
+          "line": 140,
           "conditions": []
         },
         {
           "selector": "[dir=\"rtl\"] .search > .icon",
           "file": "19-logical.css",
-          "line": 183,
+          "line": 188,
           "conditions": []
         },
         {
@@ -32581,7 +32653,7 @@
         {
           "selector": "[dir=\"rtl\"] .icon-follow",
           "file": "19-logical.css",
-          "line": 162,
+          "line": 167,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -32589,7 +32661,7 @@
         {
           "selector": "[dir=\"rtl\"] .btn:hover .icon-follow",
           "file": "19-logical.css",
-          "line": 163,
+          "line": 168,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -32597,7 +32669,7 @@
         {
           "selector": "[dir=\"rtl\"] .list-row:hover .icon-follow",
           "file": "19-logical.css",
-          "line": 163,
+          "line": 168,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -32605,7 +32677,7 @@
         {
           "selector": "[dir=\"rtl\"] .card-link:hover .icon-follow",
           "file": "19-logical.css",
-          "line": 163,
+          "line": 168,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -37707,7 +37779,7 @@
         {
           "selector": "[dir=\"rtl\"] .list-row:hover .icon-follow",
           "file": "19-logical.css",
-          "line": 163,
+          "line": 168,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -38031,7 +38103,7 @@
         {
           "selector": "[dir=\"rtl\"] .marquee-track",
           "file": "19-logical.css",
-          "line": 168,
+          "line": 173,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -41119,7 +41191,7 @@
     {
       "name": "no-flip",
       "file": "19-logical.css",
-      "line": 150,
+      "line": 155,
       "layer": "deck.rtl",
       "section": null,
       "doc": null,
@@ -41128,7 +41200,7 @@
         {
           "selector": "[dir=\"rtl\"] .no-flip",
           "file": "19-logical.css",
-          "line": 150,
+          "line": 155,
           "conditions": []
         }
       ],
@@ -44399,7 +44471,7 @@
         {
           "selector": "[dir=\"rtl\"] :is(.chart-bar-fill, .progress::-webkit-progress-value, .toast-timer)",
           "file": "19-logical.css",
-          "line": 213,
+          "line": 218,
           "conditions": []
         }
       ],
@@ -47338,7 +47410,7 @@
         {
           "selector": "[dir=\"rtl\"] .scroll-progress",
           "file": "19-logical.css",
-          "line": 216,
+          "line": 221,
           "conditions": []
         }
       ],
@@ -47499,7 +47571,7 @@
         {
           "selector": "[dir=\"rtl\"] .search > .icon",
           "file": "19-logical.css",
-          "line": 183,
+          "line": 188,
           "conditions": []
         }
       ],
@@ -47792,7 +47864,7 @@
         {
           "selector": "[dir=\"rtl\"] .select",
           "file": "19-logical.css",
-          "line": 175,
+          "line": 180,
           "conditions": []
         },
         {
@@ -51538,7 +51610,7 @@
         {
           "selector": "[dir=\"rtl\"] .sweep",
           "file": "19-logical.css",
-          "line": 167,
+          "line": 172,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -51621,13 +51693,13 @@
         {
           "selector": "[dir=\"rtl\"] .switch input::after",
           "file": "19-logical.css",
-          "line": 197,
+          "line": 202,
           "conditions": []
         },
         {
           "selector": "[dir=\"rtl\"] .switch input:checked::after",
           "file": "19-logical.css",
-          "line": 198,
+          "line": 203,
           "conditions": []
         },
         {
@@ -54915,7 +54987,7 @@
         {
           "selector": "[dir=\"rtl\"] :is(.chart-bar-fill, .progress::-webkit-progress-value, .toast-timer)",
           "file": "19-logical.css",
-          "line": 213,
+          "line": 218,
           "conditions": []
         }
       ],

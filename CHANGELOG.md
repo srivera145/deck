@@ -22,6 +22,7 @@ Notable changes to Deck. The npm package (`@echodial/deck`) and the Composer pac
 - **A `.btn` label split at a bare `<span>` reads as one phrase.** `Save <span>changes</span>` used to put the 8px gap between the words. A span with no class and no child elements now joins the label's text. A span with a class, such as a badge or `.sr-only`, keeps its box and the gap.
 - **`.form-actions-sticky` sits above `.tabbar`.** It used to slide underneath the tab bar. `body:has(.tabbar)` now publishes its clearance as `--tabbar-clearance`, the sticky bar uses it, and the bar drops its own safe-area padding while the tab bar is showing.
 - **`aria-pressed` and `aria-selected` both mean "on".** `.chip`, `.reaction` and `.datepicker-preset` used to respond only to `aria-pressed="true"`, and `.segmented` only to `aria-selected="true"`, so the wrong one showed no state and raised no error. All four now accept both, with the same look as before. deck.js moves either attribute when a `.segmented` is clicked, and no longer selects an `aria-selected` table row that contains one.
+- **Small pointing icons mirror under `dir="rtl"`.** The automatic mirror in `src/19-logical.css` matched `#chevron-right` but not `#chevron-right-sm`, so an `.icon-sm` arrow or chevron kept pointing the wrong way in a right-to-left page. Every pointing icon is now listed with its `-sm` cut.
 
 ### Added
 
@@ -29,9 +30,10 @@ Notable changes to Deck. The npm package (`@echodial/deck`) and the Composer pac
 - **Toggle buttons.** A `.btn` with `aria-pressed="true"` now has a visible on state: the brand tint with a brand edge. A pressed `.btn-soft` fills solid, and the solid variants go a shade darker. `aria-pressed` is now Deck's attribute for "on"; the table at `docs/components/button.php#on-attribute` lists what each component accepts. Pages that already put `aria-pressed` on a `.btn` with their own pressed styles will see Deck's on state wherever their rules leave a property unset.
 - Seven theme-aware tokens. `--surface-recessed` is the recessed surface a control sits on: a progress, range or ring track, or a skeleton's sweep. `--good-soft`, `--warn-soft` and `--bad-soft`, each with a `-text` partner, are the status equivalents of `--brand-soft` and `--brand-soft-text`. Reach for these rather than the `--ink-*` and status ramps, which are the same colour in both themes.
 - Layout regression tests that render the built stylesheet in a real browser: `npm test`. They use Microsoft Edge by default; set `DECK_TEST_BROWSER` to `chrome` or to the path of a Chromium executable to use another. `playwright-core` is a dev dependency only; Deck still ships no runtime dependencies.
+- **Ten icons.** `inbox` and `arrow-down-right`, plus a media set: `play`, `pause`, `skip`, `fullscreen`, `tv`, `film`, `music` and `broadcast`, each in both cuts. The sprite is 86 icons, 174 symbols. `docs/components/icon.php#set` lists every icon in it.
 
 ### Changed
 
-- `src/deck-icons.svg` gained `menu-book` and `menu-book-sm` after 0.1.3. The brand artwork, which uses only the `deck-mark` symbol, did not change; `src/brand/sources.json` records the sprite's new hash so the build accepts it.
+- `src/deck-icons.svg` gained `menu-book` and `menu-book-sm` after 0.1.3. The brand artwork, which uses only the `deck-mark` symbol, did not change; `src/brand/sources.json` records the sprite's new hash so the build accepts it. `menu-book` is now listed in `tools/icons/icons.txt` as well, so regenerating the sprite keeps it.
 
 Releases before 0.1.4 are described in the git history.

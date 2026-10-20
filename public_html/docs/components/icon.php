@@ -135,6 +135,37 @@ $sizes = [
   </p>
 </section>
 
+<?php
+/* Read from the sprite itself rather than typed here, so a name added to
+   tools/icons/icons.txt appears on this page with the next `npm run icons` and a
+   name removed from it disappears. The -sm cuts and the two brand marks are left
+   out of the grid: every icon has a -sm twin, and the marks are not icons. */
+preg_match_all('/<symbol\b[^>]*\bid="([^"]+)"/', (string) file_get_contents($REPO . '/src/deck-icons.svg'), $symbolIds);
+$allIds = $symbolIds[1];
+$iconIds = array_values(array_filter(
+    $allIds,
+    static fn (string $id): bool => !str_ends_with($id, '-sm') && in_array($id . '-sm', $allIds, true)
+));
+?>
+<section class="stack stack-3">
+  <h2 id="set">The icon set</h2>
+  <p>
+    Every icon in the sprite, read from <code>src/deck-icons.svg</code> when this page
+    renders: <?= count($iconIds) ?> icons, each also shipped as <code>#name-sm</code>. The
+    name under each is the fragment to put after <code>deck-icons.svg#</code>. To add one,
+    put its Material Symbols name in <code>tools/icons/icons.txt</code> and run
+    <code>npm run icons</code>; it appears here on the next build.
+  </p>
+  <div class="grid" style="--min:9rem;--gap:var(--space-2)">
+    <?php foreach ($iconIds as $id): ?>
+      <div class="center gap-2 p-3 border r-md">
+        <svg class="icon icon-lg" aria-hidden="true"><use href="/assets/deck/deck-icons.svg#<?= e($id) ?>"></use></svg>
+        <code class="text-xs"><?= e($id) ?></code>
+      </div>
+    <?php endforeach; ?>
+  </div>
+</section>
+
 <section class="stack stack-3">
   <h2 id="variants">Fill and muted</h2>
   <p>
@@ -269,16 +300,19 @@ $sizes = [
     id itself:
   </p>
   <pre class="dx-code"><code><?= e('[dir="rtl"] :is(
-  .icon:has(use[href$="#chevron-left"]),
-  .icon:has(use[href$="#arrow-right"]),
-  .icon:has(use[href$="#send"]),
+  .icon:has(use[href$="#chevron-left"]), .icon:has(use[href$="#chevron-left-sm"]),
+  .icon:has(use[href$="#arrow-right"]),  .icon:has(use[href$="#arrow-right-sm"]),
+  .icon:has(use[href$="#send"]),         .icon:has(use[href$="#send-sm"]),
   …
 ) { scale: -1 1; }') ?></code></pre>
   <p>
     So an arrow, a chevron and the send glyph flip automatically, while a checkmark, a
-    clock and a magnifier — which would look wrong mirrored — are left alone. It is a
-    list rather than a rule, which means <strong>a directional icon you add yourself is
-    not in it</strong>; reach for <code>.mirror-rtl</code> in that case.
+    clock and a magnifier — which would look wrong mirrored — are left alone. Each pointing
+    icon is listed with its <code>-sm</code> cut, because <code>$=</code> matches the end
+    of the id. The transport icons, <code>#play</code> and <code>#skip</code>, are not in
+    the list: a media timeline runs left to right in every locale. It is a list rather than
+    a rule, which means <strong>a directional icon you add yourself is not in it</strong>;
+    reach for <code>.mirror-rtl</code> in that case.
   </p>
   <?php
   docs_example(
