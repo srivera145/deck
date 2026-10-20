@@ -2,13 +2,13 @@
   "generated": "tools/docs/extract.mjs — do not edit",
   "stylesheets": 26,
   "counts": {
-    "classes": 944,
+    "classes": 945,
     "documented": 323,
-    "undocumented": 621,
+    "undocumented": 622,
     "tokens": 152,
-    "rules": 1801,
+    "rules": 1804,
     "components": 99,
-    "states": 39,
+    "states": 40,
     "unattributedStates": 0
   },
   "unattributedStates": [],
@@ -275,13 +275,13 @@
         {
           "selector": ".msg .avatar",
           "file": "24-media.css",
-          "line": 291,
+          "line": 304,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .avatar",
           "file": "24-media.css",
-          "line": 292,
+          "line": 305,
           "conditions": []
         },
         {
@@ -436,7 +436,7 @@
         {
           "selector": ".banner",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -937,85 +937,85 @@
         {
           "selector": ".bubble",
           "file": "24-media.css",
-          "line": 247,
+          "line": 260,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 258,
+          "line": 271,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .bubble",
           "file": "24-media.css",
-          "line": 266,
+          "line": 279,
           "conditions": []
         },
         {
           "selector": ".msg-out:not(:last-of-type) + .msg-out .bubble",
           "file": "24-media.css",
-          "line": 267,
+          "line": 280,
           "conditions": []
         },
         {
           "selector": ".bubble-meta",
           "file": "24-media.css",
-          "line": 269,
+          "line": 282,
           "conditions": []
         },
         {
           "selector": ".msg:not(.msg-out) .bubble-meta",
           "file": "24-media.css",
-          "line": 279,
+          "line": 292,
           "conditions": []
         },
         {
           "selector": ".bubble-name",
           "file": "24-media.css",
-          "line": 280,
+          "line": 293,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble-name",
           "file": "24-media.css",
-          "line": 281,
+          "line": 294,
           "conditions": []
         },
         {
           "selector": ".bubble-attachment",
           "file": "24-media.css",
-          "line": 283,
+          "line": 296,
           "conditions": []
         },
         {
           "selector": ".bubble-attachment img",
           "file": "24-media.css",
-          "line": 289,
+          "line": 302,
           "conditions": []
         },
         {
           "selector": ".bubble-system",
           "file": "24-media.css",
-          "line": 294,
+          "line": 307,
           "conditions": []
         },
         {
           "selector": ".bubble-typing",
           "file": "24-media.css",
-          "line": 305,
+          "line": 318,
           "conditions": []
         },
         {
           "selector": ".bubble-typing > span",
           "file": "24-media.css",
-          "line": 306,
+          "line": 319,
           "conditions": []
         },
         {
           "selector": ".bubble-typing > span",
           "file": "24-media.css",
-          "line": 313,
+          "line": 326,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -1023,7 +1023,7 @@
         {
           "selector": ".bubble-typing > span:nth-child(2)",
           "file": "24-media.css",
-          "line": 314,
+          "line": 327,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -1031,7 +1031,7 @@
         {
           "selector": ".bubble-typing > span:nth-child(3)",
           "file": "24-media.css",
-          "line": 315,
+          "line": 328,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -1039,7 +1039,7 @@
         {
           "selector": ".bubble",
           "file": "24-media.css",
-          "line": 394,
+          "line": 407,
           "conditions": [
             "@media print"
           ]
@@ -1047,7 +1047,7 @@
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 395,
+          "line": 408,
           "conditions": [
             "@media print"
           ]
@@ -1508,7 +1508,7 @@
         {
           "selector": ".carousel-arrow",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -1516,7 +1516,7 @@
         {
           "selector": ".carousel-dots",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -2044,31 +2044,31 @@
         {
           "selector": ".chat",
           "file": "24-media.css",
-          "line": 212,
+          "line": 225,
           "conditions": []
         },
         {
           "selector": ".chat-day",
           "file": "24-media.css",
-          "line": 222,
+          "line": 235,
           "conditions": []
         },
         {
           "selector": ".chat-composer",
           "file": "24-media.css",
-          "line": 323,
+          "line": 336,
           "conditions": []
         },
         {
           "selector": ".chat-composer .textarea",
           "file": "24-media.css",
-          "line": 332,
+          "line": 345,
           "conditions": []
         },
         {
           "selector": ".chat-composer",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -2076,7 +2076,7 @@
         {
           "selector": ".chat",
           "file": "24-media.css",
-          "line": 392,
+          "line": 405,
           "conditions": [
             "@media print"
           ]
@@ -2950,7 +2950,7 @@
         {
           "selector": ".cq",
           "file": "04-layout.css",
-          "line": 252,
+          "line": 258,
           "conditions": []
         },
         {
@@ -4827,7 +4827,7 @@
         {
           "selector": ".drawer",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -4996,7 +4996,7 @@
         {
           "selector": ".editor-footer",
           "file": "24-media.css",
-          "line": 397,
+          "line": 410,
           "conditions": [
             "@media print"
           ]
@@ -5004,7 +5004,7 @@
         {
           "selector": ".editor-toolbar",
           "file": "24-media.css",
-          "line": 397,
+          "line": 410,
           "conditions": [
             "@media print"
           ]
@@ -5012,7 +5012,7 @@
         {
           "selector": ".editor-content",
           "file": "24-media.css",
-          "line": 398,
+          "line": 411,
           "conditions": [
             "@media print"
           ]
@@ -6017,7 +6017,7 @@
         "99-print.css"
       ],
       "states": [],
-      "ruleCount": 12,
+      "ruleCount": 15,
       "rules": [
         {
           "selector": ".grid",
@@ -6052,19 +6052,19 @@
         {
           "selector": ".grid-fixed-2",
           "file": "04-layout.css",
-          "line": 131,
+          "line": 134,
           "conditions": []
         },
         {
           "selector": ".grid-fixed-3",
           "file": "04-layout.css",
-          "line": 133,
+          "line": 136,
           "conditions": []
         },
         {
           "selector": ".grid-fixed-4",
           "file": "04-layout.css",
-          "line": 136,
+          "line": 139,
           "conditions": []
         },
         {
@@ -6090,7 +6090,31 @@
           ]
         },
         {
-          "selector": ":is(.grid, .grid-fill) > * + *",
+          "selector": ".grid-fixed-2",
+          "file": "99-print.css",
+          "line": 86,
+          "conditions": [
+            "@media print"
+          ]
+        },
+        {
+          "selector": ".grid-fixed-3",
+          "file": "99-print.css",
+          "line": 86,
+          "conditions": [
+            "@media print"
+          ]
+        },
+        {
+          "selector": ".grid-fixed-4",
+          "file": "99-print.css",
+          "line": 86,
+          "conditions": [
+            "@media print"
+          ]
+        },
+        {
+          "selector": ":is(.grid, .grid-fill, .grid-fixed-2, .grid-fixed-3, .grid-fixed-4) > * + *",
           "file": "99-print.css",
           "line": 87,
           "conditions": [
@@ -6829,9 +6853,10 @@
         "24-media.css"
       ],
       "states": [
-        "is-loaded"
+        "is-loaded",
+        "is-error"
       ],
-      "ruleCount": 14,
+      "ruleCount": 17,
       "rules": [
         {
           "selector": ".g-scrim > :is(img, picture, video, canvas, svg, iframe, .lazy, .video)",
@@ -6872,49 +6897,69 @@
         {
           "selector": ".lazy::after",
           "file": "24-media.css",
-          "line": 172,
+          "line": 167,
           "conditions": []
         },
         {
           "selector": ".lazy:has(img.is-loaded)::after",
           "file": "24-media.css",
-          "line": 183,
+          "line": 178,
           "conditions": []
         },
         {
           "selector": ".lazy:has(img[data-loaded])::after",
           "file": "24-media.css",
-          "line": 183,
+          "line": 178,
           "conditions": []
         },
         {
-          "selector": ".lazy-blur",
+          "selector": ".lazy.is-error",
+          "file": "24-media.css",
+          "line": 185,
+          "conditions": []
+        },
+        {
+          "selector": ".lazy.is-error::after",
           "file": "24-media.css",
           "line": 186,
           "conditions": []
         },
         {
+          "selector": ".lazy.is-error::after",
+          "file": "24-media.css",
+          "line": 195,
+          "conditions": [
+            "@media (forced-colors: active)"
+          ]
+        },
+        {
+          "selector": ".lazy-blur",
+          "file": "24-media.css",
+          "line": 199,
+          "conditions": []
+        },
+        {
           "selector": ".lazy-blur::before",
           "file": "24-media.css",
-          "line": 187,
+          "line": 200,
           "conditions": []
         },
         {
           "selector": ".lazy-blur:has(img.is-loaded)::before",
           "file": "24-media.css",
-          "line": 195,
+          "line": 208,
           "conditions": []
         },
         {
           "selector": ".lazy-block",
           "file": "24-media.css",
-          "line": 198,
+          "line": 211,
           "conditions": []
         },
         {
           "selector": ".lazy::after",
           "file": "24-media.css",
-          "line": 396,
+          "line": 409,
           "conditions": [
             "@media print"
           ]
@@ -7242,7 +7287,7 @@
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 391,
+          "line": 404,
           "conditions": [
             "@media print"
           ]
@@ -7350,7 +7395,7 @@
         {
           "selector": ".mega",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -7624,61 +7669,61 @@
         {
           "selector": ".msg",
           "file": "24-media.css",
-          "line": 236,
+          "line": 249,
           "conditions": []
         },
         {
           "selector": ".msg-out",
           "file": "24-media.css",
-          "line": 243,
+          "line": 256,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 258,
+          "line": 271,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .bubble",
           "file": "24-media.css",
-          "line": 266,
+          "line": 279,
           "conditions": []
         },
         {
           "selector": ".msg-out:not(:last-of-type) + .msg-out .bubble",
           "file": "24-media.css",
-          "line": 267,
+          "line": 280,
           "conditions": []
         },
         {
           "selector": ".msg:not(.msg-out) .bubble-meta",
           "file": "24-media.css",
-          "line": 279,
+          "line": 292,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble-name",
           "file": "24-media.css",
-          "line": 281,
+          "line": 294,
           "conditions": []
         },
         {
           "selector": ".msg .avatar",
           "file": "24-media.css",
-          "line": 291,
+          "line": 304,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .avatar",
           "file": "24-media.css",
-          "line": 292,
+          "line": 305,
           "conditions": []
         },
         {
           "selector": ".msg",
           "file": "24-media.css",
-          "line": 393,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -7686,7 +7731,7 @@
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 395,
+          "line": 408,
           "conditions": [
             "@media print"
           ]
@@ -8244,55 +8289,55 @@
         {
           "selector": ".qr",
           "file": "24-media.css",
-          "line": 344,
+          "line": 357,
           "conditions": []
         },
         {
           "selector": ".qr svg",
           "file": "24-media.css",
-          "line": 355,
+          "line": 368,
           "conditions": []
         },
         {
           "selector": ".qr svg rect",
           "file": "24-media.css",
-          "line": 356,
+          "line": 369,
           "conditions": []
         },
         {
           "selector": ".qr-lg",
           "file": "24-media.css",
-          "line": 357,
+          "line": 370,
           "conditions": []
         },
         {
           "selector": ".qr-sm",
           "file": "24-media.css",
-          "line": 358,
+          "line": 371,
           "conditions": []
         },
         {
           "selector": ".qr-logo",
           "file": "24-media.css",
-          "line": 360,
+          "line": 373,
           "conditions": []
         },
         {
           "selector": ".qr-logo > .qr-logo-mark",
           "file": "24-media.css",
-          "line": 363,
+          "line": 376,
           "conditions": []
         },
         {
           "selector": ".qr-caption",
           "file": "24-media.css",
-          "line": 375,
+          "line": 388,
           "conditions": []
         },
         {
           "selector": ".qr",
           "file": "24-media.css",
-          "line": 388,
+          "line": 401,
           "conditions": [
             "@media print"
           ]
@@ -9295,7 +9340,7 @@
         {
           "selector": ".speed-dial",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -9360,19 +9405,19 @@
         {
           "selector": ".split",
           "file": "04-layout.css",
-          "line": 139,
+          "line": 142,
           "conditions": []
         },
         {
           "selector": ".split > *",
           "file": "04-layout.css",
-          "line": 149,
+          "line": 152,
           "conditions": []
         },
         {
           "selector": ".split",
           "file": "04-layout.css",
-          "line": 151,
+          "line": 154,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -9380,7 +9425,7 @@
         {
           "selector": ".split-rail-start",
           "file": "04-layout.css",
-          "line": 156,
+          "line": 162,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -9957,19 +10002,11 @@
         {
           "selector": ".sticky-top",
           "file": "04-layout.css",
-          "line": 199,
+          "line": 205,
           "conditions": []
         },
         {
           "selector": ".sticky-top",
-          "file": "04-layout.css",
-          "line": 212,
-          "conditions": [
-            "@supports (container-type: scroll-state)"
-          ]
-        },
-        {
-          "selector": ".sticky-top::after",
           "file": "04-layout.css",
           "line": 218,
           "conditions": [
@@ -9979,7 +10016,15 @@
         {
           "selector": ".sticky-top::after",
           "file": "04-layout.css",
-          "line": 230,
+          "line": 224,
+          "conditions": [
+            "@supports (container-type: scroll-state)"
+          ]
+        },
+        {
+          "selector": ".sticky-top::after",
+          "file": "04-layout.css",
+          "line": 236,
           "conditions": [
             "@supports (container-type: scroll-state)",
             "@container scroll-state(stuck: block-start)"
@@ -11149,7 +11194,7 @@
         {
           "selector": ".video",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -11992,7 +12037,7 @@
     {
       "name": "app-shell",
       "file": "04-layout.css",
-      "line": 238,
+      "line": 244,
       "layer": "deck.layout",
       "section": null,
       "doc": "Header, content, footer in a 100dvh grid whose middle row takes the\nremaining height — the sticky footer, without the hacks. dvh rather\nthan vh so it tracks a phone browser hiding its chrome. It expects\nexactly three children.",
@@ -12014,7 +12059,7 @@
         {
           "selector": ".app-shell",
           "file": "04-layout.css",
-          "line": 238,
+          "line": 244,
           "conditions": []
         }
       ],
@@ -12118,13 +12163,13 @@
         {
           "selector": ".msg .avatar",
           "file": "24-media.css",
-          "line": 291,
+          "line": 304,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .avatar",
           "file": "24-media.css",
-          "line": 292,
+          "line": 305,
           "conditions": []
         },
         {
@@ -12931,7 +12976,7 @@
         {
           "selector": ".banner",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -14878,7 +14923,7 @@
     {
       "name": "bubble",
       "file": "24-media.css",
-      "line": 247,
+      "line": 260,
       "layer": "deck.components",
       "section": null,
       "doc": "The message body. Its corner radii are logical, which is what lets the\ngrouping flatten the correct side in either writing direction.",
@@ -14924,31 +14969,31 @@
         {
           "selector": ".bubble",
           "file": "24-media.css",
-          "line": 247,
+          "line": 260,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 258,
+          "line": 271,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .bubble",
           "file": "24-media.css",
-          "line": 266,
+          "line": 279,
           "conditions": []
         },
         {
           "selector": ".msg-out:not(:last-of-type) + .msg-out .bubble",
           "file": "24-media.css",
-          "line": 267,
+          "line": 280,
           "conditions": []
         },
         {
           "selector": ".bubble",
           "file": "24-media.css",
-          "line": 394,
+          "line": 407,
           "conditions": [
             "@media print"
           ]
@@ -14956,7 +15001,7 @@
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 395,
+          "line": 408,
           "conditions": [
             "@media print"
           ]
@@ -14986,7 +15031,7 @@
     {
       "name": "bubble-attachment",
       "file": "24-media.css",
-      "line": 283,
+      "line": 296,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -15012,13 +15057,13 @@
         {
           "selector": ".bubble-attachment",
           "file": "24-media.css",
-          "line": 283,
+          "line": 296,
           "conditions": []
         },
         {
           "selector": ".bubble-attachment img",
           "file": "24-media.css",
-          "line": 289,
+          "line": 302,
           "conditions": []
         }
       ],
@@ -15034,7 +15079,7 @@
     {
       "name": "bubble-meta",
       "file": "24-media.css",
-      "line": 269,
+      "line": 282,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -15076,13 +15121,13 @@
         {
           "selector": ".bubble-meta",
           "file": "24-media.css",
-          "line": 269,
+          "line": 282,
           "conditions": []
         },
         {
           "selector": ".msg:not(.msg-out) .bubble-meta",
           "file": "24-media.css",
-          "line": 279,
+          "line": 292,
           "conditions": []
         }
       ],
@@ -15097,7 +15142,7 @@
     {
       "name": "bubble-name",
       "file": "24-media.css",
-      "line": 280,
+      "line": 293,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -15123,13 +15168,13 @@
         {
           "selector": ".bubble-name",
           "file": "24-media.css",
-          "line": 280,
+          "line": 293,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble-name",
           "file": "24-media.css",
-          "line": 281,
+          "line": 294,
           "conditions": []
         }
       ],
@@ -15144,7 +15189,7 @@
     {
       "name": "bubble-system",
       "file": "24-media.css",
-      "line": 294,
+      "line": 307,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -15182,7 +15227,7 @@
         {
           "selector": ".bubble-system",
           "file": "24-media.css",
-          "line": 294,
+          "line": 307,
           "conditions": []
         }
       ],
@@ -15197,7 +15242,7 @@
     {
       "name": "bubble-typing",
       "file": "24-media.css",
-      "line": 305,
+      "line": 318,
       "layer": "deck.components",
       "section": null,
       "doc": "Typing indicator",
@@ -15219,19 +15264,19 @@
         {
           "selector": ".bubble-typing",
           "file": "24-media.css",
-          "line": 305,
+          "line": 318,
           "conditions": []
         },
         {
           "selector": ".bubble-typing > span",
           "file": "24-media.css",
-          "line": 306,
+          "line": 319,
           "conditions": []
         },
         {
           "selector": ".bubble-typing > span",
           "file": "24-media.css",
-          "line": 313,
+          "line": 326,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -15239,7 +15284,7 @@
         {
           "selector": ".bubble-typing > span:nth-child(2)",
           "file": "24-media.css",
-          "line": 314,
+          "line": 327,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -15247,7 +15292,7 @@
         {
           "selector": ".bubble-typing > span:nth-child(3)",
           "file": "24-media.css",
-          "line": 315,
+          "line": 328,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -16003,7 +16048,7 @@
         {
           "selector": ".carousel-arrow",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -16200,7 +16245,7 @@
         {
           "selector": ".carousel-dots",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -16552,7 +16597,7 @@
     {
       "name": "center",
       "file": "04-layout.css",
-      "line": 160,
+      "line": 166,
       "layer": "deck.layout",
       "section": null,
       "doc": "Center a thing with a max width and no side effects",
@@ -16582,7 +16627,7 @@
         {
           "selector": ".center",
           "file": "04-layout.css",
-          "line": 160,
+          "line": 166,
           "conditions": []
         }
       ],
@@ -18285,7 +18330,7 @@
     {
       "name": "chat",
       "file": "24-media.css",
-      "line": 212,
+      "line": 225,
       "layer": "deck.components",
       "section": "Chat bubbles",
       "doc": "Conversation view. Consecutive messages from one side group together and\nonly the last one in a run gets the tail.",
@@ -18319,13 +18364,13 @@
         {
           "selector": ".chat",
           "file": "24-media.css",
-          "line": 212,
+          "line": 225,
           "conditions": []
         },
         {
           "selector": ".chat",
           "file": "24-media.css",
-          "line": 392,
+          "line": 405,
           "conditions": [
             "@media print"
           ]
@@ -18345,7 +18390,7 @@
     {
       "name": "chat-composer",
       "file": "24-media.css",
-      "line": 323,
+      "line": 336,
       "layer": "deck.components",
       "section": null,
       "doc": "Composer pinned to the bottom",
@@ -18383,19 +18428,19 @@
         {
           "selector": ".chat-composer",
           "file": "24-media.css",
-          "line": 323,
+          "line": 336,
           "conditions": []
         },
         {
           "selector": ".chat-composer .textarea",
           "file": "24-media.css",
-          "line": 332,
+          "line": 345,
           "conditions": []
         },
         {
           "selector": ".chat-composer",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -18415,7 +18460,7 @@
     {
       "name": "chat-day",
       "file": "24-media.css",
-      "line": 222,
+      "line": 235,
       "layer": "deck.components",
       "section": null,
       "doc": "A centred date pill between days. Styling, not structure — a screen\nreader hears ordinary text.",
@@ -18457,7 +18502,7 @@
         {
           "selector": ".chat-day",
           "file": "24-media.css",
-          "line": 222,
+          "line": 235,
           "conditions": []
         }
       ],
@@ -21431,7 +21476,7 @@
     {
       "name": "cq",
       "file": "04-layout.css",
-      "line": 252,
+      "line": 258,
       "layer": "deck.layout",
       "section": null,
       "doc": "Container queries: components respond to their slot, not the viewport",
@@ -21445,7 +21490,7 @@
         {
           "selector": ".cq",
           "file": "04-layout.css",
-          "line": 252,
+          "line": 258,
           "conditions": []
         },
         {
@@ -26242,7 +26287,7 @@
         {
           "selector": ".drawer",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -27115,7 +27160,7 @@
         {
           "selector": ".editor-content",
           "file": "24-media.css",
-          "line": 398,
+          "line": 411,
           "conditions": [
             "@media print"
           ]
@@ -27226,7 +27271,7 @@
         {
           "selector": ".editor-footer",
           "file": "24-media.css",
-          "line": 397,
+          "line": 410,
           "conditions": [
             "@media print"
           ]
@@ -27528,7 +27573,7 @@
         {
           "selector": ".editor-toolbar",
           "file": "24-media.css",
-          "line": 397,
+          "line": 410,
           "conditions": [
             "@media print"
           ]
@@ -31986,7 +32031,7 @@
           ]
         },
         {
-          "selector": ":is(.grid, .grid-fill) > * + *",
+          "selector": ":is(.grid, .grid-fill, .grid-fixed-2, .grid-fixed-3, .grid-fixed-4) > * + *",
           "file": "99-print.css",
           "line": 87,
           "conditions": [
@@ -32074,7 +32119,7 @@
           ]
         },
         {
-          "selector": ":is(.grid, .grid-fill) > * + *",
+          "selector": ":is(.grid, .grid-fill, .grid-fixed-2, .grid-fixed-3, .grid-fixed-4) > * + *",
           "file": "99-print.css",
           "line": 87,
           "conditions": [
@@ -32094,11 +32139,19 @@
     {
       "name": "grid-fixed-2",
       "file": "04-layout.css",
-      "line": 131,
+      "line": 134,
       "layer": "deck.layout",
       "section": null,
-      "doc": "Exactly two equal columns at every width, including a phone. Only\nfor a count that is part of the meaning — a 2x2 comparison. It does\nnot reflow, so it does not satisfy the reflow criterion on its own.",
+      "doc": "Exactly two equal columns at every width, including a phone. Only\nfor a count that is part of the meaning — a 2x2 comparison. It does\nnot reflow, so it does not satisfy the reflow criterion on its own.\nEach fixed grid is a grid on its own, with .grid's gap. They used to\nset only the columns, so without .grid beside them nothing was a grid\nand the columns did nothing, silently.",
       "declarations": [
+        {
+          "prop": "display",
+          "value": "grid"
+        },
+        {
+          "prop": "gap",
+          "value": "var(--gap, var(--space-4))"
+        },
         {
           "prop": "grid-template-columns",
           "value": "1fr 1fr"
@@ -32108,23 +32161,50 @@
         {
           "selector": ".grid-fixed-2",
           "file": "04-layout.css",
-          "line": 131,
+          "line": 134,
           "conditions": []
+        },
+        {
+          "selector": ".grid-fixed-2",
+          "file": "99-print.css",
+          "line": 86,
+          "conditions": [
+            "@media print"
+          ]
+        },
+        {
+          "selector": ":is(.grid, .grid-fill, .grid-fixed-2, .grid-fixed-3, .grid-fixed-4) > * + *",
+          "file": "99-print.css",
+          "line": 87,
+          "conditions": [
+            "@media print"
+          ]
         }
       ],
       "variants": [],
-      "tokensUsed": [],
+      "tokensUsed": [
+        "--gap",
+        "--space-4"
+      ],
       "defined": true,
       "definedUnconditional": true
     },
     {
       "name": "grid-fixed-3",
       "file": "04-layout.css",
-      "line": 133,
+      "line": 136,
       "layer": "deck.layout",
       "section": null,
       "doc": "Exactly three equal columns at every width. See .grid-fixed-2.",
       "declarations": [
+        {
+          "prop": "display",
+          "value": "grid"
+        },
+        {
+          "prop": "gap",
+          "value": "var(--gap, var(--space-4))"
+        },
         {
           "prop": "grid-template-columns",
           "value": "repeat(3, 1fr)"
@@ -32134,23 +32214,50 @@
         {
           "selector": ".grid-fixed-3",
           "file": "04-layout.css",
-          "line": 133,
+          "line": 136,
           "conditions": []
+        },
+        {
+          "selector": ".grid-fixed-3",
+          "file": "99-print.css",
+          "line": 86,
+          "conditions": [
+            "@media print"
+          ]
+        },
+        {
+          "selector": ":is(.grid, .grid-fill, .grid-fixed-2, .grid-fixed-3, .grid-fixed-4) > * + *",
+          "file": "99-print.css",
+          "line": 87,
+          "conditions": [
+            "@media print"
+          ]
         }
       ],
       "variants": [],
-      "tokensUsed": [],
+      "tokensUsed": [
+        "--gap",
+        "--space-4"
+      ],
       "defined": true,
       "definedUnconditional": true
     },
     {
       "name": "grid-fixed-4",
       "file": "04-layout.css",
-      "line": 136,
+      "line": 139,
       "layer": "deck.layout",
       "section": null,
       "doc": "Exactly four equal columns at every width. On a phone that is four\n70px columns; reach for .grid with a --min instead.",
       "declarations": [
+        {
+          "prop": "display",
+          "value": "grid"
+        },
+        {
+          "prop": "gap",
+          "value": "var(--gap, var(--space-4))"
+        },
         {
           "prop": "grid-template-columns",
           "value": "repeat(4, 1fr)"
@@ -32160,12 +32267,31 @@
         {
           "selector": ".grid-fixed-4",
           "file": "04-layout.css",
-          "line": 136,
+          "line": 139,
           "conditions": []
+        },
+        {
+          "selector": ".grid-fixed-4",
+          "file": "99-print.css",
+          "line": 86,
+          "conditions": [
+            "@media print"
+          ]
+        },
+        {
+          "selector": ":is(.grid, .grid-fill, .grid-fixed-2, .grid-fixed-3, .grid-fixed-4) > * + *",
+          "file": "99-print.css",
+          "line": 87,
+          "conditions": [
+            "@media print"
+          ]
         }
       ],
       "variants": [],
-      "tokensUsed": [],
+      "tokensUsed": [
+        "--gap",
+        "--space-4"
+      ],
       "defined": true,
       "definedUnconditional": true
     },
@@ -35097,6 +35223,57 @@
       "role": "state"
     },
     {
+      "name": "is-error",
+      "file": "24-media.css",
+      "line": 185,
+      "layer": "deck.components",
+      "section": null,
+      "doc": null,
+      "declarations": [],
+      "selectors": [
+        {
+          "selector": ".lazy.is-error",
+          "file": "24-media.css",
+          "line": 185,
+          "conditions": []
+        },
+        {
+          "selector": ".lazy.is-error::after",
+          "file": "24-media.css",
+          "line": 186,
+          "conditions": []
+        },
+        {
+          "selector": ".lazy.is-error::after",
+          "file": "24-media.css",
+          "line": 195,
+          "conditions": [
+            "@media (forced-colors: active)"
+          ]
+        }
+      ],
+      "variants": [],
+      "tokensUsed": [
+        "--text-faint"
+      ],
+      "defined": false,
+      "contextSelector": ".lazy.is-error",
+      "contextConditions": [],
+      "contextDeclarations": [
+        {
+          "prop": "color",
+          "value": "var(--text-faint)"
+        }
+      ],
+      "owners": [
+        "lazy"
+      ],
+      "ownerClasses": [
+        "lazy"
+      ],
+      "role": "state"
+    },
+    {
       "name": "is-fanned",
       "file": "21-space3d.css",
       "line": 108,
@@ -35544,13 +35721,13 @@
         {
           "selector": ".lazy:has(img.is-loaded)::after",
           "file": "24-media.css",
-          "line": 183,
+          "line": 178,
           "conditions": []
         },
         {
           "selector": ".lazy-blur:has(img.is-loaded)::before",
           "file": "24-media.css",
-          "line": 195,
+          "line": 208,
           "conditions": []
         }
       ],
@@ -37632,25 +37809,45 @@
         {
           "selector": ".lazy::after",
           "file": "24-media.css",
-          "line": 172,
+          "line": 167,
           "conditions": []
         },
         {
           "selector": ".lazy:has(img.is-loaded)::after",
           "file": "24-media.css",
-          "line": 183,
+          "line": 178,
           "conditions": []
         },
         {
           "selector": ".lazy:has(img[data-loaded])::after",
           "file": "24-media.css",
-          "line": 183,
+          "line": 178,
           "conditions": []
+        },
+        {
+          "selector": ".lazy.is-error",
+          "file": "24-media.css",
+          "line": 185,
+          "conditions": []
+        },
+        {
+          "selector": ".lazy.is-error::after",
+          "file": "24-media.css",
+          "line": 186,
+          "conditions": []
+        },
+        {
+          "selector": ".lazy.is-error::after",
+          "file": "24-media.css",
+          "line": 195,
+          "conditions": [
+            "@media (forced-colors: active)"
+          ]
         },
         {
           "selector": ".lazy::after",
           "file": "24-media.css",
-          "line": 396,
+          "line": 409,
           "conditions": [
             "@media print"
           ]
@@ -37674,7 +37871,7 @@
     {
       "name": "lazy-block",
       "file": "24-media.css",
-      "line": 198,
+      "line": 211,
       "layer": "deck.components",
       "section": null,
       "doc": "Generic content placeholder while a region streams in",
@@ -37712,7 +37909,7 @@
         {
           "selector": ".lazy-block",
           "file": "24-media.css",
-          "line": 198,
+          "line": 211,
           "conditions": []
         }
       ],
@@ -37729,7 +37926,7 @@
     {
       "name": "lazy-blur",
       "file": "24-media.css",
-      "line": 186,
+      "line": 199,
       "layer": "deck.components",
       "section": null,
       "doc": "A blurred low-res preview underneath, if you have one",
@@ -37747,19 +37944,19 @@
         {
           "selector": ".lazy-blur",
           "file": "24-media.css",
-          "line": 186,
+          "line": 199,
           "conditions": []
         },
         {
           "selector": ".lazy-blur::before",
           "file": "24-media.css",
-          "line": 187,
+          "line": 200,
           "conditions": []
         },
         {
           "selector": ".lazy-blur:has(img.is-loaded)::before",
           "file": "24-media.css",
-          "line": 195,
+          "line": 208,
           "conditions": []
         }
       ],
@@ -38751,7 +38948,7 @@
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 391,
+          "line": 404,
           "conditions": [
             "@media print"
           ]
@@ -39330,7 +39527,7 @@
         {
           "selector": ".mega",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -41118,7 +41315,7 @@
     {
       "name": "msg",
       "file": "24-media.css",
-      "line": 236,
+      "line": 249,
       "layer": "deck.components",
       "section": null,
       "doc": "One message row. .msg-out flips it to the other edge and reverses the row\nso the avatar swaps sides. The incoming/outgoing distinction is position\nand colour only, so name the sender in text for anyone not seeing it.",
@@ -41148,49 +41345,49 @@
         {
           "selector": ".msg",
           "file": "24-media.css",
-          "line": 236,
+          "line": 249,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .bubble",
-          "file": "24-media.css",
-          "line": 266,
-          "conditions": []
-        },
-        {
-          "selector": ".msg:not(:last-of-type) + .msg .bubble",
-          "file": "24-media.css",
-          "line": 266,
-          "conditions": []
-        },
-        {
-          "selector": ".msg:not(.msg-out) .bubble-meta",
           "file": "24-media.css",
           "line": 279,
           "conditions": []
         },
         {
+          "selector": ".msg:not(:last-of-type) + .msg .bubble",
+          "file": "24-media.css",
+          "line": 279,
+          "conditions": []
+        },
+        {
+          "selector": ".msg:not(.msg-out) .bubble-meta",
+          "file": "24-media.css",
+          "line": 292,
+          "conditions": []
+        },
+        {
           "selector": ".msg .avatar",
           "file": "24-media.css",
-          "line": 291,
+          "line": 304,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .avatar",
           "file": "24-media.css",
-          "line": 292,
+          "line": 305,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .avatar",
           "file": "24-media.css",
-          "line": 292,
+          "line": 305,
           "conditions": []
         },
         {
           "selector": ".msg",
           "file": "24-media.css",
-          "line": 393,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -41208,7 +41405,7 @@
     {
       "name": "msg-out",
       "file": "24-media.css",
-      "line": 243,
+      "line": 256,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -41226,43 +41423,43 @@
         {
           "selector": ".msg-out",
           "file": "24-media.css",
-          "line": 243,
+          "line": 256,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 258,
+          "line": 271,
           "conditions": []
         },
         {
           "selector": ".msg-out:not(:last-of-type) + .msg-out .bubble",
           "file": "24-media.css",
-          "line": 267,
+          "line": 280,
           "conditions": []
         },
         {
           "selector": ".msg-out:not(:last-of-type) + .msg-out .bubble",
           "file": "24-media.css",
-          "line": 267,
+          "line": 280,
           "conditions": []
         },
         {
           "selector": ".msg:not(.msg-out) .bubble-meta",
           "file": "24-media.css",
-          "line": 279,
+          "line": 292,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble-name",
           "file": "24-media.css",
-          "line": 281,
+          "line": 294,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 395,
+          "line": 408,
           "conditions": [
             "@media print"
           ]
@@ -45624,7 +45821,7 @@
     {
       "name": "qr",
       "file": "24-media.css",
-      "line": 344,
+      "line": 357,
       "layer": "deck.components",
       "section": "QR code",
       "doc": "deck.js renders the modules into this frame. Kept square, with a quiet\nzone, so it stays scannable at any size.",
@@ -45670,25 +45867,25 @@
         {
           "selector": ".qr",
           "file": "24-media.css",
-          "line": 344,
+          "line": 357,
           "conditions": []
         },
         {
           "selector": ".qr svg",
           "file": "24-media.css",
-          "line": 355,
+          "line": 368,
           "conditions": []
         },
         {
           "selector": ".qr svg rect",
           "file": "24-media.css",
-          "line": 356,
+          "line": 369,
           "conditions": []
         },
         {
           "selector": ".qr",
           "file": "24-media.css",
-          "line": 388,
+          "line": 401,
           "conditions": [
             "@media print"
           ]
@@ -45715,7 +45912,7 @@
     {
       "name": "qr-caption",
       "file": "24-media.css",
-      "line": 375,
+      "line": 388,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -45749,7 +45946,7 @@
         {
           "selector": ".qr-caption",
           "file": "24-media.css",
-          "line": 375,
+          "line": 388,
           "conditions": []
         }
       ],
@@ -45766,7 +45963,7 @@
     {
       "name": "qr-lg",
       "file": "24-media.css",
-      "line": 357,
+      "line": 370,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -45780,7 +45977,7 @@
         {
           "selector": ".qr-lg",
           "file": "24-media.css",
-          "line": 357,
+          "line": 370,
           "conditions": []
         }
       ],
@@ -45792,7 +45989,7 @@
     {
       "name": "qr-logo",
       "file": "24-media.css",
-      "line": 360,
+      "line": 373,
       "layer": "deck.components",
       "section": null,
       "doc": "A logo punched out of the middle. Only safe at error correction Q or H.",
@@ -45806,13 +46003,13 @@
         {
           "selector": ".qr-logo",
           "file": "24-media.css",
-          "line": 360,
+          "line": 373,
           "conditions": []
         },
         {
           "selector": ".qr-logo > .qr-logo-mark",
           "file": "24-media.css",
-          "line": 363,
+          "line": 376,
           "conditions": []
         }
       ],
@@ -45826,7 +46023,7 @@
     {
       "name": "qr-logo-mark",
       "file": "24-media.css",
-      "line": 363,
+      "line": 376,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -45835,7 +46032,7 @@
         {
           "selector": ".qr-logo > .qr-logo-mark",
           "file": "24-media.css",
-          "line": 363,
+          "line": 376,
           "conditions": []
         }
       ],
@@ -45893,7 +46090,7 @@
     {
       "name": "qr-sm",
       "file": "24-media.css",
-      "line": 358,
+      "line": 371,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -45907,7 +46104,7 @@
         {
           "selector": ".qr-sm",
           "file": "24-media.css",
-          "line": 358,
+          "line": 371,
           "conditions": []
         }
       ],
@@ -46660,7 +46857,7 @@
     {
       "name": "ratio-16x9",
       "file": "04-layout.css",
-      "line": 245,
+      "line": 251,
       "layer": "deck.layout",
       "section": null,
       "doc": "Aspect boxes for media",
@@ -46682,7 +46879,7 @@
         {
           "selector": ".ratio-16x9",
           "file": "04-layout.css",
-          "line": 245,
+          "line": 251,
           "conditions": []
         }
       ],
@@ -46694,7 +46891,7 @@
     {
       "name": "ratio-1x1",
       "file": "04-layout.css",
-      "line": 247,
+      "line": 253,
       "layer": "deck.layout",
       "section": null,
       "doc": null,
@@ -46716,7 +46913,7 @@
         {
           "selector": ".ratio-1x1",
           "file": "04-layout.css",
-          "line": 247,
+          "line": 253,
           "conditions": []
         }
       ],
@@ -46728,7 +46925,7 @@
     {
       "name": "ratio-2x3",
       "file": "04-layout.css",
-      "line": 249,
+      "line": 255,
       "layer": "deck.layout",
       "section": null,
       "doc": "Portrait 2:3, the shape of a film poster or a book cover.",
@@ -46750,7 +46947,7 @@
         {
           "selector": ".ratio-2x3",
           "file": "04-layout.css",
-          "line": 249,
+          "line": 255,
           "conditions": []
         }
       ],
@@ -46762,7 +46959,7 @@
     {
       "name": "ratio-4x3",
       "file": "04-layout.css",
-      "line": 246,
+      "line": 252,
       "layer": "deck.layout",
       "section": null,
       "doc": null,
@@ -46784,7 +46981,7 @@
         {
           "selector": ".ratio-4x3",
           "file": "04-layout.css",
-          "line": 246,
+          "line": 252,
           "conditions": []
         }
       ],
@@ -48040,7 +48237,7 @@
     {
       "name": "scroller",
       "file": "04-layout.css",
-      "line": 179,
+      "line": 185,
       "layer": "deck.layout",
       "section": null,
       "doc": "Everything stays on one line and scrolls sideways — cards, chips, dates.\nA scroll container clips on both axes, so the block padding leaves room\nfor a child's focus ring (2px, offset 2px) at the top and a scrollbar\nat the bottom. scroll-padding-inline matches the bleed's padding, so a\ncard that snaps or is scrolled into view rests at the gutter like\neverything else, not flush against the edge of the screen.",
@@ -48090,19 +48287,19 @@
         {
           "selector": ".scroller",
           "file": "04-layout.css",
-          "line": 179,
+          "line": 185,
           "conditions": []
         },
         {
           "selector": ".scroller::-webkit-scrollbar",
           "file": "04-layout.css",
-          "line": 191,
+          "line": 197,
           "conditions": []
         },
         {
           "selector": ".scroller > *",
           "file": "04-layout.css",
-          "line": 192,
+          "line": 198,
           "conditions": []
         },
         {
@@ -48198,7 +48395,7 @@
     {
       "name": "section",
       "file": "04-layout.css",
-      "line": 171,
+      "line": 177,
       "layer": "deck.layout",
       "section": null,
       "doc": "Vertical page rhythm: a block of --space-section, which is a clamp that\ngrows with the viewport. For spacing inside a component reach for\n.stack instead.",
@@ -48212,7 +48409,7 @@
         {
           "selector": ".section",
           "file": "04-layout.css",
-          "line": 171,
+          "line": 177,
           "conditions": []
         },
         {
@@ -50093,7 +50290,7 @@
         {
           "selector": ".speed-dial",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]
@@ -50539,7 +50736,7 @@
     {
       "name": "split",
       "file": "04-layout.css",
-      "line": 139,
+      "line": 142,
       "layer": "deck.layout",
       "section": null,
       "doc": "Content + rail. Collapses to one column below the width it needs.",
@@ -50561,19 +50758,19 @@
         {
           "selector": ".split",
           "file": "04-layout.css",
-          "line": 139,
+          "line": 142,
           "conditions": []
         },
         {
           "selector": ".split > *",
           "file": "04-layout.css",
-          "line": 149,
+          "line": 152,
           "conditions": []
         },
         {
           "selector": ".split",
           "file": "04-layout.css",
-          "line": 151,
+          "line": 154,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -50607,10 +50804,10 @@
     {
       "name": "split-rail-start",
       "file": "04-layout.css",
-      "line": 156,
+      "line": 162,
       "layer": "deck.layout",
       "section": null,
-      "doc": "Puts the rail on the starting edge without touching markup order, so\nthe main column stays first for a screen reader and for the keyboard.\nUse it for supplementary navigation; not for a rail holding the first\nthing a reader needs.",
+      "doc": "Puts the rail on the starting edge by swapping the two track widths,\nnot the children: the first child takes the rail's width. So the rail\nhas to come first in the markup, which also makes it first for a\nscreen reader and the keyboard. Right for section navigation; for a\nrail that should be read after the content, use plain .split with the\nrail second. With the main column first, the main column is what\nlands in the narrow track.",
       "declarations": [
         {
           "prop": "grid-template-columns",
@@ -50621,7 +50818,7 @@
         {
           "selector": ".split-rail-start",
           "file": "04-layout.css",
-          "line": 156,
+          "line": 162,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -52038,7 +52235,7 @@
     {
       "name": "sticky-top",
       "file": "04-layout.css",
-      "line": 199,
+      "line": 205,
       "layer": "deck.layout",
       "section": null,
       "doc": "A sticky header. Where scroll-state container queries are supported\nthe blur and shadow live on an ::after that is transparent until the\nheader actually sticks, so in flow it looks like part of the page.\nThe treatment rides on a pseudo-element because a scroll-state\ncontainer can style its descendants but not itself.",
@@ -52072,19 +52269,11 @@
         {
           "selector": ".sticky-top",
           "file": "04-layout.css",
-          "line": 199,
+          "line": 205,
           "conditions": []
         },
         {
           "selector": ".sticky-top",
-          "file": "04-layout.css",
-          "line": 212,
-          "conditions": [
-            "@supports (container-type: scroll-state)"
-          ]
-        },
-        {
-          "selector": ".sticky-top::after",
           "file": "04-layout.css",
           "line": 218,
           "conditions": [
@@ -52094,7 +52283,15 @@
         {
           "selector": ".sticky-top::after",
           "file": "04-layout.css",
-          "line": 230,
+          "line": 224,
+          "conditions": [
+            "@supports (container-type: scroll-state)"
+          ]
+        },
+        {
+          "selector": ".sticky-top::after",
+          "file": "04-layout.css",
+          "line": 236,
           "conditions": [
             "@supports (container-type: scroll-state)",
             "@container scroll-state(stuck: block-start)"
@@ -53827,7 +54024,7 @@
         {
           "selector": ".chat-composer .textarea",
           "file": "24-media.css",
-          "line": 332,
+          "line": 345,
           "conditions": []
         },
         {
@@ -56319,7 +56516,7 @@
         {
           "selector": ".video",
           "file": "24-media.css",
-          "line": 389,
+          "line": 402,
           "conditions": [
             "@media print"
           ]

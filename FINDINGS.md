@@ -1319,7 +1319,7 @@ link inside a `<p>` underlined like any other.
 **How it was found:** writing the link section of `footer.php` and noticing that the
 declared link colour and the declared container colour were the same variable.
 
-## 66. `.is-error` is written by the script and styled by nothing
+## 66. `.is-error` is written by the script and styled by nothing — FIXED
 
 `lazies()` in `src/js/deck-extras.js` handles a failed image:
 
@@ -1358,6 +1358,21 @@ in the build — worth noting as a category, not just an instance.
 
 **How it was found:** writing the lazy-loading section of `gallery.php` and reading the
 error handler, then grepping for the class it sets.
+
+**Fixed** in `src/24-media.css`. `.lazy.is-error` stops the shimmer and paints a
+broken-image glyph (Material's `broken_image`, as a CSS mask over `currentColor`) in the
+middle of the frame, in `--text-faint`, so it works in both themes; under forced colours
+the glyph is `CanvasText`. The frame keeps the space it reserved. The dashed border
+recommended above was not used: `.lazy-block` already means "still streaming in", and a
+failure should not look like that either. The class is in the ledger as internal, because
+the script sets it.
+
+**A second gap, in the script:** `lazies()` only listened for `error`. An image whose
+`src` was in the markup, rather than in `data-src`, could fail while deck-extras.js was
+still loading, and then there was no event left to hear, so even a styled `.is-error`
+would never have been set. `load()` now treats an image that is `complete` with no
+`naturalWidth` and a `currentSrc` as already failed, unless it has just swapped
+`data-src` in, when the new request has not started. A test covers both paths.
 
 ## 67. Two components share `dk-shimmer` and behave differently under reduced motion
 
@@ -2468,3 +2483,38 @@ theme-aware scrim, which has the same structure.
   same eased stops in `--surface`, and `.g-scrim-auto`, which uses it and sets
   `color: var(--text)`. It is built like the fixed `.g-scrim` (#105), so a photo child
   sits under it.
+
+## 107. `.grid-fixed-N` was not a grid unless `.grid` was beside it — FIXED
+
+`.grid-fixed-2`, `-3` and `-4` set `grid-template-columns` and nothing else. On an
+element without `.grid` that property does nothing, so `class="grid-fixed-3"` was a block
+with three ignored column definitions: no error, no columns, no gap. Every example wrote
+`grid grid-fixed-3`, so the dependency was learned by copying rather than stated.
+
+**Fixed in the API rather than the docs:** each fixed grid now declares `display: grid`
+and `.grid`'s `gap: var(--gap, var(--space-4))` itself. `grid grid-fixed-3` computes
+exactly as before. The print sheet, which unwinds `.grid` with `display: block`, now
+names the fixed grids too, so a standalone one prints as a `.grid` one did. `.grid-fill`
+was written standalone from the start for the same reason.
+
+**Still the same shape:** `.grid-2` also sets only `grid-template-columns` and so also
+needs `.grid`. It was left alone because it is already recorded as a duplicate of
+`.grid-wide` that ought to go, and making it standalone would give it a reason to stay.
+
+## 108. `.split-rail-start`'s comment, and the split docs, described the opposite of what it does — FIXED
+
+The comment said the class "puts the rail on the starting edge without touching markup
+order, so the main column stays first for a screen reader". The rule only swaps the two
+track widths. Grid places children in source order, so with the main column first, as the
+comment advised, the main column went into the 20rem rail track and the rail stretched
+across the rest. `split.php` repeated the claim, and its live example demonstrated the
+broken layout under a caption saying the opposite, while its accessibility notes built an
+argument about deliberately separating visual and DOM order on it.
+
+**Fixed** by correcting the comment and the docs, not the CSS. The rule is right as a
+layout: rail first in the markup, first on screen, first for the keyboard, which is what
+section navigation wants and what the `first-page.php` tutorial already wrote.
+Making the CSS match the old comment would have meant moving content visually away from
+its reading order, which is the thing WCAG 1.3.2 warns about. The example now puts the rail
+first; the accessibility notes say neither variant reorders anything. While there,
+`first-page.php` said `.split` goes to two columns at 48rem; it is 64rem.

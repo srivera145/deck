@@ -97,31 +97,32 @@ require __DIR__ . '/../_layout.php';
 <section class="stack stack-3">
   <h2 id="rail-start">Rail on the starting edge</h2>
   <p>
-    <code>.split-rail-start</code> swaps the track order so the rail comes first
-    visually. <strong>The markup order does not change</strong> — the rail is still the
-    second child — so this is a case where visual order and DOM order deliberately
-    differ. That is defensible for a navigation rail that should be read after the
-    content but appear before it; it is not defensible if the rail contains the first
-    thing a reader needs.
+    <code>.split-rail-start</code> swaps the two track widths, so the first track is the
+    rail and the second is the flexible column. It does not move the children: the first
+    child takes the first track. <strong>So the rail goes first in the markup.</strong>
+    That makes it first for a screen reader and the keyboard as well as on screen, which is
+    right for section navigation — a settings page's list of sections, a docs sidebar —
+    where a reader should meet the links before the content.
   </p>
   <?php
   docs_example(
       '<div class="split split-rail-start">' . "\n" .
+      '  <aside class="panel"><p class="text-muted">Rail, first in the markup and on the starting edge</p></aside>' . "\n" .
       '  <div class="stack stack-2">' . "\n" .
-      '    <h3>Main content, second visually</h3>' . "\n" .
-      '    <p class="text-muted">Still first in the markup, so still first for a screen reader.</p>' . "\n" .
+      '    <h3>Main content</h3>' . "\n" .
+      '    <p class="text-muted">Second in the markup, in the flexible column.</p>' . "\n" .
       '  </div>' . "\n" .
-      '  <aside class="panel"><p class="text-muted">Rail, on the starting edge</p></aside>' . "\n" .
       '</div>',
-      'Visual order reversed; reading order unchanged',
+      'Rail first in the markup, first on screen',
       'stack'
   );
   ?>
   <p class="dx-note text-muted">
-    Because the rail is placed by <code>grid-template-columns</code> rather than by
-    <code>order</code>, the tab order still follows the markup: a keyboard user reaches
-    the main content first and then the rail, even though the rail is on the left. Decide
-    whether that is what you want before reaching for this class.
+    Put the main column first and it is the main column that lands in the
+    20rem track, with the rail stretched across the rest. That is what the
+    source comment used to recommend; it was wrong. For a rail that should be read
+    <em>after</em> the content — related links, a summary — use plain <code>.split</code>
+    with the rail second, which puts it on the ending edge.
   </p>
 </section>
 
@@ -235,15 +236,17 @@ require __DIR__ . '/../_layout.php';
   <h2 id="accessibility">Accessibility</h2>
   <ul class="stack stack-2">
     <li>
-      <strong>Markup order is reading order and tab order.</strong> Put the main content
-      first. Everything on this page follows from that: the rail is the second child even
-      when <code>.split-rail-start</code> draws it on the left.
+      <strong>Markup order is reading order and tab order, and the layout follows
+      it.</strong> Neither variant reorders anything. With <code>.split</code> the main
+      content is first in the markup and on the starting edge; with
+      <code>.split-rail-start</code> the rail is first in both. A sighted reader and a
+      keyboard user meet things in the same order either way.
     </li>
     <li>
-      <strong><code>.split-rail-start</code> separates visual and DOM order on
-      purpose</strong>, which is the one thing this page asks you to think about. It is
-      fine for supplementary navigation; it is wrong if a sighted reader would encounter
-      something in the rail before the content and a keyboard user would not.
+      <strong>Choose by what should be read first.</strong> Section navigation that a reader
+      uses to find the content belongs first, in <code>.split-rail-start</code>.
+      Supplementary content that is read after the main column belongs second, in
+      <code>.split</code>.
     </li>
     <li>
       <strong>The rail should usually be an <code>&lt;aside&gt;</code></strong>, which

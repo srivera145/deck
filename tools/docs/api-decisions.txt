@@ -7,7 +7,7 @@
 # Written by: node tools/docs/classify.mjs --accept
 # Edit a line by hand to overrule what the rules propose.
 # Text after a # on a line is the reason for that decision; --accept keeps it.
-# 944 classes.
+# 945 classes.
 
 absolute = public
 accordion = public
@@ -465,6 +465,7 @@ is-dismissed = internal
 is-done = public
 is-down = internal
 is-dragging = internal
+is-error = internal  # State deck-extras.js sets on a .lazy frame when its image fails. Style it; do not write it.
 is-fanned = internal
 is-flipped = internal
 is-front = internal

@@ -10,6 +10,7 @@ import { chromium } from 'playwright-core';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const css = fs.readFileSync(path.join(root, 'dist', 'deck.css'), 'utf8');
 const js = fs.readFileSync(path.join(root, 'dist', 'deck.js'), 'utf8');
+const extras = fs.readFileSync(path.join(root, 'dist', 'deck-extras.js'), 'utf8');
 const paint = ['background-color', 'color', 'border-top-color', 'box-shadow'];
 
 let browser;
@@ -109,13 +110,15 @@ test('deck.js moves the on state of a .segmented, whichever attribute it uses', 
 /* deck.js wires .alert-close once, on the document, when it first runs. The
    shared page ran it in an earlier test and has had its document replaced by
    setContent since, so these two load deck.js into a page of their own. */
-async function freshPage(body) {
+async function freshPage(body, { before, withExtras = false } = {}) {
   const fresh = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   await fresh.emulateMedia({ reducedMotion: 'reduce' });
   await fresh.setContent(
     `<!doctype html><html lang="en"><head><meta charset="utf-8"><style>${css}</style></head><body>${body}</body></html>`,
   );
+  if (before) await fresh.waitForFunction(before);
   await fresh.addScriptTag({ content: js });
+  if (withExtras) await fresh.addScriptTag({ content: extras });
   return fresh;
 }
 
@@ -161,6 +164,32 @@ test('an alert inserted after the page loaded still closes, with no Deck.init()'
     });
     await p.click('#late .alert-close');
     assert.equal(await p.evaluate(() => document.getElementById('late').hidden), true);
+  } finally {
+    await p.close();
+  }
+});
+
+test('a .lazy image that fails stops shimmering and shows the broken state, however it failed', async () => {
+  const broken = 'data:image/png;base64,AAAA';
+  const p = await freshPage(`
+    <span class="lazy" id="swapped" style="--ratio:1;inline-size:120px"><img data-src="${broken}" alt="Swapped in, then failed"></span>
+    <span class="lazy" id="early" style="--ratio:1;inline-size:120px"><img src="${broken}" alt="Failed before the script ran"></span>
+    <span class="lazy" id="fine" style="--ratio:1;inline-size:120px"><img data-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Loaded"></span>`,
+  // The markup src must have failed already, so no error event is left for the script.
+  { before: () => document.querySelector('#early img').complete, withExtras: true });
+  try {
+    await p.waitForFunction(() => document.querySelectorAll('.lazy.is-error').length === 2
+      && document.querySelector('#fine img').classList.contains('is-loaded'), null, { timeout: 5000 });
+    const m = await p.evaluate(() => Object.fromEntries(['swapped', 'early', 'fine'].map((id) => {
+      const frame = document.getElementById(id);
+      const after = getComputedStyle(frame, '::after');
+      return [id, { error: frame.classList.contains('is-error'), animation: after.animationName,
+        glyph: (after.maskImage || after.webkitMaskImage).startsWith('url("data:image/svg'), display: after.display }];
+    })));
+    assert.deepEqual(m.swapped, { error: true, animation: 'none', glyph: true, display: 'block' });
+    assert.deepEqual(m.early, { error: true, animation: 'none', glyph: true, display: 'block' });
+    assert.equal(m.fine.error, false);
+    assert.equal(m.fine.display, 'none', 'a loaded image drops the shimmer as before');
   } finally {
     await p.close();
   }

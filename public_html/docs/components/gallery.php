@@ -9,7 +9,7 @@ $page = [
     'documents' => [
         'gallery', 'span-2', 'span-wide',
         'masonry', 'masonry-2', 'masonry-3',
-        'lazy', 'lazy-blur', 'lazy-block', 'is-loaded',
+        'lazy', 'lazy-blur', 'lazy-block', 'is-loaded', 'is-error',
     ],
 ];
 
@@ -159,12 +159,32 @@ require __DIR__ . '/../_layout.php';
     out when the real image arrives. <code>.lazy-block</code> is unrelated to images — a
     dashed placeholder box for a region that is still streaming in.
   </p>
-  <p class="dx-note text-muted">
-    <strong>A failed image shimmers forever.</strong> On an <code>error</code> event the
-    script adds <code>.is-error</code> to the <code>.lazy</code> wrapper — and nothing in
-    Deck styles that class. There is no rule for it anywhere in <code>src/</code>, so a
-    broken image is visually identical to one still loading, indefinitely. Style it yourself
-    (see <a href="#overriding">Overriding it</a>). Recorded in <code>FINDINGS.md</code>.
+  <h3 id="lazy-error">When an image fails</h3>
+  <p>
+    When the image fails, the script adds <code>.is-error</code> to the
+    <code>.lazy</code> frame. The shimmer stops and a broken-image glyph sits in the
+    middle of the space the frame was already holding, in the faint text colour, so a
+    failed image no longer looks like one that is still loading. The script also catches
+    an image whose <code>src</code> was in the markup and had failed before the script
+    ran, which fires no event for it to hear.
+  </p>
+  <?php
+  docs_example(
+      '<div class="gallery" style="max-inline-size:26rem">' . "\n" .
+      '  <span class="lazy" style="--ratio:1">' . "\n" .
+      '    <img data-src="/assets/deck/docs/sample-2.jpg" alt="Frost on a window">' . "\n" .
+      '  </span>' . "\n" .
+      '  <span class="lazy" style="--ratio:1">' . "\n" .
+      '    <img data-src="/assets/deck/docs/no-such-file.jpg" alt="A poster that did not load">' . "\n" .
+      '  </span>' . "\n" .
+      '</div>',
+      'The second file does not exist',
+      'stack'
+  );
+  ?>
+  <p class="text-muted">
+    <code>.is-error</code> is set by the script; you style it, you do not write it. To
+    say something other than the glyph, see <a href="#overriding">Overriding it</a>.
   </p>
 </section>
 
@@ -212,10 +232,11 @@ require __DIR__ . '/../_layout.php';
       loading frames is a screenful of movement.
     </li>
     <li>
-      <strong>A broken image says nothing.</strong> With <code>.is-error</code> unstyled,
-      there is no visual failure state and no announcement. If images can fail, handle it —
-      the alt text is what a screen reader falls back to, and a sighted reader gets nothing
-      at all.
+      <strong>A broken image is shown, not announced.</strong> <code>.is-error</code> draws
+      a glyph for a sighted reader. A screen reader is told nothing new: it reads the alt
+      text, as it would for an image that loaded, which is another reason the alt text has
+      to describe the picture. If a failure matters — a product photo, a document scan —
+      say so in text near the frame.
     </li>
     <li>
       <strong><code>.gallery</code> crops.</strong> <code>object-fit: cover</code> on a
@@ -307,7 +328,7 @@ require __DIR__ . '/../_layout.php';
   /* A 3:2 gallery instead of squares */
   .gallery > * { aspect-ratio: 3 / 2; }
 
-  /* Give the failed state something to say */
+  /* Words instead of the broken-image glyph */
   .lazy.is-error::after { display: none; }
   .lazy.is-error {
     border: 1px dashed var(--line);

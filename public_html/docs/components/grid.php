@@ -175,10 +175,12 @@ function demo_cards(int $n = 5): string
   <h2 id="fixed">Fixed column counts</h2>
   <p>
     <code>.grid-fixed-2</code>, <code>-3</code> and <code>-4</code> set an exact number
-    of equal columns and keep it at every width. They do not collapse on a phone.
+    of equal columns and keep it at every width. They do not collapse on a phone. Each is a
+    grid on its own, with the same <code>--gap</code>, so it needs no <code>.grid</code>
+    beside it; <code>class="grid grid-fixed-3"</code> still works and means the same.
   </p>
   <?php
-  docs_example('<div class="grid grid-fixed-3">' . "\n" . demo_cards(3) . '</div>',
+  docs_example('<div class="grid-fixed-3">' . "\n" . demo_cards(3) . '</div>',
       'Three columns, at every width, including 320px', 'stack');
   ?>
   <p class="dx-note text-muted">
@@ -311,8 +313,8 @@ function demo_cards(int $n = 5): string
   <h2 id="print">Printing</h2>
   <p>
     <code>src/99-print.css</code> sets <code>.grid { display: block }</code>, and the
-    same for <code>.grid-fill</code>, and gives every child after the first
-    <code>margin-block-start: 4mm</code>. Grid tracks and
+    same for <code>.grid-fill</code> and the three fixed grids, and gives every child after
+    the first <code>margin-block-start: 4mm</code>. Grid tracks and
     paged media do not get on — an item taller than the remaining page cannot break out
     of its track — so the grid is unwound into a plain block flow and the spacing is
     restored with a margin. It is the one place in Deck where a margin is the right

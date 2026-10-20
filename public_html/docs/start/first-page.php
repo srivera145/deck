@@ -169,7 +169,7 @@ require __DIR__ . '/../_layout.php';
     &lt;/form&gt;
   &lt;/div&gt;</code></pre>
   <p>
-    <code>.split</code> is a single column by default and becomes two at 48rem;
+    <code>.split</code> is a single column by default and becomes two at 64rem;
     <code>.split-rail-start</code> makes the first of those two a fixed rail rather than
     an equal half. So the phone layout is the one you get for free and the desktop
     layout is the variant — which is the right way round, because the phone is the harder

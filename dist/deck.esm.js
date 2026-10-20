@@ -2114,12 +2114,18 @@ if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
     if (!imgs.length) return;
     const load = img => {
       img.dataset.deckX = '1';
+      const swapped = Boolean(img.dataset.src || img.dataset.srcset);
       if (img.dataset.src) img.src = img.dataset.src;
       if (img.dataset.srcset) img.srcset = img.dataset.srcset;
       const done = () => img.classList.add('is-loaded');
+      const fail = () => img.closest('.lazy')?.classList.add('is-error');
       if (img.complete && img.naturalWidth) done();
+      /* A src written in the markup can fail before this script runs, and
+         then there is no error event left to hear. Finished with no width
+         is that. Not after a swap: the new request has not started yet. */
+      else if (!swapped && img.complete && img.currentSrc) fail();
       else img.addEventListener('load', done, { once: true });
-      img.addEventListener('error', () => img.closest('.lazy')?.classList.add('is-error'), { once: true });
+      img.addEventListener('error', fail, { once: true });
     };
     if (!('IntersectionObserver' in window)) return imgs.forEach(load);
     const io = new IntersectionObserver(entries => {

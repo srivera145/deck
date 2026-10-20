@@ -2,15 +2,15 @@
   "generated": "tools/docs/usage.mjs — do not edit",
   "filesScanned": 128,
   "counts": {
-    "classes": 944,
-    "used": 937,
+    "classes": 945,
+    "used": 938,
     "unused": 7
   },
   "uses": {
-    "stack": 4214,
+    "stack": 4215,
     "icon": 3357,
     "stack-3": 2256,
-    "text-muted": 1581,
+    "text-muted": 1582,
     "btn": 1225,
     "icon-sm": 1185,
     "text-sm": 717,
@@ -46,7 +46,7 @@
     "icon-tile": 223,
     "breadcrumb": 211,
     "section": 204,
-    "lazy": 189,
+    "lazy": 194,
     "check": 171,
     "chart-col": 164,
     "icon-follow": 153,
@@ -57,6 +57,7 @@
     "table-wrap": 139,
     "menu-item": 138,
     "avatar-sm": 126,
+    "grid": 126,
     "table-stack": 125,
     "enter-rise": 125,
     "stat-value": 124,
@@ -64,7 +65,6 @@
     "list-row": 122,
     "footer-col": 121,
     "badge-good": 118,
-    "grid": 118,
     "help": 114,
     "list-main": 113,
     "footer-heading": 106,
@@ -118,10 +118,10 @@
     "rating-static": 56,
     "drawer": 55,
     "icon-tile-lg": 55,
+    "split": 52,
     "skip-link": 52,
     "footer-bottom": 51,
     "tooltip": 51,
-    "split": 51,
     "grow": 51,
     "indicator-good": 50,
     "segmented": 49,
@@ -233,12 +233,12 @@
     "btn-danger": 20,
     "chart-bars": 20,
     "dg-wrap": 20,
+    "error": 20,
     "s3": 19,
     "sparkline-good": 19,
     "fieldset": 19,
     "copy-done": 19,
     "dg": 19,
-    "error": 19,
     "overflow-hidden": 19,
     "center": 19,
     "kanban-col": 19,
@@ -259,6 +259,7 @@
     "fw-medium": 18,
     "scene": 17,
     "cq": 17,
+    "gallery": 17,
     "spinner": 17,
     "qr": 17,
     "toast-main": 17,
@@ -268,6 +269,7 @@
     "sticky-top": 16,
     "copy-idle": 16,
     "g-dots": 16,
+    "grid-wide": 16,
     "p-3": 16,
     "modal": 16,
     "r-sm": 16,
@@ -275,9 +277,7 @@
     "flip": 15,
     "btn-3d": 15,
     "dg-actions": 15,
-    "gallery": 15,
     "g-scrim": 15,
-    "grid-wide": 15,
     "kanban-card": 15,
     "kanban": 15,
     "marquee": 15,
@@ -340,6 +340,7 @@
     "editor-sep": 11,
     "g-mesh": 11,
     "text-cq": 11,
+    "grid-2": 11,
     "icon-tile-bad": 11,
     "indicator-brand": 11,
     "kanban-card-meta": 11,
@@ -357,9 +358,9 @@
     "bubble-name": 10,
     "editor-count": 10,
     "masonry": 10,
+    "is-error": 10,
     "inset-be-0": 10,
     "inset-ie-0": 10,
-    "grid-2": 10,
     "icon-xl": 10,
     "number-unit": 10,
     "phone-flag": 10,
@@ -367,6 +368,7 @@
     "range-pair": 10,
     "sheet": 10,
     "skeleton-circle": 10,
+    "split-rail-start": 10,
     "is-current": 10,
     "video-poster": 10,
     "video-play": 10,
@@ -389,6 +391,8 @@
     "inset-is-0": 9,
     "g-brand-soft": 9,
     "g-mesh-drift": 9,
+    "grid-fill": 9,
+    "grid-fixed-3": 9,
     "icon-tile-warn": 9,
     "indicator-bad": 9,
     "indicator-badge-brand": 9,
@@ -404,7 +408,6 @@
     "sheet-header": 9,
     "sheet-title": 9,
     "sheet-body": 9,
-    "split-rail-start": 9,
     "toast-close": 9,
     "video-meta": 9,
     "video-duration": 9,
@@ -423,7 +426,6 @@
     "float-outline": 8,
     "absolute": 8,
     "g-mesh-subtle": 8,
-    "grid-fill": 8,
     "border": 8,
     "p-0": 8,
     "delay-3": 8,
@@ -712,7 +714,6 @@
     "g-fade-more": 3,
     "g-conic": 3,
     "g-bar-fill": 3,
-    "grid-fixed-3": 3,
     "transition-colors": 3,
     "dur-1": 3,
     "dur-5": 3,
@@ -770,8 +771,10 @@
     "is-blocked": 2,
     "is-outside": 2,
     "is-today": 2,
+    "lazy-block": 2,
     "g-mesh-warm": 2,
     "g-hairline": 2,
+    "grid-fixed-2": 2,
     "is-lifted": 2,
     "reorder": 2,
     "transition-move": 2,
@@ -927,8 +930,6 @@
     "is-preview": 1,
     "masonry-2": 1,
     "lazy-blur": 1,
-    "lazy-block": 1,
-    "grid-fixed-2": 1,
     "grid-fixed-4": 1,
     "indicator-lg": 1,
     "indicator-ring": 1,
@@ -5436,9 +5437,15 @@
       "public_html/docs/components/gallery.php"
     ],
     "lazy-block": [
+      "FINDINGS.md",
       "public_html/docs/components/gallery.php"
     ],
     "is-loaded": [
+      "FINDINGS.md",
+      "public_html/docs/components/gallery.php",
+      "src/js/deck-extras.js"
+    ],
+    "is-error": [
       "FINDINGS.md",
       "public_html/docs/components/gallery.php",
       "src/js/deck-extras.js"
@@ -5767,6 +5774,7 @@
       "public_html/docs/components/grid.php"
     ],
     "grid-fixed-3": [
+      "FINDINGS.md",
       "public_html/docs/components/grid.php"
     ],
     "text-cq": [
@@ -5782,6 +5790,7 @@
       "public_html/templates/test.html"
     ],
     "grid-fixed-2": [
+      "FINDINGS.md",
       "public_html/docs/components/grid.php"
     ],
     "grid-fixed-4": [
@@ -7110,6 +7119,7 @@
       "public_html/templates/dashboard.html"
     ],
     "split-rail-start": [
+      "FINDINGS.md",
       "public_html/docs/components/split.php",
       "public_html/docs/start/first-page.php",
       "public_html/templates/dashboard.html"

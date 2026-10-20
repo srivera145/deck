@@ -449,3 +449,17 @@ test('.g-scrim-auto follows the theme, and .glass is a translucent blurred surfa
   assert.match(m.glassBlur, /blur\(16px\)/);
   assert.match(m.glassBg, /\/ 0\.76\)|, 0\.76\)/, `the surface at 76%: ${m.glassBg}`);
 });
+
+test('.grid-fixed-3 is a grid without .grid, and .split-rail-start gives the first child the rail', async () => {
+  await render(`
+    <div class="grid-fixed-3" id="fixed" style="inline-size:900px"><div>A</div><div>B</div><div>C</div></div>
+    <div class="split split-rail-start" id="split"><aside>Rail</aside><div>Main</div></div>`);
+  const m = await page.evaluate(() => {
+    const fixed = document.getElementById('fixed');
+    const cols = [...fixed.children].map((c) => Math.round(c.getBoundingClientRect().width));
+    const [rail, main] = [...document.getElementById('split').children].map((c) => c.getBoundingClientRect());
+    return { display: getComputedStyle(fixed).display, gap: getComputedStyle(fixed).columnGap, cols,
+      railWidth: Math.round(rail.width), railFirst: rail.left < main.left };
+  });
+  assert.deepEqual(m, { display: 'grid', gap: '16px', cols: [289, 289, 289], railWidth: 320, railFirst: true });
+});

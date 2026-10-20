@@ -83,8 +83,8 @@
     }
     .section { padding-block: 0 0 8mm !important; }
     .split { display: block !important; }
-    .grid, .grid-fill { display: block !important; }
-    :is(.grid, .grid-fill) > * + * { margin-block-start: 4mm; }
+    .grid, .grid-fill, .grid-fixed-2, .grid-fixed-3, .grid-fixed-4 { display: block !important; }
+    :is(.grid, .grid-fill, .grid-fixed-2, .grid-fixed-3, .grid-fixed-4) > * + * { margin-block-start: 4mm; }
     .sticky-top, .sticky, .form-actions-sticky { position: static !important; }
 
     /* --- Surfaces ---------------------------------------------------------- */

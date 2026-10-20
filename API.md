@@ -16,11 +16,11 @@ fails the build if a public class is missing from this file, or if a class in
 | bucket | count | meaning |
 | --- | ---: | --- |
 | public | 841 | in the freeze, semver applies |
-| internal | 103 | Deck's own; may change any release |
+| internal | 104 | Deck's own; may change any release |
 | deprecated | 0 | works, warns, removed at v1 |
 | removed | 31 | already gone, before first publish |
 
-Total classes in `src/`: **944**.
+Total classes in `src/`: **945**.
 
 ## How big this actually is
 
@@ -1163,7 +1163,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.split` | deck.layout | Content + rail. Collapses to one column below the width it needs. |
-| `.split-rail-start` | deck.layout | Puts the rail on the starting edge without touching markup order, so |
+| `.split-rail-start` | deck.layout | Puts the rail on the starting edge by swapping the two track widths, |
 
 ## stack
 
@@ -1527,13 +1527,13 @@ a major version.
 
 ## Internal classes
 
-103 classes are internal. They are real and they work, but
+104 classes are internal. They are real and they work, but
 they are Deck's own plumbing: states its JavaScript toggles, and the inside of
 components whose markup Deck generates. Style them if you need to; do not rely on
 the names.
 
-<details><summary>Show all 103</summary>
+<details><summary>Show all 104</summary>
 
-`.carousel-dot`, `.carousel-dots`, `.combo-check`, `.combo-clear`, `.combo-control`, `.combo-count`, `.combo-create`, `.combo-empty`, `.combo-group`, `.combo-hint`, `.combo-input`, `.combo-list`, `.combo-loading`, `.combo-option`, `.combo-option-main`, `.combo-option-sub`, `.combo-option-trail`, `.combo-sep`, `.combo-toggle`, `.combo-token`, `.combo-tokens`, `.datepicker-day`, `.datepicker-dow`, `.datepicker-foot`, `.datepicker-grid`, `.datepicker-head`, `.datepicker-jump`, `.datepicker-layout`, `.datepicker-main`, `.datepicker-month`, `.datepicker-months`, `.datepicker-nav`, `.datepicker-preset`, `.datepicker-presets`, `.datepicker-readout`, `.datepicker-time`, `.datepicker-title`, `.dg-sort`, `.dg-sort-icon`, `.drop-reject`, `.drop-target`, `.is-above`, `.is-animating`, `.is-behind-end`, `.is-behind-start`, `.is-blocked`, `.is-copied`, `.is-dismissed`, `.is-down`, `.is-dragging`, `.is-fanned`, `.is-flipped`, `.is-front`, `.is-in-range`, `.is-leaving`, `.is-lifted`, `.is-loaded`, `.is-new`, `.is-outside`, `.is-over`, `.is-preview`, `.is-range-end`, `.is-range-start`, `.is-resizing`, `.is-revealed`, `.is-scrolled-end`, `.is-scrolled-x`, `.is-tilting`, `.is-today`, `.is-up`, `.is-visible`, `.qr-caption`, `.qr-lg`, `.qr-logo`, `.qr-logo-mark`, `.qr-sm`, `.reorder`, `.sortable`, `.sortable-chosen`, `.sortable-drag`, `.sortable-fallback`, `.sortable-ghost`, `.theme-dock`, `.toast-action`, `.toast-actions`, `.toast-bad`, `.toast-close`, `.toast-good`, `.toast-icon`, `.toast-info`, `.toast-loading`, `.toast-main`, `.toast-region`, `.toast-region-center`, `.toast-region-stacked`, `.toast-region-start`, `.toast-region-top`, `.toast-text`, `.toast-timer`, `.toast-title`, `.toast-undo`, `.toast-warn`, `.was-shaken`
+`.carousel-dot`, `.carousel-dots`, `.combo-check`, `.combo-clear`, `.combo-control`, `.combo-count`, `.combo-create`, `.combo-empty`, `.combo-group`, `.combo-hint`, `.combo-input`, `.combo-list`, `.combo-loading`, `.combo-option`, `.combo-option-main`, `.combo-option-sub`, `.combo-option-trail`, `.combo-sep`, `.combo-toggle`, `.combo-token`, `.combo-tokens`, `.datepicker-day`, `.datepicker-dow`, `.datepicker-foot`, `.datepicker-grid`, `.datepicker-head`, `.datepicker-jump`, `.datepicker-layout`, `.datepicker-main`, `.datepicker-month`, `.datepicker-months`, `.datepicker-nav`, `.datepicker-preset`, `.datepicker-presets`, `.datepicker-readout`, `.datepicker-time`, `.datepicker-title`, `.dg-sort`, `.dg-sort-icon`, `.drop-reject`, `.drop-target`, `.is-above`, `.is-animating`, `.is-behind-end`, `.is-behind-start`, `.is-blocked`, `.is-copied`, `.is-dismissed`, `.is-down`, `.is-dragging`, `.is-error`, `.is-fanned`, `.is-flipped`, `.is-front`, `.is-in-range`, `.is-leaving`, `.is-lifted`, `.is-loaded`, `.is-new`, `.is-outside`, `.is-over`, `.is-preview`, `.is-range-end`, `.is-range-start`, `.is-resizing`, `.is-revealed`, `.is-scrolled-end`, `.is-scrolled-x`, `.is-tilting`, `.is-today`, `.is-up`, `.is-visible`, `.qr-caption`, `.qr-lg`, `.qr-logo`, `.qr-logo-mark`, `.qr-sm`, `.reorder`, `.sortable`, `.sortable-chosen`, `.sortable-drag`, `.sortable-fallback`, `.sortable-ghost`, `.theme-dock`, `.toast-action`, `.toast-actions`, `.toast-bad`, `.toast-close`, `.toast-good`, `.toast-icon`, `.toast-info`, `.toast-loading`, `.toast-main`, `.toast-region`, `.toast-region-center`, `.toast-region-stacked`, `.toast-region-start`, `.toast-region-top`, `.toast-text`, `.toast-timer`, `.toast-title`, `.toast-undo`, `.toast-warn`, `.was-shaken`
 
 </details>

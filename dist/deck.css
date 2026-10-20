@@ -705,13 +705,16 @@
   }
   /* Exactly two equal columns at every width, including a phone. Only
      for a count that is part of the meaning — a 2x2 comparison. It does
-     not reflow, so it does not satisfy the reflow criterion on its own. */
-  .grid-fixed-2 { grid-template-columns: 1fr 1fr; }
+     not reflow, so it does not satisfy the reflow criterion on its own.
+     Each fixed grid is a grid on its own, with .grid's gap. They used to
+     set only the columns, so without .grid beside them nothing was a grid
+     and the columns did nothing, silently. */
+  .grid-fixed-2 { display: grid; gap: var(--gap, var(--space-4)); grid-template-columns: 1fr 1fr; }
   /* Exactly three equal columns at every width. See .grid-fixed-2. */
-  .grid-fixed-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-fixed-3 { display: grid; gap: var(--gap, var(--space-4)); grid-template-columns: repeat(3, 1fr); }
   /* Exactly four equal columns at every width. On a phone that is four
      70px columns; reach for .grid with a --min instead. */
-  .grid-fixed-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-fixed-4 { display: grid; gap: var(--gap, var(--space-4)); grid-template-columns: repeat(4, 1fr); }
 
   /* Content + rail. Collapses to one column below the width it needs. */
   .split {
@@ -727,10 +730,13 @@
   .split > * { min-inline-size: 0; }
   @media (min-width: 64rem) {
     .split { grid-template-columns: minmax(0, 1fr) var(--rail, 20rem); }
-    /* Puts the rail on the starting edge without touching markup order, so
-       the main column stays first for a screen reader and for the keyboard.
-       Use it for supplementary navigation; not for a rail holding the first
-       thing a reader needs. */
+    /* Puts the rail on the starting edge by swapping the two track widths,
+       not the children: the first child takes the rail's width. So the rail
+       has to come first in the markup, which also makes it first for a
+       screen reader and the keyboard. Right for section navigation; for a
+       rail that should be read after the content, use plain .split with the
+       rail second. With the main column first, the main column is what
+       lands in the narrow track. */
     .split-rail-start { grid-template-columns: var(--rail, 20rem) minmax(0, 1fr); }
   }
 
@@ -7337,16 +7343,11 @@
     transition: opacity var(--dur-3) var(--ease-out);
   }
   .lazy > img.is-loaded, .lazy > img[data-loaded] { opacity: 1; }
-  /* Two things about this shimmer are recorded in FINDINGS.md:
-
-     67: it runs the same dk-shimmer keyframes as .skeleton, for the same
-     purpose, but .lazy::after is NOT in 02-reset.css's reduced-motion
-     exemption list -- so it freezes where .skeleton slows to 2.4s. The
-     durations differ too (1.6s here, 1.4s there). One of the two is wrong.
-
-     66: deck-extras.js adds .is-error to the wrapper when an image fails to
-     load, and nothing in src/ styles that class. So the shimmer carries on
-     forever and a broken image is indistinguishable from a loading one. */
+  /* FINDINGS 67: this runs the same dk-shimmer keyframes as .skeleton, for
+     the same purpose, but .lazy::after is NOT in 02-reset.css's
+     reduced-motion exemption list -- so it freezes where .skeleton slows to
+     2.4s. The durations differ too (1.6s here, 1.4s there). One of the two
+     is wrong. */
   .lazy::after {
     content: "";
     position: absolute;
@@ -7359,6 +7360,24 @@
     pointer-events: none;
   }
   .lazy:has(img.is-loaded)::after, .lazy:has(img[data-loaded])::after { display: none; }
+  /* An image that failed. deck-extras.js sets .is-error on the frame, and
+     nothing used to style it, so the shimmer ran forever and a broken image
+     looked like one still loading (FINDINGS 66). The shimmer stops and a
+     broken-image glyph sits in the middle of the space the frame already
+     holds. The glyph is a mask over currentColor, so it takes the faint
+     text colour in either theme. The image's alt text is still announced. */
+  .lazy.is-error { color: var(--text-faint); }
+  .lazy.is-error::after {
+    animation: none;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0,0,24,24'%3E%3Cpath%20d='M19,21H5Q4.2,21,3.6,20.4Q3,19.8,3,19V5Q3,4.2,3.6,3.6Q4.2,3,5,3H19Q19.8,3,20.4,3.6Q21,4.2,21,5V19Q21,19.8,20.4,20.4Q19.8,21,19,21ZM5,11.6L6,12.6L9.3,9.3Q9.6,9,10,9Q10.4,9,10.7,9.3L14,12.6L17.3,9.3Q17.6,9,18,9Q18.4,9,18.7,9.3L19,9.6V5H5ZM5,19H19V12.4L18,11.4L14.7,14.7Q14.4,15,14,15Q13.6,15,13.3,14.7L10,11.4L6.7,14.7Q6.4,15,6,15Q5.6,15,5.3,14.7L5,14.4Z'/%3E%3C/svg%3E") center / 2rem no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0,0,24,24'%3E%3Cpath%20d='M19,21H5Q4.2,21,3.6,20.4Q3,19.8,3,19V5Q3,4.2,3.6,3.6Q4.2,3,5,3H19Q19.8,3,20.4,3.6Q21,4.2,21,5V19Q21,19.8,20.4,20.4Q19.8,21,19,21ZM5,11.6L6,12.6L9.3,9.3Q9.6,9,10,9Q10.4,9,10.7,9.3L14,12.6L17.3,9.3Q17.6,9,18,9Q18.4,9,18.7,9.3L19,9.6V5H5ZM5,19H19V12.4L18,11.4L14.7,14.7Q14.4,15,14,15Q13.6,15,13.3,14.7L10,11.4L6.7,14.7Q6.4,15,6,15Q5.6,15,5.3,14.7L5,14.4Z'/%3E%3C/svg%3E") center / 2rem no-repeat;
+  }
+  /* Forced colours replace the background with Canvas, which would paint the
+     glyph in the colour of everything around it. */
+  @media (forced-colors: active) {
+    .lazy.is-error::after { forced-color-adjust: none; background: CanvasText; }
+  }
 
   /* A blurred low-res preview underneath, if you have one */
   .lazy-blur { background-size: cover; background-position: center; }
@@ -8100,8 +8119,8 @@
     }
     .section { padding-block: 0 0 8mm !important; }
     .split { display: block !important; }
-    .grid, .grid-fill { display: block !important; }
-    :is(.grid, .grid-fill) > * + * { margin-block-start: 4mm; }
+    .grid, .grid-fill, .grid-fixed-2, .grid-fixed-3, .grid-fixed-4 { display: block !important; }
+    :is(.grid, .grid-fill, .grid-fixed-2, .grid-fixed-3, .grid-fixed-4) > * + * { margin-block-start: 4mm; }
     .sticky-top, .sticky, .form-actions-sticky { position: static !important; }
 
     /* --- Surfaces ---------------------------------------------------------- */

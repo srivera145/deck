@@ -127,13 +127,16 @@
   }
   /* Exactly two equal columns at every width, including a phone. Only
      for a count that is part of the meaning — a 2x2 comparison. It does
-     not reflow, so it does not satisfy the reflow criterion on its own. */
-  .grid-fixed-2 { grid-template-columns: 1fr 1fr; }
+     not reflow, so it does not satisfy the reflow criterion on its own.
+     Each fixed grid is a grid on its own, with .grid's gap. They used to
+     set only the columns, so without .grid beside them nothing was a grid
+     and the columns did nothing, silently. */
+  .grid-fixed-2 { display: grid; gap: var(--gap, var(--space-4)); grid-template-columns: 1fr 1fr; }
   /* Exactly three equal columns at every width. See .grid-fixed-2. */
-  .grid-fixed-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-fixed-3 { display: grid; gap: var(--gap, var(--space-4)); grid-template-columns: repeat(3, 1fr); }
   /* Exactly four equal columns at every width. On a phone that is four
      70px columns; reach for .grid with a --min instead. */
-  .grid-fixed-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-fixed-4 { display: grid; gap: var(--gap, var(--space-4)); grid-template-columns: repeat(4, 1fr); }
 
   /* Content + rail. Collapses to one column below the width it needs. */
   .split {
@@ -149,10 +152,13 @@
   .split > * { min-inline-size: 0; }
   @media (min-width: 64rem) {
     .split { grid-template-columns: minmax(0, 1fr) var(--rail, 20rem); }
-    /* Puts the rail on the starting edge without touching markup order, so
-       the main column stays first for a screen reader and for the keyboard.
-       Use it for supplementary navigation; not for a rail holding the first
-       thing a reader needs. */
+    /* Puts the rail on the starting edge by swapping the two track widths,
+       not the children: the first child takes the rail's width. So the rail
+       has to come first in the markup, which also makes it first for a
+       screen reader and the keyboard. Right for section navigation; for a
+       rail that should be read after the content, use plain .split with the
+       rail second. With the main column first, the main column is what
+       lands in the narrow track. */
     .split-rail-start { grid-template-columns: var(--rail, 20rem) minmax(0, 1fr); }
   }
 
