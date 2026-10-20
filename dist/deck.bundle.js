@@ -1471,6 +1471,21 @@ const Deck = (() => {
     });
   }
 
+  /* An .alert-close hides its alert. One listener on the document rather
+     than one per alert, so an alert inserted later — a form result, a fetch
+     error — works without a call to Deck.init(). deck:dismiss fires on the
+     alert first and can be cancelled, for an app that animates the alert
+     out, remembers the choice, or moves focus somewhere better than the top
+     of the page. */
+  function wireDismiss() {
+    document.addEventListener('click', e => {
+      const alert = e.target.closest?.('.alert-close')?.closest('.alert');
+      if (!alert) return;
+      const go = alert.dispatchEvent(new CustomEvent('deck:dismiss', { bubbles: true, cancelable: true }));
+      if (go) alert.hidden = true;
+    });
+  }
+
   /* Fallback for browsers with no scroll-driven animations. The CSS above
      handles show and hide everywhere else, so this only runs where
      animation-timeline is missing -- and never as a scroll handler. A sentinel
@@ -1612,6 +1627,7 @@ const Deck = (() => {
   };
 
   wireViewTransitions();
+  wireDismiss();
 
   document.addEventListener('DOMContentLoaded', () => {
     try {

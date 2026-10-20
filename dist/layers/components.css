@@ -173,6 +173,27 @@
   /* Something failed, or is about to. */
   .alert-bad  { background: var(--bad-soft);  border-color: transparent; border-inline-start-color: var(--bad-500);  color: var(--bad-soft-text); }
   .alert :is(.alert-body, p) { color: inherit; opacity: .9; }
+  /* The dismiss button, last in the row: a --tap square with the icon
+     centred in it, as on .banner-close. The negative margins reach into the
+     alert's padding, so a dismissible alert is no taller than one without.
+     deck.js hides the alert when it is pressed, after a cancellable
+     deck:dismiss event. */
+  .alert-close {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+    align-self: flex-start;
+    min-inline-size: var(--tap);
+    min-block-size: var(--tap);
+    margin-block: calc(var(--space-3) * -1);
+    margin-inline: auto calc(var(--space-3) * -1);
+    border-radius: var(--r-sm);
+    color: inherit;
+    opacity: .7;
+    cursor: pointer;
+  }
+  .alert-close:hover { opacity: 1; }
+  .alert[hidden] { display: none; }
 
   /* --- Avatar ------------------------------------------------------------- */
   /* A round box holding an image or initials. --size drives the width, the

@@ -15,25 +15,25 @@ fails the build if a public class is missing from this file, or if a class in
 
 | bucket | count | meaning |
 | --- | ---: | --- |
-| public | 837 | in the freeze, semver applies |
+| public | 841 | in the freeze, semver applies |
 | internal | 103 | Deck's own; may change any release |
 | deprecated | 0 | works, warns, removed at v1 |
 | removed | 31 | already gone, before first publish |
 
-Total classes in `src/`: **940**.
+Total classes in `src/`: **944**.
 
 ## How big this actually is
 
-837 is more names than anyone will learn, and this document should say
+841 is more names than anyone will learn, and this document should say
 so rather than let a reader discover it by scrolling. What makes it workable is
 that the surface is not flat:
 
 | group | public classes | what learning it costs |
 | --- | ---: | --- |
-| `deck.components` | 377 | Looked up per component, not memorised. |
+| `deck.components` | 378 | Looked up per component, not memorised. |
 | `deck.utilities` | 237 | A grammar. Learn the pattern, get the family. |
-| `deck.effects` | 71 | Opt-in. Nothing runs unless you add the class. |
-| `deck.layout` | 64 | The eight or so primitives most pages actually use. |
+| `deck.effects` | 73 | Opt-in. Nothing runs unless you add the class. |
+| `deck.layout` | 65 | The eight or so primitives most pages actually use. |
 | `deck.motion` | 37 | Opt-in. Nothing runs unless you add the class. |
 | `deck.mobile` | 30 | Only if you build the mobile shell. |
 | `deck.type` | 10 | Small, and mostly obvious from the name. |
@@ -46,7 +46,7 @@ spacing steps and that `p`, `m` and `gap` take them, you know the whole family
 without reading it. The component layers are the opposite: 99 components,
 each a handful of names, and a page that uses six of them needs six.
 
-One number that is not comfortable: **4 of the 837 public classes are
+One number that is not comfortable: **4 of the 841 public classes are
 used nowhere in this repository** — not in the demo, not in the docs, not in
 Deck's own JavaScript. They are frozen on the strength of their source alone.
 
@@ -66,6 +66,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.alert` | deck.components | A block of prose the reader is meant to stop and read. The tone is a |
 | `.alert-bad` | deck.components | Something failed, or is about to. |
 | `.alert-body` | deck.components | The explanatory line. min-inline-size: 0 so a long unbroken string |
+| `.alert-close` | deck.components | The dismiss button, last in the row: a --tap square with the icon |
 | `.alert-good` | deck.components | Confirmation that something worked. |
 | `.alert-info` | deck.components | Something the reader should know before continuing. |
 | `.alert-title` | deck.components | The first line of an alert. A weight change, not a heading — if it |
@@ -602,6 +603,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.g-scrim` | deck.effects | A caption over a photo needs a legible floor. A flat 50% black overlay |
+| `.g-scrim-auto` | deck.effects | The scrim in the theme's own colour, from --scrim-auto: a light floor |
 | `.g-scrim-top` | deck.effects | Modifier; see the component. |
 
 ## g-text
@@ -634,6 +636,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.g-sunken` | deck.effects | Sets background-image. |
 | `.g-surface` | deck.effects | Quiet. These sit behind content and must never fight it. |
 | `.g-warn` | deck.effects | Sets background-image, color. |
+| `.glass` | deck.effects | A frosted surface for a .card, a .panel or a bar laid over an image or a |
 
 ## grid
 
@@ -641,6 +644,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | --- | --- | --- |
 | `.grid` | deck.layout | Auto-fitting grid: no breakpoints needed, it responds to its own width |
 | `.grid-2` | deck.layout | Two-ish columns: an auto-fit grid with a 24rem floor. Identical in |
+| `.grid-fill` | deck.layout | auto-fill instead of auto-fit: the empty tracks a short row leaves are |
 | `.grid-fixed-2` | deck.layout | Exactly two equal columns at every width, including a phone. Only |
 | `.grid-fixed-3` | deck.layout | Exactly three equal columns at every width. See .grid-fixed-2. |
 | `.grid-fixed-4` | deck.layout | Exactly four equal columns at every width. On a phone that is four |

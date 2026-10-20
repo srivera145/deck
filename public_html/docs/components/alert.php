@@ -7,14 +7,14 @@ $page = [
     'level' => 'Beginner',
     'description' => 'Deck\'s .alert: a flex row with a logical start border in one of four tones, a title and body, an optional icon, and the ARIA rules that decide whether a screen reader interrupts.',
     'documents' => [
-        'alert', 'alert-bad', 'alert-body', 'alert-good', 'alert-info',
+        'alert', 'alert-bad', 'alert-body', 'alert-close', 'alert-good', 'alert-info',
         'alert-title', 'alert-warn',
     ],
 
     'component' => 'alert',
     'accounts' => [
-        '07-components.css' => 'documented: the alert, its title and body, the four tones and the icon alignment',
-        '99-print.css'      => 'documented: alerts keep a hairline border and avoid splitting across pages — the Printing section',
+        '07-components.css' => 'documented: the alert, its title and body, the four tones, the icon alignment and the dismiss button',
+        '99-print.css'      => 'documented: alerts keep a hairline border and avoid splitting across pages, and the dismiss button does not print — the Printing section',
     ],
 ];
 
@@ -166,6 +166,47 @@ $tones = [
 </section>
 
 <section class="stack stack-3">
+  <h2 id="dismiss">Dismissing it</h2>
+  <p>
+    Put a <code>&lt;button class="alert-close"&gt;</code> last in the alert and the reader
+    can close it. The button is a <?= e(api_token('--tap')['value'] ?? '44px') ?> square
+    pushed to the end of the row, with negative margins that reach into the alert's
+    padding, so a dismissible alert is no taller than one without. deck.js hides the alert
+    with the <code>hidden</code> attribute when the button is pressed. It listens on the
+    document, so an alert you insert after the page has loaded — a form result, a failed
+    request — closes without a call to <code>Deck.init()</code>.
+  </p>
+  <?php
+  docs_example(
+      '<div class="alert alert-info">' . "\n" .
+      '  <div>' . "\n" .
+      '    <p class="alert-title">New episodes every Friday</p>' . "\n" .
+      '    <p class="alert-body">Turn on notifications to hear when the next one lands.</p>' . "\n" .
+      '  </div>' . "\n" .
+      '  <button type="button" class="alert-close" aria-label="Dismiss">' . "\n" .
+      '    <svg class="icon icon-sm" aria-hidden="true"><use href="/assets/deck/deck-icons.svg#x-sm"></use></svg>' . "\n" .
+      '  </button>' . "\n" .
+      '</div>',
+      'Press the button: the alert goes, and the page closes up',
+      'stack'
+  );
+  ?>
+  <p>
+    Before it hides anything, deck.js fires <code>deck:dismiss</code> on the alert. The
+    event bubbles and can be cancelled, which is the hook for anything Deck does not decide
+    for you: animate the alert out and set <code>hidden</code> yourself, remember that it
+    was closed, or move focus.
+  </p>
+  <pre class="dx-code"><code><?= e('document.addEventListener(\'deck:dismiss\', (e) => {
+  const alert = e.target;
+  if (alert.id === \'release-notes\') localStorage.setItem(\'release-notes\', \'closed\');
+  // The button that had focus is gone. Send focus to the section heading,
+  // which needs tabindex="-1" to accept it: <h2 id="news" tabindex="-1">.
+  document.getElementById(\'news\')?.focus();
+});') ?></code></pre>
+</section>
+
+<section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>Generated from <code>src/07-components.css</code> by <code>tools/docs/extract.mjs</code>.</p>
   <?php docs_class_table($page['documents']); ?>
@@ -217,10 +258,16 @@ $tones = [
       <code>.alert-title</code> on it.
     </li>
     <li>
-      <strong>Dismissible alerts need a real button.</strong> Deck ships no close
-      button for <code>.alert</code>. If you add one, it needs
-      <code>aria-label</code> and a 44px target — <code>.btn-icon.btn-ghost.btn-sm</code>
-      gives both.
+      <strong>The dismiss button needs a name.</strong> <code>.alert-close</code> holds
+      only an icon, so give it <code>aria-label="Dismiss"</code>, or name what it closes
+      when a page has several. Use a real <code>&lt;button type="button"&gt;</code>; the
+      class supplies the 44px target, not the semantics.
+    </li>
+    <li>
+      <strong>Closing it drops focus.</strong> The button had focus and is now hidden, so
+      the browser puts focus back at the start of the document. Deck does not guess where
+      it should go instead. Handle <code>deck:dismiss</code> and move it — to the heading
+      of the section the alert was in, or to whatever the alert was about.
     </li>
   </ul>
 </section>
@@ -267,7 +314,8 @@ $tones = [
     <code>#bbb</code> hairline, no radius, a white background, and
     <code>break-inside: avoid</code>. The tone fill is dropped, so a printed alert reads
     as a bordered note rather than a coloured band — the words have to carry it, which
-    is the same reason the tone is never the only signal on screen.
+    is the same reason the tone is never the only signal on screen. The dismiss button
+    is not printed.
   </p>
 </section>
 

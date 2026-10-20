@@ -7,7 +7,7 @@
 # Written by: node tools/docs/classify.mjs --accept
 # Edit a line by hand to overrule what the rules propose.
 # Text after a # on a line is the reason for that decision; --accept keeps it.
-# 940 classes.
+# 944 classes.
 
 absolute = public
 accordion = public
@@ -17,6 +17,7 @@ addon = public
 alert = public
 alert-bad = public
 alert-body = public
+alert-close = public  # Component part an author writes: the dismiss button of an .alert. deck.js hides the alert on click, after a cancellable deck:dismiss.
 alert-good = public
 alert-info = public
 alert-title = public
@@ -378,6 +379,7 @@ g-mesh-warm = public
 g-ring = public
 g-ring-spin = public
 g-scrim = public
+g-scrim-auto = public  # Opt-in scrim in the theme's surface colour (--scrim-auto), so text over an image can follow a light theme. Used instead of .g-scrim.
 g-scrim-top = public
 g-sheen = public
 g-shimmer = public
@@ -396,8 +398,10 @@ gap-4 = public
 gap-6 = public
 gap-8 = public
 gap-cq = public
+glass = public  # Opt-in surface effect for a .card, .panel or bar over imagery; theme-aware via --surface, opaque under prefers-reduced-transparency.
 grid = public
 grid-2 = public
+grid-fill = public  # Layout primitive: .grid with auto-fill, so a short row keeps card-sized columns. Stands alone, without .grid.
 grid-fixed-2 = public
 grid-fixed-3 = public
 grid-fixed-4 = public

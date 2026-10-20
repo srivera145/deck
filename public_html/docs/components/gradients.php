@@ -11,7 +11,7 @@ $page = [
         'g-mesh', 'g-mesh-drift', 'g-mesh-subtle', 'g-mesh-warm',
         'g-text', 'g-text-shine',
         'g-border', 'g-border-soft', 'g-border-spin', 'g-hairline',
-        'g-scrim', 'g-scrim-top',
+        'g-scrim', 'g-scrim-top', 'g-scrim-auto',
         'g-fade-inline', 'g-fade-end', 'g-fade-block', 'g-fade-more',
         'g-sheen', 'g-good', 'g-warn', 'g-bad',
         'g-conic', 'g-ring', 'g-ring-spin',
@@ -27,6 +27,8 @@ require __DIR__ . '/../_layout.php';
 $verdicts = [
     ['g-scrim',       'keep', 'Text over a photo. Eased rather than a flat wash, so it darkens only where the text sits. Shared with .carousel-caption through the --scrim token.'],
     ['g-scrim-top',   'keep', 'The same from the block start, for a caption above an image.'],
+    ['g-scrim-auto',  'keep', 'The same floor in the theme\'s surface colour, so the text over it uses --text and follows a light theme instead of always being white. Added for a media app.'],
+    ['glass',         'keep', 'Not a gradient: a frosted surface for a card or a panel over an image. It lives in this file because it is an effect. Documented on the card page.'],
     ['g-fade-inline', 'keep', 'Fades content at both inline edges instead of cutting it. This is what a .scroller should have at its edges.'],
     ['g-fade-end',    'keep', 'Fades at the end edge only — a row that continues off-screen in one direction.'],
     ['g-fade-block',  'keep', 'Fades the bottom of a truncated article, under a "read more".'],
@@ -77,7 +79,7 @@ $counts = array_count_values(array_column($verdicts, 1));
 <header class="stack stack-3">
   <h1>Gradients</h1>
   <p class="lede">
-    Thirty-four <code>.g-*</code> classes, every one built from the brand hue and
+    Thirty-five <code>.g-*</code> classes, every one built from the brand hue and
     interpolated in <code>oklab</code> or <code>oklch</code> — which is what avoids the
     grey dead zone you get when sRGB blends two saturated colours. Change
     <code>--hue-brand</code> and all of them retune together.
@@ -132,6 +134,38 @@ $counts = array_count_values(array_column($verdicts, 1));
         '  </figcaption>' . "\n" .
         '</figure>',
         '',
+        'stack'
+    );
+    ?>
+    <p>
+      The scrim goes over a photo child and under everything else: an <code>img</code>,
+      <code>picture</code>, <code>video</code>, <code>canvas</code>, <code>svg</code> or
+      <code>iframe</code>, or Deck's <code>.lazy</code> and <code>.video</code> wrappers,
+      sits beneath it, and the caption sits on top. A photo set as the element's own
+      background works too. A photo inside some other wrapper, such as an
+      <code>&lt;a&gt;</code>, is lifted above the scrim like any other child.
+    </p>
+    <p>
+      <code>.g-scrim</code> is dark in both themes, for white text.
+      <code>.g-scrim-auto</code> is the same eased floor in the theme's surface colour,
+      from the <code>--scrim-auto</code> token, and it sets
+      <code>color: var(--text)</code>: dark text on a light floor in a light theme, light
+      text on a dark floor in a dark one. Use it instead of <code>.g-scrim</code>, not with
+      it. <code>.g-scrim-top</code> works on either.
+    </p>
+    <?php
+    docs_example(
+        '<div class="grid grid-tight" style="max-inline-size:34rem">' . "\n" .
+        '  <figure class="g-scrim-auto r-md overflow-hidden m-0">' . "\n" .
+        '    <img class="ratio-4x3" src="/assets/deck/docs/sample-1.jpg" alt="">' . "\n" .
+        '    <figcaption class="absolute inset-be-0 inset-is-0 inset-ie-0 p-4 fw-semi">Follows a light theme</figcaption>' . "\n" .
+        '  </figure>' . "\n" .
+        '  <figure class="g-scrim-auto r-md overflow-hidden m-0" data-theme="dark">' . "\n" .
+        '    <img class="ratio-4x3" src="/assets/deck/docs/sample-1.jpg" alt="">' . "\n" .
+        '    <figcaption class="absolute inset-be-0 inset-is-0 inset-ie-0 p-4 fw-semi">And a dark one</figcaption>' . "\n" .
+        '  </figure>' . "\n" .
+        '</div>',
+        'The same markup; the second figure has data-theme="dark"',
         'stack'
     );
     ?>
@@ -310,7 +344,7 @@ $counts = array_count_values(array_column($verdicts, 1));
       <code>--g-width</code>; the pattern exists and was simply not applied here.
     </p>
     <p class="dx-note text-muted">
-      That would take the file from thirty-four public classes to twenty-one, with nothing
+      That would take the file from thirty-five <code>.g-*</code> classes to twenty-two, with nothing
       lost that a page could not do for itself in three lines of its own CSS. It is
       recorded in <code>FINDINGS.md</code> and deliberately not acted on here — this pass
       documents, and removing eight frozen classes is a decision rather than a

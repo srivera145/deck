@@ -165,6 +165,58 @@
      image. Text and other children still sit above it. */
   .g-scrim > :is(img, picture, video, canvas, svg, iframe, .lazy, .video) { z-index: -2; }
 
+  /* The scrim in the theme's own colour, from --scrim-auto: a light floor
+     with --text over it in a light theme, a dark one in a dark theme, so a
+     title over a poster follows the theme instead of always being white.
+     Built like .g-scrim and used instead of it, not with it. Add
+     .g-scrim-top to fade from the block start. */
+  .g-scrim-auto {
+    position: relative;
+    isolation: isolate;
+    color: var(--text);
+  }
+  .g-scrim-auto::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--scrim-auto);
+    pointer-events: none;
+  }
+  .g-scrim-auto.g-scrim-top::after {
+    background: linear-gradient(to bottom,
+      color-mix(in oklab, var(--surface) 82%, transparent), transparent 62%);
+  }
+  .g-scrim-auto > * { position: relative; }
+  .g-scrim-auto > :is(img, picture, video, canvas, svg, iframe, .lazy, .video) { z-index: -2; }
+
+  /* --- Glass ----------------------------------------------------------------
+     A frosted surface for a .card, a .panel or a bar laid over an image or a
+     gradient: the theme's surface colour at --glass (76%), with whatever is
+     behind it blurred and saturated. It follows the theme because --surface
+     does. Not a gradient; it lives here with the other surface treatments,
+     in deck.effects, so it beats the component's own background.
+     ---------------------------------------------------------------------- */
+  .glass {
+    background: color-mix(in oklab, var(--surface) var(--glass, 76%), transparent);
+    border-color: color-mix(in oklab, var(--line) 60%, transparent);
+    backdrop-filter: saturate(1.6) blur(16px);
+    -webkit-backdrop-filter: saturate(1.6) blur(16px);
+  }
+  /* Without the blur, 24% of a sharp photo shows through and fights the
+     text, so the surface goes nearly opaque instead. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass { background: color-mix(in oklab, var(--surface) 94%, transparent); }
+  }
+  /* A reader who has asked for less transparency gets the plain surface. */
+  @media (prefers-reduced-transparency: reduce) {
+    .glass {
+      background: var(--surface);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+  }
+
   /* --- Fade masks ----------------------------------------------------------
      Content that runs off the edge should fade, not be cut with a hard line.
      ---------------------------------------------------------------------- */

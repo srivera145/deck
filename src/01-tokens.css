@@ -164,6 +164,15 @@
              oklch(12% .02 var(--hue-neutral) / .62) 22%,
              oklch(12% .02 var(--hue-neutral) / .28) 48%,
              transparent 78%);
+    /* The same floor in the surface colour, so it follows the theme: light
+       under dark text in a light theme, dark under light text in a dark one.
+       Text over it uses --text. --scrim stays dark in both, for white text.
+       Used by .g-scrim-auto. */
+    --scrim-auto: linear-gradient(to top,
+             color-mix(in oklab, var(--surface) 90%, transparent) 0%,
+             color-mix(in oklab, var(--surface) 70%, transparent) 22%,
+             color-mix(in oklab, var(--surface) 32%, transparent) 48%,
+             transparent 78%);
 
     /* --- Type -------------------------------------------------------------- */
     --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI Variable Text",

@@ -105,3 +105,63 @@ test('deck.js moves the on state of a .segmented, whichever attribute it uses', 
   // .tabs is a tablist: a toggle button inside it is not one of its items.
   assert.equal(await state('tabs'), 'true,false');
 });
+
+/* deck.js wires .alert-close once, on the document, when it first runs. The
+   shared page ran it in an earlier test and has had its document replaced by
+   setContent since, so these two load deck.js into a page of their own. */
+async function freshPage(body) {
+  const fresh = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  await fresh.emulateMedia({ reducedMotion: 'reduce' });
+  await fresh.setContent(
+    `<!doctype html><html lang="en"><head><meta charset="utf-8"><style>${css}</style></head><body>${body}</body></html>`,
+  );
+  await fresh.addScriptTag({ content: js });
+  return fresh;
+}
+
+test('an .alert-close hides its alert after a cancellable deck:dismiss, without making the alert taller', async () => {
+  const close = '<button type="button" class="alert-close" aria-label="Dismiss"><svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M2 2h20v20H2z"/></svg></button>';
+  const p = await freshPage(`
+    <div class="alert" id="plain"><div><p class="alert-body">One line.</p></div></div>
+    <div class="alert" id="closable"><div><p class="alert-body">One line.</p></div>${close}</div>
+    <div class="alert" id="kept"><div><p class="alert-body">One line.</p></div>${close}</div>`);
+  try {
+    const h = await p.evaluate(() => ['plain', 'closable'].map((id) => document.getElementById(id).getBoundingClientRect().height));
+    assert.equal(h[1], h[0], `a dismissible alert is as tall as a plain one: ${h}`);
+    const box = await p.locator('#closable .alert-close').boundingBox();
+    assert.ok(box.width >= 44 && box.height >= 44, `a 44px target: ${JSON.stringify(box)}`);
+
+    await p.evaluate(() => {
+      window.dismissed = [];
+      document.addEventListener('deck:dismiss', (e) => {
+        window.dismissed.push(e.target.id);
+        if (e.target.id === 'kept') e.preventDefault();
+      });
+    });
+    await p.click('#closable .alert-close');
+    await p.click('#kept .alert-close');
+    const state = await p.evaluate(() => ({
+      closable: document.getElementById('closable').hidden,
+      closableDisplay: getComputedStyle(document.getElementById('closable')).display,
+      kept: document.getElementById('kept').hidden,
+      dismissed: window.dismissed,
+    }));
+    assert.deepEqual(state, { closable: true, closableDisplay: 'none', kept: false, dismissed: ['closable', 'kept'] });
+  } finally {
+    await p.close();
+  }
+});
+
+test('an alert inserted after the page loaded still closes, with no Deck.init()', async () => {
+  const p = await freshPage('<main id="main"></main>');
+  try {
+    await p.evaluate(() => {
+      document.getElementById('main').insertAdjacentHTML('beforeend',
+        '<div class="alert" id="late"><div>Saved.</div><button type="button" class="alert-close" aria-label="Dismiss">x</button></div>');
+    });
+    await p.click('#late .alert-close');
+    assert.equal(await p.evaluate(() => document.getElementById('late').hidden), true);
+  } finally {
+    await p.close();
+  }
+});

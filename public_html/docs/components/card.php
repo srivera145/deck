@@ -6,10 +6,12 @@ $page = [
     'title' => 'Card',
     'level' => 'Beginner',
     'description' => 'Deck\'s .card: a bordered surface with no padding of its own, a header, body and footer that own their spacing, a whole-card link pattern, and a container-query variant that becomes a media object.',
+    /* .glass is not a card member: it works on a .panel or any bar too. It is
+       claimed here because a frosted card is where people look for it. */
     'documents' => [
         'card', 'card-body', 'card-brand', 'card-flex', 'card-flush',
         'card-footer', 'card-header', 'card-link', 'card-media', 'card-raised',
-        'card-title',
+        'card-title', 'glass',
     ],
 
     'component' => 'card',
@@ -180,6 +182,47 @@ $surfaces = [
       ?>
     </div>
   <?php endforeach; ?>
+</section>
+
+<section class="stack stack-3">
+  <h2 id="glass">Glass</h2>
+  <p>
+    <code>.glass</code> turns a card into frosted glass: the theme's surface colour at
+    76%, with whatever is behind it blurred and saturated. It works the same on a
+    <code>.panel</code>, a toolbar or a player bar. It only reads as glass over
+    something — a photo, a gradient, a video — and on a plain page it is a slightly paler
+    card. It follows the theme because <code>--surface</code> does: white glass in a
+    light theme, smoked glass in a dark one.
+  </p>
+  <?php
+  docs_example(
+      '<div class="p-6 r-lg" style="background:url(/assets/deck/docs/sample-3.jpg) center/cover;max-inline-size:28rem">' . "\n" .
+      '  <article class="card glass">' . "\n" .
+      '    <div class="card-body">' . "\n" .
+      '      <h3 class="card-title">Now showing</h3>' . "\n" .
+      '      <p>The poster stays visible through the card, blurred enough that the text wins.</p>' . "\n" .
+      '    </div>' . "\n" .
+      '  </article>' . "\n" .
+      '</div>',
+      'A .card.glass over a photo',
+      'stack'
+  );
+  ?>
+  <p>
+    <code>--glass</code> sets how much of the surface there is, 76% by default. Raise it
+    for a card with a paragraph of text in it — <code>style="--glass: 90%"</code> — and
+    lower it for a bar that holds only a few large controls.
+  </p>
+  <p class="dx-note text-muted">
+    <strong>Contrast depends on what is behind the glass.</strong> Body text stays above
+    7:1 even with pure black behind light glass or pure white behind dark glass. Muted text
+    does not: over the darkest part of a photo in a light theme it can fall to about 3:1.
+    Keep <code>.text-muted</code> off glass that sits on photos, or raise
+    <code>--glass</code>. Where <code>backdrop-filter</code> is not supported the surface
+    goes to 94% instead, and a reader with
+    <code>prefers-reduced-transparency: reduce</code> gets the ordinary opaque surface.
+    In print, the blur is dropped with every other effect.
+  </p>
 </section>
 
 <section class="stack stack-3">

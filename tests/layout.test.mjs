@@ -409,3 +409,43 @@ test('a photo child of .g-scrim sits under the scrim, and its caption above it',
   }));
   assert.deepEqual(z, { img: '-2', scrim: '-1', caption: 'auto', captionPosition: 'relative' });
 });
+
+test('.grid-fill keeps a short row card-sized and works without .grid', async () => {
+  await render(`
+    <div style="inline-size:1000px">
+      <div class="grid" style="--min:12rem" id="fit"><div>A</div><div>B</div></div>
+      <div class="grid-fill" style="--min:12rem" id="fill"><div>A</div><div>B</div></div>
+    </div>`);
+  const w = await page.evaluate(() => ['fit', 'fill'].map((id) => ({
+    display: getComputedStyle(document.getElementById(id)).display,
+    item: document.querySelector(`#${id} > div`).getBoundingClientRect().width,
+  })));
+  assert.equal(w[1].display, 'grid');
+  assert.ok(w[0].item > 450, `.grid stretches two items across the row: ${JSON.stringify(w)}`);
+  assert.ok(w[1].item < 250, `.grid-fill keeps them near the 12rem floor: ${JSON.stringify(w)}`);
+});
+
+test('.g-scrim-auto follows the theme, and .glass is a translucent blurred surface', async () => {
+  await render(`
+    <figure class="g-scrim-auto" id="light" style="margin:0"><img alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw="><figcaption>Title</figcaption></figure>
+    <figure class="g-scrim-auto" id="dark" data-theme="dark" style="margin:0"><img alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw="><figcaption>Title</figcaption></figure>
+    <article class="card glass" id="glass">Glass</article>`);
+  const m = await page.evaluate(() => {
+    // Lightness from 0 to 1, whether the browser reports oklch(), oklab() or rgb().
+    const lum = (c) => { const n = c.match(/[\d.]+/g).map(Number); return /^okl/.test(c) ? n[0] : (n[0] + n[1] + n[2]) / 765; };
+    const g = getComputedStyle(document.getElementById('glass'));
+    return {
+      light: lum(getComputedStyle(document.querySelector('#light figcaption')).color),
+      dark: lum(getComputedStyle(document.querySelector('#dark figcaption')).color),
+      img: getComputedStyle(document.querySelector('#light img')).zIndex,
+      scrim: getComputedStyle(document.getElementById('light'), '::after').backgroundImage.startsWith('linear-gradient'),
+      glassBlur: g.backdropFilter,
+      glassBg: g.backgroundColor,
+    };
+  });
+  assert.ok(m.light < 0.4 && m.dark > 0.8, `dark text in a light theme, light text in a dark one: ${JSON.stringify(m)}`);
+  assert.equal(m.img, '-2');
+  assert.equal(m.scrim, true);
+  assert.match(m.glassBlur, /blur\(16px\)/);
+  assert.match(m.glassBg, /\/ 0\.76\)|, 0\.76\)/, `the surface at 76%: ${m.glassBg}`);
+});

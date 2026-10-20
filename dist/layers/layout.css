@@ -115,6 +115,16 @@
   /* Widens the auto-fit column floor to 24rem, so the grid packs fewer,
      wider columns before it wraps. For cards with a paragraph in them. */
   .grid-wide { --min: 24rem; }
+  /* auto-fill instead of auto-fit: the empty tracks a short row leaves are
+     kept, so three cards in a grid wide enough for five stay card-sized
+     rather than stretching across the page. A complete grid looks the same
+     either way. A grid on its own, so it needs no .grid beside it; --min,
+     .grid-tight and .grid-wide set the column floor as they do for .grid. */
+  .grid-fill {
+    display: grid;
+    gap: var(--gap, var(--space-4));
+    grid-template-columns: repeat(auto-fill, minmax(min(var(--min, 17rem), 100%), 1fr));
+  }
   /* Exactly two equal columns at every width, including a phone. Only
      for a count that is part of the meaning — a 2x2 comparison. It does
      not reflow, so it does not satisfy the reflow criterion on its own. */

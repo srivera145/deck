@@ -75,6 +75,7 @@ $GROUPS = [
             '--text-on-warn', '--text-on-bad', '--brand', '--brand-hover', '--brand-soft',
             '--brand-soft-text', '--good-soft', '--good-soft-text', '--warn-soft',
             '--warn-soft-text', '--bad-soft', '--bad-soft-text', '--focus', '--scrim',
+            '--scrim-auto',
         ], true),
     ],
     [

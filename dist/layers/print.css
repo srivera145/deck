@@ -61,7 +61,7 @@
     .tabbar, .fab, .speed-dial, .back-to-top, .toast-region, .skip-link, .theme-dock,
     .navbar-links, .sidebar, .datepicker, .combo-list, .menu,
     .dg-toolbar, .dg-resize, .sheet-grip, .no-print,
-    .pagination, .segmented, .tabs, .scroller::-webkit-scrollbar {
+    .pagination, .segmented, .tabs, .alert-close, .scroller::-webkit-scrollbar {
       display: none !important;
     }
 
@@ -83,8 +83,8 @@
     }
     .section { padding-block: 0 0 8mm !important; }
     .split { display: block !important; }
-    .grid { display: block !important; }
-    .grid > * + * { margin-block-start: 4mm; }
+    .grid, .grid-fill { display: block !important; }
+    :is(.grid, .grid-fill) > * + * { margin-block-start: 4mm; }
     .sticky-top, .sticky, .form-actions-sticky { position: static !important; }
 
     /* --- Surfaces ---------------------------------------------------------- */

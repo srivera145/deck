@@ -35,6 +35,10 @@ Notable changes to Deck. The npm package (`@echodial/deck`) and the Composer pac
 - **Layout utilities.** `.ratio-2x3` for posters and book covers, `.object-contain` to letterbox instead of crop (it beats a `.ratio-*` frame's cover), `.break-words` (`overflow-wrap: anywhere`, which also stops a long string widening a flex item or table cell), and `.z-sticky`, `.z-nav` and `.z-sheet`, which put your own chrome on Deck's named stacking layers.
 - **`.input-sm` and `.input-lg`,** the heights of `.btn-sm` (34px) and `.btn-lg` (50px). They work on `.select` and inside `.search` too. Every control is still 16px on a touch screen.
 - **`.list-flush`,** a list with no border, radius or fill of its own, for a list inside a card or a sheet.
+- **Dismissible alerts.** A `<button class="alert-close">` last in an `.alert` closes it: a 44px target that does not make the alert taller. deck.js hides the alert after a cancellable `deck:dismiss` event, and works for alerts inserted after the page loaded.
+- **`.grid-fill`,** the auto-fit grid with `auto-fill`, so a short last row keeps card-sized columns instead of stretching. It needs no `.grid` beside it.
+- **`.glass`,** a frosted, theme-aware surface for a card, panel or bar over an image. `--glass` sets the opacity (76%). Opaque under `prefers-reduced-transparency`.
+- **`.g-scrim-auto` and `--scrim-auto`,** a scrim in the theme's surface colour with `--text` over it, so text over an image follows a light theme. `--scrim` stays dark, for white text.
 
 ### Changed
 

@@ -7,13 +7,13 @@ $page = [
     'level' => 'Beginner',
     'description' => 'Deck\'s .grid is one auto-fitting rule with no breakpoints: columns appear and disappear as the container changes width. How minmax(min(--min, 100%), 1fr) works, and when a fixed column count is right instead.',
     'documents' => [
-        'grid', 'grid-2', 'grid-fixed-2', 'grid-fixed-3', 'grid-fixed-4',
+        'grid', 'grid-2', 'grid-fill', 'grid-fixed-2', 'grid-fixed-3', 'grid-fixed-4',
         'grid-tight', 'grid-wide',
     ],
 
     'component' => 'grid',
     'accounts' => [
-        '04-layout.css'    => 'documented: the auto-fit grid, its two floors and the three fixed-column variants',
+        '04-layout.css'    => 'documented: the auto-fit grid, its two floors, the auto-fill variant and the three fixed-column variants',
         '18-container.css' => 'documented: a .cq child of a grid becomes its own query container — the Cards that respond to their track section',
         '99-print.css'     => 'documented: the grid is unwound to display: block for print — the Printing section',
     ],
@@ -80,7 +80,7 @@ function demo_cards(int $n = 5): string
       <strong><code>repeat(auto-fit, …)</code></strong> — make as many columns of this
       size as will fit, and collapse the empty ones so the items stretch to fill the
       row. <code>auto-fill</code> is the alternative and leaves the empty tracks in
-      place, which is right for a calendar and wrong for a list of cards.
+      place; that is <a href="#fill"><code>.grid-fill</code></a>.
     </li>
     <li>
       <strong><code>minmax(X, 1fr)</code></strong> — every column is at least
@@ -145,6 +145,29 @@ function demo_cards(int $n = 5): string
     identical to <code>.grid-wide</code> and cannot be adjusted with
     <code>--min</code> afterwards. Two names for one behaviour, one of which composes
     and one of which does not — recorded in <code>FINDINGS.md</code>.
+  </p>
+</section>
+
+<section class="stack stack-3">
+  <h2 id="fill">Keeping the empty tracks</h2>
+  <p>
+    <code>.grid</code> collapses the columns it has no items for, so two cards in a grid
+    with room for five stretch to half the page each. That is right when the cards are the
+    whole row's content. It is wrong for a shelf of posters, a row of search results, or
+    any grid whose last row is usually short: the last row comes out at a different size
+    from every row above it. <code>.grid-fill</code> keeps the empty tracks
+    (<code>auto-fill</code> instead of <code>auto-fit</code>), so every item is the same
+    size whatever the count. A full row looks the same either way.
+  </p>
+  <?php
+  docs_example('<div class="grid grid-tight">' . "\n" . demo_cards(2) . '</div>' . "\n" .
+      '<div class="grid-fill grid-tight">' . "\n" . demo_cards(2) . '</div>',
+      'The same two cards: .grid stretches them, .grid-fill keeps them card-sized', 'stack');
+  ?>
+  <p class="text-muted">
+    It is a grid on its own: <code>class="grid-fill"</code> needs no <code>.grid</code>
+    beside it, and <code>--min</code>, <code>.grid-tight</code>, <code>.grid-wide</code>
+    and <code>--gap</code> work on it exactly as they do on <code>.grid</code>.
   </p>
 </section>
 
@@ -287,8 +310,9 @@ function demo_cards(int $n = 5): string
 <section class="stack stack-3">
   <h2 id="print">Printing</h2>
   <p>
-    <code>src/99-print.css</code> sets <code>.grid { display: block }</code> and gives
-    every child after the first <code>margin-block-start: 4mm</code>. Grid tracks and
+    <code>src/99-print.css</code> sets <code>.grid { display: block }</code>, and the
+    same for <code>.grid-fill</code>, and gives every child after the first
+    <code>margin-block-start: 4mm</code>. Grid tracks and
     paged media do not get on — an item taller than the remaining page cannot break out
     of its track — so the grid is unwound into a plain block flow and the spacing is
     restored with a margin. It is the one place in Deck where a margin is the right
@@ -302,11 +326,6 @@ function demo_cards(int $n = 5): string
 <div class="grid" style="--min:9rem;--gap:var(--space-6)">
 
 @layer app.components {
-  /* Keep empty tracks — right for a calendar, wrong for cards */
-  .grid-calendar {
-    grid-template-columns: repeat(auto-fill, minmax(min(6rem, 100%), 1fr));
-  }
-
   /* A first item that spans the full width */
   .grid > .span-all { grid-column: 1 / -1; }
 }') ?></code></pre>

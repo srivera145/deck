@@ -2435,3 +2435,36 @@ inside `.g-scrim` would then have gone under it. A photo wrapped in an element t
 in that list, such as a plain `<a>`, is still lifted above the scrim. The templates' own
 rules are unlayered, so they win and render as before. Found while building the
 theme-aware scrim, which has the same structure.
+
+## 106. Four components a media app wrote for itself — FIXED
+
+- **An alert could not be dismissed.** The alert page said Deck ships no close button
+  and suggested `.btn-icon.btn-ghost.btn-sm`, which hides nothing. Added `.alert-close`:
+  a 44px square at the end of the row that reaches into the alert's padding, so a
+  dismissible alert is exactly as tall as one without (a test measures both), and a
+  delegated listener in deck.js that sets `hidden` on the alert. It listens on the
+  document rather than on each alert, because alerts are the component most often
+  inserted after load — a form result, a failed request — and those would otherwise need
+  a `Deck.init()`. A cancellable `deck:dismiss` fires first. Deck deliberately does not
+  move focus after the button disappears; the alert page says so and shows where the
+  event lets you do it.
+- **A short last row stretched across the page.** `.grid` uses `auto-fit`, which
+  collapses empty tracks. Added `.grid-fill` (`auto-fill`). The grid page had described
+  `auto-fill` as "right for a calendar and wrong for a list of cards", and its Overriding
+  example built exactly this class by hand. That is true of a single row of cards and
+  false of a shelf of posters or search results, where the last row should match the
+  rows above it; the page now says which is which. `.grid-fill` is a grid on its own, so
+  it does not repeat the `.grid-fixed-N` mistake recorded below, and print unwinds
+  it as it does `.grid`.
+- **No frosted surface.** Added `.glass`: `--surface` at `--glass` (76%) with
+  `saturate(1.6) blur(16px)` behind, so it follows the theme. It is in `deck.effects`,
+  which beats the component layer, so it works on a `.card`, a `.panel` or a sheet
+  without a specificity fight. Without `backdrop-filter` it goes to 94%, and under
+  `prefers-reduced-transparency: reduce` it is the opaque surface. Contrast was worked
+  out rather than assumed: body text stays above 7:1 over a pure black or pure white
+  backdrop, muted text falls to about 3:1 in the worst case, and the card page says so.
+- **The scrim was dark in both themes.** `--scrim` is 12% lightness by design, for white
+  text, so a title over a poster could not follow a light theme. Added `--scrim-auto`, the
+  same eased stops in `--surface`, and `.g-scrim-auto`, which uses it and sets
+  `color: var(--text)`. It is built like the fixed `.g-scrim` (#105), so a photo child
+  sits under it.
