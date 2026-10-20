@@ -180,39 +180,30 @@ Deck.theme('light');</code></pre>
   <div class="alert alert-warn">
     <svg class="icon"><use href="../../assets/deck/deck-icons.svg#alert-triangle"></use></svg>
     <div>
-      <div class="alert-title">1. Eight status surfaces stay light</div>
+      <div class="alert-title">1. Three icon tiles stay light</div>
       <p class="alert-body">
-        <code>.alert-good</code>, <code>.alert-warn</code>, <code>.alert-bad</code>,
-        <code>.badge-good</code>, <code>.badge-warn</code>, <code>.badge-bad</code>,
-        <code>.icon-tile-good</code> and <code>.icon-tile-bad</code> all fill with the
-        <code>100</code> step of their ramp, which is a fixed pale tint with no
-        <code>light-dark()</code> around it. On a dark page they read as light stickers.
-        They are still legible — the text is the fixed dark <code>700</code> step, so
-        contrast measures between 5.3:1 and 6.9:1 — but they do not match the page.
-        <code>.alert-info</code> and <code>.badge-brand</code> are fine, because those use
-        <code>--brand-soft</code>, which is a role.
+        <code>.icon-tile-good</code>, <code>.icon-tile-warn</code> and
+        <code>.icon-tile-bad</code> fill with the <code>100</code> step of their ramp,
+        which is a fixed pale tint with no <code>light-dark()</code> around it. On a dark
+        page they read as light stickers. They are still legible — the text is the fixed
+        dark <code>700</code> step — but they do not match the page. The status alerts and
+        badges, and <code>.banner-warn</code>, used to do the same; they now fill with
+        <code>--good-soft</code>, <code>--warn-soft</code> and <code>--bad-soft</code>,
+        which are roles, like <code>--brand-soft</code>.
       </p>
     </div>
   </div>
-  <p>Until that is fixed in the framework, this is the patch:</p>
-  <pre class="dx-code"><code>@layer app.base {
-  :root {
-    /* the fill */
-    --good-100: light-dark(oklch(94%   .04 var(--hue-good)), oklch(26% .05 var(--hue-good)));
-    --warn-100: light-dark(oklch(95%   .04 var(--hue-warn)), oklch(26% .05 var(--hue-warn)));
-    --bad-100:  light-dark(oklch(94.5% .04 var(--hue-bad)),  oklch(26% .05 var(--hue-bad)));
-
-    /* and the text on it, or you get dark on dark */
-    --good-700: light-dark(oklch(43% .12 var(--hue-good)), oklch(86% .10 var(--hue-good)));
-    --warn-700: light-dark(oklch(43% .12 var(--hue-warn)), oklch(86% .10 var(--hue-warn)));
-    --bad-700:  light-dark(oklch(43% .12 var(--hue-bad)),  oklch(86% .10 var(--hue-bad)));
-  }
+  <p>Until the tiles are fixed in the framework, this is the patch:</p>
+  <pre class="dx-code"><code>@layer app.components {
+  .icon-tile-good { background: var(--good-soft); color: var(--good-soft-text); }
+  .icon-tile-warn { background: var(--warn-soft); color: var(--warn-soft-text); }
+  .icon-tile-bad  { background: var(--bad-soft);  color: var(--bad-soft-text); }
 }</code></pre>
   <p class="text-sm text-muted">
-    Override the fill and its text together, or you get dark text on a dark fill —
-    readable in neither theme. Keeping <code>var(--hue-*)</code> in there means the patch
-    still follows <a href="theming.php">your brand hues</a> rather than pinning the status
-    colours to Deck's.
+    Change the fill and its text together, or you get dark text on a dark fill —
+    readable in neither theme. Both halves of each pair resolve through
+    <code>light-dark()</code> and follow <a href="theming.php">your brand hues</a>, so the
+    patch needs no second rule for dark mode.
   </p>
 
   <div class="alert alert-warn">

@@ -5,7 +5,7 @@ $page = [
     'path' => 'components/segmented.php',
     'title' => 'Segmented',
     'level' => 'Beginner',
-    'description' => 'Deck\'s .segmented is an iOS-style one-of-N control: equal-width children in a sunken track, with the selected one raised. Styled from aria-selected, so the state is real rather than decorative.',
+    'description' => 'Deck\'s .segmented is an iOS-style one-of-N control: equal-width children in a sunken track, with the selected one raised. Styled from aria-selected or aria-pressed, so the state is real rather than decorative.',
     'documents' => [
         'segmented',
     ],
@@ -63,16 +63,39 @@ require __DIR__ . '/../_layout.php';
 <section class="stack stack-3">
   <h2 id="state">The selected state</h2>
   <p>
-    The raised look comes from <code>[aria-selected="true"]</code> — a surface background,
-    the full text colour and a one-pixel shadow, against the sunken
-    <code>--bg-sunken</code> track. Nothing moves: the unselected children have the same
-    padding and radius, so selecting one is a colour and shadow change only.
+    The raised look comes from <code>[aria-selected="true"]</code> or
+    <code>[aria-pressed="true"]</code> — a surface background, the full text colour and a
+    one-pixel shadow, against the sunken <code>--bg-sunken</code> track. Nothing moves: the
+    unselected children have the same padding and radius, so selecting one is a colour and
+    shadow change only.
   </p>
-  <pre class="dx-code"><code><?= e('.segmented > [aria-selected="true"], .segmented > .is-active {
+  <pre class="dx-code"><code><?= e('.segmented > [aria-selected="true"],
+.segmented > [aria-pressed="true"],
+.segmented > .is-active {
   background: var(--surface);
   color: var(--text);
   box-shadow: var(--shadow-1);
 }') ?></code></pre>
+  <p>
+    The two attributes are equal and look the same. Use <code>aria-selected</code> when the
+    control is a tablist and <code>aria-pressed</code> when it is a group of toggle
+    buttons; <code>aria-pressed</code> is <a href="button.php#on-attribute">Deck's
+    attribute for "on"</a> everywhere else. deck.js wires every <code>.segmented</code> on
+    the page: a click sets the pressed child's attribute to <code>"true"</code>, the
+    others' to <code>"false"</code>, and fires <code>deck:change</code> — whichever of the
+    two attributes the children carry.
+  </p>
+  <?php
+  docs_example(
+      '<div class="segmented" role="group" aria-label="View" style="max-inline-size:22rem">' . "\n" .
+      '  <button class="btn btn-ghost" aria-pressed="true">List</button>' . "\n" .
+      '  <button class="btn btn-ghost" aria-pressed="false">Board</button>' . "\n" .
+      '  <button class="btn btn-ghost" aria-pressed="false">Calendar</button>' . "\n" .
+      '</div>',
+      'Toggle buttons: the same look from aria-pressed',
+      'stack'
+  );
+  ?>
   <p>
     As with <a href="tabs.php">tabs</a>, styling from the ARIA attribute means the visual
     state cannot drift from the accessible one. <code>.is-active</code> is accepted for
@@ -112,7 +135,8 @@ require __DIR__ . '/../_layout.php';
   ?>
   <p class="dx-note text-muted">
     <strong>Deck does not style the checked state of this version.</strong> The rule keys
-    off <code>[aria-selected]</code>, not <code>:has(:checked)</code>, so the labels above
+    off <code>[aria-selected]</code> and <code>[aria-pressed]</code>, not
+    <code>:has(:checked)</code>, so the labels above
     look identical whichever radio is chosen. It is a real gap, recorded in
     <code>FINDINGS.md</code>; one rule closes it:
     <code>.segmented &gt; label:has(:checked) { background: var(--surface); color:
@@ -178,6 +202,13 @@ require __DIR__ . '/../_layout.php';
       <strong>As a tablist</strong>, it needs everything
       <a href="tabs.php#keyboard">the tabs page</a> describes: roving
       <code>tabindex</code>, arrow keys, Home and End. Deck ships none of it.
+    </li>
+    <li>
+      <strong>As toggle buttons</strong>, mark the options with <code>aria-pressed</code>
+      and label the wrapper with <code>role="group"</code> and <code>aria-label</code>.
+      Every option is its own Tab stop and needs no roving <code>tabindex</code>, and
+      deck.js moves the pressed state on click. Do not mix the two attributes within one
+      control.
     </li>
     <li>
       <strong>As a radio group</strong>, the browser gives you arrow keys, the group label

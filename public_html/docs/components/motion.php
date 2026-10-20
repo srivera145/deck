@@ -111,6 +111,12 @@ require __DIR__ . '/../_layout.php';
     real overshoot rather than cubic approximations.
   </p>
   <p>
+    All of these live in <code>src/09-utilities.css</code>, in the
+    <code>deck.utilities</code> layer, so they also tune a component's own transition or
+    animation: <code>.fade-swap.dur-4</code> fades over 420ms, and
+    <code>.enter-rise.delay-3</code> waits 260ms before it rises.
+  </p>
+  <p>
     <code>.no-motion</code> is the escape hatch: <code>transition: none !important</code>
     and <code>animation: none !important</code> on anything that must stay still.
   </p>
@@ -277,8 +283,9 @@ require __DIR__ . '/../_layout.php';
 <section class="stack stack-3">
   <h2 id="classes">Classes</h2>
   <p>
-    These are a dozen unrelated utility groups in <code>src/16-motion.css</code> rather than
-    one component root, so there is no completeness check on this page.
+    These are a dozen unrelated groups, the transition utilities in
+    <code>src/09-utilities.css</code> and the rest in <code>src/16-motion.css</code>, rather
+    than one component root, so there is no completeness check on this page.
   </p>
   <?php docs_class_table($page['documents']); ?>
 </section>

@@ -250,7 +250,10 @@ require __DIR__ . '/../_layout.php';
     form. <code>.form-actions-sticky</code> pins it to the bottom of the viewport with a
     blur behind it, and adds <code>env(safe-area-inset-bottom)</code> so it clears the
     home indicator on a phone. Its buttons are full width below <code>48rem</code> and
-    natural width above.
+    natural width above. On a page with a <code>.tabbar</code> it sits above the tab bar
+    rather than under it, at the same <code>--tabbar-clearance</code> the body leaves for
+    the bar, and drops its own safe-area padding because the tab bar already clears the
+    home indicator.
   </p>
   <?php
   docs_example(

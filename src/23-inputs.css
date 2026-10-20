@@ -280,7 +280,7 @@
     grid-area: 1 / 1;
     block-size: 6px;
     border-radius: var(--r-full);
-    background: var(--ink-200);
+    background: var(--surface-recessed);
   }
   .range-pair::after {
     content: "";

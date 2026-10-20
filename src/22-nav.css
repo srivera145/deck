@@ -630,8 +630,21 @@
   }
   .banner-fixed { position: fixed; inset-inline: 0; }
   .banner-dark { background: var(--ink-900); color: var(--ink-100); border-color: transparent; }
-  .banner-warn { background: var(--warn-100); color: var(--warn-700); border-color: transparent; }
+  .banner-warn { background: var(--warn-soft); color: var(--warn-soft-text); border-color: transparent; }
+  /* The dismiss button, a --tap square with the icon centred in it.
+     The square clears the touch target while the icon keeps its own size,
+     and a negative --space-3 margin lets it reach into the banner's padding
+     rather than make the strip taller. A .btn.banner-close keeps the
+     button's size, because .btn's ::before already clears --tap. */
   .banner-close { margin-inline-start: auto; opacity: .7; cursor: pointer; flex: 0 0 auto; }
+  .banner-close:not(.btn) {
+    display: inline-grid;
+    place-items: center;
+    min-inline-size: var(--tap);
+    min-block-size: var(--tap);
+    margin-block: calc(var(--space-3) * -1);
+    margin-inline-end: calc(var(--space-3) * -1);
+  }
   .banner-close:hover { opacity: 1; }
   .banner[hidden] { display: none; }
 

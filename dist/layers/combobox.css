@@ -114,11 +114,15 @@
   }
 
   /* --- Listbox ------------------------------------------------------------- */
-  /* The option list. A positioned sibling by default, which a clipping
-     ancestor can cut off; 25-anchor.css moves it to the top layer where
-     anchor positioning exists, which is the fix for the combobox-inside-a-modal
-     bug. */
+  /* The option list. deck.js draws only the rows near the scroll position
+     and pads for the rest, and keeps the view steady itself as rows are
+     measured, so the browser's scroll anchoring is off: two of them
+     correcting the same jump would make one. Its size and place are set by
+     script or by anchor positioning and read back at once, so nothing on it
+     transitions; the reduced-motion reset would otherwise give each change
+     a .01ms transition, and the read would get the old value. */
   .combo-list {
+    transition-property: none;
     position: absolute;
     inset-block-start: calc(100% + 4px);
     inset-inline: 0;
@@ -128,16 +132,30 @@
     max-block-size: min(20rem, 50dvh);
     overflow-y: auto;
     overscroll-behavior: contain;
+    overflow-anchor: none;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--r-md);
     box-shadow: var(--shadow-4);
     display: none;
   }
+  /* deck.js makes the list a popover, so it opens in the top layer: no
+     ancestor's overflow, containment, transform or stacking context can clip
+     it or trap it. 25-anchor.css places it, or deck.js where anchor
+     positioning is missing. This undoes the browser's own popover box, and
+     :where() keeps it at the weight of .combo-list so 25-anchor.css, later
+     in the cascade, still sets the margin. */
+  .combo-list:where([popover]) {
+    position: fixed;
+    inset: auto;
+    margin: 0;
+    color: inherit;
+  }
   .combo.is-open .combo-list { display: block; animation: dk-combo-in var(--dur-2) var(--ease-out); }
   @keyframes dk-combo-in { from { opacity: 0; translate: 0 -4px; } }
 
-  /* Open upward when there is no room below */
+  /* Open upward when there is no room below. Only for a browser with no
+     popover, where the list is still a positioned sibling of the control. */
   .combo-list.is-above { inset-block: auto calc(100% + 4px); }
 
   .combo-option {
@@ -230,19 +248,12 @@
   }
   @media (pointer: fine) { .combo.is-open .combo-hint { display: flex; } }
 
-  /* --- Phone: the list takes over the screen ------------------------------- */
+  /* --- Phone: rows a finger can hit --------------------------------------- */
+  /* The list stays anchored to the field at every width. It used to become a
+     sheet across the bottom of the screen, which covered the field being
+     typed in, and inside a .card was pinned to the card instead of the
+     screen. */
   @media (max-width: 30rem) {
-    .combo.is-open .combo-list {
-      position: fixed;
-      inset: auto 0 0 0;
-      max-block-size: 70dvh;
-      border-radius: var(--r-lg) var(--r-lg) 0 0;
-      border-inline: 0;
-      border-block-end: 0;
-      padding-block-end: calc(var(--space-2) + env(safe-area-inset-bottom));
-      animation: dk-combo-up var(--dur-3) var(--ease-out);
-    }
     .combo-option { min-block-size: var(--tap); }
-    @keyframes dk-combo-up { from { translate: 0 100%; } }
   }
 }

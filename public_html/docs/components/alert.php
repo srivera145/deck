@@ -177,7 +177,7 @@ $tones = [
     Each tone uses the <code>100</code> step of a status ramp for its fill, the
     <code>500</code> step for the edge, and the <code>700</code> step for text.
   </p>
-  <?php docs_token_table(['--surface-2', '--line', '--ink-400', '--r-md', '--space-4', '--text-sm', '--brand-soft', '--brand-soft-text', '--brand-500', '--good-100', '--good-500', '--good-700', '--warn-100', '--warn-500', '--warn-700', '--bad-100', '--bad-500', '--bad-700']); ?>
+  <?php docs_token_table(['--surface-2', '--line', '--ink-400', '--r-md', '--space-4', '--text-sm', '--brand-soft', '--brand-soft-text', '--brand-500', '--good-soft', '--good-500', '--good-soft-text', '--warn-soft', '--warn-500', '--warn-soft-text', '--bad-soft', '--bad-500', '--bad-soft-text']); ?>
 </section>
 
 <section class="stack stack-3">

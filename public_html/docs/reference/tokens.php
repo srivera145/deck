@@ -70,10 +70,11 @@ $GROUPS = [
             . ' Reference --surface, not --ink-0, and dark mode comes free.',
         'match' => static fn(string $n): bool => in_array($n, [
             '--bg', '--bg-sunken', '--surface', '--surface-2', '--surface-hover',
-            '--line', '--line-strong', '--text', '--text-muted', '--text-faint',
-            '--text-on-brand', '--text-on-accent', '--text-on-good', '--text-on-warn',
-            '--text-on-bad', '--brand', '--brand-hover', '--brand-soft',
-            '--brand-soft-text', '--focus', '--scrim',
+            '--surface-recessed', '--line', '--line-strong', '--text', '--text-muted',
+            '--text-faint', '--text-on-brand', '--text-on-accent', '--text-on-good',
+            '--text-on-warn', '--text-on-bad', '--brand', '--brand-hover', '--brand-soft',
+            '--brand-soft-text', '--good-soft', '--good-soft-text', '--warn-soft',
+            '--warn-soft-text', '--bad-soft', '--bad-soft-text', '--focus', '--scrim',
         ], true),
     ],
     [
@@ -196,7 +197,7 @@ ksort($byFile);
 &lt;html style="--hue-brand: 265"&gt;
 
 &lt;!-- or scoped to a subtree --&gt;
-&lt;section class="card" style="--brand-soft: var(--good-100)"&gt;</code></pre>
+&lt;section class="card" style="--brand-soft: var(--good-soft)"&gt;</code></pre>
   <p>
     Reach for the <a href="#roles">semantic roles</a> before the ramps.
     <code>--surface</code> resolves to a different step of the neutral ramp in light and

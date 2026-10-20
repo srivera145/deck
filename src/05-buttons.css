@@ -39,6 +39,13 @@
                 translate var(--dur-1) var(--ease-out);
   }
 
+  /* A label split into text and a bare <span>, `Save <span>changes</span>`,
+     is one run of words. As two flex items the parts were held apart by the
+     gap, about twice a word space; display: contents puts the span's text
+     back in the run. A span with a class or with children keeps its box:
+     a badge, an avatar, .sr-only, or one span wrapping the whole label. */
+  .btn > span:not([class], [hidden]):not(:has(*)) { display: contents; }
+
   /* Every button clears the 44px touch target even when it looks smaller */
   .btn { position: relative; }
   .btn::before {
@@ -171,6 +178,32 @@
   .btn-group > .btn:last-child  { border-start-end-radius: var(--r-sm); border-end-end-radius: var(--r-sm); }
   .btn-group > .btn + .btn { margin-inline-start: -1px; }
   .btn-group > .btn:hover, .btn-group > .btn:focus-visible { z-index: 1; }
+
+  /* --- Toggle ------------------------------------------------------------- */
+  /* A button that stays on, at [aria-pressed="true"].
+     That is Deck's attribute for "on". .chip, .reaction, .datepicker-preset
+     and .segmented take [aria-selected="true"] as an equal alternative; a
+     button does not, because aria-selected is not valid on role="button".
+     On is the brand tint with a brand edge and no lift. .btn-soft is that
+     tint already, so it fills solid instead, and the solid variants keep
+     their colour and sink a shade. Inside .segmented the control draws the
+     on state, so the button adds none of its own. */
+  .btn[aria-pressed="true"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *)) {
+    --btn-bg: var(--brand-soft);
+    --btn-text: var(--brand-soft-text);
+    --btn-border: color-mix(in oklab, var(--brand) 45%, transparent);
+    --btn-shadow: none;
+  }
+  .btn[aria-pressed="true"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *)):hover {
+    background: color-mix(in oklab, var(--brand-soft) 80%, var(--brand-300));
+    border-color: var(--btn-border);
+  }
+  .btn-soft[aria-pressed="true"]:not(:where(.segmented > *)) { --btn-bg: var(--brand-600); --btn-text: var(--text-on-brand); }
+  .btn-soft[aria-pressed="true"]:not(:where(.segmented > *)):hover { background: var(--brand-700); }
+  .btn:is(.btn-primary, .btn-accent, .btn-danger)[aria-pressed="true"] {
+    --btn-shadow: none;
+    background: oklch(from var(--btn-bg) calc(l - .06) c h);
+  }
 
   /* --- Loading ------------------------------------------------------------ */
   .btn.is-loading { color: transparent; pointer-events: none; }

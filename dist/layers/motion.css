@@ -40,47 +40,15 @@
     --travel: 12px;   /* how far entrances move */
   }
 
+  /* The utilities that used to open this file -- .transition-*, .dur-*,
+     .ease-*, .delay-*, .no-motion and .will-move -- are in 09-utilities.css.
+     In this layer, every component below them reset them. FINDINGS 82. */
+
   /* --- Reduced motion ------------------------------------------------------
      Everything below is wrapped in no-preference. A person who asked their OS
      to calm things down gets the end state instantly, with one exception:
      loading indicators keep moving, because a frozen spinner reads as broken.
      ---------------------------------------------------------------------- */
-  /* --- Transition utilities ------------------------------------------------ */
-  .transition        { transition: all var(--dur-2) var(--ease-out); }
-  .transition-colors { transition: background-color var(--dur-1) var(--ease-out),
-                                   border-color var(--dur-1) var(--ease-out),
-                                   color var(--dur-1) var(--ease-out),
-                                   fill var(--dur-1) var(--ease-out),
-                                   stroke var(--dur-1) var(--ease-out); }
-  .transition-move   { transition: translate var(--dur-2) var(--ease-out),
-                                   scale var(--dur-2) var(--ease-out),
-                                   rotate var(--dur-2) var(--ease-out); }
-  .transition-size   { transition: inline-size var(--dur-3) var(--ease-out),
-                                   block-size var(--dur-3) var(--ease-out); }
-  .transition-opacity{ transition: opacity var(--dur-2) var(--ease-out); }
-
-  .dur-1 { transition-duration: var(--dur-1); animation-duration: var(--dur-1); }
-  .dur-2 { transition-duration: var(--dur-2); animation-duration: var(--dur-2); }
-  .dur-3 { transition-duration: var(--dur-3); animation-duration: var(--dur-3); }
-  .dur-4 { transition-duration: var(--dur-4); animation-duration: var(--dur-4); }
-  .dur-5 { transition-duration: var(--dur-5); animation-duration: var(--dur-5); }
-
-  .ease-out { transition-timing-function: var(--ease-out); animation-timing-function: var(--ease-out); }
-  .ease-in { transition-timing-function: var(--ease-in); animation-timing-function: var(--ease-in); }
-  .ease-spring { transition-timing-function: var(--ease-spring); animation-timing-function: var(--ease-spring); }
-  .ease-bounce { transition-timing-function: var(--ease-bounce); animation-timing-function: var(--ease-bounce); }
-  .ease-overshoot { transition-timing-function: var(--ease-overshoot); animation-timing-function: var(--ease-overshoot); }
-  .ease-linear { transition-timing-function: linear; animation-timing-function: linear; }
-
-  .delay-1 { transition-delay: 60ms; animation-delay: 60ms; }
-  .delay-2 { transition-delay: 140ms; animation-delay: 140ms; }
-  .delay-3 { transition-delay: 260ms; animation-delay: 260ms; }
-  .no-motion { transition: none !important; animation: none !important; }
-
-  /* Tell the compositor what is about to move, then let go. Never leave
-     will-change on permanently — it costs memory on every element. */
-  .will-move:is(:hover, :focus-within, .is-animating) { will-change: translate, scale, opacity; }
-
   @media (prefers-reduced-motion: no-preference) {
 
     /* --- Entrances --------------------------------------------------------
@@ -293,7 +261,13 @@
                   display var(--dur-2) allow-discrete;
     }
     .fade-swap[hidden] { opacity: 0; }
-    @starting-style { .fade-swap:not([hidden]) { opacity: 0; } }
+    /* The fade in is for a reveal, not for first paint. @starting-style
+       applies to any element with no earlier style, which on first paint is
+       all of them, so a boot screen or a panel that started open faded in
+       over the page. deck.js sets data-deck-ready on <html> once the first
+       frame has rendered. Without deck.js it still fades out; it just
+       appears without fading in. FINDINGS 83. */
+    @starting-style { html[data-deck-ready] .fade-swap:not([hidden]) { opacity: 0; } }
 
     /* --- Marquee / ticker --------------------------------------------------
        For a status strip: recalls, open campaigns, parts on backorder.

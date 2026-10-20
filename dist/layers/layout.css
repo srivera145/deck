@@ -160,7 +160,12 @@
      .stack instead. */
   .section { padding-block: var(--space-section); }
 
-  /* Everything stays on one line and scrolls sideways — cards, chips, dates */
+  /* Everything stays on one line and scrolls sideways — cards, chips, dates.
+     A scroll container clips on both axes, so the block padding leaves room
+     for a child's focus ring (2px, offset 2px) at the top and a scrollbar
+     at the bottom. scroll-padding-inline matches the bleed's padding, so a
+     card that snaps or is scrolled into view rests at the gutter like
+     everything else, not flush against the edge of the screen. */
   .scroller {
     display: flex;
     gap: var(--gap, var(--space-3));
@@ -168,9 +173,10 @@
     overscroll-behavior-inline: contain;
     scroll-snap-type: x proximity;
     scrollbar-width: none;
-    padding-block-end: var(--space-2);
+    padding-block: var(--space-1) var(--space-2);
     margin-inline: calc(var(--space-gutter) * -1);
     padding-inline: var(--space-gutter);
+    scroll-padding-inline: var(--space-gutter);
   }
   .scroller::-webkit-scrollbar { display: none; }
   .scroller > * { scroll-snap-align: start; flex: 0 0 auto; }

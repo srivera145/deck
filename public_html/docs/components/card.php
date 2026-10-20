@@ -317,11 +317,12 @@ $surfaces = [
       a list of identical links.
     </li>
     <li>
-      <strong>Focus is on the anchor, not the card.</strong> The focus ring is drawn
-      around the link text rather than the whole card, because the anchor is what has
-      focus. This is a known rough edge of the stretched-link pattern and Deck does not
-      work around it; if the ring matters more than the click target, use an ordinary
-      link and drop <code>.stretch</code>.
+      <strong>Focus is on the anchor, and the card follows it.</strong> The focus ring is
+      drawn around the link text rather than the whole card, because the anchor is what
+      has focus. <code>.card-link:focus-within</code> gives the card the same deeper
+      shadow and stronger border as hover, so a keyboard user can see which card they are
+      on. If a ring around the whole card matters more than the large click target, use
+      an ordinary link and drop <code>.stretch</code>.
     </li>
     <li>
       <strong>Text stays selectable.</strong> Unlike wrapping the card in an anchor,

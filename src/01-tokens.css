@@ -79,6 +79,11 @@
     --surface:     light-dark(var(--ink-0),   var(--ink-950));
     --surface-2:   light-dark(var(--ink-25),  var(--ink-900));
     --surface-hover:light-dark(var(--ink-50), var(--ink-900));
+    /* The recessed surface a control sits on: a progress, range or ring
+       track, a spinner's unlit arc, a skeleton's sweep. Darker than what it
+       sits on in both themes, and one step deeper than --bg-sunken. Reach for
+       this rather than --ink-200, which is near-white in dark mode too. */
+    --surface-recessed: light-dark(var(--ink-200), oklch(5% .008 var(--hue-neutral)));
     --line:        light-dark(var(--ink-200), oklch(28% .016 var(--hue-neutral)));
     --line-strong: light-dark(var(--ink-300), oklch(36% .018 var(--hue-neutral)));
 
@@ -100,6 +105,16 @@
     --brand-hover: light-dark(var(--brand-700), var(--brand-300));
     --brand-soft:  light-dark(var(--brand-50),  oklch(26% .05 var(--hue-brand)));
     --brand-soft-text: light-dark(var(--brand-800), var(--brand-200));
+    /* The same soft pair for each status: badges, alerts, banners. The -100
+       and -700 steps are fixed light values, so a --good-100 fill is a
+       near-white block in dark mode. The dark fill matches --brand-soft, so
+       an info alert and a good alert are the same weight side by side. */
+    --good-soft:      light-dark(var(--good-100), oklch(26% .05 var(--hue-good)));
+    --good-soft-text: light-dark(var(--good-700), oklch(80% .13 var(--hue-good)));
+    --warn-soft:      light-dark(var(--warn-100), oklch(26% .05 var(--hue-warn)));
+    --warn-soft-text: light-dark(var(--warn-700), oklch(84% .13 var(--hue-warn)));
+    --bad-soft:       light-dark(var(--bad-100),  oklch(26% .05 var(--hue-bad)));
+    --bad-soft-text:  light-dark(var(--bad-700),  oklch(76% .13 var(--hue-bad)));
 
     --focus: light-dark(var(--brand-500), var(--brand-300));
 

@@ -1,5 +1,5 @@
 /*! ==========================================================================
- *  Deck v0.1.3 — the CSS framework for Keel
+ *  Deck v0.1.4 — the CSS framework for Keel
  *  Mobile first. One file. No build step. No config. No dependencies.
  *
  *  <link rel="stylesheet" href="/assets/deck.css">
@@ -44,7 +44,7 @@
   deck.layout,     /* containers, stack, grid, containers   */
   deck.components, /* buttons, forms, cards, grid, charts   */
   deck.mobile,     /* sheets, tab bar, icons, emoji         */
-  deck.motion,     /* transitions, entrances, view trans.   */
+  deck.motion,     /* motion components, view transitions   */
   deck.effects,    /* gradients, 3D, surface treatments     */
   deck.utilities,  /* single-purpose classes                */
   deck.rtl,        /* direction fixes, must beat utilities  */
@@ -184,6 +184,11 @@
     --surface:     light-dark(var(--ink-0),   var(--ink-950));
     --surface-2:   light-dark(var(--ink-25),  var(--ink-900));
     --surface-hover:light-dark(var(--ink-50), var(--ink-900));
+    /* The recessed surface a control sits on: a progress, range or ring
+       track, a spinner's unlit arc, a skeleton's sweep. Darker than what it
+       sits on in both themes, and one step deeper than --bg-sunken. Reach for
+       this rather than --ink-200, which is near-white in dark mode too. */
+    --surface-recessed: light-dark(var(--ink-200), oklch(5% .008 var(--hue-neutral)));
     --line:        light-dark(var(--ink-200), oklch(28% .016 var(--hue-neutral)));
     --line-strong: light-dark(var(--ink-300), oklch(36% .018 var(--hue-neutral)));
 
@@ -205,6 +210,16 @@
     --brand-hover: light-dark(var(--brand-700), var(--brand-300));
     --brand-soft:  light-dark(var(--brand-50),  oklch(26% .05 var(--hue-brand)));
     --brand-soft-text: light-dark(var(--brand-800), var(--brand-200));
+    /* The same soft pair for each status: badges, alerts, banners. The -100
+       and -700 steps are fixed light values, so a --good-100 fill is a
+       near-white block in dark mode. The dark fill matches --brand-soft, so
+       an info alert and a good alert are the same weight side by side. */
+    --good-soft:      light-dark(var(--good-100), oklch(26% .05 var(--hue-good)));
+    --good-soft-text: light-dark(var(--good-700), oklch(80% .13 var(--hue-good)));
+    --warn-soft:      light-dark(var(--warn-100), oklch(26% .05 var(--hue-warn)));
+    --warn-soft-text: light-dark(var(--warn-700), oklch(84% .13 var(--hue-warn)));
+    --bad-soft:       light-dark(var(--bad-100),  oklch(26% .05 var(--hue-bad)));
+    --bad-soft-text:  light-dark(var(--bad-700),  oklch(76% .13 var(--hue-bad)));
 
     --focus: light-dark(var(--brand-500), var(--brand-300));
 
@@ -714,7 +729,12 @@
      .stack instead. */
   .section { padding-block: var(--space-section); }
 
-  /* Everything stays on one line and scrolls sideways — cards, chips, dates */
+  /* Everything stays on one line and scrolls sideways — cards, chips, dates.
+     A scroll container clips on both axes, so the block padding leaves room
+     for a child's focus ring (2px, offset 2px) at the top and a scrollbar
+     at the bottom. scroll-padding-inline matches the bleed's padding, so a
+     card that snaps or is scrolled into view rests at the gutter like
+     everything else, not flush against the edge of the screen. */
   .scroller {
     display: flex;
     gap: var(--gap, var(--space-3));
@@ -722,9 +742,10 @@
     overscroll-behavior-inline: contain;
     scroll-snap-type: x proximity;
     scrollbar-width: none;
-    padding-block-end: var(--space-2);
+    padding-block: var(--space-1) var(--space-2);
     margin-inline: calc(var(--space-gutter) * -1);
     padding-inline: var(--space-gutter);
+    scroll-padding-inline: var(--space-gutter);
   }
   .scroller::-webkit-scrollbar { display: none; }
   .scroller > * { scroll-snap-align: start; flex: 0 0 auto; }
@@ -828,6 +849,13 @@
                 box-shadow var(--dur-1) var(--ease-out),
                 translate var(--dur-1) var(--ease-out);
   }
+
+  /* A label split into text and a bare <span>, `Save <span>changes</span>`,
+     is one run of words. As two flex items the parts were held apart by the
+     gap, about twice a word space; display: contents puts the span's text
+     back in the run. A span with a class or with children keeps its box:
+     a badge, an avatar, .sr-only, or one span wrapping the whole label. */
+  .btn > span:not([class], [hidden]):not(:has(*)) { display: contents; }
 
   /* Every button clears the 44px touch target even when it looks smaller */
   .btn { position: relative; }
@@ -961,6 +989,32 @@
   .btn-group > .btn:last-child  { border-start-end-radius: var(--r-sm); border-end-end-radius: var(--r-sm); }
   .btn-group > .btn + .btn { margin-inline-start: -1px; }
   .btn-group > .btn:hover, .btn-group > .btn:focus-visible { z-index: 1; }
+
+  /* --- Toggle ------------------------------------------------------------- */
+  /* A button that stays on, at [aria-pressed="true"].
+     That is Deck's attribute for "on". .chip, .reaction, .datepicker-preset
+     and .segmented take [aria-selected="true"] as an equal alternative; a
+     button does not, because aria-selected is not valid on role="button".
+     On is the brand tint with a brand edge and no lift. .btn-soft is that
+     tint already, so it fills solid instead, and the solid variants keep
+     their colour and sink a shade. Inside .segmented the control draws the
+     on state, so the button adds none of its own. */
+  .btn[aria-pressed="true"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *)) {
+    --btn-bg: var(--brand-soft);
+    --btn-text: var(--brand-soft-text);
+    --btn-border: color-mix(in oklab, var(--brand) 45%, transparent);
+    --btn-shadow: none;
+  }
+  .btn[aria-pressed="true"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *)):hover {
+    background: color-mix(in oklab, var(--brand-soft) 80%, var(--brand-300));
+    border-color: var(--btn-border);
+  }
+  .btn-soft[aria-pressed="true"]:not(:where(.segmented > *)) { --btn-bg: var(--brand-600); --btn-text: var(--text-on-brand); }
+  .btn-soft[aria-pressed="true"]:not(:where(.segmented > *)):hover { background: var(--brand-700); }
+  .btn:is(.btn-primary, .btn-accent, .btn-danger)[aria-pressed="true"] {
+    --btn-shadow: none;
+    background: oklch(from var(--btn-bg) calc(l - .06) c h);
+  }
 
   /* --- Loading ------------------------------------------------------------ */
   .btn.is-loading { color: transparent; pointer-events: none; }
@@ -1295,12 +1349,12 @@
   .range::-webkit-slider-runnable-track {
     block-size: 6px;
     border-radius: var(--r-full);
-    background: var(--ink-200);
+    background: var(--surface-recessed);
   }
   .range::-moz-range-track {
     block-size: 6px;
     border-radius: var(--r-full);
-    background: var(--ink-200);
+    background: var(--surface-recessed);
   }
   .range::-webkit-slider-thumb {
     appearance: none;
@@ -1395,9 +1449,18 @@
     padding-block: var(--space-3);
     padding-block-end: calc(var(--space-3) + env(safe-area-inset-bottom));
   }
+  /* On a page with a .tabbar the bar sits above it rather than under it,
+     by the clearance the body already leaves (08-mobile.css). The tab bar
+     clears the home indicator itself, so this bar drops its safe-area
+     padding until the tab bar hides at 48rem. */
+  body:has(.tabbar) .form-actions-sticky {
+    inset-block-end: var(--tabbar-clearance);
+    padding-block-end: var(--space-3);
+  }
   .form-actions-sticky > .btn { flex: 1 1 auto; }
   @media (min-width: 48rem) {
     .form-actions-sticky > .btn { flex: 0 0 auto; }
+    body:has(.tabbar) .form-actions-sticky { padding-block-end: calc(var(--space-3) + env(safe-area-inset-bottom)); }
   }
 }
 
@@ -1447,9 +1510,11 @@
   .card-media { margin: 0; }
   .card-media img { inline-size: 100%; object-fit: cover; }
 
-  /* Whole card is the link, but nested links still work */
+  /* Whole card is the link, but nested links still work. :focus-within
+     gives a keyboard user the same lift as hover when they tab to the
+     stretched link, or to anything else inside the card. */
   .card-link { position: relative; transition: box-shadow var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease-out); }
-  .card-link:hover { box-shadow: var(--shadow-3); border-color: var(--line-strong); }
+  .card-link:is(:hover, :focus-within) { box-shadow: var(--shadow-3); border-color: var(--line-strong); }
   .card-link .stretch::after { content: ""; position: absolute; inset: 0; }
 
   /* A card with no border, shadow or background. Grouping without a box
@@ -1498,11 +1563,11 @@
   /* Brand tint. For a label that names a category rather than a status. */
   .badge-brand { background: var(--brand-soft); color: var(--brand-soft-text); border-color: transparent; }
   /* Paid, shipped, passing, active. */
-  .badge-good  { background: var(--good-100); color: var(--good-700); border-color: transparent; }
+  .badge-good  { background: var(--good-soft); color: var(--good-soft-text); border-color: transparent; }
   /* Pending, expiring: needs attention, nothing is broken. */
-  .badge-warn  { background: var(--warn-100); color: var(--warn-700); border-color: transparent; }
+  .badge-warn  { background: var(--warn-soft); color: var(--warn-soft-text); border-color: transparent; }
   /* Failed, overdue, rejected. */
-  .badge-bad   { background: var(--bad-100);  color: var(--bad-700);  border-color: transparent; }
+  .badge-bad   { background: var(--bad-soft);  color: var(--bad-soft-text);  border-color: transparent; }
   /* Filled with the brand colour. The highest-emphasis badge; use one per
      view or it stops meaning anything. */
   .badge-solid { background: var(--brand-600); color: var(--text-on-brand); border-color: transparent; }
@@ -1516,6 +1581,9 @@
     background: currentColor;
   }
 
+  /* A filter or choice pill that is on at [aria-pressed="true"].
+     [aria-selected="true"], for a chip that is an option in a listbox, and
+     .is-active are equal alternatives with the same look. */
   .chip {
     display: inline-flex;
     align-items: center;
@@ -1532,7 +1600,7 @@
     transition: background-color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out);
   }
   .chip:hover { background: var(--surface-hover); }
-  .chip[aria-pressed="true"], .chip.is-active {
+  .chip[aria-pressed="true"], .chip[aria-selected="true"], .chip.is-active {
     background: var(--brand-600);
     border-color: var(--brand-600);
     color: var(--text-on-brand);
@@ -1565,11 +1633,11 @@
   /* Something the reader should know before continuing. */
   .alert-info { background: var(--brand-soft); border-color: transparent; border-inline-start-color: var(--brand-500); color: var(--brand-soft-text); }
   /* Confirmation that something worked. */
-  .alert-good { background: var(--good-100); border-color: transparent; border-inline-start-color: var(--good-500); color: var(--good-700); }
+  .alert-good { background: var(--good-soft); border-color: transparent; border-inline-start-color: var(--good-500); color: var(--good-soft-text); }
   /* A consequence the reader should understand first. */
-  .alert-warn { background: var(--warn-100); border-color: transparent; border-inline-start-color: var(--warn-500); color: var(--warn-700); }
+  .alert-warn { background: var(--warn-soft); border-color: transparent; border-inline-start-color: var(--warn-500); color: var(--warn-soft-text); }
   /* Something failed, or is about to. */
-  .alert-bad  { background: var(--bad-100);  border-color: transparent; border-inline-start-color: var(--bad-500);  color: var(--bad-700); }
+  .alert-bad  { background: var(--bad-soft);  border-color: transparent; border-inline-start-color: var(--bad-500);  color: var(--bad-soft-text); }
   .alert :is(.alert-body, p) { color: inherit; opacity: .9; }
 
   /* --- Avatar ------------------------------------------------------------- */
@@ -1723,6 +1791,13 @@
   }
   .list-row + .list-row { border-block-start: 1px solid var(--line); }
   .list-row:hover { background: var(--surface-hover); }
+  /* The focus ring goes inside the row. .list clips, so a ring drawn
+     outside lost both sides of every row and the outer edge of the first
+     and last. While focused, the end rows take the list's corner radius,
+     so the ring follows the rounded clip instead of being cut by it. */
+  .list-row:focus-visible { outline-offset: -2px; }
+  .list-row:first-child:focus-visible { border-start-start-radius: inherit; border-start-end-radius: inherit; }
+  .list-row:last-child:focus-visible { border-end-start-radius: inherit; border-end-end-radius: inherit; }
   /* The text column of a row. min-inline-size: 0 is the important half: a
      flex item's minimum is its content by default, so without it a long
      value pushes the trailing content off the end of the row. */
@@ -1789,10 +1864,12 @@
 
   /* --- Segmented control (iOS-style, good on a phone) --------------------- */
   /* A one-of-N control: equal-width children in a sunken track with the
-     selected one raised. Styled from [aria-selected="true"] or .is-active.
-     Built from radio inputs it needs no JavaScript and gets arrow keys free —
-     but Deck does not style :has(:checked), so that version needs one rule of
-     your own. */
+     selected one raised. Styled from [aria-selected="true"] for a tablist,
+     [aria-pressed="true"] for a group of toggle buttons, or .is-active; all
+     three look the same, and deck.js moves whichever attribute the children
+     carry. Built from radio inputs it needs no JavaScript and gets arrow keys
+     free — but Deck does not style :has(:checked), so that version needs one
+     rule of your own. */
   .segmented {
     display: inline-flex;
     padding: 3px;
@@ -1818,7 +1895,7 @@
     white-space: nowrap;
     transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out);
   }
-  .segmented > [aria-selected="true"], .segmented > .is-active {
+  .segmented > [aria-selected="true"], .segmented > [aria-pressed="true"], .segmented > .is-active {
     background: var(--surface);
     color: var(--text);
     box-shadow: var(--shadow-1);
@@ -1913,12 +1990,12 @@
     inline-size: 100%;
     block-size: 8px;
     border-radius: var(--r-full);
-    background: var(--ink-200);
+    background: var(--surface-recessed);
     overflow: hidden;
     appearance: none;
     border: 0;
   }
-  .progress::-webkit-progress-bar { background: var(--ink-200); }
+  .progress::-webkit-progress-bar { background: var(--surface-recessed); }
   .progress::-webkit-progress-value { background: var(--brand-600); border-radius: var(--r-full); transition: inline-size var(--dur-3) var(--ease-out); }
   .progress::-moz-progress-bar { background: var(--brand-600); border-radius: var(--r-full); }
 
@@ -1948,7 +2025,7 @@
     font-size: var(--text-xs);
     font-weight: 620;
     font-variant-numeric: tabular-nums;
-    background: conic-gradient(var(--brand-600) calc(var(--value) * 1%), var(--ink-200) 0);
+    background: conic-gradient(var(--brand-600) calc(var(--value) * 1%), var(--surface-recessed) 0);
     mask: radial-gradient(farthest-side, transparent calc(100% - var(--thickness)), #000 calc(100% - var(--thickness) + 1px));
     -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--thickness)), #000 calc(100% - var(--thickness) + 1px));
   }
@@ -1963,7 +2040,7 @@
   .spinner {
     inline-size: 20px;
     block-size: 20px;
-    border: 2px solid var(--ink-200);
+    border: 2px solid var(--surface-recessed);
     border-block-start-color: var(--brand-600);
     border-radius: var(--r-full);
     animation: dk-spin .62s linear infinite;
@@ -1972,7 +2049,7 @@
 
   .skeleton {
     background: linear-gradient(100deg,
-      var(--ink-100) 30%, var(--ink-200) 48%, var(--ink-100) 66%);
+      var(--bg-sunken) 30%, var(--surface-recessed) 48%, var(--bg-sunken) 66%);
     background-size: 300% 100%;
     animation: dk-shimmer 1.4s var(--ease-in-out) infinite;
     border-radius: var(--r-xs);
@@ -2079,10 +2156,21 @@
      open attribute: only showModal() gives the top layer, the backdrop, the
      focus trap and an inert background. The open and close animate because
      display and overlay are in the transition with allow-discrete, which is
-     what keeps the element rendered long enough to fade out. */
+     what keeps the element rendered long enough to fade out.
+     margin: auto centres it: the browser's own dialog styles do that, but
+     the reset's `* { margin: 0 }` removes them, so Deck restores it here.
+     An open modal is a flex column, so a body taller than the cap shrinks
+     and scrolls (a scroll container's minimum height is 0) while the header
+     and footer keep their height; as a block, the cap clipped everything
+     past it, footer included. Only [open] sets display, because the browser
+     gives a closed dialog display: none. flex-direction sits on .modal
+     itself, so the column holds while display: flex lingers through the
+     close transition. */
   .modal {
     inline-size: min(34rem, calc(100vw - var(--space-8)));
     max-block-size: min(85dvh, 48rem);
+    margin: auto;
+    flex-direction: column;
     padding: 0;
     border: 1px solid var(--line);
     border-radius: var(--r-lg);
@@ -2099,7 +2187,7 @@
                 overlay var(--dur-2) allow-discrete,
                 display var(--dur-2) allow-discrete;
   }
-  .modal[open] { opacity: 1; scale: 1; translate: 0; }
+  .modal[open] { display: flex; opacity: 1; scale: 1; translate: 0; }
   @starting-style { .modal[open] { opacity: 0; scale: .97; translate: 0 8px; } }
   .modal::backdrop {
     background: oklch(18% .02 var(--hue-neutral) / .48);
@@ -2110,6 +2198,10 @@
   }
   .modal[open]::backdrop { opacity: 1; }
   @starting-style { .modal[open]::backdrop { opacity: 0; } }
+  /* A <form method="dialog"> around the regions is the modal's only flex
+     item, so it is a column that may shrink as well, or the body inside it
+     would never scroll. */
+  .modal > form { display: flex; flex-direction: column; min-block-size: 0; }
 
   /* The title row. A flex row aligned to flex-start, so a long title and a
      close button line up on the first line. */
@@ -2231,8 +2323,14 @@
   .navbar-links { display: none; gap: var(--space-1); align-items: center; }
   @media (min-width: 48rem) { .navbar-links { display: flex; } }
   /* One destination in a .navbar. Carries the hover and current-page
-     states; use .btn only for actions, never for navigation. */
+     states; use .btn only for actions, never for navigation. inline-flex
+     centres an icon on the label rather than sitting it on the baseline,
+     where it could push the line box taller, so a row that mixes icon and
+     text-only links keeps one height. */
   .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
     padding: var(--space-2) var(--space-3);
     border-radius: var(--r-sm);
     color: var(--text-muted);
@@ -2387,9 +2485,15 @@
   .tabbar-item[aria-current] .icon { scale: 1.06; }
   .tabbar-item .icon { transition: scale var(--dur-2) var(--ease-spring); }
 
-  /* Give the page room so the tab bar never covers the last row */
-  body:has(.tabbar) { padding-block-end: calc(var(--tap) + var(--space-4) + env(safe-area-inset-bottom)); }
-  @media (min-width: 48rem) { body:has(.tabbar) { padding-block-end: 0; } }
+  /* Give the page room so the tab bar never covers the last row.
+     --tabbar-clearance is that room, and anything else pinned to the
+     bottom of the viewport reads it to sit above the bar
+     (.form-actions-sticky in 06-forms.css). */
+  body:has(.tabbar) {
+    --tabbar-clearance: calc(var(--tap) + var(--space-4) + env(safe-area-inset-bottom));
+    padding-block-end: var(--tabbar-clearance);
+  }
+  @media (min-width: 48rem) { body:has(.tabbar) { --tabbar-clearance: 0px; } }
 
   /* --- Safe area helpers --------------------------------------------------- */
   .safe-top { padding-block-start: env(safe-area-inset-top); }
@@ -2402,8 +2506,12 @@
      ---------------------------------------------------------------------- */
   /* An SVG icon sized in em, so it scales with the text it sits beside and
      lands on the baseline. Icons are filled with currentColor and inherit
-     the surrounding colour. */
+     the surrounding colour. inline-block undoes the reset's
+     `svg { display: block }`, which would otherwise put an icon in running
+     text on a line of its own; in flex and grid rows (buttons, alerts,
+     tiles) items are blocks anyway, so nothing changes there. */
   .icon {
+    display: inline-block;
     inline-size: 1.25em;
     block-size: 1.25em;
     flex: 0 0 auto;
@@ -2513,7 +2621,8 @@
     color: var(--text-muted);
     cursor: pointer;
   }
-  .reaction[aria-pressed="true"] { background: var(--brand-soft); border-color: var(--brand-300); color: var(--brand-soft-text); }
+  /* On at [aria-pressed="true"], or the equal [aria-selected="true"]. */
+  .reaction[aria-pressed="true"], .reaction[aria-selected="true"] { background: var(--brand-soft); border-color: var(--brand-300); color: var(--brand-soft-text); }
 }
 
 /* ==========================================================================
@@ -2696,6 +2805,48 @@
   .no-select { user-select: none; }
   .cursor-pointer { cursor: pointer; }
 
+  /* These were in deck.motion, which comes before this layer, so any motion
+     component that sets the transition or animation shorthand later in
+     16-motion.css reset them: .fade-swap.dur-4 ran at --dur-2, and
+     .enter-rise.delay-3 never waited. Here they beat every component.
+     .transition-* stays above the scales so .transition.dur-4 still works.
+     FINDINGS 82. */
+  /* --- Motion ------------------------------------------------------------- */
+  .transition        { transition: all var(--dur-2) var(--ease-out); }
+  .transition-colors { transition: background-color var(--dur-1) var(--ease-out),
+                                   border-color var(--dur-1) var(--ease-out),
+                                   color var(--dur-1) var(--ease-out),
+                                   fill var(--dur-1) var(--ease-out),
+                                   stroke var(--dur-1) var(--ease-out); }
+  .transition-move   { transition: translate var(--dur-2) var(--ease-out),
+                                   scale var(--dur-2) var(--ease-out),
+                                   rotate var(--dur-2) var(--ease-out); }
+  .transition-size   { transition: inline-size var(--dur-3) var(--ease-out),
+                                   block-size var(--dur-3) var(--ease-out); }
+  .transition-opacity{ transition: opacity var(--dur-2) var(--ease-out); }
+
+  .dur-1 { transition-duration: var(--dur-1); animation-duration: var(--dur-1); }
+  .dur-2 { transition-duration: var(--dur-2); animation-duration: var(--dur-2); }
+  .dur-3 { transition-duration: var(--dur-3); animation-duration: var(--dur-3); }
+  .dur-4 { transition-duration: var(--dur-4); animation-duration: var(--dur-4); }
+  .dur-5 { transition-duration: var(--dur-5); animation-duration: var(--dur-5); }
+
+  .ease-out { transition-timing-function: var(--ease-out); animation-timing-function: var(--ease-out); }
+  .ease-in { transition-timing-function: var(--ease-in); animation-timing-function: var(--ease-in); }
+  .ease-spring { transition-timing-function: var(--ease-spring); animation-timing-function: var(--ease-spring); }
+  .ease-bounce { transition-timing-function: var(--ease-bounce); animation-timing-function: var(--ease-bounce); }
+  .ease-overshoot { transition-timing-function: var(--ease-overshoot); animation-timing-function: var(--ease-overshoot); }
+  .ease-linear { transition-timing-function: linear; animation-timing-function: linear; }
+
+  .delay-1 { transition-delay: 60ms; animation-delay: 60ms; }
+  .delay-2 { transition-delay: 140ms; animation-delay: 140ms; }
+  .delay-3 { transition-delay: 260ms; animation-delay: 260ms; }
+  .no-motion { transition: none !important; animation: none !important; }
+
+  /* Tell the compositor what is about to move, then let go. Never leave
+     will-change on permanently — it costs memory on every element. */
+  .will-move:is(:hover, :focus-within, .is-animating) { will-change: translate, scale, opacity; }
+
   /* --- Accessibility ------------------------------------------------------ */
   .sr-only {
     position: absolute;
@@ -2850,6 +3001,8 @@
       background: var(--surface-2);
     }
   }
+  /* A shortcut in the preset rail, on at [aria-pressed="true"] or the equal
+     [aria-selected="true"]. */
   .datepicker-preset {
     padding: var(--space-2) var(--space-3);
     min-block-size: 36px;
@@ -2863,7 +3016,7 @@
     transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out);
   }
   .datepicker-preset:hover { background: var(--surface-hover); color: var(--text); }
-  .datepicker-preset[aria-pressed="true"] { background: var(--brand-soft); color: var(--brand-soft-text); font-weight: 600; }
+  .datepicker-preset[aria-pressed="true"], .datepicker-preset[aria-selected="true"] { background: var(--brand-soft); color: var(--brand-soft-text); font-weight: 600; }
 
   /* --- Calendar ----------------------------------------------------------- */
   .datepicker-main { padding: var(--space-3); }
@@ -3180,11 +3333,15 @@
   }
 
   /* --- Listbox ------------------------------------------------------------- */
-  /* The option list. A positioned sibling by default, which a clipping
-     ancestor can cut off; 25-anchor.css moves it to the top layer where
-     anchor positioning exists, which is the fix for the combobox-inside-a-modal
-     bug. */
+  /* The option list. deck.js draws only the rows near the scroll position
+     and pads for the rest, and keeps the view steady itself as rows are
+     measured, so the browser's scroll anchoring is off: two of them
+     correcting the same jump would make one. Its size and place are set by
+     script or by anchor positioning and read back at once, so nothing on it
+     transitions; the reduced-motion reset would otherwise give each change
+     a .01ms transition, and the read would get the old value. */
   .combo-list {
+    transition-property: none;
     position: absolute;
     inset-block-start: calc(100% + 4px);
     inset-inline: 0;
@@ -3194,16 +3351,30 @@
     max-block-size: min(20rem, 50dvh);
     overflow-y: auto;
     overscroll-behavior: contain;
+    overflow-anchor: none;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--r-md);
     box-shadow: var(--shadow-4);
     display: none;
   }
+  /* deck.js makes the list a popover, so it opens in the top layer: no
+     ancestor's overflow, containment, transform or stacking context can clip
+     it or trap it. 25-anchor.css places it, or deck.js where anchor
+     positioning is missing. This undoes the browser's own popover box, and
+     :where() keeps it at the weight of .combo-list so 25-anchor.css, later
+     in the cascade, still sets the margin. */
+  .combo-list:where([popover]) {
+    position: fixed;
+    inset: auto;
+    margin: 0;
+    color: inherit;
+  }
   .combo.is-open .combo-list { display: block; animation: dk-combo-in var(--dur-2) var(--ease-out); }
   @keyframes dk-combo-in { from { opacity: 0; translate: 0 -4px; } }
 
-  /* Open upward when there is no room below */
+  /* Open upward when there is no room below. Only for a browser with no
+     popover, where the list is still a positioned sibling of the control. */
   .combo-list.is-above { inset-block: auto calc(100% + 4px); }
 
   .combo-option {
@@ -3296,20 +3467,13 @@
   }
   @media (pointer: fine) { .combo.is-open .combo-hint { display: flex; } }
 
-  /* --- Phone: the list takes over the screen ------------------------------- */
+  /* --- Phone: rows a finger can hit --------------------------------------- */
+  /* The list stays anchored to the field at every width. It used to become a
+     sheet across the bottom of the screen, which covered the field being
+     typed in, and inside a .card was pinned to the card instead of the
+     screen. */
   @media (max-width: 30rem) {
-    .combo.is-open .combo-list {
-      position: fixed;
-      inset: auto 0 0 0;
-      max-block-size: 70dvh;
-      border-radius: var(--r-lg) var(--r-lg) 0 0;
-      border-inline: 0;
-      border-block-end: 0;
-      padding-block-end: calc(var(--space-2) + env(safe-area-inset-bottom));
-      animation: dk-combo-up var(--dur-3) var(--ease-out);
-    }
     .combo-option { min-block-size: var(--tap); }
-    @keyframes dk-combo-up { from { translate: 0 100%; } }
   }
 }
 
@@ -4231,47 +4395,15 @@
     --travel: 12px;   /* how far entrances move */
   }
 
+  /* The utilities that used to open this file -- .transition-*, .dur-*,
+     .ease-*, .delay-*, .no-motion and .will-move -- are in 09-utilities.css.
+     In this layer, every component below them reset them. FINDINGS 82. */
+
   /* --- Reduced motion ------------------------------------------------------
      Everything below is wrapped in no-preference. A person who asked their OS
      to calm things down gets the end state instantly, with one exception:
      loading indicators keep moving, because a frozen spinner reads as broken.
      ---------------------------------------------------------------------- */
-  /* --- Transition utilities ------------------------------------------------ */
-  .transition        { transition: all var(--dur-2) var(--ease-out); }
-  .transition-colors { transition: background-color var(--dur-1) var(--ease-out),
-                                   border-color var(--dur-1) var(--ease-out),
-                                   color var(--dur-1) var(--ease-out),
-                                   fill var(--dur-1) var(--ease-out),
-                                   stroke var(--dur-1) var(--ease-out); }
-  .transition-move   { transition: translate var(--dur-2) var(--ease-out),
-                                   scale var(--dur-2) var(--ease-out),
-                                   rotate var(--dur-2) var(--ease-out); }
-  .transition-size   { transition: inline-size var(--dur-3) var(--ease-out),
-                                   block-size var(--dur-3) var(--ease-out); }
-  .transition-opacity{ transition: opacity var(--dur-2) var(--ease-out); }
-
-  .dur-1 { transition-duration: var(--dur-1); animation-duration: var(--dur-1); }
-  .dur-2 { transition-duration: var(--dur-2); animation-duration: var(--dur-2); }
-  .dur-3 { transition-duration: var(--dur-3); animation-duration: var(--dur-3); }
-  .dur-4 { transition-duration: var(--dur-4); animation-duration: var(--dur-4); }
-  .dur-5 { transition-duration: var(--dur-5); animation-duration: var(--dur-5); }
-
-  .ease-out { transition-timing-function: var(--ease-out); animation-timing-function: var(--ease-out); }
-  .ease-in { transition-timing-function: var(--ease-in); animation-timing-function: var(--ease-in); }
-  .ease-spring { transition-timing-function: var(--ease-spring); animation-timing-function: var(--ease-spring); }
-  .ease-bounce { transition-timing-function: var(--ease-bounce); animation-timing-function: var(--ease-bounce); }
-  .ease-overshoot { transition-timing-function: var(--ease-overshoot); animation-timing-function: var(--ease-overshoot); }
-  .ease-linear { transition-timing-function: linear; animation-timing-function: linear; }
-
-  .delay-1 { transition-delay: 60ms; animation-delay: 60ms; }
-  .delay-2 { transition-delay: 140ms; animation-delay: 140ms; }
-  .delay-3 { transition-delay: 260ms; animation-delay: 260ms; }
-  .no-motion { transition: none !important; animation: none !important; }
-
-  /* Tell the compositor what is about to move, then let go. Never leave
-     will-change on permanently — it costs memory on every element. */
-  .will-move:is(:hover, :focus-within, .is-animating) { will-change: translate, scale, opacity; }
-
   @media (prefers-reduced-motion: no-preference) {
 
     /* --- Entrances --------------------------------------------------------
@@ -4484,7 +4616,13 @@
                   display var(--dur-2) allow-discrete;
     }
     .fade-swap[hidden] { opacity: 0; }
-    @starting-style { .fade-swap:not([hidden]) { opacity: 0; } }
+    /* The fade in is for a reveal, not for first paint. @starting-style
+       applies to any element with no earlier style, which on first paint is
+       all of them, so a boot screen or a panel that started open faded in
+       over the page. deck.js sets data-deck-ready on <html> once the first
+       frame has rendered. Without deck.js it still fades out; it just
+       appears without fading in. FINDINGS 83. */
+    @starting-style { html[data-deck-ready] .fade-swap:not([hidden]) { opacity: 0; } }
 
     /* --- Marquee / ticker --------------------------------------------------
        For a status strip: recalls, open campaigns, parts on backorder.
@@ -5188,6 +5326,9 @@
     -webkit-mask-image: none;
   }
   .scroller { mask-image: linear-gradient(90deg, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, #000 92%, transparent); }
+  /* The fade would dim the focus ring of a card resting at the end edge,
+     so it lifts while keyboard focus is in the row. */
+  .scroller:has(:focus-visible) { mask-image: none; -webkit-mask-image: none; }
 
   /* --- Sheen ---------------------------------------------------------------
      A highlight that sweeps across on hover. --sheen is registered, so it
@@ -6212,8 +6353,21 @@
   }
   .banner-fixed { position: fixed; inset-inline: 0; }
   .banner-dark { background: var(--ink-900); color: var(--ink-100); border-color: transparent; }
-  .banner-warn { background: var(--warn-100); color: var(--warn-700); border-color: transparent; }
+  .banner-warn { background: var(--warn-soft); color: var(--warn-soft-text); border-color: transparent; }
+  /* The dismiss button, a --tap square with the icon centred in it.
+     The square clears the touch target while the icon keeps its own size,
+     and a negative --space-3 margin lets it reach into the banner's padding
+     rather than make the strip taller. A .btn.banner-close keeps the
+     button's size, because .btn's ::before already clears --tap. */
   .banner-close { margin-inline-start: auto; opacity: .7; cursor: pointer; flex: 0 0 auto; }
+  .banner-close:not(.btn) {
+    display: inline-grid;
+    place-items: center;
+    min-inline-size: var(--tap);
+    min-block-size: var(--tap);
+    margin-block: calc(var(--space-3) * -1);
+    margin-inline-end: calc(var(--space-3) * -1);
+  }
   .banner-close:hover { opacity: 1; }
   .banner[hidden] { display: none; }
 
@@ -6634,7 +6788,7 @@
     grid-area: 1 / 1;
     block-size: 6px;
     border-radius: var(--r-full);
-    background: var(--ink-200);
+    background: var(--surface-recessed);
   }
   .range-pair::after {
     content: "";
@@ -7328,20 +7482,30 @@
     .menu-match { inline-size: anchor-size(inline); min-inline-size: 0; }
 
     /* --- Combobox list ------------------------------------------------------
-       The listbox is a sibling today, positioned with absolute. With anchor
-       positioning it can go in the top layer and escape overflow:hidden
-       ancestors, which is the bug that bites every combobox inside a modal.
+       deck.js opens the list as a popover, in the top layer, so its
+       containing block is the viewport and no ancestor can clip it. That is
+       also what position-area needs: as an absolute child of .combo, the
+       area below the control was measured inside .combo, which is exactly as
+       tall as the control, so there was no room on either side and the list
+       was pushed back over the field. deck.js gives each combobox its own
+       --anchor. Below at full height if that fits, above if that fits,
+       otherwise below in whatever room there is; the list's 50dvh cap means
+       that room is close to half the screen.
        ---------------------------------------------------------------------- */
     .combo-control { anchor-name: var(--anchor, --combo); }
     .combo-list {
       position-anchor: var(--anchor, --combo);
       position-area: block-end;
-      position-try-fallbacks: flip-block;
+      position-try-fallbacks: flip-block, --dk-combo-fit;
       inline-size: anchor-size(inline);
       inset: auto;
       margin-block: 4px;
     }
     .combo-list.is-above { inset: auto; }
+    @position-try --dk-combo-fit {
+      position-area: block-end;
+      max-block-size: calc(100% - 8px);
+    }
 
     /* --- Tooltips -----------------------------------------------------------
        The ::after tooltip could never flip. This one can, and it can carry a

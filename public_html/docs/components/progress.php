@@ -165,7 +165,7 @@ require __DIR__ . '/../_layout.php';
 
 <section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
-  <?php docs_token_table(['--ink-200', '--brand-600', '--r-full', '--text-xs', '--dur-3', '--ease-out']); ?>
+  <?php docs_token_table(['--surface-recessed', '--brand-600', '--r-full', '--text-xs', '--dur-3', '--ease-out']); ?>
 </section>
 
 <section class="stack stack-3">

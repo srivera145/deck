@@ -115,9 +115,15 @@
   .tabbar-item[aria-current] .icon { scale: 1.06; }
   .tabbar-item .icon { transition: scale var(--dur-2) var(--ease-spring); }
 
-  /* Give the page room so the tab bar never covers the last row */
-  body:has(.tabbar) { padding-block-end: calc(var(--tap) + var(--space-4) + env(safe-area-inset-bottom)); }
-  @media (min-width: 48rem) { body:has(.tabbar) { padding-block-end: 0; } }
+  /* Give the page room so the tab bar never covers the last row.
+     --tabbar-clearance is that room, and anything else pinned to the
+     bottom of the viewport reads it to sit above the bar
+     (.form-actions-sticky in 06-forms.css). */
+  body:has(.tabbar) {
+    --tabbar-clearance: calc(var(--tap) + var(--space-4) + env(safe-area-inset-bottom));
+    padding-block-end: var(--tabbar-clearance);
+  }
+  @media (min-width: 48rem) { body:has(.tabbar) { --tabbar-clearance: 0px; } }
 
   /* --- Safe area helpers --------------------------------------------------- */
   .safe-top { padding-block-start: env(safe-area-inset-top); }
@@ -130,8 +136,12 @@
      ---------------------------------------------------------------------- */
   /* An SVG icon sized in em, so it scales with the text it sits beside and
      lands on the baseline. Icons are filled with currentColor and inherit
-     the surrounding colour. */
+     the surrounding colour. inline-block undoes the reset's
+     `svg { display: block }`, which would otherwise put an icon in running
+     text on a line of its own; in flex and grid rows (buttons, alerts,
+     tiles) items are blocks anyway, so nothing changes there. */
   .icon {
+    display: inline-block;
     inline-size: 1.25em;
     block-size: 1.25em;
     flex: 0 0 auto;
@@ -241,5 +251,6 @@
     color: var(--text-muted);
     cursor: pointer;
   }
-  .reaction[aria-pressed="true"] { background: var(--brand-soft); border-color: var(--brand-300); color: var(--brand-soft-text); }
+  /* On at [aria-pressed="true"], or the equal [aria-selected="true"]. */
+  .reaction[aria-pressed="true"], .reaction[aria-selected="true"] { background: var(--brand-soft); border-color: var(--brand-300); color: var(--brand-soft-text); }
 }

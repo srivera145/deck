@@ -230,6 +230,14 @@ require __DIR__ . '/../_layout.php';
     the whole panel into a row and the rail becomes a column beside it.
   </p>
   <p>
+    A <code>.datepicker-preset</code> is on at <code>aria-pressed="true"</code> — the brand
+    tint and a heavier weight — or at the equal <code>aria-selected="true"</code>, as with
+    <a href="button.php#on-attribute">every Deck component that has an on state</a>.
+    The style is ready, but nothing uses it yet: deck.js redraws the rail on every
+    interaction with neither attribute on any preset, so the picker never shows which
+    preset is active, and an attribute set by your own code is gone on the next click.
+  </p>
+  <p>
     <code>.datepicker-jump</code> opens <code>.datepicker-months</code>, a grid of twelve
     months, so a reader choosing a date two years out does not press the next-month arrow
     twenty-four times.

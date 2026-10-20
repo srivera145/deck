@@ -294,12 +294,12 @@
   .range::-webkit-slider-runnable-track {
     block-size: 6px;
     border-radius: var(--r-full);
-    background: var(--ink-200);
+    background: var(--surface-recessed);
   }
   .range::-moz-range-track {
     block-size: 6px;
     border-radius: var(--r-full);
-    background: var(--ink-200);
+    background: var(--surface-recessed);
   }
   .range::-webkit-slider-thumb {
     appearance: none;
@@ -394,8 +394,17 @@
     padding-block: var(--space-3);
     padding-block-end: calc(var(--space-3) + env(safe-area-inset-bottom));
   }
+  /* On a page with a .tabbar the bar sits above it rather than under it,
+     by the clearance the body already leaves (08-mobile.css). The tab bar
+     clears the home indicator itself, so this bar drops its safe-area
+     padding until the tab bar hides at 48rem. */
+  body:has(.tabbar) .form-actions-sticky {
+    inset-block-end: var(--tabbar-clearance);
+    padding-block-end: var(--space-3);
+  }
   .form-actions-sticky > .btn { flex: 1 1 auto; }
   @media (min-width: 48rem) {
     .form-actions-sticky > .btn { flex: 0 0 auto; }
+    body:has(.tabbar) .form-actions-sticky { padding-block-end: calc(var(--space-3) + env(safe-area-inset-bottom)); }
   }
 }

@@ -31,10 +31,10 @@ that the surface is not flat:
 | group | public classes | what learning it costs |
 | --- | ---: | --- |
 | `deck.components` | 374 | Looked up per component, not memorised. |
-| `deck.utilities` | 211 | A grammar. Learn the pattern, get the family. |
+| `deck.utilities` | 232 | A grammar. Learn the pattern, get the family. |
 | `deck.effects` | 71 | Opt-in. Nothing runs unless you add the class. |
 | `deck.layout` | 63 | The eight or so primitives most pages actually use. |
-| `deck.motion` | 58 | Opt-in. Nothing runs unless you add the class. |
+| `deck.motion` | 37 | Opt-in. Nothing runs unless you add the class. |
 | `deck.mobile` | 30 | Only if you build the mobile shell. |
 | `deck.type` | 10 | Small, and mostly obvious from the name. |
 | `deck.print` | 8 | Four or five you reach for once. |
@@ -46,7 +46,7 @@ spacing steps and that `p`, `m` and `gap` take them, you know the whole family
 without reading it. The component layers are the opposite: 99 components,
 each a handful of names, and a page that uses six of them needs six.
 
-One number that is not comfortable: **13 of the 828 public classes are
+One number that is not comfortable: **4 of the 828 public classes are
 used nowhere in this repository** — not in the demo, not in the docs, not in
 Deck's own JavaScript. They are frozen on the strength of their source alone.
 
@@ -107,7 +107,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | --- | --- | --- |
 | `.banner` | deck.components | An announcement strip. Top or bottom, dismissible, out of the way. |
 | `.banner-bottom` | deck.components | Sets inset-block, border-block, border-block-start, border-block-end, and 1 more. |
-| `.banner-close` | deck.components | Sets margin-inline-start, opacity, cursor, flex. |
+| `.banner-close` | deck.components | The dismiss button, a --tap square with the icon centred in it. |
 | `.banner-dark` | deck.components | Sets background, color, border-color. |
 | `.banner-fixed` | deck.components | Sets position, inset-inline. |
 | `.banner-warn` | deck.components | Sets background, color, border-color. |
@@ -126,7 +126,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.btn` | deck.components | Every button clears the 44px touch target even when it looks smaller |
+| `.btn` | deck.components | A label split into text and a bare <span>, `Save <span>changes</span>`, |
 | `.btn-3d` | deck.effects | A button with real thickness. The face moves down into the shadow instead |
 | `.btn-accent` | deck.components | A secondary emphasis colour, for upsells and highlights. |
 | `.btn-block` | deck.components | Full width. For a phone, or the primary action at the end of a form. |
@@ -171,7 +171,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.card-flush` | deck.components | A card with no border, shadow or background. Grouping without a box |
 | `.card-footer` | deck.components | The top region of a card. A flex row, so a title and a control sit |
 | `.card-header` | deck.components | The top region of a card. A flex row, so a title and a control sit |
-| `.card-link` | deck.components | Whole card is the link, but nested links still work |
+| `.card-link` | deck.components | Whole card is the link, but nested links still work. :focus-within |
 | `.card-media` | deck.components | An image region that reaches the card's edges. The card's own |
 | `.card-raised` | deck.components | A deeper shadow and no visible border, for a surface that should read |
 | `.card-title` | deck.components | The heading inside a card. Sized independently of h1-h6 so the same |
@@ -262,7 +262,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.chip` | deck.components | Sets display, align-items, gap, min-block-size, and 9 more. |
+| `.chip` | deck.components | A filter or choice pill that is on at [aria-pressed="true"]. |
 | `.chip-remove` | deck.components | Sets display, place-items, opacity. |
 
 ## cluster
@@ -726,7 +726,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.ratio-16x9` | deck.layout | Aspect boxes for media |
 | `.ratio-1x1` | deck.layout | Sets aspect-ratio, object-fit, inline-size. |
 | `.ratio-4x3` | deck.layout | Sets aspect-ratio, object-fit, inline-size. |
-| `.scroller` | deck.layout | Everything stays on one line and scrolls sideways — cards, chips, dates |
+| `.scroller` | deck.layout | Everything stays on one line and scrolls sideways — cards, chips, dates. |
 | `.section` | deck.layout | Vertical page rhythm: a block of --space-section, which is a clamp that |
 
 ## lazy
@@ -890,24 +890,9 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.delay-1` | deck.motion | Sets transition-delay, animation-delay. |
-| `.delay-2` | deck.motion | Sets transition-delay, animation-delay. |
-| `.delay-3` | deck.motion | Sets transition-delay, animation-delay. |
-| `.dur-1` | deck.motion | Sets transition-duration, animation-duration. |
-| `.dur-2` | deck.motion | Sets transition-duration, animation-duration. |
-| `.dur-3` | deck.motion | Sets transition-duration, animation-duration. |
-| `.dur-4` | deck.motion | Sets transition-duration, animation-duration. |
-| `.dur-5` | deck.motion | Sets transition-duration, animation-duration. |
-| `.ease-bounce` | deck.motion | Sets transition-timing-function, animation-timing-function. |
-| `.ease-in` | deck.motion | Sets transition-timing-function, animation-timing-function. |
-| `.ease-linear` | deck.motion | Sets transition-timing-function, animation-timing-function. |
-| `.ease-out` | deck.motion | Sets transition-timing-function, animation-timing-function. |
-| `.ease-overshoot` | deck.motion | Sets transition-timing-function, animation-timing-function. |
-| `.ease-spring` | deck.motion | Sets transition-timing-function, animation-timing-function. |
 | `.expand` | deck.motion | Real height:auto transitions, no measuring in JS. Needs |
 | `.fade-swap` | deck.motion | Anything that goes display:none can still animate out. |
 | `.lift` | deck.motion | Sets transition. |
-| `.no-motion` | deck.motion | Sets transition, animation. |
 | `.nudge` | deck.motion | Sets animation. |
 | `.ping` | deck.motion | Ping ring for a live indicator — a dot with a halo going out |
 | `.press` | deck.motion | Sets transition. |
@@ -921,7 +906,6 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.vt-hold` | deck.motion | Elements that persist across the navigation. Give the same |
 | `.vt-main` | deck.motion | Sets view-transition-name. |
 | `.vt-tabbar` | deck.motion | Sets view-transition-name. |
-| `.will-move` | deck.motion | Modifier; see the component. |
 
 ## msg
 
@@ -1279,11 +1263,11 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 
 | class | layer | purpose |
 | --- | --- | --- |
-| `.transition` | deck.motion | Sets transition. |
-| `.transition-colors` | deck.motion | Sets transition. |
-| `.transition-move` | deck.motion | Sets transition. |
-| `.transition-opacity` | deck.motion | Sets transition. |
-| `.transition-size` | deck.motion | Sets transition. |
+| `.transition` | deck.utilities | Sets transition. |
+| `.transition-colors` | deck.utilities | Sets transition. |
+| `.transition-move` | deck.utilities | Sets transition. |
+| `.transition-opacity` | deck.utilities | Sets transition. |
+| `.transition-size` | deck.utilities | Sets transition. |
 
 ## type
 
@@ -1315,6 +1299,20 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.clamp-3` | deck.utilities | Sets display, -webkit-box-orient, overflow. |
 | `.contents` | deck.utilities | Sets display. |
 | `.cursor-pointer` | deck.utilities | Sets cursor. |
+| `.delay-1` | deck.utilities | Sets transition-delay, animation-delay. |
+| `.delay-2` | deck.utilities | Sets transition-delay, animation-delay. |
+| `.delay-3` | deck.utilities | Sets transition-delay, animation-delay. |
+| `.dur-1` | deck.utilities | Sets transition-duration, animation-duration. |
+| `.dur-2` | deck.utilities | Sets transition-duration, animation-duration. |
+| `.dur-3` | deck.utilities | Sets transition-duration, animation-duration. |
+| `.dur-4` | deck.utilities | Sets transition-duration, animation-duration. |
+| `.dur-5` | deck.utilities | Sets transition-duration, animation-duration. |
+| `.ease-bounce` | deck.utilities | Sets transition-timing-function, animation-timing-function. |
+| `.ease-in` | deck.utilities | Sets transition-timing-function, animation-timing-function. |
+| `.ease-linear` | deck.utilities | Sets transition-timing-function, animation-timing-function. |
+| `.ease-out` | deck.utilities | Sets transition-timing-function, animation-timing-function. |
+| `.ease-overshoot` | deck.utilities | Sets transition-timing-function, animation-timing-function. |
+| `.ease-spring` | deck.utilities | Sets transition-timing-function, animation-timing-function. |
 | `.fixed` | deck.utilities | Sets position. |
 | `.fw-bold` | deck.utilities | Sets font-weight. |
 | `.fw-medium` | deck.utilities | Sets font-weight. |
@@ -1367,6 +1365,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.mt-6` | deck.utilities | Sets margin-block-start. |
 | `.mt-8` | deck.utilities | Sets margin-block-start. |
 | `.mx-auto` | deck.utilities | Sets margin-inline. |
+| `.no-motion` | deck.utilities | Sets transition, animation. |
 | `.no-select` | deck.utilities | Sets user-select. |
 | `.no-underline` | deck.utilities | Sets text-decoration. |
 | `.nowrap` | deck.utilities | Sets flex-wrap, white-space. |
@@ -1438,6 +1437,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.uppercase` | deck.utilities | Sets text-transform, letter-spacing. |
 | `.w-auto` | deck.utilities | Sets inline-size. |
 | `.w-full` | deck.utilities | Sets inline-size. |
+| `.will-move` | deck.utilities | Modifier; see the component. |
 | `.wrap` | deck.utilities | Sets flex-wrap. |
 | `.z-1` | deck.utilities | Sets z-index. |
 

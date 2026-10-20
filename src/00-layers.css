@@ -27,7 +27,7 @@
   deck.layout,     /* containers, stack, grid, containers   */
   deck.components, /* buttons, forms, cards, grid, charts   */
   deck.mobile,     /* sheets, tab bar, icons, emoji         */
-  deck.motion,     /* transitions, entrances, view trans.   */
+  deck.motion,     /* motion components, view transitions   */
   deck.effects,    /* gradients, 3D, surface treatments     */
   deck.utilities,  /* single-purpose classes                */
   deck.rtl,        /* direction fixes, must beat utilities  */

@@ -313,7 +313,9 @@ $people = [
     <li>
       <strong>Hover has no focus counterpart.</strong>
       <code>.list-row:hover</code> changes the background;
-      <code>:focus-visible</code> gets the global focus ring but not the background. A
+      <code>:focus-visible</code> gets the focus ring but not the background. The ring is
+      drawn inside the row, because <code>.list</code> clips and would cut one drawn
+      outside it. A
       keyboard user sees the ring, which is enough — but if you rely on the background
       to show position, add <code>:focus-visible</code> yourself.
     </li>

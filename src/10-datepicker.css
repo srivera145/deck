@@ -90,6 +90,8 @@
       background: var(--surface-2);
     }
   }
+  /* A shortcut in the preset rail, on at [aria-pressed="true"] or the equal
+     [aria-selected="true"]. */
   .datepicker-preset {
     padding: var(--space-2) var(--space-3);
     min-block-size: 36px;
@@ -103,7 +105,7 @@
     transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out);
   }
   .datepicker-preset:hover { background: var(--surface-hover); color: var(--text); }
-  .datepicker-preset[aria-pressed="true"] { background: var(--brand-soft); color: var(--brand-soft-text); font-weight: 600; }
+  .datepicker-preset[aria-pressed="true"], .datepicker-preset[aria-selected="true"] { background: var(--brand-soft); color: var(--brand-soft-text); font-weight: 600; }
 
   /* --- Calendar ----------------------------------------------------------- */
   .datepicker-main { padding: var(--space-3); }

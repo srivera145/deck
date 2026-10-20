@@ -17,7 +17,7 @@ $page = [
     'component' => 'combo',
     'accounts' => [
         '11-combobox.css' => 'documented: the control, the token row, the list, option rows, the match highlight, groups and every state',
-        '25-anchor.css'   => 'documented: the list escapes to the top layer where anchor positioning exists — the Escaping the modal section',
+        '25-anchor.css'   => 'documented: anchor positioning places the list, which deck.js opens in the top layer — the Where the list opens section',
         '99-print.css'    => 'documented: the list never prints and the control prints as a value — the Printing section',
         '16-motion.css'   => 'documented: an invalid combo shakes once, sharing the rule with .input — the Reduced motion section',
     ],
@@ -216,25 +216,132 @@ require __DIR__ . '/../_layout.php';
 </section>
 
 <section class="stack stack-3">
-  <h2 id="anchor">Escaping the modal</h2>
+  <h2 id="long-lists">Long lists</h2>
   <p>
-    By default <code>.combo-list</code> is a positioned sibling, and
-    <code>.is-above</code> flips it when there is no room below. That works until the
-    combobox is inside something with <code>overflow: hidden</code> — a
-    <a href="modal.php">modal</a>, a <a href="card.php">card</a>, a scroll container —
-    at which point the list is clipped. It is the bug that bites every combobox
-    eventually.
+    Only the options near the scroll position are in the DOM: a screenful and a few
+    either side, a few dozen elements whether the list holds forty options or forty
+    thousand. Padding above and below stands in for the rest, so the scrollbar is the
+    right size and dragging it lands where it should. Opening ten thousand options costs
+    what opening twenty does.
   </p>
   <p>
-    <code>src/25-anchor.css</code> fixes it where the browser has anchor positioning: the
-    list goes in the top layer, sized to the control with
-    <code>anchor-size(inline)</code> and flipped with
-    <code>position-try-fallbacks: flip-block</code>. No clipping ancestor can reach it.
+    Rows are not assumed to be one height. An option with a second line is taller than
+    one without, a long label wraps, and a group heading is shorter than either. Each
+    kind starts from a guess, the first one drawn replaces the guess with its real
+    height, and every row is measured as it is drawn, so the list scrolls true. A group
+    heading stays pinned while you scroll through its group, as it did when every option
+    was drawn.
   </p>
+  <p>The keyboard works the same over the whole list, drawn or not:</p>
+  <ul class="stack stack-2">
+    <li><kbd>↑</kbd> and <kbd>↓</kbd> move one option and wrap at the ends, so <kbd>↑</kbd> from the first option reaches the last.</li>
+    <li><kbd>Page Up</kbd> and <kbd>Page Down</kbd> move a screenful and stop at the ends.</li>
+    <li>Typing filters every option, not the drawn ones.</li>
+  </ul>
   <p class="text-muted">
-    Where anchor positioning is missing, the sibling positioning and
-    <code>.is-above</code> remain — so the component works everywhere and works
-    <em>better</em> where the platform allows.
+    The trade: the browser's find-in-page only sees the drawn options. Typing in the
+    combobox is the search that covers all of them.
+  </p>
+</section>
+
+<section class="stack stack-3">
+  <h2 id="remote">Options from the server</h2>
+  <p>
+    Set <code>data-url</code> and <code>deck.js</code> asks the server as the reader
+    types. It appends the query to the URL, waits <code>data-debounce</code> milliseconds
+    after the last keystroke (220 by default), and expects a JSON array of
+    <code>{ value, label, sub, group, disabled }</code>, with <code>id</code> and
+    <code>name</code> accepted for <code>value</code> and <code>label</code>.
+    <code>data-min-chars</code> holds off until enough has been typed.
+  </p>
+  <pre class="dx-code"><code><?= e('<div class="combo" data-deck-combo data-multi data-url="/api/people?q=" data-min-chars="2">
+  <select hidden multiple name="people[]"></select>
+</div>') ?></code></pre>
+  <p>
+    The selection is kept apart from the results. Choose someone while searching for
+    "ad", someone else under "gr" and a third under "ka", and all three stay chosen. Each
+    chosen value is added to the <code>&lt;select&gt;</code> as an option if it is not
+    there already, so the form posts what the reader sees. Only the latest query fills
+    the list; a slow reply to an earlier one is dropped.
+  </p>
+</section>
+
+<section class="stack stack-3">
+  <h2 id="script">From script</h2>
+  <p>
+    Like every Deck component, the instance hangs off the element as
+    <code>_deck</code>. It answers three calls.
+  </p>
+  <pre class="dx-code"><code><?= e("const people = document.querySelector('#people');
+
+people._deck.value();                  // 'ken', or ['ken', 'rissa'] with data-multi
+people._deck.value(['ken', 'rissa']);  // replaces the selection
+people._deck.clear();
+
+// A remote value no search has loaded yet: pass its label too
+people._deck.value({ value: '42', label: 'Ada Lovelace' });") ?></code></pre>
+  <ul class="stack stack-2">
+    <li>
+      <strong><code>value()</code></strong> returns the selection: a string for a single
+      combobox, <code>''</code> when nothing is chosen as with a select's own
+      <code>value</code>, and an array with <code>data-multi</code>.
+    </li>
+    <li>
+      <strong><code>value(v)</code></strong> takes a value, an array of them, or
+      <code>{ value, label }</code> objects, and replaces the selection. A single
+      combobox keeps the first. A value the list does not have is ignored, as on a
+      native select, unless the combobox has <code>data-url</code> or
+      <code>data-create</code>, where it joins the selection as given.
+    </li>
+    <li><strong><code>clear()</code></strong> empties it.</li>
+  </ul>
+  <p>
+    Both update the <code>&lt;select&gt;</code> and fire <code>change</code> and
+    <code>deck:change</code>, as a pick does, so one listener hears both. Pass
+    <code>{ silent: true }</code> (the second argument to <code>value</code>, the only
+    one to <code>clear</code>) to update without firing, for when the code setting the
+    value is the code that listens. Both return the new value.
+  </p>
+</section>
+
+<section class="stack stack-3">
+  <h2 id="anchor">Where the list opens</h2>
+  <p>
+    <code>deck.js</code> opens <code>.combo-list</code> as a popover, so it is in the
+    top layer, where no ancestor can clip it, trap it or paint over it. Inside a
+    <a href="card.php">card</a> that is the whole difference. <code>.card</code> has
+    <code>overflow: clip</code> and <code>contain: layout</code>, and layout containment
+    makes the card the containing block of even a <code>position: fixed</code>
+    descendant, so a list inside a card used to be laid out against the card and cut off
+    at its edge. A <a href="modal.php">modal</a> or a scroll container did the same.
+  </p>
+  <p>
+    It is placed against the control, the same width: below it if it fits, above it if
+    that fits, otherwise below in whatever room there is. One of three things does the
+    placing, the first that is available:
+  </p>
+  <ol class="stack stack-2">
+    <li>
+      <strong>CSS anchor positioning</strong>, in <code>src/25-anchor.css</code>. Each
+      combobox gets an <code>--anchor</code> of its own, because in the top layer every
+      control on the page is a candidate anchor.
+    </li>
+    <li>
+      <strong>Floating UI</strong>, through <code>deck-adapters.js</code>, where anchor
+      positioning is missing and Floating UI is on the page. The control carries
+      <code>data-deck-anchor</code> pointing at its list, which is what the adapter looks
+      for.
+    </li>
+    <li>
+      <strong>Deck's own placement</strong> otherwise: fixed coordinates from the
+      control's box, kept up to date on scroll and resize while the list is open.
+    </li>
+  </ol>
+  <p class="text-muted">
+    On a phone the list stays anchored to the field, with taller rows. It used to become
+    a sheet across the bottom of the screen, which covered the field being typed in. In
+    a browser with no popover support the list is still a positioned sibling, flipped
+    with <code>.is-above</code>, and a clipping ancestor can still cut it off.
   </p>
 </section>
 
@@ -267,16 +374,27 @@ require __DIR__ . '/../_layout.php';
     <li>
       <strong>The ARIA is built by the script, not by you.</strong>
       <code>deck.js</code> gives the input <code>role="combobox"</code>,
-      <code>aria-autocomplete="list"</code> and an <code>aria-expanded</code> it keeps in
-      step, and each option <code>role="option"</code> with
-      <code>aria-selected</code>. That is the right division: the roles promise behaviour,
-      and the thing that implements the behaviour should own them.
+      <code>aria-autocomplete="list"</code>, <code>aria-controls</code> and an
+      <code>aria-expanded</code> it keeps in step, the list <code>role="listbox"</code>
+      (and <code>aria-multiselectable</code> with <code>data-multi</code>), and each
+      option <code>role="option"</code> with <code>aria-selected</code>. That is the right
+      division: the roles promise behaviour, and the thing that implements the behaviour
+      should own them.
     </li>
     <li>
       <strong>Focus stays in the input.</strong> Arrow keys move
       <code>.is-active</code> rather than focus, which is what the combobox pattern
       requires — the reader keeps typing while the highlight moves. The link between them
-      is <code>aria-activedescendant</code>.
+      is <code>aria-activedescendant</code>, which names the active option, so a screen
+      reader announces each option as the highlight reaches it.
+    </li>
+    <li>
+      <strong>A long list still counts right.</strong> Only a screenful of options
+      exists in the DOM, so each carries <code>aria-posinset</code> and
+      <code>aria-setsize</code> and is announced as, say, 5,000 of 10,500. The active
+      option is always drawn; if you scroll it out of view with the mouse,
+      <code>aria-activedescendant</code> is removed rather than left naming an element
+      that is gone.
     </li>
     <li>
       <strong>The control needs a label</strong> like any other. A
@@ -310,10 +428,10 @@ require __DIR__ . '/../_layout.php';
       keyboard users lose their place.
     </li>
     <li>
-      <strong>Options are 40px-ish rows.</strong> Comfortable enough on touch, and the
-      list scrolls rather than the page — but a long list on a phone is still a lot of
-      scrolling inside a small box. Consider a <a href="sheet.php">sheet</a> for the
-      mobile case.
+      <strong>Options are 40px rows, 44px on a phone.</strong> The list scrolls rather
+      than the page, but a long list on a phone is still a lot of scrolling inside a small
+      box. Typing is the quicker way through it, and a <a href="sheet.php">sheet</a> is
+      the alternative when the choice deserves the whole screen.
     </li>
   </ul>
 </section>

@@ -152,7 +152,7 @@ $tones = [
     for its fill and the <code>700</code> step for its text, which is the pairing Deck
     uses everywhere a tint needs readable text on it.
   </p>
-  <?php docs_token_table(['--surface-2', '--text-muted', '--line', '--r-xs', '--text-xs', '--brand-soft', '--brand-soft-text', '--good-100', '--good-700', '--warn-100', '--warn-700', '--bad-100', '--bad-700', '--brand-600', '--text-on-brand']); ?>
+  <?php docs_token_table(['--surface-2', '--text-muted', '--line', '--r-xs', '--text-xs', '--brand-soft', '--brand-soft-text', '--good-soft', '--good-soft-text', '--warn-soft', '--warn-soft-text', '--bad-soft', '--bad-soft-text', '--brand-600', '--text-on-brand']); ?>
 </section>
 
 <section class="stack stack-3">

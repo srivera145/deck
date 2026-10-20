@@ -4,7 +4,7 @@
 [![Packagist version](https://img.shields.io/packagist/v/echodial/deck)](https://packagist.org/packages/echodial/deck)
 [![License: MIT](https://img.shields.io/npm/l/@echodial/deck)](LICENSE)
 
-**Deck is a CSS framework that ships as one 26.8 KB Brotli (32.7 KB gzip) stylesheet: buttons, forms,
+**Deck is a CSS framework that ships as one 27.1 KB Brotli (33.2 KB gzip) stylesheet: buttons, forms,
 tables, a data grid, charts, overlays, an icon sprite, and a full color system. You add it
 with one `<link>` tag. There is no build step, no config file, and zero dependencies.**
 
@@ -29,25 +29,25 @@ That is the whole install. Nothing to compile, nothing to purge, nothing to conf
   catches the class names that look almost right, in Visual Studio Code and the editors
   built on it. See [Editor support](#editor-support).
 
-Version 0.1.3 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
+Version 0.1.4 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
 ## What Deck weighs
 
-A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **62.8 KB** Brotli, or **76.3 KB** gzip. Every browser Deck supports sends `br` in
+A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **66.2 KB** Brotli, or **80.3 KB** gzip. Every browser Deck supports sends `br` in
 `Accept-Encoding`, and Cloudflare, Vercel, Netlify, and nginx with `ngx_brotli` negotiate
 it for text by default, so Brotli is what most users actually receive.
 
 | File | Brotli | gzip |
 | --- | --- | --- |
-| `deck.min.css` | **26.8 KB** | 32.7 KB |
-| `deck-icons.svg` | **27.1 KB** | 33.6 KB |
-| `deck.min.js` | **8.9 KB** | 10.0 KB |
-| **All three** | **62.8 KB** | **76.3 KB** |
+| `deck.min.css` | **27.1 KB** | 33.2 KB |
+| `deck-icons.svg` | **28.2 KB** | 35.0 KB |
+| `deck.min.js` | **10.9 KB** | 12.2 KB |
+| **All three** | **66.2 KB** | **80.3 KB** |
 
 The sprite is the largest single file, slightly bigger than the stylesheet — worth stating
 plainly rather than leaving you to find it in devtools. Swapping `deck.min.js` for the full
 `deck.bundle.min.js` (adds the carousel, drawer, mega menu, copy button, QR encoder, editor and library adapters)
-makes the JavaScript 17.3 KB and the total 71.2 KB Brotli (85.8 KB gzip).
+makes the JavaScript 19.2 KB and the total 74.6 KB Brotli (89.9 KB gzip).
 
 ### The sprite is a manifest, not a fixed cost
 
@@ -68,7 +68,7 @@ $ npm run icons
 ```
 
 **A twelve-icon sprite measures 5.7 KB Brotli (6.9 KB gzip)** — generated and measured, not
-estimated. Against 27.1 KB for the full set, trimming the manifest is the difference between the
+estimated. Against 28.2 KB for the full set, trimming the manifest is the difference between the
 sprite dominating page weight and disappearing into it.
 
 This matters because an external sprite is all-or-nothing per request: the browser fetches
@@ -80,12 +80,12 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 
 | File | Brotli | gzip | What it is |
 | --- | --- | --- | --- |
-| `deck.min.css` | 26.8 KB | 32.7 KB | The whole framework |
-| `deck.min.js` | 8.9 KB | 10.0 KB | Optional behaviour, no dependencies |
+| `deck.min.css` | 27.1 KB | 33.2 KB | The whole framework |
+| `deck.min.js` | 10.9 KB | 12.2 KB | Optional behaviour, no dependencies |
 | `deck-extras.min.js` | 5.7 KB | 6.5 KB | Carousel, drawer, mega menu, copy button, QR encoder, editor |
 | `deck-adapters.min.js` | 4.0 KB | 4.5 KB | Optional library integrations, inert unless one is loaded |
-| `deck.bundle.min.js` | 17.3 KB | 19.5 KB | All three scripts in one file |
-| `deck-icons.svg` | 27.1 KB | 33.6 KB | 152 symbols: 75 icons at two weights, plus two brand marks |
+| `deck.bundle.min.js` | 19.2 KB | 21.7 KB | All three scripts in one file |
+| `deck-icons.svg` | 28.2 KB | 35.0 KB | 152 symbols: 75 icons at two weights, plus two brand marks |
 | `src/` | — | — | The 26 source stylesheets, concatenated to build `deck.css` |
 | `dist/layers/` | — | — | One file per layer, if you only want part of Deck |
 | `php/` | — | — | Optional PHP helper for Composer users |
@@ -726,7 +726,16 @@ groups options, `data-create` allows adding new values, `data-multi` gives token
 For a remote source, set `data-url="/api/repos?q="` — deck.js appends the query,
 debounces (`data-debounce`, default 220ms), and expects JSON rows of
 `{ value, label, sub, group, disabled }`. Use `data-min-chars` to hold off until
-the user has typed enough.
+the user has typed enough. Choices made under one query stay chosen under the next,
+and each is written into the `<select>` so the form posts it.
+
+Only the options near the scroll position are in the DOM, so ten thousand open as fast
+as twenty, and the arrow keys still reach every one.
+
+From script, through the element: `el._deck.value()` reads the selection (a string, or
+an array with `data-multi`), `el._deck.value(['ken', 'rissa'])` replaces it, and
+`el._deck.clear()` empties it. Both fire the same events a pick does; pass
+`{ silent: true }` to skip them.
 
 Events: `deck:change` with `{ values }`, `deck:create` with `{ value }`.
 

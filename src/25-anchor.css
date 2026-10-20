@@ -50,20 +50,30 @@
     .menu-match { inline-size: anchor-size(inline); min-inline-size: 0; }
 
     /* --- Combobox list ------------------------------------------------------
-       The listbox is a sibling today, positioned with absolute. With anchor
-       positioning it can go in the top layer and escape overflow:hidden
-       ancestors, which is the bug that bites every combobox inside a modal.
+       deck.js opens the list as a popover, in the top layer, so its
+       containing block is the viewport and no ancestor can clip it. That is
+       also what position-area needs: as an absolute child of .combo, the
+       area below the control was measured inside .combo, which is exactly as
+       tall as the control, so there was no room on either side and the list
+       was pushed back over the field. deck.js gives each combobox its own
+       --anchor. Below at full height if that fits, above if that fits,
+       otherwise below in whatever room there is; the list's 50dvh cap means
+       that room is close to half the screen.
        ---------------------------------------------------------------------- */
     .combo-control { anchor-name: var(--anchor, --combo); }
     .combo-list {
       position-anchor: var(--anchor, --combo);
       position-area: block-end;
-      position-try-fallbacks: flip-block;
+      position-try-fallbacks: flip-block, --dk-combo-fit;
       inline-size: anchor-size(inline);
       inset: auto;
       margin-block: 4px;
     }
     .combo-list.is-above { inset: auto; }
+    @position-try --dk-combo-fit {
+      position-area: block-end;
+      max-block-size: calc(100% - 8px);
+    }
 
     /* --- Tooltips -----------------------------------------------------------
        The ::after tooltip could never flip. This one can, and it can carry a

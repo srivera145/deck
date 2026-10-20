@@ -111,7 +111,7 @@ require __DIR__ . '/../_layout.php';
 
 <section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
-  <?php docs_token_table(['--ink-100', '--ink-200', '--r-xs', '--r-full', '--ease-in-out']); ?>
+  <?php docs_token_table(['--bg-sunken', '--surface-recessed', '--r-xs', '--r-full', '--ease-in-out']); ?>
 </section>
 
 <section class="stack stack-3">
@@ -225,7 +225,7 @@ require __DIR__ . '/../_layout.php';
   .skeleton { animation-duration: 2.2s; }
 
   /* No shimmer at all — a plain tinted block */
-  .skeleton { animation: none; background: var(--ink-100); }
+  .skeleton { animation: none; background: var(--bg-sunken); }
 }') ?></code></pre>
   <p class="text-muted">
     Note that removing the animation in your own layer does not remove the reduced-motion

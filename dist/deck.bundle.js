@@ -361,7 +361,24 @@ const Deck = (() => {
      </div>
      The <select> stays in the DOM and stays in sync, so normal form posts
      work with no extra server-side handling.
+
+     From script, through the element like every Deck component:
+       el._deck.value()                   'deck', or ['deck', 'keel'] with data-multi
+       el._deck.value(['deck', 'keel'])   replaces the selection
+       el._deck.clear()
      ====================================================================== */
+
+  let comboSeq = 0;
+  /* Rows drawn past each edge of the visible part of the list, so a fling or
+     a held arrow key does not outrun the drawing. */
+  const COMBO_OVERSCAN = 8;
+  /* Row heights to start from, by kind: an option, an option with a second
+     line, a group heading. The first row of each kind drawn replaces its
+     guess with its real height. */
+  const COMBO_GUESS = [40, 56, 30];
+
+  const comboOption = (value, label, sub = '', group = '', disabled = false) =>
+    ({ value, label, sub, group, disabled });
 
   class Combo {
     constructor(root) {
@@ -375,16 +392,24 @@ const Deck = (() => {
       this.open = false;
       this.activeIndex = -1;
       this.query = '';
+      this.id = `dk-combo-${++comboSeq}`;
+      this.visible = [];
+      this.rows = [];
+      this.win = null;
+      this.seq = 0;
 
+      /* The selection lives here, keyed by value in the order chosen, rather
+         than as a flag on each of this.options: a remote search replaces
+         this.options on every query, and a choice made under one query has
+         to survive the next. */
+      this.selection = new Map();
       this.options = this.select
-        ? $$('option', this.select).map(o => ({
-            value: o.value,
-            label: o.textContent.trim(),
-            sub: o.dataset.sub || '',
-            group: o.dataset.group || (o.parentElement.tagName === 'OPTGROUP' ? o.parentElement.label : ''),
-            disabled: o.disabled,
-            selected: o.selected
-          }))
+        ? $$('option', this.select).map(o => {
+            const opt = comboOption(o.value, o.textContent.trim(), o.dataset.sub || '',
+              o.dataset.group || (o.parentElement.tagName === 'OPTGROUP' ? o.parentElement.label : ''), o.disabled);
+            if (o.selected) this.selection.set(opt.value, opt);
+            return opt;
+          })
         : [];
 
       if (this.select) this.select.hidden = true;
@@ -393,17 +418,32 @@ const Deck = (() => {
       this.renderTokens();
     }
 
-    get selected() { return this.options.filter(o => o.selected); }
+    get selected() { return [...this.selection.values()]; }
 
     build() {
       this.control = el('div', 'combo-control');
       this.control.innerHTML = `
         <span class="combo-tokens"></span>
         <input class="combo-input" type="text" role="combobox" autocomplete="off"
-               aria-expanded="false" aria-autocomplete="list" placeholder="${this.placeholder}">
+               aria-expanded="false" aria-autocomplete="list" aria-controls="${this.id}"
+               placeholder="${escapeHTML(this.placeholder)}">
         <button type="button" class="combo-toggle" tabindex="-1" aria-label="Toggle list">${icon('chevron-down', 'icon icon-sm')}</button>`;
       this.list = el('div', 'combo-list');
+      this.list.id = this.id;
       this.list.setAttribute('role', 'listbox');
+      if (this.multi) this.list.setAttribute('aria-multiselectable', 'true');
+      /* A popover opens in the top layer, where no ancestor can clip it, trap
+         it or paint over it. .card does all three: overflow: clip, and
+         contain: layout, which makes the card the containing block of even a
+         position: fixed list. In the top layer every control on the page is
+         a candidate anchor, so each combobox gets an anchor name of its own,
+         and data-deck-anchor hands placement to the Floating UI adapter in a
+         browser without anchor positioning. */
+      if ('popover' in HTMLElement.prototype) {
+        this.list.popover = 'manual';
+        this.control.dataset.deckAnchor = '#' + this.id;
+        if (!this.root.style.getPropertyValue('--anchor')) this.root.style.setProperty('--anchor', '--' + this.id);
+      }
       this.root.append(this.control, this.list);
       this.input = $('.combo-input', this.control);
       this.tokens = $('.combo-tokens', this.control);
@@ -437,10 +477,11 @@ const Deck = (() => {
       });
       this.list.addEventListener('mousemove', e => {
         const opt = e.target.closest('.combo-option');
-        if (!opt) return;
+        if (!opt || Number(opt.dataset.index) === this.activeIndex) return;
         this.activeIndex = Number(opt.dataset.index);
         this.paintActive();
       });
+      this.list.addEventListener('scroll', () => this.paint(), { passive: true });
 
       this.tokens.addEventListener('click', e => {
         const btn = e.target.closest('button');
@@ -453,75 +494,229 @@ const Deck = (() => {
       const q = this.query.trim().toLowerCase();
       if (q.length < this.minChars) return [];
       if (!q) return this.options;
+      // Lowercased once per option, not three times per option per keystroke
       return this.options.filter(o =>
-        o.label.toLowerCase().includes(q) || o.sub.toLowerCase().includes(q) || o.value.toLowerCase().includes(q));
+        (o.hay || (o.hay = `${o.label}\n${o.sub}\n${o.value}`.toLowerCase())).includes(q));
     }
 
+    /* Rebuild the list for the current query and selection. Only the rows
+       near the scroll position become elements (paint() below), so ten
+       thousand options open as fast as twenty. */
     render() {
+      if (!this.open) return;
+      const q = this.query.trim();
       const list = this.matches();
+      const keep = q === this.drawn ? this.list.scrollTop : 0;
+      this.drawn = q;
       this.visible = list;
+      this.hasCreate = !!(this.allowCreate && q && !list.some(o => o.label.toLowerCase() === q.toLowerCase()));
+      this.setSize = list.length + (this.hasCreate ? 1 : 0);
+      if (this.activeIndex >= this.setSize) this.activeIndex = -1;
+      this.rows = [];
+      this.win = null;
+      this.range = null;
+
+      const add = this.hasCreate
+        ? `<button type="button" class="combo-option" role="option" id="${this.id}-${list.length}" data-create data-index="${list.length}"
+             aria-selected="false" aria-posinset="${this.setSize}" aria-setsize="${this.setSize}">${icon('plus', 'icon icon-sm')}
+             <span class="combo-option-main"><span>Add “${escapeHTML(q)}”</span></span></button>`
+        : '';
 
       if (!list.length) {
-        this.list.innerHTML = this.allowCreate && this.query.trim()
-          ? `<button type="button" class="combo-option" data-create data-index="0">${icon('plus', 'icon icon-sm')}
-               <span class="combo-option-main"><span>Add “${escapeHTML(this.query.trim())}”</span></span></button>`
-          : `<div class="combo-empty">${icon('search', 'icon icon-sm')} No matches for “${escapeHTML(this.query)}”</div>`;
+        this.list.innerHTML = add ||
+          `<div class="combo-empty">${icon('search', 'icon icon-sm')} No matches for “${escapeHTML(this.query)}”</div>`;
+        this.paintActive();
         return;
       }
 
-      let html = '';
-      let group = null;
+      /* One row per group heading and per option. head is the row of the
+         heading an option sits under, so a slice that starts below its
+         heading can pin a copy of it. */
+      const rows = this.rows;
+      const rowOf = this.rowOf = new Int32Array(list.length);
+      let group = null, head = -1;
       list.forEach((o, i) => {
-        if (o.group && o.group !== group) {
-          group = o.group;
-          html += `<div class="combo-group">${escapeHTML(group)}</div>`;
-        }
-        html += `<button type="button" class="combo-option" role="option" data-index="${i}"
-                   data-value="${escapeHTML(o.value)}"
-                   aria-selected="${o.selected}" ${o.disabled ? 'aria-disabled="true"' : ''}>
-            <span class="combo-option-main">
-              <span>${highlight(o.label, this.query)}</span>
-              ${o.sub ? `<span class="combo-option-sub">${highlight(o.sub, this.query)}</span>` : ''}
-            </span>
-            ${this.multi ? `<span class="combo-check">${icon('check', 'icon icon-sm')}</span>` : ''}
-          </button>`;
+        if (o.group && o.group !== group) { group = o.group; head = rows.length; rows.push({ group, head }); }
+        rowOf[i] = rows.length;
+        rows.push({ o, i, head: o.group ? head : -1 });
       });
 
-      if (this.allowCreate && this.query.trim() && !list.some(o => o.label.toLowerCase() === this.query.trim().toLowerCase())) {
-        html += `<div class="combo-create"><button type="button" class="combo-option" data-create data-index="${list.length}">
-          ${icon('plus', 'icon icon-sm')}<span class="combo-option-main"><span>Add “${escapeHTML(this.query.trim())}”</span></span></button></div>`;
-      }
+      const n = rows.length;
+      this.kind = new Uint8Array(n);
+      this.size = new Float64Array(n);
+      this.fixed = new Uint8Array(n);
+      rows.forEach((r, k) => {
+        const kind = this.kind[k] = r.o ? (r.o.sub ? 1 : 0) : 2;
+        const h = r.o && this.heights.get(r.o);
+        this.size[k] = h || this.guess[kind];
+        if (h) this.fixed[k] = 1;
+      });
+      this.tops = new Float64Array(n + 1);
+      this.layout();
 
-      html += `<div class="combo-hint"><span><kbd>↑</kbd><kbd>↓</kbd> move</span><span><kbd>enter</kbd> select</span><span><kbd>esc</kbd> close</span></div>`;
-      this.list.innerHTML = html;
+      this.list.innerHTML = '<div></div>'
+        + (add ? `<div class="combo-create">${add}</div>` : '')
+        + `<div class="combo-hint"><span><kbd>↑</kbd><kbd>↓</kbd> move</span><span><kbd>enter</kbd> select</span><span><kbd>esc</kbd> close</span></div>`;
+      this.win = this.list.firstElementChild;
+      /* Its padding moves on every scroll and is measured straight after.
+         Under reduced motion the reset gives every property a .01ms
+         transition, and layout in the same task would use the old padding. */
+      this.win.style.transitionProperty = 'none';
+      this.win.style.paddingBlockEnd = `${this.tops[n]}px`;
+      this.list.scrollTop = keep;
+      this.paint();
+    }
+
+    // tops[k] is where row k begins; tops[n] is the height of the whole list
+    layout() {
+      const { size, tops } = this;
+      for (let k = 0; k < size.length; k++) tops[k + 1] = tops[k] + size[k];
+    }
+
+    rowAt(y) {
+      const t = this.tops;
+      let lo = 0, hi = this.rows.length - 1;
+      while (lo < hi) {
+        const mid = (lo + hi + 1) >> 1;
+        if (t[mid] <= y) lo = mid; else hi = mid - 1;
+      }
+      return lo;
+    }
+
+    /* Draw the rows in view and a few either side, and stand padding in for
+       the rest. A row not yet drawn counts at the guess for its kind; once
+       drawn it counts at its real height, so wrapped labels and second lines
+       scroll true. */
+    paint() {
+      if (!this.open || !this.win) return;
+      const { rows, kind, size, fixed, guess } = this;
+      const n = rows.length;
+      const y = this.list.scrollTop - this.win.offsetTop;
+      const first = this.rowAt(y), last = this.rowAt(y + this.list.clientHeight);
+      // Redraw only once the view comes within half the overscan of an edge
+      const slack = COMBO_OVERSCAN >> 1;
+      if (this.range && this.range[0] <= Math.max(0, first - slack) && this.range[1] >= Math.min(n, last + 1 + slack)) return;
+      const start = Math.max(0, first - COMBO_OVERSCAN);
+      const end = Math.min(n, last + 1 + COMBO_OVERSCAN);
+      this.range = [start, end];
+
+      /* A heading is sticky only while it is drawn. When the slice starts
+         below the heading of its first group, pin a copy: sticky, pulled up
+         by its own height so it takes no room, and hidden from screen
+         readers because it is a duplicate. */
+      const head = rows[start].head;
+      const pin = head >= 0 && head < start;
+      let html = pin ? `<div class="combo-group" aria-hidden="true">${escapeHTML(rows[head].group)}</div>` : '';
+      for (let k = start; k < end; k++) html += this.rowHTML(rows[k]);
+      this.win.innerHTML = html;
+      const nodes = this.win.children;
+      if (pin) nodes[0].style.marginBlockEnd = `-${size[head]}px`;
+      // Padding before measuring, so the list never shrinks under the scroll position
+      this.win.style.paddingBlock = `${this.tops[start]}px ${this.tops[n] - this.tops[end]}px`;
+
+      const anchor = this.rowAt(y), was = this.tops[anchor];
+      let moved = false, reguessed = false;
+      for (let k = start, i = pin ? 1 : 0; k < end; k++, i++) {
+        const h = nodes[i].getBoundingClientRect().height;
+        if (!this.guessed[kind[k]]) {
+          this.guessed[kind[k]] = true;
+          if (Math.abs(h - guess[kind[k]]) > 0.5) { guess[kind[k]] = h; reguessed = true; }
+        }
+        fixed[k] = 1;
+        if (rows[k].o) this.heights.set(rows[k].o, h);
+        if (Math.abs(h - size[k]) > 0.5) { size[k] = h; moved = true; }
+      }
+      if (reguessed) {
+        for (let k = 0; k < n; k++) if (!fixed[k]) size[k] = guess[kind[k]];
+        moved = true;
+      }
+      if (moved) {
+        this.layout();
+        this.win.style.paddingBlock = `${this.tops[start]}px ${this.tops[n] - this.tops[end]}px`;
+        // Keep the row at the top of the view where it was
+        const shift = this.tops[anchor] - was;
+        if (shift) this.list.scrollTop += shift;
+      }
       this.paintActive();
     }
 
+    rowHTML(row) {
+      if (!row.o) return `<div class="combo-group">${escapeHTML(row.group)}</div>`;
+      const { o, i } = row;
+      return `<button type="button" class="combo-option${i === this.activeIndex ? ' is-active' : ''}" role="option"
+                 id="${this.id}-${i}" data-index="${i}" data-value="${escapeHTML(o.value)}"
+                 aria-selected="${this.selection.has(o.value)}" aria-posinset="${i + 1}" aria-setsize="${this.setSize}"
+                 ${o.disabled ? 'aria-disabled="true"' : ''}>
+          <span class="combo-option-main">
+            <span>${highlight(o.label, this.query)}</span>
+            ${o.sub ? `<span class="combo-option-sub">${highlight(o.sub, this.query)}</span>` : ''}
+          </span>
+          ${this.multi ? `<span class="combo-check">${icon('check', 'icon icon-sm')}</span>` : ''}
+        </button>`;
+    }
+
+    /* Move the highlight, and point aria-activedescendant at it so a screen
+       reader announces the option while focus stays in the input. Only a
+       drawn option can be pointed at; reveal() keeps the active one drawn,
+       and aria-posinset and aria-setsize give its place in the whole list. */
     paintActive() {
-      const nodes = $$('.combo-option', this.list);
-      nodes.forEach(n => n.classList.remove('is-active'));
-      const node = nodes[this.activeIndex];
+      const was = $('.combo-option.is-active', this.list);
+      if (was) was.classList.remove('is-active');
+      const node = this.activeIndex < 0 ? null : $(`[id="${this.id}-${this.activeIndex}"]`, this.list);
       if (node) {
         node.classList.add('is-active');
-        node.scrollIntoView({ block: 'nearest' });
+        this.input.setAttribute('aria-activedescendant', node.id);
+      } else {
+        this.input.removeAttribute('aria-activedescendant');
       }
     }
 
+    /* Scroll the active option into view, clear of the pinned heading above
+       and the sticky Add row below, then draw around it. Repeated because
+       drawing a row can correct its height. */
+    reveal() {
+      const k = this.win && this.activeIndex >= 0 ? this.rowOf[this.activeIndex] : undefined;
+      if (k === undefined) { this.paintActive(); return; }
+      const gap = this.win.offsetTop;
+      const below = this.hasCreate ? $('.combo-create', this.list).offsetHeight : 0;
+      for (let pass = 0; pass < 3; pass++) {
+        const top = gap + this.tops[k];
+        const bottom = gap + this.tops[k + 1];
+        const above = this.rows[k].head >= 0 ? this.guess[2] : 0;
+        const at = this.list.scrollTop, view = this.list.clientHeight;
+        let to = at;
+        if (top - above - gap < at) to = top - above - gap;
+        else if (bottom + below + gap > at + view) to = bottom + below + gap - view;
+        if (Math.abs(to - at) < 1) break;
+        this.list.scrollTop = to;
+        this.paint();
+      }
+      this.paintActive();
+    }
+
     onKey(e) {
-      const nodes = $$('.combo-option', this.list);
-      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      const page = e.key === 'PageDown' || e.key === 'PageUp';
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || (page && this.open)) {
         e.preventDefault();
         if (!this.open) this.show();
-        const dir = e.key === 'ArrowDown' ? 1 : -1;
-        this.activeIndex = (this.activeIndex + dir + nodes.length) % (nodes.length || 1);
-        this.paintActive();
+        const n = this.setSize;
+        if (!n) return;
+        const dir = e.key === 'ArrowDown' || e.key === 'PageDown' ? 1 : -1;
+        const i = this.activeIndex;
+        if (page) {
+          // A page at a time, stopping at the ends rather than wrapping
+          const step = Math.max(1, Math.floor(this.list.clientHeight / this.guess[0]) - 1);
+          this.activeIndex = Math.min(n - 1, Math.max(0, (i < 0 ? 0 : i) + dir * step));
+        } else {
+          this.activeIndex = i < 0 ? (dir > 0 ? 0 : n - 1) : (i + dir + n) % n;
+        }
+        this.reveal();
       } else if (e.key === 'Enter') {
         if (!this.open) return;
         e.preventDefault();
-        const node = nodes[this.activeIndex];
-        if (!node) return;
-        if (node.dataset.create != null) this.create(this.query);
-        else this.choose(node.dataset.value);
+        const i = this.activeIndex;
+        if (this.hasCreate && i === this.visible.length) this.create(this.query);
+        else if (this.visible[i]) this.choose(this.visible[i].value);
       } else if (e.key === 'Escape') {
         if (this.open) { e.stopPropagation(); this.hide(); }
       } else if (e.key === 'Backspace' && !this.input.value && this.multi) {
@@ -531,37 +726,90 @@ const Deck = (() => {
     }
 
     choose(value, forceOff) {
-      const opt = this.options.find(o => o.value === value);
+      // The selection first: a remote option may not be in this query's results
+      const opt = this.selection.get(value) || this.options.find(o => o.value === value);
       if (!opt || opt.disabled) return;
       if (this.multi) {
-        opt.selected = forceOff ? false : !opt.selected;
+        if (forceOff || this.selection.has(value)) this.selection.delete(value);
+        else this.selection.set(value, opt);
+        this.input.value = '';
+        this.query = '';
       } else {
-        this.options.forEach(o => { o.selected = false; });
-        opt.selected = true;
+        this.selection.clear();
+        this.selection.set(value, opt);
         this.input.value = opt.label;
         this.query = '';
         this.hide();
       }
-      if (this.multi) { this.input.value = ''; this.query = ''; }
       this.sync();
       this.renderTokens();
       this.render();
+      // Keep the highlight on what was just picked, wherever the cleared query has put it
+      if (this.open) {
+        const i = this.visible.findIndex(o => o.value === value);
+        if (i >= 0) { this.activeIndex = i; this.reveal(); }
+      }
     }
 
     create(text) {
       const label = text.trim();
       if (!label) return;
-      const o = { value: label, label, sub: '', group: '', disabled: false, selected: false };
-      this.options.push(o);
+      this.options.push(comboOption(label, label));
       if (this.select) this.select.append(new Option(label, label));
       this.choose(label);
       this.root.dispatchEvent(new CustomEvent('deck:create', { bubbles: true, detail: { value: label } }));
     }
 
+    /* Read or replace the selection from script.
+         el._deck.value()                         'keel', or ['deck', 'keel'] with data-multi
+         el._deck.value('keel')
+         el._deck.value(['deck', 'keel'])         replaces rather than adds
+         el._deck.value({ value: 42, label: 'Ada Lovelace' })
+       A value the list does not have is ignored, unless the combobox is
+       remote or takes data-create, where it joins as given: the object form
+       carries the label for a remote value that no search has loaded yet.
+       Like a pick, it updates the <select> and fires change and deck:change;
+       { silent: true } skips the events. Returns the new value. */
+    value(v, { silent = false } = {}) {
+      if (v === undefined) {
+        const values = this.selected.map(o => o.value);
+        return this.multi ? values : (values[0] ?? '');
+      }
+      const picked = [];
+      for (const item of [].concat(v ?? [])) {
+        const o = this.lookup(item);
+        if (o && !picked.includes(o)) picked.push(o);
+      }
+      this.selection = new Map((this.multi ? picked : picked.slice(0, 1)).map(o => [o.value, o]));
+      if (!this.multi) {
+        this.input.value = this.selected[0]?.label ?? '';
+        this.query = '';
+      }
+      this.sync(silent);
+      this.renderTokens();
+      this.render();
+      return this.value();
+    }
+
+    clear(opts) { return this.value(null, opts); }
+
+    lookup(item) {
+      const obj = item !== null && typeof item === 'object';
+      const key = String(obj ? item.value ?? item.id : item);
+      const known = this.selection.get(key) || this.options.find(o => o.value === key);
+      if (known) return known;
+      if (!this.remote && !this.allowCreate) return null;
+      const given = obj ? item.label ?? item.name : undefined;
+      const tag = this.select && [...this.select.options].find(o => o.value === key);
+      const o = comboOption(key, String(given ?? tag?.textContent.trim() ?? key));
+      if (!this.remote) this.options.push(o);
+      return o;
+    }
+
     renderTokens() {
       if (!this.multi) {
         const one = this.selected[0];
-        if (one && document.activeElement !== this.input) this.input.value = one.label;
+        if (document.activeElement !== this.input) this.input.value = one ? one.label : '';
         this.tokens.innerHTML = '';
         return;
       }
@@ -575,13 +823,24 @@ const Deck = (() => {
       this.input.placeholder = sel.length ? '' : this.placeholder;
     }
 
-    sync() {
-      if (!this.select) return;
-      $$('option', this.select).forEach(o => {
-        const match = this.options.find(x => x.value === o.value);
-        o.selected = !!(match && match.selected);
-      });
-      this.select.dispatchEvent(new Event('change', { bubbles: true }));
+    /* Mirror the selection into the <select>, adding an <option> for a value
+       it does not have (a remote result, or one set from script), so the
+       form posts what the reader sees. */
+    sync(silent) {
+      if (this.select) {
+        const seen = new Set();
+        for (const o of this.select.options) {
+          const on = this.selection.has(o.value);
+          if (o.selected !== on) o.selected = on;
+          seen.add(o.value);
+        }
+        for (const [value, o] of this.selection) {
+          if (!seen.has(value)) this.select.append(new Option(o.label, value, true, true));
+        }
+        if (!this.selection.size) this.select.selectedIndex = -1;
+      }
+      if (silent) return;
+      if (this.select) this.select.dispatchEvent(new Event('change', { bubbles: true }));
       this.root.dispatchEvent(new CustomEvent('deck:change', {
         bubbles: true,
         detail: { values: this.selected.map(o => o.value) }
@@ -592,22 +851,20 @@ const Deck = (() => {
       const q = this.query.trim();
       if (q.length < this.minChars) return;
       this.list.innerHTML = `<div class="combo-loading"><span class="spinner"></span> Searching</div>`;
+      this.win = null;
       clearTimeout(this._t);
+      // Only the latest query may fill the list; an earlier reply can arrive later
+      const seq = ++this.seq;
       this._t = setTimeout(async () => {
         try {
           const res = await window.fetch(this.remote + encodeURIComponent(q), { headers: { 'Accept': 'application/json' } });
           const rows = await res.json();
-          const keep = this.selected;
-          this.options = rows.map(r => ({
-            value: String(r.value ?? r.id),
-            label: String(r.label ?? r.name),
-            sub: r.sub || '',
-            group: r.group || '',
-            disabled: !!r.disabled,
-            selected: keep.some(k => k.value === String(r.value ?? r.id))
-          }));
+          if (seq !== this.seq) return;
+          this.options = rows.map(r => comboOption(String(r.value ?? r.id), String(r.label ?? r.name),
+            r.sub || '', r.group || '', !!r.disabled));
           this.render();
         } catch (err) {
+          if (seq !== this.seq) return;
           this.list.innerHTML = `<div class="combo-empty">Could not load results. Try again.</div>`;
         }
       }, Number(this.root.dataset.debounce || 220));
@@ -615,13 +872,47 @@ const Deck = (() => {
 
     show() {
       if (this.open) return;
+      // Measured heights belong to a width, and the width may have changed since
+      this.heights = new WeakMap();
+      this.guess = COMBO_GUESS.slice();
+      this.guessed = [false, false, false];
       this.open = true;
       this.root.classList.add('is-open');
       this.input.setAttribute('aria-expanded', 'true');
+      if (this.list.popover && !this.list.matches(':popover-open')) this.list.showPopover();
+      this.place();
       this.render();
+      if (this.activeIndex >= 0) this.reveal();
+      if (!this.list.popover) {
+        const r = this.control.getBoundingClientRect();
+        this.list.classList.toggle('is-above',
+          window.innerWidth > 480 && window.innerHeight - r.bottom < 240 && r.top > 240);
+      }
+    }
+
+    /* Deck's own placement of the popover, for a browser with neither anchor
+       positioning nor the Floating UI adapter: fixed coordinates from the
+       control's box, below it unless there is little room there and more
+       above. */
+    place() {
+      if (!this.list.popover || CSS.supports('anchor-name: --a')) return;
+      const s = this.list.style;
       const r = this.control.getBoundingClientRect();
-      this.list.classList.toggle('is-above',
-        window.innerWidth > 480 && window.innerHeight - r.bottom < 240 && r.top > 240);
+      s.width = `${r.width}px`;
+      if (this.control.dataset.deckA) return;          // the Floating UI adapter has it
+      if (!this.onMove) {
+        this.onMove = e => { if (e.target !== this.list) this.place(); };
+        window.addEventListener('scroll', this.onMove, true);
+        window.addEventListener('resize', this.onMove);
+        s.maxHeight = '';
+        this.cap = parseFloat(getComputedStyle(this.list).maxHeight) || 320;
+      }
+      const below = window.innerHeight - r.bottom - 8, above = r.top - 8;
+      const up = below < Math.min(this.cap, 240) && above > below;
+      s.left = `${r.left}px`;
+      s.top = up ? 'auto' : `${r.bottom + 4}px`;
+      s.bottom = up ? `${window.innerHeight - r.top + 4}px` : 'auto';
+      s.maxHeight = `${Math.max(0, Math.min(this.cap, up ? above : below))}px`;
     }
 
     toggle() { this.open ? this.hide() : this.show(); }
@@ -631,6 +922,13 @@ const Deck = (() => {
       this.open = false;
       this.root.classList.remove('is-open');
       this.input.setAttribute('aria-expanded', 'false');
+      this.input.removeAttribute('aria-activedescendant');
+      if (this.list.popover && this.list.matches(':popover-open')) this.list.hidePopover();
+      if (this.onMove) {
+        window.removeEventListener('scroll', this.onMove, true);
+        window.removeEventListener('resize', this.onMove);
+        this.onMove = null;
+      }
       if (!this.multi) {
         const one = this.selected[0];
         this.input.value = one ? one.label : '';
@@ -1125,11 +1423,15 @@ const Deck = (() => {
     $$('.segmented, .tabs', root).forEach(group => {
       if (group.dataset.deckWired) return;
       group.dataset.deckWired = '1';
+      // A .segmented may be toggle buttons rather than tabs. A .tabs is a
+      // tablist, where only aria-selected is valid.
+      const states = group.classList.contains('segmented') ? ['aria-selected', 'aria-pressed'] : ['aria-selected'];
       group.addEventListener('click', e => {
-        const item = e.target.closest('[aria-selected]');
-        if (!item) return;
-        $$('[aria-selected]', group).forEach(b => b.setAttribute('aria-selected', 'false'));
-        item.setAttribute('aria-selected', 'true');
+        const item = e.target.closest(states.map(a => `[${a}]`).join());
+        if (!item || !group.contains(item)) return;
+        const state = states.find(a => item.hasAttribute(a));
+        $$(`[${state}]`, group).forEach(b => b.setAttribute(state, 'false'));
+        item.setAttribute(state, 'true');
         group.dispatchEvent(new CustomEvent('deck:change', { bubbles: true, detail: { value: item.dataset.value ?? item.textContent.trim() } }));
       });
     });
@@ -1319,6 +1621,12 @@ const Deck = (() => {
       if (dir) document.documentElement.setAttribute('dir', dir);
     } catch (e) {}
     Deck.init();
+    /* .fade-swap fades in only once this is set, so whatever was on screen at
+       first paint stays put. Two frames, because the first callback runs
+       before the first frame renders rather than after it. */
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      document.documentElement.dataset.deckReady = '';
+    }));
   });
 
   return Deck;

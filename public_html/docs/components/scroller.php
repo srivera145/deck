@@ -108,6 +108,11 @@ padding-inline: var(--space-gutter);') ?></code></pre>
       difference between cards that look cut off and cards that look like they continue
       past the edge.
     </p>
+    <p>
+      <code>scroll-padding-inline</code> is set to the same gutter. Without it a card that
+      snaps, or is scrolled into view, lands flush against the edge of the screen; with
+      it, the card rests at the gutter like everything else on the page.
+    </p>
     <p class="text-muted">
       It only works inside something that has the gutter — a <code>.container</code>. In
       a container with different padding the row will bleed by the wrong amount, and in
@@ -142,6 +147,9 @@ padding-inline: var(--space-gutter);') ?></code></pre>
     <code>padding-block-end: <?= e(api_token('--space-2')['value'] ?? '.5rem') ?></code>
     is set as well, leaving room for a scrollbar on platforms that show one over the
     content rather than beside it.
+    <code>padding-block-start: <?= e(api_token('--space-1')['value'] ?? '.25rem') ?></code>
+    leaves room for a focused item's ring, a 2px outline 2px out, because a scroll
+    container clips on both axes even when it only scrolls on one.
   </p>
 </section>
 
@@ -211,6 +219,17 @@ padding-inline: var(--space-gutter);') ?></code></pre>
       <code>aria-label</code>. This is the same defect as
       <a href="table.php#accessibility"><code>.table-wrap</code></a>, and it is recorded
       in <code>FINDINGS.md</code>.
+    </li>
+    <li>
+      <strong>Chromium leaves a half-visible item where it is.</strong> Tab to a card
+      that is partly past the edge of the row and Chromium-based browsers do not scroll
+      it in, so the card and its focus ring stay cut off by the edge of the screen. A
+      card wholly out of view is scrolled in. This is the browser's focus behaviour, and
+      it happens in a plain <code>overflow-x: auto</code> box too, so CSS cannot change
+      it. If it matters, call
+      <code>scrollIntoView({ block: 'nearest', inline: 'nearest' })</code> on
+      <code>focusin</code>; <code>scroll-padding-inline</code> then rests the card at the
+      gutter.
     </li>
     <li>
       <strong>Do not add <code>aria-hidden</code> to the off-screen items.</strong> They
@@ -303,7 +322,7 @@ padding-inline: var(--space-gutter);') ?></code></pre>
   .scroller > * { scroll-snap-align: center; }
 
   /* No bleed, for a scroller that is not inside a .container */
-  .scroller-flush { margin-inline: 0; padding-inline: 0; }
+  .scroller-flush { margin-inline: 0; padding-inline: 0; scroll-padding-inline: 0; }
 }') ?></code></pre>
   <p>
     <code>scroll-snap-align: center</code> is worth knowing about for a carousel of full

@@ -142,6 +142,11 @@ require __DIR__ . '/../_layout.php';
     <code>"true"</code> or any other value all match.
   </p>
   <p>
+    It is an inline-flex row, so an <code>.icon</code> beside the label is centred on it
+    instead of sitting on the text baseline. A link with an icon is the same height as a
+    link without one, and a row that mixes the two stays level.
+  </p>
+  <p>
     The source carries an instruction worth repeating: <strong>use
     <a href="button.php"><code>.btn</code></a> only for actions, never for navigation.</strong>
     A link goes somewhere and can be opened in a new tab, copied, or followed with the

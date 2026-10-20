@@ -508,6 +508,7 @@ $INTERNAL_ATTRS = [
     ['data-deck-x', 'The same guard in deck-extras.js.'],
     ['data-deck-a', 'The same guard in deck-adapters.js.'],
     ['data-deck-anchored', 'Marks a popover trigger whose anchor name has already been assigned.'],
+    ['data-deck-ready', 'Set on <code>&lt;html&gt;</code> once the first frame has rendered. <code>.fade-swap</code> fades in only after it is there, so nothing on screen at first paint fades in.'],
 ];
 ?>
 

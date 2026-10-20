@@ -178,6 +178,48 @@
   .no-select { user-select: none; }
   .cursor-pointer { cursor: pointer; }
 
+  /* These were in deck.motion, which comes before this layer, so any motion
+     component that sets the transition or animation shorthand later in
+     16-motion.css reset them: .fade-swap.dur-4 ran at --dur-2, and
+     .enter-rise.delay-3 never waited. Here they beat every component.
+     .transition-* stays above the scales so .transition.dur-4 still works.
+     FINDINGS 82. */
+  /* --- Motion ------------------------------------------------------------- */
+  .transition        { transition: all var(--dur-2) var(--ease-out); }
+  .transition-colors { transition: background-color var(--dur-1) var(--ease-out),
+                                   border-color var(--dur-1) var(--ease-out),
+                                   color var(--dur-1) var(--ease-out),
+                                   fill var(--dur-1) var(--ease-out),
+                                   stroke var(--dur-1) var(--ease-out); }
+  .transition-move   { transition: translate var(--dur-2) var(--ease-out),
+                                   scale var(--dur-2) var(--ease-out),
+                                   rotate var(--dur-2) var(--ease-out); }
+  .transition-size   { transition: inline-size var(--dur-3) var(--ease-out),
+                                   block-size var(--dur-3) var(--ease-out); }
+  .transition-opacity{ transition: opacity var(--dur-2) var(--ease-out); }
+
+  .dur-1 { transition-duration: var(--dur-1); animation-duration: var(--dur-1); }
+  .dur-2 { transition-duration: var(--dur-2); animation-duration: var(--dur-2); }
+  .dur-3 { transition-duration: var(--dur-3); animation-duration: var(--dur-3); }
+  .dur-4 { transition-duration: var(--dur-4); animation-duration: var(--dur-4); }
+  .dur-5 { transition-duration: var(--dur-5); animation-duration: var(--dur-5); }
+
+  .ease-out { transition-timing-function: var(--ease-out); animation-timing-function: var(--ease-out); }
+  .ease-in { transition-timing-function: var(--ease-in); animation-timing-function: var(--ease-in); }
+  .ease-spring { transition-timing-function: var(--ease-spring); animation-timing-function: var(--ease-spring); }
+  .ease-bounce { transition-timing-function: var(--ease-bounce); animation-timing-function: var(--ease-bounce); }
+  .ease-overshoot { transition-timing-function: var(--ease-overshoot); animation-timing-function: var(--ease-overshoot); }
+  .ease-linear { transition-timing-function: linear; animation-timing-function: linear; }
+
+  .delay-1 { transition-delay: 60ms; animation-delay: 60ms; }
+  .delay-2 { transition-delay: 140ms; animation-delay: 140ms; }
+  .delay-3 { transition-delay: 260ms; animation-delay: 260ms; }
+  .no-motion { transition: none !important; animation: none !important; }
+
+  /* Tell the compositor what is about to move, then let go. Never leave
+     will-change on permanently — it costs memory on every element. */
+  .will-move:is(:hover, :focus-within, .is-animating) { will-change: translate, scale, opacity; }
+
   /* --- Accessibility ------------------------------------------------------ */
   .sr-only {
     position: absolute;

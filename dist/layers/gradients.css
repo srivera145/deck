@@ -190,6 +190,9 @@
     -webkit-mask-image: none;
   }
   .scroller { mask-image: linear-gradient(90deg, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, #000 92%, transparent); }
+  /* The fade would dim the focus ring of a card resting at the end edge,
+     so it lifts while keyboard focus is in the row. */
+  .scroller:has(:focus-visible) { mask-image: none; -webkit-mask-image: none; }
 
   /* --- Sheen ---------------------------------------------------------------
      A highlight that sweeps across on hover. --sheen is registered, so it

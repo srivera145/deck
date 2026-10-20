@@ -5,7 +5,7 @@ $page = [
     'path' => 'components/button.php',
     'title' => 'Button',
     'level' => 'Beginner',
-    'description' => 'Deck\'s .btn component: seven variants, three sizes, icon-only, block, groups, loading and disabled states, with the touch target, focus ring and RTL behaviour explained.',
+    'description' => 'Deck\'s .btn component: seven variants, three sizes, icon-only, block, groups, toggle, loading and disabled states, with the touch target, focus ring and RTL behaviour explained.',
     'documents' => [
         'btn', 'btn-primary', 'btn-accent', 'btn-danger', 'btn-soft', 'btn-ghost',
         'btn-outline', 'btn-link', 'btn-sm', 'btn-lg', 'btn-block', 'btn-icon',
@@ -19,7 +19,7 @@ $page = [
        page proves it looked at all ten instead of remembering nine. */
     'component' => 'btn',
     'accounts' => [
-        '05-buttons.css' => 'documented: the component itself, its variants, sizes, group and states',
+        '05-buttons.css' => 'documented: the component itself, its variants, sizes, group, toggle and states',
         '21-space3d.css' => 'documented: .btn-3d, in the Pressable section',
         '16-motion.css'  => 'documented: reduced-motion behaviour, in the Reduced motion section',
         '99-print.css'   => 'documented: buttons are dropped from print, in Reduced motion and Accessibility',
@@ -172,6 +172,27 @@ $variants = [
 </section>
 
 <section class="stack stack-3">
+  <h2 id="label">A label in more than one piece</h2>
+  <p>
+    A button is a flex row, and its <?= e(api_token('--space-2')['value'] ?? '.5rem') ?>
+    gap is what holds an icon away from its label. Text next to a bare
+    <code>&lt;span&gt;</code>, as in <code>Save &lt;span&gt;changes&lt;/span&gt;</code>,
+    would be two flex items held apart by that same gap, about twice a word space. So a
+    span with no class and no child elements gives up its box, and its text runs on with
+    the rest of the label. A span with a class keeps its box, because a
+    <code>.badge</code> or <code>.sr-only</code> needs one. When the split part needs a
+    class, wrap the whole label in one span.
+  </p>
+  <?php
+  docs_example(
+      '<button class="btn">Save <span>changes</span></button>' . "\n" .
+      '<button class="btn btn-primary"><span>Pay <span class="nums">$82.10</span></span></button>' . "\n" .
+      '<button class="btn">Inbox <span class="badge">4</span></button>'
+  );
+  ?>
+</section>
+
+<section class="stack stack-3">
   <h2 id="group">Groups</h2>
   <p>
     <code>.btn-group</code> joins adjacent buttons into a segmented control: it squares
@@ -188,6 +209,74 @@ $variants = [
       '</div>'
   );
   ?>
+</section>
+
+<section class="stack stack-3">
+  <h2 id="toggle">Toggle buttons</h2>
+  <p>
+    A button that stays on — Bold, Mute, Follow — is a toggle, and its on state is
+    <code>aria-pressed="true"</code>. That is the attribute a screen reader announces as
+    "pressed", and it is the only thing Deck styles, so the look and the accessible state
+    cannot disagree. Deck does not flip it for you: set it in your click handler.
+  </p>
+  <?php
+  docs_example(
+      '<button class="btn" aria-pressed="true">Bold</button>' . "\n" .
+      '<button class="btn" aria-pressed="false">Italic</button>' . "\n" .
+      '<button class="btn btn-ghost" aria-pressed="true">Ghost</button>' . "\n" .
+      '<button class="btn btn-soft" aria-pressed="true">Soft</button>' . "\n" .
+      '<button class="btn btn-primary" aria-pressed="true">Primary</button>'
+  );
+  ?>
+  <p>
+    On is the brand tint with a brand edge and no lift. <code>.btn-soft</code> is that
+    tint already, so a pressed soft button fills solid instead, and
+    <code>.btn-primary</code>, <code>.btn-accent</code> and <code>.btn-danger</code> keep
+    their colour and sink a shade. <code>aria-pressed="false"</code> looks exactly like no
+    attribute. In a <code>.btn-group</code> each button toggles on its own, which is a
+    formatting toolbar.
+  </p>
+  <?php
+  docs_example(
+      '<div class="btn-group" role="group" aria-label="Text style">' . "\n" .
+      '  <button class="btn btn-sm" aria-pressed="true">Bold</button>' . "\n" .
+      '  <button class="btn btn-sm" aria-pressed="false">Italic</button>' . "\n" .
+      '  <button class="btn btn-sm" aria-pressed="true">Underline</button>' . "\n" .
+      '</div>'
+  );
+  ?>
+
+  <h3 id="on-attribute">Which attribute means on</h3>
+  <p>
+    <code>aria-pressed="true"</code> is Deck's attribute for "on". Every component with an
+    on state answers to it. The ones that can also be a selected option treat
+    <code>aria-selected="true"</code> as an equal alternative with the same look, so
+    reaching for the other one is never a silent mistake.
+  </p>
+  <div class="table-wrap">
+    <table class="table table-stack">
+      <caption class="sr-only">The on state of each component</caption>
+      <thead><tr><th scope="col">Component</th><th scope="col"><code>aria-pressed</code></th><th scope="col"><code>aria-selected</code></th><th scope="col"><code>.is-active</code></th></tr></thead>
+      <tbody>
+        <tr><th scope="row" data-label="Component"><code>.btn</code></th><td data-label="aria-pressed">Yes</td><td data-label="aria-selected">No</td><td data-label=".is-active">No</td></tr>
+        <tr><th scope="row" data-label="Component"><code>.chip</code></th><td data-label="aria-pressed">Yes</td><td data-label="aria-selected">Yes</td><td data-label=".is-active">Yes</td></tr>
+        <tr><th scope="row" data-label="Component"><code>.reaction</code></th><td data-label="aria-pressed">Yes</td><td data-label="aria-selected">Yes</td><td data-label=".is-active">No</td></tr>
+        <tr><th scope="row" data-label="Component"><a href="datepicker.php#presets"><code>.datepicker-preset</code></a></th><td data-label="aria-pressed">Yes</td><td data-label="aria-selected">Yes</td><td data-label=".is-active">No</td></tr>
+        <tr><th scope="row" data-label="Component"><a href="segmented.php#state"><code>.segmented</code></a> children</th><td data-label="aria-pressed">Yes</td><td data-label="aria-selected">Yes</td><td data-label=".is-active">Yes</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-muted">
+    <code>.btn</code> takes <code>aria-pressed</code> alone because
+    <code>aria-selected</code> is not valid on a button. A button with
+    <code>role="tab"</code> is a tab: put it in
+    <a href="segmented.php"><code>.segmented</code></a>, or make it a
+    <a href="tabs.php"><code>.tab</code></a>, and the container draws the selected state.
+    For the same reason a pressed <code>.btn</code> inside <code>.segmented</code> adds no
+    tint of its own.
+    Tabs, combobox options and data-grid rows are selected rather than pressed, and keep
+    <code>aria-selected</code>, which their roles require.
+  </p>
 </section>
 
 <section class="stack stack-3">
@@ -282,6 +371,12 @@ $variants = [
       <code>aria-busy="true"</code> so the state is announced, and keep the accessible
       name on the button.
     </li>
+    <li>
+      <strong>A toggle keeps its label.</strong> The label names the thing — "Bold", not
+      "Make bold" — and <code>aria-pressed</code> carries the state, which a screen reader
+      reads out as "pressed" or "not pressed". Leave the attribute off a button that is
+      not a toggle: <code>aria-pressed="false"</code> tells a screen reader it is one.
+    </li>
   </ul>
 </section>
 
@@ -366,9 +461,11 @@ $variants = [
       current-page state; a row of <code>.btn</code> elements reads as a row of commands.
     </li>
     <li>
-      <strong>Not for a toggle with two states.</strong> Use <code>.switch</code> for on
-      and off, or <code>.segmented</code> for one-of-three. A button that changes its own
-      label is harder to announce and harder to script.
+      <strong>Not for a setting.</strong> Use <code>.switch</code> for a preference that
+      is on or off, or <code>.segmented</code> for one-of-three. A
+      <a href="#toggle">toggle button</a> is for a state of the thing in front of the
+      reader — bold text, a muted call. And a button that changes its own label instead
+      of using <code>aria-pressed</code> is harder to announce and harder to script.
     </li>
     <li>
       <strong>Not for a whole clickable card.</strong> Use <code>.card-link</code> with a

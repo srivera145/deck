@@ -1780,3 +1780,539 @@ The install page shows the 0.1.1 line as printed, with a note saying why.
 
 **How it was found:** the Composer transcript for the install page said 0.1.1 after
 installing v0.1.2.
+
+## 81. Seven components drew a light-mode surface in dark mode
+
+`--ink-100` and `--ink-200` are fixed values, 95.4% and 91.2% lightness with no
+`light-dark()`, and seven rules used them as a surface: the `.progress` track, the
+`.ring` remainder, the `.spinner`'s unlit arc, the `.skeleton` gradient, both vendor
+tracks of `.range`, and `.range-pair::before`. In dark mode each drew a near-white bar on a
+near-black page. The status badges, alerts and `.banner-warn` had the same fault through
+another ramp: they filled with `--good-100`, `--warn-100` and `--bad-100`, which are just
+as fixed. Worst was a `.btn-ghost` inside `.alert-good`, `-warn` or `-bad`: `.btn` text is
+`--text`, near-white in dark mode, on a near-white fill, and it measured 1.02:1 to 1.06:1.
+The other `--ink-100` uses are text on a surface that is dark in both themes (`pre`,
+`.g-dark`, `.banner-dark`, the Chart.js tooltip), and were left alone.
+
+**Fixed** with seven tokens in `01-tokens.css`. Each is `light-dark()` whose light branch
+is the exact step the component used before, so light mode does not change. Checked in
+Edge against the build before the change: the computed colour, background, border and
+shadow of all 13,582 elements and pseudo-elements across the twenty templates are
+identical in light mode, and so is a screenshot of every affected component on `--bg`,
+`--surface` and `--surface-2`.
+
+- `--surface-recessed` is `--ink-200` in light and `oklch(5% .008 neutral)` in dark: the
+  surface a control sits on. It is darker than what it sits on in both themes and one step
+  below `--bg-sunken`, so the skeleton now runs `--bg-sunken` to `--surface-recessed`,
+  which is the `--ink-100` to `--ink-200` it drew before.
+- `--good-soft`, `--warn-soft` and `--bad-soft`, each with a `-text` partner, are the `100`
+  and `700` steps in light. In dark the fill is `--brand-soft`'s 26% at the status hue and
+  the text is 76% to 84%. Tone text now measures 7.0:1 to 9.4:1 in dark mode, and the ghost
+  button inside each alert 13.4:1 to 13.9:1.
+
+**Deliberately not recessed:** in dark mode the status fills sit at 26% lightness, above
+`--surface` rather than below it. They were tried at 9% first, but sRGB holds only about
+.02 chroma there: `.alert-good` and `.alert-warn` rendered as plain black boxes, and on
+`--bg` the badges lost their shape and only the coloured text remained. At 26% they match
+`.alert-info`, `.badge-brand` and `.banner`, which have always used `--brand-soft` there,
+and the patch the dark-mode guide was already recommending.
+
+**A limit worth knowing:** dark `--bg` renders at about rgb(5, 5, 6), so anything darker
+is close to black. A recessed track on the bare page background is faint in dark mode
+however it is specified; on `--surface` and `--surface-2` it is clear.
+
+**Not fixed here:** the same fixed steps still fill `.icon-tile-good`, `-warn` and `-bad`,
+`.menu-item-danger:hover`, `.copy-btn.is-copied`, `.tone-surface` in `18-container.css`,
+`.drop-reject`, and the `dg-flash` keyframe in the data grid. The `700` steps are still the
+text colour of `.text-good`, `.text-warn`, `.text-bad`, `.stat-delta-up`,
+`.stat-delta-down`, `.menu-item-danger`, the invalid `.float` label and
+`.editor-count.is-over`, which on a dark surface measures 2.0:1 to 2.8:1 for good and bad
+and 2.8:1 to 3.3:1 for warn. Each is a one-line move to a soft pair. The dark-mode guide's
+patch now covers the icon tiles only.
+
+**Templates that patched this themselves:** `auto-repair.html` and `digital-marketing.html`
+redefine `--good-100`, `--warn-100`, `--bad-100` and the `700` steps at `:root`, as the
+guide used to recommend. In dark mode the soft pairs no longer read those steps, so their
+badges now take Deck's 26% fill instead of the templates' 31% to 33%; the overrides are
+redundant for badges and alerts. `app-shell.html`, `carousels.html` and `checkout.html`
+restyle the classes directly in unlayered CSS, which still wins, so they render as before.
+`app-shell.html` gives `.progress` a lighter `--ink-800` track in dark mode, the opposite
+direction to `--surface-recessed`. Each workaround can go in a template pass.
+
+**How it was found:** five bug reports against these components, which turned out to share
+two causes rather than one. Grepping every use of `--ink-100` and `--ink-200` and sorting
+each into surface or text found the two `.range` tracks, which nobody had reported.
+
+## 82. `.dur-*`, `.ease-*` and `.delay-*` lost to every motion component
+
+The duration, easing and delay utilities were declared at the top of `16-motion.css`, in
+`deck.motion`. Every component further down that file sets the `transition` or `animation`
+shorthand, at the same specificity and later in the same layer, and a shorthand resets its
+longhands, so the component won. `<div class="fade-swap dur-4">` faded over `--dur-2`'s
+190ms, `.fade-swap.ease-spring` kept `--ease-out`, and in `landing.html` the
+`.enter-rise.delay-3` and two `.enter-pop.delay-3` elements started with no delay at all.
+The same was true of the entrances, `.shake`, `.flash`, `.pulse`, `.lift`, `.press`,
+`.sweep`, `.icon-follow`, `.expand` and `.tick`, and of everything in `deck.effects`, which
+comes after `deck.motion` in the layer order. The utilities could only beat the layers
+before them.
+
+**Fixed** by moving the whole family to a Motion section of `09-utilities.css`, in
+`deck.utilities`, in the order it had: the five `.transition` shorthands, `.dur-1` to
+`.dur-5`, the six `.ease-*`, `.delay-1` to `.delay-3`, `.no-motion` and `.will-move`. All
+21 are single-purpose. The components and their modifiers, `.stagger-fast` and
+`.reveal-late` among them, stay in `deck.motion`. The shorthands stay above the scales, so
+`.transition.dur-4` still works. The rules moved unchanged; `deck.min.css` is 22 bytes
+larger, and all of that is #83's selector.
+
+Checked in Edge against the build before the change. Across the twenty templates, the
+computed transition and animation longhands and `will-change` of all 38,439 elements and
+pseudo-elements are identical except on the three `landing.html` elements above, which now
+wait the 260ms their markup asks for. On a test page `.fade-swap.dur-4` runs 420ms each
+way instead of 190ms, and `.fade-swap.ease-spring` runs on `--ease-spring`.
+
+**Worth knowing:** the utility now wins for the shorthands too. `.lift.transition-colors`
+replaces `.lift`'s translate and shadow transition rather than losing to it, as `.card.p-0`
+replaces the card's padding. `.no-motion` keeps its `!important`: the only other important
+transitions are the reduced-motion reset, in an earlier layer that wins either way, and
+print, which also says `none`. In `dist/api.json` 22 classes changed layer, the 21 plus
+`.is-animating`, which appears only inside `.will-move`'s selector. None changed bucket or
+description.
+
+**How it was found:** `<div class="fade-swap dur-4">` animated at the default speed. The
+`landing.html` delays turned up when the templates were searched for the classes being
+moved.
+
+## 83. `.fade-swap` faded in on first paint
+
+`@starting-style` gives an element a style to transition from when it has no earlier style.
+That covers an element going from `display: none` to shown, and it also covers every
+element on a page's first render. `.fade-swap`'s rule had no condition, so anything with the
+class that was visible on load faded in from transparent over 190ms: a boot screen or
+loading overlay let the page show through before it covered it. On a test page in Edge, all
+four visible `.fade-swap` elements ran an opacity transition on load.
+
+**Fixed** with a marker, because CSS cannot tell a first render from a reveal: neither has
+an earlier style. Two animation frames after `Deck.init()` runs on `DOMContentLoaded`,
+deck.js sets `data-deck-ready` on `<html>`, and the `@starting-style` rule now matches only
+beneath it. It takes two because the first callback runs before the first frame renders. On
+the same page nothing fades in on load, and an element un-hidden afterwards still fades in
+from 0. The attribute is listed with deck.js's other runtime marks in the JavaScript
+reference.
+
+**The trade:** without deck.js, `.fade-swap` still fades out but appears without fading in.
+Anything shown or inserted before the marker lands, including an element page code
+un-hides in its own `DOMContentLoaded` handler, also appears without fading, which is the
+point: it is part of the first render.
+
+**How it was found:** reported with #82: an overlay with `.fade-swap` flashed on load.
+
+## 84. The combobox wrote `data-placeholder` into its markup unescaped
+
+`Combo.build()` in deck.js builds the control with `innerHTML` and interpolated
+`root.dataset.placeholder` straight into the input's `placeholder="…"`. The dataset value
+is already decoded, so a server that escaped the attribute correctly did not help: a
+placeholder containing a double quote closed the attribute early. In Edge,
+`data-placeholder='" onfocus="alert(1)'` gave the input an `onfocus` handler that ran on
+the first focus, and an ordinary `Search O'Brien's <b>files</b> & "notes"` was cut off
+after the `&`, leaving a junk attribute named `notes""`. Every other
+interpolation in the combobox — options, groups, tokens and `highlight()` — already went
+through `escapeHTML()`.
+
+**Fixed** by passing the placeholder through `escapeHTML()` like the rest. The markup and
+the data attributes are unchanged. All three strings above now arrive as literal
+placeholder text, with no extra attributes and no script. `tests/state.test.mjs` covers it.
+
+**How it was found:** reported, with the line number; the rest of the combobox was
+re-read to confirm this was the only unescaped interpolation.
+
+## 85. `.banner-close` had no touch target
+
+`.banner-close` set only `margin-inline-start`, `opacity`, `cursor` and `flex`, so its
+hit area was the icon plus the browser's button padding: 25×22px in Edge, against the
+44px every Deck control claims to clear. `.btn` meets the claim with a `::before`, but a
+bare `<button class="banner-close">`, as on the home page, had nothing.
+
+**Fixed** with a `--tap` square. `.banner-close:not(.btn)` is an `inline-grid` of
+`min-inline-size` and `min-block-size: var(--tap)`, with the icon centred, so the button is
+44×44 and the 13px `.icon-sm` is still 13px. A negative `--space-3` margin on the block
+axis and the inline end lets the square reach into the banner's padding, so the strip does
+not get taller and the icon moves 2.5px. A one-line banner is 2px *shorter*, 45px rather
+than 47, because the old button's line box was the tallest thing in it; a two-line banner is
+unchanged. `.btn.banner-close`, as used by `ecommerce.html`, `product.html` and
+`jumbotrons.html`, is excluded and measures the same as before, because `.btn`'s `::before`
+already gave it a 44px target.
+
+**How it was found:** reported, by measuring the home page banner against the README's
+touch-target claim.
+
+## 86. Two attributes meant "on", and `.btn` answered to neither
+
+`.chip`, `.reaction` and `.datepicker-preset` were on at `[aria-pressed="true"]`;
+`.segmented` was on at `[aria-selected="true"]`; `.btn` had no on state at all. Picking the
+wrong one failed silently: no error, no visible state. The templates show the cost. Five of
+them put `aria-pressed` on a `.btn` and each wrote its own pressed style, and
+`product.html`'s `.helpful` reinvents the brand tint by hand.
+
+**Fixed** by picking `aria-pressed="true"` as Deck's attribute for "on", because it is
+valid on a plain `<button>` with no role, and `aria-selected` is not. `aria-selected="true"`
+stays as an equal alternative with the same look wherever an element could be an option or
+a tab: `.chip`, `.reaction`, `.datepicker-preset` and `.segmented`'s children now take both,
+and `.chip` and `.segmented` keep `.is-active`. `.btn` gains `[aria-pressed="true"]`. That is
+the brand tint with a brand edge and no lift, a solid fill for `.btn-soft` (already tinted),
+and a shade darker with no lift for the solid variants. `aria-pressed="false"` looks the same
+as no attribute. A `.btn` inside `.segmented` is excluded, so the control's raised look is the
+only one there. deck.js's `.segmented` click handler moved only `aria-selected`; it now moves
+whichever of the two attributes the children carry. `.tabs` still moves only `aria-selected`,
+so a toggle button inside a tab bar is not taken for a tab. The convention is in a table on
+`button.php#on-attribute`, and the segmented and date picker pages link to it.
+
+Checked in Edge against the build before the change, light and dark. The existing look of
+every on state is identical: `.chip`, `.reaction` and `.datepicker-preset` at
+`aria-pressed`, `.segmented` at `aria-selected` and `.is-active`, at rest and on hover,
+whether the children are bare buttons, `.btn` or `.btn-ghost`. The new alternatives compute
+the same paint as the originals. Every `.btn` variant now differs when pressed.
+
+**Worth knowing:** the templates that already put `aria-pressed="true"` on a `.btn` pick up
+whatever their own unlayered rules leave unset. `.helpful` now loses its lift shadow, and
+`.buy-wish` gains the tint and edge when pressed. `.product-wish` and `.cr-product-fav`
+change only on hover, and `landing.html`'s `.marquee-toggle` is tinted while paused. The
+handler had a second bug: it found its item with `closest('[aria-selected]')` and never
+checked that the item was inside the group. In a `.segmented` inside a `tr[aria-selected]`,
+a click on the track's padding selected the table row. The handler now ignores anything
+outside its group.
+
+**How it was found:** reported, as a trap recorded in `CLAUDE.md`: `.segmented` built with
+`aria-pressed` shows no state.
+
+## 87. The date picker never shows which preset is active
+
+`.datepicker-preset` has an on state, but deck.js never uses it. `render()` rebuilds the
+whole panel with `innerHTML` on every interaction, and it writes each preset as a bare
+`<button class="datepicker-preset" data-preset="7">` with neither attribute. So after
+"Last 7 days" is chosen, nothing marks it, and an attribute set by page code is wiped on
+the next click.
+
+**Not fixed.** It needs the picker to remember which preset produced the current range,
+and to drop that memory when the reader edits the range by hand. That is a behaviour change
+to the date picker, outside the attribute fix in #86. The date picker page says so.
+
+**How it was found:** while adding `aria-selected` to the preset rule in #86, by checking
+what sets the attribute today.
+
+## 88. The combobox list covered its own field, and inside a `.card` on a phone it was cut off — FIXED
+
+Reported as a phone bug inside `.card`. Measured in Edge, it turned out to be two bugs, and
+the one underneath affects every page.
+
+**On a phone inside a `.card`.** Under 30rem `.combo-list` became a sheet:
+`position: fixed; inset: auto 0 0 0; max-block-size: 70dvh`. `26-perf.css` gives `.card`
+`contain: layout style`, and layout containment makes an element the containing block for
+fixed-position descendants as well as absolute ones. So the sheet was laid out against the
+card, not the screen. At 375×667, with the field at y=286–337 in a card spanning y=202–393,
+the list ran from y=−78 to y=388: bottom-aligned to the card, 78px off the top of the screen.
+Then the card's `overflow: clip` cut away everything outside the card, leaving a card-sized
+window into the middle of the list, over the field. A tap in the middle of the list hit the
+page behind it.
+
+Each suspect switched off in turn, same page:
+
+| changed | list spans | on screen | tappable |
+| --- | --- | --- | --- |
+| nothing | y −78 to 388, visible only inside the card | no | no |
+| `.card { contain: none }` | y 196 to 663 | yes | yes |
+| `.card { overflow: visible }` | y −78 to 388 | no | yes |
+| anchor rules off | y −78 to 388 | no | no |
+
+**Containment is the cause.** `overflow: clip` only did the visible damage because
+containment had made the card the fixed box's containing block; without containment a fixed
+box escapes the clip. The anchor rules played no part in the card failure. A z-index could
+not have fixed it either, because layout containment also makes the card a stacking context.
+
+**Under it, on every page.** With containment off, the list was on screen but still covered
+the field: it started at y=196, and the field was at 286–337. Outside any card, on a desktop
+page at 1024px, the list spanned y=43–363 over a field at y=39–88. `25-anchor.css` gave
+the list `position-area: block-end`, but `position-area` resolves against the positioned
+element's containing block. That was `.combo`, which is `position: relative` and exactly as
+tall as the control. The area below the control was zero pixels tall, and so was the area
+`flip-block` tried above it, so the list was pushed back into `.combo`, on top of the field.
+That has been true in every Chromium browser since `25-anchor.css` shipped. The comment and
+the docs said the list "goes in the top layer"; nothing put it there. On a phone outside a
+card, the sheet ran 38px off the bottom of the screen.
+
+**Fixed** by opening the list as a popover (`popover="manual"`), which puts it in the top
+layer. Its containing block is the viewport, no ancestor can clip it, and `position-area`
+measures real space. Each combobox gets its own `--anchor`. In the top layer every
+`.combo-control` is a candidate anchor, and the shared `--combo` name would have tied every
+list to the last control on the page. The phone sheet is gone: the list stays anchored at
+every width, with 44px rows under 30rem. `25-anchor.css` gains a third fallback,
+`--dk-combo-fit`: below the field and shrunk to the room there, for a field in the middle
+of a short screen where the list fits on neither side at full height. Without anchor
+positioning, the control carries `data-deck-anchor`, so the Floating UI adapter places the
+list when it is loaded. Its `combo-list` branch had never been reachable, because the list
+was not a popover and nothing pointed at it. With neither, deck.js places the list itself
+with fixed coordinates.
+
+Verified in Edge at 375×667 and 1024×768, with the field near the top, middle, lower part and
+bottom of the screen and two comboboxes per card. In every case the list had the same edges
+as its field, was clear of it, fully on screen and hit-testable: 16 of 16 with anchor
+positioning, 16 of 16 with it stripped out and Deck's own placement, and 16 of 16 with it
+stripped out and Floating UI 1.6 loaded from jsDelivr. `tests/combo.test.mjs` covers the card
+at 375px and a plain desktop page.
+
+**Worth knowing:** with Floating UI, the adapter's `size` middleware writes `max-height`
+inline from the available space, so the list can grow past the stylesheet's
+`min(20rem, 50dvh)`. That is how the adapter has always treated menus; left alone. In a
+browser with no popover support, the list is still a positioned sibling and a card still
+clips it. Every browser in the browserslist has popover.
+
+**How it was found:** reported, building an app on 0.1.3. The desktop overlap turned up while
+measuring the diagnosis, with containment switched off.
+
+## 89. The combobox drew every option, so ten thousand took over a second to open — FIXED
+
+`Combo.render()` wrote every matching option into the list with `innerHTML`, on every open
+and every keystroke. Reported at 8.5 seconds for 10,500 options in a real app. Measured in
+Edge on this machine, median of five, mousedown to the first painted frame:
+
+| options | before | after |
+| --- | --- | --- |
+| 100 | 26.9ms | 17.1ms |
+| 1,000 | 114.6ms | 17.3ms |
+| 10,000 | 1,397ms | 16.4ms |
+
+The synchronous part of the open went from 877ms to 14ms at 10,000. What is left is the wait
+for the next frame. Two smaller costs grew with the list too: `sync()` looked each `<option>`
+up in `this.options` with `find()`, O(n²) per pick, and `onKey()` re-queried every option
+node on every key press.
+
+**Fixed** with windowing. Only the rows near the scroll position are elements, a few
+dozen at most, and padding on a wrapper stands in for the rest. Rows are not assumed to be
+one height: an option, an option with a second line and a group heading each start from a
+guess, the first row of each kind drawn replaces its guess with its real height, and every
+row is measured as it is drawn. When a measurement moves rows above the view, the scroll
+position is corrected so the view does not jump, and the browser's own scroll anchoring is
+off so the two do not both correct it. A group heading drawn out of the slice is pinned as an
+`aria-hidden` copy, so the sticky heading still shows while you scroll through its group.
+`activeIndex` was always an index into the filtered list, so the arrow keys work over every
+option. `reveal()` scrolls the active one into view, clear of the pinned heading and the
+sticky Add row, before it is drawn.
+
+The docs said the input was linked to the active option by `aria-activedescendant`.
+deck.js never set it, and the options had no ids, so a screen reader heard nothing as the
+highlight moved. With windowing it became essential, because the active option has to exist
+to be named. deck.js now sets it, removes it when the active option is scrolled out of the
+drawn slice (rather than leave it naming an element that is gone), and gives each option
+`aria-posinset` and `aria-setsize`, so a drawn option is announced with its place in the whole
+list. The input also gains `aria-controls`, and the list `aria-multiselectable` with
+`data-multi`.
+
+Also fixed on the way: `ArrowUp` with no active option went to the second-to-last option,
+because `(−1 − 1 + n) % n` is `n − 2`. It now goes to the last. `PageUp` and
+`PageDown` move a screenful and stop at the ends.
+
+Verified with 10,000 real `ArrowDown` presses in Edge. After each one the active option was
+drawn, in view and named by `aria-activedescendant`. The run ended on "Option number 9999",
+position 10,000 of 10,000, with no more than 25 options in the DOM at any point. One more
+press wrapped to the first option, and `ArrowUp` wrapped back.
+
+**The trade:** the browser's find-in-page only sees drawn options. The combobox's own
+filter searches all of them.
+
+**How it was found:** reported. The missing `aria-activedescendant` turned up while checking
+what a screen reader would be told once most options no longer existed.
+
+## 90. A combobox could not be read, set or cleared from script — FIXED
+
+The instance was reachable as `el._deck`, but it had no public methods. Setting the hidden
+`<select>`'s value changed nothing on screen, and there was no way to clear the field from a
+"Reset filters" button.
+
+**Fixed** with `value()` and `clear()`. The shape follows Deck's own read-or-write
+methods, where `Deck.theme()` and `Deck.dir()` read with no argument and write with one:
+
+- `value()` returns a string for a single combobox (`''` with nothing chosen, as a select's
+  `value` does), or an array with `data-multi`.
+- `value(v)` takes a value, an array, or `{ value, label }` objects, and replaces the
+  selection. A value the list does not have is ignored, as on a native select, unless the
+  combobox is remote or takes `data-create`. Then it joins as given, and the object form
+  carries the label for a remote value no search has loaded.
+- `clear()` empties it.
+
+Both update the `<select>` and fire `change` and `deck:change`, as a pick does, so code that
+listens for one hears the other. `{ silent: true }` skips the events, for code that sets the
+value from the same state its `deck:change` handler writes to.
+
+**How it was found:** reported.
+
+## 91. A remote multi-select forgot earlier choices, and never posted any — FIXED
+
+The selection was a `selected` flag on each entry in `this.options`. `fetch()` replaced
+`this.options` with each query's results and carried the flag over only for rows that
+appeared in them. Choose Ada under "ad", search "gr", and Ada was gone. Measured on 0.1.3:
+pick one person under each of three queries and one token is left, the last.
+
+It was worse than reported. The form posted nothing at all, because `sync()` only marked
+`<option>`s already in the select, and a remote result never was one. A token whose option
+was not in the current results could not be removed, because `choose()` looked it up in
+`this.options`. And two requests in flight could resolve out of order, so an old query's
+results could replace a newer one's.
+
+**Fixed** by keeping the selection in its own `Map`, keyed by value in the order chosen and
+separate from the options any query returns. Rendering reads `aria-selected` from it, tokens
+come from it, and `choose()` looks there first. `sync()` adds an `<option>` to the select for
+any chosen value it does not have, so the form posts what the reader sees. Only the latest
+request may fill the list. The same three queries now leave three tokens, and the form posts
+`1, 3, 4`. Going back to the first query shows Ada as chosen. `tests/combo.test.mjs` covers
+all of this, and a slow reply arriving after a newer one.
+
+**How it was found:** reported. The empty form post turned up when the test checked what the
+form would actually send.
+
+## 92. Under reduced motion every style change is a transition, so script reads the old value
+
+`02-reset.css` sets `transition-duration: .01ms !important` on every element when the reader
+asks for reduced motion. `transition-property` defaults to `all`, so every property change on
+every element starts a .01ms transition, and until the current task ends, layout and
+`getComputedStyle` see the old value. A script that writes a style and reads geometry in the
+same task gets stale numbers, and only for readers who asked for reduced motion.
+
+It surfaced in #89. The windowed list moves its wrapper's padding and then measures. Near the
+end of a long list, layout used the old padding, the content was briefly shorter than the
+scroll position, the browser clamped `scrollTop`, and the active option fell out of the drawn
+slice. It took the run of 10,000 key presses to show.
+
+**Worked around in the combobox:** `.combo-list` and its rows wrapper have
+`transition-property: none`. Nothing on them was meant to transition.
+
+**Not fixed in general.** The .01ms is deliberate: `transitionend` and `animationend` still
+fire for code that waits on them, and `transition-property: none` in the reset would stop
+those events. No other script in Deck has been audited for a write-then-measure in the same
+task.
+
+**How it was found:** while verifying #89, by watching `getComputedStyle` disagree with the
+inline style it had just been given, and finding `padding-top` and `padding-bottom`
+transitions in `document.getAnimations()`.
+
+## 93. `.list` cut the focus ring off its own rows — FIXED
+
+`.list` has `overflow: clip`, which it needs for its rounded corners, and a row is the
+full width of the list. The global ring sits 2px outside the element and is 2px wide, so
+4px of it fell outside the list on both sides of every row, and above the first row and
+below the last. What a keyboard user saw was a single line along one edge.
+
+**Fixed** in `src/07-components.css`. `.list-row:focus-visible` has `outline-offset: -2px`,
+so the ring is drawn inside the row. While focused, the first and last rows take the
+list's corner radius (`inherit`), so the ring follows the rounded clip instead of being cut
+at the corners. The clip stays. Item 28, hover with no focus counterpart, still stands.
+
+**How it was found:** reported, then measured by tabbing through a three-row list and
+comparing each outline's box with the list's padding box.
+
+## 94. `.scroller` clipped focus rings and snapped its first card flush to the edge — FIXED
+
+Three problems in one container:
+
+- `overflow-x: auto` turns `overflow-y` to `auto` as well, so the scroller clips on both
+  axes. With no top padding, every focused card lost the top 4px of its ring.
+- There was no `scroll-padding-inline`. Proximity snapping settled onto the first card's
+  snap position as soon as the page loaded, which put it flush against the edge of the
+  screen and cut the left side of its ring. Any card scrolled into view did the same.
+- The fade in `src/20-gradients.css` covers the last 8% of the row. A card resting at the
+  end edge had its ring drawn at about 40% opacity.
+
+**Fixed.** The scroller has `padding-block: var(--space-1) var(--space-2)`, which adds 4px
+above the row (content below it moves down 4px), and `scroll-padding-inline:
+var(--space-gutter)`, matching its own inline padding, so the first and last cards rest at
+the gutter. `.scroller:has(:focus-visible)` drops the fade. The overflow is unchanged.
+
+**Side effect in a template:** `travel.html` has a page-local
+`.chip-row { padding-block-start: 2px }`, which was a workaround for the same clip. Being
+unlayered, it now overrides Deck's 4px with 2px, so the top 2px of a chip's ring is still
+cut on that page. Deleting that declaration fixes it.
+
+## 95. Chromium does not scroll a half-visible item into view on focus — NOT FIXED
+
+Found while verifying #94. Tab to a card that is partly past the end edge of a scroller,
+and Chromium-based browsers leave the scroll position alone, so the card and its ring stay
+cut off by the edge of the screen. A card wholly out of view is scrolled in. Tested in Edge
+155, and it happens the same way in a plain `overflow-x: auto` div with no Deck CSS, so it
+is the browser's focus behaviour. Whether snapping is on makes no difference.
+
+CSS cannot change it. `scrollIntoView({ block: 'nearest', inline: 'nearest' })` on
+`focusin` does work, and with #94's `scroll-padding-inline` the card comes to rest at the
+gutter. That would be a `deck.js` behaviour, and it was out of scope for a CSS fix.
+Documented on the scroller page.
+
+## 96. `.card-link` gave no card-level feedback for keyboard focus — FIXED
+
+Hover lifted the card with a deeper shadow and a stronger border, but tabbing to the
+stretched link changed nothing on the card. The ring went around the link text only, so a
+keyboard user moving through a grid of cards had less to go on than a mouse user.
+
+**Fixed:** the hover rule is now `.card-link:is(:hover, :focus-within)`. The ring stays on
+the anchor, which is what has focus, and the card page now describes this rather than
+saying Deck does not work around it.
+
+## 97. `.nav-link` sat its icon on the baseline, so link height depended on the icon — FIXED
+
+`.nav-link` set no `display`, so in `.navbar-links` it was a block, and an icon inside it
+was an inline box on the text baseline. Whether that pushed the line box taller depended on
+the icon's size and on the font's ascent. With the default system font, `.icon` and
+`.icon-sm` happened to fit, but `.icon-lg` made the link 3px taller. A bare `<svg>`,
+which the reset makes `display: block`, put the icon on a line of its own and made the
+link 56–60px tall. A row of mixed links went uneven, and so did their hover and current
+backgrounds.
+
+**Fixed:** `display: inline-flex; align-items: center; gap: var(--space-2)`. The icon is
+centred on the label, and any icon up to the line height leaves the link at the same height
+as a text-only one, whatever the font. In every template the computed heights are
+unchanged. One docs page had already patched this with `inline-flex items-center gap-1`.
+That still works, and its `gap-1` wins.
+
+## 98. A `.btn` label split at a `<span>` got the gap instead of a word space — FIXED
+
+`.btn` is a flex row with an 8px gap. In `Pay <span>$8</span>` the text and the span are
+two flex items, and the space between them is dropped at the end of the first item. So the
+words were held apart by the gap, which is twice a 4px word space. Templates had been
+working around it by wrapping the whole label in an outer span (`settings.html`,
+`product.html`).
+
+**Fixed** in `src/05-buttons.css`:
+`.btn > span:not([class], [hidden]):not(:has(*)) { display: contents; }`. A bare span's
+text joins the run, and it measures the same as the unsplit label. Each exclusion is there
+for a reason:
+
+- **A span with a class keeps its box.** `.badge`, `.avatar`, `.sr-only` and spans with a
+  user's own class need one, and Deck cannot tell a box class from a text class.
+- **A span with children keeps its box,** so the existing outer-span workaround is left
+  alone.
+- **`[hidden]` is excluded** because Deck has no `[hidden]` rule. The attribute relies on
+  the browser's `display: none`, which any author rule beats.
+
+Without `:has()` the selector is invalid and the old behaviour remains.
+
+**Still affected:** `checkout.html`'s `Pay <span class="nums">…</span>`, because the span
+has a class. Wrap the label in one bare span, as `product.html` does.
+
+## 99. `.form-actions-sticky` sat underneath `.tabbar` — FIXED
+
+Both are pinned to the bottom of the viewport, and the tab bar has the higher z-index, so
+while a long form scrolled, the tab bar covered the action row. At 375px the overlap was
+the tab bar's full height.
+
+**Fixed.** `body:has(.tabbar)` in `src/08-mobile.css` now declares its existing arithmetic
+once, as `--tabbar-clearance: calc(var(--tap) + var(--space-4) +
+env(safe-area-inset-bottom))`. It sets `0px` from 48rem, when the tab bar hides. The
+body's padding reads the variable, and so does
+`body:has(.tabbar) .form-actions-sticky { inset-block-end: … }` in `src/06-forms.css`. The
+bar drops its own safe-area padding while the tab bar is showing, because the tab bar
+already clears the home indicator. The tab bar in the templates is 57.6px tall against
+60px of clearance, so a strip of about 2px shows between the two bars.
+
+`.toast-region` repeats the same arithmetic in `src/13-toasts.css` and could read the
+variable too. `.fab`, `.speed-dial` and `.back-to-top` add `--space-3` on top of it.
+
+**How it was found:** reported. Items 93–99 were checked with a computed-style diff of
+all 20 templates at 375px and 1280px, before and after. Apart from these rules, the only
+difference was animation noise on a spinner, confirmed by a run that diffed the old build
+against itself.
