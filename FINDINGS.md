@@ -2600,3 +2600,19 @@ not already end in it. The PHP helper skips the two hand-authored brand marks, w
 no small cut; deck.js only ever renders font icons. This depended on #101 first: the RTL
 mirror did not match `-sm` ids, so this change alone would have left the date picker's
 small chevrons pointing the wrong way under `dir="rtl"`.
+
+## 112. `.video-poster` put its play button below the frame, where it was clipped — FIXED
+
+`.video-poster` is a grid with `place-items: center`, and its two children, the poster
+`<img>` and the `.video-play` disc, were two grid items, so they took two rows. The image
+row was the image's natural height (360px in a 270px frame in the docs example), and the
+disc sat in the second row, below the frame, where `.video`'s `overflow: clip` hid it. Every
+poster façade built from the documented markup showed no play button, the docs' own two
+examples included. Found while switching those examples to the new `#play` icon and
+noticing the icon never appeared.
+
+**Fixed** in `src/24-media.css`: the poster image is `position: absolute; inset: 0`, so it
+fills the frame out of flow and the grid centres the disc alone. The paint order is
+unchanged: image, then the scrim (`::after`), then the disc at `z-index: 1`. Not on the list
+this pass was working from, so it is its own commit. A test checks that the image fills
+the frame and the disc is centred.

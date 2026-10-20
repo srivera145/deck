@@ -463,3 +463,22 @@ test('.grid-fixed-3 is a grid without .grid, and .split-rail-start gives the fir
   });
   assert.deepEqual(m, { display: 'grid', gap: '16px', cols: [289, 289, 289], railWidth: 320, railFirst: true });
 });
+
+test('a .video-poster shows its play button in the middle of the frame, over the image', async () => {
+  await render(`
+    <div class="video" id="frame" style="inline-size:480px">
+      <button type="button" class="video-poster" aria-label="Play">
+        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="640" height="480">
+        <span class="video-play" id="play">${shape}</span>
+      </button>
+    </div>`);
+  const m = await page.evaluate(() => {
+    const f = document.getElementById('frame').getBoundingClientRect();
+    const p = document.getElementById('play').getBoundingClientRect();
+    const i = document.querySelector('#frame img').getBoundingClientRect();
+    return { frame: [f.width, f.height], img: [i.width, i.height],
+      playCentre: [p.x + p.width / 2 - f.x, p.y + p.height / 2 - f.y] };
+  });
+  assert.deepEqual(m.img, m.frame, `the image fills the frame: ${JSON.stringify(m)}`);
+  assert.deepEqual(m.playCentre, [m.frame[0] / 2, m.frame[1] / 2], `the button is centred: ${JSON.stringify(m)}`);
+});

@@ -275,13 +275,13 @@
         {
           "selector": ".msg .avatar",
           "file": "24-media.css",
-          "line": 304,
+          "line": 308,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .avatar",
           "file": "24-media.css",
-          "line": 305,
+          "line": 309,
           "conditions": []
         },
         {
@@ -436,7 +436,7 @@
         {
           "selector": ".banner",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -937,85 +937,85 @@
         {
           "selector": ".bubble",
           "file": "24-media.css",
-          "line": 260,
+          "line": 264,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 271,
+          "line": 275,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .bubble",
           "file": "24-media.css",
-          "line": 279,
+          "line": 283,
           "conditions": []
         },
         {
           "selector": ".msg-out:not(:last-of-type) + .msg-out .bubble",
           "file": "24-media.css",
-          "line": 280,
+          "line": 284,
           "conditions": []
         },
         {
           "selector": ".bubble-meta",
           "file": "24-media.css",
-          "line": 282,
+          "line": 286,
           "conditions": []
         },
         {
           "selector": ".msg:not(.msg-out) .bubble-meta",
           "file": "24-media.css",
-          "line": 292,
+          "line": 296,
           "conditions": []
         },
         {
           "selector": ".bubble-name",
           "file": "24-media.css",
-          "line": 293,
+          "line": 297,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble-name",
           "file": "24-media.css",
-          "line": 294,
+          "line": 298,
           "conditions": []
         },
         {
           "selector": ".bubble-attachment",
           "file": "24-media.css",
-          "line": 296,
+          "line": 300,
           "conditions": []
         },
         {
           "selector": ".bubble-attachment img",
           "file": "24-media.css",
-          "line": 302,
+          "line": 306,
           "conditions": []
         },
         {
           "selector": ".bubble-system",
           "file": "24-media.css",
-          "line": 307,
+          "line": 311,
           "conditions": []
         },
         {
           "selector": ".bubble-typing",
           "file": "24-media.css",
-          "line": 318,
+          "line": 322,
           "conditions": []
         },
         {
           "selector": ".bubble-typing > span",
           "file": "24-media.css",
-          "line": 319,
+          "line": 323,
           "conditions": []
         },
         {
           "selector": ".bubble-typing > span",
           "file": "24-media.css",
-          "line": 326,
+          "line": 330,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -1023,7 +1023,7 @@
         {
           "selector": ".bubble-typing > span:nth-child(2)",
           "file": "24-media.css",
-          "line": 327,
+          "line": 331,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -1031,7 +1031,7 @@
         {
           "selector": ".bubble-typing > span:nth-child(3)",
           "file": "24-media.css",
-          "line": 328,
+          "line": 332,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -1039,7 +1039,7 @@
         {
           "selector": ".bubble",
           "file": "24-media.css",
-          "line": 407,
+          "line": 411,
           "conditions": [
             "@media print"
           ]
@@ -1047,7 +1047,7 @@
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 408,
+          "line": 412,
           "conditions": [
             "@media print"
           ]
@@ -1508,7 +1508,7 @@
         {
           "selector": ".carousel-arrow",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -1516,7 +1516,7 @@
         {
           "selector": ".carousel-dots",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -2044,31 +2044,31 @@
         {
           "selector": ".chat",
           "file": "24-media.css",
-          "line": 225,
+          "line": 229,
           "conditions": []
         },
         {
           "selector": ".chat-day",
           "file": "24-media.css",
-          "line": 235,
+          "line": 239,
           "conditions": []
         },
         {
           "selector": ".chat-composer",
           "file": "24-media.css",
-          "line": 336,
+          "line": 340,
           "conditions": []
         },
         {
           "selector": ".chat-composer .textarea",
           "file": "24-media.css",
-          "line": 345,
+          "line": 349,
           "conditions": []
         },
         {
           "selector": ".chat-composer",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -2076,7 +2076,7 @@
         {
           "selector": ".chat",
           "file": "24-media.css",
-          "line": 405,
+          "line": 409,
           "conditions": [
             "@media print"
           ]
@@ -4827,7 +4827,7 @@
         {
           "selector": ".drawer",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -4996,7 +4996,7 @@
         {
           "selector": ".editor-footer",
           "file": "24-media.css",
-          "line": 410,
+          "line": 414,
           "conditions": [
             "@media print"
           ]
@@ -5004,7 +5004,7 @@
         {
           "selector": ".editor-toolbar",
           "file": "24-media.css",
-          "line": 410,
+          "line": 414,
           "conditions": [
             "@media print"
           ]
@@ -5012,7 +5012,7 @@
         {
           "selector": ".editor-content",
           "file": "24-media.css",
-          "line": 411,
+          "line": 415,
           "conditions": [
             "@media print"
           ]
@@ -6873,61 +6873,61 @@
         {
           "selector": ".lazy",
           "file": "24-media.css",
-          "line": 147,
+          "line": 151,
           "conditions": []
         },
         {
           "selector": ".lazy > img",
           "file": "24-media.css",
-          "line": 154,
+          "line": 158,
           "conditions": []
         },
         {
           "selector": ".lazy > img.is-loaded",
           "file": "24-media.css",
-          "line": 161,
+          "line": 165,
           "conditions": []
         },
         {
           "selector": ".lazy > img[data-loaded]",
           "file": "24-media.css",
-          "line": 161,
+          "line": 165,
           "conditions": []
         },
         {
           "selector": ".lazy::after",
           "file": "24-media.css",
-          "line": 167,
+          "line": 171,
           "conditions": []
         },
         {
           "selector": ".lazy:has(img.is-loaded)::after",
           "file": "24-media.css",
-          "line": 178,
+          "line": 182,
           "conditions": []
         },
         {
           "selector": ".lazy:has(img[data-loaded])::after",
           "file": "24-media.css",
-          "line": 178,
+          "line": 182,
           "conditions": []
         },
         {
           "selector": ".lazy.is-error",
           "file": "24-media.css",
-          "line": 185,
+          "line": 189,
           "conditions": []
         },
         {
           "selector": ".lazy.is-error::after",
           "file": "24-media.css",
-          "line": 186,
+          "line": 190,
           "conditions": []
         },
         {
           "selector": ".lazy.is-error::after",
           "file": "24-media.css",
-          "line": 195,
+          "line": 199,
           "conditions": [
             "@media (forced-colors: active)"
           ]
@@ -6935,31 +6935,31 @@
         {
           "selector": ".lazy-blur",
           "file": "24-media.css",
-          "line": 199,
+          "line": 203,
           "conditions": []
         },
         {
           "selector": ".lazy-blur::before",
           "file": "24-media.css",
-          "line": 200,
+          "line": 204,
           "conditions": []
         },
         {
           "selector": ".lazy-blur:has(img.is-loaded)::before",
           "file": "24-media.css",
-          "line": 208,
+          "line": 212,
           "conditions": []
         },
         {
           "selector": ".lazy-block",
           "file": "24-media.css",
-          "line": 211,
+          "line": 215,
           "conditions": []
         },
         {
           "selector": ".lazy::after",
           "file": "24-media.css",
-          "line": 409,
+          "line": 413,
           "conditions": [
             "@media print"
           ]
@@ -7217,13 +7217,13 @@
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 94,
+          "line": 98,
           "conditions": []
         },
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 98,
+          "line": 102,
           "conditions": [
             "@media (min-width: 30rem)"
           ]
@@ -7231,7 +7231,7 @@
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 99,
+          "line": 103,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -7239,7 +7239,7 @@
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 100,
+          "line": 104,
           "conditions": [
             "@media (min-width: 72rem)"
           ]
@@ -7247,31 +7247,31 @@
         {
           "selector": ".masonry-2",
           "file": "24-media.css",
-          "line": 101,
+          "line": 105,
           "conditions": []
         },
         {
           "selector": ".masonry-3",
           "file": "24-media.css",
-          "line": 102,
+          "line": 106,
           "conditions": []
         },
         {
           "selector": ".masonry > *",
           "file": "24-media.css",
-          "line": 104,
+          "line": 108,
           "conditions": []
         },
         {
           "selector": ".masonry img",
           "file": "24-media.css",
-          "line": 111,
+          "line": 115,
           "conditions": []
         },
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 114,
+          "line": 118,
           "conditions": [
             "@supports (grid-template-rows: masonry)"
           ]
@@ -7279,7 +7279,7 @@
         {
           "selector": ".masonry > *",
           "file": "24-media.css",
-          "line": 121,
+          "line": 125,
           "conditions": [
             "@supports (grid-template-rows: masonry)"
           ]
@@ -7287,7 +7287,7 @@
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 404,
+          "line": 408,
           "conditions": [
             "@media print"
           ]
@@ -7395,7 +7395,7 @@
         {
           "selector": ".mega",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -7669,61 +7669,61 @@
         {
           "selector": ".msg",
           "file": "24-media.css",
-          "line": 249,
+          "line": 253,
           "conditions": []
         },
         {
           "selector": ".msg-out",
           "file": "24-media.css",
-          "line": 256,
+          "line": 260,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 271,
+          "line": 275,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .bubble",
           "file": "24-media.css",
-          "line": 279,
+          "line": 283,
           "conditions": []
         },
         {
           "selector": ".msg-out:not(:last-of-type) + .msg-out .bubble",
           "file": "24-media.css",
-          "line": 280,
+          "line": 284,
           "conditions": []
         },
         {
           "selector": ".msg:not(.msg-out) .bubble-meta",
           "file": "24-media.css",
-          "line": 292,
+          "line": 296,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble-name",
           "file": "24-media.css",
-          "line": 294,
+          "line": 298,
           "conditions": []
         },
         {
           "selector": ".msg .avatar",
           "file": "24-media.css",
-          "line": 304,
+          "line": 308,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .avatar",
           "file": "24-media.css",
-          "line": 305,
+          "line": 309,
           "conditions": []
         },
         {
           "selector": ".msg",
           "file": "24-media.css",
-          "line": 406,
+          "line": 410,
           "conditions": [
             "@media print"
           ]
@@ -7731,7 +7731,7 @@
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 408,
+          "line": 412,
           "conditions": [
             "@media print"
           ]
@@ -8289,55 +8289,55 @@
         {
           "selector": ".qr",
           "file": "24-media.css",
-          "line": 357,
+          "line": 361,
           "conditions": []
         },
         {
           "selector": ".qr svg",
           "file": "24-media.css",
-          "line": 368,
+          "line": 372,
           "conditions": []
         },
         {
           "selector": ".qr svg rect",
           "file": "24-media.css",
-          "line": 369,
+          "line": 373,
           "conditions": []
         },
         {
           "selector": ".qr-lg",
           "file": "24-media.css",
-          "line": 370,
+          "line": 374,
           "conditions": []
         },
         {
           "selector": ".qr-sm",
           "file": "24-media.css",
-          "line": 371,
+          "line": 375,
           "conditions": []
         },
         {
           "selector": ".qr-logo",
           "file": "24-media.css",
-          "line": 373,
+          "line": 377,
           "conditions": []
         },
         {
           "selector": ".qr-logo > .qr-logo-mark",
           "file": "24-media.css",
-          "line": 376,
+          "line": 380,
           "conditions": []
         },
         {
           "selector": ".qr-caption",
           "file": "24-media.css",
-          "line": 388,
+          "line": 392,
           "conditions": []
         },
         {
           "selector": ".qr",
           "file": "24-media.css",
-          "line": 401,
+          "line": 405,
           "conditions": [
             "@media print"
           ]
@@ -9340,7 +9340,7 @@
         {
           "selector": ".speed-dial",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -11158,43 +11158,43 @@
         {
           "selector": ".video-poster img",
           "file": "24-media.css",
-          "line": 48,
+          "line": 52,
           "conditions": []
         },
         {
           "selector": ".video-poster::after",
           "file": "24-media.css",
-          "line": 49,
+          "line": 53,
           "conditions": []
         },
         {
           "selector": ".video-play",
           "file": "24-media.css",
-          "line": 55,
+          "line": 59,
           "conditions": []
         },
         {
           "selector": ".video-poster:hover .video-play",
           "file": "24-media.css",
-          "line": 70,
+          "line": 74,
           "conditions": []
         },
         {
           "selector": ".video-meta",
           "file": "24-media.css",
-          "line": 71,
+          "line": 75,
           "conditions": []
         },
         {
           "selector": ".video-duration",
           "file": "24-media.css",
-          "line": 82,
+          "line": 86,
           "conditions": []
         },
         {
           "selector": ".video",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -12163,13 +12163,13 @@
         {
           "selector": ".msg .avatar",
           "file": "24-media.css",
-          "line": 304,
+          "line": 308,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .avatar",
           "file": "24-media.css",
-          "line": 305,
+          "line": 309,
           "conditions": []
         },
         {
@@ -12976,7 +12976,7 @@
         {
           "selector": ".banner",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -14923,7 +14923,7 @@
     {
       "name": "bubble",
       "file": "24-media.css",
-      "line": 260,
+      "line": 264,
       "layer": "deck.components",
       "section": null,
       "doc": "The message body. Its corner radii are logical, which is what lets the\ngrouping flatten the correct side in either writing direction.",
@@ -14969,31 +14969,31 @@
         {
           "selector": ".bubble",
           "file": "24-media.css",
-          "line": 260,
+          "line": 264,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 271,
+          "line": 275,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .bubble",
           "file": "24-media.css",
-          "line": 279,
+          "line": 283,
           "conditions": []
         },
         {
           "selector": ".msg-out:not(:last-of-type) + .msg-out .bubble",
           "file": "24-media.css",
-          "line": 280,
+          "line": 284,
           "conditions": []
         },
         {
           "selector": ".bubble",
           "file": "24-media.css",
-          "line": 407,
+          "line": 411,
           "conditions": [
             "@media print"
           ]
@@ -15001,7 +15001,7 @@
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 408,
+          "line": 412,
           "conditions": [
             "@media print"
           ]
@@ -15031,7 +15031,7 @@
     {
       "name": "bubble-attachment",
       "file": "24-media.css",
-      "line": 296,
+      "line": 300,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -15057,13 +15057,13 @@
         {
           "selector": ".bubble-attachment",
           "file": "24-media.css",
-          "line": 296,
+          "line": 300,
           "conditions": []
         },
         {
           "selector": ".bubble-attachment img",
           "file": "24-media.css",
-          "line": 302,
+          "line": 306,
           "conditions": []
         }
       ],
@@ -15079,7 +15079,7 @@
     {
       "name": "bubble-meta",
       "file": "24-media.css",
-      "line": 282,
+      "line": 286,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -15121,13 +15121,13 @@
         {
           "selector": ".bubble-meta",
           "file": "24-media.css",
-          "line": 282,
+          "line": 286,
           "conditions": []
         },
         {
           "selector": ".msg:not(.msg-out) .bubble-meta",
           "file": "24-media.css",
-          "line": 292,
+          "line": 296,
           "conditions": []
         }
       ],
@@ -15142,7 +15142,7 @@
     {
       "name": "bubble-name",
       "file": "24-media.css",
-      "line": 293,
+      "line": 297,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -15168,13 +15168,13 @@
         {
           "selector": ".bubble-name",
           "file": "24-media.css",
-          "line": 293,
+          "line": 297,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble-name",
           "file": "24-media.css",
-          "line": 294,
+          "line": 298,
           "conditions": []
         }
       ],
@@ -15189,7 +15189,7 @@
     {
       "name": "bubble-system",
       "file": "24-media.css",
-      "line": 307,
+      "line": 311,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -15227,7 +15227,7 @@
         {
           "selector": ".bubble-system",
           "file": "24-media.css",
-          "line": 307,
+          "line": 311,
           "conditions": []
         }
       ],
@@ -15242,7 +15242,7 @@
     {
       "name": "bubble-typing",
       "file": "24-media.css",
-      "line": 318,
+      "line": 322,
       "layer": "deck.components",
       "section": null,
       "doc": "Typing indicator",
@@ -15264,19 +15264,19 @@
         {
           "selector": ".bubble-typing",
           "file": "24-media.css",
-          "line": 318,
+          "line": 322,
           "conditions": []
         },
         {
           "selector": ".bubble-typing > span",
           "file": "24-media.css",
-          "line": 319,
+          "line": 323,
           "conditions": []
         },
         {
           "selector": ".bubble-typing > span",
           "file": "24-media.css",
-          "line": 326,
+          "line": 330,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -15284,7 +15284,7 @@
         {
           "selector": ".bubble-typing > span:nth-child(2)",
           "file": "24-media.css",
-          "line": 327,
+          "line": 331,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -15292,7 +15292,7 @@
         {
           "selector": ".bubble-typing > span:nth-child(3)",
           "file": "24-media.css",
-          "line": 328,
+          "line": 332,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -16048,7 +16048,7 @@
         {
           "selector": ".carousel-arrow",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -16245,7 +16245,7 @@
         {
           "selector": ".carousel-dots",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -18330,7 +18330,7 @@
     {
       "name": "chat",
       "file": "24-media.css",
-      "line": 225,
+      "line": 229,
       "layer": "deck.components",
       "section": "Chat bubbles",
       "doc": "Conversation view. Consecutive messages from one side group together and\nonly the last one in a run gets the tail.",
@@ -18364,13 +18364,13 @@
         {
           "selector": ".chat",
           "file": "24-media.css",
-          "line": 225,
+          "line": 229,
           "conditions": []
         },
         {
           "selector": ".chat",
           "file": "24-media.css",
-          "line": 405,
+          "line": 409,
           "conditions": [
             "@media print"
           ]
@@ -18390,7 +18390,7 @@
     {
       "name": "chat-composer",
       "file": "24-media.css",
-      "line": 336,
+      "line": 340,
       "layer": "deck.components",
       "section": null,
       "doc": "Composer pinned to the bottom",
@@ -18428,19 +18428,19 @@
         {
           "selector": ".chat-composer",
           "file": "24-media.css",
-          "line": 336,
+          "line": 340,
           "conditions": []
         },
         {
           "selector": ".chat-composer .textarea",
           "file": "24-media.css",
-          "line": 345,
+          "line": 349,
           "conditions": []
         },
         {
           "selector": ".chat-composer",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -18460,7 +18460,7 @@
     {
       "name": "chat-day",
       "file": "24-media.css",
-      "line": 235,
+      "line": 239,
       "layer": "deck.components",
       "section": null,
       "doc": "A centred date pill between days. Styling, not structure — a screen\nreader hears ordinary text.",
@@ -18502,7 +18502,7 @@
         {
           "selector": ".chat-day",
           "file": "24-media.css",
-          "line": 235,
+          "line": 239,
           "conditions": []
         }
       ],
@@ -26287,7 +26287,7 @@
         {
           "selector": ".drawer",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -27160,7 +27160,7 @@
         {
           "selector": ".editor-content",
           "file": "24-media.css",
-          "line": 411,
+          "line": 415,
           "conditions": [
             "@media print"
           ]
@@ -27271,7 +27271,7 @@
         {
           "selector": ".editor-footer",
           "file": "24-media.css",
-          "line": 410,
+          "line": 414,
           "conditions": [
             "@media print"
           ]
@@ -27573,7 +27573,7 @@
         {
           "selector": ".editor-toolbar",
           "file": "24-media.css",
-          "line": 410,
+          "line": 414,
           "conditions": [
             "@media print"
           ]
@@ -31645,7 +31645,7 @@
     {
       "name": "gallery",
       "file": "24-media.css",
-      "line": 125,
+      "line": 129,
       "layer": "deck.components",
       "section": null,
       "doc": "A simple gallery grid, when equal tiles are wanted instead",
@@ -31667,37 +31667,37 @@
         {
           "selector": ".gallery",
           "file": "24-media.css",
-          "line": 125,
+          "line": 129,
           "conditions": []
         },
         {
           "selector": ".gallery > *",
           "file": "24-media.css",
-          "line": 130,
+          "line": 134,
           "conditions": []
         },
         {
           "selector": ".gallery img",
           "file": "24-media.css",
-          "line": 136,
+          "line": 140,
           "conditions": []
         },
         {
           "selector": ".gallery a:hover img",
           "file": "24-media.css",
-          "line": 137,
+          "line": 141,
           "conditions": []
         },
         {
           "selector": ".gallery .span-2",
           "file": "24-media.css",
-          "line": 139,
+          "line": 143,
           "conditions": []
         },
         {
           "selector": ".gallery .span-wide",
           "file": "24-media.css",
-          "line": 140,
+          "line": 144,
           "conditions": []
         }
       ],
@@ -35231,7 +35231,7 @@
     {
       "name": "is-error",
       "file": "24-media.css",
-      "line": 185,
+      "line": 189,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -35240,19 +35240,19 @@
         {
           "selector": ".lazy.is-error",
           "file": "24-media.css",
-          "line": 185,
+          "line": 189,
           "conditions": []
         },
         {
           "selector": ".lazy.is-error::after",
           "file": "24-media.css",
-          "line": 186,
+          "line": 190,
           "conditions": []
         },
         {
           "selector": ".lazy.is-error::after",
           "file": "24-media.css",
-          "line": 195,
+          "line": 199,
           "conditions": [
             "@media (forced-colors: active)"
           ]
@@ -35712,7 +35712,7 @@
     {
       "name": "is-loaded",
       "file": "24-media.css",
-      "line": 161,
+      "line": 165,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -35721,19 +35721,19 @@
         {
           "selector": ".lazy > img.is-loaded",
           "file": "24-media.css",
-          "line": 161,
+          "line": 165,
           "conditions": []
         },
         {
           "selector": ".lazy:has(img.is-loaded)::after",
           "file": "24-media.css",
-          "line": 178,
+          "line": 182,
           "conditions": []
         },
         {
           "selector": ".lazy-blur:has(img.is-loaded)::before",
           "file": "24-media.css",
-          "line": 208,
+          "line": 212,
           "conditions": []
         }
       ],
@@ -37768,7 +37768,7 @@
     {
       "name": "lazy",
       "file": "24-media.css",
-      "line": 147,
+      "line": 151,
       "layer": "deck.components",
       "section": "Lazy loading",
       "doc": "A placeholder that holds the space so nothing shifts, and fades the image\nin once it decodes. Set the aspect ratio on the frame and the layout is\nstable before a byte arrives.",
@@ -37810,61 +37810,61 @@
         {
           "selector": ".lazy",
           "file": "24-media.css",
-          "line": 147,
+          "line": 151,
           "conditions": []
         },
         {
           "selector": ".lazy > img",
           "file": "24-media.css",
-          "line": 154,
+          "line": 158,
           "conditions": []
         },
         {
           "selector": ".lazy > img.is-loaded",
           "file": "24-media.css",
-          "line": 161,
+          "line": 165,
           "conditions": []
         },
         {
           "selector": ".lazy > img[data-loaded]",
           "file": "24-media.css",
-          "line": 161,
+          "line": 165,
           "conditions": []
         },
         {
           "selector": ".lazy::after",
           "file": "24-media.css",
-          "line": 167,
+          "line": 171,
           "conditions": []
         },
         {
           "selector": ".lazy:has(img.is-loaded)::after",
           "file": "24-media.css",
-          "line": 178,
+          "line": 182,
           "conditions": []
         },
         {
           "selector": ".lazy:has(img[data-loaded])::after",
           "file": "24-media.css",
-          "line": 178,
+          "line": 182,
           "conditions": []
         },
         {
           "selector": ".lazy.is-error",
           "file": "24-media.css",
-          "line": 185,
+          "line": 189,
           "conditions": []
         },
         {
           "selector": ".lazy.is-error::after",
           "file": "24-media.css",
-          "line": 186,
+          "line": 190,
           "conditions": []
         },
         {
           "selector": ".lazy.is-error::after",
           "file": "24-media.css",
-          "line": 195,
+          "line": 199,
           "conditions": [
             "@media (forced-colors: active)"
           ]
@@ -37872,7 +37872,7 @@
         {
           "selector": ".lazy::after",
           "file": "24-media.css",
-          "line": 409,
+          "line": 413,
           "conditions": [
             "@media print"
           ]
@@ -37896,7 +37896,7 @@
     {
       "name": "lazy-block",
       "file": "24-media.css",
-      "line": 211,
+      "line": 215,
       "layer": "deck.components",
       "section": null,
       "doc": "Generic content placeholder while a region streams in",
@@ -37934,7 +37934,7 @@
         {
           "selector": ".lazy-block",
           "file": "24-media.css",
-          "line": 211,
+          "line": 215,
           "conditions": []
         }
       ],
@@ -37951,7 +37951,7 @@
     {
       "name": "lazy-blur",
       "file": "24-media.css",
-      "line": 199,
+      "line": 203,
       "layer": "deck.components",
       "section": null,
       "doc": "A blurred low-res preview underneath, if you have one",
@@ -37969,19 +37969,19 @@
         {
           "selector": ".lazy-blur",
           "file": "24-media.css",
-          "line": 199,
+          "line": 203,
           "conditions": []
         },
         {
           "selector": ".lazy-blur::before",
           "file": "24-media.css",
-          "line": 200,
+          "line": 204,
           "conditions": []
         },
         {
           "selector": ".lazy-blur:has(img.is-loaded)::before",
           "file": "24-media.css",
-          "line": 208,
+          "line": 212,
           "conditions": []
         }
       ],
@@ -38897,7 +38897,7 @@
     {
       "name": "masonry",
       "file": "24-media.css",
-      "line": 94,
+      "line": 98,
       "layer": "deck.components",
       "section": "Masonry gallery",
       "doc": "Two implementations. Columns is universal and good for photos where the\nreading order down each column is fine. Grid masonry is the real thing\nand preserves row order; it is used automatically where supported.",
@@ -38915,13 +38915,13 @@
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 94,
+          "line": 98,
           "conditions": []
         },
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 98,
+          "line": 102,
           "conditions": [
             "@media (min-width: 30rem)"
           ]
@@ -38929,7 +38929,7 @@
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 99,
+          "line": 103,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -38937,7 +38937,7 @@
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 100,
+          "line": 104,
           "conditions": [
             "@media (min-width: 72rem)"
           ]
@@ -38945,19 +38945,19 @@
         {
           "selector": ".masonry > *",
           "file": "24-media.css",
-          "line": 104,
+          "line": 108,
           "conditions": []
         },
         {
           "selector": ".masonry img",
           "file": "24-media.css",
-          "line": 111,
+          "line": 115,
           "conditions": []
         },
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 114,
+          "line": 118,
           "conditions": [
             "@supports (grid-template-rows: masonry)"
           ]
@@ -38965,7 +38965,7 @@
         {
           "selector": ".masonry > *",
           "file": "24-media.css",
-          "line": 121,
+          "line": 125,
           "conditions": [
             "@supports (grid-template-rows: masonry)"
           ]
@@ -38973,7 +38973,7 @@
         {
           "selector": ".masonry",
           "file": "24-media.css",
-          "line": 404,
+          "line": 408,
           "conditions": [
             "@media print"
           ]
@@ -38995,7 +38995,7 @@
     {
       "name": "masonry-2",
       "file": "24-media.css",
-      "line": 101,
+      "line": 105,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -39009,7 +39009,7 @@
         {
           "selector": ".masonry-2",
           "file": "24-media.css",
-          "line": 101,
+          "line": 105,
           "conditions": []
         }
       ],
@@ -39021,7 +39021,7 @@
     {
       "name": "masonry-3",
       "file": "24-media.css",
-      "line": 102,
+      "line": 106,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -39035,7 +39035,7 @@
         {
           "selector": ".masonry-3",
           "file": "24-media.css",
-          "line": 102,
+          "line": 106,
           "conditions": []
         }
       ],
@@ -39552,7 +39552,7 @@
         {
           "selector": ".mega",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -41340,7 +41340,7 @@
     {
       "name": "msg",
       "file": "24-media.css",
-      "line": 249,
+      "line": 253,
       "layer": "deck.components",
       "section": null,
       "doc": "One message row. .msg-out flips it to the other edge and reverses the row\nso the avatar swaps sides. The incoming/outgoing distinction is position\nand colour only, so name the sender in text for anyone not seeing it.",
@@ -41370,49 +41370,49 @@
         {
           "selector": ".msg",
           "file": "24-media.css",
-          "line": 249,
+          "line": 253,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .bubble",
           "file": "24-media.css",
-          "line": 279,
+          "line": 283,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .bubble",
           "file": "24-media.css",
-          "line": 279,
+          "line": 283,
           "conditions": []
         },
         {
           "selector": ".msg:not(.msg-out) .bubble-meta",
           "file": "24-media.css",
-          "line": 292,
+          "line": 296,
           "conditions": []
         },
         {
           "selector": ".msg .avatar",
           "file": "24-media.css",
-          "line": 304,
+          "line": 308,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .avatar",
           "file": "24-media.css",
-          "line": 305,
+          "line": 309,
           "conditions": []
         },
         {
           "selector": ".msg:not(:last-of-type) + .msg .avatar",
           "file": "24-media.css",
-          "line": 305,
+          "line": 309,
           "conditions": []
         },
         {
           "selector": ".msg",
           "file": "24-media.css",
-          "line": 406,
+          "line": 410,
           "conditions": [
             "@media print"
           ]
@@ -41430,7 +41430,7 @@
     {
       "name": "msg-out",
       "file": "24-media.css",
-      "line": 256,
+      "line": 260,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -41448,43 +41448,43 @@
         {
           "selector": ".msg-out",
           "file": "24-media.css",
-          "line": 256,
+          "line": 260,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 271,
+          "line": 275,
           "conditions": []
         },
         {
           "selector": ".msg-out:not(:last-of-type) + .msg-out .bubble",
           "file": "24-media.css",
-          "line": 280,
+          "line": 284,
           "conditions": []
         },
         {
           "selector": ".msg-out:not(:last-of-type) + .msg-out .bubble",
           "file": "24-media.css",
-          "line": 280,
+          "line": 284,
           "conditions": []
         },
         {
           "selector": ".msg:not(.msg-out) .bubble-meta",
           "file": "24-media.css",
-          "line": 292,
+          "line": 296,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble-name",
           "file": "24-media.css",
-          "line": 294,
+          "line": 298,
           "conditions": []
         },
         {
           "selector": ".msg-out .bubble",
           "file": "24-media.css",
-          "line": 408,
+          "line": 412,
           "conditions": [
             "@media print"
           ]
@@ -45846,7 +45846,7 @@
     {
       "name": "qr",
       "file": "24-media.css",
-      "line": 357,
+      "line": 361,
       "layer": "deck.components",
       "section": "QR code",
       "doc": "deck.js renders the modules into this frame. Kept square, with a quiet\nzone, so it stays scannable at any size.",
@@ -45892,25 +45892,25 @@
         {
           "selector": ".qr",
           "file": "24-media.css",
-          "line": 357,
+          "line": 361,
           "conditions": []
         },
         {
           "selector": ".qr svg",
           "file": "24-media.css",
-          "line": 368,
+          "line": 372,
           "conditions": []
         },
         {
           "selector": ".qr svg rect",
           "file": "24-media.css",
-          "line": 369,
+          "line": 373,
           "conditions": []
         },
         {
           "selector": ".qr",
           "file": "24-media.css",
-          "line": 401,
+          "line": 405,
           "conditions": [
             "@media print"
           ]
@@ -45937,7 +45937,7 @@
     {
       "name": "qr-caption",
       "file": "24-media.css",
-      "line": 388,
+      "line": 392,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -45971,7 +45971,7 @@
         {
           "selector": ".qr-caption",
           "file": "24-media.css",
-          "line": 388,
+          "line": 392,
           "conditions": []
         }
       ],
@@ -45988,7 +45988,7 @@
     {
       "name": "qr-lg",
       "file": "24-media.css",
-      "line": 370,
+      "line": 374,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -46002,7 +46002,7 @@
         {
           "selector": ".qr-lg",
           "file": "24-media.css",
-          "line": 370,
+          "line": 374,
           "conditions": []
         }
       ],
@@ -46014,7 +46014,7 @@
     {
       "name": "qr-logo",
       "file": "24-media.css",
-      "line": 373,
+      "line": 377,
       "layer": "deck.components",
       "section": null,
       "doc": "A logo punched out of the middle. Only safe at error correction Q or H.",
@@ -46028,13 +46028,13 @@
         {
           "selector": ".qr-logo",
           "file": "24-media.css",
-          "line": 373,
+          "line": 377,
           "conditions": []
         },
         {
           "selector": ".qr-logo > .qr-logo-mark",
           "file": "24-media.css",
-          "line": 376,
+          "line": 380,
           "conditions": []
         }
       ],
@@ -46048,7 +46048,7 @@
     {
       "name": "qr-logo-mark",
       "file": "24-media.css",
-      "line": 376,
+      "line": 380,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -46057,7 +46057,7 @@
         {
           "selector": ".qr-logo > .qr-logo-mark",
           "file": "24-media.css",
-          "line": 376,
+          "line": 380,
           "conditions": []
         }
       ],
@@ -46115,7 +46115,7 @@
     {
       "name": "qr-sm",
       "file": "24-media.css",
-      "line": 371,
+      "line": 375,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -46129,7 +46129,7 @@
         {
           "selector": ".qr-sm",
           "file": "24-media.css",
-          "line": 371,
+          "line": 375,
           "conditions": []
         }
       ],
@@ -50045,7 +50045,7 @@
     {
       "name": "span-2",
       "file": "24-media.css",
-      "line": 139,
+      "line": 143,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -50054,7 +50054,7 @@
         {
           "selector": ".gallery .span-2",
           "file": "24-media.css",
-          "line": 139,
+          "line": 143,
           "conditions": []
         }
       ],
@@ -50081,7 +50081,7 @@
     {
       "name": "span-wide",
       "file": "24-media.css",
-      "line": 140,
+      "line": 144,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -50090,7 +50090,7 @@
         {
           "selector": ".gallery .span-wide",
           "file": "24-media.css",
-          "line": 140,
+          "line": 144,
           "conditions": []
         }
       ],
@@ -50315,7 +50315,7 @@
         {
           "selector": ".speed-dial",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -54049,7 +54049,7 @@
         {
           "selector": ".chat-composer .textarea",
           "file": "24-media.css",
-          "line": 345,
+          "line": 349,
           "conditions": []
         },
         {
@@ -56541,7 +56541,7 @@
         {
           "selector": ".video",
           "file": "24-media.css",
-          "line": 402,
+          "line": 406,
           "conditions": [
             "@media print"
           ]
@@ -56597,7 +56597,7 @@
     {
       "name": "video-duration",
       "file": "24-media.css",
-      "line": 82,
+      "line": 86,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -56623,7 +56623,7 @@
         {
           "selector": ".video-duration",
           "file": "24-media.css",
-          "line": 82,
+          "line": 86,
           "conditions": []
         }
       ],
@@ -56637,7 +56637,7 @@
     {
       "name": "video-meta",
       "file": "24-media.css",
-      "line": 71,
+      "line": 75,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -56683,7 +56683,7 @@
         {
           "selector": ".video-meta",
           "file": "24-media.css",
-          "line": 71,
+          "line": 75,
           "conditions": []
         }
       ],
@@ -56699,7 +56699,7 @@
     {
       "name": "video-play",
       "file": "24-media.css",
-      "line": 55,
+      "line": 59,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -56761,13 +56761,13 @@
         {
           "selector": ".video-play",
           "file": "24-media.css",
-          "line": 55,
+          "line": 59,
           "conditions": []
         },
         {
           "selector": ".video-poster:hover .video-play",
           "file": "24-media.css",
-          "line": 70,
+          "line": 74,
           "conditions": []
         }
       ],
@@ -56866,19 +56866,19 @@
         {
           "selector": ".video-poster img",
           "file": "24-media.css",
-          "line": 48,
+          "line": 52,
           "conditions": []
         },
         {
           "selector": ".video-poster::after",
           "file": "24-media.css",
-          "line": 49,
+          "line": 53,
           "conditions": []
         },
         {
           "selector": ".video-poster:hover .video-play",
           "file": "24-media.css",
-          "line": 70,
+          "line": 74,
           "conditions": []
         }
       ],

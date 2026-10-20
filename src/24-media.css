@@ -45,7 +45,11 @@
     padding: 0;
     background: none;
   }
-  .video-poster img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  /* The image fills the frame out of flow, so the grid holds only the play
+     button and centres it. As a grid item the image took a row of its own
+     at its natural height and pushed the button into a second row, below
+     the frame, where overflow: clip hid it. */
+  .video-poster img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; }
   .video-poster::after {
     content: "";
     position: absolute;

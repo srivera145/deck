@@ -1668,7 +1668,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 260,
+      "line": 264,
       "uses": 31
     },
     "bubble-attachment": {
@@ -1678,7 +1678,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 296,
+      "line": 300,
       "uses": 4
     },
     "bubble-meta": {
@@ -1688,7 +1688,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 282,
+      "line": 286,
       "uses": 18
     },
     "bubble-name": {
@@ -1698,7 +1698,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 293,
+      "line": 297,
       "uses": 10
     },
     "bubble-system": {
@@ -1708,7 +1708,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 307,
+      "line": 311,
       "uses": 4
     },
     "bubble-typing": {
@@ -1718,7 +1718,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 318,
+      "line": 322,
       "uses": 6
     },
     "capitalize": {
@@ -2278,7 +2278,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 225,
+      "line": 229,
       "uses": 14
     },
     "chat-composer": {
@@ -2288,7 +2288,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 336,
+      "line": 340,
       "uses": 6
     },
     "chat-day": {
@@ -2298,7 +2298,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 235,
+      "line": 239,
       "uses": 7
     },
     "check": {
@@ -4768,7 +4768,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 125,
+      "line": 129,
       "uses": 17
     },
     "gap-0": {
@@ -5528,7 +5528,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 185,
+      "line": 189,
       "uses": 10
     },
     "is-fanned": {
@@ -5608,7 +5608,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 161,
+      "line": 165,
       "uses": 4
     },
     "is-loading": {
@@ -6038,7 +6038,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 147,
+      "line": 151,
       "uses": 194
     },
     "lazy-block": {
@@ -6048,7 +6048,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 211,
+      "line": 215,
       "uses": 2
     },
     "lazy-blur": {
@@ -6058,7 +6058,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 199,
+      "line": 203,
       "uses": 1
     },
     "lede": {
@@ -6228,7 +6228,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 94,
+      "line": 98,
       "uses": 10
     },
     "masonry-2": {
@@ -6238,7 +6238,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 101,
+      "line": 105,
       "uses": 1
     },
     "masonry-3": {
@@ -6248,7 +6248,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 102,
+      "line": 106,
       "uses": 6
     },
     "max-w-lg": {
@@ -6798,7 +6798,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 249,
+      "line": 253,
       "uses": 33
     },
     "msg-out": {
@@ -6808,7 +6808,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 256,
+      "line": 260,
       "uses": 8
     },
     "mt-0": {
@@ -7968,7 +7968,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 357,
+      "line": 361,
       "uses": 17
     },
     "qr-caption": {
@@ -7978,7 +7978,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 388,
+      "line": 392,
       "uses": 3
     },
     "qr-lg": {
@@ -7988,7 +7988,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 370,
+      "line": 374,
       "uses": 6
     },
     "qr-logo": {
@@ -7998,7 +7998,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 373,
+      "line": 377,
       "uses": 4
     },
     "qr-logo-mark": {
@@ -8008,7 +8008,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 376,
+      "line": 380,
       "uses": 3
     },
     "qr-sm": {
@@ -8018,7 +8018,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 371,
+      "line": 375,
       "uses": 6
     },
     "r-end": {
@@ -8868,7 +8868,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 139,
+      "line": 143,
       "uses": 9
     },
     "span-wide": {
@@ -8878,7 +8878,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 140,
+      "line": 144,
       "uses": 9
     },
     "sparkline": {
@@ -10069,7 +10069,7 @@
       "layer": "deck.components",
       "file": "24-media.css",
       "line": 11,
-      "uses": 22
+      "uses": 23
     },
     "video-cover": {
       "bucket": "public",
@@ -10088,7 +10088,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 82,
+      "line": 86,
       "uses": 9
     },
     "video-meta": {
@@ -10098,7 +10098,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 71,
+      "line": 75,
       "uses": 9
     },
     "video-play": {
@@ -10108,8 +10108,8 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "24-media.css",
-      "line": 55,
-      "uses": 10
+      "line": 59,
+      "uses": 11
     },
     "video-portrait": {
       "bucket": "public",
@@ -10129,7 +10129,7 @@
       "layer": "deck.components",
       "file": "24-media.css",
       "line": 37,
-      "uses": 10
+      "uses": 12
     },
     "video-square": {
       "bucket": "public",
