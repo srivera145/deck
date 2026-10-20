@@ -23,6 +23,7 @@ Notable changes to Deck. The npm package (`@echodial/deck`) and the Composer pac
 - **`.form-actions-sticky` sits above `.tabbar`.** It used to slide underneath the tab bar. `body:has(.tabbar)` now publishes its clearance as `--tabbar-clearance`, the sticky bar uses it, and the bar drops its own safe-area padding while the tab bar is showing.
 - **`aria-pressed` and `aria-selected` both mean "on".** `.chip`, `.reaction` and `.datepicker-preset` used to respond only to `aria-pressed="true"`, and `.segmented` only to `aria-selected="true"`, so the wrong one showed no state and raised no error. All four now accept both, with the same look as before. deck.js moves either attribute when a `.segmented` is clicked, and no longer selects an `aria-selected` table row that contains one.
 - **Small pointing icons mirror under `dir="rtl"`.** The automatic mirror in `src/19-logical.css` matched `#chevron-right` but not `#chevron-right-sm`, so an `.icon-sm` arrow or chevron kept pointing the wrong way in a right-to-left page. Every pointing icon is now listed with its `-sm` cut.
+- **`.g-scrim` darkens an `<img>` child.** The scrim painted under every child, so with the photo as an `<img>`, rather than as the element's background, the caption sat on the bare image. An `img`, `picture`, `video`, `canvas`, `svg`, `iframe`, `.lazy` or `.video` child now sits under the scrim; other children still sit above it.
 
 ### Added
 

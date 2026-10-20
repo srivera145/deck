@@ -1973,7 +1973,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 286,
+      "line": 291,
       "uses": 4
     },
     "chart-bar": {
@@ -4403,7 +4403,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 224,
+      "line": 229,
       "uses": 7
     },
     "g-bar-fill": {
@@ -4413,7 +4413,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 290,
+      "line": 295,
       "uses": 3
     },
     "g-border": {
@@ -4473,7 +4473,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 227,
+      "line": 232,
       "uses": 3
     },
     "g-dark": {
@@ -4493,7 +4493,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 254,
+      "line": 259,
       "uses": 16
     },
     "g-fade-block": {
@@ -4503,7 +4503,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 176,
+      "line": 181,
       "uses": 6
     },
     "g-fade-end": {
@@ -4513,7 +4513,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 172,
+      "line": 177,
       "uses": 3
     },
     "g-fade-inline": {
@@ -4523,7 +4523,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 166,
+      "line": 171,
       "uses": 5
     },
     "g-fade-more": {
@@ -4533,7 +4533,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 181,
+      "line": 186,
       "uses": 3
     },
     "g-good": {
@@ -4543,7 +4543,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 222,
+      "line": 227,
       "uses": 7
     },
     "g-grid-lines": {
@@ -4553,7 +4553,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 248,
+      "line": 253,
       "uses": 21
     },
     "g-hairline": {
@@ -4573,7 +4573,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 264,
+      "line": 269,
       "uses": 7
     },
     "g-mesh": {
@@ -4623,7 +4623,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 231,
+      "line": 236,
       "uses": 5
     },
     "g-ring-spin": {
@@ -4633,7 +4633,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 240,
+      "line": 245,
       "uses": 5
     },
     "g-scrim": {
@@ -4644,7 +4644,7 @@
       "layer": "deck.effects",
       "file": "20-gradients.css",
       "line": 145,
-      "uses": 9
+      "uses": 14
     },
     "g-scrim-top": {
       "bucket": "public",
@@ -4663,7 +4663,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 201,
+      "line": 206,
       "uses": 5
     },
     "g-shimmer": {
@@ -4673,7 +4673,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 271,
+      "line": 276,
       "uses": 4
     },
     "g-stripes": {
@@ -4683,7 +4683,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 258,
+      "line": 263,
       "uses": 5
     },
     "g-sunken": {
@@ -4733,7 +4733,7 @@
       "overridden": false,
       "layer": "deck.effects",
       "file": "20-gradients.css",
-      "line": 223,
+      "line": 228,
       "uses": 7
     },
     "gallery": {
@@ -5984,7 +5984,7 @@
       "layer": "deck.components",
       "file": "24-media.css",
       "line": 147,
-      "uses": 188
+      "uses": 189
     },
     "lazy-block": {
       "bucket": "public",
@@ -10014,7 +10014,7 @@
       "layer": "deck.components",
       "file": "24-media.css",
       "line": 11,
-      "uses": 21
+      "uses": 22
     },
     "video-cover": {
       "bucket": "public",

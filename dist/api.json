@@ -6,7 +6,7 @@
     "documented": 319,
     "undocumented": 621,
     "tokens": 151,
-    "rules": 1788,
+    "rules": 1789,
     "components": 99,
     "states": 39,
     "unattributedStates": 0
@@ -1911,7 +1911,7 @@
         {
           "selector": ".chart-area-g",
           "file": "20-gradients.css",
-          "line": 286,
+          "line": 291,
           "conditions": []
         },
         {
@@ -5775,7 +5775,7 @@
         {
           "selector": ".g-brand",
           "file": "20-gradients.css",
-          "line": 301,
+          "line": 306,
           "conditions": [
             "@supports not (color: oklch(50% .1 200))"
           ]
@@ -5824,7 +5824,7 @@
         {
           "selector": ".g-mesh",
           "file": "20-gradients.css",
-          "line": 303,
+          "line": 308,
           "conditions": [
             "@supports not (color: oklch(50% .1 200))"
           ]
@@ -5845,13 +5845,13 @@
         {
           "selector": ".g-ring",
           "file": "20-gradients.css",
-          "line": 231,
+          "line": 236,
           "conditions": []
         },
         {
           "selector": ".g-ring-spin",
           "file": "20-gradients.css",
-          "line": 240,
+          "line": 245,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -5867,7 +5867,7 @@
         "20-gradients.css"
       ],
       "states": [],
-      "ruleCount": 4,
+      "ruleCount": 5,
       "rules": [
         {
           "selector": ".g-scrim",
@@ -5891,6 +5891,12 @@
           "selector": ".g-scrim > *",
           "file": "20-gradients.css",
           "line": 161,
+          "conditions": []
+        },
+        {
+          "selector": ".g-scrim > :is(img, picture, video, canvas, svg, iframe, .lazy, .video)",
+          "file": "20-gradients.css",
+          "line": 166,
           "conditions": []
         }
       ]
@@ -5929,7 +5935,7 @@
         {
           "selector": ".g-text",
           "file": "20-gradients.css",
-          "line": 302,
+          "line": 307,
           "conditions": [
             "@supports not (color: oklch(50% .1 200))"
           ]
@@ -6746,13 +6752,20 @@
         "lazy-blur"
       ],
       "files": [
+        "20-gradients.css",
         "24-media.css"
       ],
       "states": [
         "is-loaded"
       ],
-      "ruleCount": 12,
+      "ruleCount": 13,
       "rules": [
+        {
+          "selector": ".g-scrim > :is(img, picture, video, canvas, svg, iframe, .lazy, .video)",
+          "file": "20-gradients.css",
+          "line": 166,
+          "conditions": []
+        },
         {
           "selector": ".lazy",
           "file": "24-media.css",
@@ -10946,11 +10959,18 @@
         "video-wide"
       ],
       "files": [
+        "20-gradients.css",
         "24-media.css"
       ],
       "states": [],
-      "ruleCount": 16,
+      "ruleCount": 17,
       "rules": [
+        {
+          "selector": ".g-scrim > :is(img, picture, video, canvas, svg, iframe, .lazy, .video)",
+          "file": "20-gradients.css",
+          "line": 166,
+          "conditions": []
+        },
         {
           "selector": ".video",
           "file": "24-media.css",
@@ -16570,7 +16590,7 @@
     {
       "name": "chart-area-g",
       "file": "20-gradients.css",
-      "line": 286,
+      "line": 291,
       "layer": "deck.effects",
       "section": "Chart fills",
       "doc": "Area charts read better with a gradient falling off to nothing.",
@@ -16588,7 +16608,7 @@
         {
           "selector": ".chart-area-g",
           "file": "20-gradients.css",
-          "line": 286,
+          "line": 291,
           "conditions": []
         }
       ],
@@ -30066,7 +30086,7 @@
     {
       "name": "g-bad",
       "file": "20-gradients.css",
-      "line": 224,
+      "line": 229,
       "layer": "deck.effects",
       "section": null,
       "doc": null,
@@ -30084,13 +30104,13 @@
         {
           "selector": ".g-bad",
           "file": "20-gradients.css",
-          "line": 224,
+          "line": 229,
           "conditions": []
         },
         {
           "selector": ".g-bad",
           "file": "20-gradients.css",
-          "line": 301,
+          "line": 306,
           "conditions": [
             "@supports not (color: oklch(50% .1 200))"
           ]
@@ -30108,7 +30128,7 @@
     {
       "name": "g-bar-fill",
       "file": "20-gradients.css",
-      "line": 290,
+      "line": 295,
       "layer": "deck.effects",
       "section": null,
       "doc": null,
@@ -30122,7 +30142,7 @@
         {
           "selector": ".g-bar-fill",
           "file": "20-gradients.css",
-          "line": 290,
+          "line": 295,
           "conditions": []
         }
       ],
@@ -30262,7 +30282,7 @@
         {
           "selector": ".g-brand",
           "file": "20-gradients.css",
-          "line": 301,
+          "line": 306,
           "conditions": [
             "@supports not (color: oklch(50% .1 200))"
           ]
@@ -30310,7 +30330,7 @@
     {
       "name": "g-conic",
       "file": "20-gradients.css",
-      "line": 227,
+      "line": 232,
       "layer": "deck.effects",
       "section": "Conic accents",
       "doc": null,
@@ -30324,7 +30344,7 @@
         {
           "selector": ".g-conic",
           "file": "20-gradients.css",
-          "line": 227,
+          "line": 232,
           "conditions": []
         }
       ],
@@ -30372,7 +30392,7 @@
     {
       "name": "g-dots",
       "file": "20-gradients.css",
-      "line": 254,
+      "line": 259,
       "layer": "deck.effects",
       "section": null,
       "doc": null,
@@ -30390,7 +30410,7 @@
         {
           "selector": ".g-dots",
           "file": "20-gradients.css",
-          "line": 254,
+          "line": 259,
           "conditions": []
         }
       ],
@@ -30405,7 +30425,7 @@
     {
       "name": "g-fade-block",
       "file": "20-gradients.css",
-      "line": 176,
+      "line": 181,
       "layer": "deck.effects",
       "section": null,
       "doc": null,
@@ -30423,7 +30443,7 @@
         {
           "selector": ".g-fade-block",
           "file": "20-gradients.css",
-          "line": 176,
+          "line": 181,
           "conditions": []
         }
       ],
@@ -30435,7 +30455,7 @@
     {
       "name": "g-fade-end",
       "file": "20-gradients.css",
-      "line": 172,
+      "line": 177,
       "layer": "deck.effects",
       "section": null,
       "doc": null,
@@ -30453,7 +30473,7 @@
         {
           "selector": ".g-fade-end",
           "file": "20-gradients.css",
-          "line": 172,
+          "line": 177,
           "conditions": []
         }
       ],
@@ -30465,7 +30485,7 @@
     {
       "name": "g-fade-inline",
       "file": "20-gradients.css",
-      "line": 166,
+      "line": 171,
       "layer": "deck.effects",
       "section": "Fade masks",
       "doc": "Content that runs off the edge should fade, not be cut with a hard line.",
@@ -30483,7 +30503,7 @@
         {
           "selector": ".g-fade-inline",
           "file": "20-gradients.css",
-          "line": 166,
+          "line": 171,
           "conditions": []
         }
       ],
@@ -30497,7 +30517,7 @@
     {
       "name": "g-fade-more",
       "file": "20-gradients.css",
-      "line": 181,
+      "line": 186,
       "layer": "deck.effects",
       "section": null,
       "doc": "Long text that is collapsed: fade the bottom instead of a hard cut",
@@ -30523,13 +30543,13 @@
         {
           "selector": ".g-fade-more",
           "file": "20-gradients.css",
-          "line": 181,
+          "line": 186,
           "conditions": []
         },
         {
           "selector": ".g-fade-more.is-open",
           "file": "20-gradients.css",
-          "line": 187,
+          "line": 192,
           "conditions": []
         }
       ],
@@ -30543,7 +30563,7 @@
     {
       "name": "g-good",
       "file": "20-gradients.css",
-      "line": 222,
+      "line": 227,
       "layer": "deck.effects",
       "section": "Status gradients",
       "doc": null,
@@ -30561,13 +30581,13 @@
         {
           "selector": ".g-good",
           "file": "20-gradients.css",
-          "line": 222,
+          "line": 227,
           "conditions": []
         },
         {
           "selector": ".g-good",
           "file": "20-gradients.css",
-          "line": 301,
+          "line": 306,
           "conditions": [
             "@supports not (color: oklch(50% .1 200))"
           ]
@@ -30585,7 +30605,7 @@
     {
       "name": "g-grid-lines",
       "file": "20-gradients.css",
-      "line": 248,
+      "line": 253,
       "layer": "deck.effects",
       "section": "Structural patterns",
       "doc": "Not gradients as decoration — gradients standing in for an image. These\ncost nothing to download and retint automatically.",
@@ -30603,7 +30623,7 @@
         {
           "selector": ".g-grid-lines",
           "file": "20-gradients.css",
-          "line": 248,
+          "line": 253,
           "conditions": []
         }
       ],
@@ -30652,7 +30672,7 @@
     {
       "name": "g-hatch",
       "file": "20-gradients.css",
-      "line": 264,
+      "line": 269,
       "layer": "deck.effects",
       "section": null,
       "doc": "Hatching for a \"pending\" or \"unavailable\" block in a schedule",
@@ -30666,7 +30686,7 @@
         {
           "selector": ".g-hatch",
           "file": "20-gradients.css",
-          "line": 264,
+          "line": 269,
           "conditions": []
         }
       ],
@@ -30712,7 +30732,7 @@
         {
           "selector": ".g-mesh",
           "file": "20-gradients.css",
-          "line": 303,
+          "line": 308,
           "conditions": [
             "@supports not (color: oklch(50% .1 200))"
           ]
@@ -30825,7 +30845,7 @@
     {
       "name": "g-ring",
       "file": "20-gradients.css",
-      "line": 231,
+      "line": 236,
       "layer": "deck.effects",
       "section": null,
       "doc": null,
@@ -30855,7 +30875,7 @@
         {
           "selector": ".g-ring",
           "file": "20-gradients.css",
-          "line": 231,
+          "line": 236,
           "conditions": []
         }
       ],
@@ -30874,7 +30894,7 @@
     {
       "name": "g-ring-spin",
       "file": "20-gradients.css",
-      "line": 240,
+      "line": 245,
       "layer": "deck.effects",
       "section": null,
       "doc": null,
@@ -30888,7 +30908,7 @@
         {
           "selector": ".g-ring-spin",
           "file": "20-gradients.css",
-          "line": 240,
+          "line": 245,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -30934,6 +30954,12 @@
           "file": "20-gradients.css",
           "line": 161,
           "conditions": []
+        },
+        {
+          "selector": ".g-scrim > :is(img, picture, video, canvas, svg, iframe, .lazy, .video)",
+          "file": "20-gradients.css",
+          "line": 166,
+          "conditions": []
         }
       ],
       "variants": [
@@ -30978,7 +31004,7 @@
     {
       "name": "g-sheen",
       "file": "20-gradients.css",
-      "line": 201,
+      "line": 206,
       "layer": "deck.effects",
       "section": "Sheen",
       "doc": "A highlight that sweeps across on hover. --sheen is registered, so it\nanimates as a real percentage instead of jumping.",
@@ -31000,19 +31026,19 @@
         {
           "selector": ".g-sheen",
           "file": "20-gradients.css",
-          "line": 201,
+          "line": 206,
           "conditions": []
         },
         {
           "selector": ".g-sheen::after",
           "file": "20-gradients.css",
-          "line": 206,
+          "line": 211,
           "conditions": []
         },
         {
           "selector": ".g-sheen:hover::after",
           "file": "20-gradients.css",
-          "line": 218,
+          "line": 223,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -31030,7 +31056,7 @@
     {
       "name": "g-shimmer",
       "file": "20-gradients.css",
-      "line": 271,
+      "line": 276,
       "layer": "deck.effects",
       "section": "Skeleton and shimmer, unified with the palette",
       "doc": null,
@@ -31052,13 +31078,13 @@
         {
           "selector": ".g-shimmer",
           "file": "20-gradients.css",
-          "line": 271,
+          "line": 276,
           "conditions": []
         },
         {
           "selector": ".g-shimmer",
           "file": "20-gradients.css",
-          "line": 280,
+          "line": 285,
           "conditions": [
             "@media (prefers-reduced-motion: no-preference)"
           ]
@@ -31075,7 +31101,7 @@
     {
       "name": "g-stripes",
       "file": "20-gradients.css",
-      "line": 258,
+      "line": 263,
       "layer": "deck.effects",
       "section": null,
       "doc": null,
@@ -31089,7 +31115,7 @@
         {
           "selector": ".g-stripes",
           "file": "20-gradients.css",
-          "line": 258,
+          "line": 263,
           "conditions": []
         }
       ],
@@ -31199,7 +31225,7 @@
         {
           "selector": ".g-text",
           "file": "20-gradients.css",
-          "line": 302,
+          "line": 307,
           "conditions": [
             "@supports not (color: oklch(50% .1 200))"
           ]
@@ -31277,7 +31303,7 @@
     {
       "name": "g-warn",
       "file": "20-gradients.css",
-      "line": 223,
+      "line": 228,
       "layer": "deck.effects",
       "section": null,
       "doc": null,
@@ -31295,13 +31321,13 @@
         {
           "selector": ".g-warn",
           "file": "20-gradients.css",
-          "line": 223,
+          "line": 228,
           "conditions": []
         },
         {
           "selector": ".g-warn",
           "file": "20-gradients.css",
-          "line": 301,
+          "line": 306,
           "conditions": [
             "@supports not (color: oklch(50% .1 200))"
           ]
@@ -35352,7 +35378,7 @@
         {
           "selector": ".g-fade-more.is-open",
           "file": "20-gradients.css",
-          "line": 187,
+          "line": 192,
           "conditions": []
         },
         {
@@ -37205,6 +37231,12 @@
         }
       ],
       "selectors": [
+        {
+          "selector": ".g-scrim > :is(img, picture, video, canvas, svg, iframe, .lazy, .video)",
+          "file": "20-gradients.css",
+          "line": 166,
+          "conditions": []
+        },
         {
           "selector": ".lazy",
           "file": "24-media.css",
@@ -47708,13 +47740,13 @@
         {
           "selector": ".scroller",
           "file": "20-gradients.css",
-          "line": 192,
+          "line": 197,
           "conditions": []
         },
         {
           "selector": ".scroller:has(:focus-visible)",
           "file": "20-gradients.css",
-          "line": 195,
+          "line": 200,
           "conditions": []
         },
         {
@@ -55880,6 +55912,12 @@
         }
       ],
       "selectors": [
+        {
+          "selector": ".g-scrim > :is(img, picture, video, canvas, svg, iframe, .lazy, .video)",
+          "file": "20-gradients.css",
+          "line": 166,
+          "conditions": []
+        },
         {
           "selector": ".video",
           "file": "24-media.css",

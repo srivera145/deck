@@ -46,7 +46,7 @@
     "icon-tile": 223,
     "breadcrumb": 211,
     "section": 204,
-    "lazy": 188,
+    "lazy": 189,
     "check": 171,
     "chart-col": 164,
     "icon-follow": 153,
@@ -224,10 +224,10 @@
     "combo": 22,
     "emoji-lg": 22,
     "step-note": 22,
+    "video": 22,
     "text-faint": 22,
     "mt-6": 22,
     "g-grid-lines": 21,
-    "video": 21,
     "text-brand": 21,
     "btn-danger": 20,
     "chart-bars": 20,
@@ -293,6 +293,7 @@
     "editor": 14,
     "emoji-tile": 14,
     "required": 14,
+    "g-scrim": 14,
     "indicator-badge-dot": 14,
     "phone": 14,
     "pop": 14,
@@ -381,7 +382,6 @@
     "editor-toolbar": 9,
     "span-2": 9,
     "span-wide": 9,
-    "g-scrim": 9,
     "g-brand-soft": 9,
     "g-mesh-drift": 9,
     "icon-tile-warn": 9,
@@ -5415,6 +5415,7 @@
       "src/js/deck-extras.js"
     ],
     "g-scrim": [
+      "FINDINGS.md",
       "README.md",
       "public_html/docs/components/gradients.php",
       "public_html/index.php",
@@ -7214,6 +7215,7 @@
       "src/js/deck-adapters.js"
     ],
     "video": [
+      "FINDINGS.md",
       "README.md",
       "public_html/docs/components/video.php",
       "public_html/index.php",

@@ -392,3 +392,20 @@ test('.object-contain beats the cover a .ratio-* frame sets; .list-flush drops t
   });
   assert.deepEqual(m, { fit: 'contain', ratio: '2 / 3', border: '0px', radius: '0px', bg: 'rgba(0, 0, 0, 0)', divider: '1px' });
 });
+
+test('a photo child of .g-scrim sits under the scrim, and its caption above it', async () => {
+  await render(`
+    <figure class="g-scrim" id="scrim" style="inline-size:200px;margin:0">
+      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" style="inline-size:200px;block-size:200px">
+      <figcaption id="cap">Caption</figcaption>
+    </figure>`);
+  // Inside the isolated scrim, -2 paints before the ::after at -1, and the
+  // caption (positioned, z-index auto) paints after it.
+  const z = await page.evaluate(() => ({
+    img: getComputedStyle(document.querySelector('#scrim img')).zIndex,
+    scrim: getComputedStyle(document.getElementById('scrim'), '::after').zIndex,
+    caption: getComputedStyle(document.getElementById('cap')).zIndex,
+    captionPosition: getComputedStyle(document.getElementById('cap')).position,
+  }));
+  assert.deepEqual(z, { img: '-2', scrim: '-1', caption: 'auto', captionPosition: 'relative' });
+});

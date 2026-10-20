@@ -2415,3 +2415,23 @@ scratch and dropped anything after a `#`, so a reason written beside a decision 
 have survived the next run. It now keeps the text after the `#`, writes it back, and uses
 it as the decision's reason in `dist/api-buckets.json` instead of the rule's generic one.
 Every class added in this pass has its reason recorded that way.
+
+## 105. `.g-scrim` painted under a photo child, so its caption sat on the bare image — FIXED
+
+`.g-scrim`'s `::after` has `z-index: -1` inside an isolated stacking context, and
+`.g-scrim > *` lifts every child to `position: relative`. So the scrim only worked when the
+photo was the element's own `background-image`. With the photo as an `<img>` child, the
+usual markup, the image painted over the scrim, and the caption sat directly on the photo.
+The docs example on `gradients.php` showed exactly that: white text on a light grey image,
+captioned "Readable on a light image, because the scrim is underneath". `ecommerce.html`,
+`consulting.html` and `jumbotrons.html` had each worked around it by giving their photo
+`position: absolute; z-index: -2`.
+
+**Fixed** in `src/20-gradients.css` by doing what the templates did:
+`.g-scrim > :is(img, picture, video, canvas, svg, iframe, .lazy, .video) { z-index: -2; }`.
+The media child paints before the scrim and every other child after it, as before. Moving
+the scrim above the children instead was rejected, because a caption written as bare text
+inside `.g-scrim` would then have gone under it. A photo wrapped in an element that is not
+in that list, such as a plain `<a>`, is still lifted above the scrim. The templates' own
+rules are unlayered, so they win and render as before. Found while building the
+theme-aware scrim, which has the same structure.

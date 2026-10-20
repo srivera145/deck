@@ -5345,6 +5345,11 @@
       oklch(12% .02 var(--hue-neutral) / .72), transparent 62%);
   }
   .g-scrim > * { position: relative; }
+  /* A photo child goes under the scrim, where a background image would be.
+     Every child used to be lifted above the ::after, the <img> included, so
+     the scrim was painted behind the photo and the caption sat on the bare
+     image. Text and other children still sit above it. */
+  .g-scrim > :is(img, picture, video, canvas, svg, iframe, .lazy, .video) { z-index: -2; }
 
   /* --- Fade masks ----------------------------------------------------------
      Content that runs off the edge should fade, not be cut with a hard line.

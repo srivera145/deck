@@ -14,6 +14,7 @@ $page = [
     'component' => 'video',
     'accounts' => [
         '24-media.css' => 'documented: the ratio-locked frame, the three ratio modifiers and the cover variant, the native control tweaks, the poster overlay with its scrim and play button, and the meta and duration overlays',
+        '20-gradients.css' => 'cross-referenced: a .video that is a direct child of .g-scrim sits under the scrim, as a photo does. Documented on gradients.php',
     ],
 ];
 
