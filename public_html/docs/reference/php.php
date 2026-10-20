@@ -99,13 +99,14 @@ $METHODS = [
     ],
     [
         'id' => 'head',
-        'signature' => 'Deck::head(bool $viewport = true): string',
+        'signature' => 'Deck::head(bool $viewport = true, ?string $nonce = null): string',
         'summary' => 'Everything for the <code>&lt;head&gt;</code>, in one call: the viewport meta'
             . ' tag Deck\'s mobile-first layout assumes, the stylesheet link, any theme override,'
-            . ' the script tags, and a small inline script pointing <code>Deck.iconSprite</code>'
-            . ' at the right URL.',
+            . ' and the script tags. The first script tag carries <code>data-deck-icons</code>,'
+            . ' which is how <code>deck.js</code> finds the sprite, so there is no inline script.',
         'params' => [
             ['$viewport', 'bool', 'Pass <code>false</code> if your layout already emits the viewport meta tag. Emitting it twice is harmless but untidy.'],
+            ['$nonce', '?string', 'The request\'s Content Security Policy nonce. It goes on the <code>&lt;link&gt;</code>, every <code>&lt;script&gt;</code> and the hue <code>&lt;style&gt;</code>, escaped. A parameter rather than a <code>configure()</code> option because it changes every request, and static configuration outlives a request on a long-running PHP server.'],
         ],
         'returns' => 'An HTML string of several tags separated by newlines. Not escaped — it is'
             . ' markup, and it is meant to be echoed raw.',
@@ -117,14 +118,18 @@ $METHODS = [
             . "  <meta charset=\"utf-8\">\n"
             . "  <title>Orders</title>\n"
             . "  <?= Deck::head() ?>\n"
-            . "</head>",
+            . "</head>\n\n"
+            . "<!-- Under a strict CSP: script-src 'nonce-…' 'strict-dynamic'; style-src 'nonce-…' -->\n"
+            . "<?= Deck::head(nonce: \$cspNonce) ?>",
     ],
     [
         'id' => 'css',
-        'signature' => 'Deck::css(): string',
+        'signature' => 'Deck::css(?string $nonce = null): string',
         'summary' => 'The stylesheet <code>&lt;link&gt;</code> tag on its own, for a layout that'
             . ' wants to place the scripts somewhere else.',
-        'params' => [],
+        'params' => [
+            ['$nonce', '?string', 'A CSP nonce, for a <code>style-src</code> that allows stylesheets by nonce.'],
+        ],
         'returns' => 'One <code>&lt;link rel="stylesheet"&gt;</code> tag with the URL escaped.',
         'absent' => 'Which file it links is <code>stylesheet()</code>\'s decision. The URL carries'
             . ' a cache-busting query where one could be worked out.',
@@ -133,11 +138,14 @@ $METHODS = [
     ],
     [
         'id' => 'js',
-        'signature' => 'Deck::js(): string',
+        'signature' => 'Deck::js(?string $nonce = null): string',
         'summary' => 'The script tags, in the right order, honouring the'
             . ' <code>extras</code>, <code>adapters</code>, <code>bundle</code> and'
-            . ' <code>defer</code> options.',
-        'params' => [],
+            . ' <code>defer</code> options. The first tag carries'
+            . ' <code>data-deck-icons</code> with the sprite\'s URL.',
+        'params' => [
+            ['$nonce', '?string', 'A CSP nonce, put on every tag.'],
+        ],
         'returns' => 'One to three <code>&lt;script&gt;</code> tags separated by newlines.',
         'absent' => 'With <code>bundle</code> on, it looks for <code>deck.bundle.min.js</code> on'
             . ' disk and falls back to the unminified bundle when it is not there — so a project'
@@ -145,7 +153,7 @@ $METHODS = [
             . ' That check needs <code>root</code> to be right.',
         'example' => "Deck::configure(['bundle' => true]);\n"
             . "echo Deck::js();\n"
-            . "// <script src=\"/assets/deck/deck.bundle.min.js?v=…\" defer></script>",
+            . "// <script src=\"/assets/deck/deck.bundle.min.js?v=…\" data-deck-icons=\"/assets/deck/deck-icons.svg?v=…\" defer></script>",
     ],
     [
         'id' => 'asset',
@@ -211,7 +219,11 @@ $METHODS = [
             . ' no brand colour and a user with no theme preference produce an empty string and'
             . ' the defaults apply. Because it is server-rendered there is no flash of the wrong'
             . ' brand colour, which is the reason to prefer it over <code>Deck.hue()</code> in'
-            . ' JavaScript.',
+            . ' JavaScript. Under a Content Security Policy whose <code>style-src</code> has no'
+            . ' <code>\'unsafe-inline\'</code>, the <code>style</code> attribute is blocked, and a'
+            . ' nonce cannot allow an attribute. There, set the <code>hue</code> option and use'
+            . ' <code>Deck::head(nonce: …)</code>, which writes the hue into a nonced'
+            . ' <code>&lt;style&gt;</code> instead.',
         'example' => "<html <?= Deck::htmlAttributes(lang: 'en') ?>\n"
             . "      <?= Deck::theme(hue: \$tenant->hue, mode: \$user->theme) ?>>\n"
             . "<!-- <html lang=\"en\" style=\"--hue-brand:265\" data-theme=\"dark\"> -->",
@@ -222,7 +234,7 @@ $METHODS = [
         'summary' => 'One <code>&lt;svg&gt;&lt;use&gt;</code> pointing at Deck\'s sprite.',
         'params' => [
             ['$name', 'string', "The icon id, such as <code>'check-circle'</code>."],
-            ['$class', 'string', 'Classes for the svg. <code>icon-sm</code>, <code>icon-lg</code> and <code>icon-fill</code> are the usual additions.'],
+            ['$class', 'string', 'Classes for the svg. <code>icon-sm</code>, <code>icon-lg</code> and <code>icon-fill</code> are the usual additions. With <code>icon-sm</code> the helper uses the icon\'s heavier <code>-sm</code> cut.'],
             ['$label', '?string', 'An accessible name. Omit it for a decorative icon.'],
         ],
         'returns' => 'An SVG element as a string. The name, the class and the sprite URL are all'
@@ -232,9 +244,12 @@ $METHODS = [
             . ' content — an icon-only button with no label is announced as "button". Pass'
             . ' <code>$label</code> there, or put the words in a <code>.sr-only</code> span.'
             . ' A name that is not in the sprite renders an empty svg rather than an error, so'
-            . ' check the spelling if an icon simply does not appear.',
+            . ' check the spelling if an icon simply does not appear. The <code>-sm</code> cut is'
+            . ' skipped for a name that already ends in <code>-sm</code> and for the two brand'
+            . ' marks, which have no small cut.',
         'example' => "<?= Deck::icon('check-circle', 'icon icon-lg', 'Paid') ?>\n"
-            . "<?= Deck::icon('chevron-down') ?>   <!-- decorative -->",
+            . "<?= Deck::icon('chevron-down') ?>   <!-- decorative -->\n"
+            . "<?= Deck::icon('x', 'icon icon-sm') ?>   <!-- uses #x-sm -->",
     ],
     [
         'id' => 'config',

@@ -128,10 +128,12 @@ $sizes = [
     with the <code>-sm</code> symbol.
   </p>
   <p class="dx-note text-muted">
-    CSS cannot rewrite a <code>&lt;use href&gt;</code>, so <strong>the pairing is on
-    you</strong>. <code>.icon-sm</code> with <code>#star</code> renders the light cut at a
-    small size and simply looks thin — nothing errors, and nothing warns. This is the one
-    part of Deck's icon system that a reader has to remember rather than being handed.
+    CSS cannot rewrite a <code>&lt;use href&gt;</code>, so in markup you write by hand
+    <strong>the pairing is on you</strong>. <code>.icon-sm</code> with <code>#star</code>
+    renders the light cut at a small size and simply looks thin — nothing errors, and
+    nothing warns. The helpers make the pairing for you: <code>Deck::icon('star', 'icon
+    icon-sm')</code> in PHP writes <code>#star-sm</code>, and so do the icons Deck's own
+    JavaScript renders into date pickers, comboboxes and toasts.
   </p>
 </section>
 

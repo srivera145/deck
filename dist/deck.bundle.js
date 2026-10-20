@@ -35,8 +35,12 @@ const Deck = (() => {
     if (html != null) n.innerHTML = html;
     return n;
   };
-  const icon = (name, cls = 'icon') =>
-    `<svg class="${cls}" aria-hidden="true"><use href="${Deck.iconSprite}#${name}"></use></svg>`;
+  /* .icon-sm is drawn from the sprite's heavier -sm cut, which holds up at
+     16px. CSS cannot change a <use href>, so the helper picks the cut. */
+  const icon = (name, cls = 'icon') => {
+    const cut = /(^|\s)icon-sm(\s|$)/.test(cls) && !name.endsWith('-sm') ? `${name}-sm` : name;
+    return `<svg class="${cls}" aria-hidden="true"><use href="${Deck.iconSprite}#${cut}"></use></svg>`;
+  };
 
   /* ======================================================================
      Date picker

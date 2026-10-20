@@ -2561,3 +2561,42 @@ not at all.
 Three tests load a real page through a routed origin, with Deck deferred and a stand-in
 SortableJS deferred, async and late, or absent. All three fail against the previous
 `deck-adapters.js`.
+
+## 110. `Deck::head()` could not be used under a strict Content Security Policy — FIXED
+
+`Deck::head()` printed an inline `<script>` to set `Deck.iconSprite` on
+`DOMContentLoaded`, an inline `<style>` when a hue was configured, and script and link
+tags, none of which could carry a nonce. Under a nonce-based policy (`script-src
+'nonce-…' 'strict-dynamic'`, the configuration CSP guidance recommends) every one of them
+was blocked: no stylesheet, no Deck, four console violations. The only way out was to stop
+using the helper.
+
+**Fixed** in `php/Deck.php`. `head()`, `css()` and `js()` take an optional `$nonce`, which
+goes, escaped, on the `<link>`, every `<script>` and the hue `<style>`. The inline script is
+gone rather than nonced: deck.js already read a `data-deck-icons` attribute on its own
+script tag (`bin/deck.mjs init` even prints it), so `js()` now puts the sprite URL there,
+on `deck.js` or the bundle. The nonce is a parameter, not a `configure()` option, because
+it changes every request and static configuration outlives the request on a long-running
+PHP server. Checked by serving the helper's output through a routed origin under
+`default-src 'self'; script-src 'nonce-n0nce' 'strict-dynamic'; style-src 'nonce-n0nce'`:
+with the nonce, no violations, Deck loads, the sprite resolves and the hue applies; without
+it, and with the old helper, the page is blocked as before.
+
+**Not fixable here:** `Deck::theme()` returns a `style` attribute for the `<html>` tag, and
+a nonce cannot allow an attribute; under a `style-src` without `'unsafe-inline'` it is
+dropped. `php.php` now says so and points at the `hue` option with `head(nonce: …)`, which
+writes the same custom property into a nonced `<style>`.
+
+## 111. `Deck::icon()` and deck.js drew `.icon-sm` with the regular cut — FIXED
+
+Every sprite icon has a `-sm` cut at weight 500, drawn to hold up at 16px, and the icon
+page explained that CSS cannot pick it, so the pairing is on the author. Deck's own two
+helpers did not make it either: `Deck::icon('x', 'icon icon-sm')` wrote `#x`, and so did
+every `icon(…, 'icon icon-sm')` call in deck.js — the date picker's chevrons, the combobox
+toggle and checks, the toast close button.
+
+**Fixed:** both helpers append `-sm` when the class list has `icon-sm` and the name does
+not already end in it. The PHP helper skips the two hand-authored brand marks, which have
+no small cut; deck.js only ever renders font icons. This depended on #101 first: the RTL
+mirror did not match `-sm` ids, so this change alone would have left the date picker's
+small chevrons pointing the wrong way under `dir="rtl"`.

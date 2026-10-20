@@ -318,3 +318,16 @@ test('without SortableJS, the native fallback drags a row only from its handle',
     await p.close();
   }
 });
+
+test('an .icon-sm that deck.js renders uses the sprite\'s -sm cut', async () => {
+  const p = await freshPage('<main></main>');
+  try {
+    const href = await p.evaluate(() => {
+      Deck.toast({ title: 'Saved', duration: 0 });
+      return document.querySelector('.toast-close use').getAttribute('href');
+    });
+    assert.match(href, /#x-sm$/);
+  } finally {
+    await p.close();
+  }
+});

@@ -29,6 +29,7 @@ Notable changes to Deck. The npm package (`@echodial/deck`) and the Composer pac
 - **`.split-rail-start` is described correctly.** It sizes the first track as the rail, so the rail goes first in the markup. Its comment and the split docs said the opposite, and the docs example showed the main column squeezed into the rail's width.
 - **`.file` takes a dropped file.** It looked like a drop zone and ignored drops. With deck-extras.js, dragging a file over it sets `.is-over` (a solid border and the focus ring), and a dropped file goes into the input as a pick would: filtered by `accept`, one file unless `multiple`, then `input` and `change`. A drop the page's own handler has already taken is left alone.
 - **SortableJS can load after Deck.** With Deck deferred, a SortableJS deferred after it or loaded `async` was not there when the adapters first ran, and the list was left on the native fallback for good, so drag handles did not work on first load. A list on the fallback is now handed to SortableJS when it arrives (at `DOMContentLoaded` or `load`, or on any later `Deck.init()`). The native fallback now honours `data-handle`.
+- **Small icons from Deck's helpers use the small cut.** `Deck::icon($name, 'icon icon-sm')` and the icons deck.js renders with `.icon-sm` (date picker, combobox, toasts) pointed at the regular `#name` symbol rather than the heavier `#name-sm` drawn for 16px.
 
 ### Added
 
@@ -44,9 +45,11 @@ Notable changes to Deck. The npm package (`@echodial/deck`) and the Composer pac
 - **`.grid-fill`,** the auto-fit grid with `auto-fill`, so a short last row keeps card-sized columns instead of stretching. It needs no `.grid` beside it.
 - **`.glass`,** a frosted, theme-aware surface for a card, panel or bar over an image. `--glass` sets the opacity (76%). Opaque under `prefers-reduced-transparency`.
 - **`.g-scrim-auto` and `--scrim-auto`,** a scrim in the theme's surface colour with `--text` over it, so text over an image follows a light theme. `--scrim` stays dark, for white text.
+- **`Deck::head()`, `Deck::css()` and `Deck::js()` take a CSP nonce.** `Deck::head(nonce: $nonce)` puts it on the stylesheet link, every script tag and the hue `<style>`, so the helper works under a strict Content Security Policy.
 
 ### Changed
 
 - `src/deck-icons.svg` gained `menu-book` and `menu-book-sm` after 0.1.3. The brand artwork, which uses only the `deck-mark` symbol, did not change; `src/brand/sources.json` records the sprite's new hash so the build accepts it. `menu-book` is now listed in `tools/icons/icons.txt` as well, so regenerating the sprite keeps it.
+- `Deck::head()` no longer prints an inline `<script>` to set the sprite URL. `Deck::js()` puts it on the first script tag as `data-deck-icons`, which deck.js already read; the result is the same.
 
 Releases before 0.1.4 are described in the git history.

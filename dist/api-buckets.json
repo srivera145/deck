@@ -5059,7 +5059,7 @@
       "layer": "deck.mobile",
       "file": "08-mobile.css",
       "line": 143,
-      "uses": 3359
+      "uses": 3362
     },
     "icon-fill": {
       "bucket": "public",
@@ -5109,7 +5109,7 @@
       "layer": "deck.mobile",
       "file": "08-mobile.css",
       "line": 161,
-      "uses": 1185
+      "uses": 1190
     },
     "icon-spin": {
       "bucket": "public",

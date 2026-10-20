@@ -95,23 +95,35 @@ final class Deck
         return $minify ? 'deck.min.css' : 'deck.css';
     }
 
-    /** The <link> tag. */
-    public static function css(): string
+    /**
+     * The <link> tag. Pass the request's CSP nonce when style-src allows
+     * stylesheets by nonce.
+     */
+    public static function css(?string $nonce = null): string
     {
         return sprintf(
-            '<link rel="stylesheet" href="%s">',
-            htmlspecialchars(self::asset(self::stylesheet()), ENT_QUOTES)
+            '<link rel="stylesheet" href="%s"%s>',
+            htmlspecialchars(self::asset(self::stylesheet()), ENT_QUOTES),
+            self::nonceAttribute($nonce)
         );
     }
 
-    /** The <script> tags, in the right order. */
-    public static function js(): string
+    /**
+     * The <script> tags, in the right order, each with the nonce when one is
+     * given. The first carries data-deck-icons, which deck.js reads to find
+     * the sprite, so the sprite path needs no inline script.
+     */
+    public static function js(?string $nonce = null): string
     {
         $defer = self::$config['defer'] ? ' defer' : '';
-        $tag = static fn (string $f): string => sprintf(
-            '<script src="%s"%s></script>',
+        $nonceAttr = self::nonceAttribute($nonce);
+        $sprite = sprintf(' data-deck-icons="%s"', htmlspecialchars(self::asset('deck-icons.svg'), ENT_QUOTES));
+        $tag = static fn (string $f, string $extra = ''): string => sprintf(
+            '<script src="%s"%s%s%s></script>',
             htmlspecialchars(self::asset($f), ENT_QUOTES),
-            $defer
+            $extra,
+            $defer,
+            $nonceAttr
         );
 
         if (self::$config['bundle']) {
@@ -119,10 +131,10 @@ final class Deck
             $base = trim((string) self::$config['base'], '/');
             $min  = $root !== null && is_file($root . '/' . $base . '/deck.bundle.min.js');
 
-            return $tag($min ? 'deck.bundle.min.js' : 'deck.bundle.js');
+            return $tag($min ? 'deck.bundle.min.js' : 'deck.bundle.js', $sprite);
         }
 
-        $out = [$tag('deck.js')];
+        $out = [$tag('deck.js', $sprite)];
 
         if (self::$config['extras']) {
             $out[] = $tag('deck-extras.js');
@@ -137,9 +149,19 @@ final class Deck
 
     /**
      * Everything for the <head>: the meta viewport Deck's mobile-first layout
-     * assumes, the stylesheet, the icon sprite path, and any theme overrides.
+     * assumes, the stylesheet, the scripts with the icon sprite path, and any
+     * theme overrides.
+     *
+     * Under a strict Content Security Policy, pass the request's nonce and it
+     * goes on every tag this prints, the <style> for the hue included:
+     *
+     *   <?= Deck::head(nonce: $cspNonce) ?>
+     *
+     * There is no inline script to allow. The nonce is per request, so it is a
+     * parameter rather than a configure() setting: static config outlives the
+     * request on a long-running PHP server.
      */
-    public static function head(bool $viewport = true): string
+    public static function head(bool $viewport = true, ?string $nonce = null): string
     {
         $out = [];
 
@@ -147,7 +169,7 @@ final class Deck
             $out[] = '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">';
         }
 
-        $out[] = self::css();
+        $out[] = self::css($nonce);
 
         $vars = [];
         if (self::$config['hue'] !== null) {
@@ -155,14 +177,10 @@ final class Deck
         }
 
         if ($vars !== []) {
-            $out[] = '<style>:root{' . implode(';', $vars) . '}</style>';
+            $out[] = '<style' . self::nonceAttribute($nonce) . '>:root{' . implode(';', $vars) . '}</style>';
         }
 
-        $out[] = self::js();
-        $out[] = sprintf(
-            '<script>window.addEventListener("DOMContentLoaded",function(){if(window.Deck)Deck.iconSprite=%s});</script>',
-            json_encode(self::asset('deck-icons.svg'), JSON_UNESCAPED_SLASHES)
-        );
+        $out[] = self::js($nonce);
 
         return implode("\n", $out);
     }
@@ -192,13 +210,26 @@ final class Deck
         return ltrim($out);
     }
 
+    /** The sprite's hand-authored symbols, which have no -sm cut. */
+    private const NO_SMALL_CUT = ['deck-mark', 'deck-wordmark'];
+
     /**
      * One <svg><use> for an icon from Deck's sprite.
      *
      *   <?= Deck::icon('check-circle', 'icon icon-lg') ?>
+     *
+     * With .icon-sm in the class it uses the icon's heavier -sm cut, which is
+     * drawn to hold up at 16px. CSS cannot change a <use href>, so the helper
+     * makes the pairing a hand-written tag would have to remember.
      */
     public static function icon(string $name, string $class = 'icon', ?string $label = null): string
     {
+        if (preg_match('/(^|\s)icon-sm(\s|$)/', $class) === 1
+            && !str_ends_with($name, '-sm')
+            && !in_array($name, self::NO_SMALL_CUT, true)) {
+            $name .= '-sm';
+        }
+
         $aria = $label === null
             ? ' aria-hidden="true"'
             : sprintf(' role="img" aria-label="%s"', htmlspecialchars($label, ENT_QUOTES));
@@ -241,6 +272,13 @@ final class Deck
         }
 
         return $out;
+    }
+
+    private static function nonceAttribute(?string $nonce): string
+    {
+        return $nonce === null || $nonce === ''
+            ? ''
+            : sprintf(' nonce="%s"', htmlspecialchars($nonce, ENT_QUOTES));
     }
 
     private static function guessDocumentRoot(): ?string

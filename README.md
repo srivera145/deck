@@ -33,7 +33,7 @@ Version 0.1.4 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
 ## What Deck weighs
 
-A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **70.1 KB** Brotli, or **85.2 KB** gzip. Every browser Deck supports sends `br` in
+A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **70.1 KB** Brotli, or **85.3 KB** gzip. Every browser Deck supports sends `br` in
 `Accept-Encoding`, and Cloudflare, Vercel, Netlify, and nginx with `ngx_brotli` negotiate
 it for text by default, so Brotli is what most users actually receive.
 
@@ -41,8 +41,8 @@ it for text by default, so Brotli is what most users actually receive.
 | --- | --- | --- |
 | `deck.min.css` | **27.8 KB** | 34.1 KB |
 | `deck-icons.svg` | **31.3 KB** | 38.9 KB |
-| `deck.min.js` | **10.9 KB** | 12.2 KB |
-| **All three** | **70.1 KB** | **85.2 KB** |
+| `deck.min.js` | **11.0 KB** | 12.3 KB |
+| **All three** | **70.1 KB** | **85.3 KB** |
 
 The sprite is the largest single file, slightly bigger than the stylesheet — worth stating
 plainly rather than leaving you to find it in devtools. Swapping `deck.min.js` for the full
@@ -81,7 +81,7 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 | File | Brotli | gzip | What it is |
 | --- | --- | --- | --- |
 | `deck.min.css` | 27.8 KB | 34.1 KB | The whole framework |
-| `deck.min.js` | 10.9 KB | 12.2 KB | Optional behaviour, no dependencies |
+| `deck.min.js` | 11.0 KB | 12.3 KB | Optional behaviour, no dependencies |
 | `deck-extras.min.js` | 6.1 KB | 7.0 KB | Carousel, drawer, mega menu, copy button, QR encoder, editor |
 | `deck-adapters.min.js` | 4.1 KB | 4.7 KB | Optional library integrations, inert unless one is loaded |
 | `deck.bundle.min.js` | 19.9 KB | 22.5 KB | All three scripts in one file |
