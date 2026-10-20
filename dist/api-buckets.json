@@ -3539,7 +3539,7 @@
       "layer": "deck.components",
       "file": "26-perf.css",
       "line": 76,
-      "uses": 11
+      "uses": 12
     },
     "drawer": {
       "bucket": "public",
@@ -8809,7 +8809,7 @@
       "layer": "deck.components",
       "file": "26-perf.css",
       "line": 75,
-      "uses": 0
+      "uses": 3
     },
     "sortable-chosen": {
       "bucket": "internal",

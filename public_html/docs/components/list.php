@@ -290,6 +290,15 @@ $people = [
     when it is present and the native drag-and-drop API when it is not.
   </p>
   <p>
+    Load SortableJS before Deck or after it, with <code>defer</code> or
+    <code>async</code>. A list starts on the native fallback if SortableJS is not there
+    yet, and is handed over when it arrives: Deck looks again at
+    <code>DOMContentLoaded</code> and at <code>load</code>. If you load SortableJS later
+    than that, call <code>Deck.init()</code> afterwards. <code>data-handle</code> works
+    on both engines: with <code>data-handle=".drag-handle"</code> a row drags only from
+    its handle, so the rest of it stays clickable and selectable.
+  </p>
+  <p>
     <code>.is-lifted</code> is set by JavaScript at runtime and is
     <strong>internal</strong> — style it if you like, but do not write it in markup.
   </p>

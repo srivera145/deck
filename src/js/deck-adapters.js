@@ -333,11 +333,26 @@
      Deck's CSS already uses SortableJS's default class names, so no
      configuration is needed. Without the library, the fallback below uses the
      native HTML drag and drop API, which is worse on touch but costs nothing.
+
+     SortableJS is often not on the page yet when Deck first initialises: a
+     deferred script after Deck's, or an async one. data-deck-sort records
+     which engine a list is on, and a list still on the native fallback is
+     handed to SortableJS whenever Deck initialises and finds it, which
+     happens again at DOMContentLoaded and at load. Before, the first pass
+     marked the list done, so it stayed on the fallback for good, and the
+     fallback ignored data-handle: the whole row dragged, not the handle.
      ====================================================================== */
+
+  const natives = new WeakMap();   // list -> AbortController for its native listeners
 
   function sortables(root) {
     $$('[data-deck-sortable]', root).forEach(list => {
-      if (!once(list)) return;
+      const engine = list.dataset.deckSort;
+      if (engine === 'sortable' || (engine === 'native' && !have.sortable)) return;
+      if (engine === 'native') {
+        natives.get(list).abort();
+        Array.from(list.children).forEach(child => child.removeAttribute('draggable'));
+      }
       const group = list.dataset.deckSortable || undefined;
       const handle = list.dataset.handle || null;
 
@@ -345,6 +360,7 @@
         new CustomEvent('deck:reorder', { bubbles: true, detail }));
 
       if (have.sortable) {
+        list.dataset.deckSort = 'sortable';
         window.Sortable.create(list, {
           group: group && group !== 'true' ? { name: group, pull: true, put: true } : undefined,
           handle,
@@ -370,8 +386,18 @@
         return;
       }
 
-      // Native fallback
-      Array.from(list.children).forEach(child => { child.draggable = true; });
+      // Native fallback, on an AbortController so SortableJS can take over later
+      const native = new AbortController();
+      const signal = native.signal;
+      natives.set(list, native);
+      list.dataset.deckSort = 'native';
+      if (!handle) Array.from(list.children).forEach(child => { child.draggable = true; });
+      // With a handle, a row is draggable only while the press is on its
+      // handle, as with SortableJS, so the rest of the row stays selectable.
+      else list.addEventListener('pointerdown', e => {
+        const item = Array.from(list.children).find(child => child.contains(e.target));
+        if (item) item.draggable = Boolean(e.target.closest(handle));
+      }, { signal });
       let dragged = null;
       list.addEventListener('dragstart', e => {
         dragged = e.target.closest('[draggable="true"]');
@@ -379,22 +405,24 @@
         dragged.classList.add('sortable-chosen');
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData('text/plain', dragged.dataset.id || '');
-      });
+      }, { signal });
       list.addEventListener('dragover', e => {
         e.preventDefault();
-        const over = e.target.closest('[draggable="true"]');
+        // The row under the pointer, found by containment: with a handle, only
+        // the row being dragged is draggable.
+        const over = Array.from(list.children).find(child => child.contains(e.target));
         if (!over || over === dragged || !dragged) return;
         const r = over.getBoundingClientRect();
         const after = (e.clientY - r.top) / r.height > 0.5;
         over.parentElement.insertBefore(dragged, after ? over.nextSibling : over);
-      });
+      }, { signal });
       list.addEventListener('dragend', () => {
         dragged?.classList.remove('sortable-chosen');
         counts();
         emit({ item: dragged, from: list, to: list,
                order: Array.from(list.children).map(c => c.dataset.id ?? null) });
         dragged = null;
-      });
+      }, { signal });
     });
 
     function counts() {
@@ -477,6 +505,12 @@
 
   if (document.readyState !== 'loading') Deck.init();
   else document.addEventListener('DOMContentLoaded', () => Deck.init());
+  /* deck.js initialises again at DOMContentLoaded, which catches a SortableJS
+     deferred after Deck. An async one can land later, up to load, so look
+     once more then. Later than that, call Deck.init() after loading it. */
+  if (document.readyState !== 'complete') {
+    window.addEventListener('load', () => sortables(document), { once: true });
+  }
 
 })(typeof window !== 'undefined' && window.Deck ? window.Deck
    : typeof Deck !== 'undefined' ? Deck : null);

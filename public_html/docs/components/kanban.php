@@ -128,7 +128,8 @@ function demo_card(string $title, string $meta): string
     <a href="datagrid.php">data grid</a>: a <code>.drag-handle</code> that appears on
     hover or focus-within, and the lifted appearance of a card in flight.
     <code>deck-adapters.js</code> drives them with SortableJS when it is present, or the
-    native drag-and-drop API when it is not.
+    native drag-and-drop API when it is not. SortableJS can load after Deck, deferred or
+    async; how the hand-over works is on the <a href="list.php#reorder">list page</a>.
   </p>
   <p class="dx-note text-muted">
     <strong>There is no keyboard path.</strong> A board that can only be reordered by

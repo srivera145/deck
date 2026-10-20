@@ -243,3 +243,78 @@ test('a file dropped on a .file zone goes into its input, filtered by accept and
     await p.close();
   }
 });
+
+/* A real page load, so script order and readyState are what a browser does:
+   Deck deferred, then SortableJS deferred after it or async and late. The
+   stand-in Sortable records each list it is given. */
+async function sortablePage(sortableTag, { delay = 0 } = {}) {
+  const adapters = fs.readFileSync(path.join(root, 'dist', 'deck-adapters.js'), 'utf8');
+  const files = {
+    '/deck.js': js,
+    '/deck-adapters.js': adapters,
+    '/sortable.js': "window.Sortable = { create(el, o) { (window.created ||= []).push({ id: el.id, handle: o.handle }); } };",
+    '/': `<!doctype html><html><head>
+      <script src="/deck.js" defer></script>
+      <script src="/deck-adapters.js" defer></script>
+      ${sortableTag}
+      </head><body>
+      <ul data-deck-sortable data-handle=".h" id="list"><li id="a"><span class="h">=</span> A</li><li id="b"><span class="h">=</span> B</li></ul>
+      </body></html>`,
+  };
+  const p = await browser.newPage();
+  await p.route('http://deck.test/**', async (route) => {
+    const file = new URL(route.request().url()).pathname;
+    if (file === '/sortable.js' && delay) await new Promise((r) => setTimeout(r, delay));
+    await route.fulfill({ body: files[file], contentType: file === '/' ? 'text/html' : 'text/javascript' });
+  });
+  await p.goto('http://deck.test/', { waitUntil: 'load' });
+  return p;
+}
+
+const sortState = (p) => p.evaluate(() => ({
+  engine: document.getElementById('list').dataset.deckSort,
+  created: window.created ?? [],
+  draggable: [...document.querySelectorAll('#list > li')].map((li) => li.getAttribute('draggable')),
+}));
+
+test('SortableJS deferred after Deck takes over the list, handle and all', async () => {
+  const p = await sortablePage('<script src="/sortable.js" defer></script>');
+  try {
+    assert.deepEqual(await sortState(p), { engine: 'sortable', created: [{ id: 'list', handle: '.h' }], draggable: [null, null] });
+  } finally {
+    await p.close();
+  }
+});
+
+test('SortableJS loaded async and late still takes over the list by window load', async () => {
+  const p = await sortablePage('<script src="/sortable.js" async></script>', { delay: 400 });
+  try {
+    assert.deepEqual(await sortState(p), { engine: 'sortable', created: [{ id: 'list', handle: '.h' }], draggable: [null, null] });
+  } finally {
+    await p.close();
+  }
+});
+
+test('without SortableJS, the native fallback drags a row only from its handle', async () => {
+  const p = await sortablePage('');
+  try {
+    assert.deepEqual(await sortState(p), { engine: 'native', created: [], draggable: [null, null] });
+    const after = await p.evaluate(() => {
+      const press = (el) => el.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
+      press(document.querySelector('#a .h'));
+      const fromHandle = document.getElementById('a').draggable;
+      press(document.getElementById('a'));
+      return { fromHandle, fromRow: document.getElementById('a').draggable };
+    });
+    assert.deepEqual(after, { fromHandle: true, fromRow: false });
+    // A SortableJS that arrives later still gets the list, and the native listeners go.
+    const upgraded = await p.evaluate(() => {
+      window.Sortable = { create(el, o) { (window.created ||= []).push({ id: el.id, handle: o.handle }); } };
+      Deck.init();
+      return document.getElementById('list').dataset.deckSort;
+    });
+    assert.equal(upgraded, 'sortable');
+  } finally {
+    await p.close();
+  }
+});

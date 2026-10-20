@@ -28,6 +28,7 @@ Notable changes to Deck. The npm package (`@echodial/deck`) and the Composer pac
 - **`.grid-fixed-2`, `-3` and `-4` work without `.grid`.** They set only the columns, so on their own they did nothing. Each now sets `display: grid` and the gap itself; `grid grid-fixed-3` is unchanged, and print unwinds them like `.grid`.
 - **`.split-rail-start` is described correctly.** It sizes the first track as the rail, so the rail goes first in the markup. Its comment and the split docs said the opposite, and the docs example showed the main column squeezed into the rail's width.
 - **`.file` takes a dropped file.** It looked like a drop zone and ignored drops. With deck-extras.js, dragging a file over it sets `.is-over` (a solid border and the focus ring), and a dropped file goes into the input as a pick would: filtered by `accept`, one file unless `multiple`, then `input` and `change`. A drop the page's own handler has already taken is left alone.
+- **SortableJS can load after Deck.** With Deck deferred, a SortableJS deferred after it or loaded `async` was not there when the adapters first ran, and the list was left on the native fallback for good, so drag handles did not work on first load. A list on the fallback is now handed to SortableJS when it arrives (at `DOMContentLoaded` or `load`, or on any later `Deck.init()`). The native fallback now honours `data-handle`.
 
 ### Added
 

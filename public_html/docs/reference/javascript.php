@@ -447,7 +447,8 @@ $EXTRAS = [
             . ' here being present is a supported configuration. Placement falls back from CSS'
             . ' anchor positioning to Floating UI to Deck\'s own; the editor from Tiptap to Quill'
             . ' to <code>execCommand</code>; charts from Chart.js to Deck\'s CSS charts; drag and'
-            . ' drop from SortableJS to the native HTML API. Paste'
+            . ' drop from SortableJS to the native HTML API, and back to SortableJS when it'
+            . ' loads after Deck. Paste'
             . ' <code>Deck.adapters.report()</code> into a console when a component behaves'
             . ' differently on two pages — it is usually this.',
         'example' => "Deck.adapters.available.chart;   // false\n"
@@ -507,6 +508,7 @@ $INTERNAL_ATTRS = [
     ['data-deck-wired', 'The once-guard in deck.js. If it is on an element, that element has already been wired and init will skip it.'],
     ['data-deck-x', 'The same guard in deck-extras.js.'],
     ['data-deck-a', 'The same guard in deck-adapters.js.'],
+    ['data-deck-sort', 'Which engine a <code>data-deck-sortable</code> list is on: <code>native</code> until SortableJS is on the page, then <code>sortable</code>. A list on <code>native</code> is handed to SortableJS the next time Deck initialises and finds it.'],
     ['data-deck-anchored', 'Marks a popover trigger whose anchor name has already been assigned.'],
     ['data-deck-ready', 'Set on <code>&lt;html&gt;</code> once the first frame has rendered. <code>.fade-swap</code> fades in only after it is there, so nothing on screen at first paint fades in.'],
 ];

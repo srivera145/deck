@@ -3,8 +3,8 @@
   "filesScanned": 128,
   "counts": {
     "classes": 945,
-    "used": 938,
-    "unused": 7
+    "used": 939,
+    "unused": 6
   },
   "uses": {
     "stack": 4218,
@@ -324,6 +324,7 @@
     "combo-option": 12,
     "editor-content": 12,
     "kanban-empty": 12,
+    "drag-handle": 12,
     "fade-swap": 12,
     "stepper": 12,
     "timeline": 12,
@@ -350,7 +351,6 @@
     "sheet-grip": 11,
     "cq-shell": 11,
     "reaction": 11,
-    "drag-handle": 11,
     "cube": 10,
     "alert-good": 10,
     "avatar-xl": 10,
@@ -758,6 +758,7 @@
     "writing-sideways": 3,
     "th-vertical": 3,
     "h3": 3,
+    "sortable": 3,
     "is-visible": 3,
     "sm": 3,
     "scene-far": 2,
@@ -6208,6 +6209,10 @@
       "README.md",
       "public_html/docs/components/list.php"
     ],
+    "drag-handle": [
+      "public_html/docs/components/list.php",
+      "public_html/index.php"
+    ],
     "is-lifted": [
       "FINDINGS.md",
       "public_html/docs/components/list.php"
@@ -8518,9 +8523,6 @@
       "public_html/index.php",
       "public_html/templates/jumbotrons.html"
     ],
-    "drag-handle": [
-      "public_html/index.php"
-    ],
     "speed-dial": [
       "FINDINGS.md",
       "README.md",
@@ -8599,6 +8601,10 @@
       "README.md",
       "src/js/deck-adapters.js"
     ],
+    "sortable": [
+      "FINDINGS.md",
+      "src/js/deck-adapters.js"
+    ],
     "sortable-ghost": [
       "README.md",
       "src/js/deck-adapters.js"
@@ -8636,7 +8642,6 @@
     "disclosure-body",
     "drop-target",
     "h1",
-    "sortable",
     "sortable-fallback"
   ]
 }

@@ -2531,3 +2531,33 @@ Making the CSS match the old comment would have meant moving content visually aw
 its reading order, which is the thing WCAG 1.3.2 warns about. The example now puts the rail
 first; the accessibility notes say neither variant reorders anything. While there,
 `first-page.php` said `.split` goes to two columns at 48rem; it is 64rem.
+
+## 109. SortableJS loaded after Deck never took over, and the fallback ignored the handle — FIXED
+
+`deck-adapters.js` called `Deck.init()` as soon as it ran if `document.readyState` was not
+`loading`. With deferred scripts it is already `interactive`, so with Deck deferred and
+SortableJS deferred after it (or loaded `async`), the adapter initialised before SortableJS
+existed and every `[data-deck-sortable]` list went to the native fallback. The adapters'
+`once()` guard then marked the list done, and the second `Deck.init()` at
+`DOMContentLoaded`, by which time SortableJS was there, skipped it. So drag handles failed
+on the first load of the page. The native fallback made it worse: it made every row
+`draggable` and never read `data-handle`, so the row dragged from anywhere, and on touch
+not at all.
+
+**Fixed** in `src/js/deck-adapters.js`:
+
+- `data-deck-sort` records the engine (`native` or `sortable`) in place of the once-guard.
+  A list on `native` is handed to SortableJS whenever Deck initialises and finds it: its
+  native listeners are on an `AbortController` and are aborted, and the `draggable`
+  attributes are removed.
+- deck.js already initialises again at `DOMContentLoaded`, which catches a deferred
+  SortableJS. The adapter also looks once more at `load`, which catches an `async` one.
+  Later than that, the docs say to call `Deck.init()`.
+- The fallback honours `data-handle`: a row is draggable only while the press is on its
+  handle, as SortableJS behaves. Its `dragover` used to find the row under the pointer by
+  `[draggable="true"]`, which in handle mode is only the row being dragged, so that lookup
+  is by containment now.
+
+Three tests load a real page through a routed origin, with Deck deferred and a stand-in
+SortableJS deferred, async and late, or absent. All three fail against the previous
+`deck-adapters.js`.

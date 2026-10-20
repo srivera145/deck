@@ -23,14 +23,14 @@
       "brotli": 6101
     },
     "deck-adapters.min.js": {
-      "raw": 11294,
-      "gzip": 4517,
-      "brotli": 3969
+      "raw": 11875,
+      "gzip": 4700,
+      "brotli": 4149
     },
     "deck.bundle.min.js": {
-      "raw": 67701,
-      "gzip": 22315,
-      "brotli": 19730
+      "raw": 68273,
+      "gzip": 22464,
+      "brotli": 19916
     }
   },
   "totals": {
@@ -39,8 +39,8 @@
       "brotli": 70073
     },
     "bundle": {
-      "gzip": 95302,
-      "brotli": 78869
+      "gzip": 95451,
+      "brotli": 79055
     }
   },
   "sample": {
