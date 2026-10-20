@@ -5,9 +5,11 @@ $page = [
     'path' => 'components/file.php',
     'title' => 'File',
     'level' => 'Beginner',
-    'description' => 'Deck\'s .file is a dashed drop zone wrapping a real file input that is 1px rather than display:none, so it keeps its tab stop. It styles the zone; dropping needs a handler of your own.',
+    'description' => 'Deck\'s .file is a dashed drop zone wrapping a real file input that is 1px rather than display:none, so it keeps its tab stop, and deck-extras.js puts a dropped file into the input.',
+    /* .is-over is shared with the editor's character counter, which claims it
+       too; here it is the drag-over state. */
     'documents' => [
-        'file',
+        'file', 'is-over',
     ],
 ];
 
@@ -43,7 +45,7 @@ require __DIR__ . '/../_layout.php';
   docs_example(
       '<label class="file" style="max-inline-size:26rem">' . "\n" .
       '  <svg class="icon icon-lg" aria-hidden="true"><use href="/assets/deck/deck-icons.svg#upload"></use></svg>' . "\n" .
-      '  <span>Drop a CSV here, or choose a file</span>' . "\n" .
+      '  <span>Choose a CSV, or drop it here</span>' . "\n" .
       '  <span class="text-sm text-muted">Up to 10 MB</span>' . "\n" .
       '  <input type="file" accept=".csv">' . "\n" .
       '</label>',
@@ -117,42 +119,47 @@ require __DIR__ . '/../_layout.php';
 </section>
 
 <section class="stack stack-3">
-  <h2 id="dropping">Dropping is not implemented</h2>
+  <h2 id="dropping">Dropping a file</h2>
   <p>
-    <code>.file</code> draws the visual vocabulary of a drop target — a dashed border, a
-    hover state, an upload icon — and Deck ships <strong>no drop handler</strong>.
-    Dragging a file onto it does nothing. Clicking works, because the label wraps a real
-    input; dragging does not, because dragging requires JavaScript that is not there.
+    With <code>deck-extras.js</code> on the page, a file dragged onto the zone lights it up
+    — <code>.is-over</code> turns the dashed border solid and adds the focus ring — and a
+    file dropped on it goes into the input exactly as if it had been chosen in the picker:
   </p>
-  <p class="dx-note text-muted">
-    An affordance that does not do what it looks like it does is worse than no affordance:
-    a reader drags a file, nothing happens, and they conclude the page is broken rather
-    than that they should have clicked. This is recorded in <code>FINDINGS.md</code>. The
-    honest options are to ship the handler or to stop drawing a drop zone; until one of
-    them happens, the label text should not say "drop".
-  </p>
-  <p>
-    The handler is about fifteen lines, and needs <code>dragover</code> prevented or the
-    browser navigates to the file:
-  </p>
-  <pre class="dx-code"><code><?= e('const zone = document.querySelector(\'.file\');
-const input = zone.querySelector(\'input[type="file"]\');
-
-zone.addEventListener(\'dragover\', e => {
-  e.preventDefault();               // without this the browser opens the file
-  zone.classList.add(\'is-over\');
-});
-zone.addEventListener(\'dragleave\', () => zone.classList.remove(\'is-over\'));
-zone.addEventListener(\'drop\', e => {
-  e.preventDefault();
-  zone.classList.remove(\'is-over\');
-  input.files = e.dataTransfer.files;
-  input.dispatchEvent(new Event(\'change\', { bubbles: true }));
-});') ?></code></pre>
+  <ul class="stack stack-2">
+    <li>
+      <strong>Only what <code>accept</code> allows.</strong> The picker filters by
+      <code>accept</code>; a drop does not, so Deck applies it: extensions
+      (<code>.csv</code>), wildcards (<code>image/*</code>) and exact types. A file that
+      does not match is ignored, and a drop with no matching file changes nothing.
+    </li>
+    <li>
+      <strong>One file unless the input is <code>multiple</code>.</strong> Dropping five
+      files on a single-file input keeps the first that matches.
+    </li>
+    <li>
+      <strong><code>input</code> and <code>change</code> fire</strong> on the input,
+      bubbling, so a form's own listeners — a preview, an upload, a selected-file list —
+      run the same way for a drop as for a pick.
+    </li>
+  </ul>
+  <?php
+  docs_example(
+      '<label class="file" style="max-inline-size:26rem">' . "\n" .
+      '  <svg class="icon icon-lg" aria-hidden="true"><use href="/assets/deck/deck-icons.svg#upload"></use></svg>' . "\n" .
+      '  <span>Choose a poster, or drop one here</span>' . "\n" .
+      '  <span class="text-sm text-muted">JPEG or PNG</span>' . "\n" .
+      '  <input type="file" accept=".jpg,.jpeg,.png">' . "\n" .
+      '</label>',
+      'Drag an image from your desktop onto it',
+      'stack'
+  );
+  ?>
   <p class="text-muted">
-    <code>.is-over</code> already exists in <code>src/23-inputs.css</code> — it is used
-    by the editor's character counter — so the class is available, though nothing in
-    <code>.file</code>'s own rules styles it yet.
+    Deck listens on the document, after any handler of your own on the zone. If your
+    handler calls <code>preventDefault()</code> on the drop, Deck leaves it alone, so a
+    page that already wired the zone itself is not handled twice. A zone added to the page
+    later works without a call to <code>Deck.init()</code>. A file dropped anywhere
+    <em>outside</em> a zone is the browser's business, which usually means opening it.
   </p>
 </section>
 
@@ -190,10 +197,10 @@ zone.addEventListener(\'drop\', e => {
       focusable but invisibly so, which is worse than not being focusable at all.
     </li>
     <li>
-      <strong>Dragging is pointer-only and always will be.</strong> Even with the handler
-      above, drag-and-drop has no keyboard equivalent. The click path is not a fallback,
-      it is the primary path — which is another reason not to lead the label text with
-      "Drop".
+      <strong>Dragging is pointer-only and always will be.</strong> Even with Deck's drop
+      handler, drag-and-drop has no keyboard equivalent. The click path is not a fallback,
+      it is the primary path — which is why the label should lead with "choose" and
+      mention dropping second.
     </li>
     <li>
       <strong>Selected files are not announced.</strong> The browser shows the file name
@@ -204,7 +211,8 @@ zone.addEventListener(\'drop\', e => {
     </li>
     <li>
       <strong><code>accept</code> is a filter, not validation.</strong> It narrows the
-      file dialog and can be bypassed. Check the type on the server.
+      file dialog, and Deck applies it to a drop by name and declared type, but both can be
+      bypassed. Check the type on the server.
     </li>
     <li>
       <strong>Touch target.</strong> The zone is
@@ -265,7 +273,7 @@ zone.addEventListener(\'drop\', e => {
   /* A compact zone for a sidebar */
   .file { padding: var(--space-4); }
 
-  /* Style the drag-over state the handler sets */
+  /* Restyle the drag-over state deck-extras.js sets */
   .file.is-over {
     border-color: var(--brand-600);
     background: var(--brand-soft);
@@ -293,8 +301,9 @@ zone.addEventListener(\'drop\', e => {
       whether anything happened. This is the component's biggest gap.
     </li>
     <li>
-      <strong>Not with "Drop" in the label, until you ship the handler.</strong> The
-      dashed border already implies it; the words make a promise the page does not keep.
+      <strong>Not with "Drop" as the only instruction.</strong> Dragging is impossible on
+      most phones and with a keyboard. Say "choose a file" first, and "or drop it here"
+      after.
     </li>
     <li>
       <strong>Not for an avatar.</strong> A picture needs a preview and a crop. A drop

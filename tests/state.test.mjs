@@ -194,3 +194,52 @@ test('a .lazy image that fails stops shimmering and shows the broken state, howe
     await p.close();
   }
 });
+
+test('a file dropped on a .file zone goes into its input, filtered by accept and multiple', async () => {
+  const p = await freshPage(`
+    <label class="file" id="single"><span>One image</span><input type="file" accept="image/*"></label>
+    <label class="file" id="many"><span>Many</span><input type="file" accept=".png,.jpg" multiple></label>
+    <label class="file" id="own"><span>Handled by the page</span><input type="file"></label>`, { withExtras: true });
+  try {
+    const m = await p.evaluate(() => {
+      const drag = (zone, type, names) => {
+        const dt = new DataTransfer();
+        names.forEach(([name, mime]) => dt.items.add(new File(['x'], name, { type: mime })));
+        zone.dispatchEvent(new DragEvent(type, { dataTransfer: dt, bubbles: true, cancelable: true }));
+        return dt;
+      };
+      const out = {};
+      const single = document.getElementById('single');
+      const changes = [];
+      single.querySelector('input').addEventListener('change', () => changes.push('change'));
+      drag(single, 'dragenter', [['a.png', 'image/png']]);
+      out.overOnEnter = single.classList.contains('is-over');
+      // Crossing into a child and back out of the zone leaves it lit until the last leave.
+      drag(single.querySelector('span'), 'dragenter', [['a.png', 'image/png']]);
+      drag(single, 'dragleave', [['a.png', 'image/png']]);
+      out.overInsideChild = single.classList.contains('is-over');
+      drag(single.querySelector('span'), 'dragleave', [['a.png', 'image/png']]);
+      out.overAfterLeave = single.classList.contains('is-over');
+
+      drag(single, 'drop', [['notes.txt', 'text/plain'], ['poster.png', 'image/png'], ['still.jpg', 'image/jpeg']]);
+      out.single = [...single.querySelector('input').files].map((f) => f.name);
+      out.changes = changes.length;
+
+      const many = document.getElementById('many');
+      drag(many, 'drop', [['a.png', 'image/png'], ['b.gif', 'image/gif'], ['c.JPG', 'image/jpeg']]);
+      out.many = [...many.querySelector('input').files].map((f) => f.name);
+
+      const own = document.getElementById('own');
+      own.addEventListener('drop', (e) => e.preventDefault());
+      drag(own, 'drop', [['a.png', 'image/png']]);
+      out.own = own.querySelector('input').files.length;
+      return out;
+    });
+    assert.deepEqual(m, {
+      overOnEnter: true, overInsideChild: true, overAfterLeave: false,
+      single: ['poster.png'], changes: 1, many: ['a.png', 'c.JPG'], own: 0,
+    });
+  } finally {
+    await p.close();
+  }
+});

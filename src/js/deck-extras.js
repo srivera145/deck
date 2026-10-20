@@ -447,6 +447,74 @@
   }
 
   /* ======================================================================
+     File drop zone
+     <label class="file"> … <input type="file" accept="image/*"> </label>
+     A file dropped on the zone goes into its input as if it had been
+     picked: only the types accept allows, one file unless the input is
+     multiple, then input and change events so the form's own handlers
+     run. The listeners are on the document, so they run after any of the
+     page's own on the zone: a drop the page has already handled
+     (preventDefault) is left alone, and a zone added later needs no
+     Deck.init().
+     ====================================================================== */
+
+  const dragDepth = new WeakMap();   // dragenter and dragleave fire per child crossed
+
+  function accepts(input, file) {
+    const rules = input.accept.split(',').map(r => r.trim().toLowerCase()).filter(Boolean);
+    if (!rules.length) return true;
+    const name = file.name.toLowerCase();
+    const type = file.type.toLowerCase();
+    return rules.some(r => r.startsWith('.') ? name.endsWith(r)
+      : r.endsWith('/*') ? type.startsWith(r.slice(0, -1))
+      : type === r);
+  }
+
+  function fileDrops() {
+    const zoneFor = e => {
+      const zone = e.target.closest?.('.file');
+      const input = zone && $('input[type="file"]', zone);
+      const files = Array.from(e.dataTransfer?.types || []).includes('Files');
+      return input && files && !input.disabled ? { zone, input } : null;
+    };
+    document.addEventListener('dragenter', e => {
+      const hit = zoneFor(e);
+      if (!hit) return;
+      e.preventDefault();
+      dragDepth.set(hit.zone, (dragDepth.get(hit.zone) || 0) + 1);
+      hit.zone.classList.add('is-over');
+    });
+    document.addEventListener('dragover', e => {
+      if (!zoneFor(e)) return;
+      e.preventDefault();               // drop only fires where dragover was cancelled
+      e.dataTransfer.dropEffect = 'copy';
+    });
+    document.addEventListener('dragleave', e => {
+      const zone = e.target.closest?.('.file');
+      if (!zone || !dragDepth.get(zone)) return;
+      const depth = dragDepth.get(zone) - 1;
+      dragDepth.set(zone, depth);
+      if (!depth) zone.classList.remove('is-over');
+    });
+    document.addEventListener('drop', e => {
+      const hit = zoneFor(e);
+      if (!hit) return;
+      dragDepth.set(hit.zone, 0);
+      hit.zone.classList.remove('is-over');
+      if (e.defaultPrevented) return;
+      e.preventDefault();               // or the browser navigates to the file
+      let picked = Array.from(e.dataTransfer.files).filter(f => accepts(hit.input, f));
+      if (!hit.input.multiple) picked = picked.slice(0, 1);
+      if (!picked.length) return;
+      const list = new DataTransfer();
+      picked.forEach(f => list.items.add(f));
+      hit.input.files = list.files;
+      hit.input.dispatchEvent(new Event('input', { bubbles: true }));
+      hit.input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  }
+
+  /* ======================================================================
      Lazy images
      ====================================================================== */
 
@@ -821,6 +889,8 @@
 
   Deck.qr = QR;
   Deck.copy = writeClipboard;
+
+  fileDrops();
 
   if (document.readyState !== 'loading') Deck.init();
   else document.addEventListener('DOMContentLoaded', () => Deck.init());

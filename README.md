@@ -47,7 +47,7 @@ it for text by default, so Brotli is what most users actually receive.
 The sprite is the largest single file, slightly bigger than the stylesheet — worth stating
 plainly rather than leaving you to find it in devtools. Swapping `deck.min.js` for the full
 `deck.bundle.min.js` (adds the carousel, drawer, mega menu, copy button, QR encoder, editor and library adapters)
-makes the JavaScript 19.3 KB and the total 78.5 KB Brotli (94.8 KB gzip).
+makes the JavaScript 19.7 KB and the total 78.9 KB Brotli (95.3 KB gzip).
 
 ### The sprite is a manifest, not a fixed cost
 
@@ -82,9 +82,9 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 | --- | --- | --- | --- |
 | `deck.min.css` | 27.8 KB | 34.1 KB | The whole framework |
 | `deck.min.js` | 10.9 KB | 12.2 KB | Optional behaviour, no dependencies |
-| `deck-extras.min.js` | 5.7 KB | 6.5 KB | Carousel, drawer, mega menu, copy button, QR encoder, editor |
+| `deck-extras.min.js` | 6.1 KB | 7.0 KB | Carousel, drawer, mega menu, copy button, QR encoder, editor |
 | `deck-adapters.min.js` | 4.0 KB | 4.5 KB | Optional library integrations, inert unless one is loaded |
-| `deck.bundle.min.js` | 19.3 KB | 21.8 KB | All three scripts in one file |
+| `deck.bundle.min.js` | 19.7 KB | 22.3 KB | All three scripts in one file |
 | `deck-icons.svg` | 31.3 KB | 38.9 KB | 174 symbols: 86 icons at two weights, plus two brand marks |
 | `src/` | — | — | The 26 source stylesheets, concatenated to build `deck.css` |
 | `dist/layers/` | — | — | One file per layer, if you only want part of Deck |

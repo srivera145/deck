@@ -416,7 +416,7 @@ suggested on the range page's *Overriding it* section rather than being left imp
 Not fixed here because this pass was not allowed to change rendering, and a focus ring
 is a rendering change.
 
-## 27. `.file` draws a drop zone that Deck does not implement — NOT FIXED
+## 27. `.file` draws a drop zone that Deck does not implement — FIXED
 
 `.file` is a dashed border, a hover state and a `:focus-within` state — the visual
 vocabulary of a drag-and-drop target. Deck ships no `drop` handler, so dragging a file
@@ -425,6 +425,19 @@ onto it does nothing at all. Clicking works, because the label wraps a real file
 An affordance that does not do what it looks like it does is worse than no affordance.
 Documented on the field page; the honest fixes are either to ship the handler or to stop
 drawing a drop zone.
+
+**Fixed by shipping the handler**, in `src/js/deck-extras.js`. Dragging files over a
+zone sets `.is-over` (counted across the zone's children, so crossing the icon does not
+flicker it off), which `src/06-forms.css` now styles as a solid border with the focus
+ring. A drop goes into the zone's input as a pick would: filtered by `accept`
+(extensions, `type/*` and exact types — the picker enforces `accept` and a drop bypasses
+it), cut to one file unless the input is `multiple`, then `input` and `change`, bubbling.
+`.is-over` was reused rather than adding a class because `file.php` had already told
+authors to style `.file.is-over` from a handler of their own. For the same reason the
+listeners are on the document: they run after any handler on the zone, and a drop that
+handler has already taken (`preventDefault`) is left alone, so a page that followed the
+old advice does not get two `change` events. Delegation also means a zone inserted later
+needs no `Deck.init()`. Tests cover the state, the filter, `multiple` and the hand-off.
 
 ## 28. `.list-row:hover` and `.table tbody tr:hover` have no focus counterpart
 

@@ -6,7 +6,7 @@
     "documented": 323,
     "undocumented": 622,
     "tokens": 152,
-    "rules": 1804,
+    "rules": 1805,
     "components": 99,
     "states": 40,
     "unattributedStates": 0
@@ -812,13 +812,13 @@
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 425,
+          "line": 435,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 427,
+          "line": 437,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -5257,13 +5257,13 @@
         {
           "selector": ".field-row",
           "file": "06-forms.css",
-          "line": 388,
+          "line": 398,
           "conditions": []
         },
         {
           "selector": ".field-row",
           "file": "06-forms.css",
-          "line": 394,
+          "line": 404,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -5687,31 +5687,31 @@
         {
           "selector": ".form-actions",
           "file": "06-forms.css",
-          "line": 398,
+          "line": 408,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky",
           "file": "06-forms.css",
-          "line": 406,
+          "line": 416,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 421,
+          "line": 431,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 425,
+          "line": 435,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 427,
+          "line": 437,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -5719,7 +5719,7 @@
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 428,
+          "line": 438,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -10079,13 +10079,13 @@
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 421,
+          "line": 431,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 428,
+          "line": 438,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -14045,13 +14045,13 @@
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 425,
+          "line": 435,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 427,
+          "line": 437,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -28831,7 +28831,7 @@
     {
       "name": "field-row",
       "file": "06-forms.css",
-      "line": 388,
+      "line": 398,
       "layer": "deck.components",
       "section": null,
       "doc": "Two fields side by side on anything wider than a phone",
@@ -28853,13 +28853,13 @@
         {
           "selector": ".field-row",
           "file": "06-forms.css",
-          "line": 388,
+          "line": 398,
           "conditions": []
         },
         {
           "selector": ".field-row",
           "file": "06-forms.css",
-          "line": 394,
+          "line": 404,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -28921,7 +28921,7 @@
     {
       "name": "fieldset",
       "file": "06-forms.css",
-      "line": 371,
+      "line": 381,
       "layer": "deck.components",
       "section": null,
       "doc": "A bordered group of controls that answer one question. Its legend is\nthe group's accessible name, which is what a radio group needs and\nwhat a .label above one does not provide.",
@@ -28959,13 +28959,13 @@
         {
           "selector": ".fieldset",
           "file": "06-forms.css",
-          "line": 371,
+          "line": 381,
           "conditions": []
         },
         {
           "selector": ".fieldset > legend",
           "file": "06-forms.css",
-          "line": 380,
+          "line": 390,
           "conditions": []
         },
         {
@@ -28996,7 +28996,7 @@
       "line": 351,
       "layer": "deck.components",
       "section": null,
-      "doc": "A dashed drop zone wrapping a real file input. The input is 1px and\ntransparent rather than display: none, so it keeps its place in the\ntab order, and :focus-within is what makes that focus visible. Deck\nstyles the zone; dropping needs a handler of your own.",
+      "doc": "A dashed drop zone wrapping a real file input. The input is 1px and\ntransparent rather than display: none, so it keeps its place in the\ntab order, and :focus-within is what makes that focus visible.\ndeck-extras.js puts a dropped file into the input.",
       "declarations": [
         {
           "prop": "display",
@@ -29063,9 +29063,15 @@
           "conditions": []
         },
         {
+          "selector": ".file.is-over",
+          "file": "06-forms.css",
+          "line": 369,
+          "conditions": []
+        },
+        {
           "selector": ".file input[type=\"file\"]",
           "file": "06-forms.css",
-          "line": 365,
+          "line": 375,
           "conditions": []
         }
       ],
@@ -30061,7 +30067,7 @@
     {
       "name": "form-actions",
       "file": "06-forms.css",
-      "line": 398,
+      "line": 408,
       "layer": "deck.components",
       "section": null,
       "doc": "Sticky save bar for long forms on mobile",
@@ -30083,7 +30089,7 @@
         {
           "selector": ".form-actions",
           "file": "06-forms.css",
-          "line": 398,
+          "line": 408,
           "conditions": []
         },
         {
@@ -30107,7 +30113,7 @@
     {
       "name": "form-actions-sticky",
       "file": "06-forms.css",
-      "line": 406,
+      "line": 416,
       "layer": "deck.components",
       "section": null,
       "doc": "Pins the action row to the bottom of the viewport with a blur behind\nit and a safe-area inset for the home indicator. Add matching bottom\npadding to the form, or the last field sits underneath it.",
@@ -30153,25 +30159,25 @@
         {
           "selector": ".form-actions-sticky",
           "file": "06-forms.css",
-          "line": 406,
+          "line": 416,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 421,
+          "line": 431,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 425,
+          "line": 435,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 427,
+          "line": 437,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -30179,7 +30185,7 @@
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 428,
+          "line": 438,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -36023,13 +36029,19 @@
     },
     {
       "name": "is-over",
-      "file": "23-inputs.css",
-      "line": 521,
+      "file": "06-forms.css",
+      "line": 369,
       "layer": "deck.components",
       "section": null,
       "doc": null,
       "declarations": [],
       "selectors": [
+        {
+          "selector": ".file.is-over",
+          "file": "06-forms.css",
+          "line": 369,
+          "conditions": []
+        },
         {
           "selector": ".editor-count.is-over",
           "file": "23-inputs.css",
@@ -36039,26 +36051,39 @@
       ],
       "variants": [],
       "tokensUsed": [
+        "--brand-500",
+        "--brand-soft",
+        "--ring",
         "--bad-700"
       ],
       "defined": false,
-      "contextSelector": ".editor-count.is-over",
+      "contextSelector": ".file.is-over",
       "contextConditions": [],
       "contextDeclarations": [
         {
-          "prop": "color",
-          "value": "var(--bad-700)"
+          "prop": "border-style",
+          "value": "solid"
         },
         {
-          "prop": "font-weight",
-          "value": "620"
+          "prop": "border-color",
+          "value": "var(--brand-500)"
+        },
+        {
+          "prop": "background",
+          "value": "var(--brand-soft)"
+        },
+        {
+          "prop": "box-shadow",
+          "value": "var(--ring)"
         }
       ],
       "owners": [
-        "editor"
+        "editor",
+        "file"
       ],
       "ownerClasses": [
-        "editor-count"
+        "editor-count",
+        "file"
       ],
       "role": "state"
     },
@@ -52706,13 +52731,13 @@
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 421,
+          "line": 431,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 428,
+          "line": 438,
           "conditions": [
             "@media (min-width: 48rem)"
           ]

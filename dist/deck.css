@@ -1428,8 +1428,8 @@
   /* --- File --------------------------------------------------------------- */
   /* A dashed drop zone wrapping a real file input. The input is 1px and
      transparent rather than display: none, so it keeps its place in the
-     tab order, and :focus-within is what makes that focus visible. Deck
-     styles the zone; dropping needs a handler of your own. */
+     tab order, and :focus-within is what makes that focus visible.
+     deck-extras.js puts a dropped file into the input. */
   .file {
     display: grid;
     place-items: center;
@@ -1444,6 +1444,16 @@
     transition: border-color var(--dur-1) var(--ease-out), background-color var(--dur-1) var(--ease-out);
   }
   .file:hover, .file:focus-within { border-color: var(--brand-500); background: var(--brand-soft); }
+  /* A file is being dragged over the zone. deck-extras.js sets .is-over
+     until it is dropped or the drag leaves. The border turns solid and the
+     ring appears: the dashed border said "put something here", this says
+     "let go". */
+  .file.is-over {
+    border-style: solid;
+    border-color: var(--brand-500);
+    background: var(--brand-soft);
+    box-shadow: var(--ring);
+  }
   .file input[type="file"] { position: absolute; opacity: 0; inline-size: 1px; block-size: 1px; }
 
   /* --- Fieldset ----------------------------------------------------------- */

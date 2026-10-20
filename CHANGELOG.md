@@ -27,6 +27,7 @@ Notable changes to Deck. The npm package (`@echodial/deck`) and the Composer pac
 - **A failed `.lazy` image shows that it failed.** deck-extras.js set `.is-error` on the frame and nothing styled it, so the shimmer ran forever. The shimmer now stops and a broken-image glyph appears in the frame. The script also catches an image whose markup `src` failed before the script loaded, which fired no event.
 - **`.grid-fixed-2`, `-3` and `-4` work without `.grid`.** They set only the columns, so on their own they did nothing. Each now sets `display: grid` and the gap itself; `grid grid-fixed-3` is unchanged, and print unwinds them like `.grid`.
 - **`.split-rail-start` is described correctly.** It sizes the first track as the rail, so the rail goes first in the markup. Its comment and the split docs said the opposite, and the docs example showed the main column squeezed into the rail's width.
+- **`.file` takes a dropped file.** It looked like a drop zone and ignored drops. With deck-extras.js, dragging a file over it sets `.is-over` (a solid border and the focus ring), and a dropped file goes into the input as a pick would: filtered by `accept`, one file unless `multiple`, then `input` and `change`. A drop the page's own handler has already taken is left alone.
 
 ### Added
 
