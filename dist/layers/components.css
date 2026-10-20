@@ -310,6 +310,11 @@
     border-radius: var(--r-md);
     overflow: clip;
   }
+  /* A list with no box of its own: no border, corner radius or fill, only
+     the dividers between rows. For a list inside a .card, a .sheet or a
+     .sidebar that already draws the box, or one that runs edge to edge on
+     a phone. The rows keep their padding. */
+  .list-flush { background: none; border: 0; border-radius: 0; }
   /* One row. min-block-size: var(--tap) puts every row at the touch
      target, and the colour and text-decoration resets mean the row can be
      an <a> directly — one element, one tab stop, the whole row clickable. */

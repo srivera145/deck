@@ -353,3 +353,42 @@ test('the -sm cut of a pointing icon mirrors under dir="rtl", and a transport ic
     .map((id) => [id, getComputedStyle(document.getElementById(id)).scale])));
   assert.deepEqual(scale, { regular: '-1 1', small: '-1 1', new: '-1 1', play: 'none' });
 });
+
+test('.input-sm and .input-lg are the heights of .btn-sm and .btn-lg', async () => {
+  await render(`
+    <input class="input input-sm" id="is"><button class="btn btn-sm" id="bs">Go</button>
+    <input class="input input-lg" id="il"><button class="btn btn-lg" id="bl">Go</button>
+    <select class="select input-sm" id="ss"><option>One</option></select>`);
+  const h = await page.evaluate(() => Object.fromEntries(['is', 'bs', 'il', 'bl', 'ss']
+    .map((id) => [id, document.getElementById(id).getBoundingClientRect().height])));
+  assert.equal(h.is, h.bs, `small: ${JSON.stringify(h)}`);
+  assert.equal(h.il, h.bl, `large: ${JSON.stringify(h)}`);
+  assert.equal(h.ss, h.bs, `a small select: ${JSON.stringify(h)}`);
+  const pad = await page.evaluate(() => getComputedStyle(document.getElementById('ss')).paddingInlineEnd);
+  assert.equal(pad, '40px', 'the select keeps room for its arrow');
+});
+
+test('.break-words lets a flex item shrink below a long unbroken string', async () => {
+  const url = 'https://example.com/films/2026/the-long-unbroken-path-to-a-poster-image.jpg';
+  await render(`
+    <div class="flex" style="inline-size:240px" id="plain"><span class="shrink-0">Source</span><span>${url}</span></div>
+    <div class="flex" style="inline-size:240px" id="broken"><span class="shrink-0">Source</span><span class="break-words">${url}</span></div>`);
+  const w = await page.evaluate(() => Object.fromEntries(['plain', 'broken']
+    .map((id) => [id, document.getElementById(id).scrollWidth])));
+  assert.ok(w.plain > 240, `the body's break-word alone still overflows: ${JSON.stringify(w)}`);
+  assert.ok(w.broken <= 240, `.break-words keeps the row inside its box: ${JSON.stringify(w)}`);
+});
+
+test('.object-contain beats the cover a .ratio-* frame sets; .list-flush drops the box', async () => {
+  await render(`
+    <img class="ratio-2x3 object-contain" id="poster" alt="" style="inline-size:120px">
+    <div class="list list-flush" id="flush"><div class="list-row">A</div><div class="list-row">B</div></div>`);
+  const m = await page.evaluate(() => {
+    const img = getComputedStyle(document.getElementById('poster'));
+    const list = getComputedStyle(document.getElementById('flush'));
+    const row = getComputedStyle(document.querySelector('#flush .list-row + .list-row'));
+    return { fit: img.objectFit, ratio: img.aspectRatio, border: list.borderTopWidth, radius: list.borderTopLeftRadius,
+      bg: list.backgroundColor, divider: row.borderTopWidth };
+  });
+  assert.deepEqual(m, { fit: 'contain', ratio: '2 / 3', border: '0px', radius: '0px', bg: 'rgba(0, 0, 0, 0)', divider: '1px' });
+});

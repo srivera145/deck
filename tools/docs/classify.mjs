@@ -35,17 +35,22 @@ const usage = JSON.parse(fs.readFileSync(path.join(ROOT, 'dist', 'usage.json'), 
 const LEDGER = path.join(ROOT, 'tools', 'docs', 'api-decisions.txt');
 const ACCEPT = process.argv.includes('--accept');
 
+/* A line may carry its reason after a #: `glass = public  # a surface …`.
+   The reason replaces the rule's in dist/api-buckets.json, and --accept
+   writes it back, so a decision written by hand survives the next rewrite. */
+const notes = new Map();
+
 function readLedger() {
   if (!fs.existsSync(LEDGER)) return new Map();
-  return new Map(
-    fs.readFileSync(LEDGER, 'utf8')
-      .split(/\r?\n/)
-      .map((l) => l.replace(/#.*/, '').trim())
-      .filter(Boolean)
-      .map((l) => l.split(/\s*=\s*/))
-      .filter((p) => p.length === 2)
-      .map(([n, b]) => [n, b])
-  );
+  const entries = new Map();
+  for (const line of fs.readFileSync(LEDGER, 'utf8').split(/\r?\n/)) {
+    const hash = line.indexOf('#');
+    const parts = (hash < 0 ? line : line.slice(0, hash)).trim().split(/\s*=\s*/);
+    if (parts.length !== 2) continue;
+    entries.set(parts[0], parts[1]);
+    if (hash >= 0 && line.slice(hash + 1).trim()) notes.set(parts[0], line.slice(hash + 1).trim());
+  }
+  return entries;
 }
 
 /* Classes an author never writes: Deck's own JavaScript adds and removes them.
@@ -196,7 +201,7 @@ for (const c of api.classes) {
   const bucket = recorded ?? proposal.bucket;
   decisions[c.name] = {
     bucket,
-    reason: proposal.reason,
+    reason: notes.get(c.name) ?? proposal.reason,
     rule: proposal.rule,
     overridden: Boolean(recorded) && recorded !== proposal.bucket,
     layer: c.layer,
@@ -238,7 +243,7 @@ if (ACCEPT) {
   const lines = api.classes
     .map((c) => [c.name, ledger.get(c.name) ?? classify(c).bucket])
     .sort((a, b) => a[0].localeCompare(b[0]))
-    .map(([n, b]) => `${n} = ${b}`);
+    .map(([n, b]) => (notes.has(n) ? `${n} = ${b}  # ${notes.get(n)}` : `${n} = ${b}`));
   const header = [
     '# The public API ledger. One line per class: name = bucket.',
     '#',
@@ -248,6 +253,7 @@ if (ACCEPT) {
     '#',
     '# Written by: node tools/docs/classify.mjs --accept',
     '# Edit a line by hand to overrule what the rules propose.',
+    '# Text after a # on a line is the reason for that decision; --accept keeps it.',
     `# ${lines.length} classes.`,
     '',
   ];

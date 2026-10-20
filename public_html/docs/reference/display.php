@@ -21,7 +21,7 @@ $page = [
         'justify-start', 'justify-center', 'justify-end', 'justify-between', 'place-center',
         'w-full', 'w-auto', 'h-full', 'min-h-screen', 'min-is-0', 'square',
         'max-w-sm', 'max-w-md', 'max-w-lg', 'max-w-prose',
-        'ratio-16x9', 'ratio-4x3', 'ratio-1x1',
+        'ratio-16x9', 'ratio-4x3', 'ratio-1x1', 'ratio-2x3', 'object-contain',
         'overflow-auto', 'overflow-clip', 'overflow-hidden',
         'sr-only', 'skip-link', 'touch-only', 'mouse-only',
         'cursor-pointer', 'no-select', 'pointer-none', 'opacity-60',
@@ -113,11 +113,28 @@ require __DIR__ . '/../_layout.php';
 <section class="stack stack-4">
   <h2 id="ratio">Aspect ratio</h2>
   <p>
-    Three ratios with <code>object-fit: cover</code> already set, for the media slot in
-    a card or a gallery. Setting the ratio in CSS rather than leaving the image to size
+    Four ratios with <code>object-fit: cover</code> already set, for the media slot in
+    a card or a gallery: <code>.ratio-2x3</code> is the portrait one, the shape of a film
+    poster or a book cover. Setting the ratio in CSS rather than leaving the image to size
     itself is what stops the page reflowing as images arrive.
   </p>
-  <?php docs_utility_table(['ratio-16x9', 'ratio-4x3', 'ratio-1x1', 'square'], 'Aspect ratio utilities'); ?>
+  <p>
+    <code>.object-contain</code> swaps the crop for a letterbox: the whole image fits
+    inside the frame and the rest shows the background. It is a utility, so it beats the
+    cover a <code>.ratio-*</code> class sets — a logo, a screenshot or a poster that must
+    not lose its edges keeps them inside a 16:9 slot.
+  </p>
+  <?php
+  docs_example(
+      '<div class="grid" style="--min:9rem;max-inline-size:22rem">' . "\n" .
+      '  <img class="ratio-2x3 r-md" src="/assets/deck/docs/sample-2.jpg" alt="">' . "\n" .
+      '  <img class="ratio-2x3 object-contain r-md bg-sunken" src="/assets/deck/docs/sample-2.jpg" alt="">' . "\n" .
+      '</div>',
+      'The same image in a 2:3 frame, cropped and then letterboxed',
+      'stack'
+  );
+  ?>
+  <?php docs_utility_table(['ratio-16x9', 'ratio-4x3', 'ratio-1x1', 'ratio-2x3', 'square', 'object-contain'], 'Aspect ratio utilities'); ?>
 </section>
 
 <section class="stack stack-4">

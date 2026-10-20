@@ -31,6 +31,9 @@ Notable changes to Deck. The npm package (`@echodial/deck`) and the Composer pac
 - Seven theme-aware tokens. `--surface-recessed` is the recessed surface a control sits on: a progress, range or ring track, or a skeleton's sweep. `--good-soft`, `--warn-soft` and `--bad-soft`, each with a `-text` partner, are the status equivalents of `--brand-soft` and `--brand-soft-text`. Reach for these rather than the `--ink-*` and status ramps, which are the same colour in both themes.
 - Layout regression tests that render the built stylesheet in a real browser: `npm test`. They use Microsoft Edge by default; set `DECK_TEST_BROWSER` to `chrome` or to the path of a Chromium executable to use another. `playwright-core` is a dev dependency only; Deck still ships no runtime dependencies.
 - **Ten icons.** `inbox` and `arrow-down-right`, plus a media set: `play`, `pause`, `skip`, `fullscreen`, `tv`, `film`, `music` and `broadcast`, each in both cuts. The sprite is 86 icons, 174 symbols. `docs/components/icon.php#set` lists every icon in it.
+- **Layout utilities.** `.ratio-2x3` for posters and book covers, `.object-contain` to letterbox instead of crop (it beats a `.ratio-*` frame's cover), `.break-words` (`overflow-wrap: anywhere`, which also stops a long string widening a flex item or table cell), and `.z-sticky`, `.z-nav` and `.z-sheet`, which put your own chrome on Deck's named stacking layers.
+- **`.input-sm` and `.input-lg`,** the heights of `.btn-sm` (34px) and `.btn-lg` (50px). They work on `.select` and inside `.search` too. Every control is still 16px on a touch screen.
+- **`.list-flush`,** a list with no border, radius or fill of its own, for a list inside a card or a sheet.
 
 ### Changed
 

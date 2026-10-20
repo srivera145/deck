@@ -2,11 +2,11 @@
   "generated": "tools/docs/extract.mjs — do not edit",
   "stylesheets": 26,
   "counts": {
-    "classes": 931,
-    "documented": 312,
-    "undocumented": 619,
+    "classes": 940,
+    "documented": 319,
+    "undocumented": 621,
     "tokens": 151,
-    "rules": 1779,
+    "rules": 1788,
     "components": 99,
     "states": 39,
     "unattributedStates": 0
@@ -27,61 +27,61 @@
         {
           "selector": ".accordion",
           "file": "07-components.css",
-          "line": 445,
+          "line": 450,
           "conditions": []
         },
         {
           "selector": ".accordion > details + details",
           "file": "07-components.css",
-          "line": 446,
+          "line": 451,
           "conditions": []
         },
         {
           "selector": ".accordion summary",
           "file": "07-components.css",
-          "line": 447,
+          "line": 452,
           "conditions": []
         },
         {
           "selector": ".accordion summary::-webkit-details-marker",
           "file": "07-components.css",
-          "line": 458,
+          "line": 463,
           "conditions": []
         },
         {
           "selector": ".accordion summary:hover",
           "file": "07-components.css",
-          "line": 459,
+          "line": 464,
           "conditions": []
         },
         {
           "selector": ".accordion summary::after",
           "file": "07-components.css",
-          "line": 460,
+          "line": 465,
           "conditions": []
         },
         {
           "selector": ".accordion details[open] summary::after",
           "file": "07-components.css",
-          "line": 471,
+          "line": 476,
           "conditions": []
         },
         {
           "selector": ".accordion .accordion-body",
           "file": "07-components.css",
-          "line": 474,
+          "line": 479,
           "conditions": []
         },
         {
           "selector": ".accordion details::details-content",
           "file": "07-components.css",
-          "line": 479,
+          "line": 484,
           "conditions": []
         },
         {
           "selector": ".accordion details[open]::details-content",
           "file": "07-components.css",
-          "line": 484,
+          "line": 489,
           "conditions": []
         }
       ]
@@ -433,31 +433,31 @@
         {
           "selector": ".border",
           "file": "09-utilities.css",
-          "line": 147,
+          "line": 157,
           "conditions": []
         },
         {
           "selector": ".border-t",
           "file": "09-utilities.css",
-          "line": 148,
+          "line": 158,
           "conditions": []
         },
         {
           "selector": ".border-b",
           "file": "09-utilities.css",
-          "line": 149,
+          "line": 159,
           "conditions": []
         },
         {
           "selector": ".border-brand",
           "file": "09-utilities.css",
-          "line": 150,
+          "line": 160,
           "conditions": []
         },
         {
           "selector": ".border-0",
           "file": "09-utilities.css",
-          "line": 151,
+          "line": 161,
           "conditions": []
         }
       ]
@@ -779,19 +779,19 @@
         {
           "selector": ".input-group > .btn",
           "file": "06-forms.css",
-          "line": 157,
+          "line": 177,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 405,
+          "line": 425,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 407,
+          "line": 427,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -799,7 +799,7 @@
         {
           "selector": ".modal-footer > .btn",
           "file": "07-components.css",
-          "line": 770,
+          "line": 775,
           "conditions": [
             "@media (max-width: 32rem)"
           ]
@@ -2074,97 +2074,97 @@
         {
           "selector": ".check",
           "file": "06-forms.css",
-          "line": 175,
+          "line": 195,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"checkbox\"]",
           "file": "06-forms.css",
-          "line": 184,
+          "line": 204,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"radio\"]",
           "file": "06-forms.css",
-          "line": 184,
+          "line": 204,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"radio\"]",
           "file": "06-forms.css",
-          "line": 199,
+          "line": 219,
           "conditions": []
         },
         {
           "selector": ".check input:hover",
           "file": "06-forms.css",
-          "line": 200,
+          "line": 220,
           "conditions": []
         },
         {
           "selector": ".check input:checked",
           "file": "06-forms.css",
-          "line": 201,
+          "line": 221,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"checkbox\"]::before",
           "file": "06-forms.css",
-          "line": 202,
+          "line": 222,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"radio\"]::before",
           "file": "06-forms.css",
-          "line": 211,
+          "line": 231,
           "conditions": []
         },
         {
           "selector": ".check input:checked::before",
           "file": "06-forms.css",
-          "line": 220,
+          "line": 240,
           "conditions": []
         },
         {
           "selector": ".check input:indeterminate",
           "file": "06-forms.css",
-          "line": 221,
+          "line": 241,
           "conditions": []
         },
         {
           "selector": ".check input:indeterminate::before",
           "file": "06-forms.css",
-          "line": 222,
+          "line": 242,
           "conditions": []
         },
         {
           "selector": ".check input:focus-visible",
           "file": "06-forms.css",
-          "line": 226,
+          "line": 246,
           "conditions": []
         },
         {
           "selector": ".check .check-text",
           "file": "06-forms.css",
-          "line": 231,
+          "line": 251,
           "conditions": []
         },
         {
           "selector": ".check .check-note",
           "file": "06-forms.css",
-          "line": 235,
+          "line": 255,
           "conditions": []
         },
         {
           "selector": ".check-card",
           "file": "06-forms.css",
-          "line": 238,
+          "line": 258,
           "conditions": []
         },
         {
           "selector": ".check-card:has(input:checked)",
           "file": "06-forms.css",
-          "line": 245,
+          "line": 265,
           "conditions": []
         },
         {
@@ -2923,7 +2923,7 @@
         {
           "selector": ".cq",
           "file": "04-layout.css",
-          "line": 240,
+          "line": 242,
           "conditions": []
         },
         {
@@ -4558,49 +4558,49 @@
         {
           "selector": ".disclosure summary",
           "file": "07-components.css",
-          "line": 447,
+          "line": 452,
           "conditions": []
         },
         {
           "selector": ".disclosure summary::-webkit-details-marker",
           "file": "07-components.css",
-          "line": 458,
+          "line": 463,
           "conditions": []
         },
         {
           "selector": ".disclosure summary:hover",
           "file": "07-components.css",
-          "line": 459,
+          "line": 464,
           "conditions": []
         },
         {
           "selector": ".disclosure summary::after",
           "file": "07-components.css",
-          "line": 460,
+          "line": 465,
           "conditions": []
         },
         {
           "selector": ".disclosure[open] summary::after",
           "file": "07-components.css",
-          "line": 471,
+          "line": 476,
           "conditions": []
         },
         {
           "selector": ".disclosure .disclosure-body",
           "file": "07-components.css",
-          "line": 474,
+          "line": 479,
           "conditions": []
         },
         {
           "selector": ".disclosure::details-content",
           "file": "07-components.css",
-          "line": 479,
+          "line": 484,
           "conditions": []
         },
         {
           "selector": ".disclosure[open]::details-content",
           "file": "07-components.css",
-          "line": 484,
+          "line": 489,
           "conditions": []
         }
       ]
@@ -5079,25 +5079,25 @@
         {
           "selector": ".empty",
           "file": "07-components.css",
-          "line": 774,
+          "line": 779,
           "conditions": []
         },
         {
           "selector": ".empty-art",
           "file": "07-components.css",
-          "line": 782,
+          "line": 787,
           "conditions": []
         },
         {
           "selector": ".empty-title",
           "file": "07-components.css",
-          "line": 792,
+          "line": 797,
           "conditions": []
         },
         {
           "selector": ".empty p",
           "file": "07-components.css",
-          "line": 793,
+          "line": 798,
           "conditions": []
         }
       ]
@@ -5218,25 +5218,25 @@
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select)",
           "file": "06-forms.css",
-          "line": 110,
+          "line": 130,
           "conditions": []
         },
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select):focus",
           "file": "06-forms.css",
-          "line": 114,
+          "line": 134,
           "conditions": []
         },
         {
           "selector": ".field-row",
           "file": "06-forms.css",
-          "line": 368,
+          "line": 388,
           "conditions": []
         },
         {
           "selector": ".field-row",
           "file": "06-forms.css",
-          "line": 374,
+          "line": 394,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -5660,31 +5660,31 @@
         {
           "selector": ".form-actions",
           "file": "06-forms.css",
-          "line": 378,
+          "line": 398,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky",
           "file": "06-forms.css",
-          "line": 386,
+          "line": 406,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 401,
+          "line": 421,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 405,
+          "line": 425,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 407,
+          "line": 427,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -5692,7 +5692,7 @@
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 408,
+          "line": 428,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -6065,7 +6065,7 @@
         {
           "selector": ".search > .icon",
           "file": "06-forms.css",
-          "line": 164,
+          "line": 184,
           "conditions": []
         },
         {
@@ -6376,7 +6376,9 @@
     "input": {
       "members": [
         "input",
-        "input-group"
+        "input-group",
+        "input-lg",
+        "input-sm"
       ],
       "files": [
         "06-forms.css",
@@ -6388,7 +6390,7 @@
       "states": [
         "is-invalid"
       ],
-      "ruleCount": 27,
+      "ruleCount": 29,
       "rules": [
         {
           "selector": ".input",
@@ -6397,9 +6399,21 @@
           "conditions": []
         },
         {
+          "selector": ".input-sm",
+          "file": "06-forms.css",
+          "line": 70,
+          "conditions": []
+        },
+        {
+          "selector": ".input-lg",
+          "file": "06-forms.css",
+          "line": 78,
+          "conditions": []
+        },
+        {
           "selector": ".input",
           "file": "06-forms.css",
-          "line": 66,
+          "line": 86,
           "conditions": [
             "@media (pointer: coarse)"
           ]
@@ -6407,103 +6421,103 @@
         {
           "selector": ".input::placeholder",
           "file": "06-forms.css",
-          "line": 69,
+          "line": 89,
           "conditions": []
         },
         {
           "selector": ".input:hover",
           "file": "06-forms.css",
-          "line": 71,
+          "line": 91,
           "conditions": []
         },
         {
           "selector": ".input:focus",
           "file": "06-forms.css",
-          "line": 73,
+          "line": 93,
           "conditions": []
         },
         {
           "selector": ".input[disabled]",
           "file": "06-forms.css",
-          "line": 79,
+          "line": 99,
           "conditions": []
         },
         {
           "selector": ".input[readonly]",
           "file": "06-forms.css",
-          "line": 85,
+          "line": 105,
           "conditions": []
         },
         {
           "selector": ".input:user-invalid",
           "file": "06-forms.css",
-          "line": 110,
+          "line": 130,
           "conditions": []
         },
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select)",
           "file": "06-forms.css",
-          "line": 110,
+          "line": 130,
           "conditions": []
         },
         {
           "selector": ".input:user-invalid:focus",
           "file": "06-forms.css",
-          "line": 114,
+          "line": 134,
           "conditions": []
         },
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select):focus",
           "file": "06-forms.css",
-          "line": 114,
+          "line": 134,
           "conditions": []
         },
         {
           "selector": ".input-group",
           "file": "06-forms.css",
-          "line": 123,
+          "line": 143,
           "conditions": []
         },
         {
           "selector": ".input-group:focus-within",
           "file": "06-forms.css",
-          "line": 133,
+          "line": 153,
           "conditions": []
         },
         {
           "selector": ".input-group > .input",
           "file": "06-forms.css",
-          "line": 134,
+          "line": 154,
           "conditions": []
         },
         {
           "selector": ".input-group > .input:focus",
           "file": "06-forms.css",
-          "line": 140,
+          "line": 160,
           "conditions": []
         },
         {
           "selector": ".input-group > .addon",
           "file": "06-forms.css",
-          "line": 145,
+          "line": 165,
           "conditions": []
         },
         {
           "selector": ".input-group > .addon:last-child",
           "file": "06-forms.css",
-          "line": 156,
+          "line": 176,
           "conditions": []
         },
         {
           "selector": ".input-group > .btn",
           "file": "06-forms.css",
-          "line": 157,
+          "line": 177,
           "conditions": []
         },
         {
           "selector": ".search > .input",
           "file": "06-forms.css",
-          "line": 170,
+          "line": 190,
           "conditions": []
         },
         {
@@ -6818,6 +6832,7 @@
     "list": {
       "members": [
         "list",
+        "list-flush",
         "list-header",
         "list-main",
         "list-row",
@@ -6837,7 +6852,7 @@
       "states": [
         "is-lifted"
       ],
-      "ruleCount": 23,
+      "ruleCount": 24,
       "rules": [
         {
           "selector": ".list",
@@ -6846,69 +6861,75 @@
           "conditions": []
         },
         {
+          "selector": ".list-flush",
+          "file": "07-components.css",
+          "line": 317,
+          "conditions": []
+        },
+        {
           "selector": ".list-row",
           "file": "07-components.css",
-          "line": 316,
+          "line": 321,
           "conditions": []
         },
         {
           "selector": ".list-row + .list-row",
           "file": "07-components.css",
-          "line": 326,
+          "line": 331,
           "conditions": []
         },
         {
           "selector": ".list-row:hover",
           "file": "07-components.css",
-          "line": 327,
+          "line": 332,
           "conditions": []
         },
         {
           "selector": ".list-row:focus-visible",
           "file": "07-components.css",
-          "line": 332,
+          "line": 337,
           "conditions": []
         },
         {
           "selector": ".list-row:first-child:focus-visible",
           "file": "07-components.css",
-          "line": 333,
+          "line": 338,
           "conditions": []
         },
         {
           "selector": ".list-row:last-child:focus-visible",
           "file": "07-components.css",
-          "line": 334,
+          "line": 339,
           "conditions": []
         },
         {
           "selector": ".list-row .list-main",
           "file": "07-components.css",
-          "line": 338,
+          "line": 343,
           "conditions": []
         },
         {
           "selector": ".list-row .list-title",
           "file": "07-components.css",
-          "line": 340,
+          "line": 345,
           "conditions": []
         },
         {
           "selector": ".list-row .list-sub",
           "file": "07-components.css",
-          "line": 342,
+          "line": 347,
           "conditions": []
         },
         {
           "selector": ".list-row .list-trail",
           "file": "07-components.css",
-          "line": 346,
+          "line": 351,
           "conditions": []
         },
         {
           "selector": ".list-header",
           "file": "07-components.css",
-          "line": 349,
+          "line": 354,
           "conditions": []
         },
         {
@@ -7288,73 +7309,73 @@
         {
           "selector": ".menu",
           "file": "07-components.css",
-          "line": 634,
+          "line": 639,
           "conditions": []
         },
         {
           "selector": ".menu:popover-open",
           "file": "07-components.css",
-          "line": 653,
+          "line": 658,
           "conditions": []
         },
         {
           "selector": ".menu:popover-open",
           "file": "07-components.css",
-          "line": 654,
+          "line": 659,
           "conditions": []
         },
         {
           "selector": ".menu::backdrop",
           "file": "07-components.css",
-          "line": 655,
+          "line": 660,
           "conditions": []
         },
         {
           "selector": ".menu-item",
           "file": "07-components.css",
-          "line": 661,
+          "line": 666,
           "conditions": []
         },
         {
           "selector": ".menu-item:hover",
           "file": "07-components.css",
-          "line": 676,
+          "line": 681,
           "conditions": []
         },
         {
           "selector": ".menu-item:focus-visible",
           "file": "07-components.css",
-          "line": 676,
+          "line": 681,
           "conditions": []
         },
         {
           "selector": ".menu-item-danger",
           "file": "07-components.css",
-          "line": 679,
+          "line": 684,
           "conditions": []
         },
         {
           "selector": ".menu-item-danger:hover",
           "file": "07-components.css",
-          "line": 680,
+          "line": 685,
           "conditions": []
         },
         {
           "selector": ".menu-item .push",
           "file": "07-components.css",
-          "line": 681,
+          "line": 686,
           "conditions": []
         },
         {
           "selector": ".menu-sep",
           "file": "07-components.css",
-          "line": 683,
+          "line": 688,
           "conditions": []
         },
         {
           "selector": ".menu-label",
           "file": "07-components.css",
-          "line": 686,
+          "line": 691,
           "conditions": []
         },
         {
@@ -7416,73 +7437,73 @@
         {
           "selector": ".modal",
           "file": "07-components.css",
-          "line": 703,
+          "line": 708,
           "conditions": []
         },
         {
           "selector": ".modal[open]",
           "file": "07-components.css",
-          "line": 724,
+          "line": 729,
           "conditions": []
         },
         {
           "selector": ".modal[open]",
           "file": "07-components.css",
-          "line": 725,
+          "line": 730,
           "conditions": []
         },
         {
           "selector": ".modal::backdrop",
           "file": "07-components.css",
-          "line": 726,
+          "line": 731,
           "conditions": []
         },
         {
           "selector": ".modal[open]::backdrop",
-          "file": "07-components.css",
-          "line": 733,
-          "conditions": []
-        },
-        {
-          "selector": ".modal[open]::backdrop",
-          "file": "07-components.css",
-          "line": 734,
-          "conditions": []
-        },
-        {
-          "selector": ".modal > form",
           "file": "07-components.css",
           "line": 738,
           "conditions": []
         },
         {
+          "selector": ".modal[open]::backdrop",
+          "file": "07-components.css",
+          "line": 739,
+          "conditions": []
+        },
+        {
+          "selector": ".modal > form",
+          "file": "07-components.css",
+          "line": 743,
+          "conditions": []
+        },
+        {
           "selector": ".modal-header",
           "file": "07-components.css",
-          "line": 742,
+          "line": 747,
           "conditions": []
         },
         {
           "selector": ".modal-title",
           "file": "07-components.css",
-          "line": 751,
+          "line": 756,
           "conditions": []
         },
         {
           "selector": ".modal-body",
           "file": "07-components.css",
-          "line": 755,
+          "line": 760,
           "conditions": []
         },
         {
           "selector": ".modal-footer",
           "file": "07-components.css",
-          "line": 759,
+          "line": 764,
           "conditions": []
         },
         {
           "selector": ".modal-footer",
           "file": "07-components.css",
-          "line": 769,
+          "line": 774,
           "conditions": [
             "@media (max-width: 32rem)"
           ]
@@ -7490,7 +7511,7 @@
         {
           "selector": ".modal-footer > .btn",
           "file": "07-components.css",
-          "line": 770,
+          "line": 775,
           "conditions": [
             "@media (max-width: 32rem)"
           ]
@@ -7596,25 +7617,25 @@
         {
           "selector": ".navbar",
           "file": "07-components.css",
-          "line": 839,
+          "line": 844,
           "conditions": []
         },
         {
           "selector": ".navbar-brand",
           "file": "07-components.css",
-          "line": 847,
+          "line": 852,
           "conditions": []
         },
         {
           "selector": ".navbar-links",
           "file": "07-components.css",
-          "line": 857,
+          "line": 862,
           "conditions": []
         },
         {
           "selector": ".navbar-links",
           "file": "07-components.css",
-          "line": 858,
+          "line": 863,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -7644,7 +7665,7 @@
         {
           "selector": ".no-print",
           "file": "09-utilities.css",
-          "line": 282,
+          "line": 300,
           "conditions": [
             "@media print"
           ]
@@ -8203,37 +8224,37 @@
         {
           "selector": ".range",
           "file": "06-forms.css",
-          "line": 288,
+          "line": 308,
           "conditions": []
         },
         {
           "selector": ".range::-webkit-slider-runnable-track",
           "file": "06-forms.css",
-          "line": 294,
+          "line": 314,
           "conditions": []
         },
         {
           "selector": ".range::-moz-range-track",
           "file": "06-forms.css",
-          "line": 299,
+          "line": 319,
           "conditions": []
         },
         {
           "selector": ".range::-webkit-slider-thumb",
           "file": "06-forms.css",
-          "line": 304,
+          "line": 324,
           "conditions": []
         },
         {
           "selector": ".range::-moz-range-thumb",
           "file": "06-forms.css",
-          "line": 315,
+          "line": 335,
           "conditions": []
         },
         {
           "selector": ".range:active::-webkit-slider-thumb",
           "file": "06-forms.css",
-          "line": 324,
+          "line": 344,
           "conditions": []
         },
         {
@@ -8526,19 +8547,19 @@
         {
           "selector": ".ring",
           "file": "07-components.css",
-          "line": 550,
+          "line": 555,
           "conditions": []
         },
         {
           "selector": ".ring-wrap",
           "file": "07-components.css",
-          "line": 566,
+          "line": 571,
           "conditions": []
         },
         {
           "selector": ".ring-wrap > .ring-label",
           "file": "07-components.css",
-          "line": 567,
+          "line": 572,
           "conditions": []
         }
       ]
@@ -8771,37 +8792,37 @@
         {
           "selector": ".sidebar",
           "file": "07-components.css",
-          "line": 880,
+          "line": 885,
           "conditions": []
         },
         {
           "selector": ".sidebar-group",
           "file": "07-components.css",
-          "line": 886,
+          "line": 891,
           "conditions": []
         },
         {
           "selector": ".sidebar-link",
           "file": "07-components.css",
-          "line": 887,
+          "line": 892,
           "conditions": []
         },
         {
           "selector": ".sidebar-link:hover",
           "file": "07-components.css",
-          "line": 900,
+          "line": 905,
           "conditions": []
         },
         {
           "selector": ".sidebar-link[aria-current]",
           "file": "07-components.css",
-          "line": 901,
+          "line": 906,
           "conditions": []
         },
         {
           "selector": ".sidebar-link .push",
           "file": "07-components.css",
-          "line": 902,
+          "line": 907,
           "conditions": []
         },
         {
@@ -8862,19 +8883,19 @@
         {
           "selector": ".skeleton",
           "file": "07-components.css",
-          "line": 584,
+          "line": 589,
           "conditions": []
         },
         {
           "selector": ".skeleton-text",
           "file": "07-components.css",
-          "line": 594,
+          "line": 599,
           "conditions": []
         },
         {
           "selector": ".skeleton-circle",
           "file": "07-components.css",
-          "line": 595,
+          "line": 600,
           "conditions": []
         }
       ]
@@ -9220,13 +9241,13 @@
         {
           "selector": ".spinner",
           "file": "07-components.css",
-          "line": 574,
+          "line": 579,
           "conditions": []
         },
         {
           "selector": ".spinner-lg",
           "file": "07-components.css",
-          "line": 582,
+          "line": 587,
           "conditions": []
         }
       ]
@@ -9541,37 +9562,37 @@
         {
           "selector": ".stat",
           "file": "07-components.css",
-          "line": 796,
+          "line": 801,
           "conditions": []
         },
         {
           "selector": ".stat-value",
           "file": "07-components.css",
-          "line": 797,
+          "line": 802,
           "conditions": []
         },
         {
           "selector": ".stat-label",
           "file": "07-components.css",
-          "line": 804,
+          "line": 809,
           "conditions": []
         },
         {
           "selector": ".stat-delta",
           "file": "07-components.css",
-          "line": 805,
+          "line": 810,
           "conditions": []
         },
         {
           "selector": ".stat-delta-up",
           "file": "07-components.css",
-          "line": 806,
+          "line": 811,
           "conditions": []
         },
         {
           "selector": ".stat-delta-down",
           "file": "07-components.css",
-          "line": 807,
+          "line": 812,
           "conditions": []
         },
         {
@@ -9875,7 +9896,7 @@
         {
           "selector": ".sticky",
           "file": "09-utilities.css",
-          "line": 169,
+          "line": 179,
           "conditions": []
         },
         {
@@ -9921,13 +9942,13 @@
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 401,
+          "line": 421,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 408,
+          "line": 428,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -10374,31 +10395,31 @@
         {
           "selector": ".timeline",
           "file": "07-components.css",
-          "line": 810,
+          "line": 815,
           "conditions": []
         },
         {
           "selector": ".timeline-item",
           "file": "07-components.css",
-          "line": 811,
+          "line": 816,
           "conditions": []
         },
         {
           "selector": ".timeline-item:not(:last-child)::before",
           "file": "07-components.css",
-          "line": 818,
+          "line": 823,
           "conditions": []
         },
         {
           "selector": ".timeline-dot",
           "file": "07-components.css",
-          "line": 826,
+          "line": 831,
           "conditions": []
         },
         {
           "selector": ".timeline-item.is-done .timeline-dot",
           "file": "07-components.css",
-          "line": 836,
+          "line": 841,
           "conditions": []
         },
         {
@@ -10883,31 +10904,31 @@
         {
           "selector": ".transition",
           "file": "09-utilities.css",
-          "line": 188,
+          "line": 206,
           "conditions": []
         },
         {
           "selector": ".transition-colors",
           "file": "09-utilities.css",
-          "line": 189,
+          "line": 207,
           "conditions": []
         },
         {
           "selector": ".transition-move",
           "file": "09-utilities.css",
-          "line": 194,
+          "line": 212,
           "conditions": []
         },
         {
           "selector": ".transition-size",
           "file": "09-utilities.css",
-          "line": 197,
+          "line": 215,
           "conditions": []
         },
         {
           "selector": ".transition-opacity",
           "file": "09-utilities.css",
-          "line": 199,
+          "line": 217,
           "conditions": []
         }
       ]
@@ -11112,7 +11133,7 @@
     {
       "name": "absolute",
       "file": "09-utilities.css",
-      "line": 167,
+      "line": 177,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -11126,7 +11147,7 @@
         {
           "selector": ".absolute",
           "file": "09-utilities.css",
-          "line": 167,
+          "line": 177,
           "conditions": []
         }
       ],
@@ -11138,7 +11159,7 @@
     {
       "name": "accordion",
       "file": "07-components.css",
-      "line": 445,
+      "line": 450,
       "layer": "deck.components",
       "section": null,
       "doc": "A bordered container for native <details>. The open state, the keyboard\nand the accessible name are the element's. Deck restyles the summary,\nreplaces the marker with a chevron, and animates the height using\n::details-content plus the interpolate-size opt-in in 02-reset.css — the\nfirst time a disclosure could animate to auto height without JavaScript.\nGive the details elements a shared name attribute for one-at-a-time.",
@@ -11164,61 +11185,61 @@
         {
           "selector": ".accordion",
           "file": "07-components.css",
-          "line": 445,
+          "line": 450,
           "conditions": []
         },
         {
           "selector": ".accordion > details + details",
           "file": "07-components.css",
-          "line": 446,
+          "line": 451,
           "conditions": []
         },
         {
           "selector": ".accordion summary",
           "file": "07-components.css",
-          "line": 447,
+          "line": 452,
           "conditions": []
         },
         {
           "selector": ".accordion summary::-webkit-details-marker",
           "file": "07-components.css",
-          "line": 458,
+          "line": 463,
           "conditions": []
         },
         {
           "selector": ".accordion summary:hover",
           "file": "07-components.css",
-          "line": 459,
+          "line": 464,
           "conditions": []
         },
         {
           "selector": ".accordion summary::after",
           "file": "07-components.css",
-          "line": 460,
+          "line": 465,
           "conditions": []
         },
         {
           "selector": ".accordion details[open] summary::after",
           "file": "07-components.css",
-          "line": 471,
+          "line": 476,
           "conditions": []
         },
         {
           "selector": ".accordion .accordion-body",
           "file": "07-components.css",
-          "line": 474,
+          "line": 479,
           "conditions": []
         },
         {
           "selector": ".accordion details::details-content",
           "file": "07-components.css",
-          "line": 479,
+          "line": 484,
           "conditions": []
         },
         {
           "selector": ".accordion details[open]::details-content",
           "file": "07-components.css",
-          "line": 484,
+          "line": 489,
           "conditions": []
         }
       ],
@@ -11245,7 +11266,7 @@
     {
       "name": "accordion-body",
       "file": "07-components.css",
-      "line": 474,
+      "line": 479,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -11254,7 +11275,7 @@
         {
           "selector": ".accordion .accordion-body",
           "file": "07-components.css",
-          "line": 474,
+          "line": 479,
           "conditions": []
         }
       ],
@@ -11343,7 +11364,7 @@
     {
       "name": "addon",
       "file": "06-forms.css",
-      "line": 145,
+      "line": 165,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -11352,13 +11373,13 @@
         {
           "selector": ".input-group > .addon",
           "file": "06-forms.css",
-          "line": 145,
+          "line": 165,
           "conditions": []
         },
         {
           "selector": ".input-group > .addon:last-child",
           "file": "06-forms.css",
-          "line": 156,
+          "line": 176,
           "conditions": []
         }
       ],
@@ -12979,7 +13000,7 @@
     {
       "name": "bg-brand",
       "file": "09-utilities.css",
-      "line": 143,
+      "line": 153,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -12997,7 +13018,7 @@
         {
           "selector": ".bg-brand",
           "file": "09-utilities.css",
-          "line": 143,
+          "line": 153,
           "conditions": []
         }
       ],
@@ -13012,7 +13033,7 @@
     {
       "name": "bg-none",
       "file": "09-utilities.css",
-      "line": 145,
+      "line": 155,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -13026,7 +13047,7 @@
         {
           "selector": ".bg-none",
           "file": "09-utilities.css",
-          "line": 145,
+          "line": 155,
           "conditions": []
         }
       ],
@@ -13038,7 +13059,7 @@
     {
       "name": "bg-soft",
       "file": "09-utilities.css",
-      "line": 144,
+      "line": 154,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -13056,7 +13077,7 @@
         {
           "selector": ".bg-soft",
           "file": "09-utilities.css",
-          "line": 144,
+          "line": 154,
           "conditions": []
         }
       ],
@@ -13071,7 +13092,7 @@
     {
       "name": "bg-sunken",
       "file": "09-utilities.css",
-      "line": 142,
+      "line": 152,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -13085,7 +13106,7 @@
         {
           "selector": ".bg-sunken",
           "file": "09-utilities.css",
-          "line": 142,
+          "line": 152,
           "conditions": []
         }
       ],
@@ -13099,7 +13120,7 @@
     {
       "name": "bg-surface",
       "file": "09-utilities.css",
-      "line": 141,
+      "line": 151,
       "layer": "deck.utilities",
       "section": "Surfaces",
       "doc": null,
@@ -13113,7 +13134,7 @@
         {
           "selector": ".bg-surface",
           "file": "09-utilities.css",
-          "line": 141,
+          "line": 151,
           "conditions": []
         }
       ],
@@ -13261,7 +13282,7 @@
     {
       "name": "border",
       "file": "09-utilities.css",
-      "line": 147,
+      "line": 157,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -13275,7 +13296,7 @@
         {
           "selector": ".border",
           "file": "09-utilities.css",
-          "line": 147,
+          "line": 157,
           "conditions": []
         }
       ],
@@ -13294,7 +13315,7 @@
     {
       "name": "border-0",
       "file": "09-utilities.css",
-      "line": 151,
+      "line": 161,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -13308,7 +13329,7 @@
         {
           "selector": ".border-0",
           "file": "09-utilities.css",
-          "line": 151,
+          "line": 161,
           "conditions": []
         }
       ],
@@ -13320,7 +13341,7 @@
     {
       "name": "border-b",
       "file": "09-utilities.css",
-      "line": 149,
+      "line": 159,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -13334,7 +13355,7 @@
         {
           "selector": ".border-b",
           "file": "09-utilities.css",
-          "line": 149,
+          "line": 159,
           "conditions": []
         }
       ],
@@ -13348,7 +13369,7 @@
     {
       "name": "border-brand",
       "file": "09-utilities.css",
-      "line": 150,
+      "line": 160,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -13362,7 +13383,7 @@
         {
           "selector": ".border-brand",
           "file": "09-utilities.css",
-          "line": 150,
+          "line": 160,
           "conditions": []
         }
       ],
@@ -13376,7 +13397,7 @@
     {
       "name": "border-t",
       "file": "09-utilities.css",
-      "line": 148,
+      "line": 158,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -13390,7 +13411,7 @@
         {
           "selector": ".border-t",
           "file": "09-utilities.css",
-          "line": 148,
+          "line": 158,
           "conditions": []
         }
       ],
@@ -13404,7 +13425,7 @@
     {
       "name": "breadcrumb",
       "file": "07-components.css",
-      "line": 487,
+      "line": 492,
       "layer": "deck.components",
       "section": "Breadcrumb",
       "doc": null,
@@ -13434,37 +13455,37 @@
         {
           "selector": ".breadcrumb",
           "file": "07-components.css",
-          "line": 487,
+          "line": 492,
           "conditions": []
         },
         {
           "selector": ".breadcrumb a",
           "file": "07-components.css",
-          "line": 488,
+          "line": 493,
           "conditions": []
         },
         {
           "selector": ".breadcrumb a:hover",
           "file": "07-components.css",
-          "line": 489,
+          "line": 494,
           "conditions": []
         },
         {
           "selector": ".breadcrumb li + li::before",
           "file": "07-components.css",
-          "line": 490,
+          "line": 495,
           "conditions": []
         },
         {
           "selector": ".breadcrumb li",
           "file": "07-components.css",
-          "line": 491,
+          "line": 496,
           "conditions": []
         },
         {
           "selector": ".breadcrumb [aria-current]",
           "file": "07-components.css",
-          "line": 492,
+          "line": 497,
           "conditions": []
         },
         {
@@ -13483,6 +13504,32 @@
         "--text-faint",
         "--text"
       ],
+      "defined": true,
+      "definedUnconditional": true
+    },
+    {
+      "name": "break-words",
+      "file": "09-utilities.css",
+      "line": 148,
+      "layer": "deck.utilities",
+      "section": null,
+      "doc": "Lets a long unbroken string — a URL, a hash, an email address — wrap at\nany character. anywhere rather than break-word: the body already has\nbreak-word, which wraps the line but leaves the min-content width alone,\nso in a flex row or a table cell the string still pushed the box wider\nthan its container.",
+      "declarations": [
+        {
+          "prop": "overflow-wrap",
+          "value": "anywhere"
+        }
+      ],
+      "selectors": [
+        {
+          "selector": ".break-words",
+          "file": "09-utilities.css",
+          "line": 148,
+          "conditions": []
+        }
+      ],
+      "variants": [],
+      "tokensUsed": [],
       "defined": true,
       "definedUnconditional": true
     },
@@ -13747,19 +13794,19 @@
         {
           "selector": ".input-group > .btn",
           "file": "06-forms.css",
-          "line": 157,
+          "line": 177,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 405,
+          "line": 425,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 407,
+          "line": 427,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -13767,7 +13814,7 @@
         {
           "selector": ".modal-footer > .btn",
           "file": "07-components.css",
-          "line": 770,
+          "line": 775,
           "conditions": [
             "@media (max-width: 32rem)"
           ]
@@ -15019,7 +15066,7 @@
     {
       "name": "capitalize",
       "file": "09-utilities.css",
-      "line": 123,
+      "line": 127,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -15033,7 +15080,7 @@
         {
           "selector": ".capitalize",
           "file": "09-utilities.css",
-          "line": 123,
+          "line": 127,
           "conditions": []
         }
       ],
@@ -18231,7 +18278,7 @@
     {
       "name": "check",
       "file": "06-forms.css",
-      "line": 175,
+      "line": 195,
       "layer": "deck.components",
       "section": null,
       "doc": "A checkbox or radio and its text, laid out as a row that clears the\n44px touch target. Wrap the text in .check-text to add a second line.",
@@ -18269,85 +18316,85 @@
         {
           "selector": ".check",
           "file": "06-forms.css",
-          "line": 175,
+          "line": 195,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"checkbox\"]",
           "file": "06-forms.css",
-          "line": 184,
+          "line": 204,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"radio\"]",
           "file": "06-forms.css",
-          "line": 184,
+          "line": 204,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"radio\"]",
           "file": "06-forms.css",
-          "line": 199,
+          "line": 219,
           "conditions": []
         },
         {
           "selector": ".check input:hover",
           "file": "06-forms.css",
-          "line": 200,
+          "line": 220,
           "conditions": []
         },
         {
           "selector": ".check input:checked",
           "file": "06-forms.css",
-          "line": 201,
+          "line": 221,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"checkbox\"]::before",
           "file": "06-forms.css",
-          "line": 202,
+          "line": 222,
           "conditions": []
         },
         {
           "selector": ".check input[type=\"radio\"]::before",
           "file": "06-forms.css",
-          "line": 211,
+          "line": 231,
           "conditions": []
         },
         {
           "selector": ".check input:checked::before",
           "file": "06-forms.css",
-          "line": 220,
+          "line": 240,
           "conditions": []
         },
         {
           "selector": ".check input:indeterminate",
           "file": "06-forms.css",
-          "line": 221,
+          "line": 241,
           "conditions": []
         },
         {
           "selector": ".check input:indeterminate::before",
           "file": "06-forms.css",
-          "line": 222,
+          "line": 242,
           "conditions": []
         },
         {
           "selector": ".check input:focus-visible",
           "file": "06-forms.css",
-          "line": 226,
+          "line": 246,
           "conditions": []
         },
         {
           "selector": ".check .check-text",
           "file": "06-forms.css",
-          "line": 231,
+          "line": 251,
           "conditions": []
         },
         {
           "selector": ".check .check-note",
           "file": "06-forms.css",
-          "line": 235,
+          "line": 255,
           "conditions": []
         },
         {
@@ -18409,7 +18456,7 @@
     {
       "name": "check-card",
       "file": "06-forms.css",
-      "line": 238,
+      "line": 258,
       "layer": "deck.components",
       "section": null,
       "doc": "Card-style choice, good for pricing and plan pickers",
@@ -18439,13 +18486,13 @@
         {
           "selector": ".check-card",
           "file": "06-forms.css",
-          "line": 238,
+          "line": 258,
           "conditions": []
         },
         {
           "selector": ".check-card:has(input:checked)",
           "file": "06-forms.css",
-          "line": 245,
+          "line": 265,
           "conditions": []
         }
       ],
@@ -18466,7 +18513,7 @@
     {
       "name": "check-note",
       "file": "06-forms.css",
-      "line": 235,
+      "line": 255,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -18475,7 +18522,7 @@
         {
           "selector": ".check .check-note",
           "file": "06-forms.css",
-          "line": 235,
+          "line": 255,
           "conditions": []
         }
       ],
@@ -18501,7 +18548,7 @@
     {
       "name": "check-text",
       "file": "06-forms.css",
-      "line": 231,
+      "line": 251,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -18510,7 +18557,7 @@
         {
           "selector": ".check .check-text",
           "file": "06-forms.css",
-          "line": 231,
+          "line": 251,
           "conditions": []
         }
       ],
@@ -18697,7 +18744,7 @@
     {
       "name": "clamp-2",
       "file": "09-utilities.css",
-      "line": 132,
+      "line": 136,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -18719,13 +18766,13 @@
         {
           "selector": ".clamp-2",
           "file": "09-utilities.css",
-          "line": 132,
+          "line": 136,
           "conditions": []
         },
         {
           "selector": ".clamp-2",
           "file": "09-utilities.css",
-          "line": 137,
+          "line": 141,
           "conditions": []
         }
       ],
@@ -18737,7 +18784,7 @@
     {
       "name": "clamp-3",
       "file": "09-utilities.css",
-      "line": 132,
+      "line": 136,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -18759,13 +18806,13 @@
         {
           "selector": ".clamp-3",
           "file": "09-utilities.css",
-          "line": 132,
+          "line": 136,
           "conditions": []
         },
         {
           "selector": ".clamp-3",
           "file": "09-utilities.css",
-          "line": 138,
+          "line": 142,
           "conditions": []
         }
       ],
@@ -21184,7 +21231,7 @@
     {
       "name": "cq",
       "file": "04-layout.css",
-      "line": 240,
+      "line": 242,
       "layer": "deck.layout",
       "section": null,
       "doc": "Container queries: components respond to their slot, not the viewport",
@@ -21198,7 +21245,7 @@
         {
           "selector": ".cq",
           "file": "04-layout.css",
-          "line": 240,
+          "line": 242,
           "conditions": []
         },
         {
@@ -21853,7 +21900,7 @@
     {
       "name": "cursor-pointer",
       "file": "09-utilities.css",
-      "line": 179,
+      "line": 197,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -21867,7 +21914,7 @@
         {
           "selector": ".cursor-pointer",
           "file": "09-utilities.css",
-          "line": 179,
+          "line": 197,
           "conditions": []
         }
       ],
@@ -23236,7 +23283,7 @@
     {
       "name": "delay-1",
       "file": "09-utilities.css",
-      "line": 214,
+      "line": 232,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -23254,7 +23301,7 @@
         {
           "selector": ".delay-1",
           "file": "09-utilities.css",
-          "line": 214,
+          "line": 232,
           "conditions": []
         }
       ],
@@ -23266,7 +23313,7 @@
     {
       "name": "delay-2",
       "file": "09-utilities.css",
-      "line": 215,
+      "line": 233,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -23284,7 +23331,7 @@
         {
           "selector": ".delay-2",
           "file": "09-utilities.css",
-          "line": 215,
+          "line": 233,
           "conditions": []
         }
       ],
@@ -23296,7 +23343,7 @@
     {
       "name": "delay-3",
       "file": "09-utilities.css",
-      "line": 216,
+      "line": 234,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -23314,7 +23361,7 @@
         {
           "selector": ".delay-3",
           "file": "09-utilities.css",
-          "line": 216,
+          "line": 234,
           "conditions": []
         }
       ],
@@ -25309,7 +25356,7 @@
     {
       "name": "disclosure",
       "file": "07-components.css",
-      "line": 447,
+      "line": 452,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -25318,49 +25365,49 @@
         {
           "selector": ".disclosure summary",
           "file": "07-components.css",
-          "line": 447,
+          "line": 452,
           "conditions": []
         },
         {
           "selector": ".disclosure summary::-webkit-details-marker",
           "file": "07-components.css",
-          "line": 458,
+          "line": 463,
           "conditions": []
         },
         {
           "selector": ".disclosure summary:hover",
           "file": "07-components.css",
-          "line": 459,
+          "line": 464,
           "conditions": []
         },
         {
           "selector": ".disclosure summary::after",
           "file": "07-components.css",
-          "line": 460,
+          "line": 465,
           "conditions": []
         },
         {
           "selector": ".disclosure[open] summary::after",
           "file": "07-components.css",
-          "line": 471,
+          "line": 476,
           "conditions": []
         },
         {
           "selector": ".disclosure .disclosure-body",
           "file": "07-components.css",
-          "line": 474,
+          "line": 479,
           "conditions": []
         },
         {
           "selector": ".disclosure::details-content",
           "file": "07-components.css",
-          "line": 479,
+          "line": 484,
           "conditions": []
         },
         {
           "selector": ".disclosure[open]::details-content",
           "file": "07-components.css",
-          "line": 484,
+          "line": 489,
           "conditions": []
         }
       ],
@@ -25423,7 +25470,7 @@
     {
       "name": "disclosure-body",
       "file": "07-components.css",
-      "line": 474,
+      "line": 479,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -25432,7 +25479,7 @@
         {
           "selector": ".disclosure .disclosure-body",
           "file": "07-components.css",
-          "line": 474,
+          "line": 479,
           "conditions": []
         }
       ],
@@ -26352,7 +26399,7 @@
     {
       "name": "dur-1",
       "file": "09-utilities.css",
-      "line": 201,
+      "line": 219,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -26370,7 +26417,7 @@
         {
           "selector": ".dur-1",
           "file": "09-utilities.css",
-          "line": 201,
+          "line": 219,
           "conditions": []
         }
       ],
@@ -26384,7 +26431,7 @@
     {
       "name": "dur-2",
       "file": "09-utilities.css",
-      "line": 202,
+      "line": 220,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -26402,7 +26449,7 @@
         {
           "selector": ".dur-2",
           "file": "09-utilities.css",
-          "line": 202,
+          "line": 220,
           "conditions": []
         }
       ],
@@ -26416,7 +26463,7 @@
     {
       "name": "dur-3",
       "file": "09-utilities.css",
-      "line": 203,
+      "line": 221,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -26434,7 +26481,7 @@
         {
           "selector": ".dur-3",
           "file": "09-utilities.css",
-          "line": 203,
+          "line": 221,
           "conditions": []
         }
       ],
@@ -26448,7 +26495,7 @@
     {
       "name": "dur-4",
       "file": "09-utilities.css",
-      "line": 204,
+      "line": 222,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -26466,7 +26513,7 @@
         {
           "selector": ".dur-4",
           "file": "09-utilities.css",
-          "line": 204,
+          "line": 222,
           "conditions": []
         }
       ],
@@ -26480,7 +26527,7 @@
     {
       "name": "dur-5",
       "file": "09-utilities.css",
-      "line": 205,
+      "line": 223,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -26498,7 +26545,7 @@
         {
           "selector": ".dur-5",
           "file": "09-utilities.css",
-          "line": 205,
+          "line": 223,
           "conditions": []
         }
       ],
@@ -26512,7 +26559,7 @@
     {
       "name": "ease-bounce",
       "file": "09-utilities.css",
-      "line": 210,
+      "line": 228,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -26530,7 +26577,7 @@
         {
           "selector": ".ease-bounce",
           "file": "09-utilities.css",
-          "line": 210,
+          "line": 228,
           "conditions": []
         }
       ],
@@ -26544,7 +26591,7 @@
     {
       "name": "ease-in",
       "file": "09-utilities.css",
-      "line": 208,
+      "line": 226,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -26562,7 +26609,7 @@
         {
           "selector": ".ease-in",
           "file": "09-utilities.css",
-          "line": 208,
+          "line": 226,
           "conditions": []
         }
       ],
@@ -26576,7 +26623,7 @@
     {
       "name": "ease-linear",
       "file": "09-utilities.css",
-      "line": 212,
+      "line": 230,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -26594,7 +26641,7 @@
         {
           "selector": ".ease-linear",
           "file": "09-utilities.css",
-          "line": 212,
+          "line": 230,
           "conditions": []
         }
       ],
@@ -26606,7 +26653,7 @@
     {
       "name": "ease-out",
       "file": "09-utilities.css",
-      "line": 207,
+      "line": 225,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -26624,7 +26671,7 @@
         {
           "selector": ".ease-out",
           "file": "09-utilities.css",
-          "line": 207,
+          "line": 225,
           "conditions": []
         }
       ],
@@ -26638,7 +26685,7 @@
     {
       "name": "ease-overshoot",
       "file": "09-utilities.css",
-      "line": 211,
+      "line": 229,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -26656,7 +26703,7 @@
         {
           "selector": ".ease-overshoot",
           "file": "09-utilities.css",
-          "line": 211,
+          "line": 229,
           "conditions": []
         }
       ],
@@ -26670,7 +26717,7 @@
     {
       "name": "ease-spring",
       "file": "09-utilities.css",
-      "line": 209,
+      "line": 227,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -26688,7 +26735,7 @@
         {
           "selector": ".ease-spring",
           "file": "09-utilities.css",
-          "line": 209,
+          "line": 227,
           "conditions": []
         }
       ],
@@ -27598,7 +27645,7 @@
     {
       "name": "empty",
       "file": "07-components.css",
-      "line": 774,
+      "line": 779,
       "layer": "deck.components",
       "section": "Empty state",
       "doc": null,
@@ -27632,13 +27679,13 @@
         {
           "selector": ".empty",
           "file": "07-components.css",
-          "line": 774,
+          "line": 779,
           "conditions": []
         },
         {
           "selector": ".empty p",
           "file": "07-components.css",
-          "line": 793,
+          "line": 798,
           "conditions": []
         }
       ],
@@ -27658,7 +27705,7 @@
     {
       "name": "empty-art",
       "file": "07-components.css",
-      "line": 782,
+      "line": 787,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -27700,7 +27747,7 @@
         {
           "selector": ".empty-art",
           "file": "07-components.css",
-          "line": 782,
+          "line": 787,
           "conditions": []
         }
       ],
@@ -27716,7 +27763,7 @@
     {
       "name": "empty-title",
       "file": "07-components.css",
-      "line": 792,
+      "line": 797,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -27738,7 +27785,7 @@
         {
           "selector": ".empty-title",
           "file": "07-components.css",
-          "line": 792,
+          "line": 797,
           "conditions": []
         }
       ],
@@ -28508,13 +28555,13 @@
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select)",
           "file": "06-forms.css",
-          "line": 110,
+          "line": 130,
           "conditions": []
         },
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select):focus",
           "file": "06-forms.css",
-          "line": 114,
+          "line": 134,
           "conditions": []
         },
         {
@@ -28539,7 +28586,7 @@
     {
       "name": "field-row",
       "file": "06-forms.css",
-      "line": 368,
+      "line": 388,
       "layer": "deck.components",
       "section": null,
       "doc": "Two fields side by side on anything wider than a phone",
@@ -28561,13 +28608,13 @@
         {
           "selector": ".field-row",
           "file": "06-forms.css",
-          "line": 368,
+          "line": 388,
           "conditions": []
         },
         {
           "selector": ".field-row",
           "file": "06-forms.css",
-          "line": 374,
+          "line": 394,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -28629,7 +28676,7 @@
     {
       "name": "fieldset",
       "file": "06-forms.css",
-      "line": 351,
+      "line": 371,
       "layer": "deck.components",
       "section": null,
       "doc": "A bordered group of controls that answer one question. Its legend is\nthe group's accessible name, which is what a radio group needs and\nwhat a .label above one does not provide.",
@@ -28667,13 +28714,13 @@
         {
           "selector": ".fieldset",
           "file": "06-forms.css",
-          "line": 351,
+          "line": 371,
           "conditions": []
         },
         {
           "selector": ".fieldset > legend",
           "file": "06-forms.css",
-          "line": 360,
+          "line": 380,
           "conditions": []
         },
         {
@@ -28701,7 +28748,7 @@
     {
       "name": "file",
       "file": "06-forms.css",
-      "line": 331,
+      "line": 351,
       "layer": "deck.components",
       "section": null,
       "doc": "A dashed drop zone wrapping a real file input. The input is 1px and\ntransparent rather than display: none, so it keeps its place in the\ntab order, and :focus-within is what makes that focus visible. Deck\nstyles the zone; dropping needs a handler of your own.",
@@ -28755,25 +28802,25 @@
         {
           "selector": ".file",
           "file": "06-forms.css",
-          "line": 331,
+          "line": 351,
           "conditions": []
         },
         {
           "selector": ".file:hover",
           "file": "06-forms.css",
-          "line": 344,
+          "line": 364,
           "conditions": []
         },
         {
           "selector": ".file:focus-within",
           "file": "06-forms.css",
-          "line": 344,
+          "line": 364,
           "conditions": []
         },
         {
           "selector": ".file input[type=\"file\"]",
           "file": "06-forms.css",
-          "line": 345,
+          "line": 365,
           "conditions": []
         }
       ],
@@ -28796,7 +28843,7 @@
     {
       "name": "fixed",
       "file": "09-utilities.css",
-      "line": 168,
+      "line": 178,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -28810,7 +28857,7 @@
         {
           "selector": ".fixed",
           "file": "09-utilities.css",
-          "line": 168,
+          "line": 178,
           "conditions": []
         }
       ],
@@ -29769,7 +29816,7 @@
     {
       "name": "form-actions",
       "file": "06-forms.css",
-      "line": 378,
+      "line": 398,
       "layer": "deck.components",
       "section": null,
       "doc": "Sticky save bar for long forms on mobile",
@@ -29791,7 +29838,7 @@
         {
           "selector": ".form-actions",
           "file": "06-forms.css",
-          "line": 378,
+          "line": 398,
           "conditions": []
         },
         {
@@ -29815,7 +29862,7 @@
     {
       "name": "form-actions-sticky",
       "file": "06-forms.css",
-      "line": 386,
+      "line": 406,
       "layer": "deck.components",
       "section": null,
       "doc": "Pins the action row to the bottom of the viewport with a blur behind\nit and a safe-area inset for the home indicator. Add matching bottom\npadding to the form, or the last field sits underneath it.",
@@ -29861,25 +29908,25 @@
         {
           "selector": ".form-actions-sticky",
           "file": "06-forms.css",
-          "line": 386,
+          "line": 406,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 401,
+          "line": 421,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 405,
+          "line": 425,
           "conditions": []
         },
         {
           "selector": ".form-actions-sticky > .btn",
           "file": "06-forms.css",
-          "line": 407,
+          "line": 427,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -29887,7 +29934,7 @@
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 408,
+          "line": 428,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -29915,7 +29962,7 @@
     {
       "name": "fw-bold",
       "file": "09-utilities.css",
-      "line": 102,
+      "line": 106,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -29929,7 +29976,7 @@
         {
           "selector": ".fw-bold",
           "file": "09-utilities.css",
-          "line": 102,
+          "line": 106,
           "conditions": []
         }
       ],
@@ -29941,7 +29988,7 @@
     {
       "name": "fw-medium",
       "file": "09-utilities.css",
-      "line": 98,
+      "line": 102,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -29955,7 +30002,7 @@
         {
           "selector": ".fw-medium",
           "file": "09-utilities.css",
-          "line": 98,
+          "line": 102,
           "conditions": []
         }
       ],
@@ -29967,7 +30014,7 @@
     {
       "name": "fw-normal",
       "file": "09-utilities.css",
-      "line": 97,
+      "line": 101,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -29981,7 +30028,7 @@
         {
           "selector": ".fw-normal",
           "file": "09-utilities.css",
-          "line": 97,
+          "line": 101,
           "conditions": []
         }
       ],
@@ -29993,7 +30040,7 @@
     {
       "name": "fw-semi",
       "file": "09-utilities.css",
-      "line": 101,
+      "line": 105,
       "layer": "deck.utilities",
       "section": null,
       "doc": "Semibold. The weight for a label or a name that needs to lead without\nbecoming a heading.",
@@ -30007,7 +30054,7 @@
         {
           "selector": ".fw-semi",
           "file": "09-utilities.css",
-          "line": 101,
+          "line": 105,
           "conditions": []
         }
       ],
@@ -32340,7 +32387,7 @@
         {
           "selector": ".search > .icon",
           "file": "06-forms.css",
-          "line": 164,
+          "line": 184,
           "conditions": []
         },
         {
@@ -33583,7 +33630,7 @@
         {
           "selector": ".input",
           "file": "06-forms.css",
-          "line": 66,
+          "line": 86,
           "conditions": [
             "@media (pointer: coarse)"
           ]
@@ -33591,73 +33638,73 @@
         {
           "selector": ".input::placeholder",
           "file": "06-forms.css",
-          "line": 69,
+          "line": 89,
           "conditions": []
         },
         {
           "selector": ".input:hover",
           "file": "06-forms.css",
-          "line": 71,
+          "line": 91,
           "conditions": []
         },
         {
           "selector": ".input:focus",
           "file": "06-forms.css",
-          "line": 73,
+          "line": 93,
           "conditions": []
         },
         {
           "selector": ".input[disabled]",
           "file": "06-forms.css",
-          "line": 79,
+          "line": 99,
           "conditions": []
         },
         {
           "selector": ".input[readonly]",
           "file": "06-forms.css",
-          "line": 85,
+          "line": 105,
           "conditions": []
         },
         {
           "selector": ".input:user-invalid",
           "file": "06-forms.css",
-          "line": 110,
+          "line": 130,
           "conditions": []
         },
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select)",
           "file": "06-forms.css",
-          "line": 110,
+          "line": 130,
           "conditions": []
         },
         {
           "selector": ".input:user-invalid:focus",
           "file": "06-forms.css",
-          "line": 114,
+          "line": 134,
           "conditions": []
         },
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select):focus",
           "file": "06-forms.css",
-          "line": 114,
+          "line": 134,
           "conditions": []
         },
         {
           "selector": ".input-group > .input",
           "file": "06-forms.css",
-          "line": 134,
+          "line": 154,
           "conditions": []
         },
         {
           "selector": ".input-group > .input:focus",
           "file": "06-forms.css",
-          "line": 140,
+          "line": 160,
           "conditions": []
         },
         {
           "selector": ".search > .input",
           "file": "06-forms.css",
-          "line": 170,
+          "line": 190,
           "conditions": []
         },
         {
@@ -33714,7 +33761,9 @@
         }
       ],
       "variants": [
-        "input-group"
+        "input-group",
+        "input-lg",
+        "input-sm"
       ],
       "tokensUsed": [
         "--control-h",
@@ -33746,7 +33795,7 @@
     {
       "name": "input-group",
       "file": "06-forms.css",
-      "line": 123,
+      "line": 143,
       "layer": "deck.components",
       "section": null,
       "doc": "A prefix, suffix or attached button joined to a control. The group\ntakes over the border, radius and shadow, and the input inside strips\nits own, so the seam does not double up. :focus-within puts the ring\naround the whole assembly.",
@@ -33788,43 +33837,43 @@
         {
           "selector": ".input-group",
           "file": "06-forms.css",
-          "line": 123,
+          "line": 143,
           "conditions": []
         },
         {
           "selector": ".input-group:focus-within",
           "file": "06-forms.css",
-          "line": 133,
+          "line": 153,
           "conditions": []
         },
         {
           "selector": ".input-group > .input",
           "file": "06-forms.css",
-          "line": 134,
+          "line": 154,
           "conditions": []
         },
         {
           "selector": ".input-group > .input:focus",
           "file": "06-forms.css",
-          "line": 140,
+          "line": 160,
           "conditions": []
         },
         {
           "selector": ".input-group > .addon",
           "file": "06-forms.css",
-          "line": 145,
+          "line": 165,
           "conditions": []
         },
         {
           "selector": ".input-group > .addon:last-child",
           "file": "06-forms.css",
-          "line": 156,
+          "line": 176,
           "conditions": []
         },
         {
           "selector": ".input-group > .btn",
           "file": "06-forms.css",
-          "line": 157,
+          "line": 177,
           "conditions": []
         }
       ],
@@ -33841,9 +33890,80 @@
       "definedUnconditional": true
     },
     {
+      "name": "input-lg",
+      "file": "06-forms.css",
+      "line": 78,
+      "layer": "deck.components",
+      "section": null,
+      "doc": "The 50px control, to match .btn-lg in a hero search or a sign-in form.\nThe default block padding is kept: any more and a line of --text-md\noutgrows the 50px.",
+      "declarations": [
+        {
+          "prop": "min-block-size",
+          "value": "var(--control-h-lg)"
+        },
+        {
+          "prop": "font-size",
+          "value": "var(--text-md)"
+        }
+      ],
+      "selectors": [
+        {
+          "selector": ".input-lg",
+          "file": "06-forms.css",
+          "line": 78,
+          "conditions": []
+        }
+      ],
+      "variants": [],
+      "tokensUsed": [
+        "--control-h-lg",
+        "--text-md"
+      ],
+      "defined": true,
+      "definedUnconditional": true
+    },
+    {
+      "name": "input-sm",
+      "file": "06-forms.css",
+      "line": 70,
+      "layer": "deck.components",
+      "section": null,
+      "doc": "The 34px control, to sit beside a .btn-sm in a toolbar or a filter row.\n.btn-sm keeps a 44px target with a pseudo-element; an <input> cannot\nhave one, so this is a smaller target than the default control. It\nstill clears WCAG 2.5.8's 24px. The inline padding is left alone so\n.select keeps room for its arrow and .search for its icon.",
+      "declarations": [
+        {
+          "prop": "min-block-size",
+          "value": "var(--control-h-sm)"
+        },
+        {
+          "prop": "padding-block",
+          "value": "var(--space-1)"
+        },
+        {
+          "prop": "font-size",
+          "value": "var(--text-sm)"
+        }
+      ],
+      "selectors": [
+        {
+          "selector": ".input-sm",
+          "file": "06-forms.css",
+          "line": 70,
+          "conditions": []
+        }
+      ],
+      "variants": [],
+      "tokensUsed": [
+        "--control-h-sm",
+        "--space-1",
+        "--text-sm"
+      ],
+      "defined": true,
+      "definedUnconditional": true
+    },
+    {
       "name": "inset-0",
       "file": "09-utilities.css",
-      "line": 170,
+      "line": 180,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -33857,7 +33977,7 @@
         {
           "selector": ".inset-0",
           "file": "09-utilities.css",
-          "line": 170,
+          "line": 180,
           "conditions": []
         }
       ],
@@ -34031,13 +34151,13 @@
         {
           "selector": ".tab.is-active",
           "file": "07-components.css",
-          "line": 394,
+          "line": 399,
           "conditions": []
         },
         {
           "selector": ".segmented > .is-active",
           "file": "07-components.css",
-          "line": 432,
+          "line": 437,
           "conditions": []
         },
         {
@@ -34099,7 +34219,7 @@
     {
       "name": "is-animating",
       "file": "09-utilities.css",
-      "line": 221,
+      "line": 239,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -34108,7 +34228,7 @@
         {
           "selector": ".will-move:is(:hover, :focus-within, .is-animating)",
           "file": "09-utilities.css",
-          "line": 221,
+          "line": 239,
           "conditions": []
         }
       ],
@@ -34456,7 +34576,7 @@
     {
       "name": "is-done",
       "file": "07-components.css",
-      "line": 836,
+      "line": 841,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -34465,7 +34585,7 @@
         {
           "selector": ".timeline-item.is-done .timeline-dot",
           "file": "07-components.css",
-          "line": 836,
+          "line": 841,
           "conditions": []
         },
         {
@@ -34833,7 +34953,7 @@
     {
       "name": "is-invalid",
       "file": "06-forms.css",
-      "line": 110,
+      "line": 130,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -34842,13 +34962,13 @@
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select)",
           "file": "06-forms.css",
-          "line": 110,
+          "line": 130,
           "conditions": []
         },
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select):focus",
           "file": "06-forms.css",
-          "line": 114,
+          "line": 134,
           "conditions": []
         },
         {
@@ -37311,7 +37431,7 @@
     {
       "name": "lg",
       "file": "09-utilities.css",
-      "line": 271,
+      "line": 289,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -37320,7 +37440,7 @@
         {
           "selector": ".lg\\:hidden",
           "file": "09-utilities.css",
-          "line": 271,
+          "line": 289,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -37328,7 +37448,7 @@
         {
           "selector": ".lg\\:block",
           "file": "09-utilities.css",
-          "line": 272,
+          "line": 290,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -37336,7 +37456,7 @@
         {
           "selector": ".lg\\:flex",
           "file": "09-utilities.css",
-          "line": 273,
+          "line": 291,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -37344,7 +37464,7 @@
         {
           "selector": ".lg\\:grid-d",
           "file": "09-utilities.css",
-          "line": 274,
+          "line": 292,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -37352,7 +37472,7 @@
         {
           "selector": ".lg\\:row",
           "file": "09-utilities.css",
-          "line": 275,
+          "line": 293,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -37360,7 +37480,7 @@
         {
           "selector": ".lg\\:gap-8",
           "file": "09-utilities.css",
-          "line": 276,
+          "line": 294,
           "conditions": [
             "@media (min-width: 64rem)"
           ]
@@ -37532,6 +37652,7 @@
         }
       ],
       "variants": [
+        "list-flush",
         "list-header",
         "list-main",
         "list-row",
@@ -37549,9 +37670,43 @@
       "definedUnconditional": true
     },
     {
+      "name": "list-flush",
+      "file": "07-components.css",
+      "line": 317,
+      "layer": "deck.components",
+      "section": null,
+      "doc": "A list with no box of its own: no border, corner radius or fill, only\nthe dividers between rows. For a list inside a .card, a .sheet or a\n.sidebar that already draws the box, or one that runs edge to edge on\na phone. The rows keep their padding.",
+      "declarations": [
+        {
+          "prop": "background",
+          "value": "none"
+        },
+        {
+          "prop": "border",
+          "value": "0"
+        },
+        {
+          "prop": "border-radius",
+          "value": "0"
+        }
+      ],
+      "selectors": [
+        {
+          "selector": ".list-flush",
+          "file": "07-components.css",
+          "line": 317,
+          "conditions": []
+        }
+      ],
+      "variants": [],
+      "tokensUsed": [],
+      "defined": true,
+      "definedUnconditional": true
+    },
+    {
       "name": "list-header",
       "file": "07-components.css",
-      "line": 349,
+      "line": 354,
       "layer": "deck.components",
       "section": null,
       "doc": "A group heading inside a list. Styling only: a screen reader hears\nordinary text, so if the grouping is meaningful use a real heading.",
@@ -37593,7 +37748,7 @@
         {
           "selector": ".list-header",
           "file": "07-components.css",
-          "line": 349,
+          "line": 354,
           "conditions": []
         },
         {
@@ -37619,7 +37774,7 @@
     {
       "name": "list-main",
       "file": "07-components.css",
-      "line": 338,
+      "line": 343,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -37628,7 +37783,7 @@
         {
           "selector": ".list-row .list-main",
           "file": "07-components.css",
-          "line": 338,
+          "line": 343,
           "conditions": []
         }
       ],
@@ -37663,7 +37818,7 @@
     {
       "name": "list-row",
       "file": "07-components.css",
-      "line": 316,
+      "line": 321,
       "layer": "deck.components",
       "section": null,
       "doc": "One row. min-block-size: var(--tap) puts every row at the touch\ntarget, and the colour and text-decoration resets mean the row can be\nan <a> directly — one element, one tab stop, the whole row clickable.",
@@ -37705,67 +37860,67 @@
         {
           "selector": ".list-row",
           "file": "07-components.css",
-          "line": 316,
+          "line": 321,
           "conditions": []
         },
         {
           "selector": ".list-row + .list-row",
           "file": "07-components.css",
-          "line": 326,
+          "line": 331,
           "conditions": []
         },
         {
           "selector": ".list-row + .list-row",
           "file": "07-components.css",
-          "line": 326,
+          "line": 331,
           "conditions": []
         },
         {
           "selector": ".list-row:hover",
           "file": "07-components.css",
-          "line": 327,
+          "line": 332,
           "conditions": []
         },
         {
           "selector": ".list-row:focus-visible",
           "file": "07-components.css",
-          "line": 332,
+          "line": 337,
           "conditions": []
         },
         {
           "selector": ".list-row:first-child:focus-visible",
           "file": "07-components.css",
-          "line": 333,
+          "line": 338,
           "conditions": []
         },
         {
           "selector": ".list-row:last-child:focus-visible",
           "file": "07-components.css",
-          "line": 334,
+          "line": 339,
           "conditions": []
         },
         {
           "selector": ".list-row .list-main",
           "file": "07-components.css",
-          "line": 338,
+          "line": 343,
           "conditions": []
         },
         {
           "selector": ".list-row .list-title",
           "file": "07-components.css",
-          "line": 340,
+          "line": 345,
           "conditions": []
         },
         {
           "selector": ".list-row .list-sub",
           "file": "07-components.css",
-          "line": 342,
+          "line": 347,
           "conditions": []
         },
         {
           "selector": ".list-row .list-trail",
           "file": "07-components.css",
-          "line": 346,
+          "line": 351,
           "conditions": []
         },
         {
@@ -37833,7 +37988,7 @@
     {
       "name": "list-sub",
       "file": "07-components.css",
-      "line": 342,
+      "line": 347,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -37842,7 +37997,7 @@
         {
           "selector": ".list-row .list-sub",
           "file": "07-components.css",
-          "line": 342,
+          "line": 347,
           "conditions": []
         }
       ],
@@ -37868,7 +38023,7 @@
     {
       "name": "list-title",
       "file": "07-components.css",
-      "line": 340,
+      "line": 345,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -37877,7 +38032,7 @@
         {
           "selector": ".list-row .list-title",
           "file": "07-components.css",
-          "line": 340,
+          "line": 345,
           "conditions": []
         }
       ],
@@ -37896,7 +38051,7 @@
     {
       "name": "list-trail",
       "file": "07-components.css",
-      "line": 346,
+      "line": 351,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -37905,7 +38060,7 @@
         {
           "selector": ".list-row .list-trail",
           "file": "07-components.css",
-          "line": 346,
+          "line": 351,
           "conditions": []
         }
       ],
@@ -38570,7 +38725,7 @@
     {
       "name": "md",
       "file": "09-utilities.css",
-      "line": 257,
+      "line": 275,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -38579,7 +38734,7 @@
         {
           "selector": ".md\\:hidden",
           "file": "09-utilities.css",
-          "line": 257,
+          "line": 275,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -38587,7 +38742,7 @@
         {
           "selector": ".md\\:block",
           "file": "09-utilities.css",
-          "line": 258,
+          "line": 276,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -38595,7 +38750,7 @@
         {
           "selector": ".md\\:flex",
           "file": "09-utilities.css",
-          "line": 259,
+          "line": 277,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -38603,7 +38758,7 @@
         {
           "selector": ".md\\:grid-d",
           "file": "09-utilities.css",
-          "line": 260,
+          "line": 278,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -38611,7 +38766,7 @@
         {
           "selector": ".md\\:row",
           "file": "09-utilities.css",
-          "line": 261,
+          "line": 279,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -38619,7 +38774,7 @@
         {
           "selector": ".md\\:col",
           "file": "09-utilities.css",
-          "line": 262,
+          "line": 280,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -38627,7 +38782,7 @@
         {
           "selector": ".md\\:items-center",
           "file": "09-utilities.css",
-          "line": 263,
+          "line": 281,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -38635,7 +38790,7 @@
         {
           "selector": ".md\\:justify-between",
           "file": "09-utilities.css",
-          "line": 264,
+          "line": 282,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -38643,7 +38798,7 @@
         {
           "selector": ".md\\:w-auto",
           "file": "09-utilities.css",
-          "line": 265,
+          "line": 283,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -38651,7 +38806,7 @@
         {
           "selector": ".md\\:text-center",
           "file": "09-utilities.css",
-          "line": 266,
+          "line": 284,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -38659,7 +38814,7 @@
         {
           "selector": ".md\\:p-8",
           "file": "09-utilities.css",
-          "line": 267,
+          "line": 285,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -38667,7 +38822,7 @@
         {
           "selector": ".md\\:gap-6",
           "file": "09-utilities.css",
-          "line": 268,
+          "line": 286,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -39187,7 +39342,7 @@
     {
       "name": "menu",
       "file": "07-components.css",
-      "line": 634,
+      "line": 639,
       "layer": "deck.components",
       "section": null,
       "doc": "A dropdown built on the native popover attribute: light dismiss, Escape,\nthe top layer and one-at-a-time behaviour all come from the platform.\n25-anchor.css positions it against its trigger with anchor positioning and\na fallback chain, so it flips when there is no room below.",
@@ -39253,25 +39408,25 @@
         {
           "selector": ".menu",
           "file": "07-components.css",
-          "line": 634,
+          "line": 639,
           "conditions": []
         },
         {
           "selector": ".menu:popover-open",
           "file": "07-components.css",
-          "line": 653,
+          "line": 658,
           "conditions": []
         },
         {
           "selector": ".menu:popover-open",
           "file": "07-components.css",
-          "line": 654,
+          "line": 659,
           "conditions": []
         },
         {
           "selector": ".menu::backdrop",
           "file": "07-components.css",
-          "line": 655,
+          "line": 660,
           "conditions": []
         },
         {
@@ -39333,7 +39488,7 @@
     {
       "name": "menu-item",
       "file": "07-components.css",
-      "line": 661,
+      "line": 666,
       "layer": "deck.components",
       "section": null,
       "doc": "One row in a menu. Works on a button or an anchor — colour and\ntext-decoration are reset so a link needs no help. Hover and focus share a\nstyle, so a keyboard user sees what a mouse user sees. 40px tall, which is\nunder the 44px target: a deliberate density trade for a list of eight.",
@@ -39395,25 +39550,25 @@
         {
           "selector": ".menu-item",
           "file": "07-components.css",
-          "line": 661,
+          "line": 666,
           "conditions": []
         },
         {
           "selector": ".menu-item:hover",
           "file": "07-components.css",
-          "line": 676,
+          "line": 681,
           "conditions": []
         },
         {
           "selector": ".menu-item:focus-visible",
           "file": "07-components.css",
-          "line": 676,
+          "line": 681,
           "conditions": []
         },
         {
           "selector": ".menu-item .push",
           "file": "07-components.css",
-          "line": 681,
+          "line": 686,
           "conditions": []
         }
       ],
@@ -39436,7 +39591,7 @@
     {
       "name": "menu-item-danger",
       "file": "07-components.css",
-      "line": 679,
+      "line": 684,
       "layer": "deck.components",
       "section": null,
       "doc": "A destructive item. Red is not announced, so the label has to say what it\ndoes and a confirmation should stand behind it.",
@@ -39450,13 +39605,13 @@
         {
           "selector": ".menu-item-danger",
           "file": "07-components.css",
-          "line": 679,
+          "line": 684,
           "conditions": []
         },
         {
           "selector": ".menu-item-danger:hover",
           "file": "07-components.css",
-          "line": 680,
+          "line": 685,
           "conditions": []
         }
       ],
@@ -39471,7 +39626,7 @@
     {
       "name": "menu-label",
       "file": "07-components.css",
-      "line": 686,
+      "line": 691,
       "layer": "deck.components",
       "section": null,
       "doc": "A small heading above a group of items. Styling only — a screen reader\nhears ordinary text.",
@@ -39497,7 +39652,7 @@
         {
           "selector": ".menu-label",
           "file": "07-components.css",
-          "line": 686,
+          "line": 691,
           "conditions": []
         }
       ],
@@ -39547,7 +39702,7 @@
     {
       "name": "menu-sep",
       "file": "07-components.css",
-      "line": 683,
+      "line": 688,
       "layer": "deck.components",
       "section": null,
       "doc": "A one-pixel divider between groups of items.",
@@ -39569,7 +39724,7 @@
         {
           "selector": ".menu-sep",
           "file": "07-components.css",
-          "line": 683,
+          "line": 688,
           "conditions": []
         }
       ],
@@ -40168,7 +40323,7 @@
     {
       "name": "modal",
       "file": "07-components.css",
-      "line": 703,
+      "line": 708,
       "layer": "deck.components",
       "section": null,
       "doc": "A native <dialog>. Open it with showModal(), never show() and never the\nopen attribute: only showModal() gives the top layer, the backdrop, the\nfocus trap and an inert background. The open and close animate because\ndisplay and overlay are in the transition with allow-discrete, which is\nwhat keeps the element rendered long enough to fade out.\nmargin: auto centres it: the browser's own dialog styles do that, but\nthe reset's `* { margin: 0 }` removes them, so Deck restores it here.\nAn open modal is a flex column, so a body taller than the cap shrinks\nand scrolls (a scroll container's minimum height is 0) while the header\nand footer keep their height; as a block, the cap clipped everything\npast it, footer included. Only [open] sets display, because the browser\ngives a closed dialog display: none. flex-direction sits on .modal\nitself, so the column holds while display: flex lingers through the\nclose transition.",
@@ -40238,43 +40393,43 @@
         {
           "selector": ".modal",
           "file": "07-components.css",
-          "line": 703,
+          "line": 708,
           "conditions": []
         },
         {
           "selector": ".modal[open]",
           "file": "07-components.css",
-          "line": 724,
+          "line": 729,
           "conditions": []
         },
         {
           "selector": ".modal[open]",
           "file": "07-components.css",
-          "line": 725,
+          "line": 730,
           "conditions": []
         },
         {
           "selector": ".modal::backdrop",
           "file": "07-components.css",
-          "line": 726,
+          "line": 731,
           "conditions": []
         },
         {
           "selector": ".modal[open]::backdrop",
           "file": "07-components.css",
-          "line": 733,
+          "line": 738,
           "conditions": []
         },
         {
           "selector": ".modal[open]::backdrop",
           "file": "07-components.css",
-          "line": 734,
+          "line": 739,
           "conditions": []
         },
         {
           "selector": ".modal > form",
           "file": "07-components.css",
-          "line": 738,
+          "line": 743,
           "conditions": []
         }
       ],
@@ -40302,7 +40457,7 @@
     {
       "name": "modal-body",
       "file": "07-components.css",
-      "line": 755,
+      "line": 760,
       "layer": "deck.components",
       "section": null,
       "doc": "The scrolling region. The modal caps at min(85dvh, 48rem) and clips, so a\nlong body scrolls while the header and footer stay put — which is what\nkeeps the actions above the fold.",
@@ -40332,7 +40487,7 @@
         {
           "selector": ".modal-body",
           "file": "07-components.css",
-          "line": 755,
+          "line": 760,
           "conditions": []
         }
       ],
@@ -40347,7 +40502,7 @@
     {
       "name": "modal-footer",
       "file": "07-components.css",
-      "line": 759,
+      "line": 764,
       "layer": "deck.components",
       "section": null,
       "doc": "The action row, end-aligned. Below 32rem it becomes column-reverse with\nfull-width buttons, so the primary action — last in the markup — is on top\nwhere a thumb reaches it, without changing DOM order.",
@@ -40385,13 +40540,13 @@
         {
           "selector": ".modal-footer",
           "file": "07-components.css",
-          "line": 759,
+          "line": 764,
           "conditions": []
         },
         {
           "selector": ".modal-footer",
           "file": "07-components.css",
-          "line": 769,
+          "line": 774,
           "conditions": [
             "@media (max-width: 32rem)"
           ]
@@ -40399,7 +40554,7 @@
         {
           "selector": ".modal-footer > .btn",
           "file": "07-components.css",
-          "line": 770,
+          "line": 775,
           "conditions": [
             "@media (max-width: 32rem)"
           ]
@@ -40419,7 +40574,7 @@
     {
       "name": "modal-header",
       "file": "07-components.css",
-      "line": 742,
+      "line": 747,
       "layer": "deck.components",
       "section": null,
       "doc": "The title row. A flex row aligned to flex-start, so a long title and a\nclose button line up on the first line.",
@@ -40449,7 +40604,7 @@
         {
           "selector": ".modal-header",
           "file": "07-components.css",
-          "line": 742,
+          "line": 747,
           "conditions": []
         }
       ],
@@ -40465,7 +40620,7 @@
     {
       "name": "modal-title",
       "file": "07-components.css",
-      "line": 751,
+      "line": 756,
       "layer": "deck.components",
       "section": null,
       "doc": "The dialog's heading. Give it an id and point aria-labelledby at it, or\nthe dialog is announced with no name.",
@@ -40487,7 +40642,7 @@
         {
           "selector": ".modal-title",
           "file": "07-components.css",
-          "line": 751,
+          "line": 756,
           "conditions": []
         }
       ],
@@ -40501,7 +40656,7 @@
     {
       "name": "mono",
       "file": "09-utilities.css",
-      "line": 121,
+      "line": 125,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -40515,7 +40670,7 @@
         {
           "selector": ".mono",
           "file": "09-utilities.css",
-          "line": 121,
+          "line": 125,
           "conditions": []
         },
         {
@@ -40535,7 +40690,7 @@
     {
       "name": "mouse-only",
       "file": "09-utilities.css",
-      "line": 281,
+      "line": 299,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -40549,7 +40704,7 @@
         {
           "selector": ".mouse-only",
           "file": "09-utilities.css",
-          "line": 281,
+          "line": 299,
           "conditions": [
             "@media (pointer: coarse)"
           ]
@@ -40941,7 +41096,7 @@
     {
       "name": "nav-link",
       "file": "07-components.css",
-      "line": 864,
+      "line": 869,
       "layer": "deck.components",
       "section": null,
       "doc": "One destination in a .navbar. Carries the hover and current-page\nstates; use .btn only for actions, never for navigation. inline-flex\ncentres an icon on the label rather than sitting it on the baseline,\nwhere it could push the line box taller, so a row that mixes icon and\ntext-only links keeps one height.",
@@ -40991,19 +41146,19 @@
         {
           "selector": ".nav-link",
           "file": "07-components.css",
-          "line": 864,
+          "line": 869,
           "conditions": []
         },
         {
           "selector": ".nav-link:hover",
           "file": "07-components.css",
-          "line": 876,
+          "line": 881,
           "conditions": []
         },
         {
           "selector": ".nav-link[aria-current]",
           "file": "07-components.css",
-          "line": 877,
+          "line": 882,
           "conditions": []
         }
       ],
@@ -41027,7 +41182,7 @@
     {
       "name": "navbar",
       "file": "07-components.css",
-      "line": 839,
+      "line": 844,
       "layer": "deck.components",
       "section": "Nav bar",
       "doc": null,
@@ -41061,7 +41216,7 @@
         {
           "selector": ".navbar",
           "file": "07-components.css",
-          "line": 839,
+          "line": 844,
           "conditions": []
         }
       ],
@@ -41081,7 +41236,7 @@
     {
       "name": "navbar-brand",
       "file": "07-components.css",
-      "line": 847,
+      "line": 852,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -41123,7 +41278,7 @@
         {
           "selector": ".navbar-brand",
           "file": "07-components.css",
-          "line": 847,
+          "line": 852,
           "conditions": []
         }
       ],
@@ -41139,7 +41294,7 @@
     {
       "name": "navbar-links",
       "file": "07-components.css",
-      "line": 857,
+      "line": 862,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -41161,13 +41316,13 @@
         {
           "selector": ".navbar-links",
           "file": "07-components.css",
-          "line": 857,
+          "line": 862,
           "conditions": []
         },
         {
           "selector": ".navbar-links",
           "file": "07-components.css",
-          "line": 858,
+          "line": 863,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -41219,7 +41374,7 @@
     {
       "name": "no-motion",
       "file": "09-utilities.css",
-      "line": 217,
+      "line": 235,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -41237,7 +41392,7 @@
         {
           "selector": ".no-motion",
           "file": "09-utilities.css",
-          "line": 217,
+          "line": 235,
           "conditions": []
         }
       ],
@@ -41249,7 +41404,7 @@
     {
       "name": "no-print",
       "file": "09-utilities.css",
-      "line": 282,
+      "line": 300,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -41263,7 +41418,7 @@
         {
           "selector": ".no-print",
           "file": "09-utilities.css",
-          "line": 282,
+          "line": 300,
           "conditions": [
             "@media print"
           ]
@@ -41319,7 +41474,7 @@
     {
       "name": "no-select",
       "file": "09-utilities.css",
-      "line": 178,
+      "line": 196,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -41333,7 +41488,7 @@
         {
           "selector": ".no-select",
           "file": "09-utilities.css",
-          "line": 178,
+          "line": 196,
           "conditions": []
         }
       ],
@@ -41345,7 +41500,7 @@
     {
       "name": "no-underline",
       "file": "09-utilities.css",
-      "line": 124,
+      "line": 128,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -41359,7 +41514,7 @@
         {
           "selector": ".no-underline",
           "file": "09-utilities.css",
-          "line": 124,
+          "line": 128,
           "conditions": []
         }
       ],
@@ -41712,7 +41867,7 @@
     {
       "name": "nums",
       "file": "09-utilities.css",
-      "line": 120,
+      "line": 124,
       "layer": "deck.utilities",
       "section": null,
       "doc": "Tabular figures, so numbers line up in a column and do not jitter when\nthey change.",
@@ -41726,7 +41881,7 @@
         {
           "selector": ".nums",
           "file": "09-utilities.css",
-          "line": 120,
+          "line": 124,
           "conditions": []
         },
         {
@@ -41742,9 +41897,35 @@
       "definedUnconditional": true
     },
     {
+      "name": "object-contain",
+      "file": "09-utilities.css",
+      "line": 88,
+      "layer": "deck.utilities",
+      "section": null,
+      "doc": "Fits the whole image inside its box, letterboxed, instead of cropping\nit to fill. This layer beats the cover that .ratio-* sets, so a logo or\na poster in a 16:9 frame keeps its edges.",
+      "declarations": [
+        {
+          "prop": "object-fit",
+          "value": "contain"
+        }
+      ],
+      "selectors": [
+        {
+          "selector": ".object-contain",
+          "file": "09-utilities.css",
+          "line": 88,
+          "conditions": []
+        }
+      ],
+      "variants": [],
+      "tokensUsed": [],
+      "defined": true,
+      "definedUnconditional": true
+    },
+    {
       "name": "opacity-60",
       "file": "09-utilities.css",
-      "line": 176,
+      "line": 194,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -41758,7 +41939,7 @@
         {
           "selector": ".opacity-60",
           "file": "09-utilities.css",
-          "line": 176,
+          "line": 194,
           "conditions": []
         }
       ],
@@ -41804,7 +41985,7 @@
     {
       "name": "overflow-auto",
       "file": "09-utilities.css",
-      "line": 173,
+      "line": 191,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -41818,7 +41999,7 @@
         {
           "selector": ".overflow-auto",
           "file": "09-utilities.css",
-          "line": 173,
+          "line": 191,
           "conditions": []
         }
       ],
@@ -41830,7 +42011,7 @@
     {
       "name": "overflow-clip",
       "file": "09-utilities.css",
-      "line": 174,
+      "line": 192,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -41844,7 +42025,7 @@
         {
           "selector": ".overflow-clip",
           "file": "09-utilities.css",
-          "line": 174,
+          "line": 192,
           "conditions": []
         }
       ],
@@ -41856,7 +42037,7 @@
     {
       "name": "overflow-hidden",
       "file": "09-utilities.css",
-      "line": 172,
+      "line": 190,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -41870,7 +42051,7 @@
         {
           "selector": ".overflow-hidden",
           "file": "09-utilities.css",
-          "line": 172,
+          "line": 190,
           "conditions": []
         }
       ],
@@ -42173,7 +42354,7 @@
     {
       "name": "pagination",
       "file": "07-components.css",
-      "line": 495,
+      "line": 500,
       "layer": "deck.components",
       "section": "Pagination",
       "doc": null,
@@ -42199,25 +42380,25 @@
         {
           "selector": ".pagination",
           "file": "07-components.css",
-          "line": 495,
+          "line": 500,
           "conditions": []
         },
         {
           "selector": ".pagination > *",
           "file": "07-components.css",
-          "line": 496,
+          "line": 501,
           "conditions": []
         },
         {
           "selector": ".pagination > a:hover",
           "file": "07-components.css",
-          "line": 509,
+          "line": 514,
           "conditions": []
         },
         {
           "selector": ".pagination > [aria-current=\"page\"]",
           "file": "07-components.css",
-          "line": 510,
+          "line": 515,
           "conditions": []
         },
         {
@@ -43805,7 +43986,7 @@
     {
       "name": "pointer-none",
       "file": "09-utilities.css",
-      "line": 177,
+      "line": 195,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -43819,7 +44000,7 @@
         {
           "selector": ".pointer-none",
           "file": "09-utilities.css",
-          "line": 177,
+          "line": 195,
           "conditions": []
         }
       ],
@@ -44409,7 +44590,7 @@
     {
       "name": "progress",
       "file": "07-components.css",
-      "line": 523,
+      "line": 528,
       "layer": "deck.components",
       "section": null,
       "doc": "Three ways to say \"something is happening\", and the choice is only ever\nabout one thing: whether you know how much is left. .progress and .ring\ndo, .spinner does not. There is no standalone meter -- a bar drawn from a\nvalue rather than from an element is .chart-meter, in 14-charts.css.\n\n.progress goes on a real <progress>, so the element carries the value, the\nmaximum and the role. The two vendor pseudo-elements have to be written as\nseparate rules: a vendor pseudo-element in a shared selector invalidates\nthe whole rule for the other engine. Same constraint as .range.",
@@ -44447,25 +44628,25 @@
         {
           "selector": ".progress",
           "file": "07-components.css",
-          "line": 523,
+          "line": 528,
           "conditions": []
         },
         {
           "selector": ".progress::-webkit-progress-bar",
           "file": "07-components.css",
-          "line": 532,
+          "line": 537,
           "conditions": []
         },
         {
           "selector": ".progress::-webkit-progress-value",
           "file": "07-components.css",
-          "line": 533,
+          "line": 538,
           "conditions": []
         },
         {
           "selector": ".progress::-moz-progress-bar",
           "file": "07-components.css",
-          "line": 534,
+          "line": 539,
           "conditions": []
         },
         {
@@ -44629,13 +44810,13 @@
         {
           "selector": ".menu-item .push",
           "file": "07-components.css",
-          "line": 681,
+          "line": 686,
           "conditions": []
         },
         {
           "selector": ".sidebar-link .push",
           "file": "07-components.css",
-          "line": 902,
+          "line": 907,
           "conditions": []
         },
         {
@@ -45370,7 +45551,7 @@
     {
       "name": "r-full",
       "file": "09-utilities.css",
-      "line": 157,
+      "line": 167,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -45384,7 +45565,7 @@
         {
           "selector": ".r-full",
           "file": "09-utilities.css",
-          "line": 157,
+          "line": 167,
           "conditions": []
         }
       ],
@@ -45398,7 +45579,7 @@
     {
       "name": "r-lg",
       "file": "09-utilities.css",
-      "line": 156,
+      "line": 166,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -45412,7 +45593,7 @@
         {
           "selector": ".r-lg",
           "file": "09-utilities.css",
-          "line": 156,
+          "line": 166,
           "conditions": []
         }
       ],
@@ -45426,7 +45607,7 @@
     {
       "name": "r-md",
       "file": "09-utilities.css",
-      "line": 155,
+      "line": 165,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -45440,7 +45621,7 @@
         {
           "selector": ".r-md",
           "file": "09-utilities.css",
-          "line": 155,
+          "line": 165,
           "conditions": []
         }
       ],
@@ -45454,7 +45635,7 @@
     {
       "name": "r-sm",
       "file": "09-utilities.css",
-      "line": 154,
+      "line": 164,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -45468,7 +45649,7 @@
         {
           "selector": ".r-sm",
           "file": "09-utilities.css",
-          "line": 154,
+          "line": 164,
           "conditions": []
         }
       ],
@@ -45514,7 +45695,7 @@
     {
       "name": "r-xs",
       "file": "09-utilities.css",
-      "line": 153,
+      "line": 163,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -45528,7 +45709,7 @@
         {
           "selector": ".r-xs",
           "file": "09-utilities.css",
-          "line": 153,
+          "line": 163,
           "conditions": []
         }
       ],
@@ -45542,7 +45723,7 @@
     {
       "name": "range",
       "file": "06-forms.css",
-      "line": 288,
+      "line": 308,
       "layer": "deck.components",
       "section": null,
       "doc": "A slider. The track and thumb are vendor pseudo-elements with\ndifferent names and different box models per engine, so every\ndeclaration is written twice — WebKit needs a negative block-start\nmargin to centre the thumb and Firefox does not.",
@@ -45568,37 +45749,37 @@
         {
           "selector": ".range",
           "file": "06-forms.css",
-          "line": 288,
+          "line": 308,
           "conditions": []
         },
         {
           "selector": ".range::-webkit-slider-runnable-track",
           "file": "06-forms.css",
-          "line": 294,
+          "line": 314,
           "conditions": []
         },
         {
           "selector": ".range::-moz-range-track",
           "file": "06-forms.css",
-          "line": 299,
+          "line": 319,
           "conditions": []
         },
         {
           "selector": ".range::-webkit-slider-thumb",
           "file": "06-forms.css",
-          "line": 304,
+          "line": 324,
           "conditions": []
         },
         {
           "selector": ".range::-moz-range-thumb",
           "file": "06-forms.css",
-          "line": 315,
+          "line": 335,
           "conditions": []
         },
         {
           "selector": ".range:active::-webkit-slider-thumb",
           "file": "06-forms.css",
-          "line": 324,
+          "line": 344,
           "conditions": []
         }
       ],
@@ -46145,6 +46326,40 @@
       "definedUnconditional": true
     },
     {
+      "name": "ratio-2x3",
+      "file": "04-layout.css",
+      "line": 239,
+      "layer": "deck.layout",
+      "section": null,
+      "doc": "Portrait 2:3, the shape of a film poster or a book cover.",
+      "declarations": [
+        {
+          "prop": "aspect-ratio",
+          "value": "2 / 3"
+        },
+        {
+          "prop": "object-fit",
+          "value": "cover"
+        },
+        {
+          "prop": "inline-size",
+          "value": "100%"
+        }
+      ],
+      "selectors": [
+        {
+          "selector": ".ratio-2x3",
+          "file": "04-layout.css",
+          "line": 239,
+          "conditions": []
+        }
+      ],
+      "variants": [],
+      "tokensUsed": [],
+      "defined": true,
+      "definedUnconditional": true
+    },
+    {
       "name": "ratio-4x3",
       "file": "04-layout.css",
       "line": 236,
@@ -46274,7 +46489,7 @@
     {
       "name": "relative",
       "file": "09-utilities.css",
-      "line": 166,
+      "line": 176,
       "layer": "deck.utilities",
       "section": "Position and overflow",
       "doc": null,
@@ -46288,7 +46503,7 @@
         {
           "selector": ".relative",
           "file": "09-utilities.css",
-          "line": 166,
+          "line": 176,
           "conditions": []
         }
       ],
@@ -46538,7 +46753,7 @@
     {
       "name": "ring",
       "file": "07-components.css",
-      "line": 550,
+      "line": 555,
       "layer": "deck.components",
       "section": null,
       "doc": "A conic gradient for the fill, a radial mask for the hole. Three custom\nproperties shape it: --value, --size, --thickness.\n\nThe mask is the thing to understand. It applies to this element AND its\nwhole subtree, so a label centred inside a .ring is punched out along with\nthe middle -- it renders, it takes up space, it is in the accessibility\ntree, and it is invisible. That is what .ring-wrap and .ring-label below\nexist for: an unmasked wrapper that stacks the label over the ring as a\nsibling rather than a child.\n\nFINDINGS 60: place-items and the three font declarations here are the\nfossil of the approach that does not work. They style a child nobody can\nsee -- .ring-label repeats all three on the sibling, which is the tell.\nDue for removal; kept for now because the API is frozen.",
@@ -46604,7 +46819,7 @@
         {
           "selector": ".ring",
           "file": "07-components.css",
-          "line": 550,
+          "line": 555,
           "conditions": []
         }
       ],
@@ -46627,7 +46842,7 @@
     {
       "name": "ring-label",
       "file": "07-components.css",
-      "line": 567,
+      "line": 572,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -46636,7 +46851,7 @@
         {
           "selector": ".ring-wrap > .ring-label",
           "file": "07-components.css",
-          "line": 567,
+          "line": 572,
           "conditions": []
         }
       ],
@@ -46669,7 +46884,7 @@
     {
       "name": "ring-wrap",
       "file": "07-components.css",
-      "line": 566,
+      "line": 571,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -46691,13 +46906,13 @@
         {
           "selector": ".ring-wrap",
           "file": "07-components.css",
-          "line": 566,
+          "line": 571,
           "conditions": []
         },
         {
           "selector": ".ring-wrap > .ring-label",
           "file": "07-components.css",
-          "line": 567,
+          "line": 572,
           "conditions": []
         }
       ],
@@ -47525,7 +47740,7 @@
     {
       "name": "search",
       "file": "06-forms.css",
-      "line": 163,
+      "line": 183,
       "layer": "deck.components",
       "section": null,
       "doc": "A control with an icon inside its starting edge. The icon is\npointer-events: none, so clicking it focuses the field underneath\nrather than doing nothing.",
@@ -47547,19 +47762,19 @@
         {
           "selector": ".search",
           "file": "06-forms.css",
-          "line": 163,
+          "line": 183,
           "conditions": []
         },
         {
           "selector": ".search > .icon",
           "file": "06-forms.css",
-          "line": 164,
+          "line": 184,
           "conditions": []
         },
         {
           "selector": ".search > .input",
           "file": "06-forms.css",
-          "line": 170,
+          "line": 190,
           "conditions": []
         },
         {
@@ -47619,7 +47834,7 @@
     {
       "name": "segmented",
       "file": "07-components.css",
-      "line": 407,
+      "line": 412,
       "layer": "deck.components",
       "section": null,
       "doc": "A one-of-N control: equal-width children in a sunken track with the\nselected one raised. Styled from [aria-selected=\"true\"] for a tablist,\n[aria-pressed=\"true\"] for a group of toggle buttons, or .is-active; all\nthree look the same, and deck.js moves whichever attribute the children\ncarry. Built from radio inputs it needs no JavaScript and gets arrow keys\nfree — but Deck does not style :has(:checked), so that version needs one\nrule of your own.",
@@ -47681,31 +47896,31 @@
         {
           "selector": ".segmented",
           "file": "07-components.css",
-          "line": 407,
+          "line": 412,
           "conditions": []
         },
         {
           "selector": ".segmented > *",
           "file": "07-components.css",
-          "line": 416,
+          "line": 421,
           "conditions": []
         },
         {
           "selector": ".segmented > [aria-selected=\"true\"]",
           "file": "07-components.css",
-          "line": 432,
+          "line": 437,
           "conditions": []
         },
         {
           "selector": ".segmented > [aria-pressed=\"true\"]",
           "file": "07-components.css",
-          "line": 432,
+          "line": 437,
           "conditions": []
         },
         {
           "selector": ".segmented > .is-active",
           "file": "07-components.css",
-          "line": 432,
+          "line": 437,
           "conditions": []
         },
         {
@@ -47806,7 +48021,7 @@
         {
           "selector": ".select",
           "file": "06-forms.css",
-          "line": 66,
+          "line": 86,
           "conditions": [
             "@media (pointer: coarse)"
           ]
@@ -47814,43 +48029,43 @@
         {
           "selector": ".select:hover",
           "file": "06-forms.css",
-          "line": 71,
+          "line": 91,
           "conditions": []
         },
         {
           "selector": ".select:focus",
           "file": "06-forms.css",
-          "line": 73,
+          "line": 93,
           "conditions": []
         },
         {
           "selector": ".select[disabled]",
           "file": "06-forms.css",
-          "line": 79,
+          "line": 99,
           "conditions": []
         },
         {
           "selector": ".select",
           "file": "06-forms.css",
-          "line": 95,
+          "line": 115,
           "conditions": []
         },
         {
           "selector": ".select:user-invalid",
           "file": "06-forms.css",
-          "line": 110,
+          "line": 130,
           "conditions": []
         },
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select)",
           "file": "06-forms.css",
-          "line": 110,
+          "line": 130,
           "conditions": []
         },
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select):focus",
           "file": "06-forms.css",
-          "line": 114,
+          "line": 134,
           "conditions": []
         },
         {
@@ -47938,7 +48153,7 @@
     {
       "name": "shadow-0",
       "file": "09-utilities.css",
-      "line": 159,
+      "line": 169,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -47952,7 +48167,7 @@
         {
           "selector": ".shadow-0",
           "file": "09-utilities.css",
-          "line": 159,
+          "line": 169,
           "conditions": []
         }
       ],
@@ -47964,7 +48179,7 @@
     {
       "name": "shadow-1",
       "file": "09-utilities.css",
-      "line": 160,
+      "line": 170,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -47978,7 +48193,7 @@
         {
           "selector": ".shadow-1",
           "file": "09-utilities.css",
-          "line": 160,
+          "line": 170,
           "conditions": []
         }
       ],
@@ -47992,7 +48207,7 @@
     {
       "name": "shadow-2",
       "file": "09-utilities.css",
-      "line": 161,
+      "line": 171,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -48006,7 +48221,7 @@
         {
           "selector": ".shadow-2",
           "file": "09-utilities.css",
-          "line": 161,
+          "line": 171,
           "conditions": []
         }
       ],
@@ -48020,7 +48235,7 @@
     {
       "name": "shadow-3",
       "file": "09-utilities.css",
-      "line": 162,
+      "line": 172,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -48034,7 +48249,7 @@
         {
           "selector": ".shadow-3",
           "file": "09-utilities.css",
-          "line": 162,
+          "line": 172,
           "conditions": []
         }
       ],
@@ -48048,7 +48263,7 @@
     {
       "name": "shadow-4",
       "file": "09-utilities.css",
-      "line": 163,
+      "line": 173,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -48062,7 +48277,7 @@
         {
           "selector": ".shadow-4",
           "file": "09-utilities.css",
-          "line": 163,
+          "line": 173,
           "conditions": []
         }
       ],
@@ -48500,7 +48715,7 @@
     {
       "name": "sidebar",
       "file": "07-components.css",
-      "line": 880,
+      "line": 885,
       "layer": "deck.components",
       "section": "Sidebar",
       "doc": null,
@@ -48526,7 +48741,7 @@
         {
           "selector": ".sidebar",
           "file": "07-components.css",
-          "line": 880,
+          "line": 885,
           "conditions": []
         },
         {
@@ -48552,7 +48767,7 @@
     {
       "name": "sidebar-group",
       "file": "07-components.css",
-      "line": 886,
+      "line": 891,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48578,7 +48793,7 @@
         {
           "selector": ".sidebar-group",
           "file": "07-components.css",
-          "line": 886,
+          "line": 891,
           "conditions": []
         },
         {
@@ -48603,7 +48818,7 @@
     {
       "name": "sidebar-link",
       "file": "07-components.css",
-      "line": 887,
+      "line": 892,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48657,25 +48872,25 @@
         {
           "selector": ".sidebar-link",
           "file": "07-components.css",
-          "line": 887,
+          "line": 892,
           "conditions": []
         },
         {
           "selector": ".sidebar-link:hover",
           "file": "07-components.css",
-          "line": 900,
+          "line": 905,
           "conditions": []
         },
         {
           "selector": ".sidebar-link[aria-current]",
           "file": "07-components.css",
-          "line": 901,
+          "line": 906,
           "conditions": []
         },
         {
           "selector": ".sidebar-link .push",
           "file": "07-components.css",
-          "line": 902,
+          "line": 907,
           "conditions": []
         },
         {
@@ -48715,7 +48930,7 @@
     {
       "name": "skeleton",
       "file": "07-components.css",
-      "line": 584,
+      "line": 589,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48761,7 +48976,7 @@
         {
           "selector": ".skeleton",
           "file": "07-components.css",
-          "line": 584,
+          "line": 589,
           "conditions": []
         }
       ],
@@ -48781,7 +48996,7 @@
     {
       "name": "skeleton-circle",
       "file": "07-components.css",
-      "line": 595,
+      "line": 600,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48795,7 +49010,7 @@
         {
           "selector": ".skeleton-circle",
           "file": "07-components.css",
-          "line": 595,
+          "line": 600,
           "conditions": []
         }
       ],
@@ -48809,7 +49024,7 @@
     {
       "name": "skeleton-text",
       "file": "07-components.css",
-      "line": 594,
+      "line": 599,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48827,7 +49042,7 @@
         {
           "selector": ".skeleton-text",
           "file": "07-components.css",
-          "line": 594,
+          "line": 599,
           "conditions": []
         }
       ],
@@ -48839,7 +49054,7 @@
     {
       "name": "skip-link",
       "file": "09-utilities.css",
-      "line": 235,
+      "line": 253,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -48881,13 +49096,13 @@
         {
           "selector": ".skip-link",
           "file": "09-utilities.css",
-          "line": 235,
+          "line": 253,
           "conditions": []
         },
         {
           "selector": ".skip-link:focus",
           "file": "09-utilities.css",
-          "line": 245,
+          "line": 263,
           "conditions": []
         },
         {
@@ -48914,7 +49129,7 @@
     {
       "name": "sm",
       "file": "09-utilities.css",
-      "line": 249,
+      "line": 267,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -48923,7 +49138,7 @@
         {
           "selector": ".sm\\:hidden",
           "file": "09-utilities.css",
-          "line": 249,
+          "line": 267,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -48931,7 +49146,7 @@
         {
           "selector": ".sm\\:block",
           "file": "09-utilities.css",
-          "line": 250,
+          "line": 268,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -48939,7 +49154,7 @@
         {
           "selector": ".sm\\:flex",
           "file": "09-utilities.css",
-          "line": 251,
+          "line": 269,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -48947,7 +49162,7 @@
         {
           "selector": ".sm\\:row",
           "file": "09-utilities.css",
-          "line": 252,
+          "line": 270,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -48955,7 +49170,7 @@
         {
           "selector": ".sm\\:w-auto",
           "file": "09-utilities.css",
-          "line": 253,
+          "line": 271,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -48963,7 +49178,7 @@
         {
           "selector": ".sm\\:text-start",
           "file": "09-utilities.css",
-          "line": 254,
+          "line": 272,
           "conditions": [
             "@media (min-width: 40rem)"
           ]
@@ -49830,7 +50045,7 @@
     {
       "name": "spinner",
       "file": "07-components.css",
-      "line": 574,
+      "line": 579,
       "layer": "deck.components",
       "section": null,
       "doc": "Exempt from the reduced-motion reset in 02-reset.css: instead of freezing\nit slows to 2.4s. A frozen spinner reads as a hung page, which is worse\nfor everyone than a slow one. Note border-block-start-color rather than\nborder-top-color -- the lit segment starts at the block start in any\nwriting mode.",
@@ -49872,7 +50087,7 @@
         {
           "selector": ".spinner",
           "file": "07-components.css",
-          "line": 574,
+          "line": 579,
           "conditions": []
         }
       ],
@@ -49890,7 +50105,7 @@
     {
       "name": "spinner-lg",
       "file": "07-components.css",
-      "line": 582,
+      "line": 587,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -49912,7 +50127,7 @@
         {
           "selector": ".spinner-lg",
           "file": "07-components.css",
-          "line": 582,
+          "line": 587,
           "conditions": []
         }
       ],
@@ -50048,7 +50263,7 @@
     {
       "name": "sr-only",
       "file": "09-utilities.css",
-      "line": 224,
+      "line": 242,
       "layer": "deck.utilities",
       "section": "Accessibility",
       "doc": null,
@@ -50094,7 +50309,7 @@
         {
           "selector": ".sr-only",
           "file": "09-utilities.css",
-          "line": 224,
+          "line": 242,
           "conditions": []
         }
       ],
@@ -50567,7 +50782,7 @@
     {
       "name": "stat",
       "file": "07-components.css",
-      "line": 796,
+      "line": 801,
       "layer": "deck.components",
       "section": "Stat",
       "doc": null,
@@ -50589,7 +50804,7 @@
         {
           "selector": ".stat",
           "file": "07-components.css",
-          "line": 796,
+          "line": 801,
           "conditions": []
         },
         {
@@ -50679,7 +50894,7 @@
     {
       "name": "stat-delta",
       "file": "07-components.css",
-      "line": 805,
+      "line": 810,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -50709,7 +50924,7 @@
         {
           "selector": ".stat-delta",
           "file": "07-components.css",
-          "line": 805,
+          "line": 810,
           "conditions": []
         }
       ],
@@ -50727,7 +50942,7 @@
     {
       "name": "stat-delta-down",
       "file": "07-components.css",
-      "line": 807,
+      "line": 812,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -50741,7 +50956,7 @@
         {
           "selector": ".stat-delta-down",
           "file": "07-components.css",
-          "line": 807,
+          "line": 812,
           "conditions": []
         }
       ],
@@ -50755,7 +50970,7 @@
     {
       "name": "stat-delta-up",
       "file": "07-components.css",
-      "line": 806,
+      "line": 811,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -50769,7 +50984,7 @@
         {
           "selector": ".stat-delta-up",
           "file": "07-components.css",
-          "line": 806,
+          "line": 811,
           "conditions": []
         }
       ],
@@ -50783,7 +50998,7 @@
     {
       "name": "stat-label",
       "file": "07-components.css",
-      "line": 804,
+      "line": 809,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -50801,7 +51016,7 @@
         {
           "selector": ".stat-label",
           "file": "07-components.css",
-          "line": 804,
+          "line": 809,
           "conditions": []
         },
         {
@@ -50824,7 +51039,7 @@
     {
       "name": "stat-value",
       "file": "07-components.css",
-      "line": 797,
+      "line": 802,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -50854,7 +51069,7 @@
         {
           "selector": ".stat-value",
           "file": "07-components.css",
-          "line": 797,
+          "line": 802,
           "conditions": []
         },
         {
@@ -51387,7 +51602,7 @@
     {
       "name": "sticky",
       "file": "09-utilities.css",
-      "line": 169,
+      "line": 179,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -51401,7 +51616,7 @@
         {
           "selector": ".sticky",
           "file": "09-utilities.css",
-          "line": 169,
+          "line": 179,
           "conditions": []
         },
         {
@@ -51627,7 +51842,7 @@
     {
       "name": "switch",
       "file": "06-forms.css",
-      "line": 255,
+      "line": 275,
       "layer": "deck.components",
       "section": null,
       "doc": "An on/off control that takes effect immediately, drawn over a real\ncheckbox. If the reader has to press Save afterwards, use .check\ninstead. Add role=\"switch\" when \"on\"/\"off\" reads better than\n\"checked\"/\"unchecked\".",
@@ -51657,37 +51872,37 @@
         {
           "selector": ".switch",
           "file": "06-forms.css",
-          "line": 255,
+          "line": 275,
           "conditions": []
         },
         {
           "selector": ".switch input",
           "file": "06-forms.css",
-          "line": 256,
+          "line": 276,
           "conditions": []
         },
         {
           "selector": ".switch input::after",
           "file": "06-forms.css",
-          "line": 267,
+          "line": 287,
           "conditions": []
         },
         {
           "selector": ".switch input:checked",
           "file": "06-forms.css",
-          "line": 279,
+          "line": 299,
           "conditions": []
         },
         {
           "selector": ".switch input:checked::after",
           "file": "06-forms.css",
-          "line": 280,
+          "line": 300,
           "conditions": []
         },
         {
           "selector": ".switch input:focus-visible",
           "file": "06-forms.css",
-          "line": 281,
+          "line": 301,
           "conditions": []
         },
         {
@@ -51731,7 +51946,7 @@
     {
       "name": "tab",
       "file": "07-components.css",
-      "line": 377,
+      "line": 382,
       "layer": "deck.components",
       "section": null,
       "doc": "One trigger. Styled from [aria-selected=\"true\"], so the visual state and\nthe accessible state are the same attribute and cannot disagree. The\nunselected state carries the same transparent border, so selecting one\nchanges a colour and never moves anything.",
@@ -51797,25 +52012,25 @@
         {
           "selector": ".tab",
           "file": "07-components.css",
-          "line": 377,
+          "line": 382,
           "conditions": []
         },
         {
           "selector": ".tab:hover",
           "file": "07-components.css",
-          "line": 393,
+          "line": 398,
           "conditions": []
         },
         {
           "selector": ".tab[aria-selected=\"true\"]",
           "file": "07-components.css",
-          "line": 394,
+          "line": 399,
           "conditions": []
         },
         {
           "selector": ".tab.is-active",
           "file": "07-components.css",
-          "line": 394,
+          "line": 399,
           "conditions": []
         }
       ],
@@ -51894,13 +52109,13 @@
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 401,
+          "line": 421,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .form-actions-sticky",
           "file": "06-forms.css",
-          "line": 408,
+          "line": 428,
           "conditions": [
             "@media (min-width: 48rem)"
           ]
@@ -52472,7 +52687,7 @@
     {
       "name": "tabs",
       "file": "07-components.css",
-      "line": 365,
+      "line": 370,
       "layer": "deck.components",
       "section": null,
       "doc": "The strip. Scrolls sideways rather than wrapping, because tabs that wrap\nstop reading as a strip. Deck styles the tabs and ships no keyboard\nbehaviour: if you use role=\"tablist\" you must add the roving tabindex and\nthe arrow keys yourself, or the role promises what the page does not do.",
@@ -52502,13 +52717,13 @@
         {
           "selector": ".tabs",
           "file": "07-components.css",
-          "line": 365,
+          "line": 370,
           "conditions": []
         },
         {
           "selector": ".tabs::-webkit-scrollbar",
           "file": "07-components.css",
-          "line": 372,
+          "line": 377,
           "conditions": []
         },
         {
@@ -52531,7 +52746,7 @@
     {
       "name": "text-2xl",
       "file": "09-utilities.css",
-      "line": 95,
+      "line": 99,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -52545,7 +52760,7 @@
         {
           "selector": ".text-2xl",
           "file": "09-utilities.css",
-          "line": 95,
+          "line": 99,
           "conditions": []
         }
       ],
@@ -52559,7 +52774,7 @@
     {
       "name": "text-2xs",
       "file": "09-utilities.css",
-      "line": 87,
+      "line": 91,
       "layer": "deck.utilities",
       "section": "Type",
       "doc": null,
@@ -52573,7 +52788,7 @@
         {
           "selector": ".text-2xs",
           "file": "09-utilities.css",
-          "line": 87,
+          "line": 91,
           "conditions": []
         }
       ],
@@ -52587,7 +52802,7 @@
     {
       "name": "text-bad",
       "file": "09-utilities.css",
-      "line": 115,
+      "line": 119,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -52601,7 +52816,7 @@
         {
           "selector": ".text-bad",
           "file": "09-utilities.css",
-          "line": 115,
+          "line": 119,
           "conditions": []
         }
       ],
@@ -52615,7 +52830,7 @@
     {
       "name": "text-base",
       "file": "09-utilities.css",
-      "line": 91,
+      "line": 95,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -52629,7 +52844,7 @@
         {
           "selector": ".text-base",
           "file": "09-utilities.css",
-          "line": 91,
+          "line": 95,
           "conditions": []
         }
       ],
@@ -52643,7 +52858,7 @@
     {
       "name": "text-brand",
       "file": "09-utilities.css",
-      "line": 112,
+      "line": 116,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -52657,7 +52872,7 @@
         {
           "selector": ".text-brand",
           "file": "09-utilities.css",
-          "line": 112,
+          "line": 116,
           "conditions": []
         }
       ],
@@ -52671,7 +52886,7 @@
     {
       "name": "text-center",
       "file": "09-utilities.css",
-      "line": 105,
+      "line": 109,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -52685,7 +52900,7 @@
         {
           "selector": ".text-center",
           "file": "09-utilities.css",
-          "line": 105,
+          "line": 109,
           "conditions": []
         }
       ],
@@ -52728,7 +52943,7 @@
     {
       "name": "text-end",
       "file": "09-utilities.css",
-      "line": 106,
+      "line": 110,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -52742,7 +52957,7 @@
         {
           "selector": ".text-end",
           "file": "09-utilities.css",
-          "line": 106,
+          "line": 110,
           "conditions": []
         }
       ],
@@ -52754,7 +52969,7 @@
     {
       "name": "text-faint",
       "file": "09-utilities.css",
-      "line": 111,
+      "line": 115,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -52768,7 +52983,7 @@
         {
           "selector": ".text-faint",
           "file": "09-utilities.css",
-          "line": 111,
+          "line": 115,
           "conditions": []
         }
       ],
@@ -52782,7 +52997,7 @@
     {
       "name": "text-good",
       "file": "09-utilities.css",
-      "line": 113,
+      "line": 117,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -52796,7 +53011,7 @@
         {
           "selector": ".text-good",
           "file": "09-utilities.css",
-          "line": 113,
+          "line": 117,
           "conditions": []
         }
       ],
@@ -52810,7 +53025,7 @@
     {
       "name": "text-inherit",
       "file": "09-utilities.css",
-      "line": 116,
+      "line": 120,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -52824,7 +53039,7 @@
         {
           "selector": ".text-inherit",
           "file": "09-utilities.css",
-          "line": 116,
+          "line": 120,
           "conditions": []
         }
       ],
@@ -52836,7 +53051,7 @@
     {
       "name": "text-lg",
       "file": "09-utilities.css",
-      "line": 93,
+      "line": 97,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -52850,7 +53065,7 @@
         {
           "selector": ".text-lg",
           "file": "09-utilities.css",
-          "line": 93,
+          "line": 97,
           "conditions": []
         }
       ],
@@ -52864,7 +53079,7 @@
     {
       "name": "text-md",
       "file": "09-utilities.css",
-      "line": 92,
+      "line": 96,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -52878,7 +53093,7 @@
         {
           "selector": ".text-md",
           "file": "09-utilities.css",
-          "line": 92,
+          "line": 96,
           "conditions": []
         }
       ],
@@ -52892,7 +53107,7 @@
     {
       "name": "text-muted",
       "file": "09-utilities.css",
-      "line": 110,
+      "line": 114,
       "layer": "deck.utilities",
       "section": null,
       "doc": "Secondary text colour. Still meets contrast against every surface Deck\ndefines, so it is safe for body copy rather than decoration only.",
@@ -52906,7 +53121,7 @@
         {
           "selector": ".text-muted",
           "file": "09-utilities.css",
-          "line": 110,
+          "line": 114,
           "conditions": []
         }
       ],
@@ -52920,7 +53135,7 @@
     {
       "name": "text-sm",
       "file": "09-utilities.css",
-      "line": 90,
+      "line": 94,
       "layer": "deck.utilities",
       "section": null,
       "doc": "One step down the type scale, for secondary text and dense rows.",
@@ -52934,7 +53149,7 @@
         {
           "selector": ".text-sm",
           "file": "09-utilities.css",
-          "line": 90,
+          "line": 94,
           "conditions": []
         }
       ],
@@ -52948,7 +53163,7 @@
     {
       "name": "text-start",
       "file": "09-utilities.css",
-      "line": 104,
+      "line": 108,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -52962,7 +53177,7 @@
         {
           "selector": ".text-start",
           "file": "09-utilities.css",
-          "line": 104,
+          "line": 108,
           "conditions": []
         }
       ],
@@ -52974,7 +53189,7 @@
     {
       "name": "text-warn",
       "file": "09-utilities.css",
-      "line": 114,
+      "line": 118,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -52988,7 +53203,7 @@
         {
           "selector": ".text-warn",
           "file": "09-utilities.css",
-          "line": 114,
+          "line": 118,
           "conditions": []
         }
       ],
@@ -53002,7 +53217,7 @@
     {
       "name": "text-xl",
       "file": "09-utilities.css",
-      "line": 94,
+      "line": 98,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -53016,7 +53231,7 @@
         {
           "selector": ".text-xl",
           "file": "09-utilities.css",
-          "line": 94,
+          "line": 98,
           "conditions": []
         }
       ],
@@ -53030,7 +53245,7 @@
     {
       "name": "text-xs",
       "file": "09-utilities.css",
-      "line": 88,
+      "line": 92,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -53044,7 +53259,7 @@
         {
           "selector": ".text-xs",
           "file": "09-utilities.css",
-          "line": 88,
+          "line": 92,
           "conditions": []
         }
       ],
@@ -53118,7 +53333,7 @@
         {
           "selector": ".textarea",
           "file": "06-forms.css",
-          "line": 66,
+          "line": 86,
           "conditions": [
             "@media (pointer: coarse)"
           ]
@@ -53126,49 +53341,49 @@
         {
           "selector": ".textarea::placeholder",
           "file": "06-forms.css",
-          "line": 69,
+          "line": 89,
           "conditions": []
         },
         {
           "selector": ".textarea:hover",
           "file": "06-forms.css",
-          "line": 71,
+          "line": 91,
           "conditions": []
         },
         {
           "selector": ".textarea:focus",
           "file": "06-forms.css",
-          "line": 73,
+          "line": 93,
           "conditions": []
         },
         {
           "selector": ".textarea[disabled]",
           "file": "06-forms.css",
-          "line": 79,
+          "line": 99,
           "conditions": []
         },
         {
           "selector": ".textarea",
           "file": "06-forms.css",
-          "line": 88,
+          "line": 108,
           "conditions": []
         },
         {
           "selector": ".textarea:user-invalid",
           "file": "06-forms.css",
-          "line": 110,
+          "line": 130,
           "conditions": []
         },
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select)",
           "file": "06-forms.css",
-          "line": 110,
+          "line": 130,
           "conditions": []
         },
         {
           "selector": ".field.is-invalid :is(.input, .textarea, .select):focus",
           "file": "06-forms.css",
-          "line": 114,
+          "line": 134,
           "conditions": []
         },
         {
@@ -53552,7 +53767,7 @@
     {
       "name": "timeline",
       "file": "07-components.css",
-      "line": 810,
+      "line": 815,
       "layer": "deck.components",
       "section": "Timeline",
       "doc": null,
@@ -53570,7 +53785,7 @@
         {
           "selector": ".timeline",
           "file": "07-components.css",
-          "line": 810,
+          "line": 815,
           "conditions": []
         }
       ],
@@ -53585,7 +53800,7 @@
     {
       "name": "timeline-dot",
       "file": "07-components.css",
-      "line": 826,
+      "line": 831,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -53627,13 +53842,13 @@
         {
           "selector": ".timeline-dot",
           "file": "07-components.css",
-          "line": 826,
+          "line": 831,
           "conditions": []
         },
         {
           "selector": ".timeline-item.is-done .timeline-dot",
           "file": "07-components.css",
-          "line": 836,
+          "line": 841,
           "conditions": []
         }
       ],
@@ -53651,7 +53866,7 @@
     {
       "name": "timeline-item",
       "file": "07-components.css",
-      "line": 811,
+      "line": 816,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -53681,19 +53896,19 @@
         {
           "selector": ".timeline-item",
           "file": "07-components.css",
-          "line": 811,
+          "line": 816,
           "conditions": []
         },
         {
           "selector": ".timeline-item:not(:last-child)::before",
           "file": "07-components.css",
-          "line": 818,
+          "line": 823,
           "conditions": []
         },
         {
           "selector": ".timeline-item.is-done .timeline-dot",
           "file": "07-components.css",
-          "line": 836,
+          "line": 841,
           "conditions": []
         },
         {
@@ -55241,7 +55456,7 @@
     {
       "name": "tooltip",
       "file": "07-components.css",
-      "line": 604,
+      "line": 609,
       "layer": "deck.components",
       "section": null,
       "doc": "A CSS-only tooltip: the text comes from data-tip through ::after, so there\nis no second element. It cannot flip near a window edge, cannot escape an\noverflow:hidden ancestor, and is hidden entirely on a coarse pointer. Never\nput anything essential in it, and pair it with aria-label — generated\ncontent is not a reliable accessible name.",
@@ -55255,25 +55470,25 @@
         {
           "selector": ".tooltip",
           "file": "07-components.css",
-          "line": 604,
+          "line": 609,
           "conditions": []
         },
         {
           "selector": ".tooltip::after",
           "file": "07-components.css",
-          "line": 605,
+          "line": 610,
           "conditions": []
         },
         {
           "selector": ".tooltip:is(:hover, :focus-visible)::after",
           "file": "07-components.css",
-          "line": 626,
+          "line": 631,
           "conditions": []
         },
         {
           "selector": ".tooltip::after",
           "file": "07-components.css",
-          "line": 627,
+          "line": 632,
           "conditions": [
             "@media (pointer: coarse)"
           ]
@@ -55298,7 +55513,7 @@
     {
       "name": "touch-only",
       "file": "09-utilities.css",
-      "line": 280,
+      "line": 298,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -55312,7 +55527,7 @@
         {
           "selector": ".touch-only",
           "file": "09-utilities.css",
-          "line": 280,
+          "line": 298,
           "conditions": [
             "@media (pointer: fine)"
           ]
@@ -55326,7 +55541,7 @@
     {
       "name": "transition",
       "file": "09-utilities.css",
-      "line": 188,
+      "line": 206,
       "layer": "deck.utilities",
       "section": "Motion",
       "doc": null,
@@ -55340,7 +55555,7 @@
         {
           "selector": ".transition",
           "file": "09-utilities.css",
-          "line": 188,
+          "line": 206,
           "conditions": []
         }
       ],
@@ -55360,7 +55575,7 @@
     {
       "name": "transition-colors",
       "file": "09-utilities.css",
-      "line": 189,
+      "line": 207,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -55374,7 +55589,7 @@
         {
           "selector": ".transition-colors",
           "file": "09-utilities.css",
-          "line": 189,
+          "line": 207,
           "conditions": []
         }
       ],
@@ -55389,7 +55604,7 @@
     {
       "name": "transition-move",
       "file": "09-utilities.css",
-      "line": 194,
+      "line": 212,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -55403,7 +55618,7 @@
         {
           "selector": ".transition-move",
           "file": "09-utilities.css",
-          "line": 194,
+          "line": 212,
           "conditions": []
         }
       ],
@@ -55418,7 +55633,7 @@
     {
       "name": "transition-opacity",
       "file": "09-utilities.css",
-      "line": 199,
+      "line": 217,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -55432,7 +55647,7 @@
         {
           "selector": ".transition-opacity",
           "file": "09-utilities.css",
-          "line": 199,
+          "line": 217,
           "conditions": []
         }
       ],
@@ -55447,7 +55662,7 @@
     {
       "name": "transition-size",
       "file": "09-utilities.css",
-      "line": 197,
+      "line": 215,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -55461,7 +55676,7 @@
         {
           "selector": ".transition-size",
           "file": "09-utilities.css",
-          "line": 197,
+          "line": 215,
           "conditions": []
         }
       ],
@@ -55476,7 +55691,7 @@
     {
       "name": "truncate",
       "file": "09-utilities.css",
-      "line": 126,
+      "line": 130,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -55502,7 +55717,7 @@
         {
           "selector": ".truncate",
           "file": "09-utilities.css",
-          "line": 126,
+          "line": 130,
           "conditions": []
         }
       ],
@@ -55600,7 +55815,7 @@
     {
       "name": "uppercase",
       "file": "09-utilities.css",
-      "line": 122,
+      "line": 126,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -55618,7 +55833,7 @@
         {
           "selector": ".uppercase",
           "file": "09-utilities.css",
-          "line": 122,
+          "line": 126,
           "conditions": []
         }
       ],
@@ -56376,7 +56591,7 @@
     {
       "name": "will-move",
       "file": "09-utilities.css",
-      "line": 221,
+      "line": 239,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -56385,7 +56600,7 @@
         {
           "selector": ".will-move:is(:hover, :focus-within, .is-animating)",
           "file": "09-utilities.css",
-          "line": 221,
+          "line": 239,
           "conditions": []
         }
       ],
@@ -56610,7 +56825,7 @@
     {
       "name": "z-1",
       "file": "09-utilities.css",
-      "line": 171,
+      "line": 181,
       "layer": "deck.utilities",
       "section": null,
       "doc": null,
@@ -56624,7 +56839,7 @@
         {
           "selector": ".z-1",
           "file": "09-utilities.css",
-          "line": 171,
+          "line": 181,
           "conditions": []
         }
       ],
@@ -56712,6 +56927,62 @@
       "definedUnconditional": true
     },
     {
+      "name": "z-nav",
+      "file": "09-utilities.css",
+      "line": 188,
+      "layer": "deck.utilities",
+      "section": null,
+      "doc": null,
+      "declarations": [
+        {
+          "prop": "z-index",
+          "value": "var(--z-nav)"
+        }
+      ],
+      "selectors": [
+        {
+          "selector": ".z-nav",
+          "file": "09-utilities.css",
+          "line": 188,
+          "conditions": []
+        }
+      ],
+      "variants": [],
+      "tokensUsed": [
+        "--z-nav"
+      ],
+      "defined": true,
+      "definedUnconditional": true
+    },
+    {
+      "name": "z-sheet",
+      "file": "09-utilities.css",
+      "line": 189,
+      "layer": "deck.utilities",
+      "section": null,
+      "doc": null,
+      "declarations": [
+        {
+          "prop": "z-index",
+          "value": "var(--z-sheet)"
+        }
+      ],
+      "selectors": [
+        {
+          "selector": ".z-sheet",
+          "file": "09-utilities.css",
+          "line": 189,
+          "conditions": []
+        }
+      ],
+      "variants": [],
+      "tokensUsed": [
+        "--z-sheet"
+      ],
+      "defined": true,
+      "definedUnconditional": true
+    },
+    {
       "name": "z-sink",
       "file": "21-space3d.css",
       "line": 260,
@@ -56734,6 +57005,34 @@
       ],
       "variants": [],
       "tokensUsed": [],
+      "defined": true,
+      "definedUnconditional": true
+    },
+    {
+      "name": "z-sticky",
+      "file": "09-utilities.css",
+      "line": 187,
+      "layer": "deck.utilities",
+      "section": null,
+      "doc": "Named layers, not bigger numbers: the --z-* tokens Deck's own sticky\nheader, navigation and sheets read, so your own sticky bar, fixed player\nor slide-over panel stacks with Deck's chrome instead of fighting it.\nThere is no .z-modal or .z-toast; at those layers, use a <dialog> or\nDeck.toast().",
+      "declarations": [
+        {
+          "prop": "z-index",
+          "value": "var(--z-sticky)"
+        }
+      ],
+      "selectors": [
+        {
+          "selector": ".z-sticky",
+          "file": "09-utilities.css",
+          "line": 187,
+          "conditions": []
+        }
+      ],
+      "variants": [],
+      "tokensUsed": [
+        "--z-sticky"
+      ],
       "defined": true,
       "definedUnconditional": true
     }

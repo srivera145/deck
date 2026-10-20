@@ -2,28 +2,28 @@
   "generated": "tools/docs/usage.mjs — do not edit",
   "filesScanned": 128,
   "counts": {
-    "classes": 931,
-    "used": 924,
+    "classes": 940,
+    "used": 933,
     "unused": 7
   },
   "uses": {
-    "stack": 4196,
+    "stack": 4204,
     "icon": 3355,
-    "stack-3": 2246,
-    "text-muted": 1575,
-    "btn": 1221,
+    "stack-3": 2250,
+    "text-muted": 1578,
+    "btn": 1225,
     "icon-sm": 1183,
     "text-sm": 717,
     "badge": 637,
-    "cluster": 610,
+    "cluster": 614,
     "stack-2": 552,
     "nums": 486,
     "push": 484,
     "card-body": 475,
-    "card": 469,
-    "btn-sm": 451,
+    "card": 471,
+    "btn-sm": 455,
     "sidebar-link": 449,
-    "cluster-tight": 420,
+    "cluster-tight": 424,
     "stack-4": 388,
     "sr-only": 376,
     "container": 349,
@@ -33,10 +33,10 @@
     "lede": 323,
     "label": 315,
     "stack-1": 310,
+    "input": 287,
     "field": 286,
-    "fw-semi": 284,
-    "input": 283,
-    "btn-primary": 262,
+    "fw-semi": 286,
+    "btn-primary": 264,
     "btn-icon": 257,
     "stack-6": 236,
     "mirror-rtl": 235,
@@ -61,12 +61,12 @@
     "enter-rise": 125,
     "stat-value": 124,
     "nav-link": 123,
+    "list-row": 122,
     "footer-col": 121,
     "badge-good": 118,
-    "list-row": 118,
     "help": 114,
-    "grid": 109,
-    "list-main": 109,
+    "list-main": 113,
+    "grid": 111,
     "footer-heading": 106,
     "stat-label": 106,
     "chart-bar-fill": 105,
@@ -77,19 +77,19 @@
     "chart-bar-track": 103,
     "chart-bar-value": 103,
     "stack-0": 103,
+    "btn-lg": 100,
     "stat": 100,
     "stretch": 98,
-    "btn-lg": 97,
+    "list-title": 96,
     "skeleton": 96,
     "stack-8": 93,
-    "list-title": 92,
     "indicator": 86,
+    "list-sub": 85,
     "tab": 82,
     "badge-brand": 81,
     "btn-block": 81,
-    "list-sub": 81,
+    "select": 80,
     "accordion-body": 79,
-    "select": 79,
     "s1": 76,
     "link-quiet": 76,
     "range": 75,
@@ -101,7 +101,7 @@
     "truncate": 69,
     "file": 68,
     "switch": 66,
-    "list": 64,
+    "list": 66,
     "rating-fill": 63,
     "avatar-xs": 62,
     "chart": 62,
@@ -110,7 +110,7 @@
     "alert-body": 61,
     "emoji": 61,
     "lift": 60,
-    "search": 58,
+    "search": 59,
     "card-link": 57,
     "sidebar": 57,
     "navbar": 56,
@@ -149,9 +149,9 @@
     "mono": 40,
     "card-media": 39,
     "menu-sep": 39,
+    "toast": 39,
     "step-marker": 38,
     "step-label": 38,
-    "toast": 38,
     "drawer-header": 37,
     "drawer-body": 37,
     "stagger": 37,
@@ -232,6 +232,7 @@
     "btn-danger": 20,
     "chart-bars": 20,
     "dg-wrap": 20,
+    "r-md": 20,
     "s3": 19,
     "sparkline-good": 19,
     "fieldset": 19,
@@ -253,6 +254,7 @@
     "indicator-warn": 18,
     "kanban-head": 18,
     "kanban-count": 18,
+    "bg-surface": 18,
     "fw-medium": 18,
     "scene": 17,
     "cq": 17,
@@ -265,8 +267,8 @@
     "sticky-top": 16,
     "copy-idle": 16,
     "g-dots": 16,
+    "p-3": 16,
     "modal": 16,
-    "bg-surface": 16,
     "r-sm": 16,
     "mega-heading": 16,
     "flip": 15,
@@ -291,8 +293,6 @@
     "editor": 14,
     "emoji-tile": 14,
     "required": 14,
-    "p-3": 14,
-    "r-md": 14,
     "indicator-badge-dot": 14,
     "phone": 14,
     "pop": 14,
@@ -323,6 +323,7 @@
     "fade-swap": 12,
     "stepper": 12,
     "timeline": 12,
+    "bg-sunken": 12,
     "cq-tone": 12,
     "tone-text": 12,
     "clamp-3": 12,
@@ -364,7 +365,6 @@
     "is-current": 10,
     "video-poster": 10,
     "video-play": 10,
-    "bg-sunken": 10,
     "no-flip": 10,
     "r-lg": 10,
     "wrap": 10,
@@ -418,6 +418,8 @@
     "hidden": 8,
     "float-outline": 8,
     "g-mesh-subtle": 8,
+    "border": 8,
+    "p-0": 8,
     "delay-3": 8,
     "reveal-fade": 8,
     "rating": 8,
@@ -454,6 +456,7 @@
     "g-warn": 7,
     "g-bad": 7,
     "g-dark": 7,
+    "fixed": 7,
     "gap-2": 7,
     "list-header": 7,
     "sweep": 7,
@@ -469,6 +472,7 @@
     "text-bad": 7,
     "h2": 7,
     "code-ltr": 7,
+    "ratio-2x3": 7,
     "relative": 7,
     "pbs-6": 7,
     "mt-4": 7,
@@ -482,6 +486,7 @@
     "is-flipped": 6,
     "square": 6,
     "btn-accent": 6,
+    "ratio-16x9": 6,
     "chart-heat": 6,
     "bubble-typing": 6,
     "chat-composer": 6,
@@ -495,7 +500,6 @@
     "masonry-3": 6,
     "g-fade-block": 6,
     "g-border-spin": 6,
-    "border": 6,
     "menu-match": 6,
     "is-animating": 6,
     "scroll-progress": 6,
@@ -508,11 +512,15 @@
     "empty": 6,
     "bg-soft": 6,
     "text-inherit": 6,
+    "object-contain": 6,
+    "flex": 6,
     "defer": 6,
-    "p-0": 6,
+    "inset-be-0": 6,
+    "inset-ie-0": 6,
     "mt-1": 6,
     "gap-1": 6,
     "gap-cq": 6,
+    "break-words": 6,
     "mega": 6,
     "jumbotron-center": 6,
     "speed-dial": 6,
@@ -559,8 +567,9 @@
     "g-sheen": 5,
     "g-ring": 5,
     "g-ring-spin": 5,
-    "fixed": 5,
     "icon-spin": 5,
+    "input-sm": 5,
+    "input-lg": 5,
     "reveal-pop": 5,
     "pulse": 5,
     "ripple": 5,
@@ -577,7 +586,12 @@
     "w-full": 5,
     "border-0": 5,
     "border-t": 5,
+    "ratio-1x1": 5,
     "cq-md": 5,
+    "sticky": 5,
+    "z-sticky": 5,
+    "inset-is-0": 5,
+    "z-nav": 5,
     "prose": 5,
     "display-cq": 5,
     "writing-upright": 5,
@@ -585,7 +599,6 @@
     "parallax-mid": 4,
     "parallax-front": 4,
     "cube-spin": 4,
-    "ratio-16x9": 4,
     "card-brand": 4,
     "carousel-dot": 4,
     "chart-area-g": 4,
@@ -604,6 +617,7 @@
     "emoji-hero": 4,
     "is-loaded": 4,
     "g-shimmer": 4,
+    "list-flush": 4,
     "list-virtual": 4,
     "ease-spring": 4,
     "enter-blur": 4,
@@ -625,9 +639,9 @@
     "bidi-plaintext": 4,
     "r-xs": 4,
     "r-full": 4,
-    "ratio-1x1": 4,
-    "flex": 4,
+    "border-b": 4,
     "nowrap": 4,
+    "shrink-0": 4,
     "max-w-sm": 4,
     "max-w-md": 4,
     "max-w-prose": 4,
@@ -635,8 +649,6 @@
     "cq-sm": 4,
     "cq-lg": 4,
     "absolute": 4,
-    "inset-be-0": 4,
-    "inset-ie-0": 4,
     "mie-2": 4,
     "py-3": 4,
     "pbs-0": 4,
@@ -644,6 +656,7 @@
     "pbe-8": 4,
     "mb-1": 4,
     "mb-8": 4,
+    "gap-3": 4,
     "text-2xs": 4,
     "text-md": 4,
     "fw-bold": 4,
@@ -721,6 +734,7 @@
     "bie": 3,
     "r-start": 3,
     "r-end": 3,
+    "ratio-4x3": 3,
     "cq-size": 3,
     "cq-panel": 3,
     "cq-pane": 3,
@@ -732,8 +746,8 @@
     "virtual": 3,
     "safe-top": 3,
     "safe-bottom": 3,
-    "sticky": 3,
-    "inset-is-0": 3,
+    "z-1": 3,
+    "z-sheet": 3,
     "p-4": 3,
     "pad-cq": 3,
     "writing-sideways": 3,
@@ -780,7 +794,6 @@
     "toast-region-start": 2,
     "toast-region-top": 2,
     "bg-none": 2,
-    "border-b": 2,
     "border-brand": 2,
     "shadow-0": 2,
     "shadow-1": 2,
@@ -791,7 +804,6 @@
     "contents": 2,
     "flex-row": 2,
     "flex-col": 2,
-    "shrink-0": 2,
     "items-start": 2,
     "items-baseline": 2,
     "items-stretch": 2,
@@ -803,7 +815,6 @@
     "w-auto": 2,
     "min-h-screen": 2,
     "max-w-lg": 2,
-    "ratio-4x3": 2,
     "overflow-auto": 2,
     "overflow-clip": 2,
     "touch-only": 2,
@@ -818,7 +829,6 @@
     "virtual-lg": 2,
     "inset-0": 2,
     "inset-bs-0": 2,
-    "z-1": 2,
     "p-1": 2,
     "p-8": 2,
     "px-1": 2,
@@ -877,7 +887,6 @@
     "mie-8": 2,
     "mie-auto": 2,
     "gap-0": 2,
-    "gap-3": 2,
     "gap-6": 2,
     "gap-8": 2,
     "safe-x": 2,
@@ -1839,6 +1848,7 @@
       "public_html/docs/components/card.php",
       "public_html/docs/components/check.php",
       "public_html/docs/components/grid.php",
+      "public_html/docs/components/list.php",
       "public_html/docs/components/motion.php",
       "public_html/docs/components/print.php",
       "public_html/docs/components/scroller.php",
@@ -2054,6 +2064,7 @@
       "public_html/docs/components/drawer.php",
       "public_html/docs/components/field.php",
       "public_html/docs/components/icon.php",
+      "public_html/docs/components/input.php",
       "public_html/docs/components/modal.php",
       "public_html/docs/components/popover.php",
       "public_html/docs/components/print.php",
@@ -2962,6 +2973,7 @@
       "public_html/templates/travel.html"
     ],
     "btn-sm": [
+      "FINDINGS.md",
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
       "public_html/docs/components/bar.php",
@@ -2969,6 +2981,7 @@
       "public_html/docs/components/card.php",
       "public_html/docs/components/cluster.php",
       "public_html/docs/components/drawer.php",
+      "public_html/docs/components/input.php",
       "public_html/docs/components/nav.php",
       "public_html/docs/components/popover.php",
       "public_html/docs/components/sheet.php",
@@ -3205,8 +3218,10 @@
       "public_html/templates/sidebars.html"
     ],
     "btn-lg": [
+      "FINDINGS.md",
       "bin/deck.mjs",
       "public_html/docs/components/button.php",
+      "public_html/docs/components/input.php",
       "public_html/index.php",
       "public_html/templates/auto-repair.html",
       "public_html/templates/carousels.html",
@@ -3546,6 +3561,7 @@
       "public_html/docs/components/stack.php",
       "public_html/docs/guides/layout.php",
       "public_html/docs/index.php",
+      "public_html/docs/reference/display.php",
       "public_html/docs/reference/php.php",
       "public_html/docs/start/first-page.php",
       "public_html/index.php",
@@ -3575,6 +3591,7 @@
       "public_html/templates/travel.html"
     ],
     "ratio-16x9": [
+      "FINDINGS.md",
       "public_html/docs/components/card.php",
       "public_html/docs/reference/display.php"
     ],
@@ -5687,18 +5704,22 @@
       "public_html/docs/components/icon.php",
       "public_html/docs/guides/layout.php",
       "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/typography.php",
       "public_html/templates/dashboard.html"
     ],
     "border": [
       "public_html/docs/components/icon.php",
       "public_html/docs/guides/migrating-from-tailwind.php",
-      "public_html/docs/reference/color.php"
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/typography.php"
     ],
     "r-md": [
       "public_html/docs/components/icon.php",
       "public_html/docs/guides/layout.php",
       "public_html/docs/reference/color.php",
-      "public_html/docs/reference/position.php"
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/position.php",
+      "public_html/docs/reference/typography.php"
     ],
     "text-xs": [
       "public_html/docs/components/icon.php",
@@ -5960,6 +5981,14 @@
     "indicator-ring": [
       "public_html/docs/components/indicator.php"
     ],
+    "input-sm": [
+      "FINDINGS.md",
+      "public_html/docs/components/input.php"
+    ],
+    "input-lg": [
+      "FINDINGS.md",
+      "public_html/docs/components/input.php"
+    ],
     "addon": [
       "FINDINGS.md",
       "public_html/docs/components/input.php",
@@ -6045,6 +6074,16 @@
     "list-header": [
       "public_html/docs/components/list.php",
       "public_html/index.php"
+    ],
+    "p-0": [
+      "public_html/docs/components/list.php",
+      "public_html/docs/reference/spacing.php",
+      "public_html/templates/auto-repair.html",
+      "public_html/templates/landing.html"
+    ],
+    "list-flush": [
+      "FINDINGS.md",
+      "public_html/docs/components/list.php"
     ],
     "list-virtual": [
       "README.md",
@@ -7071,6 +7110,7 @@
       "public_html/templates/travel.html"
     ],
     "toast": [
+      "FINDINGS.md",
       "bin/deck.mjs",
       "public_html/docs/components/toast.php",
       "public_html/docs/reference/javascript.php",
@@ -7262,12 +7302,14 @@
     "bg-sunken": [
       "public_html/docs/guides/layout.php",
       "public_html/docs/reference/color.php",
+      "public_html/docs/reference/display.php",
       "public_html/templates/auto-repair.html"
     ],
     "bg-surface": [
       "public_html/docs/guides/layout.php",
       "public_html/docs/guides/migrating-from-tailwind.php",
-      "public_html/docs/reference/color.php"
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/position.php"
     ],
     "p-2": [
       "public_html/docs/guides/layout.php",
@@ -7465,7 +7507,8 @@
       "public_html/templates/digital-marketing.html"
     ],
     "border-b": [
-      "public_html/docs/reference/color.php"
+      "public_html/docs/reference/color.php",
+      "public_html/docs/reference/position.php"
     ],
     "border-brand": [
       "public_html/docs/reference/color.php"
@@ -7505,7 +7548,16 @@
       "public_html/docs/reference/color.php",
       "public_html/index.php"
     ],
+    "ratio-2x3": [
+      "FINDINGS.md",
+      "public_html/docs/reference/display.php"
+    ],
+    "object-contain": [
+      "FINDINGS.md",
+      "public_html/docs/reference/display.php"
+    ],
     "ratio-1x1": [
+      "FINDINGS.md",
       "public_html/docs/reference/display.php"
     ],
     "inline-block": [
@@ -7513,7 +7565,8 @@
     ],
     "flex": [
       "FINDINGS.md",
-      "public_html/docs/reference/display.php"
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/typography.php"
     ],
     "contents": [
       "public_html/docs/reference/display.php"
@@ -7543,7 +7596,8 @@
       "public_html/templates/settings.html"
     ],
     "shrink-0": [
-      "public_html/docs/reference/display.php"
+      "public_html/docs/reference/display.php",
+      "public_html/docs/reference/typography.php"
     ],
     "items-start": [
       "public_html/docs/reference/display.php"
@@ -7609,6 +7663,7 @@
       "public_html/templates/app-shell.html"
     ],
     "ratio-4x3": [
+      "FINDINGS.md",
       "public_html/docs/reference/display.php"
     ],
     "overflow-auto": [
@@ -7802,28 +7857,36 @@
       "public_html/docs/reference/position.php",
       "src/js/deck.js"
     ],
-    "inset-0": [
+    "z-sticky": [
+      "FINDINGS.md",
       "public_html/docs/reference/position.php"
     ],
     "inset-is-0": [
       "README.md",
       "public_html/docs/reference/position.php"
     ],
+    "z-nav": [
+      "FINDINGS.md",
+      "public_html/docs/reference/position.php"
+    ],
+    "inset-0": [
+      "public_html/docs/reference/position.php"
+    ],
     "inset-bs-0": [
       "public_html/docs/reference/position.php"
     ],
     "z-1": [
+      "FINDINGS.md",
+      "public_html/docs/reference/position.php"
+    ],
+    "z-sheet": [
+      "FINDINGS.md",
       "public_html/docs/reference/position.php"
     ],
     "mis-auto": [
       "public_html/docs/reference/spacing.php",
       "public_html/templates/auto-repair.html",
       "public_html/templates/digital-marketing.html"
-    ],
-    "p-0": [
-      "public_html/docs/reference/spacing.php",
-      "public_html/templates/auto-repair.html",
-      "public_html/templates/landing.html"
     ],
     "p-1": [
       "public_html/docs/reference/spacing.php"
@@ -8073,7 +8136,8 @@
       "public_html/index.php"
     ],
     "gap-3": [
-      "public_html/docs/reference/spacing.php"
+      "public_html/docs/reference/spacing.php",
+      "public_html/docs/reference/typography.php"
     ],
     "gap-4": [
       "public_html/docs/reference/spacing.php",
@@ -8099,6 +8163,10 @@
       "public_html/templates/auto-repair.html",
       "public_html/templates/digital-marketing.html",
       "public_html/templates/sidebars.html"
+    ],
+    "break-words": [
+      "FINDINGS.md",
+      "public_html/docs/reference/typography.php"
     ],
     "prose": [
       "FINDINGS.md",

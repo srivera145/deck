@@ -21,7 +21,7 @@ $page = [
         'fw-normal', 'fw-medium', 'fw-semi', 'fw-bold',
         'text-start', 'text-center', 'text-end',
         'mono', 'nums', 'uppercase', 'capitalize', 'no-underline',
-        'truncate', 'clamp-2', 'clamp-3',
+        'truncate', 'clamp-2', 'clamp-3', 'break-words',
         'writing-vertical', 'writing-vertical-lr', 'writing-normal',
         'writing-sideways', 'writing-upright', 'th-vertical',
         'bidi-isolate', 'bidi-plaintext', 'dir-ltr', 'dir-rtl', 'code-ltr',
@@ -142,7 +142,26 @@ require __DIR__ . '/../_layout.php';
     silently does nothing inside a flex row: a flex item will not shrink below its
     content by default, so the ellipsis never gets a chance to appear.
   </p>
-  <?php docs_utility_table(['truncate', 'clamp-2', 'clamp-3'], 'Truncation utilities'); ?>
+  <p>
+    <code>.break-words</code> is the opposite choice: keep all the text and let a long
+    unbroken string — a URL, a commit hash, an email address — wrap at any character.
+    It is <code>overflow-wrap: anywhere</code>. The body already has
+    <code>break-word</code>, which wraps such a string when the line runs out but still
+    counts its full length as the element's minimum width, so in a flex row or a table
+    cell the box grows to fit the string and pushes everything beside it off the edge.
+    <code>anywhere</code> lowers that minimum too.
+  </p>
+  <?php
+  docs_example(
+      '<div class="flex gap-3 border r-md p-3" style="max-inline-size:20rem">' . "\n" .
+      '  <span class="shrink-0 fw-semi">Source</span>' . "\n" .
+      '  <span class="break-words">https://example.com/films/2026/the-long-unbroken-path-to-a-poster.jpg</span>' . "\n" .
+      '</div>',
+      'Without .break-words the URL holds the row at its own length',
+      'stack'
+  );
+  ?>
+  <?php docs_utility_table(['truncate', 'clamp-2', 'clamp-3', 'break-words'], 'Truncation and wrapping utilities'); ?>
 </section>
 
 <section class="stack stack-4">

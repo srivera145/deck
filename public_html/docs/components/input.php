@@ -11,7 +11,7 @@ $page = [
        page is where they are explained. Claiming them here is what keeps them
        out of the undocumented backlog. */
     'documents' => [
-        'input', 'input-group', 'is-invalid', 'addon', 'search',
+        'input', 'input-group', 'input-sm', 'input-lg', 'is-invalid', 'addon', 'search',
     ],
 
     /* 19-logical.css is deliberately absent. It mirrors .select and .search
@@ -151,6 +151,39 @@ require __DIR__ . '/../_layout.php';
       swapping them points the wrong way. See <a href="#rtl">Right to left</a>.
     </p>
   </div>
+</section>
+
+<section class="stack stack-3">
+  <h2 id="sizes">Sizes</h2>
+  <p>
+    <code>.input-sm</code> is 34px and <code>.input-lg</code> is 50px, the heights of
+    <code>.btn-sm</code> and <code>.btn-lg</code>, so a small search box and a small
+    button in one toolbar line up the way the default sizes do. They change the height,
+    the block padding and the type size, and leave the inline padding alone, so they work
+    on <code>.select</code> and inside <code>.search</code> as well.
+  </p>
+  <?php
+  docs_example(
+      '<div class="cluster cluster-tight">' . "\n" .
+      '  <input class="input input-sm" style="inline-size:12rem" placeholder="Filter" aria-label="Filter">' . "\n" .
+      '  <button class="btn btn-sm">Apply</button>' . "\n" .
+      '</div>' . "\n" .
+      '<div class="cluster cluster-tight">' . "\n" .
+      '  <input class="input input-lg" style="inline-size:16rem" placeholder="Search films" aria-label="Search films">' . "\n" .
+      '  <button class="btn btn-primary btn-lg">Search</button>' . "\n" .
+      '</div>',
+      'Each size lines up with the button of the same size',
+      'stack'
+  );
+  ?>
+  <p class="dx-note text-muted">
+    <strong>On a touch screen every control is 16px,</strong> <code>.input-sm</code>
+    included, because iOS zooms the page into any field set smaller. And
+    <code>.input-sm</code> is a smaller target than the default: <code>.btn-sm</code>
+    keeps a 44px target with a pseudo-element, which an <code>&lt;input&gt;</code> cannot
+    have. 34px still clears WCAG 2.5.8's 24px minimum, but on a touch-first screen the
+    default size is the kinder choice.
+  </p>
 </section>
 
 <section class="stack stack-6">

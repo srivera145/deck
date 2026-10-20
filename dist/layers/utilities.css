@@ -82,6 +82,10 @@
   .max-w-md { max-inline-size: 34rem; }
   .max-w-lg { max-inline-size: 48rem; }
   .square { aspect-ratio: 1; }
+  /* Fits the whole image inside its box, letterboxed, instead of cropping
+     it to fill. This layer beats the cover that .ratio-* sets, so a logo or
+     a poster in a 16:9 frame keeps its edges. */
+  .object-contain { object-fit: contain; }
 
   /* --- Type --------------------------------------------------------------- */
   .text-2xs { font-size: var(--text-2xs); }
@@ -136,6 +140,12 @@
   }
   .clamp-2 { -webkit-line-clamp: 2; line-clamp: 2; }
   .clamp-3 { -webkit-line-clamp: 3; line-clamp: 3; }
+  /* Lets a long unbroken string — a URL, a hash, an email address — wrap at
+     any character. anywhere rather than break-word: the body already has
+     break-word, which wraps the line but leaves the min-content width alone,
+     so in a flex row or a table cell the string still pushed the box wider
+     than its container. */
+  .break-words { overflow-wrap: anywhere; }
 
   /* --- Surfaces ----------------------------------------------------------- */
   .bg-surface { background: var(--surface); }
@@ -169,6 +179,14 @@
   .sticky { position: sticky; }
   .inset-0 { inset: 0; }
   .z-1 { z-index: 1; }
+  /* Named layers, not bigger numbers: the --z-* tokens Deck's own sticky
+     header, navigation and sheets read, so your own sticky bar, fixed player
+     or slide-over panel stacks with Deck's chrome instead of fighting it.
+     There is no .z-modal or .z-toast; at those layers, use a <dialog> or
+     Deck.toast(). */
+  .z-sticky { z-index: var(--z-sticky); }
+  .z-nav { z-index: var(--z-nav); }
+  .z-sheet { z-index: var(--z-sheet); }
   .overflow-hidden { overflow: hidden; }
   .overflow-auto { overflow: auto; }
   .overflow-clip { overflow: clip; }

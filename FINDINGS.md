@@ -2381,3 +2381,37 @@ both `build.mjs` and `tools/make-brand.mjs`, or add `src/deck-icons.svg text eol
 same for `src/brand/*.svg` to `.gitattributes`. Left alone because it is unrelated to the
 icons, but the icon change is what would expose it first: the new hash was written from
 an LF file, as the previous one was.
+
+## 104. Six small layout gaps, found by building a media app — FIXED
+
+Each of these was worked around with page-local CSS before it was added:
+
+- **Posters had no ratio.** `.ratio-16x9`, `.ratio-4x3` and `.ratio-1x1` all crop to
+  cover; a film poster is 2:3. Added `.ratio-2x3`, beside the others in the layout layer.
+- **Nothing could undo the crop.** Added `.object-contain`. It is a utility on purpose:
+  the utilities layer comes after the layout layer, so `.ratio-16x9.object-contain`
+  letterboxes without a specificity fight.
+- **Inputs had one size.** `.btn-sm` and `.btn-lg` had no input to stand beside. Added
+  `.input-sm` (34px) and `.input-lg` (50px). They set height, block padding and type size
+  only, so `.select` keeps its arrow padding and `.search` its icon padding, and they sit
+  before the coarse-pointer rule so every control is still 16px on touch. `.input-sm` is a
+  smaller target than the default, which `.btn-sm` avoids with a pseudo-element an
+  `<input>` cannot have; the input page says so. `.input-lg` keeps the default block
+  padding, because the first draft's 12px made it 50.6px against the button's 50.
+- **A list in a card was a box in a box.** Added `.list-flush`: no border, radius or fill,
+  dividers kept.
+- **Stacking.** The docs say `.z-1` is the only number on purpose, and that anything else
+  belongs to a named layer. That argument was kept: the three additions are `.z-sticky`,
+  `.z-nav` and `.z-sheet`, each reading its token, for an author's own sticky bar, player
+  bar or slide-over. There is no `.z-modal` or `.z-toast`; at those layers the answer is
+  a `<dialog>` or `Deck.toast()`.
+- **A long URL pushed its row wide.** The body sets `overflow-wrap: break-word`, which
+  wraps a long string but leaves the element's min-content width at the string's full
+  length, so a flex item or a table cell still grows to fit it. `.break-words` is
+  `overflow-wrap: anywhere`, which lowers the minimum too. A test checks both halves.
+
+**Also changed:** `tools/docs/classify.mjs --accept` rewrote `api-decisions.txt` from
+scratch and dropped anything after a `#`, so a reason written beside a decision would not
+have survived the next run. It now keeps the text after the `#`, writes it back, and uses
+it as the decision's reason in `dist/api-buckets.json` instead of the rule's generic one.
+Every class added in this pass has its reason recorded that way.

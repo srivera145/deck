@@ -13,7 +13,7 @@ $page = [
     'documents' => [
         'relative', 'absolute', 'fixed', 'sticky',
         'inset-0', 'inset-is-0', 'inset-ie-0', 'inset-bs-0', 'inset-be-0',
-        'z-1',
+        'z-1', 'z-sticky', 'z-nav', 'z-sheet',
     ],
 ];
 
@@ -91,7 +91,7 @@ require __DIR__ . '/../_layout.php';
 <section class="stack stack-4">
   <h2 id="z">Stacking</h2>
   <p>
-    There is exactly one <code>z-index</code> utility, and it is
+    There is exactly one numeric <code>z-index</code> utility, and it is
     <code>z-index: 1</code>. That is not an omission. Stacking bugs come from
     competing numbers, and the fix is a small set of named layers rather than a
     bigger set of numbers — so Deck's overlays read tokens
@@ -102,10 +102,24 @@ require __DIR__ . '/../_layout.php';
   <p>
     <code>.z-1</code> exists for the one honest case: lifting a positioned element
     above a sibling that comes after it in the source. If you find yourself wanting
-    <code>.z-50</code>, the element probably belongs to one of the named layers, and
-    the token is the thing to reach for.
+    <code>.z-50</code>, the element probably belongs to one of the named layers.
   </p>
-  <?php docs_utility_table(['z-1'], 'Stacking utilities'); ?>
+  <p>
+    Three of those layers have a utility, for chrome of your own that has to stack with
+    Deck's: <code>.z-sticky</code> for a sticky filter bar that should sit with the
+    sticky header, <code>.z-nav</code> for a fixed bottom bar or a mini player above
+    it, and <code>.z-sheet</code> for a slide-over panel that is not a
+    <code>.sheet</code>. Each reads the token, so retuning a layer moves your element
+    with Deck's. There is deliberately no <code>.z-modal</code> or
+    <code>.z-toast</code>: something at those layers should be a
+    <code>&lt;dialog&gt;</code>, which the browser puts in the top layer above every
+    <code>z-index</code>, or a <code>Deck.toast()</code>. Like any
+    <code>z-index</code>, these need a positioned element, or a flex or grid item.
+  </p>
+  <pre class="dx-code"><code><?= e('<div class="sticky z-sticky bg-surface border-b">Filters</div>
+…
+<div class="fixed inset-be-0 inset-is-0 inset-ie-0 z-nav">Now playing</div>') ?></code></pre>
+  <?php docs_utility_table(['z-1', 'z-sticky', 'z-nav', 'z-sheet'], 'Stacking utilities'); ?>
   <?php docs_token_table(['--z-sticky', '--z-nav', '--z-sheet', '--z-modal', '--z-toast']); ?>
 </section>
 

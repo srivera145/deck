@@ -62,6 +62,26 @@
                 background-color var(--dur-1) var(--ease-out);
   }
 
+  /* The 34px control, to sit beside a .btn-sm in a toolbar or a filter row.
+     .btn-sm keeps a 44px target with a pseudo-element; an <input> cannot
+     have one, so this is a smaller target than the default control. It
+     still clears WCAG 2.5.8's 24px. The inline padding is left alone so
+     .select keeps room for its arrow and .search for its icon. */
+  .input-sm {
+    min-block-size: var(--control-h-sm);
+    padding-block: var(--space-1);
+    font-size: var(--text-sm);
+  }
+  /* The 50px control, to match .btn-lg in a hero search or a sign-in form.
+     The default block padding is kept: any more and a line of --text-md
+     outgrows the 50px. */
+  .input-lg {
+    min-block-size: var(--control-h-lg);
+    font-size: var(--text-md);
+  }
+
+  /* After the sizes on purpose: on a touch screen every control is 16px,
+     .input-sm included, so iOS never zooms in on focus. */
   @media (pointer: coarse) {
     .input, .textarea, .select { font-size: 16px; }
   }

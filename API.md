@@ -15,25 +15,25 @@ fails the build if a public class is missing from this file, or if a class in
 
 | bucket | count | meaning |
 | --- | ---: | --- |
-| public | 828 | in the freeze, semver applies |
+| public | 837 | in the freeze, semver applies |
 | internal | 103 | Deck's own; may change any release |
 | deprecated | 0 | works, warns, removed at v1 |
 | removed | 31 | already gone, before first publish |
 
-Total classes in `src/`: **931**.
+Total classes in `src/`: **940**.
 
 ## How big this actually is
 
-828 is more names than anyone will learn, and this document should say
+837 is more names than anyone will learn, and this document should say
 so rather than let a reader discover it by scrolling. What makes it workable is
 that the surface is not flat:
 
 | group | public classes | what learning it costs |
 | --- | ---: | --- |
-| `deck.components` | 374 | Looked up per component, not memorised. |
-| `deck.utilities` | 232 | A grammar. Learn the pattern, get the family. |
+| `deck.components` | 377 | Looked up per component, not memorised. |
+| `deck.utilities` | 237 | A grammar. Learn the pattern, get the family. |
 | `deck.effects` | 71 | Opt-in. Nothing runs unless you add the class. |
-| `deck.layout` | 63 | The eight or so primitives most pages actually use. |
+| `deck.layout` | 64 | The eight or so primitives most pages actually use. |
 | `deck.motion` | 37 | Opt-in. Nothing runs unless you add the class. |
 | `deck.mobile` | 30 | Only if you build the mobile shell. |
 | `deck.type` | 10 | Small, and mostly obvious from the name. |
@@ -46,7 +46,7 @@ spacing steps and that `p`, `m` and `gap` take them, you know the whole family
 without reading it. The component layers are the opposite: 99 components,
 each a handful of names, and a page that uses six of them needs six.
 
-One number that is not comfortable: **4 of the 828 public classes are
+One number that is not comfortable: **4 of the 837 public classes are
 used nowhere in this repository** — not in the demo, not in the docs, not in
 Deck's own JavaScript. They are frozen on the strength of their source alone.
 
@@ -686,6 +686,8 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | --- | --- | --- |
 | `.input` | deck.components | Marks a field invalid from your own validation, producing the same |
 | `.input-group` | deck.components | A prefix, suffix or attached button joined to a control. The group |
+| `.input-lg` | deck.components | The 50px control, to match .btn-lg in a hero search or a sign-in form. |
+| `.input-sm` | deck.components | The 34px control, to sit beside a .btn-sm in a toolbar or a filter row. |
 
 ## inputs
 
@@ -725,6 +727,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.center` | deck.layout | Center a thing with a max width and no side effects |
 | `.ratio-16x9` | deck.layout | Aspect boxes for media |
 | `.ratio-1x1` | deck.layout | Sets aspect-ratio, object-fit, inline-size. |
+| `.ratio-2x3` | deck.layout | Portrait 2:3, the shape of a film poster or a book cover. |
 | `.ratio-4x3` | deck.layout | Sets aspect-ratio, object-fit, inline-size. |
 | `.scroller` | deck.layout | Everything stays on one line and scrolls sideways — cards, chips, dates. |
 | `.section` | deck.layout | Vertical page rhythm: a block of --space-section, which is a clamp that |
@@ -742,6 +745,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.list` | deck.components | A bordered, clipped column of rows. Use it when the reader reads one |
+| `.list-flush` | deck.components | A list with no box of its own: no border, corner radius or fill, only |
 | `.list-header` | deck.components | A group heading inside a list. Styling only: a screen reader hears |
 | `.list-main` | deck.components | Modifier; see the component. |
 | `.list-row` | deck.components | One row. min-block-size: var(--tap) puts every row at the touch |
@@ -1294,6 +1298,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.bg-sunken` | deck.utilities | Sets background. |
 | `.bg-surface` | deck.utilities | Sets background. |
 | `.block` | deck.utilities | Sets display. |
+| `.break-words` | deck.utilities | Lets a long unbroken string — a URL, a hash, an email address — wrap at |
 | `.capitalize` | deck.utilities | Sets text-transform. |
 | `.clamp-2` | deck.utilities | Sets display, -webkit-box-orient, overflow. |
 | `.clamp-3` | deck.utilities | Sets display, -webkit-box-orient, overflow. |
@@ -1370,6 +1375,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.no-underline` | deck.utilities | Sets text-decoration. |
 | `.nowrap` | deck.utilities | Sets flex-wrap, white-space. |
 | `.nums` | deck.utilities | Tabular figures, so numbers line up in a column and do not jitter when |
+| `.object-contain` | deck.utilities | Fits the whole image inside its box, letterboxed, instead of cropping |
 | `.opacity-60` | deck.utilities | Sets opacity. |
 | `.overflow-auto` | deck.utilities | Sets overflow. |
 | `.overflow-clip` | deck.utilities | Sets overflow. |
@@ -1440,6 +1446,9 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.will-move` | deck.utilities | Modifier; see the component. |
 | `.wrap` | deck.utilities | Sets flex-wrap. |
 | `.z-1` | deck.utilities | Sets z-index. |
+| `.z-nav` | deck.utilities | Sets z-index. |
+| `.z-sheet` | deck.utilities | Sets z-index. |
+| `.z-sticky` | deck.utilities | Named layers, not bigger numbers: the --z-* tokens Deck's own sticky |
 
 ## video
 

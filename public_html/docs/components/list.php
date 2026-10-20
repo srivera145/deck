@@ -7,7 +7,7 @@ $page = [
     'level' => 'Beginner',
     'description' => 'Deck\'s .list and .list-row: a bordered stack of rows that clear the 44px touch target, with a main/title/sub/trail structure, a virtual-scrolling variant, and reorder states.',
     'documents' => [
-        'list', 'list-header', 'list-main', 'list-row', 'list-sub',
+        'list', 'list-flush', 'list-header', 'list-main', 'list-row', 'list-sub',
         'list-title', 'list-trail', 'list-virtual', 'is-lifted',
     ],
 
@@ -199,6 +199,34 @@ $people = [
     "Today" as ordinary text with no indication that it heads the rows beneath. If the
     grouping is meaningful, use a real heading inside it or split into separate lists
     with headings between them.
+  </p>
+</section>
+
+<section class="stack stack-3">
+  <h2 id="flush">Inside another box</h2>
+  <p>
+    <code>.list-flush</code> takes away the list's own border, corner radius and fill and
+    keeps the dividers between rows. Use it when the list sits inside something that
+    already draws the box — a <code>.card</code>, a <code>.sheet</code>, a sidebar — or
+    when it runs edge to edge on a phone. Without it, a list in a card is a box inside a
+    box, with two borders a few pixels apart.
+  </p>
+  <?php
+  docs_example(
+      '<div class="card p-0" style="max-inline-size:28rem">' . "\n" .
+      '  <div class="list list-flush">' . "\n" .
+      '    <a class="list-row" href="#"><div class="list-main"><span class="list-title">Continue watching</span><span class="list-sub">3 films</span></div></a>' . "\n" .
+      '    <a class="list-row" href="#"><div class="list-main"><span class="list-title">Watchlist</span><span class="list-sub">12 films</span></div></a>' . "\n" .
+      '  </div>' . "\n" .
+      '</div>',
+      'The card draws the box; the list draws only the dividers',
+      'stack'
+  );
+  ?>
+  <p class="text-muted">
+    The rows keep their padding, so the text lines up with the rest of the card when the
+    card has no padding of its own, as here. A flush list keeps its clip, so a focused
+    row's ring is still drawn inside the row.
   </p>
 </section>
 

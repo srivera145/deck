@@ -1,8 +1,8 @@
 {
   "generated": "tools/docs/classify.mjs — do not edit",
   "counts": {
-    "total": 931,
-    "public": 828,
+    "total": 940,
+    "public": 837,
     "internal": 103,
     "deprecated": 0,
     "removed": 31
@@ -62,6 +62,7 @@
       "border-brand",
       "border-t",
       "breadcrumb",
+      "break-words",
       "btn",
       "btn-3d",
       "btn-accent",
@@ -399,6 +400,8 @@
       "inline-flex",
       "input",
       "input-group",
+      "input-lg",
+      "input-sm",
       "inset-0",
       "inset-be-0",
       "inset-bs-0",
@@ -445,6 +448,7 @@
       "lift",
       "link-quiet",
       "list",
+      "list-flush",
       "list-header",
       "list-main",
       "list-row",
@@ -539,6 +543,7 @@
       "number-sm",
       "number-unit",
       "nums",
+      "object-contain",
       "opacity-60",
       "optional",
       "overflow-auto",
@@ -647,6 +652,7 @@
       "rating-static",
       "ratio-16x9",
       "ratio-1x1",
+      "ratio-2x3",
       "ratio-4x3",
       "reaction",
       "relative",
@@ -836,7 +842,10 @@
       "z-lift-1",
       "z-lift-2",
       "z-lift-3",
-      "z-sink"
+      "z-nav",
+      "z-sheet",
+      "z-sink",
+      "z-sticky"
     ],
     "internal": [
       "carousel-dot",
@@ -954,7 +963,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 167,
+      "line": 177,
       "uses": 4
     },
     "accordion": {
@@ -964,7 +973,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 445,
+      "line": 450,
       "uses": 24
     },
     "accordion-body": {
@@ -974,7 +983,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 474,
+      "line": 479,
       "uses": 79
     },
     "actions-cq": {
@@ -994,7 +1003,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 145,
+      "line": 165,
       "uses": 27
     },
     "alert": {
@@ -1324,7 +1333,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 143,
+      "line": 153,
       "uses": 8
     },
     "bg-none": {
@@ -1334,7 +1343,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 145,
+      "line": 155,
       "uses": 2
     },
     "bg-soft": {
@@ -1344,7 +1353,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 144,
+      "line": 154,
       "uses": 6
     },
     "bg-sunken": {
@@ -1354,8 +1363,8 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 142,
-      "uses": 10
+      "line": 152,
+      "uses": 12
     },
     "bg-surface": {
       "bucket": "public",
@@ -1364,8 +1373,8 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 141,
-      "uses": 16
+      "line": 151,
+      "uses": 18
     },
     "bidi-isolate": {
       "bucket": "public",
@@ -1424,8 +1433,8 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 147,
-      "uses": 6
+      "line": 157,
+      "uses": 8
     },
     "border-0": {
       "bucket": "public",
@@ -1434,7 +1443,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 151,
+      "line": 161,
       "uses": 5
     },
     "border-b": {
@@ -1444,8 +1453,8 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 149,
-      "uses": 2
+      "line": 159,
+      "uses": 4
     },
     "border-brand": {
       "bucket": "public",
@@ -1454,7 +1463,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 150,
+      "line": 160,
       "uses": 2
     },
     "border-t": {
@@ -1464,7 +1473,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 148,
+      "line": 158,
       "uses": 5
     },
     "breadcrumb": {
@@ -1474,8 +1483,18 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 487,
+      "line": 492,
       "uses": 211
+    },
+    "break-words": {
+      "bucket": "public",
+      "reason": "Utility. overflow-wrap: anywhere, because the body's break-word does not stop a flex item or table cell overflowing.",
+      "rule": "utility",
+      "overridden": false,
+      "layer": "deck.utilities",
+      "file": "09-utilities.css",
+      "line": 148,
+      "uses": 6
     },
     "btn": {
       "bucket": "public",
@@ -1485,7 +1504,7 @@
       "layer": "deck.components",
       "file": "05-buttons.css",
       "line": 7,
-      "uses": 1221
+      "uses": 1225
     },
     "btn-3d": {
       "bucket": "public",
@@ -1565,7 +1584,7 @@
       "layer": "deck.components",
       "file": "05-buttons.css",
       "line": 156,
-      "uses": 97
+      "uses": 100
     },
     "btn-link": {
       "bucket": "public",
@@ -1595,7 +1614,7 @@
       "layer": "deck.components",
       "file": "05-buttons.css",
       "line": 79,
-      "uses": 262
+      "uses": 264
     },
     "btn-round": {
       "bucket": "public",
@@ -1615,7 +1634,7 @@
       "layer": "deck.components",
       "file": "05-buttons.css",
       "line": 148,
-      "uses": 451
+      "uses": 455
     },
     "btn-soft": {
       "bucket": "public",
@@ -1694,7 +1713,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 123,
+      "line": 127,
       "uses": 2
     },
     "card": {
@@ -1705,7 +1724,7 @@
       "layer": "deck.components",
       "file": "07-components.css",
       "line": 11,
-      "uses": 469
+      "uses": 471
     },
     "card-body": {
       "bucket": "public",
@@ -2274,7 +2293,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 175,
+      "line": 195,
       "uses": 171
     },
     "check-card": {
@@ -2284,7 +2303,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 238,
+      "line": 258,
       "uses": 31
     },
     "check-note": {
@@ -2294,7 +2313,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 235,
+      "line": 255,
       "uses": 36
     },
     "check-text": {
@@ -2304,7 +2323,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 231,
+      "line": 251,
       "uses": 62
     },
     "chip": {
@@ -2334,7 +2353,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 132,
+      "line": 136,
       "uses": 14
     },
     "clamp-3": {
@@ -2344,7 +2363,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 132,
+      "line": 136,
       "uses": 12
     },
     "cluster": {
@@ -2355,7 +2374,7 @@
       "layer": "deck.layout",
       "file": "04-layout.css",
       "line": 74,
-      "uses": 610
+      "uses": 614
     },
     "cluster-between": {
       "bucket": "public",
@@ -2395,7 +2414,7 @@
       "layer": "deck.layout",
       "file": "04-layout.css",
       "line": 81,
-      "uses": 420
+      "uses": 424
     },
     "code-ltr": {
       "bucket": "public",
@@ -2774,7 +2793,7 @@
       "overridden": false,
       "layer": "deck.layout",
       "file": "04-layout.css",
-      "line": 240,
+      "line": 242,
       "uses": 17
     },
     "cq-lg": {
@@ -2904,7 +2923,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 179,
+      "line": 197,
       "uses": 2
     },
     "datefield": {
@@ -3114,7 +3133,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 214,
+      "line": 232,
       "uses": 3
     },
     "delay-2": {
@@ -3124,7 +3143,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 215,
+      "line": 233,
       "uses": 2
     },
     "delay-3": {
@@ -3134,7 +3153,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 216,
+      "line": 234,
       "uses": 8
     },
     "dg": {
@@ -3414,7 +3433,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 447,
+      "line": 452,
       "uses": 3
     },
     "disclosure-body": {
@@ -3424,7 +3443,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 474,
+      "line": 479,
       "uses": 0
     },
     "display": {
@@ -3594,7 +3613,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 201,
+      "line": 219,
       "uses": 3
     },
     "dur-2": {
@@ -3604,7 +3623,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 202,
+      "line": 220,
       "uses": 1
     },
     "dur-3": {
@@ -3614,7 +3633,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 203,
+      "line": 221,
       "uses": 1
     },
     "dur-4": {
@@ -3624,7 +3643,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 204,
+      "line": 222,
       "uses": 7
     },
     "dur-5": {
@@ -3634,7 +3653,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 205,
+      "line": 223,
       "uses": 3
     },
     "ease-bounce": {
@@ -3644,7 +3663,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 210,
+      "line": 228,
       "uses": 2
     },
     "ease-in": {
@@ -3654,7 +3673,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 208,
+      "line": 226,
       "uses": 2
     },
     "ease-linear": {
@@ -3664,7 +3683,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 212,
+      "line": 230,
       "uses": 2
     },
     "ease-out": {
@@ -3674,7 +3693,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 207,
+      "line": 225,
       "uses": 2
     },
     "ease-overshoot": {
@@ -3684,7 +3703,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 211,
+      "line": 229,
       "uses": 2
     },
     "ease-spring": {
@@ -3694,7 +3713,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 209,
+      "line": 227,
       "uses": 4
     },
     "editor": {
@@ -3864,7 +3883,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 774,
+      "line": 779,
       "uses": 6
     },
     "empty-art": {
@@ -3874,7 +3893,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 782,
+      "line": 787,
       "uses": 4
     },
     "empty-title": {
@@ -3884,7 +3903,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 792,
+      "line": 797,
       "uses": 8
     },
     "enter": {
@@ -4074,7 +4093,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 368,
+      "line": 388,
       "uses": 35
     },
     "field-row-cq": {
@@ -4094,7 +4113,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 351,
+      "line": 371,
       "uses": 19
     },
     "file": {
@@ -4104,7 +4123,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 331,
+      "line": 351,
       "uses": 68
     },
     "fixed": {
@@ -4114,8 +4133,8 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 168,
-      "uses": 5
+      "line": 178,
+      "uses": 7
     },
     "flash": {
       "bucket": "public",
@@ -4155,7 +4174,7 @@
       "layer": "deck.utilities",
       "file": "09-utilities.css",
       "line": 13,
-      "uses": 4
+      "uses": 6
     },
     "flex-col": {
       "bucket": "public",
@@ -4324,7 +4343,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 378,
+      "line": 398,
       "uses": 13
     },
     "form-actions-sticky": {
@@ -4334,7 +4353,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 386,
+      "line": 406,
       "uses": 6
     },
     "fw-bold": {
@@ -4344,7 +4363,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 102,
+      "line": 106,
       "uses": 4
     },
     "fw-medium": {
@@ -4354,7 +4373,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 98,
+      "line": 102,
       "uses": 18
     },
     "fw-normal": {
@@ -4364,7 +4383,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 97,
+      "line": 101,
       "uses": 2
     },
     "fw-semi": {
@@ -4374,8 +4393,8 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 101,
-      "uses": 284
+      "line": 105,
+      "uses": 286
     },
     "g-bad": {
       "bucket": "public",
@@ -4765,7 +4784,7 @@
       "layer": "deck.utilities",
       "file": "09-utilities.css",
       "line": 41,
-      "uses": 2
+      "uses": 4
     },
     "gap-4": {
       "bucket": "public",
@@ -4815,7 +4834,7 @@
       "layer": "deck.layout",
       "file": "04-layout.css",
       "line": 102,
-      "uses": 109
+      "uses": 111
     },
     "grid-2": {
       "bucket": "public",
@@ -5245,7 +5264,7 @@
       "layer": "deck.components",
       "file": "06-forms.css",
       "line": 49,
-      "uses": 283
+      "uses": 287
     },
     "input-group": {
       "bucket": "public",
@@ -5254,8 +5273,28 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 123,
+      "line": 143,
       "uses": 41
+    },
+    "input-lg": {
+      "bucket": "public",
+      "reason": "Component size modifier for .input, matching .btn-lg's 50px.",
+      "rule": "component",
+      "overridden": false,
+      "layer": "deck.components",
+      "file": "06-forms.css",
+      "line": 78,
+      "uses": 5
+    },
+    "input-sm": {
+      "bucket": "public",
+      "reason": "Component size modifier for .input, matching .btn-sm's 34px so a toolbar lines up.",
+      "rule": "component",
+      "overridden": false,
+      "layer": "deck.components",
+      "file": "06-forms.css",
+      "line": 70,
+      "uses": 5
     },
     "inset-0": {
       "bucket": "public",
@@ -5264,7 +5303,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 170,
+      "line": 180,
       "uses": 2
     },
     "inset-be-0": {
@@ -5275,7 +5314,7 @@
       "layer": "deck.utilities",
       "file": "19-logical.css",
       "line": 79,
-      "uses": 4
+      "uses": 6
     },
     "inset-bs-0": {
       "bucket": "public",
@@ -5295,7 +5334,7 @@
       "layer": "deck.utilities",
       "file": "19-logical.css",
       "line": 77,
-      "uses": 4
+      "uses": 6
     },
     "inset-is-0": {
       "bucket": "public",
@@ -5305,7 +5344,7 @@
       "layer": "deck.utilities",
       "file": "19-logical.css",
       "line": 76,
-      "uses": 3
+      "uses": 5
     },
     "is-above": {
       "bucket": "internal",
@@ -5334,7 +5373,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 221,
+      "line": 239,
       "uses": 6
     },
     "is-behind-end": {
@@ -5414,7 +5453,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 836,
+      "line": 841,
       "uses": 25
     },
     "is-down": {
@@ -5484,7 +5523,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 110,
+      "line": 130,
       "uses": 28
     },
     "is-leaving": {
@@ -5984,7 +6023,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 271,
+      "line": 289,
       "uses": 1
     },
     "lift": {
@@ -6015,7 +6054,17 @@
       "layer": "deck.components",
       "file": "07-components.css",
       "line": 305,
-      "uses": 64
+      "uses": 66
+    },
+    "list-flush": {
+      "bucket": "public",
+      "reason": "Component modifier for .list: no border, radius or fill, for a list inside a box that already draws one.",
+      "rule": "component",
+      "overridden": false,
+      "layer": "deck.components",
+      "file": "07-components.css",
+      "line": 317,
+      "uses": 4
     },
     "list-header": {
       "bucket": "public",
@@ -6024,7 +6073,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 349,
+      "line": 354,
       "uses": 7
     },
     "list-main": {
@@ -6034,8 +6083,8 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 338,
-      "uses": 109
+      "line": 343,
+      "uses": 113
     },
     "list-row": {
       "bucket": "public",
@@ -6044,8 +6093,8 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 316,
-      "uses": 118
+      "line": 321,
+      "uses": 122
     },
     "list-sub": {
       "bucket": "public",
@@ -6054,8 +6103,8 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 342,
-      "uses": 81
+      "line": 347,
+      "uses": 85
     },
     "list-title": {
       "bucket": "public",
@@ -6064,8 +6113,8 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 340,
-      "uses": 92
+      "line": 345,
+      "uses": 96
     },
     "list-trail": {
       "bucket": "public",
@@ -6074,7 +6123,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 346,
+      "line": 351,
       "uses": 73
     },
     "list-virtual": {
@@ -6264,7 +6313,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 257,
+      "line": 275,
       "uses": 7
     },
     "mega": {
@@ -6364,7 +6413,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 634,
+      "line": 639,
       "uses": 48
     },
     "menu-item": {
@@ -6374,7 +6423,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 661,
+      "line": 666,
       "uses": 138
     },
     "menu-item-danger": {
@@ -6384,7 +6433,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 679,
+      "line": 684,
       "uses": 13
     },
     "menu-label": {
@@ -6394,7 +6443,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 686,
+      "line": 691,
       "uses": 27
     },
     "menu-match": {
@@ -6414,7 +6463,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 683,
+      "line": 688,
       "uses": 39
     },
     "metarow": {
@@ -6624,7 +6673,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 703,
+      "line": 708,
       "uses": 16
     },
     "modal-body": {
@@ -6634,7 +6683,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 755,
+      "line": 760,
       "uses": 13
     },
     "modal-footer": {
@@ -6644,7 +6693,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 759,
+      "line": 764,
       "uses": 13
     },
     "modal-header": {
@@ -6654,7 +6703,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 742,
+      "line": 747,
       "uses": 13
     },
     "modal-title": {
@@ -6664,7 +6713,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 751,
+      "line": 756,
       "uses": 13
     },
     "mono": {
@@ -6674,7 +6723,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 121,
+      "line": 125,
       "uses": 40
     },
     "mouse-only": {
@@ -6684,7 +6733,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 281,
+      "line": 299,
       "uses": 4
     },
     "msg": {
@@ -6794,7 +6843,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 864,
+      "line": 869,
       "uses": 123
     },
     "navbar": {
@@ -6804,7 +6853,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 839,
+      "line": 844,
       "uses": 56
     },
     "navbar-brand": {
@@ -6814,7 +6863,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 847,
+      "line": 852,
       "uses": 70
     },
     "navbar-links": {
@@ -6824,7 +6873,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 857,
+      "line": 862,
       "uses": 33
     },
     "no-flip": {
@@ -6844,7 +6893,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 217,
+      "line": 235,
       "uses": 3
     },
     "no-print": {
@@ -6854,7 +6903,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 282,
+      "line": 300,
       "uses": 7
     },
     "no-print-url": {
@@ -6874,7 +6923,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 178,
+      "line": 196,
       "uses": 2
     },
     "no-underline": {
@@ -6884,7 +6933,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 124,
+      "line": 128,
       "uses": 7
     },
     "nowrap": {
@@ -6954,8 +7003,18 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 120,
+      "line": 124,
       "uses": 486
+    },
+    "object-contain": {
+      "bucket": "public",
+      "reason": "Utility. Letterboxes media inside a .ratio-* frame instead of cropping it; the utilities layer beats the frame's cover.",
+      "rule": "utility",
+      "overridden": false,
+      "layer": "deck.utilities",
+      "file": "09-utilities.css",
+      "line": 88,
+      "uses": 6
     },
     "opacity-60": {
       "bucket": "public",
@@ -6964,7 +7023,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 176,
+      "line": 194,
       "uses": 2
     },
     "optional": {
@@ -6984,7 +7043,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 173,
+      "line": 191,
       "uses": 2
     },
     "overflow-clip": {
@@ -6994,7 +7053,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 174,
+      "line": 192,
       "uses": 2
     },
     "overflow-hidden": {
@@ -7004,7 +7063,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 172,
+      "line": 190,
       "uses": 15
     },
     "p-0": {
@@ -7015,7 +7074,7 @@
       "layer": "deck.utilities",
       "file": "09-utilities.css",
       "line": 49,
-      "uses": 6
+      "uses": 8
     },
     "p-1": {
       "bucket": "public",
@@ -7045,7 +7104,7 @@
       "layer": "deck.utilities",
       "file": "09-utilities.css",
       "line": 50,
-      "uses": 14
+      "uses": 16
     },
     "p-4": {
       "bucket": "public",
@@ -7114,7 +7173,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 495,
+      "line": 500,
       "uses": 9
     },
     "panel": {
@@ -7544,7 +7603,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 177,
+      "line": 195,
       "uses": 2
     },
     "pop": {
@@ -7674,7 +7733,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 523,
+      "line": 528,
       "uses": 46
     },
     "prose": {
@@ -7924,7 +7983,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 157,
+      "line": 167,
       "uses": 4
     },
     "r-lg": {
@@ -7934,7 +7993,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 156,
+      "line": 166,
       "uses": 10
     },
     "r-md": {
@@ -7944,8 +8003,8 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 155,
-      "uses": 14
+      "line": 165,
+      "uses": 20
     },
     "r-sm": {
       "bucket": "public",
@@ -7954,7 +8013,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 154,
+      "line": 164,
       "uses": 16
     },
     "r-start": {
@@ -7974,7 +8033,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 153,
+      "line": 163,
       "uses": 4
     },
     "range": {
@@ -7984,7 +8043,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 288,
+      "line": 308,
       "uses": 75
     },
     "range-pair": {
@@ -8075,7 +8134,7 @@
       "layer": "deck.layout",
       "file": "04-layout.css",
       "line": 235,
-      "uses": 4
+      "uses": 6
     },
     "ratio-1x1": {
       "bucket": "public",
@@ -8085,7 +8144,17 @@
       "layer": "deck.layout",
       "file": "04-layout.css",
       "line": 237,
-      "uses": 4
+      "uses": 5
+    },
+    "ratio-2x3": {
+      "bucket": "public",
+      "reason": "Poster and book-cover ratio beside the existing 16x9, 4x3 and 1x1; layout primitive like them.",
+      "rule": "layout",
+      "overridden": false,
+      "layer": "deck.layout",
+      "file": "04-layout.css",
+      "line": 239,
+      "uses": 7
     },
     "ratio-4x3": {
       "bucket": "public",
@@ -8095,7 +8164,7 @@
       "layer": "deck.layout",
       "file": "04-layout.css",
       "line": 236,
-      "uses": 2
+      "uses": 3
     },
     "reaction": {
       "bucket": "public",
@@ -8114,7 +8183,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 166,
+      "line": 176,
       "uses": 7
     },
     "reorder": {
@@ -8184,7 +8253,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 550,
+      "line": 555,
       "uses": 28
     },
     "ring-label": {
@@ -8194,7 +8263,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 567,
+      "line": 572,
       "uses": 14
     },
     "ring-wrap": {
@@ -8204,7 +8273,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 566,
+      "line": 571,
       "uses": 13
     },
     "ripple": {
@@ -8434,8 +8503,8 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 163,
-      "uses": 58
+      "line": 183,
+      "uses": 59
     },
     "section": {
       "bucket": "public",
@@ -8454,7 +8523,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 407,
+      "line": 412,
       "uses": 49
     },
     "select": {
@@ -8465,7 +8534,7 @@
       "layer": "deck.components",
       "file": "06-forms.css",
       "line": 49,
-      "uses": 79
+      "uses": 80
     },
     "shadow-0": {
       "bucket": "public",
@@ -8474,7 +8543,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 159,
+      "line": 169,
       "uses": 2
     },
     "shadow-1": {
@@ -8484,7 +8553,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 160,
+      "line": 170,
       "uses": 2
     },
     "shadow-2": {
@@ -8494,7 +8563,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 161,
+      "line": 171,
       "uses": 2
     },
     "shadow-3": {
@@ -8504,7 +8573,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 162,
+      "line": 172,
       "uses": 2
     },
     "shadow-4": {
@@ -8514,7 +8583,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 163,
+      "line": 173,
       "uses": 2
     },
     "shake": {
@@ -8585,7 +8654,7 @@
       "layer": "deck.utilities",
       "file": "09-utilities.css",
       "line": 33,
-      "uses": 2
+      "uses": 4
     },
     "shrink-on-scroll": {
       "bucket": "public",
@@ -8604,7 +8673,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 880,
+      "line": 885,
       "uses": 57
     },
     "sidebar-group": {
@@ -8614,7 +8683,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 886,
+      "line": 891,
       "uses": 73
     },
     "sidebar-link": {
@@ -8624,7 +8693,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 887,
+      "line": 892,
       "uses": 449
     },
     "skeleton": {
@@ -8634,7 +8703,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 584,
+      "line": 589,
       "uses": 96
     },
     "skeleton-circle": {
@@ -8644,7 +8713,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 595,
+      "line": 600,
       "uses": 10
     },
     "skeleton-text": {
@@ -8654,7 +8723,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 594,
+      "line": 599,
       "uses": 49
     },
     "skip-link": {
@@ -8664,7 +8733,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 235,
+      "line": 253,
       "uses": 52
     },
     "sm": {
@@ -8674,7 +8743,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 249,
+      "line": 267,
       "uses": 3
     },
     "sortable": {
@@ -8844,7 +8913,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 574,
+      "line": 579,
       "uses": 17
     },
     "spinner-lg": {
@@ -8854,7 +8923,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 582,
+      "line": 587,
       "uses": 3
     },
     "split": {
@@ -8894,7 +8963,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 224,
+      "line": 242,
       "uses": 376
     },
     "stack": {
@@ -8905,7 +8974,7 @@
       "layer": "deck.layout",
       "file": "04-layout.css",
       "line": 51,
-      "uses": 4196
+      "uses": 4204
     },
     "stack-0": {
       "bucket": "public",
@@ -8945,7 +9014,7 @@
       "layer": "deck.layout",
       "file": "04-layout.css",
       "line": 65,
-      "uses": 2246
+      "uses": 2250
     },
     "stack-4": {
       "bucket": "public",
@@ -9014,7 +9083,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 796,
+      "line": 801,
       "uses": 100
     },
     "stat-cq": {
@@ -9034,7 +9103,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 805,
+      "line": 810,
       "uses": 48
     },
     "stat-delta-down": {
@@ -9044,7 +9113,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 807,
+      "line": 812,
       "uses": 9
     },
     "stat-delta-up": {
@@ -9054,7 +9123,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 806,
+      "line": 811,
       "uses": 41
     },
     "stat-label": {
@@ -9064,7 +9133,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 804,
+      "line": 809,
       "uses": 106
     },
     "stat-value": {
@@ -9074,7 +9143,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 797,
+      "line": 802,
       "uses": 124
     },
     "status-line": {
@@ -9164,8 +9233,8 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 169,
-      "uses": 3
+      "line": 179,
+      "uses": 5
     },
     "sticky-top": {
       "bucket": "public",
@@ -9204,7 +9273,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "06-forms.css",
-      "line": 255,
+      "line": 275,
       "uses": 66
     },
     "tab": {
@@ -9214,7 +9283,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 377,
+      "line": 382,
       "uses": 82
     },
     "tabbar": {
@@ -9284,7 +9353,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 365,
+      "line": 370,
       "uses": 15
     },
     "text-2xl": {
@@ -9294,7 +9363,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 95,
+      "line": 99,
       "uses": 2
     },
     "text-2xs": {
@@ -9304,7 +9373,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 87,
+      "line": 91,
       "uses": 4
     },
     "text-bad": {
@@ -9314,7 +9383,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 115,
+      "line": 119,
       "uses": 7
     },
     "text-base": {
@@ -9324,7 +9393,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 91,
+      "line": 95,
       "uses": 14
     },
     "text-brand": {
@@ -9334,7 +9403,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 112,
+      "line": 116,
       "uses": 21
     },
     "text-center": {
@@ -9344,7 +9413,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 105,
+      "line": 109,
       "uses": 33
     },
     "text-cq": {
@@ -9364,7 +9433,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 106,
+      "line": 110,
       "uses": 2
     },
     "text-faint": {
@@ -9374,7 +9443,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 111,
+      "line": 115,
       "uses": 22
     },
     "text-good": {
@@ -9384,7 +9453,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 113,
+      "line": 117,
       "uses": 15
     },
     "text-inherit": {
@@ -9394,7 +9463,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 116,
+      "line": 120,
       "uses": 6
     },
     "text-lg": {
@@ -9404,7 +9473,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 93,
+      "line": 97,
       "uses": 3
     },
     "text-md": {
@@ -9414,7 +9483,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 92,
+      "line": 96,
       "uses": 4
     },
     "text-muted": {
@@ -9424,8 +9493,8 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 110,
-      "uses": 1575
+      "line": 114,
+      "uses": 1578
     },
     "text-sm": {
       "bucket": "public",
@@ -9434,7 +9503,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 90,
+      "line": 94,
       "uses": 717
     },
     "text-start": {
@@ -9444,7 +9513,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 104,
+      "line": 108,
       "uses": 3
     },
     "text-warn": {
@@ -9454,7 +9523,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 114,
+      "line": 118,
       "uses": 3
     },
     "text-xl": {
@@ -9464,7 +9533,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 94,
+      "line": 98,
       "uses": 2
     },
     "text-xs": {
@@ -9474,7 +9543,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 88,
+      "line": 92,
       "uses": 336
     },
     "textarea": {
@@ -9554,7 +9623,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 810,
+      "line": 815,
       "uses": 12
     },
     "timeline-dot": {
@@ -9564,7 +9633,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 826,
+      "line": 831,
       "uses": 31
     },
     "timeline-item": {
@@ -9574,7 +9643,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 811,
+      "line": 816,
       "uses": 32
     },
     "tip": {
@@ -9605,7 +9674,7 @@
       "layer": "deck.components",
       "file": "13-toasts.css",
       "line": 49,
-      "uses": 38
+      "uses": 39
     },
     "toast-action": {
       "bucket": "internal",
@@ -9834,7 +9903,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "07-components.css",
-      "line": 604,
+      "line": 609,
       "uses": 51
     },
     "touch-only": {
@@ -9844,7 +9913,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 280,
+      "line": 298,
       "uses": 2
     },
     "transition": {
@@ -9854,7 +9923,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 188,
+      "line": 206,
       "uses": 11
     },
     "transition-colors": {
@@ -9864,7 +9933,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 189,
+      "line": 207,
       "uses": 3
     },
     "transition-move": {
@@ -9874,7 +9943,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 194,
+      "line": 212,
       "uses": 2
     },
     "transition-opacity": {
@@ -9884,7 +9953,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 199,
+      "line": 217,
       "uses": 2
     },
     "transition-size": {
@@ -9894,7 +9963,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 197,
+      "line": 215,
       "uses": 2
     },
     "truncate": {
@@ -9904,7 +9973,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 126,
+      "line": 130,
       "uses": 69
     },
     "turn-in": {
@@ -9934,7 +10003,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 122,
+      "line": 126,
       "uses": 8
     },
     "video": {
@@ -10134,7 +10203,7 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 221,
+      "line": 239,
       "uses": 3
     },
     "with-indicator": {
@@ -10214,8 +10283,8 @@
       "overridden": false,
       "layer": "deck.utilities",
       "file": "09-utilities.css",
-      "line": 171,
-      "uses": 2
+      "line": 181,
+      "uses": 3
     },
     "z-lift-1": {
       "bucket": "public",
@@ -10247,6 +10316,26 @@
       "line": 259,
       "uses": 1
     },
+    "z-nav": {
+      "bucket": "public",
+      "reason": "Utility for a named stacking layer: an author's fixed bar or mini player at --z-nav, above sticky headers.",
+      "rule": "utility",
+      "overridden": false,
+      "layer": "deck.utilities",
+      "file": "09-utilities.css",
+      "line": 188,
+      "uses": 5
+    },
+    "z-sheet": {
+      "bucket": "public",
+      "reason": "Utility for a named stacking layer: an author's own slide-over panel at --z-sheet, under modals and toasts.",
+      "rule": "utility",
+      "overridden": false,
+      "layer": "deck.utilities",
+      "file": "09-utilities.css",
+      "line": 189,
+      "uses": 3
+    },
     "z-sink": {
       "bucket": "public",
       "reason": "Motion or effect class. Opt in by adding it; nothing runs unless you do.",
@@ -10256,6 +10345,16 @@
       "file": "21-space3d.css",
       "line": 260,
       "uses": 1
+    },
+    "z-sticky": {
+      "bucket": "public",
+      "reason": "Utility for a named stacking layer, so an author's own sticky chrome joins --z-sticky instead of inventing a number.",
+      "rule": "utility",
+      "overridden": false,
+      "layer": "deck.utilities",
+      "file": "09-utilities.css",
+      "line": 187,
+      "uses": 5
     }
   },
   "removed": [

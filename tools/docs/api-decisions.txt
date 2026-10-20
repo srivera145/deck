@@ -6,7 +6,8 @@
 #
 # Written by: node tools/docs/classify.mjs --accept
 # Edit a line by hand to overrule what the rules propose.
-# 931 classes.
+# Text after a # on a line is the reason for that decision; --accept keeps it.
+# 940 classes.
 
 absolute = public
 accordion = public
@@ -61,6 +62,7 @@ border-b = public
 border-brand = public
 border-t = public
 breadcrumb = public
+break-words = public  # Utility. overflow-wrap: anywhere, because the body's break-word does not stop a flex item or table cell overflowing.
 btn = public
 btn-3d = public
 btn-accent = public
@@ -439,6 +441,8 @@ inline-block = public
 inline-flex = public
 input = public
 input-group = public
+input-lg = public  # Component size modifier for .input, matching .btn-lg's 50px.
+input-sm = public  # Component size modifier for .input, matching .btn-sm's 34px so a toolbar lines up.
 inset-0 = public
 inset-be-0 = public
 inset-bs-0 = public
@@ -515,6 +519,7 @@ lg = public
 lift = public
 link-quiet = public
 list = public
+list-flush = public  # Component modifier for .list: no border, radius or fill, for a list inside a box that already draws one.
 list-header = public
 list-main = public
 list-row = public
@@ -609,6 +614,7 @@ number = public
 number-sm = public
 number-unit = public
 nums = public
+object-contain = public  # Utility. Letterboxes media inside a .ratio-* frame instead of cropping it; the utilities layer beats the frame's cover.
 opacity-60 = public
 optional = public
 overflow-auto = public
@@ -722,6 +728,7 @@ rating-sm = public
 rating-static = public
 ratio-16x9 = public
 ratio-1x1 = public
+ratio-2x3 = public  # Poster and book-cover ratio beside the existing 16x9, 4x3 and 1x1; layout primitive like them.
 ratio-4x3 = public
 reaction = public
 relative = public
@@ -938,4 +945,7 @@ z-1 = public
 z-lift-1 = public
 z-lift-2 = public
 z-lift-3 = public
+z-nav = public  # Utility for a named stacking layer: an author's fixed bar or mini player at --z-nav, above sticky headers.
+z-sheet = public  # Utility for a named stacking layer: an author's own slide-over panel at --z-sheet, under modals and toasts.
 z-sink = public
+z-sticky = public  # Utility for a named stacking layer, so an author's own sticky chrome joins --z-sticky instead of inventing a number.
