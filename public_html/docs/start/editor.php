@@ -45,7 +45,11 @@ $extData = $readJson('tools/vscode/data/deck-data.json') ?? [];
 
 $extVersion = $extPkg['version'] ?? '0.1.0';
 $vsix       = 'deck-intellisense-' . $extVersion . '.vsix';
-$vsixUrl    = 'https://github.com/srivera145/deck/raw/main/tools/vscode/' . $vsix;
+/* Each Deck release from 0.2.0 has the .vsix built against it attached, so link
+   there: main can be behind the release this page describes. */
+$vsixUrl    = isset($extData['version'])
+    ? 'https://github.com/srivera145/deck/releases/download/v' . $extData['version'] . '/' . $vsix
+    : 'https://github.com/srivera145/deck/raw/main/tools/vscode/' . $vsix;
 $counts     = $extData['counts'] ?? null;
 $settings   = $extPkg['contributes']['configuration']['properties'] ?? [];
 
@@ -148,8 +152,9 @@ $showDefault = static function ($v): string {
       <div class="stack stack-2">
         <span>
           <strong>Download the extension.</strong> It is
-          <code><?= e($vsix) ?></code>, in <code>tools/vscode/</code> of Deck's repository.
-          If you cloned the repository, it is already on your disk.
+          <code><?= e($vsix) ?></code>, attached to the Deck release on GitHub and in
+          <code>tools/vscode/</code> of Deck's repository. If you cloned the repository, it
+          is already on your disk.
         </span>
         <span>
           <a class="btn btn-primary" href="<?= e($vsixUrl) ?>">
@@ -194,7 +199,7 @@ $showDefault = static function ($v): string {
       counts</em> from the Command Palette.
       <?php if ($counts): ?>
         It answers with one line, along the lines of
-        <em>Deck 0.1.x — <?= (int) $counts['public'] ?> public classes,
+        <em>Deck <?= e((string) ($extData['version'] ?? '')) ?> — <?= (int) $counts['public'] ?> public classes,
         <?= (int) $counts['internal'] ?> internal, <?= (int) $counts['removed'] ?> removed,
         <?= (int) $counts['tokens'] ?> tokens, <?= (int) $counts['icons'] ?> icons.</em>
       <?php else: ?>
@@ -402,8 +407,8 @@ $showDefault = static function ($v): string {
   <p>
     Each Deck release can add, rename or remove classes, and the extension's class list is
     generated from the release it was built against. Because it was installed from a file,
-    nothing updates it: when you upgrade Deck, download the new <code>.vsix</code> from the
-    same folder and install it the same way. It replaces the old one in place, settings and
+    nothing updates it: when you upgrade Deck, download the <code>.vsix</code> attached to
+    the new release and install it the same way. It replaces the old one in place, settings and
     all.
   </p>
 </section>

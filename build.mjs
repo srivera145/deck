@@ -38,6 +38,23 @@ if (deckPhp && phpVersion !== pkg.version) {
   process.exit(1);
 }
 
+// The three scripts carry it by hand too: in each banner, and in deck.js as
+// Deck.version, which a page can read. All four said 0.1 from 0.1.0 to 0.1.4,
+// because nothing checked them, so check them the same way.
+const scriptVersions = [];
+for (const f of ['deck.js', 'deck-extras.js', 'deck-adapters.js']) {
+  const js = await readFile(path.join(JS, f), 'utf8');
+  scriptVersions.push([`the ${f} banner`, new RegExp(`^ \\*  ${f.replace(/\./g, '\\.')} v(\\S+)`, 'm').exec(js)?.[1]]);
+  if (f === 'deck.js') scriptVersions.push(['Deck.version', /^ {4}version: '([^']+)',$/m.exec(js)?.[1]]);
+}
+const scriptDrift = scriptVersions.filter(([, v]) => v !== pkg.version);
+if (scriptDrift.length) {
+  for (const [what, v] of scriptDrift) {
+    console.error(`  src/js: ${what} says ${v ?? 'no version'} but package.json is ${pkg.version}. Make them match.`);
+  }
+  process.exit(1);
+}
+
 const BANNER = `/*! ==========================================================================
  *  Deck v${pkg.version} — the CSS framework for Keel
  *  Mobile first. One file. No build step. No config. No dependencies.

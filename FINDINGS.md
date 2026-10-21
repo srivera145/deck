@@ -3152,3 +3152,45 @@ that `.donut` silently depends on a `.chart` ancestor. The fix is a choice betwe
 markup, so it is left open. One way is to define the palette on `:root` too, or give
 `.donut` a fallback. The other is to add `chart` to the demo's card body, as the template
 does, and say on the class that it needs one.
+
+## 123. Releasing 0.2.0: the scripts never said their version, and half the npm tarball was docs data — FIXED
+
+Found while cutting 0.2.0 (0.1.4 until `.btn-primary`'s dark fill made it a breaking release).
+
+- **The three scripts said 0.1 for five releases.** The banners of `deck.js`, `deck-extras.js`
+  and `deck-adapters.js`, and `Deck.version`, are written by hand in `src/js/`. They read
+  `0.1` from 0.1.0 to 0.1.4, while every other version string came from `package.json` or was
+  checked against it. `Deck.version` is documented as "the version of the script". All four
+  now read `0.2.0`, and `build.mjs` refuses to build when one differs from `package.json`, as
+  it already did for `Deck::VERSION`. This is the same kind of drift that let the 0.1.2
+  Composer package call itself 0.1.1.
+- **Two thirds of the npm tarball was docs data.** `dist/api.json` (1.46 MB), `usage.json`
+  (291 KB), `api-buckets.json` (268 KB) and `collisions.json` (6 KB) were 2.03 MB of the
+  4.31 MB unpacked. Nothing a page or `bin/deck.mjs` runs reads them, the `exports` map
+  exposes none of them, and the editor extension bundles its own copy. `package.json`'s `files`
+  now excludes them (`!dist/api.json` and so on): 90 files, 2.28 MB unpacked, 590 KB packed,
+  where it was 94 files, 4.31 MB and 747 KB. Composer still ships them, which matters because
+  `docs/reference/php.php` tells PHP users to read `dist/api.json`.
+- **`.gitignore` had stopped ignoring `*.log`.** In 3ab5e11 the lines `*.log` and
+  `tools/vscode/*.vsix` became one line, `*.logtools/vscode/*.vsix`, which matches nothing.
+  That same commit committed the `.vsix` and linked to it from the docs, so the vsix is meant
+  to be tracked. `*.log` is back on its own line, and the vsix stays unignored.
+- **The extension could not be updated in place.** Its data changes with every Deck release
+  but its version did not. `code --install-extension` refuses to reinstall an installed version
+  without `--force`. It is now 0.1.1, with data for 0.2.0. Its own README, which is the
+  extension's details page, said "For Deck 0.1.2" with 0.1.2's counts. It now gives 0.2.0's.
+- **The editor page's download button pointed at `raw/main/tools/vscode/`.** That is the
+  newest file on `main`, not the one built for the release the page describes. With the
+  bump, it would have named a 0.1.1 file that `main` does not have. The vsix is now attached
+  to the GitHub release, and the button links to the release named in the extension's data.
+  The example output of *Show loaded API version* said "Deck 0.1.x". It now prints the
+  version from the same data.
+
+**Not done:**
+- **The docs site still pins `@0.1`.** `docs/start/install.php` (its CDN and unpkg URLs and the
+  npx commands), `docs/explain/why-no-build-step.php` and `llms.txt` say `@0.1`, which never
+  resolves to 0.2.0. README.md now says `@0.2`. install.php's rule is to re-run a changed
+  command and paste its output, which needs 0.2.0 live on npm and Packagist. Its npx and
+  Composer transcripts are still from 0.1.2.
+- README.md's link to the vsix names the v0.2.0 release, so it needs updating at each
+  release, like the CDN pins next to it.

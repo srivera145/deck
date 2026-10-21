@@ -4,7 +4,7 @@
 [![Packagist version](https://img.shields.io/packagist/v/echodial/deck)](https://packagist.org/packages/echodial/deck)
 [![License: MIT](https://img.shields.io/npm/l/@echodial/deck)](LICENSE)
 
-**Deck is a CSS framework that ships as one 28.2 KB Brotli (34.6 KB gzip) stylesheet: buttons, forms,
+**Deck is a CSS framework that ships as one 28.1 KB Brotli (34.6 KB gzip) stylesheet: buttons, forms,
 tables, a data grid, charts, overlays, an icon sprite, and a full color system. You add it
 with one `<link>` tag. There is no build step, no config file, and zero dependencies.**
 
@@ -29,7 +29,7 @@ That is the whole install. Nothing to compile, nothing to purge, nothing to conf
   catches the class names that look almost right, in Visual Studio Code and the editors
   built on it. See [Editor support](#editor-support).
 
-Version 0.1.4 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
+Version 0.2.0 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
 ## What Deck weighs
 
@@ -39,7 +39,7 @@ it for text by default, so Brotli is what most users actually receive.
 
 | File | Brotli | gzip |
 | --- | --- | --- |
-| `deck.min.css` | **28.2 KB** | 34.6 KB |
+| `deck.min.css` | **28.1 KB** | 34.6 KB |
 | `deck-icons.svg` | **31.3 KB** | 38.9 KB |
 | `deck.min.js` | **11.0 KB** | 12.3 KB |
 | **All three** | **70.5 KB** | **85.8 KB** |
@@ -80,10 +80,10 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 
 | File | Brotli | gzip | What it is |
 | --- | --- | --- | --- |
-| `deck.min.css` | 28.2 KB | 34.6 KB | The whole framework |
+| `deck.min.css` | 28.1 KB | 34.6 KB | The whole framework |
 | `deck.min.js` | 11.0 KB | 12.3 KB | Optional behaviour, no dependencies |
 | `deck-extras.min.js` | 6.1 KB | 7.0 KB | Carousel, drawer, mega menu, copy button, QR encoder, editor |
-| `deck-adapters.min.js` | 4.1 KB | 4.7 KB | Optional library integrations, inert unless one is loaded |
+| `deck-adapters.min.js` | 4.2 KB | 4.7 KB | Optional library integrations, inert unless one is loaded |
 | `deck.bundle.min.js` | 19.9 KB | 22.5 KB | All three scripts in one file |
 | `deck-icons.svg` | 31.3 KB | 38.9 KB | 174 symbols: 86 icons at two weights, plus two brand marks |
 | `src/` | — | — | The 26 source stylesheets, concatenated to build `deck.css` |
@@ -220,11 +220,11 @@ reasonable way to adopt it into an existing app one screen at a time.
 jsDelivr and unpkg mirror every version published to npm:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@echodial/deck@0.1/dist/deck.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@echodial/deck@0.1/dist/deck.bundle.min.js" data-deck-icons="/assets/deck/deck-icons.svg" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@echodial/deck@0.2/dist/deck.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@echodial/deck@0.2/dist/deck.bundle.min.js" data-deck-icons="/assets/deck/deck-icons.svg" defer></script>
 ```
 
-Pin the version to `@0.1`, as above. It follows every 0.1.x release and never moves to 0.2.
+Pin the version to `@0.2`, as above. It follows every 0.2.x release and never moves to 0.3.
 Never use `@latest`, or leave the version off, which means the same thing: either one moves
 your page onto the next breaking release the day it is published, with nothing in your code
 to show why.
@@ -234,7 +234,7 @@ The icon sprite is the one file a CDN cannot serve. Browsers refuse an SVG `<use
 `data-deck-icons` at it:
 
 ```bash
-curl -sSL --create-dirs -o public/assets/deck/deck-icons.svg https://cdn.jsdelivr.net/npm/@echodial/deck@0.1/dist/deck-icons.svg
+curl -sSL --create-dirs -o public/assets/deck/deck-icons.svg https://cdn.jsdelivr.net/npm/@echodial/deck@0.2/dist/deck-icons.svg
 ```
 
 ### 4. Composer
@@ -358,7 +358,7 @@ promise the framework makes.
 
 ## Templates
 
-Nineteen complete pages built with Deck, in `public_html/templates/`. Each one is a
+Nineteen pages built with Deck, in `public_html/templates/`. Each one is a
 single HTML file with no build step: open it in a browser, copy it into a project, and
 delete the parts you do not want. Browse them, with live previews, at
 [get-deck.dev/templates](https://get-deck.dev/templates/).
@@ -430,8 +430,8 @@ built on it:
 ### Installing it
 
 It is not on the Visual Studio Marketplace or Open VSX yet, so you install the packaged
-file, `tools/vscode/deck-intellisense-0.1.0.vsix`
-([download](https://github.com/srivera145/deck/raw/main/tools/vscode/deck-intellisense-0.1.0.vsix)).
+file, `deck-intellisense-0.1.1.vsix`, from the [0.2.0 release](https://github.com/srivera145/deck/releases/tag/v0.2.0)
+([download](https://github.com/srivera145/deck/releases/download/v0.2.0/deck-intellisense-0.1.1.vsix)) or from `tools/vscode/` in the repository.
 
 1. Open the Command Palette: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> on Windows and
    Linux, <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> on macOS.
@@ -442,8 +442,8 @@ file, `tools/vscode/deck-intellisense-0.1.0.vsix`
 Or from a terminal, in the folder that holds the file:
 
 ```bash
-code --install-extension deck-intellisense-0.1.0.vsix     # Visual Studio Code
-cursor --install-extension deck-intellisense-0.1.0.vsix   # Cursor
+code --install-extension deck-intellisense-0.1.1.vsix     # Visual Studio Code
+cursor --install-extension deck-intellisense-0.1.1.vsix   # Cursor
 ```
 
 To check it is running, run **Deck: Show loaded API version and counts** from the

@@ -2,7 +2,7 @@
   "name": "deck-intellisense",
   "displayName": "Deck IntelliSense",
   "description": "Class and token completion, hover docs, and typo detection for the Deck CSS framework.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "echodial",
   "license": "MIT",
   "author": { "name": "Santos Rivera" },

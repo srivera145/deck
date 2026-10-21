@@ -1,5 +1,5 @@
 /*! ==========================================================================
- *  deck.js v0.1 — behaviour for Deck
+ *  deck.js v0.2.0 — behaviour for Deck
  *  No dependencies. No build step. Drop it in and it wires itself up.
  *
  *    <script src="/assets/deck/deck.js" defer></script>
@@ -1530,7 +1530,7 @@ const Deck = (() => {
 
   const Deck = {
     iconSprite: spriteURL,
-    version: '0.1',
+    version: '0.2.0',
 
     init(root = document) {
       $$('[data-deck-datepicker]', root).forEach(n => { if (!n._deck) n._deck = new DatePicker(n); });

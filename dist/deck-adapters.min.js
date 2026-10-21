@@ -1,5 +1,5 @@
 /*! ==========================================================================
- *  deck-adapters.js v0.1
+ *  deck-adapters.js v0.2.0
  *
  *  Deck's core is zero-dependency on purpose. This file is the opposite: it
  *  is a set of adapters that light up ONLY if the corresponding library is

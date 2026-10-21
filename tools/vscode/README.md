@@ -4,8 +4,8 @@ Class and token completion, hover documentation, and typo detection for
 [Deck](https://get-deck.dev), the mobile-first CSS framework.
 
 Everything the extension knows is generated from Deck's own API extract, so it
-cannot drift from the stylesheet it describes. For Deck 0.1.2 that is 828 public
-classes, 103 internal ones, 31 removed ones, 144 tokens and 152 icon symbols.
+cannot drift from the stylesheet it describes. For Deck 0.2.0 that is 844 public
+classes, 104 internal ones, 31 removed ones, 156 tokens and 174 icon symbols.
 
 ## Why this exists
 

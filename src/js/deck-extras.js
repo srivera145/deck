@@ -1,5 +1,5 @@
 /*! ==========================================================================
- *  deck-extras.js v0.1 — behaviour for the extended component set
+ *  deck-extras.js v0.2.0 — behaviour for the extended component set
  *  Loads after deck.js and registers itself with Deck.init.
  *  No dependencies, including the QR encoder.
  *  ======================================================================== */

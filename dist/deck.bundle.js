@@ -1,5 +1,5 @@
 /*! ==========================================================================
- *  deck.js v0.1 — behaviour for Deck
+ *  deck.js v0.2.0 — behaviour for Deck
  *  No dependencies. No build step. Drop it in and it wires itself up.
  *
  *    <script src="/assets/deck/deck.js" defer></script>
@@ -1530,7 +1530,7 @@ const Deck = (() => {
 
   const Deck = {
     iconSprite: spriteURL,
-    version: '0.1',
+    version: '0.2.0',
 
     init(root = document) {
       $$('[data-deck-datepicker]', root).forEach(n => { if (!n._deck) n._deck = new DatePicker(n); });
@@ -1659,7 +1659,7 @@ if (typeof globalThis !== 'undefined') globalThis.Deck = Deck;
 if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
 
 /*! ==========================================================================
- *  deck-extras.js v0.1 — behaviour for the extended component set
+ *  deck-extras.js v0.2.0 — behaviour for the extended component set
  *  Loads after deck.js and registers itself with Deck.init.
  *  No dependencies, including the QR encoder.
  *  ======================================================================== */
@@ -2559,7 +2559,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
    : typeof Deck !== 'undefined' ? Deck : null);
 
 /*! ==========================================================================
- *  deck-adapters.js v0.1
+ *  deck-adapters.js v0.2.0
  *
  *  Deck's core is zero-dependency on purpose. This file is the opposite: it
  *  is a set of adapters that light up ONLY if the corresponding library is

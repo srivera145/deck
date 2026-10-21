@@ -2,7 +2,15 @@
 
 Notable changes to Deck. The npm package (`@echodial/deck`) and the Composer package (`echodial/deck`) share version numbers; Composer reads the version from the git tag.
 
-## 0.1.4 (unreleased)
+## 0.2.0 (2026-10-21)
+
+This was going to be 0.1.4. One default below changes how existing pages look, and in 0.x a breaking change moves the minor version, so it is 0.2.0. A `^0.1` range or a CDN URL pinned to `@0.1` stays on 0.1.3 until you move it to `^0.2` or `@0.2`.
+
+### Breaking
+
+- **Primary buttons are lighter in dark mode.** `.btn-primary` now fills with `--brand` and `--brand-hover` (see *An exact brand colour reaches `.btn-primary`* under Fixed). In dark mode those are the 400 and 300 steps, so the button takes the lighter colour a link uses, with black text. Until now it was the 600 step with white text in both schemes. Light mode is unchanged. To keep the old dark look, add one line to your CSS: `@layer app.overrides { .btn-primary { --brand: var(--brand-600); --brand-hover: var(--brand-700); --btn-text: var(--text-on-brand); } }`. It matches 0.1.3 at rest and on hover, in both schemes.
+- **The npm package no longer carries the docs build data.** `dist/api.json`, `dist/api-buckets.json`, `dist/usage.json` and `dist/collisions.json` describe Deck to its documentation site and editor extension, and nothing in a page or in `npx @echodial/deck` reads them. The tarball is 2.3 MB unpacked instead of 4.3 MB. If a script of yours read them from `node_modules`, take them from the Composer package or the repository, which still have them.
+- Two fixes below also change existing markup, and each says what to do if you relied on the old behaviour: `.scroller`'s new padding (*Focus rings inside lists and scrollers are whole* and *Scrolled cards rest at the gutter*), and the on state a `.btn` now has with `aria-pressed="true"` (*Toggle buttons*, under Added).
 
 ### Fixed
 
@@ -55,10 +63,14 @@ Notable changes to Deck. The npm package (`@echodial/deck`) and the Composer pac
 - **One region, its own brand: `data-theme-scope`.** `--hue-brand` or `--chroma-brand` on an element now rethemes it when the element also has `data-theme-scope`. Deck declares its 18 brand tokens on `:root` and on `[data-theme-scope]`, so a marked element works them out from its own hue: buttons, links, badges, focus rings, tints and chart series all follow, and scopes nest. Before, a hue below the root reached only gradients and five chart series, and the theming guide said so. Without the attribute that is still all it reaches, so a `.g-mesh` with an inline hue behaves as before. A `--brand` override on `:root` stops at a scope; set it on the scope to reach inside. `Deck::theme(…, scope: true)` emits the attribute beside the custom properties; without `scope` its output is unchanged. `Deck.hue()` on the root paints exactly as before.
 - **Blur tokens.** `--blur-xs` (3px, the modal backdrop), `--blur-sm` (8px, carousel arrows and `.video-play`), `--blur-md` (12px, `.sticky-top` and `.form-actions-sticky`) and `--blur-lg` (16px, `.tabbar`). Every blurred surface reads one, so retuning a strength is one change on `:root`. The values are the ones those surfaces already used, and each `saturate()` stays as it was. `.glass` keeps its own `--glass-blur`.
 - **The docs can be searched for a component by what it is called.** `docs/components/index.php` lists every public class under the page that documents it, generated from `dist/api.json` and the pages on each request, with the classes no page covers yet at the end. `?format=json` returns the same index for a script or an AI assistant. The docs search now ranks pages by title, heading, description and the classes they claim, and treats "date picker", "datepicker" and `.datepicker` as one search. From the navbar it opens the page when one is clearly the answer, at the heading for the class: `donut` opens Charts at Donut. The old search showed a file and line for each class and never linked a page. "date picker" missed `.datepicker`, "upload" found nothing, and "ring" listed `.alert-body` first. llms.txt now points assistants at the index rather than at README's hand-kept component list.
+- **Deck IntelliSense, an editor extension.** Completion for classes, tokens and icon names, hover docs, and diagnostics for a class that is off a scale (`.stack-5`), removed, internal or one character from a real one, in Visual Studio Code, Cursor and Antigravity. Everything it knows is generated from the release it is built against. It is not on a marketplace: install `deck-intellisense-0.1.1.vsix` from the GitHub release or from `tools/vscode/`. `docs/start/editor.php` covers setup, every setting and troubleshooting.
+- **Nineteen page templates** in `public_html/templates/`, with a gallery page: a store, agency and local business sites, an app shell, settings, checkout, pricing, sign-in, and galleries of footers, sidebars, heroes and carousels. Each is a single HTML file with no build step. One is unfinished: `dashboard.html` has its top bar, sidebar and phone drawer, but its main area holds only the page title while it is rebuilt.
 
 ### Changed
 
 - `src/deck-icons.svg` gained `menu-book` and `menu-book-sm` after 0.1.3. The brand artwork, which uses only the `deck-mark` symbol, did not change; `src/brand/sources.json` records the sprite's new hash so the build accepts it. `menu-book` is now listed in `tools/icons/icons.txt` as well, so regenerating the sprite keeps it.
 - `Deck::head()` no longer prints an inline `<script>` to set the sprite URL. `Deck::js()` puts it on the first script tag as `data-deck-icons`, which deck.js already read; the result is the same.
+- **`Deck.version` is the whole version,** `'0.2.0'`. From 0.1.0 to 0.1.4 it said `'0.1'`, and so did the banners of `deck.js`, `deck-extras.js` and `deck-adapters.js`, because they are written by hand. The build now refuses to run when any of them, or `Deck::VERSION`, differs from `package.json`.
+- The Composer branch alias for `dev-main` is `0.2.x-dev`.
 
-Releases before 0.1.4 are described in the git history.
+Releases before 0.2.0 are described in the git history.

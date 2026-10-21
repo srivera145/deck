@@ -1,6 +1,6 @@
 {
   "name": "@echodial/deck",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "A mobile-first CSS framework with no build step, no config file, and no dependencies. Retheme an entire app from one number.",
   "keywords": [
     "css",
@@ -39,7 +39,7 @@
   "unpkg": "./dist/deck.min.css",
   "jsdelivr": "./dist/deck.min.css",
   "bin": {
-    "deck": "./bin/deck.mjs"
+    "deck": "bin/deck.mjs"
   },
   "exports": {
     ".": {
@@ -60,6 +60,10 @@
   },
   "files": [
     "dist",
+    "!dist/api.json",
+    "!dist/api-buckets.json",
+    "!dist/usage.json",
+    "!dist/collisions.json",
     "src",
     "bin",
     "build.mjs",
