@@ -90,10 +90,10 @@
     "node": ">=18"
   },
   "browserslist": [
-    "chrome >= 117",
-    "edge >= 117",
-    "safari >= 17.4",
-    "firefox >= 128"
+    "chrome >= 131",
+    "edge >= 131",
+    "safari >= 26",
+    "firefox >= 147"
   ],
   "publishConfig": {
     "access": "public"

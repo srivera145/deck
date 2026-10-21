@@ -74,18 +74,25 @@ require __DIR__ . '/../_layout.php';
   </p>
   <p>
     Every CSS feature Deck depends on has to exist natively in the browser, because nothing
-    compiles it down. Deck's colour system is built on the <code>light-dark()</code>
+    compiles it down. Deck's colour roles are built on the <code>light-dark()</code>
     function, which first shipped in Chrome and Edge 123, Firefox 120 and Safari 17.5,
-    according to caniuse. A browser without <code>light-dark()</code> does not show a
-    slightly degraded page. MDN documents that when a custom property holds a value that is
-    invalid where it is used, the property falls back to its inherited or initial value, so
-    in that browser Deck's brand colours, surfaces and text colours are all lost at once.
+    according to MDN. Two of those roles go further: the primary button's text and the
+    focus ring are relative colours taken from a <code>light-dark()</code> value, and that
+    combination only works from Chrome and Edge 131 and Firefox 133, tested in real builds of
+    each. Chrome 123 and 124 crash the tab when they meet it. A browser that cannot resolve
+    one of these values does not show a slightly degraded page. MDN documents that when a
+    custom property holds a value that is invalid where it is used, the property falls back
+    to its inherited or initial value, so the brand, surface and text colours go at once, or
+    a primary button's label takes the page's text colour.
   </p>
   <p>
-    Deck's <code>package.json</code> currently declares Chrome and Edge 117, Firefox 128
-    and Safari 17.4 as its minimum versions. For Chrome, Edge and Safari that is lower than
-    the <code>light-dark()</code> function allows, so the practical floor for Deck is
-    Chrome and Edge 123 and Safari 17.5, whatever the package metadata says.
+    Tooltips, popovers and menus are placed with CSS anchor positioning, which Chrome and
+    Edge have in full from 129, Firefox from 147 and Safari from 26. Deck's hand-off to
+    Floating UI for older browsers does not run yet, so below those versions those panels
+    open away from their trigger. Deck's floor is therefore Chrome and Edge 131, Firefox 147
+    and Safari 26, which is what its <code>package.json</code> declares. Chrome and Firefox
+    were tested at and just below each of those versions; Safari has not been tested, and
+    its number comes from MDN's compatibility data.
   </p>
 </section>
 
@@ -200,10 +207,10 @@ require __DIR__ . '/../_layout.php';
     data grid, date picker and chart styles are weight the site gets no use from.
   </p>
   <p>
-    A product that must support Safari 17.4 or earlier, or Chrome and Edge 122 or earlier,
-    cannot use Deck, because Deck's colour system depends on <code>light-dark()</code>.
-    Tailwind CSS v4 states support for Safari 16.4, Chrome 111 and Firefox 128, so for
-    Safari and Chrome it reaches further back than Deck does.
+    A product that must support Safari 25, Firefox 146, or Chrome and Edge 130 or earlier
+    cannot use all of Deck: below those versions its primary buttons, focus rings or
+    anchored panels fail. Tailwind CSS v4 states support for Safari 16.4, Chrome 111 and
+    Firefox 128, so it reaches further back than Deck in every engine.
   </p>
   <p>
     A team whose policy rules out dependencies below 1.0 cannot use Deck yet. Deck is at
@@ -223,8 +230,8 @@ require __DIR__ . '/../_layout.php';
     than a CSS toolchain. That one file is cached once per site, styles every class that
     later content might use, rethemes from a single value at runtime, and adopts new browser
     features without a redeploy. The price is 12.3 KB of unused CSS on a typical settings
-    page, 69 hand-maintained vendor prefixes, and a minimum of Chrome 123, Firefox 120 and
-    Safari 17.5 — each of which is a number a team can weigh before choosing Deck.
+    page, 69 hand-maintained vendor prefixes, and a minimum of Chrome 131, Firefox 147 and
+    Safari 26 — each of which is a number a team can weigh before choosing Deck.
   </p>
   <p class="text-sm text-muted">
     Related: <a href="why-cascade-layers.php">why Deck uses cascade layers</a> and

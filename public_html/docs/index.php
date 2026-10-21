@@ -58,6 +58,27 @@ require __DIR__ . '/_layout.php';
         </p>
       </div>
     </article>
+    <article class="card card-link">
+      <div class="card-body">
+        <h3 class="card-title"><a class="link-quiet stretch" href="../templates/index.php">Templates</a></h3>
+        <p class="text-sm text-muted">
+          Complete single-file pages to copy: a store, agency and local business sites, an
+          app shell, a dashboard, settings, sign-in and pricing, plus sets of sidebars,
+          footers, heroes and carousels.
+        </p>
+        <?php /* Counted, like the components badge: the gallery lists every .html file. */ ?>
+        <span class="badge"><?= count(glob(dirname(__DIR__) . '/templates/*.html') ?: []) ?> pages</span>
+      </div>
+    </article>
+    <article class="card card-link">
+      <div class="card-body">
+        <h3 class="card-title"><a class="link-quiet stretch" href="start/editor.php">Editor extension</a></h3>
+        <p class="text-sm text-muted">
+          Deck IntelliSense completes classes, tokens and icon names in Visual Studio Code
+          and the editors built on it, and flags a class name that is almost right.
+        </p>
+      </div>
+    </article>
     <article class="card">
       <div class="card-body">
         <h3 class="card-title">The demo</h3>
@@ -111,6 +132,11 @@ require __DIR__ . '/_layout.php';
 
 <section class="stack stack-3">
   <h2>Status</h2>
+  <p>
+    These pages document Deck <?= e($SITE['version']) ?>.
+    <a href="reference/changelog.php">The changelog</a> lists what changed in it, breaking
+    changes first.
+  </p>
   <div class="alert alert-info">
     <svg class="icon"><use href="../assets/deck/deck-icons.svg#info"></use></svg>
     <div>

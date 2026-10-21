@@ -134,6 +134,7 @@ $DOCS_NAV = [
         ['reference/javascript.php', 'JavaScript API', true],
         ['reference/php.php', 'PHP helper', true],
         ['reference/cli.php', 'CLI', true],
+        ['reference/changelog.php', 'Changelog', true],
     ],
     'Explanation' => [
         ['explain/why-no-build-step.php', 'Why no build step', true],
@@ -339,7 +340,7 @@ $found = is_string($_GET['found'] ?? null) ? trim($_GET['found']) : '';
 /* ------------------------------------------------------------------------- */
 function docs_footer(): void
 {
-    global $up, $api, $DOCS_SIZES, $assets;
+    global $up, $api, $DOCS_SIZES, $assets, $SITE;
     ?>
       <hr>
       <footer class="stack stack-3 text-muted">
@@ -357,6 +358,16 @@ function docs_footer(): void
           <code>tools/docs/verify.mjs</code> fails the build if a page and the
           source disagree.
         </p>
+        <?php /* The ways off a docs page that the sidebar does not give: the
+           templates and the repository are outside the docs, and the version
+           links to what changed in it. */ ?>
+        <nav class="cluster text-sm" aria-label="More from Deck">
+          <a href="<?= e($up) ?>../templates/index.php">Templates</a>
+          <a href="<?= e($up) ?>start/editor.php">Editor extension</a>
+          <a href="<?= e($up) ?>reference/changelog.php">Changelog (<?= e($SITE['version']) ?>)</a>
+          <a href="https://github.com/srivera145/deck">GitHub</a>
+          <a href="https://github.com/srivera145/deck/issues">Report a problem</a>
+        </nav>
       </footer>
     </main>
   </div>

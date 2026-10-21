@@ -3194,3 +3194,279 @@ Found while cutting 0.2.0 (0.1.4 until `.btn-primary`'s dark fill made it a brea
   Composer transcripts are still from 0.1.2.
 - README.md's link to the vsix names the v0.2.0 release, so it needs updating at each
   release, like the CDN pins next to it.
+
+## 124. "Every control clears a 44px target" was false, and #46's four exceptions are nineteen — FIXED in documentation
+
+README.md's *Mobile specifics* said "Every interactive control clears a 44px touch target",
+and the demo page's Forms section said "Every control clears a 44px target." #46 recorded
+four controls below 44px. Read against `src/` at 0.2.0, the list is longer, and some of it
+is a different case:
+
+| Control | Target | Source |
+| --- | ---: | --- |
+| `.input`, `.select`, `.textarea` | 42px tall | `--control-h`, `src/01-tokens.css`; an input cannot take a `::before` |
+| `.input-sm` | 34px | `src/06-forms.css` |
+| `.menu-item` | 40px | `src/07-components.css` |
+| `.segmented > *` | 36px, 44px when the children are `.btn` | `src/07-components.css` |
+| `.chip` | 34px | `src/07-components.css` |
+| `.pagination > *` | 34px (`--control-h-sm`) | `src/07-components.css` |
+| `.number-sm > button` | 34px (`--control-h-sm`) | `src/23-inputs.css` |
+| `.speed-dial-button` | 42px | `src/22-nav.css` |
+| `.carousel-arrow` | 40px, hidden on coarse pointers | `src/22-nav.css` |
+| datepicker day / nav and preset | 38px (42px coarse) / 36px | `src/10-datepicker.css` |
+| `.editor-tool`, `.editor-select` | 32px | `src/23-inputs.css` |
+| `.combo-toggle` | 30px | `src/11-combobox.css` |
+| `.reaction` | 28px | `src/08-mobile.css` |
+| `.datefield-clear` | 28px | `src/10-datepicker.css` |
+| `.toast-close` | 26px | `src/13-toasts.css` |
+| `.rating` star | 26px (`--star`) | `src/23-inputs.css` |
+| `.combo-token` remove | 18px | `src/11-combobox.css` |
+| `.carousel-dot` | 32px (a 7px dot with a 32px `::before`) | `src/22-nav.css` |
+| `.dg .dg-check .check` | ~34px | `src/12-datagrid.css`, #29 |
+
+What does hold: `--tap: 44px` (`src/01-tokens.css`) is the minimum for `.btn` (an invisible
+`::before`, so a 34px `.btn-sm` still has a 44px hit area), `.check`, `.switch`, `.range`,
+`.tab`, the accordion summary, `.tabbar-item`, `.banner-close` (#85), `.alert-close` and
+`.copy-btn`, and for `.combo-option` on narrow screens. "Checkboxes and tabs" is still too
+broad: the data-grid checkbox is ~34px, and `.segmented` children, which carry
+`role="tab"`, are 36px. The list above is what one pass found, not a proof that nothing
+else is under 44px.
+
+**Fixed:** the README bullet and the demo sentence now name the controls that have the
+44px target, say that text fields are 42px, and say that dense controls are smaller on
+purpose. **Not changed:** the controls. Whether each one should grow, or whether a
+`--tap-dense` token should name the smaller size, is still #46's open question.
+
+**How it was found:** checking every claim in the launch posts against `src/` before
+publishing any of them, after #85 showed the README's claim had been wrong once already.
+
+## 125. The stated browser floor was lower than `light-dark()` allows — FIXED in documentation, `package.json` NOT FIXED
+
+README.md (twice), the demo page and llms.txt said Chrome and Edge 117 and Safari 17.4, and
+the README added "older browsers still get a usable page". `--brand`, `--brand-hover`,
+`--focus` and the other colour roles in `src/01-tokens.css` are `light-dark()` with no
+fallback, and `light-dark()` shipped in Chrome and Edge 123 and Safari 17.5. Below that,
+every one of those custom properties is invalid at computed-value time, so a page loses its
+brand, surface and text colours at once. `docs/explain/why-no-build-step.php` already said
+so ("whatever the package metadata says"); the README and the demo contradicted it.
+
+**Fixed:** README.md, the demo page's browser answer and llms.txt now give Chrome/Edge 123+,
+Safari 17.5+ and Firefox 128+, and say that `package.json` declares less. `light-dark()`
+explains the Chrome, Edge and Safari figures only: Firefox shipped it in 120, so Firefox 128
+is the declared floor rather than one `light-dark()` sets.
+
+**Superseded by #131.** The 123 / 17.5 / 128 written here was itself taken from MDN and
+`package.json` rather than from the features. Tested, the floor is Chrome and Edge 131,
+Firefox 147 and Safari 26.
+
+**Not fixed:** `package.json`'s `browserslist` and the esbuild CSS target in `build.mjs` still
+say 117/17.4. Raising them is a release decision (it changes what esbuild lowers, so it can
+change `dist/`). The alternative is a fallback for the colour roles, which is a `src/` change.
+
+## 126. Two selects stay at 13px on a touch screen, so iOS can still zoom — NOT FIXED
+
+`src/06-forms.css` sets `.input`, `.textarea` and `.select` to 16px under
+`(pointer: coarse)`, after the size variants, and the combobox, `.number` and `.phone` inputs
+each repeat the rule. Two form controls are not covered:
+
+- `.phone > .phone-country select` takes `font: inherit` from `.phone-country`, which is
+  `--text-sm`.
+- `.editor-select`, the block-format select in the editor toolbar, is `--text-sm`.
+
+iOS Safari zooms the page when a control under 16px takes focus. Not tested on a device.
+The fix is the same one-line `(pointer: coarse)` rule for each, in `src/23-inputs.css`.
+
+**How it was found:** listing every form control in `src/` while checking the launch posts'
+"iOS never zooms" claim, instead of checking only `.input`.
+
+## 127. A first-time visitor hit four dead ends — FIXED
+
+Crawling the site from `/` with the PHP server (every same-origin link and `#fragment`)
+found one broken anchor. Reading the pages as someone new to Deck found the rest:
+
+- **There was no changelog page.** CHANGELOG.md was only in the repository, and not on
+  GitHub's `main` either. `docs/reference/changelog.php` now renders it on each request
+  (headings, paragraphs, one-line bullets, bold, emphasis and code, which is all the file
+  uses), so there is one copy. It is in the Reference nav, the docs footer and the docs
+  index, and the demo page's banner links to it. Where CHANGELOG.md is not deployed beside
+  `public_html/`, the page says so and links to GitHub.
+- **The docs never linked to the templates.** No docs page, the index included, mentioned
+  them. The docs index has a Templates card (its count comes from the gallery's files) and an
+  Editor extension card; until now the extension was only a phrase in the *New to Deck* card.
+  The docs footer links to the templates, the editor page, the changelog, GitHub and the
+  issue tracker on every page.
+- **"Get started" on the demo page went to `#main`**, the top of the page it is on. It now
+  goes to the install page. The *Copy the link tag* menu, which shows a path to a file the
+  visitor does not have yet, links there too.
+- **`docs/components/nav.php` linked `.push` to `cluster.php#push`,** an anchor that does not
+  exist. `.push` is documented at `bar.php#push`.
+
+The demo's banner and hero badge also said "v0.1"; they print the version from
+package.json now. The Tailwind guide's "Deck is v0.1" does the same.
+
+## 128. The demo page's hand-kept counts had drifted, though #102 said they were corrected — FIXED
+
+`public_html/index.php` typed `'classes' => 927`, `'icons' => 75` and `'symbols' => 152`
+into its page config, and printed them in the About section, the weight table and the icon
+section. The release has 948, 86 and 174. #102 corrected the comment above them, not the
+values. They are now read: the class and stylesheet counts from `dist/api.json` (the
+inventory the docs footer prints), and the icon and symbol counts from the sprite the page
+serves, `assets/deck/deck-icons.svg`. `icons_avail`, the size of the Material Symbols set,
+is the one hand-kept number left.
+
+## 129. 0.2.0 is released on Packagist and GitHub, but the site, npm and `main` are on 0.1.3 — NOT FIXED here
+
+Checked on 2026-10-21 before writing anything that links to them:
+
+- `https://get-deck.dev/llms.txt` says "Version 0.1.3" and 26.8 KB, and
+  `/docs/components/index.php` is a 404. The deployed site predates 0.2.0.
+- `registry.npmjs.org/@echodial/deck` has `latest: 0.1.3`. README.md's jsDelivr tags
+  (`@0.2`) return 404 until 0.2.0 is published.
+- GitHub's `main` is 3ab5e11, 15 commits behind `v0.2.0`, and has no CHANGELOG.md. The
+  repository page a visitor lands on shows the 0.1.x README, and llms.txt's `raw/main` links
+  serve 0.1.x files (75 icons, not 86).
+
+Each of these is outside the repository: `npm publish` (blocked on an expired npm login),
+deploying `public_html/` with `dist/`, `php/`, `package.json` and now `CHANGELOG.md` beside
+it (#77), and pushing `main`. The install page's `@0.1` pins (#123) should move to `@0.2`
+in the same pass, after npm has 0.2.0, with its transcripts re-captured.
+
+`docs/explain/why-no-build-step.php` also still quotes 0.1.x measurements typed into its
+prose (26.4 KB, a purge to 14.1 KB, 828 public and 931 total classes, a 27.1 KB sprite),
+beside a stylesheet size it reads from `sizes.json`. The purge figure needs re-measuring,
+not retyping, so it is left for that pass.
+
+## 130. Three headline claims described a different thing from the one they named — FIXED in documentation, one comment NOT FIXED
+
+Found by an independent check of the launch posts against `src/`, after #124 and #125 were
+written:
+
+- **The size is the minified file's, and the install tag is not.** "28.1 KB Brotli" is
+  `deck.min.css`. README.md's opening tag, the demo page's *Copy the link tag* menu and the
+  default `npx @echodial/deck init` all give `deck.css`, which keeps its comments: 343,315
+  bytes, 63.0 KB Brotli and 79.9 KB gzip (measured with the build's settings: Brotli quality
+  11 with a size hint). A page that follows the install instructions sends more than twice
+  the size the headline gives. **Fixed** in README.md's opening, which now says "when
+  minified" and links `deck.min.css`. **Not fixed:** the demo's menu and `init`'s default, and
+  whether `deck.css` should be the default at all.
+- **"Every colour from one number" is one number of six.** `src/01-tokens.css` declares
+  `--hue-brand`, `--hue-accent`, `--hue-good`, `--hue-warn`, `--hue-bad` and
+  `--hue-neutral`, and its own comment says "These six numbers are the whole palette".
+  Shadows read `--shadow-color`, which is `var(--hue-neutral)`, and only `.badge-brand` and
+  `.badge-solid` follow the brand hue. README.md said every badge and shadow is recomputed
+  from `--hue-brand`, and so did the demo page's hero. Both now name what does follow it: the
+  ramp, primary buttons, links, focus rings, brand badges and chart series. **Not fixed:** the
+  comment at `src/01-tokens.css:17`, which still says shadows follow `--hue-brand`.
+- **"Your CSS wins without `!important`" has exceptions.** A layered `!important` beats an
+  unlayered rule, important or not. Outside `99-print.css`, `src/` has `!important` on 25
+  lines, holding 29 declarations: `.no-motion` and the print rules in `24-media.css` put two
+  or three on a line. A plain `grep -c '!important'` finds 29 lines, but four of those are
+  the word inside comments (`00-layers.css` three times, `22-nav.css` once). The uses are
+  reduced motion (`02-reset.css`, `16-motion.css`, `.no-motion`), print rules in other
+  files, the stacked data grid (`12-datagrid.css`, `18-container.css`) and the drag states
+  (`26-perf.css`). README.md now says an unlayered rule overrides any Deck rule that is not
+  `!important`, and lists those four uses.
+
+The same check found that README.md counted the four section sets on top of the nineteen
+templates rather than among them. That is corrected too.
+
+## 131. The browser floor was typed into `package.json`, and the real one is Chrome 131, Firefox 147, Safari 26 — FIXED in configuration and documentation
+
+`browserslist` said Chrome and Edge 117, Safari 17.4 and Firefox 128, `build.mjs` typed the
+same into esbuild's target, and #125 moved the documented floor to 123 / 17.5 / 128 from
+MDN's date for `light-dark()` and from `package.json` itself. Nothing had loaded Deck in
+those versions.
+
+Tested on 2026-10-21 with a probe page built from `dist/deck.min.css` and
+`dist/deck.bundle.min.js`. It reports computed styles in light and dark with transitions
+switched off, so a read is not the start of a colour transition. The builds were Chrome for
+Testing 122, 123, 124, 125, 126, 128, 129, 130, 131 and 132; Edge 155; and Firefox 127, 128,
+131, 132, 133, 146, 147 and 158, extracted from Mozilla's signed installers and run headless.
+Safari was not tested, because there is none on this machine.
+
+| Engine | Floor | Set by | Just below it |
+| --- | --- | --- | --- |
+| Chrome, Edge | 131 | A relative colour taken from a `light-dark()` value (#132) | 125–130: `.btn-primary` takes the page's text colour (3.35:1 light, 2.22:1 dark) and `box-shadow: var(--ring)` is `none`. 125–128 also misplace anchored panels (#134), and 125–126 crash on a tooltip then a menu. 123–124 crash on load. 122: no colours at all |
+| Firefox | 147 | Anchor positioning, because the Floating UI hand-off never runs (#133) | 133–146: tooltips, popovers and menus open where they sit in the markup. 128–132: also the button text and focus ring. 127: also `.g-text` invisible and every `.g-*` gradient gone |
+| Safari | 26, not tested | Anchor positioning, as for Firefox | MDN: relative colours with `h` arithmetic need 18 (16.4–17.6 follow an older spec), so 17.5–17.6 lose the gradient classes; `light-dark()` needs 17.5 |
+
+Features with a fallback, or with nothing depending on them, are not floors:
+`@starting-style` and `allow-discrete` (Firefox 129; Firefox still cannot transition
+`display`), `field-sizing`, container style queries, `contrast-color()` (behind
+`@supports`), `interpolate-size`, `::details-content`, scroll-driven animations,
+`::scroll-button`, `sibling-index()` and view transitions. Firefox 158 has all of them except
+`interpolate-size`, scroll-driven animations and `::scroll-button` (the first two tested with
+`CSS.supports`, the third from MDN).
+
+**Fixed:** `browserslist` is now `chrome >= 131`, `edge >= 131`, `firefox >= 147`,
+`safari >= 26`. `build.mjs` reads esbuild's CSS target from it instead of typing a second
+copy, and fails if a line is not `<browser> >= <version>`. The output is byte-identical at
+the old and the new target, so `dist/` did not change. README.md, the demo page, llms.txt,
+`docs/explain/why-no-build-step.php` and the Tailwind guide give the tested floor, and say
+that Safari's comes from MDN.
+
+**How it was found:** the launch posts cited `browserslist` as the proof of Firefox 128,
+which is the file the number was typed into rather than anything that needs it.
+
+## 132. A relative colour from a `light-dark()` value crashes Chrome 123–124 and fails until Chrome 131 and Firefox 133 — NOT FIXED
+
+`--btn-text` on `.btn-primary` is
+`light-dark(var(--text-on-brand), oklch(from var(--btn-bg) clamp(0, (.565 - l) * 999, 1) 0 0))`,
+and `--btn-bg` is `var(--brand)`, itself a `light-dark()`. `--ring` is
+`light-dark(oklch(from var(--focus) l c h / .32), …)`, and `--focus` is a `light-dark()`
+too. The `.btn` hover at `src/05-buttons.css:214` has the same shape.
+
+Reduced in Chrome 123: `:root { color-scheme: light dark } .x { color: oklch(from light-dark(red, blue) l c h) }`
+crashes the renderer, and so does `rgb(from …)`. The same expression with `from red` does
+not. Chrome 124 crashes the same way and 125 does not. Chrome 125–130 and Firefox 128–132
+do not crash, but treat the value as invalid. So `.btn-primary`'s text falls back to the
+inherited colour, 3.35:1 on the 600 fill in light mode and 2.22:1 on the 400 fill in dark.
+And `box-shadow: var(--ring)` is `none`, which leaves a focused `.input` with only its
+border colour change, because the field sets `outline: none`. Chrome 131 and Firefox 133
+resolve all of it: 4.96:1 and 8.27:1. Those are the versions MDN gives for a relative colour
+from `currentcolor`, which works by the same mechanism, so its Safari 18 is the likely Safari
+answer.
+
+**Not fixed:** taking the relative colour from a plain value (`--brand-600`, `--brand-400`,
+one per scheme) instead of from `--brand` would remove the crash and the 131 / 133 floor.
+That is a `src/` change and is untested.
+
+## 133. The Floating UI hand-off for popover triggers never runs — NOT FIXED
+
+`src/25-anchor.css` says that where anchor positioning is missing, "deck-adapters.js uses
+Floating UI if it is on the page and falls back to Deck's own placement if it is not", and
+`docs/reference/javascript.php` says `data-deck-anchor` is "set by Deck on popover triggers
+it wires, and read by the Floating UI adapter". `wireAnchors()` in `src/js/deck.js` sets it,
+but its first line is `if (!CSS.supports('anchor-name: --a')) return;`, so the attribute is
+written only in browsers that have anchor positioning. In those, the adapter steps aside
+(`if (hasAnchor || !have.floating) return;`). In every other browser, nothing sets the
+attribute and the adapter finds no trigger.
+
+There is no "Deck's own placement" for `.tip`, `.pop` or `.menu` either; only the combobox
+and date picker place themselves. With `inset: auto`, a panel opens at its static position
+in the markup, which follows neither the trigger nor scrolling.
+
+Measured with Floating UI loaded from the README's own tags:
+
+| Browser | Markup as documented | With `data-deck-anchor` added by hand |
+| --- | --- | --- |
+| Chrome 122 | tooltip at (0, 900), 558px from its trigger and below the fold | 8px below, centred |
+| Firefox 133 | where it sits in the markup; 836px from its trigger on the probe page | 8px below, centred |
+
+**Not fixed.** Setting `data-deck-anchor` before the support check would make the
+documented hand-off work for pages that load Floating UI. That would put Firefox at 133 and,
+by MDN, Safari at 18. Without Floating UI, a placement of Deck's own is still missing, or the
+comment and docs should stop promising one.
+
+## 134. `@supports (anchor-name: --a)` admits Chrome 125–128, which lack `position-area` — NOT FIXED
+
+Chrome shipped `anchor-name` in 125 but `position-area` in 129. It called it `inset-area`
+until 130, and `position-try-fallbacks` was `position-try-options` until 128. Deck's anchor
+rules are all behind `@supports (anchor-name: --a)`, and `deck.js` and the adapter use the
+same test, so Chrome 125–128 take the anchor path and get none of its placement. Menus
+opened at y = 1408 in a 1400px window, and tooltips at the top of it. With transitions on,
+Chrome 125 and 126 also crash the tab when a tooltip opens and then a menu.
+
+**Not fixed:** below the new floor of 131, so it no longer matters for a supported browser.
+Testing `position-area` instead would send 125–128 to the JavaScript path, once #133 is
+fixed.

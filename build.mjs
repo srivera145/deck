@@ -216,10 +216,20 @@ async function build() {
   const css = BANNER + parts.join('\n');
   await writeFile(path.join(DIST, 'deck.css'), css);
 
+  // The CSS target is package.json's browserslist, so the two cannot disagree.
+  // It used to be typed here and still said 117/17.4 after the tested floor had
+  // moved (FINDINGS 131). esbuild lowers nothing at either, so the output is
+  // the same; the target says which browsers the file is for.
+  const cssTarget = (pkg.browserslist || []).map(q => q.replace(/\s*>=\s*/, ''));
+  if (!cssTarget.length || cssTarget.some(t => !/^(chrome|edge|firefox|safari)\d+(\.\d+)?$/.test(t))) {
+    console.error(`  package.json browserslist must be "<browser> >= <version>" lines for chrome, edge, firefox and safari; got ${JSON.stringify(pkg.browserslist)}.`);
+    process.exit(1);
+  }
+
   // The layer statement has to stay first, so minify the body and re-attach
   const minCss = esbuild
     ? BANNER.trim() + '\n' + (await esbuild.transform(css, {
-        loader: 'css', minify: true, target: ['chrome117', 'safari17.4', 'firefox128']
+        loader: 'css', minify: true, target: cssTarget
       })).code
     : minifyCSS(css);
   await writeFile(path.join(DIST, 'deck.min.css'), minCss);

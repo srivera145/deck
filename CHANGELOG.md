@@ -2,6 +2,12 @@
 
 Notable changes to Deck. The npm package (`@echodial/deck`) and the Composer package (`echodial/deck`) share version numbers; Composer reads the version from the git tag.
 
+## Unreleased
+
+### Changed
+
+- **The declared browser floor is the tested one: Chrome and Edge 131, Firefox 147, Safari 26.** `package.json`'s `browserslist` said Chrome and Edge 117, Safari 17.4 and Firefox 128, and nothing had checked it. In real builds, Chrome 123 and 124 crash on any page with a `.btn-primary` or a focused text field, Chrome up to 130 and Firefox up to 132 give `.btn-primary` the page's text colour and drop the focus ring, and tooltips, popovers and menus open away from their trigger until Chrome 129 and Firefox 147, because the hand-off to Floating UI does not run. Safari was not tested; its number is MDN's date for anchor positioning. The stylesheet itself did not change: esbuild's CSS target is now read from `browserslist`, and `deck.min.css` is byte-identical at either target.
+
 ## 0.2.0 (2026-10-21)
 
 This was going to be 0.1.4. One default below changes how existing pages look, and in 0.x a breaking change moves the minor version, so it is 0.2.0. A `^0.1` range or a CDN URL pinned to `@0.1` stays on 0.1.3 until you move it to `^0.2` or `@0.2`.

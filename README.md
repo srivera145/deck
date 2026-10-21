@@ -4,32 +4,43 @@
 [![Packagist version](https://img.shields.io/packagist/v/echodial/deck)](https://packagist.org/packages/echodial/deck)
 [![License: MIT](https://img.shields.io/npm/l/@echodial/deck)](LICENSE)
 
-**Deck is a CSS framework that ships as one 28.1 KB Brotli (34.6 KB gzip) stylesheet: buttons, forms,
-tables, a data grid, charts, overlays, an icon sprite, and a full color system. You add it
-with one `<link>` tag. There is no build step, no config file, and zero dependencies.**
+**The file you download is the file the browser reads.** Deck is a CSS framework that
+ships as one 28.1 KB Brotli (34.6 KB gzip) stylesheet when minified, with no build step, no
+config file and no runtime dependencies, so adding it to a page is one tag:
 
 ```html
-<link rel="stylesheet" href="/assets/deck/deck.css">
+<link rel="stylesheet" href="/assets/deck/deck.min.css">
 ```
 
-That is the whole install. Nothing to compile, nothing to purge, nothing to configure.
+It is built for a phone first. On a touch screen `.input`, `.select` and `.textarea` are
+16px, so iOS Safari does not zoom when one takes focus. `.btn`, `.check` (checkboxes and
+radios), `.switch` and `.tab` have a 44px hit area, including the 34px `.btn-sm`.
 
-- **No build step.** The file you download is the file the browser reads.
-- **Retheme from one number.** Set `--hue-brand` to 0–360 and every brand color, focus
-  ring, badge, chart series, and shadow is recomputed — at runtime, no rebuild.
+What it costs: every page downloads the whole stylesheet, because there is no purge step.
+Some dense controls, such as menu items and chips, are under 44px on purpose. The icon
+sprite has to be served from your own site, not a CDN. Deck has one maintainer and no
+plugins.
+
+[Docs](https://get-deck.dev/docs/) · [Templates](https://get-deck.dev/templates/) ·
+[Changelog](CHANGELOG.md) · [Editor extension](#editor-support)
+
+- **Retheme from one number.** Set `--hue-brand` to 0–360 and the brand ramp, links,
+  focus rings, brand badges and chart series are recomputed — at runtime, no rebuild.
+  Five more hue tokens set the accent, status and neutral colours.
 - **Your CSS wins.** Deck ships in cascade layers, so an ordinary unlayered rule
-  overrides it without a single `!important`.
+  overrides any Deck rule that is not `!important`. Deck uses `!important` only for
+  reduced motion, print, drag states and the stacked data grid.
 - **RTL built in.** Written in logical properties end to end; `dir="rtl"` flips the
   whole page with no second stylesheet.
 - **Zero runtime dependencies.** The JavaScript is optional and dependency-free.
 - **Templates to start from.** Nineteen single-file pages — a store, agency and local
-  business sites, a dashboard, pricing, checkout — plus sets of sidebars, footers,
-  heroes and carousels. See [Templates](#templates).
+  business sites, a dashboard, pricing and checkout among them, and four of them sets of
+  sidebars, footers, heroes and carousels. See [Templates](#templates).
 - **Editor support.** Deck IntelliSense completes class names, tokens and icons, and
   catches the class names that look almost right, in Visual Studio Code and the editors
   built on it. See [Editor support](#editor-support).
 
-Version 0.2.0 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
+Version 0.2.0 · MIT · Chrome 131+, Edge 131+, Firefox 147+, Safari 26+
 
 ## What Deck weighs
 
@@ -689,18 +700,37 @@ assistant.
 
 ## Mobile specifics
 
-- Every interactive control clears a 44px touch target
-- Inputs render at 16px on coarse pointers, so iOS never zooms on focus
+- `.btn`, `.check` (checkboxes and radios), `.switch`, `.tab`, accordion headers and
+  `.tabbar-item` have a 44px minimum target from one `--tap` token. `.btn` adds it with an
+  invisible `::before`, so a 34px `.btn-sm` still has a 44px hit area. Text inputs are 42px
+  tall, and dense controls are smaller on purpose: menu items 40px, chips and pagination
+  34px, the toast close button 26px (FINDINGS.md #124 lists the ones found so far)
+- `.input`, `.select` and `.textarea` render at 16px on coarse pointers, so iOS does not
+  zoom on focus. Two selects, in `.phone` and the editor toolbar, are not covered yet
+  (FINDINGS.md #126)
 - `env(safe-area-inset-*)` handled on the tab bar, FAB, sticky form bar, and sheets
 - `100dvh` instead of `100vh`, so the URL bar doesn't cut off the last row
 - Bottom sheet on a phone becomes a centered dialog at 640px and up
 
 ## Browser support
 
-Chrome/Edge 117+, Safari 17.4+, Firefox 128+. Deck uses `oklch()`, `light-dark()`,
-`@layer`, `:has()`, `@starting-style`, popover, and `field-sizing`. Older browsers
-still get a usable page — they lose the entry animations and auto-growing textareas,
-not the layout.
+Chrome/Edge 131+, Firefox 147+, Safari 26+. Chrome and Firefox were tested in real builds
+at and just below those versions. Safari has not been tested; its number comes from MDN's
+compatibility data. Two things set the floor:
+
+- The primary button's text and the focus ring are relative colours taken from
+  `light-dark()` values. That works from Chrome 131 and Firefox 133 (likely Safari 18, going by
+  MDN's closest entry; untested).
+  Below it, a primary button's label takes the page's text colour (3.35:1 in Chrome 130),
+  text fields lose their focus ring, and Chrome 123 and 124 crash the tab.
+- Tooltips, popovers and menus are placed with CSS anchor positioning: Chrome 129, Firefox
+  147, Safari 26. The hand-off to Floating UI for older browsers does not run yet
+  (FINDINGS.md #133), so below those versions those panels open away from their trigger.
+
+Everything else degrades rather than breaks. Without `@starting-style`, `allow-discrete`
+transitions, `field-sizing`, container style queries, `interpolate-size` or view
+transitions, a browser loses entry animations, auto-growing textareas and `--tone`
+adaptation, not the layout.
 
 
 ## Date picker

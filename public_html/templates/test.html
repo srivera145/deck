@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dashboard · Deck template</title>
+<meta name="description" content="Stat tiles, charts, a table that restacks on phones, and an activity feed.">
+
+<!-- Change these two paths to wherever Deck lives in your project.
+     The icon sprite below must be on your own origin — a cross-origin
+     <use href> renders nothing. -->
+<link rel="stylesheet" href="../assets/deck/deck.css">
+<script src="../assets/deck/deck.js" defer></script>
+
+<style>
+  .shell { display: block; }
+  .shell-side { display: none; }
+  @media (min-width: 48rem) {
+    .shell { display: grid; grid-template-columns: 15rem 1fr; gap: var(--space-6); align-items: start; }
+    .shell-side { display: block; position: sticky; inset-block-start: var(--space-4); }
+  }
+  .topbar {
+    position: sticky; inset-block-start: 0; z-index: var(--z-sticky);
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-block-end: 1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="container">
+    <nav class="navbar" style="border:0">
+      <a class="navbar-brand" href="#">
+        <svg class="icon icon-lg" style="color:var(--brand)" aria-hidden="true">
+          <use href="../assets/deck/deck-icons.svg#grid"></use>
+        </svg>
+        Acme
+      </a>
+      <div class="push cluster cluster-tight">
+        <button class="btn btn-icon btn-ghost" data-deck-theme aria-label="Switch theme">
+          <svg class="icon" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#moon"></use></svg>
+        </button>
+        <span class="avatar avatar-sm" aria-hidden="true">AR</span>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="container mt-6">
+  <div class="shell">
+
+    <aside class="shell-side">
+      <nav class="sidebar" aria-label="Sections">
+        <p class="sidebar-group">Reports</p>
+        <a class="sidebar-link" href="#" aria-current="page">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart"></use></svg>
+          Dashboard
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users"></use></svg>
+          Customers
+        </a>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#tag"></use></svg>
+          Orders
+        </a>
+        <p class="sidebar-group mt-4">Account</p>
+        <a class="sidebar-link" href="#">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings"></use></svg>
+          Settings
+        </a>
+      </nav>
+    </aside>
+
+    <main id="main" class="stack-6">
+
+      <div class="bar">
+        <div class="stack-1">
+          <h1>Dashboard</h1>
+          <p class="text-muted text-sm">Last 30 days</p>
+        </div>
+        <div class="push cluster cluster-tight">
+          <!-- .segmented shows the active child with
+               [aria-selected="true"] or .is-active — NOT aria-pressed, which
+               is what .chip and .reaction use. Mixing them up costs you the
+               whole active state with no error anywhere. aria-selected also
+               needs a role that allows it, hence tablist/tab. -->
+          <div class="segmented" role="tablist" aria-label="Range">
+            <button class="btn btn-ghost" role="tab" aria-selected="false">7d</button>
+            <button class="btn btn-ghost" role="tab" aria-selected="true">30d</button>
+            <button class="btn btn-ghost" role="tab" aria-selected="false">90d</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Stat tiles =====
+           .grid is already responsive, so these go one-up on a phone and
+           four-up on a wide screen with no breakpoint written here. -->
+      <div class="grid grid-tight">
+        <div class="card"><div class="card-body">
+          <div class="stat">
+            <span class="stat-label">Revenue</span>
+            <span class="stat-value nums">$48,210</span>
+            <span class="stat-delta stat-delta-up">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-up-right"></use></svg>
+              12.4%
+            </span>
+          </div>
+        </div></div>
+
+        <div class="card"><div class="card-body">
+          <div class="stat">
+            <span class="stat-label">Orders</span>
+            <span class="stat-value nums">1,284</span>
+            <span class="stat-delta stat-delta-up">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-up-right"></use></svg>
+              3.1%
+            </span>
+          </div>
+        </div></div>
+
+        <div class="card"><div class="card-body">
+          <div class="stat">
+            <span class="stat-label">Refunds</span>
+            <span class="stat-value nums">37</span>
+            <span class="stat-delta stat-delta-down">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-right"></use></svg>
+              0.8%
+            </span>
+          </div>
+        </div></div>
+
+        <div class="card"><div class="card-body">
+          <div class="stat">
+            <span class="stat-label">Active users</span>
+            <span class="stat-value nums">9,402</span>
+            <span class="stat-delta stat-delta-up">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#arrow-up-right"></use></svg>
+              6.7%
+            </span>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- ===== Charts =====
+           Both are pure CSS. Each number appears exactly once, in a --value
+           custom property. There is no charting library on this page. -->
+      <div class="grid grid-2">
+        <div class="card"><div class="card-body">
+          <figure class="chart">
+            <figcaption class="chart-head">
+              <span class="chart-title">Orders per month</span>
+              <span class="chart-note">2026</span>
+            </figcaption>
+            <div class="chart-columns">
+              <div class="chart-col" style="--value:42" data-label="Apr" data-value="42"></div>
+              <div class="chart-col" style="--value:58" data-label="May" data-value="58"></div>
+              <div class="chart-col" style="--value:51" data-label="Jun" data-value="51"></div>
+              <div class="chart-col" style="--value:73" data-label="Jul" data-value="73"></div>
+              <div class="chart-col" style="--value:66" data-label="Aug" data-value="66"></div>
+              <div class="chart-col" style="--value:88" data-label="Sep" data-value="88"></div>
+            </div>
+          </figure>
+        </div></div>
+
+        <div class="card"><div class="card-body">
+          <figure class="chart">
+            <figcaption class="chart-head">
+              <span class="chart-title">Traffic source</span>
+              <span class="chart-note">Share of visits</span>
+            </figcaption>
+            <div class="chart-bars">
+              <div class="chart-bar">
+                <span class="chart-bar-label">Search</span>
+                <span class="chart-bar-track"><span class="chart-bar-fill s1" style="--value:64"></span></span>
+                <span class="chart-bar-value nums">64%</span>
+              </div>
+              <div class="chart-bar">
+                <span class="chart-bar-label">Direct</span>
+                <span class="chart-bar-track"><span class="chart-bar-fill s2" style="--value:21"></span></span>
+                <span class="chart-bar-value nums">21%</span>
+              </div>
+              <div class="chart-bar">
+                <span class="chart-bar-label">Referral</span>
+                <span class="chart-bar-track"><span class="chart-bar-fill s3" style="--value:11"></span></span>
+                <span class="chart-bar-value nums">11%</span>
+              </div>
+              <div class="chart-bar">
+                <span class="chart-bar-label">Social</span>
+                <span class="chart-bar-track"><span class="chart-bar-fill s4" style="--value:4"></span></span>
+                <span class="chart-bar-value nums">4%</span>
+              </div>
+            </div>
+          </figure>
+        </div></div>
+      </div>
+
+      <!-- ===== Table =====
+           .table-stack is the important part. Below 40rem each row becomes a
+           labelled block instead of a sideways scroll, reading the column name
+           from data-label on every cell. Every cell needs one. -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Recent orders</h2>
+          <button class="btn btn-ghost btn-sm push">View all</button>
+        </div>
+        <div class="table-wrap">
+          <table class="table table-stack">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Customer</th>
+                <th>Status</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Order"><span class="mono">#4821</span></td>
+                <td data-label="Customer">Dana Whitfield</td>
+                <td data-label="Status"><span class="badge badge-good">Paid</span></td>
+                <td data-label="Total" class="nums">$320.00</td>
+              </tr>
+              <tr>
+                <td data-label="Order"><span class="mono">#4820</span></td>
+                <td data-label="Customer">Marco Pereira</td>
+                <td data-label="Status"><span class="badge badge-warn">Pending</span></td>
+                <td data-label="Total" class="nums">$89.50</td>
+              </tr>
+              <tr>
+                <td data-label="Order"><span class="mono">#4819</span></td>
+                <td data-label="Customer">Aiko Tanaka</td>
+                <td data-label="Status"><span class="badge badge-good">Paid</span></td>
+                <td data-label="Total" class="nums">$1,240.00</td>
+              </tr>
+              <tr>
+                <td data-label="Order"><span class="mono">#4818</span></td>
+                <td data-label="Customer">Samuel Oyelaran</td>
+                <td data-label="Status"><span class="badge badge-bad">Refunded</span></td>
+                <td data-label="Total" class="nums">$64.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== Activity ===== -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Activity</h2>
+        </div>
+        <div class="list">
+          <div class="list-row">
+            <span class="icon-tile" aria-hidden="true">
+              <svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#check"></use></svg>
+            </span>
+            <span class="list-main">
+              <span class="list-title">Payout completed</span>
+              <span class="list-sub">$12,480 sent to the operating account</span>
+            </span>
+            <span class="list-trail text-xs text-muted">2h</span>
+          </div>
+          <div class="list-row">
+            <span class="icon-tile" aria-hidden="true">
+              <svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#user"></use></svg>
+            </span>
+            <span class="list-main">
+              <span class="list-title">New team member</span>
+              <span class="list-sub">Priya Raman accepted an invitation</span>
+            </span>
+            <span class="list-trail text-xs text-muted">5h</span>
+          </div>
+          <div class="list-row">
+            <span class="icon-tile" aria-hidden="true">
+              <svg class="icon icon-sm"><use href="../assets/deck/deck-icons.svg#alert-triangle"></use></svg>
+            </span>
+            <span class="list-main">
+              <span class="list-title">Card expiring</span>
+              <span class="list-sub">The card on file expires next month</span>
+            </span>
+            <span class="list-trail text-xs text-muted">1d</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<nav class="tabbar" aria-label="Primary">
+  <a class="tabbar-item" href="#" aria-current="page">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#chart"></use></svg>
+    Dashboard
+  </a>
+  <a class="tabbar-item" href="#">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#users"></use></svg>
+    Customers
+  </a>
+  <a class="tabbar-item" href="#">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#tag"></use></svg>
+    Orders
+  </a>
+  <a class="tabbar-item" href="#">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="../assets/deck/deck-icons.svg#settings"></use></svg>
+    Settings
+  </a>
+</nav>
+
+</body>
+</html>

@@ -327,14 +327,14 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
     </li>
     <li>
       <strong>A newer browser floor.</strong> Tailwind v4 targets Safari 16.4+, Chrome 111+
-      and Firefox 128+. Deck's package declares Chrome and Edge 117+, Safari 17.4+ and
-      Firefox 128+, and it leans on <code>light-dark()</code>, <code>@container</code> style
-      queries and <code>:has()</code>. If you have to support Safari 16, Deck is not an
-      option.
+      and Firefox 128+. Deck needs Chrome and Edge 131+, Firefox 147+ and Safari 26+: it
+      takes relative colours from <code>light-dark()</code> values and places its tooltips,
+      popovers and menus with CSS anchor positioning. If you have to support Safari 18,
+      Deck is not an option yet.
     </li>
     <li>
       <strong>Maturity.</strong> Tailwind is at v4.3 with years of production use behind it.
-      Deck is v0.1. It is on npm and Packagist and <a href="../start/install.php">installs
+      Deck is v<?= e($SITE['version']) ?>. It is on npm and Packagist and <a href="../start/install.php">installs
       like any other package</a>, but it has none of those years. Its public API is frozen
       and checked on every build, which is the right start, but it is a start.
     </li>
@@ -441,11 +441,10 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
       number would be stale within a month.
     </li>
     <li>
-      <strong>Deck's browser floor.</strong> Chrome and Edge 117, Safari 17.4, Firefox 128
-      is what <code>package.json</code> declares. It has not been tested feature by feature
-      against those exact versions, and some of what Deck uses —
-      <code>light-dark()</code> in particular — may in practice need a slightly newer
-      Safari than 17.4. Treat the declared floor as the intent and test if you are near it.
+      <strong>Deck's browser floor.</strong> Chrome and Edge 131, Firefox 147 and Safari 26.
+      Chrome and Firefox were tested in real builds at and just below those versions.
+      Safari was not tested; its number comes from MDN's compatibility data, so test if you
+      are near it.
     </li>
   </ul>
   <p class="dx-note">

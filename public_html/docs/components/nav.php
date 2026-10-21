@@ -70,7 +70,7 @@ require __DIR__ . '/../_layout.php';
   ?>
   <p class="text-muted">
     The bar is a plain flex row with a gap, so ordering and spacing are yours.
-    <a href="cluster.php#push"><code>.push</code></a> is the usual way to shove everything
+    <a href="bar.php#push"><code>.push</code></a> is the usual way to shove everything
     after it to the far end.
   </p>
 </section>
@@ -221,7 +221,7 @@ require __DIR__ . '/../_layout.php';
     The bar is a flex row and the link padding is symmetrical, so the whole thing mirrors
     with the document — brand on the right, destinations running leftward — with nothing in
     <code>src/19-logical.css</code> required. The one thing to check is your own
-    <a href="cluster.php#push"><code>.push</code></a>, which uses
+    <a href="bar.php#push"><code>.push</code></a>, which uses
     <code>margin-inline-start: auto</code> and so also follows direction correctly.
   </p>
   <?php
