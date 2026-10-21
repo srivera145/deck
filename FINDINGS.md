@@ -2765,3 +2765,390 @@ updates a second. Nothing about the page's layout changes, so this is style alon
 `data-theme-scope` region, which restyles only that region (about 0.5ms for a card), and
 applying the hue to the root on `change` rather than `input`. Not fixed in code: the cost
 is what an inherited custom property on the root costs.
+
+## 118. `.glass` was one fixed surface, and without `backdrop-filter` it let a sharp photo through — EXTENDED
+
+The brief for a frosted surface said the name was unused. It was not: `.glass` shipped in
+#106, earlier in 0.1.4, as `--surface` at `--glass` (76%) with a fixed `blur(16px)`. 0.1.4
+is unreleased, so it was extended in place rather than added beside, and its knob renamed
+without an alias. What changed, in `src/20-gradients.css`:
+
+- **Three knobs:** `--glass-blur` (16px), `--glass-tint` (72%, replacing `--glass` at
+  76%) and `--glass-edge` (22%). `.glass-sm` and `.glass-lg` set only the blur (8px, 32px)
+  and `.glass-solid` only the tint (90%), so `.glass-lg.glass-solid` works.
+- **A top-edge highlight, weaker in dark mode,** through `light-dark()`: white at
+  `--glass-edge` in light, a third of it in dark. At full strength in dark mode it read as
+  a bright seam along the top. It is a 1px background layer, not an inset box-shadow:
+  `box-shadow` is one property and `deck.effects` beats the components, so it would have
+  wiped out `.card`'s shadow, `.card-raised`, the `.card-link` lift and any focus ring drawn
+  with box-shadow. A test checks that a `.card.glass` and a `.card-raised.glass` keep their
+  shadows and radius, and that a `.bar.glass` gets no radius and no border.
+- **The border is `--line-strong` at 60%**, and only its colour is set. A host without a
+  border gets none, for the same reason it gets no corners.
+- **No `backdrop-filter`: opaque, not 94%.** The fallback is `--surface` with the
+  component's own border (`border-color: revert-layer`), so a `.card.glass` is exactly a
+  `.card`. With the blur removed and no fallback, muted text measured 3.1–3.3:1 over the
+  test stripes, with the sharp detail showing through.
+- **`prefers-reduced-transparency: reduce`:** this was already there from #106 (the brief
+  thought it was the first in Deck). It now also reverts the border, the same as the
+  fallback. Both are tested. The fallback is tested by rewriting the stylesheet the way an
+  engine without the property would read it, and reduced transparency through CDP, because
+  Playwright has no option for it.
+- **Both `backdrop-filter` traps are in the source comment and on the card page:** a
+  backdrop-filter is a backdrop root, so a `.glass` inside `.sticky-top`, `.tabbar` or
+  another `.glass` blurs nothing; and it creates a containing block, so a `position: fixed`
+  descendant is placed against the panel. The brief named `.topbar`, which is not a Deck
+  class (cover.html has a page-local one).
+
+**Measured** in Edge, worst pixel behind the text, over a real photo / pure black behind
+light glass / pure white behind dark glass. `.glass` body text: 10.4:1 and 9.5:1 over the
+photo (light, dark), 8.58:1, 6.98:1. `.glass` muted text: 4.05:1 and 4.19:1 over the photo,
+3.33:1, 3.10:1. `.glass-solid` muted text: 5.63:1 and 6.43:1 over the photo, 5.28:1,
+5.93:1. The brief's 72% is a little less legible than the 76% it replaces. At 76%, dark
+muted text over the photo was 4.59:1 and dark body text over white 8.07:1, so both crossed
+a line. The card page now gives these figures in place of the old "above 7:1" claim,
+and points muted text at `.glass-solid`. `.glass-lg` barely helps (muted 4.17:1 over the
+photo). In forced colours the surface becomes Canvas at 72%. Text was 12.88:1 over the
+photo, so it needs no rule.
+
+`deck.min.css`: +307 bytes raw, +85 gzip, +65 Brotli.
+
+**Not changed:**
+- cover.html has its own `.glass` in `@layer app.pages`, which beats `deck.effects`, so it
+  overrides the framework's background, border, blur and shadow, and ignores both
+  fallbacks. Its `--glass` (a colour on `:root`) also made the old knob invalid at
+  computed-value time on that page. That was hidden because its own background won, and the
+  rename ends the clash.
+- The other blurred surfaces (`.sticky-top`, `.tabbar`, `.form-actions-sticky`, the
+  carousel arrows, the video play button, `.modal::backdrop`) still hardcode their own
+  values and ignore `prefers-reduced-transparency`. The `.glass` rule is the pattern to copy.
+
+## 119. The brief asked for a theme-aware `.g-scrim`; one existed, so it was finished instead — EXTENDED
+
+The brief said `.g-scrim` is dark in both themes and that text over a photo therefore
+cannot follow a light theme. Both were true of 0.1.3. But `.g-scrim-auto` and
+`--scrim-auto` had already been added for the media app (#106), and they do exactly that.
+What was missing was what this brief asked for beyond the colour:
+
+- **The dark half did not match.** `.g-scrim-auto` used `--surface` in both themes: 90/70/32%
+  of `--ink-950` in dark mode, where `.g-scrim` uses 12% lightness at .82/.62/.28. So moving a
+  page from one class to the other changed its dark mode. `--scrim-auto` is now
+  `light-dark()` per stop, since `light-dark()` takes colours and not gradients. The light
+  half is unchanged and the dark half is `--scrim`'s own stops. `.g-scrim-auto.g-scrim-top`
+  does the same against `.g-scrim-top`. Measured, `.g-scrim-auto` in dark mode is
+  pixel-identical to 0.1.3's `.g-scrim` and to the pre-change build, on both photos, for
+  both directions.
+- **No strength knob.** Added `--scrim-strength`, a multiplier on every stop's alpha, default 1,
+  on all four combinations.
+
+**Not done: flipping `.g-scrim` itself.** The brief asked for `.g-scrim` to turn light in a light
+theme "so existing pages do not shift". That would shift them. 0.1.3 documents `.g-scrim` as
+"dark in both themes, for white text", and every light-mode use in this repo relies on it:
+the index.php demo (`color:#fff`) and the gradients.php example (`oklch(98% 0 0)`) would
+both have become white text on a white floor. It stays dark. The theme-aware scrim is the
+class beside it, which costs a page one class name. Flipping it is a five-line change if
+that is wanted anyway, with a changelog entry saying light-mode white text needs
+`.g-scrim-auto` or `data-theme="dark"`.
+
+**How the knob works, and two designs rejected:**
+- `opacity` on the `::after` would have been one line, but it can only weaken, and the
+  measurements below show the default needs to go up for muted text.
+- Writing the stops into the class with `var(--scrim-strength, 1)` would have cut the class
+  off from its token, so a site that retuned `--scrim` on `:root` would lose it on
+  `.g-scrim`. Declaring the knob inside the token does not work at all, because a custom
+  property's `var()` is substituted where the property is declared, on `:root`, so a knob
+  set on the element would never reach it.
+- What shipped: the `::after` declares `--scrim-scaled`, the stops with
+  `calc(.82 * var(--scrim-strength))` and no fallback, and paints
+  `var(--scrim-scaled, var(--scrim))`. While the knob is unset, `--scrim-scaled` is invalid
+  at computed-value time, so `var()` takes the token, which is the same declaration path as
+  before. Once it is set, the stops scale. A test pins that a retuned `--scrim` still
+  reaches `.g-scrim`, and that `--scrim-strength: 1` computes the same as unset. Opacity
+  clamps at 1, so 2 makes the bottom two stops solid. `color-mix()` clamps a percentage
+  above 100% as the spec says (checked in Edge 155). `.g-scrim-top` has no token, so it
+  uses `var(--scrim-strength, 1)` directly.
+
+**Measured** in Edge 155 from screenshots, as WCAG ratios against the text's own colour.
+Text colours: light `--text` oklch(22.6%), `--text-muted` 47.6%; dark `--text` 95.4%,
+`--text-muted` 70.8%; `.g-scrim` captions `oklch(98% 0 0)`.
+
+*Worst case for any photo.* Pure white under the dark scrim and pure black under the light
+one. This shows how far up from the bottom text still clears 4.5:1:
+
+| | strength 1 | 1.3 | 1.5 |
+|---|---|---|---|
+| light floor, `--text` | 34.5% | 42.7% | 46.2% |
+| light floor, `--text-muted` | 6.9% | 25.8% | 30.1% |
+| dark scrim, `--text` | 24.6% | 35.0% | 39.6% |
+| dark scrim, `--text-muted` | 2.6% | 22.6% | 28.8% |
+| `.g-scrim`, white | 26.2% | 36.2% | 40.6% |
+
+At the bottom edge, at 1: light `--text` 13.51:1, muted 5.24:1; dark `--text` 11.02:1,
+muted 4.89:1. At 22% up: 8.03 / 3.11 and 5.14 / 2.28.
+
+*Two real photos.* A snowfield (light at the bottom, Unsplash 1418985991508) and a night
+forest under stars (dark, Unsplash 1519681393784). Same 640×360 figure and same caption in
+both themes: a `--text-lg` semibold title and a `--text-sm` muted line, in
+`--space-5` padding. Figures are the worst pixel behind each line:
+
+| photo, theme | title at 1 | muted at 1 | title at 1.3 | muted at 1.3 |
+|---|---|---|---|---|
+| snow, light | 11.12 | 4.79 | 15.10 | 6.16 |
+| snow, dark | 5.43 | **3.51** | 11.19 | 6.54 |
+| night, light | 8.70 | **4.17** | 14.13 | 5.99 |
+| night, dark | 10.61 | 7.20 | 14.73 | 7.71 |
+
+So the title clears AA in both themes on both photos at the default. The muted line fails in
+each theme on the photo that works against it, and 1.3 fixes both. The dark-mode failure was
+already in 0.1.3 for muted text on `.g-scrim`. The default cannot be retuned without breaking
+"dark mode identical", so the fix is documented: 1.3 under muted text.
+
+**Can a light scrim carry text over an arbitrary photo?** As well as the dark one does, and a
+little further up. Dark text on a light floor clears AA higher (34.5% against 24.6%), partly
+because its stops are stronger and partly because WCAG luminance favours dark text on
+mid-tones. Neither scrim covers a whole arbitrary photo. The limit is height, not colour.
+Text in the bottom quarter is safe in both themes. Text higher up, or a lot of it, belongs on
+a `.card.glass-solid` (#118), not on a scrim turned up until it hides the photo. The visible
+cost is aesthetic: over a dark photo the light floor reads as a pale mist across the bottom
+of the frame, which changes the picture more than a dark scrim does over a light one.
+
+**Also checked:** 44/44 pixel comparisons identical. These are `.g-scrim` and
+`.g-scrim.g-scrim-top` against 0.1.3 (photo as background) and against the pre-change build
+(background and `<img>` child), light and dark, on both photos; `.g-scrim-auto` in dark
+against `.g-scrim` in dark; and strength 1 against unset for all four classes in both
+themes. Computed paint styles of all 20 templates, light and dark: 0 of 27,164
+element/pseudo rows changed. The minified build computes the same gradients.
+`deck.min.css`: +1,202 bytes raw, +153 gzip, +100 Brotli.
+
+**Not changed:** `.carousel-caption` reads `--scrim` directly and has no knob. Templates that
+paint `var(--scrim)` themselves are unaffected.
+
+## 120. Six blurred surfaces hardcoded four radii and ignored reduced transparency — FIXED
+
+The brief asked for blur tokens and for #118's reduced-transparency fallback on every other
+blurred surface. Three of its premises had moved:
+
+- **The line numbers.** The sites are now `04-layout.css` 210 and 237, `06-forms.css` 421,
+  `07-components.css` 754, `08-mobile.css` 91, `22-nav.css` 58 and 143, and `24-media.css` 68.
+- **`--glass-blur` is not a root token.** It is `.glass`'s own knob, with a 16px fallback
+  (#118), so there was nothing in `01-tokens.css` to extend.
+- **There are four radii, not three:** 3px (`.modal::backdrop`), 8px (`.carousel-arrow`, the
+  native `::scroll-button`, and `.video-play`), 12px (both `.sticky-top` declarations and
+  `.form-actions-sticky`) and 16px (`.tabbar`). Zero visual change needs four tokens.
+
+What changed:
+
+- **`--blur-xs` 3px, `--blur-sm` 8px, `--blur-md` 12px, `--blur-lg` 16px,** named like `--r-*`.
+  All eight declaration pairs read them, `-webkit-backdrop-filter` included. The `saturate()`
+  values are untouched: 1.6 on the header, 1.8 on the tab bar.
+- **Reduced transparency:** each surface takes its opaque base colour and drops the blur,
+  the same pattern as `.glass`. That is `--bg` for `.sticky-top` and `.form-actions-sticky`,
+  and `--surface` for `.tabbar`, both carousel arrows and `.video-play`. Each block sits
+  beside its rule, for two reasons:
+  - `.sticky-top`'s block comes *before* the scroll-state `@supports` block, whose
+    `background: none` then wins, so a header still in flow stays see-through as it does
+    without the setting. Its `::after` has its own block inside `@supports`.
+  - The native `::scroll-button(*)` has its own block inside `@supports selector(::scroll-marker)`.
+    In a selector list with `.carousel-arrow`, an engine without `::scroll-button` would drop
+    both.
+- **`.modal::backdrop` goes solid,** with its own colour at full alpha. Dropping only the blur
+  would leave the page showing through the 48% dim *sharp*, which is more see-through than
+  before. The cost is that an open modal hides the page completely for these readers.
+  `.sheet::backdrop` and `.drawer::backdrop` are unblurred 50% dims and were left alone, so
+  under the setting the modal is solid and those two are not.
+- `99-print.css`'s `backdrop-filter: none !important` is untouched.
+- **Docs:** `reference/tokens.php` has a Backdrop blur group with a live preview. That is a
+  sharp dot beside the same dot under the token's blur, because fine stripes looked the same
+  at 8px as at 16px. The token is also in the token tables for carousel, container, field,
+  modal and video. The modal, video, sticky header and form actions prose names it and the
+  reduced-transparency behaviour.
+- **A test** pins all three things. The computed values are unchanged. Each surface follows
+  its own token and no other. Under reduced transparency each one is opaque and unblurred,
+  while a header in flow stays transparent. Against the pre-change build it fails.
+
+**Verified** in Edge:
+- **Pixels,** before against after, over a high-detail stripe-and-text background. The scenes
+  are the stuck header (scroll-state path, and the fallback with that `@supports` made false),
+  the form action bar, an open modal, the tab bar at 390px, the carousel (native buttons, and
+  the DIY arrows with `::scroll-marker` made false) and the video play button. 8/8 identical,
+  and the before-against-before control was 8/8 identical too.
+- **Computed styles** of every element and `::before`/`::after` in all 20 templates, light
+  and dark, `backdrop-filter` included: 0 of 27,190 rows changed.
+- **Under reduced transparency** (CDP), every surface has alpha 1 and `backdrop-filter: none`
+  on both fallback paths. With the pre-change build, all were translucent and blurred.
+- **Retuning,** with each token set to 40px on its own. `--blur-xs` moved the modal backdrop.
+  `--blur-sm` moved both arrows and the play button. `--blur-md` moved the header on both
+  paths and the action bar. `--blur-lg` moved the tab bar. Nothing else moved.
+- Safari's `-webkit-` path cannot be rendered here, because Edge ignores it. Each `-webkit-`
+  declaration was edited to match its unprefixed twin exactly.
+
+**Harness traps.** `html` and `.carousel-track` scroll smoothly, so screenshots taken after
+`scrollTo()` caught the scroll mid-animation and before-against-before differed. The active
+`::scroll-marker` animates its width, and `*::before, *::after` does not freeze it. Under the
+suite's emulated reduced motion, `.form-actions-sticky` has no transition of its own, so it
+gets the reset's .01ms `all` transition. In headless Edge that took more than two frames to
+settle, so the test awaits `CSSTransition.finished`.
+
+`deck.min.css`: +1,340 bytes raw, +127 gzip, +85 Brotli. The tokens alone are +230 / +32 /
++23, because `var(--blur-md)` is longer than `12px`. A refactor like this cannot come out
+negative. The eight reduced-transparency blocks are +1,110 / +95 / +62.
+
+**Not changed:**
+- `.glass` keeps its own `--glass-blur`: 16px, with 8px for `.glass-sm` and 32px for
+  `.glass-lg`. So retuning `--blur-lg` does not reach it. Its 16px and 8px defaults could
+  read `--blur-lg` and `--blur-sm` with no visual change. 32px has no token.
+  `20-gradients.css` was outside the brief.
+- There is no single master knob. Retuning every blurred surface is four changes, one per
+  strength. A multiplier token would make it one.
+- `.enter-blur` (16-motion.css) and `.lazy-blur` (24-media.css) blur their own content with
+  `filter`. They are not see-through surfaces.
+
+## 121. Documented components could not be found, so people reported them missing — FIXED
+
+A gap report written while building an app on Deck said "No date picker". Separately, a
+dashboard template was built without `.sparkline`, `.donut`, `.ring` or `.timeline`. All of
+them had pages. Coverage was not the problem, since 889 of 948 classes are claimed by a page.
+Navigation was. Before anything changed, the docs measured like this:
+
+- **The search box led nowhere.** The navbar form on every docs page posted to
+  `search.php`, a class table whose last column was a file and line. Even a perfect hit
+  (`donut`, five rows) never said the class was on the Charts page.
+  `reference/classes.php` had the link column, but the navbar did not go there.
+- **It matched the wrong text.** It took raw substrings of the class name, source comment
+  and file name, unranked, and never a page title or description:
+  - `date picker` found one row, `.datefield`, because `.datepicker` has no space.
+  - `upload` found nothing. The page was titled File and the class is `.file`.
+  - `ring` found 28 rows in alphabetical order, with `.alert-body` first because of the
+    "ring" in "during".
+- **There was no component index.** The docs home's Components card said "47 pages"
+  (typed by hand; there were 66) and linked to `button.php`. The sidebar lists page titles,
+  and a title hides what its page covers: donuts and sparklines are on Charts, the ring is
+  on Progress. Ten api.json component families with no page (`.chip`, `.stat`, `.empty`,
+  `.tabbar`, `.banner` and others) appeared only as rows in a 948-row table.
+- **The machine-readable routes were dead or stale.** `dist/api.json` is outside the web
+  root, and no page linked a copy. llms.txt sent assistants to README#components as "the
+  list of component classes". That is a hand-typed paragraph with no date picker,
+  combobox, data grid, charts, kanban, QR code or carousel.
+
+What changed:
+
+- **`docs/_docs.php`** holds the data and helpers that used to be the top of `_layout.php`,
+  with no output. That lets `search.php` redirect, and the index answer in JSON, before
+  any HTML goes out. Pages still require only `_layout.php`.
+- **One index, one matcher.**
+  - `docs_pages()` reads every page's own `$page` block (title, description, `documents`,
+    `component`) and its headings with ids. `docs_claims()` is now built on it: the same
+    889 claims, now in path order rather than directory order.
+  - `docs_find()` ranks pages by where the query matches:
+
+    | Score | Matches |
+    | --- | --- |
+    | 100 | the title, as a key |
+    | 98 | the file name |
+    | 96 | a claimed class |
+    | 90 | a heading |
+    | 85 | every word in the title |
+    | 75 | every word in a heading |
+    | 65 | every word in the description |
+    | below | prefixes, then fragments |
+
+  - A key drops case, spacing and punctuation and makes plurals singular, so "Date
+    picker", "date-picker", ".datepicker" and "date pickers" are one search. Question words
+    are dropped first, so "does Deck have a date picker?" works too.
+  - A hit lands at the heading that names the class (`charts.php#t-donut`,
+    `progress.php#ring`). Otherwise it lands on the class's row in the generated table,
+    which now carries `id="class-…"`. `print.php` lists its classes by hand, so its classes
+    land on its Classes heading.
+- **`components/index.php`** is generated on every request. It lists each page with the
+  public classes it claims, then the 49 public classes no page claims, grouped by their
+  api.json component, with source lines. It filters without JavaScript; the script runs the
+  same matcher, line for line. `?format=json` returns the same data with absolute URLs.
+- **`search.php`** lists pages first, then the class table. The table is now ranked (exact
+  name, then prefix, then the rest) and has a Documented in column.
+- **The navbar search can open a page directly.** It sends `go=1`. When one page is clearly
+  the answer, it opens that page with `?found=`. "Clearly" is `docs_sure()`: a match on a
+  name or title, strictly ahead of the next hit. The page then says "Best match for …" and
+  links back to every result.
+- **The hand-kept pointers no longer send people astray:**
+  - The docs home card links to the index and counts its pages.
+  - The sidebar's Components group starts with All components.
+  - File is retitled File upload, the name the page's own first section uses.
+  - In llms.txt, Component reference is replaced by the index and its JSON. `tools/site.mjs`
+    writes both links.
+  - README's Components paragraph says it is a summary and links to the index.
+- **`tests/docs-find.test.mjs`** serves `public_html/` with `php -S` and checks five things:
+  - Each term from the brief, plus "heatmap" and "btn-primary", redirects to the right page
+    and fragment, and that fragment exists.
+  - The landing page links back to the results.
+  - An unclear query lists pages, best first.
+  - Every public class is in the index's HTML and JSON, and nothing else is.
+  - Every link in the index lands on an id that exists, and the server filter keeps the
+    right rows.
+
+  It is skipped when `php` is not runnable. Its first run caught `print.php`'s missing row
+  ids.
+
+**Verified:**
+- **Searches, in Edge, from the navbar.** Each of the nine terms from the brief lands on
+  the right page in one step:
+  - date picker
+  - donut, at Donut
+  - sparkline, at Sparklines and meters
+  - ring, at `.ring`
+  - timeline
+  - upload
+  - kanban
+  - QR
+  - emoji
+
+  A deep link settles 130px from the top, clear of the sticky header, and the row is marked
+  with `:target`.
+- **The filter.** The script and the server kept identical rows for 18 queries.
+- **Layout.** No horizontal overflow at 390px. Checked in dark mode.
+- **Coverage.** The index lists all 844 public classes: 795 under 71 pages, and 49 under "No
+  page yet".
+- **The build and tests.** `npm run build` verifies 120 pages with no drift, and `npm test`
+  passes 55 of 55. A search takes about 85ms on the PHP dev server.
+- **A clean checkout.** The test was a copy of the tracked files plus the new ones, with
+  `dist/` deleted. The build regenerated `api.json`, verified the pages, then stopped:
+  `sizes.json` had no icon sample block. That stop predates this work, and its message says
+  to run `npm run icons` once. After that, the build and the test both pass.
+
+**Not done:**
+- **The sidebar is still a hand-kept list.** It is complete today; the index is the
+  generated view of the same pages.
+- **49 public classes still have no page.** Among them are `.stat` (a KPI tile with
+  `.stat-value`, `.stat-delta` and `.stat-label`), `.chip`, `.empty`, `.tabbar` and
+  `.banner`. They can now be found by name and in the index, but nothing explains them yet.
+- **The 543 public classes with no source comment** are found by name, and by the page that
+  claims them, but not by purpose. A comment above each is still the best fix.
+
+## 122. The Charts page's donut example drew nothing, and the demo's still does not — FIXED in documentation
+
+Found while checking where a "donut" search lands. The example had three faults:
+
+- **There was no `.chart` around it.** `.donut` paints
+  `conic-gradient(var(--stops, var(--c1) 0 100%))`, and `--c1` is defined on `.chart`.
+  Outside one, the gradient is invalid at computed-value time, so `background-image`
+  computes to `none`.
+- **`.donut-center` was inside `.donut`.** The ring's radial mask makes the hole transparent,
+  so the figure was cut out along with it. Only the strokes that crossed the ring showed.
+- **The prose said a donut was driven by `--value`.** Nothing reads `--value` for a donut;
+  `--stops` is its only input. The lede, the `--value` section and the meta description
+  all repeated the claim.
+
+The example now follows `digital-marketing.html`:
+
+- inside `.chart`
+- `--stops: var(--c1) 0 68%, var(--bg-sunken) 0 100%`
+- the centre beside the ring in `.donut-wrap`, not inside it
+
+The prose names `--stops`. Checked in light and dark.
+
+**Not fixed: the demo.** The "Sessions by device" donut on `public_html/index.php` sits in
+a `.card-body` with no `.chart`, so in Edge it computes `background-image: none` and draws
+nothing. The template's donut, inside `.card-body.chart`, renders. The underlying problem is
+that `.donut` silently depends on a `.chart` ancestor. The fix is a choice between source and
+markup, so it is left open. One way is to define the palette on `:root` too, or give
+`.donut` a fallback. The other is to add `chart` to the demo's card body, as the template
+does, and say on the class that it needs one.

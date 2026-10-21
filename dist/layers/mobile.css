@@ -88,10 +88,14 @@
     z-index: var(--z-nav);
     display: flex;
     background: color-mix(in oklab, var(--surface) 88%, transparent);
-    backdrop-filter: saturate(1.8) blur(16px);
-    -webkit-backdrop-filter: saturate(1.8) blur(16px);
+    backdrop-filter: saturate(1.8) blur(var(--blur-lg));
+    -webkit-backdrop-filter: saturate(1.8) blur(var(--blur-lg));
     border-block-start: 1px solid var(--line);
     padding-block-end: env(safe-area-inset-bottom);
+  }
+  /* Opaque, with no blur, for a reader who has asked for less transparency. */
+  @media (prefers-reduced-transparency: reduce) {
+    .tabbar { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
   }
   @media (min-width: 48rem) { .tabbar { display: none; } }
 

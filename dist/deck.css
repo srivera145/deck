@@ -294,15 +294,28 @@
              oklch(12% .02 var(--hue-neutral) / .62) 22%,
              oklch(12% .02 var(--hue-neutral) / .28) 48%,
              transparent 78%);
-    /* The same floor in the surface colour, so it follows the theme: light
-       under dark text in a light theme, dark under light text in a dark one.
-       Text over it uses --text. --scrim stays dark in both, for white text.
-       Used by .g-scrim-auto. */
+    /* The same floor, following the theme: --surface under dark text in a
+       light theme, and in a dark one --scrim's own stops, so it is --scrim
+       there. Text over it uses --text. --scrim stays dark in both, for
+       white text. Used by .g-scrim-auto. */
     --scrim-auto: linear-gradient(to top,
-             color-mix(in oklab, var(--surface) 90%, transparent) 0%,
-             color-mix(in oklab, var(--surface) 70%, transparent) 22%,
-             color-mix(in oklab, var(--surface) 32%, transparent) 48%,
+             light-dark(color-mix(in oklab, var(--surface) 90%, transparent),
+                        oklch(12% .02 var(--hue-neutral) / .82)) 0%,
+             light-dark(color-mix(in oklab, var(--surface) 70%, transparent),
+                        oklch(12% .02 var(--hue-neutral) / .62)) 22%,
+             light-dark(color-mix(in oklab, var(--surface) 32%, transparent),
+                        oklch(12% .02 var(--hue-neutral) / .28)) 48%,
              transparent 78%);
+
+    /* --- Backdrop blur: behind see-through surfaces ------------------------ */
+    /* The blur() radius only. A saturate() beside it stays in the component,
+       where it differs on purpose. Each surface that uses one goes opaque,
+       with no blur, under prefers-reduced-transparency. .glass has its own
+       knob, --glass-blur. */
+    --blur-xs: 3px;    /* .modal::backdrop                    */
+    --blur-sm: 8px;    /* carousel arrows, .video-play        */
+    --blur-md: 12px;   /* .sticky-top, .form-actions-sticky   */
+    --blur-lg: 16px;   /* .tabbar                             */
 
     /* --- Type -------------------------------------------------------------- */
     --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI Variable Text",
@@ -816,8 +829,14 @@
     inset-block-start: 0;
     z-index: var(--z-sticky);
     background: color-mix(in oklab, var(--bg) 82%, transparent);
-    backdrop-filter: saturate(1.6) blur(12px);
-    -webkit-backdrop-filter: saturate(1.6) blur(12px);
+    backdrop-filter: saturate(1.6) blur(var(--blur-md));
+    -webkit-backdrop-filter: saturate(1.6) blur(var(--blur-md));
+  }
+  /* A reader who has asked for less transparency gets an opaque bar with no
+     blur, as .glass does. This comes before the scroll-state block, whose
+     background: none keeps the header see-through while it sits in flow. */
+  @media (prefers-reduced-transparency: reduce) {
+    .sticky-top { background: var(--bg); backdrop-filter: none; -webkit-backdrop-filter: none; }
   }
 
   /* Sitting in flow it needs no treatment at all; it earns the blur and the
@@ -837,9 +856,12 @@
       z-index: -1;
       opacity: 0;
       background: color-mix(in oklab, var(--bg) 82%, transparent);
-      backdrop-filter: saturate(1.6) blur(12px);
-      -webkit-backdrop-filter: saturate(1.6) blur(12px);
+      backdrop-filter: saturate(1.6) blur(var(--blur-md));
+      -webkit-backdrop-filter: saturate(1.6) blur(var(--blur-md));
       transition: opacity var(--dur-2) var(--ease-out);
+    }
+    @media (prefers-reduced-transparency: reduce) {
+      .sticky-top::after { background: var(--bg); backdrop-filter: none; -webkit-backdrop-filter: none; }
     }
     @container scroll-state(stuck: block-start) {
       .sticky-top::after { opacity: 1; box-shadow: var(--shadow-2); }
@@ -1540,11 +1562,15 @@
     inset-block-end: 0;
     z-index: var(--z-sticky);
     background: color-mix(in oklab, var(--bg) 88%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(var(--blur-md));
+    -webkit-backdrop-filter: blur(var(--blur-md));
     border-block-start: 1px solid var(--line);
     padding-block: var(--space-3);
     padding-block-end: calc(var(--space-3) + env(safe-area-inset-bottom));
+  }
+  /* Opaque, with no blur, for a reader who has asked for less transparency. */
+  @media (prefers-reduced-transparency: reduce) {
+    .form-actions-sticky { background: var(--bg); backdrop-filter: none; -webkit-backdrop-filter: none; }
   }
   /* On a page with a .tabbar the bar sits above it rather than under it,
      by the clearance the body already leaves (08-mobile.css). The tab bar
@@ -2314,13 +2340,18 @@
   @starting-style { .modal[open] { opacity: 0; scale: .97; translate: 0 8px; } }
   .modal::backdrop {
     background: oklch(18% .02 var(--hue-neutral) / .48);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(var(--blur-xs));
+    -webkit-backdrop-filter: blur(var(--blur-xs));
     opacity: 0;
     transition: opacity var(--dur-2) var(--ease-out), display var(--dur-2) allow-discrete, overlay var(--dur-2) allow-discrete;
   }
   .modal[open]::backdrop { opacity: 1; }
   @starting-style { .modal[open]::backdrop { opacity: 0; } }
+  /* With less transparency asked for, the page goes behind a solid backdrop
+     rather than showing through it, sharp, once the blur is gone. */
+  @media (prefers-reduced-transparency: reduce) {
+    .modal::backdrop { background: oklch(18% .02 var(--hue-neutral)); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  }
   /* A <form method="dialog"> around the regions is the modal's only flex
      item, so it is a column that may shrink as well, or the body inside it
      would never scroll. */
@@ -2581,10 +2612,14 @@
     z-index: var(--z-nav);
     display: flex;
     background: color-mix(in oklab, var(--surface) 88%, transparent);
-    backdrop-filter: saturate(1.8) blur(16px);
-    -webkit-backdrop-filter: saturate(1.8) blur(16px);
+    backdrop-filter: saturate(1.8) blur(var(--blur-lg));
+    -webkit-backdrop-filter: saturate(1.8) blur(var(--blur-lg));
     border-block-start: 1px solid var(--line);
     padding-block-end: env(safe-area-inset-bottom);
+  }
+  /* Opaque, with no blur, for a reader who has asked for less transparency. */
+  @media (prefers-reduced-transparency: reduce) {
+    .tabbar { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
   }
   @media (min-width: 48rem) { .tabbar { display: none; } }
 
@@ -5426,6 +5461,24 @@
   /* --- Scrims ---------------------------------------------------------------
      A caption over a photo needs a legible floor. A flat 50% black overlay
      dulls the whole image; an eased scrim only darkens where the text sits.
+
+     .g-scrim is dark in both themes, for white text. .g-scrim-auto, below,
+     is the one that follows the theme. .g-scrim-top fades from the block
+     start on either.
+
+       --scrim-strength  multiplies the scrim's opacity       1
+
+     A flat illustration needs less than a busy photograph: .6 for one, 1.3
+     for the other. Opacity stops at 1, so a high value makes the bottom of
+     the scrim solid. Unset, each class paints its token, so a retuned
+     --scrim still reaches .g-scrim. Set, it scales the same stops written
+     out here. --scrim-scaled names the knob with no fallback, so until the
+     knob is set it is invalid, and var() falls back to the token.
+
+     What strength buys is height. Over the worst possible photo, white under
+     the dark scrim or black under the light one, body text clears 4.5:1 in
+     the bottom quarter (dark) or third (light) at 1, and muted text needs
+     about 1.3 to clear it anywhere much above the edge. FINDINGS 119.
      ---------------------------------------------------------------------- */
   .g-scrim {
     position: relative;
@@ -5436,12 +5489,17 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: var(--scrim);
+    --scrim-scaled: linear-gradient(to top,
+      oklch(12% .02 var(--hue-neutral) / calc(.82 * var(--scrim-strength))) 0%,
+      oklch(12% .02 var(--hue-neutral) / calc(.62 * var(--scrim-strength))) 22%,
+      oklch(12% .02 var(--hue-neutral) / calc(.28 * var(--scrim-strength))) 48%,
+      transparent 78%);
+    background: var(--scrim-scaled, var(--scrim));
     pointer-events: none;
   }
   .g-scrim-top::after {
     background: linear-gradient(to bottom,
-      oklch(12% .02 var(--hue-neutral) / .72), transparent 62%);
+      oklch(12% .02 var(--hue-neutral) / calc(.72 * var(--scrim-strength, 1))), transparent 62%);
   }
   .g-scrim > * { position: relative; }
   /* A photo child goes under the scrim, where a background image would be.
@@ -5450,11 +5508,13 @@
      image. Text and other children still sit above it. */
   .g-scrim > :is(img, picture, video, canvas, svg, iframe, .lazy, .video) { z-index: -2; }
 
-  /* The scrim in the theme's own colour, from --scrim-auto: a light floor
-     with --text over it in a light theme, a dark one in a dark theme, so a
-     title over a poster follows the theme instead of always being white.
-     Built like .g-scrim and used instead of it, not with it. Add
-     .g-scrim-top to fade from the block start. */
+  /* The scrim that follows the theme, from --scrim-auto: a light floor of
+     --surface with --text over it in a light theme, and in a dark theme
+     exactly .g-scrim, so swapping one class for the other changes nothing
+     in dark mode. Built like .g-scrim and used instead of it, not with it.
+     Add .g-scrim-top to fade from the block start; --scrim-strength works
+     the same way. light-dark() takes colours, not gradients, so each stop
+     has its own. */
   .g-scrim-auto {
     position: relative;
     isolation: isolate;
@@ -5465,38 +5525,94 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: var(--scrim-auto);
+    --scrim-scaled: linear-gradient(to top,
+      light-dark(color-mix(in oklab, var(--surface) calc(90% * var(--scrim-strength)), transparent),
+                 oklch(12% .02 var(--hue-neutral) / calc(.82 * var(--scrim-strength)))) 0%,
+      light-dark(color-mix(in oklab, var(--surface) calc(70% * var(--scrim-strength)), transparent),
+                 oklch(12% .02 var(--hue-neutral) / calc(.62 * var(--scrim-strength)))) 22%,
+      light-dark(color-mix(in oklab, var(--surface) calc(32% * var(--scrim-strength)), transparent),
+                 oklch(12% .02 var(--hue-neutral) / calc(.28 * var(--scrim-strength)))) 48%,
+      transparent 78%);
+    background: var(--scrim-scaled, var(--scrim-auto));
     pointer-events: none;
   }
   .g-scrim-auto.g-scrim-top::after {
     background: linear-gradient(to bottom,
-      color-mix(in oklab, var(--surface) 82%, transparent), transparent 62%);
+      light-dark(color-mix(in oklab, var(--surface) calc(82% * var(--scrim-strength, 1)), transparent),
+                 oklch(12% .02 var(--hue-neutral) / calc(.72 * var(--scrim-strength, 1)))),
+      transparent 62%);
   }
   .g-scrim-auto > * { position: relative; }
   .g-scrim-auto > :is(img, picture, video, canvas, svg, iframe, .lazy, .video) { z-index: -2; }
 
   /* --- Glass ----------------------------------------------------------------
-     A frosted surface for a .card, a .panel or a bar laid over an image or a
-     gradient: the theme's surface colour at --glass (76%), with whatever is
-     behind it blurred and saturated. It follows the theme because --surface
-     does. Not a gradient; it lives here with the other surface treatments,
-     in deck.effects, so it beats the component's own background.
+     A frosted surface for a .card, a .panel or a bar over a photo or video.
+     The theme's surface colour, partly see-through, with whatever is behind
+     it blurred and saturated; it follows the theme because --surface does.
+     Not a gradient; it lives here with the other surface treatments, in
+     deck.effects, so it beats the component's own background without a
+     specificity fight.
+
+     It goes on something that already has a shape. It sets no radius, no
+     border width and no shadow: a .card brings its own, and a full-bleed bar
+     gets no corners or edges it did not ask for. It only recolours a border
+     that is there. The top-edge highlight is a 1px background layer rather
+     than an inset box-shadow, because box-shadow is a single property and
+     this layer beats the components: it would wipe out the card's own
+     shadow, .card-raised, the .card-link lift and any focus ring drawn with
+     box-shadow.
+
+       --glass-blur  blur radius behind the surface         16px
+       --glass-tint  how much of the surface colour stays   72%
+       --glass-edge  strength of the top-edge highlight     22%
+
+     .glass-sm and .glass-lg change only the blur, and .glass-solid only the
+     tint, so they combine: .glass.glass-lg.glass-solid.
+
+     Two traps, both from backdrop-filter itself:
+     - It cannot see through another backdrop-filter. The element that has
+       one is a backdrop root, so a .glass inside .sticky-top, .tabbar or
+       another .glass only blurs its parent's flat tint, which is to say
+       nothing. filter, opacity below 1, mask, clip-path and mix-blend-mode
+       on an ancestor do the same.
+     - It creates a containing block, so a position: fixed descendant is
+       placed against the panel instead of the viewport, and a .card's
+       overflow then clips it. Open menus and toasts in the top layer
+       (popover, showModal) or outside the glass.
      ---------------------------------------------------------------------- */
   .glass {
-    background: color-mix(in oklab, var(--surface) var(--glass, 76%), transparent);
-    border-color: color-mix(in oklab, var(--line) 60%, transparent);
-    backdrop-filter: saturate(1.6) blur(16px);
-    -webkit-backdrop-filter: saturate(1.6) blur(16px);
+    background:
+      linear-gradient(light-dark(
+          oklch(100% 0 0 / var(--glass-edge, 22%)),
+          oklch(100% 0 0 / calc(var(--glass-edge, 22%) / 3)))
+        1px, transparent 1px) padding-box,
+      color-mix(in oklab, var(--surface) var(--glass-tint, 72%), transparent);
+    border-color: color-mix(in oklab, var(--line-strong) 60%, transparent);
+    backdrop-filter: saturate(1.6) blur(var(--glass-blur, 16px));
+    -webkit-backdrop-filter: saturate(1.6) blur(var(--glass-blur, 16px));
   }
-  /* Without the blur, 24% of a sharp photo shows through and fights the
-     text, so the surface goes nearly opaque instead. */
+  .glass-sm { --glass-blur: 8px; }
+  .glass-lg { --glass-blur: 32px; }
+  /* Straight over a photo, where the text matters more than the view. */
+  .glass-solid { --glass-tint: 90%; }
+
+  /* Without backdrop-filter the surface would not degrade to "no blur" but
+     to 28% of a sharp photo showing through the text, so it goes opaque:
+     the host's own border, with --surface behind it. */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .glass { background: color-mix(in oklab, var(--surface) 94%, transparent); }
+    .glass {
+      background: var(--surface);
+      border-color: revert-layer;
+    }
   }
-  /* A reader who has asked for less transparency gets the plain surface. */
+  /* A reader who has asked for less transparency gets the plain surface and
+     no blur. revert-layer hands the border back to the component, so a
+     .card.glass is exactly a .card. The pattern for any other see-through
+     surface that wants to honour this setting. */
   @media (prefers-reduced-transparency: reduce) {
     .glass {
       background: var(--surface);
+      border-color: revert-layer;
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
     }
@@ -5984,13 +6100,19 @@
     place-items: center;
     border-radius: var(--r-full);
     background: color-mix(in oklab, var(--surface) 88%, transparent);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(var(--blur-sm));
+    -webkit-backdrop-filter: blur(var(--blur-sm));
     border: 1px solid var(--line);
     box-shadow: var(--shadow-2);
     color: var(--text);
     cursor: pointer;
     transition: opacity var(--dur-2) var(--ease-out), scale var(--dur-1) var(--ease-out);
+  }
+  /* Opaque, with no blur, for a reader who has asked for less transparency.
+     The native buttons below have their own, since ::scroll-button cannot
+     share a selector list without taking it down where it is unsupported. */
+  @media (prefers-reduced-transparency: reduce) {
+    .carousel-arrow { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
   }
   .carousel-arrow:hover { scale: 1.06; }
   .carousel-arrow[disabled] { opacity: 0; pointer-events: none; }
@@ -6063,8 +6185,8 @@
       place-items: center;
       border-radius: var(--r-full);
       background: color-mix(in oklab, var(--surface) 88%, transparent);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(var(--blur-sm));
+      -webkit-backdrop-filter: blur(var(--blur-sm));
       border: 1px solid var(--line);
       box-shadow: var(--shadow-2);
       color: var(--text);
@@ -6072,6 +6194,9 @@
       line-height: 1;
       cursor: pointer;
       transition: opacity var(--dur-2) var(--ease-out), scale var(--dur-1) var(--ease-out);
+    }
+    @media (prefers-reduced-transparency: reduce) {
+      .carousel-track::scroll-button(*) { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
     }
     .carousel-track::scroll-button(*):hover { scale: 1.06; }
     .carousel-track::scroll-button(*):disabled { opacity: 0; pointer-events: none; }
@@ -7302,13 +7427,18 @@
     display: grid;
     place-items: center;
     background: color-mix(in oklab, var(--surface) 90%, transparent);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(var(--blur-sm));
+    -webkit-backdrop-filter: blur(var(--blur-sm));
     color: var(--text);
     box-shadow: var(--shadow-3);
     transition: scale var(--dur-2) var(--ease-spring), background-color var(--dur-1) var(--ease-out);
   }
   .video-poster:hover .video-play { scale: 1.08; background: var(--surface); }
+  /* Opaque, with no blur, for a reader who has asked for less transparency:
+     the disc it already becomes on hover. */
+  @media (prefers-reduced-transparency: reduce) {
+    .video-play { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  }
   .video-meta {
     position: absolute;
     inset-block-end: var(--space-3);

@@ -189,15 +189,28 @@
              oklch(12% .02 var(--hue-neutral) / .62) 22%,
              oklch(12% .02 var(--hue-neutral) / .28) 48%,
              transparent 78%);
-    /* The same floor in the surface colour, so it follows the theme: light
-       under dark text in a light theme, dark under light text in a dark one.
-       Text over it uses --text. --scrim stays dark in both, for white text.
-       Used by .g-scrim-auto. */
+    /* The same floor, following the theme: --surface under dark text in a
+       light theme, and in a dark one --scrim's own stops, so it is --scrim
+       there. Text over it uses --text. --scrim stays dark in both, for
+       white text. Used by .g-scrim-auto. */
     --scrim-auto: linear-gradient(to top,
-             color-mix(in oklab, var(--surface) 90%, transparent) 0%,
-             color-mix(in oklab, var(--surface) 70%, transparent) 22%,
-             color-mix(in oklab, var(--surface) 32%, transparent) 48%,
+             light-dark(color-mix(in oklab, var(--surface) 90%, transparent),
+                        oklch(12% .02 var(--hue-neutral) / .82)) 0%,
+             light-dark(color-mix(in oklab, var(--surface) 70%, transparent),
+                        oklch(12% .02 var(--hue-neutral) / .62)) 22%,
+             light-dark(color-mix(in oklab, var(--surface) 32%, transparent),
+                        oklch(12% .02 var(--hue-neutral) / .28)) 48%,
              transparent 78%);
+
+    /* --- Backdrop blur: behind see-through surfaces ------------------------ */
+    /* The blur() radius only. A saturate() beside it stays in the component,
+       where it differs on purpose. Each surface that uses one goes opaque,
+       with no blur, under prefers-reduced-transparency. .glass has its own
+       knob, --glass-blur. */
+    --blur-xs: 3px;    /* .modal::backdrop                    */
+    --blur-sm: 8px;    /* carousel arrows, .video-play        */
+    --blur-md: 12px;   /* .sticky-top, .form-actions-sticky   */
+    --blur-lg: 16px;   /* .tabbar                             */
 
     /* --- Type -------------------------------------------------------------- */
     --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI Variable Text",

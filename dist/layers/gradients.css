@@ -141,6 +141,24 @@
   /* --- Scrims ---------------------------------------------------------------
      A caption over a photo needs a legible floor. A flat 50% black overlay
      dulls the whole image; an eased scrim only darkens where the text sits.
+
+     .g-scrim is dark in both themes, for white text. .g-scrim-auto, below,
+     is the one that follows the theme. .g-scrim-top fades from the block
+     start on either.
+
+       --scrim-strength  multiplies the scrim's opacity       1
+
+     A flat illustration needs less than a busy photograph: .6 for one, 1.3
+     for the other. Opacity stops at 1, so a high value makes the bottom of
+     the scrim solid. Unset, each class paints its token, so a retuned
+     --scrim still reaches .g-scrim. Set, it scales the same stops written
+     out here. --scrim-scaled names the knob with no fallback, so until the
+     knob is set it is invalid, and var() falls back to the token.
+
+     What strength buys is height. Over the worst possible photo, white under
+     the dark scrim or black under the light one, body text clears 4.5:1 in
+     the bottom quarter (dark) or third (light) at 1, and muted text needs
+     about 1.3 to clear it anywhere much above the edge. FINDINGS 119.
      ---------------------------------------------------------------------- */
   .g-scrim {
     position: relative;
@@ -151,12 +169,17 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: var(--scrim);
+    --scrim-scaled: linear-gradient(to top,
+      oklch(12% .02 var(--hue-neutral) / calc(.82 * var(--scrim-strength))) 0%,
+      oklch(12% .02 var(--hue-neutral) / calc(.62 * var(--scrim-strength))) 22%,
+      oklch(12% .02 var(--hue-neutral) / calc(.28 * var(--scrim-strength))) 48%,
+      transparent 78%);
+    background: var(--scrim-scaled, var(--scrim));
     pointer-events: none;
   }
   .g-scrim-top::after {
     background: linear-gradient(to bottom,
-      oklch(12% .02 var(--hue-neutral) / .72), transparent 62%);
+      oklch(12% .02 var(--hue-neutral) / calc(.72 * var(--scrim-strength, 1))), transparent 62%);
   }
   .g-scrim > * { position: relative; }
   /* A photo child goes under the scrim, where a background image would be.
@@ -165,11 +188,13 @@
      image. Text and other children still sit above it. */
   .g-scrim > :is(img, picture, video, canvas, svg, iframe, .lazy, .video) { z-index: -2; }
 
-  /* The scrim in the theme's own colour, from --scrim-auto: a light floor
-     with --text over it in a light theme, a dark one in a dark theme, so a
-     title over a poster follows the theme instead of always being white.
-     Built like .g-scrim and used instead of it, not with it. Add
-     .g-scrim-top to fade from the block start. */
+  /* The scrim that follows the theme, from --scrim-auto: a light floor of
+     --surface with --text over it in a light theme, and in a dark theme
+     exactly .g-scrim, so swapping one class for the other changes nothing
+     in dark mode. Built like .g-scrim and used instead of it, not with it.
+     Add .g-scrim-top to fade from the block start; --scrim-strength works
+     the same way. light-dark() takes colours, not gradients, so each stop
+     has its own. */
   .g-scrim-auto {
     position: relative;
     isolation: isolate;
@@ -180,38 +205,94 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: var(--scrim-auto);
+    --scrim-scaled: linear-gradient(to top,
+      light-dark(color-mix(in oklab, var(--surface) calc(90% * var(--scrim-strength)), transparent),
+                 oklch(12% .02 var(--hue-neutral) / calc(.82 * var(--scrim-strength)))) 0%,
+      light-dark(color-mix(in oklab, var(--surface) calc(70% * var(--scrim-strength)), transparent),
+                 oklch(12% .02 var(--hue-neutral) / calc(.62 * var(--scrim-strength)))) 22%,
+      light-dark(color-mix(in oklab, var(--surface) calc(32% * var(--scrim-strength)), transparent),
+                 oklch(12% .02 var(--hue-neutral) / calc(.28 * var(--scrim-strength)))) 48%,
+      transparent 78%);
+    background: var(--scrim-scaled, var(--scrim-auto));
     pointer-events: none;
   }
   .g-scrim-auto.g-scrim-top::after {
     background: linear-gradient(to bottom,
-      color-mix(in oklab, var(--surface) 82%, transparent), transparent 62%);
+      light-dark(color-mix(in oklab, var(--surface) calc(82% * var(--scrim-strength, 1)), transparent),
+                 oklch(12% .02 var(--hue-neutral) / calc(.72 * var(--scrim-strength, 1)))),
+      transparent 62%);
   }
   .g-scrim-auto > * { position: relative; }
   .g-scrim-auto > :is(img, picture, video, canvas, svg, iframe, .lazy, .video) { z-index: -2; }
 
   /* --- Glass ----------------------------------------------------------------
-     A frosted surface for a .card, a .panel or a bar laid over an image or a
-     gradient: the theme's surface colour at --glass (76%), with whatever is
-     behind it blurred and saturated. It follows the theme because --surface
-     does. Not a gradient; it lives here with the other surface treatments,
-     in deck.effects, so it beats the component's own background.
+     A frosted surface for a .card, a .panel or a bar over a photo or video.
+     The theme's surface colour, partly see-through, with whatever is behind
+     it blurred and saturated; it follows the theme because --surface does.
+     Not a gradient; it lives here with the other surface treatments, in
+     deck.effects, so it beats the component's own background without a
+     specificity fight.
+
+     It goes on something that already has a shape. It sets no radius, no
+     border width and no shadow: a .card brings its own, and a full-bleed bar
+     gets no corners or edges it did not ask for. It only recolours a border
+     that is there. The top-edge highlight is a 1px background layer rather
+     than an inset box-shadow, because box-shadow is a single property and
+     this layer beats the components: it would wipe out the card's own
+     shadow, .card-raised, the .card-link lift and any focus ring drawn with
+     box-shadow.
+
+       --glass-blur  blur radius behind the surface         16px
+       --glass-tint  how much of the surface colour stays   72%
+       --glass-edge  strength of the top-edge highlight     22%
+
+     .glass-sm and .glass-lg change only the blur, and .glass-solid only the
+     tint, so they combine: .glass.glass-lg.glass-solid.
+
+     Two traps, both from backdrop-filter itself:
+     - It cannot see through another backdrop-filter. The element that has
+       one is a backdrop root, so a .glass inside .sticky-top, .tabbar or
+       another .glass only blurs its parent's flat tint, which is to say
+       nothing. filter, opacity below 1, mask, clip-path and mix-blend-mode
+       on an ancestor do the same.
+     - It creates a containing block, so a position: fixed descendant is
+       placed against the panel instead of the viewport, and a .card's
+       overflow then clips it. Open menus and toasts in the top layer
+       (popover, showModal) or outside the glass.
      ---------------------------------------------------------------------- */
   .glass {
-    background: color-mix(in oklab, var(--surface) var(--glass, 76%), transparent);
-    border-color: color-mix(in oklab, var(--line) 60%, transparent);
-    backdrop-filter: saturate(1.6) blur(16px);
-    -webkit-backdrop-filter: saturate(1.6) blur(16px);
+    background:
+      linear-gradient(light-dark(
+          oklch(100% 0 0 / var(--glass-edge, 22%)),
+          oklch(100% 0 0 / calc(var(--glass-edge, 22%) / 3)))
+        1px, transparent 1px) padding-box,
+      color-mix(in oklab, var(--surface) var(--glass-tint, 72%), transparent);
+    border-color: color-mix(in oklab, var(--line-strong) 60%, transparent);
+    backdrop-filter: saturate(1.6) blur(var(--glass-blur, 16px));
+    -webkit-backdrop-filter: saturate(1.6) blur(var(--glass-blur, 16px));
   }
-  /* Without the blur, 24% of a sharp photo shows through and fights the
-     text, so the surface goes nearly opaque instead. */
+  .glass-sm { --glass-blur: 8px; }
+  .glass-lg { --glass-blur: 32px; }
+  /* Straight over a photo, where the text matters more than the view. */
+  .glass-solid { --glass-tint: 90%; }
+
+  /* Without backdrop-filter the surface would not degrade to "no blur" but
+     to 28% of a sharp photo showing through the text, so it goes opaque:
+     the host's own border, with --surface behind it. */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .glass { background: color-mix(in oklab, var(--surface) 94%, transparent); }
+    .glass {
+      background: var(--surface);
+      border-color: revert-layer;
+    }
   }
-  /* A reader who has asked for less transparency gets the plain surface. */
+  /* A reader who has asked for less transparency gets the plain surface and
+     no blur. revert-layer hands the border back to the component, so a
+     .card.glass is exactly a .card. The pattern for any other see-through
+     surface that wants to honour this setting. */
   @media (prefers-reduced-transparency: reduce) {
     .glass {
       background: var(--surface);
+      border-color: revert-layer;
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
     }

@@ -1,6 +1,6 @@
 # Deck
 
-> Deck is a CSS framework that ships as a single 27.9 KB Brotli (34.2 KB gzip) stylesheet containing
+> Deck is a CSS framework that ships as a single 28.2 KB Brotli (34.6 KB gzip) stylesheet containing
 > buttons, forms, tables, a data grid, charts, overlays, an icon sprite, and a complete
 > color system. It is added to a page with one `<link>` tag and has no build step, no
 > configuration file, and zero runtime dependencies. Version 0.1.4, MIT licensed.
@@ -27,7 +27,7 @@ If that use case ever disappears, delete this file rather than keeping it for it
 - [Templates](https://get-deck.dev/templates/index.php): Nineteen complete single-file pages — a store with product and checkout pages, agency and local business sites, an app shell, a dashboard, settings, sign-in, pricing, and sets of sidebars, footers, heroes and carousels. Every class in them is checked against the stylesheet when Deck builds, so they are real markup to copy rather than invent.
 - [Editor setup page](https://get-deck.dev/docs/start/editor.php): Installing Deck IntelliSense, the extension that completes Deck's classes, tokens and icon names in Visual Studio Code and the editors built on it, and flags misspelt and off-scale class names.
 - [README](https://raw.githubusercontent.com/srivera145/deck/main/README.md): The complete documentation in one file — install, theming, every component, the JS API, motion, print, and browser support.
-- [Component reference](https://github.com/srivera145/deck/blob/main/README.md#components): The list of component classes and the markup each one expects.
+- [Component index](https://get-deck.dev/docs/components/index.php): Every public class, listed under the docs page that documents it. It is generated from the stylesheet inventory on each request, so it cannot leave a component out. Check it before deciding Deck has no component for something: a page's title hides what it covers, so `.donut` and `.sparkline` are on the Charts page and `.ring` is on Progress.
 - [Repository](https://github.com/srivera145/deck): Source, issue tracker, and the demo page under `public_html/index.php` with every component rendered and its markup visible.
 
 ## Source of truth for class names
@@ -35,6 +35,7 @@ If that use case ever disappears, delete this file rather than keeping it for it
 Read these before generating markup. Deck has no plugin system and no dynamic class
 generation, so a class that does not appear in these files does not exist.
 
+- [Component index as JSON](https://get-deck.dev/docs/components/index.php?format=json): The same index as JSON. Each docs page comes with its URL, description and public classes, followed by the public classes that have no page yet and their source lines. It is built from `dist/api.json`, Deck's full class inventory.
 - [Cascade layer reference](https://raw.githubusercontent.com/srivera145/deck/main/src/00-layers.css): Declares the whole layer order up front — `deck.reset`, `deck.tokens`, `deck.type`, `deck.layout`, `deck.components`, `deck.mobile`, `deck.motion`, `deck.effects`, `deck.utilities`, `deck.rtl`, `deck.print`, then four empty `app.*` layers reserved for application CSS. Write into `app.pages` to beat any Deck rule without `!important`.
 - [Component stylesheet](https://raw.githubusercontent.com/srivera145/deck/main/src/07-components.css): Cards, alerts, badges, lists, tables, modals, menus, tabs, timelines, and the rest of the core components.
 - [Source directory](https://github.com/srivera145/deck/tree/main/src): All 26 stylesheets, concatenated in filename order to build `deck.css`. Forms, buttons, data grid, charts, date picker, combobox, toasts, gradients, 3D, and navigation each have their own file.

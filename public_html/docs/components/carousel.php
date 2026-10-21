@@ -219,7 +219,7 @@ function demo_slides(int $n = 4): string
 
 <section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
-  <?php docs_token_table(['--surface', '--brand-600', '--ink-300', '--r-md', '--r-full', '--shadow-2', '--space-2', '--space-3', '--space-4', '--dur-2']); ?>
+  <?php docs_token_table(['--surface', '--brand-600', '--ink-300', '--r-md', '--r-full', '--shadow-2', '--blur-sm', '--space-2', '--space-3', '--space-4', '--dur-2']); ?>
 </section>
 
 <section class="stack stack-3">

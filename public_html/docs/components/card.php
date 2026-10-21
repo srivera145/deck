@@ -11,7 +11,7 @@ $page = [
     'documents' => [
         'card', 'card-body', 'card-brand', 'card-flex', 'card-flush',
         'card-footer', 'card-header', 'card-link', 'card-media', 'card-raised',
-        'card-title', 'glass',
+        'card-title', 'glass', 'glass-lg', 'glass-sm', 'glass-solid',
     ],
 
     'component' => 'card',
@@ -188,11 +188,18 @@ $surfaces = [
   <h2 id="glass">Glass</h2>
   <p>
     <code>.glass</code> turns a card into frosted glass: the theme's surface colour at
-    76%, with whatever is behind it blurred and saturated. It works the same on a
-    <code>.panel</code>, a toolbar or a player bar. It only reads as glass over
-    something — a photo, a gradient, a video — and on a plain page it is a slightly paler
-    card. It follows the theme because <code>--surface</code> does: white glass in a
-    light theme, smoked glass in a dark one.
+    72%, with whatever is behind it blurred and saturated, a see-through edge and a faint
+    highlight along the top. It works the same on a <code>.panel</code>, a toolbar or a
+    player bar. It only reads as glass over something — a photo, a gradient, a video —
+    and on a plain page it is a slightly tinted card. It follows the theme because
+    <code>--surface</code> does: white glass in a light theme, smoked glass in a dark
+    one, with a weaker highlight so the top edge does not read as a seam.
+  </p>
+  <p>
+    It sets no radius, border width or shadow, so it takes the shape of what it is put
+    on. A <code>.card</code> keeps its corners and its shadow, <code>.card-raised</code>
+    and the <code>.card-link</code> lift still work, and a full-bleed bar gets no corners
+    it did not ask for. It recolours a border that is already there and adds none.
   </p>
   <?php
   docs_example(
@@ -209,19 +216,80 @@ $surfaces = [
   );
   ?>
   <p>
-    <code>--glass</code> sets how much of the surface there is, 76% by default. Raise it
-    for a card with a paragraph of text in it — <code>style="--glass: 90%"</code> — and
-    lower it for a bar that holds only a few large controls.
+    Three custom properties tune it. Each class below sets one of them and nothing else,
+    so they combine: <code>class="card glass glass-lg glass-solid"</code>. Set the
+    properties yourself for anything in between.
+  </p>
+  <div class="table-wrap">
+    <table class="table table-stack">
+      <caption class="sr-only">The glass custom properties and the classes that set them</caption>
+      <thead>
+        <tr><th scope="col">Property</th><th scope="col">Default</th><th scope="col">What it does</th><th scope="col">Classes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row" data-label="Property"><code>--glass-blur</code></th>
+          <td data-label="Default">16px</td>
+          <td data-label="What it does">How far whatever is behind the glass is blurred</td>
+          <td data-label="Classes"><code>.glass-sm</code> 8px, <code>.glass-lg</code> 32px</td>
+        </tr>
+        <tr>
+          <th scope="row" data-label="Property"><code>--glass-tint</code></th>
+          <td data-label="Default">72%</td>
+          <td data-label="What it does">How much of the surface colour is kept. Higher is more opaque</td>
+          <td data-label="Classes"><code>.glass-solid</code> 90%</td>
+        </tr>
+        <tr>
+          <th scope="row" data-label="Property"><code>--glass-edge</code></th>
+          <td data-label="Default">22%</td>
+          <td data-label="What it does">Strength of the top-edge highlight; dark mode uses a third of it</td>
+          <td data-label="Classes">None</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <?php
+  docs_example(
+      '<div class="p-6 r-lg" style="background:url(/assets/deck/docs/sample-1.jpg) center/cover;max-inline-size:28rem">' . "\n" .
+      '  <article class="card glass glass-solid">' . "\n" .
+      '    <div class="card-body">' . "\n" .
+      '      <h3 class="card-title">Tonight, 9:40pm</h3>' . "\n" .
+      '      <p class="text-muted">Screen 2. Doors open twenty minutes before.</p>' . "\n" .
+      '    </div>' . "\n" .
+      '  </article>' . "\n" .
+      '</div>',
+      'Muted text straight over a photo: .glass-solid',
+      'stack'
+  );
+  ?>
+  <p class="dx-note text-muted">
+    <strong>Contrast depends on what is behind the glass.</strong> Measured in Edge, body
+    text on <code>.glass</code> is 9:1 to 10:1 over a photo, 8.6:1 with pure black behind
+    light glass and just under 7:1 with pure white behind dark glass. Muted text is not safe on it:
+    about 4:1 over a photo and 3.1:1 in the worst case. Put <code>.text-muted</code> on
+    <code>.glass-solid</code>, where it stays above 5.2:1 with pure black or pure white
+    behind. A stronger blur barely helps; it evens out detail but does not change how much
+    of the backdrop shows.
   </p>
   <p class="dx-note text-muted">
-    <strong>Contrast depends on what is behind the glass.</strong> Body text stays above
-    7:1 even with pure black behind light glass or pure white behind dark glass. Muted text
-    does not: over the darkest part of a photo in a light theme it can fall to about 3:1.
-    Keep <code>.text-muted</code> off glass that sits on photos, or raise
-    <code>--glass</code>. Where <code>backdrop-filter</code> is not supported the surface
-    goes to 94% instead, and a reader with
-    <code>prefers-reduced-transparency: reduce</code> gets the ordinary opaque surface.
-    In print, the blur is dropped with every other effect.
+    <strong>When glass is not glass.</strong> Where <code>backdrop-filter</code> is not
+    supported, and for a reader with <code>prefers-reduced-transparency: reduce</code>, the
+    surface is opaque <code>--surface</code> with no blur and the component's own border, so
+    a <code>.card.glass</code> is exactly a <code>.card</code>. Without that, an
+    unsupported blur would not mean no blur but a sharp photo showing through 28% of the
+    text. In print, the blur is dropped with every other effect.
+  </p>
+  <p class="dx-note text-muted">
+    <strong>Two things <code>backdrop-filter</code> does to the page.</strong> It cannot see
+    through another one: a <code>.glass</code> inside <code>.sticky-top</code>,
+    <code>.tabbar</code> or another <code>.glass</code> only blurs its parent's flat tint,
+    which looks like no blur at all. An ancestor with <code>filter</code>,
+    <code>opacity</code> below 1, <code>mask</code>, <code>clip-path</code> or
+    <code>mix-blend-mode</code> does the same. And it creates a containing block, so a
+    <code>position: fixed</code> element inside the glass is placed against the panel
+    rather than the window, and the card's <code>overflow</code> clips it. Open menus and
+    toasts as a popover or a modal dialog, which sit above the page, or put them outside
+    the glass.
   </p>
 </section>
 

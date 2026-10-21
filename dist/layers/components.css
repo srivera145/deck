@@ -751,13 +751,18 @@
   @starting-style { .modal[open] { opacity: 0; scale: .97; translate: 0 8px; } }
   .modal::backdrop {
     background: oklch(18% .02 var(--hue-neutral) / .48);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(var(--blur-xs));
+    -webkit-backdrop-filter: blur(var(--blur-xs));
     opacity: 0;
     transition: opacity var(--dur-2) var(--ease-out), display var(--dur-2) allow-discrete, overlay var(--dur-2) allow-discrete;
   }
   .modal[open]::backdrop { opacity: 1; }
   @starting-style { .modal[open]::backdrop { opacity: 0; } }
+  /* With less transparency asked for, the page goes behind a solid backdrop
+     rather than showing through it, sharp, once the blur is gone. */
+  @media (prefers-reduced-transparency: reduce) {
+    .modal::backdrop { background: oklch(18% .02 var(--hue-neutral)); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  }
   /* A <form method="dialog"> around the regions is the modal's only flex
      item, so it is a column that may shrink as well, or the body inside it
      would never scroll. */

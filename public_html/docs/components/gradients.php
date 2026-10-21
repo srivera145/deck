@@ -27,8 +27,11 @@ require __DIR__ . '/../_layout.php';
 $verdicts = [
     ['g-scrim',       'keep', 'Text over a photo. Eased rather than a flat wash, so it darkens only where the text sits. Shared with .carousel-caption through the --scrim token.'],
     ['g-scrim-top',   'keep', 'The same from the block start, for a caption above an image.'],
-    ['g-scrim-auto',  'keep', 'The same floor in the theme\'s surface colour, so the text over it uses --text and follows a light theme instead of always being white. Added for a media app.'],
+    ['g-scrim-auto',  'keep', 'The scrim that follows the theme: a light floor under --text in a light theme, and exactly .g-scrim in a dark one, so switching to it changes nothing in dark mode. Added for a media app.'],
     ['glass',         'keep', 'Not a gradient: a frosted surface for a card or a panel over an image. It lives in this file because it is an effect. Documented on the card page.'],
+    ['glass-sm',      'keep', 'Sets --glass-blur to 8px and nothing else, which is the charge against .g-mesh-warm below. The difference: it is a step on a scale rather than an arbitrary value, it combines with .glass-solid, and a class still works under a Content Security Policy that blocks style attributes.'],
+    ['glass-lg',      'keep', 'The same, at 32px.'],
+    ['glass-solid',   'keep', 'Sets --glass-tint to 90%, where muted text stays above 5.2:1 over any backdrop, pure black and pure white included. A measured value with a job, which is the case for naming it.'],
     ['g-fade-inline', 'keep', 'Fades content at both inline edges instead of cutting it. This is what a .scroller should have at its edges.'],
     ['g-fade-end',    'keep', 'Fades at the end edge only — a row that continues off-screen in one direction.'],
     ['g-fade-block',  'keep', 'Fades the bottom of a truncated article, under a "read more".'],
@@ -146,11 +149,13 @@ $counts = array_count_values(array_column($verdicts, 1));
       <code>&lt;a&gt;</code>, is lifted above the scrim like any other child.
     </p>
     <p>
-      <code>.g-scrim</code> is dark in both themes, for white text.
-      <code>.g-scrim-auto</code> is the same eased floor in the theme's surface colour,
-      from the <code>--scrim-auto</code> token, and it sets
-      <code>color: var(--text)</code>: dark text on a light floor in a light theme, light
-      text on a dark floor in a dark one. Use it instead of <code>.g-scrim</code>, not with
+      <code>.g-scrim</code> is dark in both themes, for white text, and a page that puts
+      white text on it relies on that. <code>.g-scrim-auto</code> is the one that follows
+      the theme, from the <code>--scrim-auto</code> token, and it sets
+      <code>color: var(--text)</code>. In a light theme it is a floor of
+      <code>--surface</code> under dark text. In a dark theme it is
+      <code>.g-scrim</code> exactly, to the pixel, so moving a page from one class to the
+      other changes nothing in dark mode. Use it instead of <code>.g-scrim</code>, not with
       it. <code>.g-scrim-top</code> works on either.
     </p>
     <?php
@@ -169,6 +174,82 @@ $counts = array_count_values(array_column($verdicts, 1));
         'stack'
     );
     ?>
+    <h4 id="j-scrim-strength">Strength</h4>
+    <p>
+      <code>--scrim-strength</code> multiplies the scrim's opacity on all four:
+      <code>.g-scrim</code>, <code>.g-scrim-auto</code> and either with
+      <code>.g-scrim-top</code>. The default is 1. A flat illustration needs less than a
+      busy photograph, so try about .6 for the first and 1.3 for the second. Opacity stops
+      at 1, so a high value makes the bottom of the scrim solid. While it is unset, each
+      class paints its token, so a <code>--scrim</code> you have retuned still reaches
+      <code>.g-scrim</code>. Once it is set, it scales Deck's own stops.
+    </p>
+    <?php
+    docs_example(
+        '<div class="grid grid-tight" style="max-inline-size:34rem">' . "\n" .
+        '  <figure class="g-scrim-auto r-md overflow-hidden m-0" style="--scrim-strength:.6">' . "\n" .
+        '    <img class="ratio-4x3" src="/assets/deck/docs/sample-3.jpg" alt="">' . "\n" .
+        '    <figcaption class="absolute inset-be-0 inset-is-0 inset-ie-0 p-4 fw-semi">A flat illustration</figcaption>' . "\n" .
+        '  </figure>' . "\n" .
+        '  <figure class="g-scrim-auto r-md overflow-hidden m-0" style="--scrim-strength:1.3">' . "\n" .
+        '    <img class="ratio-4x3" src="/assets/deck/docs/sample-1.jpg" alt="">' . "\n" .
+        '    <figcaption class="absolute inset-be-0 inset-is-0 inset-ie-0 p-4">' . "\n" .
+        '      <span class="block fw-semi">A title</span>' . "\n" .
+        '      <span class="text-sm text-muted">And muted text, which needs 1.3</span>' . "\n" .
+        '    </figcaption>' . "\n" .
+        '  </figure>' . "\n" .
+        '</div>',
+        '.6 under a single line on a flat image, 1.3 under muted text',
+        'stack'
+    );
+    ?>
+    <p>
+      What strength buys is height. No scrim makes text readable over the whole of an
+      arbitrary photo. The worst photo for the dark scrim is pure white, and for the light
+      one pure black, and every real photo sits somewhere between the two. These figures
+      are how far up from the bottom edge each kind of text still clears 4.5:1 against
+      that worst case, measured in the browser:
+    </p>
+    <div class="table-wrap">
+      <table class="table table-stack">
+        <caption class="sr-only">How far up a scrim keeps text at 4.5:1 over the worst possible photo</caption>
+        <thead>
+          <tr><th scope="col">Scrim and text</th><th scope="col">Strength 1</th><th scope="col">1.3</th><th scope="col">1.5</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" data-label="Scrim and text"><code>.g-scrim-auto</code>, light theme, <code>--text</code></th>
+            <td data-label="Strength 1">bottom 34%</td><td data-label="1.3">43%</td><td data-label="1.5">46%</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Scrim and text"><code>.g-scrim-auto</code>, light theme, <code>--text-muted</code></th>
+            <td data-label="Strength 1">7%</td><td data-label="1.3">26%</td><td data-label="1.5">30%</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Scrim and text"><code>.g-scrim-auto</code>, dark theme, <code>--text</code></th>
+            <td data-label="Strength 1">25%</td><td data-label="1.3">35%</td><td data-label="1.5">40%</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Scrim and text"><code>.g-scrim-auto</code>, dark theme, <code>--text-muted</code></th>
+            <td data-label="Strength 1">3%</td><td data-label="1.3">23%</td><td data-label="1.5">29%</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Scrim and text"><code>.g-scrim</code>, either theme, white</th>
+            <td data-label="Strength 1">26%</td><td data-label="1.3">36%</td><td data-label="1.5">41%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      So a light scrim carries text at least as well as a dark one: dark text on a light
+      floor goes further up. Neither carries muted text at the default. On two real photos,
+      a snowfield and a night forest, a title stayed above 5.4:1 in both themes, but the
+      muted line fell to 3.5:1 on the snow in a dark theme and 4.2:1 on the forest in a
+      light one. At 1.3 every line cleared 5.9:1. Keep the text in the bottom quarter of
+      the frame. If it has to sit higher, or there is a lot of it, put it on a
+      <a href="card.php#glass"><code>.card.glass-solid</code></a> rather than turning the
+      scrim up until it covers the photo.
+    </p>
   </div>
 
   <div class="stack stack-2">
@@ -365,7 +446,7 @@ $counts = array_count_values(array_column($verdicts, 1));
     <code>--hue-brand</code> is the one that matters: every gradient in the file is
     computed from it, so the whole set retunes when it changes.
   </p>
-  <?php docs_token_table(['--hue-brand', '--scrim', '--brand-400', '--brand-500', '--brand-600', '--brand-soft', '--text-on-brand', '--good-600', '--warn-500', '--bad-600', '--line', '--line-strong', '--surface', '--bg', '--dur-5']); ?>
+  <?php docs_token_table(['--hue-brand', '--scrim', '--scrim-auto', '--brand-400', '--brand-500', '--brand-600', '--brand-soft', '--text-on-brand', '--good-600', '--warn-500', '--bad-600', '--line', '--line-strong', '--surface', '--bg', '--dur-5']); ?>
 </section>
 
 <section class="stack stack-3">
@@ -387,6 +468,12 @@ $counts = array_count_values(array_column($verdicts, 1));
       <strong>Text on a gradient needs its contrast checked at the worst point.</strong>
       <code>.g-brand</code> and the status three set a computed text colour, which handles
       the common case; a gradient you write yourself does not.
+    </li>
+    <li>
+      <strong>A scrim protects only the text near its dense edge.</strong> Over the worst
+      photo, body text clears 4.5:1 in the bottom quarter of a dark scrim and the bottom
+      third of a light one, and muted text needs <code>--scrim-strength: 1.3</code>. The
+      <a href="#j-scrim-strength">figures are above</a>.
     </li>
     <li>
       <strong>Fade masks hide content visually only.</strong> The text behind a

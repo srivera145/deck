@@ -37,12 +37,14 @@ require __DIR__ . '/_layout.php';
     </article>
     <article class="card card-link">
       <div class="card-body">
-        <h3 class="card-title"><a class="link-quiet stretch" href="components/button.php">Components</a></h3>
+        <h3 class="card-title"><a class="link-quiet stretch" href="components/index.php">Components</a></h3>
         <p class="text-sm text-muted">
           One page per component: every variant rendered, the class table generated from
-          the stylesheet, the tokens it reads, and when not to reach for it.
+          the stylesheet, the tokens it reads, and when not to reach for it. The index
+          lists every public class under the page that covers it.
         </p>
-        <span class="badge">47 pages</span>
+        <?php /* Counted, not typed: this said "47 pages" when there were 66. */ ?>
+        <span class="badge"><?= count(array_filter(docs_pages(), static fn(array $p): bool => $p['section'] === 'components' && $p['documents'] !== [])) ?> pages</span>
       </div>
     </article>
     <article class="card card-link">

@@ -19,7 +19,7 @@ $page = [
     'path' => 'reference/tokens.php',
     'title' => 'All tokens',
     'level' => 'Beginner',
-    'description' => "Every design token Deck declares, grouped by family with a live preview of each: the palette, the roles, spacing, radius, shadow, type, motion and stacking.",
+    'description' => "Every design token Deck declares, grouped by family with a live preview of each: the palette, the roles, spacing, radius, shadow, blur, type, motion and stacking.",
 ];
 
 require __DIR__ . '/../_layout.php';
@@ -100,6 +100,15 @@ $GROUPS = [
             . ' is tinted toward the neutral hue rather than being black at low alpha, which'
             . ' is what keeps it from going muddy over a coloured surface.',
         'match' => static fn(string $n): bool => str_starts_with($n, '--shadow') || $n === '--ring',
+    ],
+    [
+        'id' => 'blur',
+        'title' => 'Backdrop blur',
+        'note' => 'Four blur() radii for the surfaces the page shows through: the modal backdrop,'
+            . ' the small controls over media, the sticky bars and the tab bar. Change one and'
+            . ' every surface at that strength follows. A reader who asks for reduced'
+            . ' transparency gets none of them: each of those surfaces goes opaque instead.',
+        'match' => static fn(string $n): bool => str_starts_with($n, '--blur-'),
     ],
     [
         'id' => 'type',

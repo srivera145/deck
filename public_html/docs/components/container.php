@@ -213,6 +213,11 @@ $widths = [
     support, the fallback is the unconditional blurred background, which is what the
     header on this page is using if your browser is older.
   </p>
+  <p>
+    The blur is <code>--blur-md</code>. A reader who has asked for reduced transparency
+    gets an opaque <code>--bg</code> bar with no blur instead. In flow, the header is
+    still see-through, because nothing has scrolled under it yet.
+  </p>
 </section>
 
 <section class="stack stack-3">
@@ -227,7 +232,7 @@ $widths = [
     Both page-level spacings are clamps rather than breakpoint steps, which is why a Deck
     page has no width at which the margins suddenly jump.
   </p>
-  <?php docs_token_table(['--space-gutter', '--space-section', '--z-sticky', '--shadow-2']); ?>
+  <?php docs_token_table(['--space-gutter', '--space-section', '--z-sticky', '--shadow-2', '--blur-md']); ?>
 </section>
 
 <section class="stack stack-3">

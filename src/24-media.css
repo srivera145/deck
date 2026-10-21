@@ -65,13 +65,18 @@
     display: grid;
     place-items: center;
     background: color-mix(in oklab, var(--surface) 90%, transparent);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(var(--blur-sm));
+    -webkit-backdrop-filter: blur(var(--blur-sm));
     color: var(--text);
     box-shadow: var(--shadow-3);
     transition: scale var(--dur-2) var(--ease-spring), background-color var(--dur-1) var(--ease-out);
   }
   .video-poster:hover .video-play { scale: 1.08; background: var(--surface); }
+  /* Opaque, with no blur, for a reader who has asked for less transparency:
+     the disc it already becomes on hover. */
+  @media (prefers-reduced-transparency: reduce) {
+    .video-play { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  }
   .video-meta {
     position: absolute;
     inset-block-end: var(--space-3);

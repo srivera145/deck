@@ -39,6 +39,8 @@ const PUBLIC = 'public_html';
 /** Links in llms.txt that point at the site, by link text. Each must appear once. */
 const LLMS_LINKS = [
   ['Documentation site', '/docs/index.php'],
+  ['Component index', '/docs/components/index.php'],
+  ['Component index as JSON', '/docs/components/index.php?format=json'],
   ['Install page', '/docs/start/install.php'],
   ['Editor setup page', '/docs/start/editor.php'],
   ['Templates', '/templates/index.php'],

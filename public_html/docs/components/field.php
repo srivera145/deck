@@ -248,7 +248,9 @@ require __DIR__ . '/../_layout.php';
   <p>
     <code>.form-actions</code> is a wrapping flex row for the buttons at the end of a
     form. <code>.form-actions-sticky</code> pins it to the bottom of the viewport with a
-    blur behind it, and adds <code>env(safe-area-inset-bottom)</code> so it clears the
+    blur behind it (<code>--blur-md</code>, and an opaque bar instead for a reader who
+    has asked for reduced transparency), and adds
+    <code>env(safe-area-inset-bottom)</code> so it clears the
     home indicator on a phone. Its buttons are full width below <code>48rem</code> and
     natural width above. On a page with a <code>.tabbar</code> it sits above the tab bar
     rather than under it, at the same <code>--tabbar-clearance</code> the body leaves for
@@ -286,7 +288,7 @@ require __DIR__ . '/../_layout.php';
 
 <section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
-  <?php docs_token_table(['--space-2', '--space-3', '--space-4', '--space-5', '--line', '--line-strong', '--r-md', '--text-sm', '--text', '--text-muted', '--text-faint', '--bad-500', '--bad-700', '--brand-500', '--brand-soft', '--surface', '--surface-2', '--bg', '--z-sticky']); ?>
+  <?php docs_token_table(['--space-2', '--space-3', '--space-4', '--space-5', '--line', '--line-strong', '--r-md', '--text-sm', '--text', '--text-muted', '--text-faint', '--bad-500', '--bad-700', '--brand-500', '--brand-soft', '--surface', '--surface-2', '--bg', '--z-sticky', '--blur-md']); ?>
 </section>
 
 <section class="stack stack-3">

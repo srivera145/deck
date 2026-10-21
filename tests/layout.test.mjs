@@ -447,7 +447,184 @@ test('.g-scrim-auto follows the theme, and .glass is a translucent blurred surfa
   assert.equal(m.img, '-2');
   assert.equal(m.scrim, true);
   assert.match(m.glassBlur, /blur\(16px\)/);
-  assert.match(m.glassBg, /\/ 0\.76\)|, 0\.76\)/, `the surface at 76%: ${m.glassBg}`);
+  assert.match(m.glassBg, /\/ 0\.72\)|, 0\.72\)/, `the surface at 72%: ${m.glassBg}`);
+});
+
+test('.g-scrim-auto is .g-scrim in a dark theme; --scrim-strength scales both and leaves the token alone while unset', async () => {
+  const both = (attrs) => `
+    <div class="g-scrim" ${attrs} data-k="fixed"></div><div class="g-scrim g-scrim-top" ${attrs} data-k="fixedTop"></div>
+    <div class="g-scrim-auto" ${attrs} data-k="auto"></div><div class="g-scrim-auto g-scrim-top" ${attrs} data-k="autoTop"></div>`;
+  const read = () => page.evaluate(() => Object.fromEntries(['dark', 'light', 'one', 'half', 'double'].map((id) => [id,
+    Object.fromEntries([...document.getElementById(id).children].map((el) =>
+      [el.dataset.k, getComputedStyle(el, '::after').backgroundImage]))])));
+  await render(`
+    <div id="dark" data-theme="dark">${both('')}</div>
+    <div id="light" data-theme="light">${both('')}</div>
+    <div id="one" data-theme="light">${both('style="--scrim-strength:1"')}</div>
+    <div id="half" data-theme="light">${both('style="--scrim-strength:.5"')}</div>
+    <div id="double" data-theme="light">${both('style="--scrim-strength:2"')}</div>`);
+  const g = await read();
+  // Dark mode is exactly the fixed scrim, so swapping the class changes nothing there.
+  assert.equal(g.dark.auto, g.dark.fixed);
+  assert.equal(g.dark.autoTop, g.dark.fixedTop);
+  assert.equal(g.light.fixed, g.dark.fixed, '.g-scrim is the same in both themes');
+  assert.match(g.dark.fixed, /\/ 0\.82\) 0%.*\/ 0\.62\) 22%.*\/ 0\.28\) 48%/);
+  assert.match(g.light.auto, /^linear-gradient\(to top, oklab\(1 0 0 \/ 0\.9\) 0%/, 'a light floor in a light theme');
+  // 1 is the default, written out; .5 halves every stop; 2 tops out at opaque.
+  assert.deepEqual(g.one, g.light);
+  assert.match(g.half.fixed, /\/ 0\.41\) 0%.*\/ 0\.31\) 22%.*\/ 0\.14\) 48%/);
+  assert.match(g.half.fixedTop, /\/ 0\.36\)/);
+  assert.match(g.half.auto, /\/ 0\.45\) 0%.*\/ 0\.35\) 22%.*\/ 0\.16\) 48%/);
+  assert.match(g.double.fixed, /oklch\([^/)]+\) 0%, oklch\([^/)]+\) 22%, .*\/ 0\.56\) 48%/);
+  assert.match(g.double.auto, /oklab\(1 0 0\) 0%, oklab\(1 0 0\) 22%, oklab\(1 0 0 \/ 0\.64\) 48%/);
+
+  // A retuned --scrim still reaches .g-scrim; the knob, once set, uses Deck's stops.
+  await render(`<style>:root { --scrim: linear-gradient(rgb(255, 0, 0), rgb(255, 0, 0)) }</style>
+    <div class="g-scrim" id="tuned"></div><div class="g-scrim" id="knob" style="--scrim-strength:1"></div>`);
+  const t = await page.evaluate(() => ['tuned', 'knob'].map((id) => getComputedStyle(document.getElementById(id), '::after').backgroundImage));
+  assert.equal(t[0], 'linear-gradient(rgb(255, 0, 0), rgb(255, 0, 0))');
+  assert.equal(t[1], g.dark.fixed);
+});
+
+test('.glass keeps its host\'s shape, its modifiers combine, and it goes opaque without blur or under reduced transparency', async () => {
+  const markup = `
+    <article class="card" id="plain">Card</article>
+    <article class="card glass" id="glass">Glass</article>
+    <article class="card card-raised" id="raised">Raised</article>
+    <article class="card card-raised glass" id="raised-glass">Raised glass</article>
+    <article class="card glass glass-lg glass-solid" id="combo">Combo</article>
+    <article class="card glass glass-sm" id="sm">Small</article>
+    <div class="bar glass" id="bar">Bar</div>
+    <div data-theme="dark"><article class="card glass" id="dark">Dark</article></div>`;
+  const read = (p) => p.evaluate(() => {
+    const s = (id) => getComputedStyle(document.getElementById(id));
+    // The first colour in the highlight gradient, and its alpha.
+    const edge = (id) => { const c = s(id).backgroundImage.match(/(?:rgba?|oklch|oklab|color)\([^)]*\)/)?.[0] ?? ''; const n = c.match(/[\d.]+/g)?.map(Number) ?? []; return /\//.test(c) || /rgba/.test(c) ? n.at(-1) : 1; };
+    return {
+      plainShadow: s('plain').boxShadow, glassShadow: s('glass').boxShadow,
+      raisedShadow: s('raised').boxShadow, raisedGlassShadow: s('raised-glass').boxShadow,
+      plainRadius: s('plain').borderTopLeftRadius, glassRadius: s('glass').borderTopLeftRadius,
+      plainBorder: s('plain').borderTopColor, glassBorder: s('glass').borderTopColor,
+      plainBg: s('plain').backgroundColor,
+      barRadius: s('bar').borderTopLeftRadius, barBorder: s('bar').borderTopWidth,
+      bg: s('glass').backgroundColor, img: s('glass').backgroundImage, blur: s('glass').backdropFilter,
+      combo: [s('combo').backdropFilter, s('combo').backgroundColor], sm: s('sm').backdropFilter,
+      edgeLight: edge('glass'), edgeDark: edge('dark'),
+    };
+  });
+
+  await render(markup);
+  const m = await read(page);
+  const detail = JSON.stringify(m);
+  assert.equal(m.glassShadow, m.plainShadow, `a .card.glass keeps the card's shadow: ${detail}`);
+  assert.equal(m.raisedGlassShadow, m.raisedShadow, `and .card-raised's: ${detail}`);
+  assert.equal(m.glassRadius, m.plainRadius, `and its radius: ${detail}`);
+  assert.equal(m.barRadius, '0px', `a bar gets no corners: ${detail}`);
+  assert.equal(m.barBorder, '0px', `and no border: ${detail}`);
+  assert.notEqual(m.glassBorder, m.plainBorder, `the card's border is recoloured: ${detail}`);
+  assert.match(m.img, /^linear-gradient/, `the top-edge highlight is a background layer: ${detail}`);
+  assert.ok(m.edgeDark < m.edgeLight, `the highlight is weaker in dark mode: ${detail}`);
+  assert.match(m.combo[0], /blur\(32px\)/, `.glass-lg sets the blur: ${detail}`);
+  assert.match(m.combo[1], /\/ 0\.9\)|, 0\.9\)/, `.glass-solid sets the tint beside it: ${detail}`);
+  assert.match(m.sm, /blur\(8px\)/, `.glass-sm: ${detail}`);
+
+  // Opaque --surface, no blur, no highlight and the card's own border: a .card.glass is a .card.
+  const opaque = (o, why) => {
+    const d = JSON.stringify(o);
+    assert.equal(o.bg, o.plainBg, `${why}: the surface is the card's opaque one: ${d}`);
+    assert.ok(/none/.test(o.blur), `${why}: no blur: ${d}`);
+    assert.equal(o.img, 'none', `${why}: no highlight: ${d}`);
+    assert.equal(o.glassBorder, o.plainBorder, `${why}: the card's own border: ${d}`);
+    assert.equal(o.glassShadow, o.plainShadow, `${why}: the card's own shadow: ${d}`);
+  };
+
+  const fresh = await browser.newPage();
+  try {
+    const cdp = await fresh.context().newCDPSession(fresh);
+    await cdp.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-transparency', value: 'reduce' }] });
+    await fresh.setContent(`<!doctype html><html lang="en"><head><meta charset="utf-8"><style>${css}</style></head><body>${markup}</body></html>`);
+    assert.equal(await fresh.evaluate(() => matchMedia('(prefers-reduced-transparency: reduce)').matches), true);
+    opaque(await read(fresh), 'reduced transparency');
+
+    // An engine without backdrop-filter: the @supports not block applies and
+    // every backdrop-filter declaration is dropped.
+    const guard = /@supports not \(\(backdrop-filter: blur\(1px\)\) or \(-webkit-backdrop-filter: blur\(1px\)\)\)/;
+    assert.match(css, guard, 'the backdrop-filter fallback is still written the way this test expects');
+    const without = css.replace(guard, '@supports (display: block)').replace(/(-webkit-)?backdrop-filter\s*:[^;{}]*;?/g, '');
+    await cdp.send('Emulation.setEmulatedMedia', { features: [] });
+    await fresh.setContent(`<!doctype html><html lang="en"><head><meta charset="utf-8"><style>${without}</style></head><body>${markup}</body></html>`);
+    opaque(await read(fresh), 'no backdrop-filter');
+  } finally {
+    await fresh.close();
+  }
+});
+
+test('every blurred surface reads a --blur-* token, and goes opaque under reduced transparency', async () => {
+  const markup = `
+    <header class="sticky-top" id="sticky">Header</header>
+    <div class="form-actions form-actions-sticky" id="actions"><button class="btn">Save</button></div>
+    <nav class="tabbar" id="tabbar"><a class="tabbar-item" href="#">Home</a></nav>
+    <div class="carousel"><div class="carousel-track" id="track"><div class="carousel-slide">A</div><div class="carousel-slide">B</div></div>
+      <button class="carousel-arrow carousel-prev" id="arrow" aria-label="Previous slide">&lsaquo;</button></div>
+    <div class="video"><button type="button" class="video-poster" aria-label="Play"><span class="video-play" id="play"></span></button></div>
+    <dialog class="modal" id="modal"><div class="modal-body">Body</div></dialog>`;
+  // Where scroll-state queries exist the header's blur rides on its ::after.
+  const read = (p) => p.evaluate(() => {
+    const $ = (id) => document.getElementById(id);
+    $('modal').showModal();
+    const at = (el, pseudo) => { const s = getComputedStyle(el, pseudo); return { blur: s.backdropFilter, bg: s.backgroundColor }; };
+    const out = {
+      sticky: at($('sticky'), CSS.supports('container-type: scroll-state') ? '::after' : null),
+      actions: at($('actions')), tabbar: at($('tabbar')), arrow: at($('arrow')), play: at($('play')),
+      backdrop: at($('modal'), '::backdrop'),
+      ...(CSS.supports('selector(::scroll-marker)') && { button: at($('track'), '::scroll-button(inline-start)') }),
+      inFlow: CSS.supports('container-type: scroll-state') ? getComputedStyle($('sticky')).backgroundColor : null,
+    };
+    $('modal').close();
+    return out;
+  });
+  const blurs = (m) => Object.fromEntries(Object.entries(m).filter(([, v]) => v?.blur).map(([k, v]) => [k, v.blur]));
+  const expected = (xs, sm, md, lg) => ({
+    sticky: `saturate(1.6) blur(${md})`, actions: `blur(${md})`, tabbar: `saturate(1.8) blur(${lg})`,
+    arrow: `blur(${sm})`, play: `blur(${sm})`, backdrop: `blur(${xs})`,
+  });
+
+  await render(markup);
+  const m = await read(page);
+  const { button, ...rest } = blurs(m);
+  assert.deepEqual(rest, expected('3px', '8px', '12px', '16px'), 'the values before the tokens, unchanged');
+  if (button) assert.equal(button, 'blur(8px)', 'the native carousel buttons match the DIY arrows');
+
+  // Each surface follows its own token, and only that one. Under the reduced
+  // motion this page emulates, the reset's .01ms transition on `all` makes a
+  // read return the old blur until that transition has finished.
+  await page.evaluate(async () => {
+    document.documentElement.style.cssText = '--blur-xs: 1px; --blur-sm: 2px; --blur-md: 4px; --blur-lg: 5px';
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    await Promise.all(document.getAnimations().filter((a) => a instanceof CSSTransition).map((a) => a.finished));
+  });
+  const tuned = blurs(await read(page));
+  await page.evaluate(() => { document.documentElement.style.cssText = ''; });
+  const { button: tunedButton, ...tunedRest } = tuned;
+  assert.deepEqual(tunedRest, expected('1px', '2px', '4px', '5px'), 'retuned through the tokens');
+  if (tunedButton) assert.equal(tunedButton, 'blur(2px)');
+
+  const alpha = (c) => Number((c.match(/\/\s*([\d.]+)\)$/) ?? c.match(/^rgba\([^)]*,\s*([\d.]+)\)$/))?.[1] ?? 1);
+  const fresh = await browser.newPage();
+  try {
+    const cdp = await fresh.context().newCDPSession(fresh);
+    await cdp.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-transparency', value: 'reduce' }] });
+    await fresh.setContent(`<!doctype html><html lang="en"><head><meta charset="utf-8"><style>${css}</style></head><body>${markup}</body></html>`);
+    const r = await read(fresh);
+    for (const [name, v] of Object.entries(r)) {
+      if (!v?.blur) continue;
+      assert.equal(v.blur, 'none', `${name}: no blur under reduced transparency: ${JSON.stringify(r)}`);
+      assert.equal(alpha(v.bg), 1, `${name}: an opaque background: ${v.bg}`);
+    }
+    if (r.inFlow) assert.equal(r.inFlow, 'rgba(0, 0, 0, 0)', 'a header still in flow stays see-through, as without the setting');
+  } finally {
+    await fresh.close();
+  }
 });
 
 test('.grid-fixed-3 is a grid without .grid, and .split-rail-start gives the first child the rail', async () => {

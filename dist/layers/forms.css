@@ -418,11 +418,15 @@
     inset-block-end: 0;
     z-index: var(--z-sticky);
     background: color-mix(in oklab, var(--bg) 88%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(var(--blur-md));
+    -webkit-backdrop-filter: blur(var(--blur-md));
     border-block-start: 1px solid var(--line);
     padding-block: var(--space-3);
     padding-block-end: calc(var(--space-3) + env(safe-area-inset-bottom));
+  }
+  /* Opaque, with no blur, for a reader who has asked for less transparency. */
+  @media (prefers-reduced-transparency: reduce) {
+    .form-actions-sticky { background: var(--bg); backdrop-filter: none; -webkit-backdrop-filter: none; }
   }
   /* On a page with a .tabbar the bar sits above it rather than under it,
      by the clearance the body already leaves (08-mobile.css). The tab bar

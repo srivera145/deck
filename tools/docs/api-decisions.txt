@@ -7,7 +7,7 @@
 # Written by: node tools/docs/classify.mjs --accept
 # Edit a line by hand to overrule what the rules propose.
 # Text after a # on a line is the reason for that decision; --accept keeps it.
-# 945 classes.
+# 948 classes.
 
 absolute = public
 accordion = public
@@ -379,7 +379,7 @@ g-mesh-warm = public
 g-ring = public
 g-ring-spin = public
 g-scrim = public
-g-scrim-auto = public  # Opt-in scrim in the theme's surface colour (--scrim-auto), so text over an image can follow a light theme. Used instead of .g-scrim.
+g-scrim-auto = public  # Opt-in scrim that follows the theme (--scrim-auto): a --surface floor under --text in a light theme, exactly .g-scrim in a dark one. Used instead of .g-scrim; --scrim-strength scales both.
 g-scrim-top = public
 g-sheen = public
 g-shimmer = public
@@ -398,7 +398,10 @@ gap-4 = public
 gap-6 = public
 gap-8 = public
 gap-cq = public
-glass = public  # Opt-in surface effect for a .card, .panel or bar over imagery; theme-aware via --surface, opaque under prefers-reduced-transparency.
+glass = public  # Effect: frosted surface for a .card, .panel or bar over imagery; knobs --glass-blur, --glass-tint, --glass-edge. Opaque without backdrop-filter and under prefers-reduced-transparency.
+glass-lg = public  # Effect modifier: .glass with --glass-blur 32px. Sets the knob only, so it combines with .glass-solid; a class works under a CSP that blocks style attributes.
+glass-sm = public  # Effect modifier: .glass with --glass-blur 8px. Sets the knob only, so it combines with .glass-solid.
+glass-solid = public  # Effect modifier: .glass with --glass-tint 90%, for text straight over a photo. Sets the knob only, so it combines with .glass-sm and .glass-lg.
 grid = public
 grid-2 = public
 grid-fill = public  # Layout primitive: .grid with auto-fill, so a short row keeps card-sized columns. Stands alone, without .grid.

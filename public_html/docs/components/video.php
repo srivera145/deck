@@ -164,9 +164,11 @@ require __DIR__ . '/../_layout.php';
   </p>
   <p class="text-muted">
     <code>.video-play</code> is a 64px disc using <code>backdrop-filter: blur(8px)</code>
-    over a 90%-opaque surface colour. Where <code>backdrop-filter</code> is unsupported the
-    blur is skipped and the disc is still nearly opaque, so it stays legible — the effect
-    degrades rather than failing.
+    (<code>--blur-sm</code>) over a 90%-opaque surface colour. Where
+    <code>backdrop-filter</code> is unsupported the blur is skipped and the disc is still
+    nearly opaque, so it stays legible — the effect degrades rather than failing. Under
+    <code>prefers-reduced-transparency: reduce</code> it is the opaque surface, with no
+    blur.
   </p>
   <p class="text-muted">
     <code>.video-meta</code> is a bottom-start overlay for a duration or a channel name, and
@@ -183,7 +185,7 @@ require __DIR__ . '/../_layout.php';
 
 <section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
-  <?php docs_token_table(['--ink-950', '--surface', '--text', '--brand-500', '--shadow-3', '--r-md', '--r-full', '--r-xs', '--text-xs', '--dur-2']); ?>
+  <?php docs_token_table(['--ink-950', '--surface', '--text', '--brand-500', '--shadow-3', '--blur-sm', '--r-md', '--r-full', '--r-xs', '--text-xs', '--dur-2']); ?>
 </section>
 
 <section class="stack stack-3">

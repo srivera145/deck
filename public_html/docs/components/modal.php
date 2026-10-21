@@ -130,7 +130,9 @@ require __DIR__ . '/../_layout.php';
     <p>
       <code>::backdrop</code> is its own pseudo-element with its own transition, so it
       needs its own <code>@starting-style</code> too. Deck fades it from transparent and
-      blurs what is behind it by 3px.
+      blurs what is behind it by <code>--blur-xs</code>, 3px. A reader who has asked for
+      reduced transparency gets a solid backdrop instead, with no blur, so the page does
+      not show through it sharp.
     </p>
   </div>
 </section>
@@ -178,7 +180,7 @@ require __DIR__ . '/../_layout.php';
 
 <section class="stack stack-3">
   <h2 id="tokens">Tokens</h2>
-  <?php docs_token_table(['--surface', '--surface-2', '--line', '--text', '--text-lg', '--r-lg', '--shadow-4', '--space-3', '--space-4', '--space-5', '--space-8', '--dur-2', '--ease-spring', '--hue-neutral']); ?>
+  <?php docs_token_table(['--surface', '--surface-2', '--line', '--text', '--text-lg', '--r-lg', '--shadow-4', '--blur-xs', '--space-3', '--space-4', '--space-5', '--space-8', '--dur-2', '--ease-spring', '--hue-neutral']); ?>
 </section>
 
 <section class="stack stack-3">

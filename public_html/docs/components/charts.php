@@ -5,7 +5,7 @@ $page = [
     'path' => 'components/charts.php',
     'title' => 'Charts',
     'level' => 'Advanced',
-    'description' => 'Deck has no charting library. Bars, columns, donuts and heatmaps are plain CSS driven by a --value custom property; lines and areas are inline SVG you style with classes. Everything reads the brand palette.',
+    'description' => 'Deck has no charting library. Bars, columns, donuts and heatmaps are plain CSS driven by custom properties; lines and areas are inline SVG you style with classes. Everything reads the brand palette.',
     'documents' => [
         'chart', 'chart-area', 'chart-area-g', 'chart-bar', 'chart-bar-fill',
         'chart-bar-label', 'chart-bar-track', 'chart-bar-value', 'chart-bars', 'chart-baseline',
@@ -53,7 +53,8 @@ function demo_columns(): string
   <h1>Charts</h1>
   <p class="lede">
     There is no charting library. Bars, columns, donuts and heatmaps are plain CSS driven
-    by a <code>--value</code> custom property; lines and areas are inline SVG you write
+    by custom properties (<code>--value</code>, or <code>--stops</code> for a donut's
+    slices); lines and areas are inline SVG you write
     and Deck styles. Everything reads the brand palette, so a chart rethemes with the rest
     of the application rather than carrying its own colours.
   </p>
@@ -78,7 +79,8 @@ function demo_columns(): string
   <h2 id="value">--value is the whole idea</h2>
   <p>
     A column's height is <code>calc(var(--value) * 1%)</code>. A bar's width is the same
-    on the inline axis. A donut segment and a heatmap cell read the same property. So
+    on the inline axis. A heatmap cell reads the same property; a donut, with several
+    slices to describe, takes a <code>--stops</code> list instead. So
     rendering a chart is writing numbers into style attributes, which any template
     language does:
   </p>
@@ -212,13 +214,18 @@ function demo_columns(): string
   <div class="stack stack-2">
     <h3 id="t-donut">Donut</h3>
     <p>
-      <code>.donut</code> is a conic gradient driven by <code>--value</code>, with
-      <code>.donut-center</code> holding a figure in the hole. One element, no SVG.
+      <code>.donut</code> is a conic gradient. It does not read <code>--value</code>,
+      because one number cannot describe several slices: its segments are a
+      <code>--stops</code> list in <code>conic-gradient()</code>'s own syntax. It reads the
+      palette, so it goes inside a <code>.chart</code>, and <code>.donut-center</code> sits
+      beside it in <code>.donut-wrap</code> rather than inside it, where the ring's mask
+      would cut the figure out with the hole. One element, no SVG.
     </p>
     <?php
     docs_example(
-        '<div class="donut-wrap">' . "\n" .
-        '  <div class="donut" style="--value:68" role="img" aria-label="68 per cent of quota used">' . "\n" .
+        '<div class="chart">' . "\n" .
+        '  <div class="donut-wrap">' . "\n" .
+        '    <div class="donut" style="--stops: var(--c1) 0 68%, var(--bg-sunken) 0 100%" role="img" aria-label="68 per cent of quota used"></div>' . "\n" .
         '    <div class="donut-center">' . "\n" .
         '      <span class="donut-value">68%</span>' . "\n" .
         '      <span class="donut-label">of quota</span>' . "\n" .

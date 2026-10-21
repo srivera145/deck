@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 $page = [
     'path' => 'components/file.php',
-    'title' => 'File',
+    'title' => 'File upload',
     'level' => 'Beginner',
     'description' => 'Deck\'s .file is a dashed drop zone wrapping a real file input that is 1px rather than display:none, so it keeps its tab stop, and deck-extras.js puts a dropped file into the input.',
     /* .is-over is shared with the editor's character counter, which claims it
@@ -20,12 +20,12 @@ require __DIR__ . '/../_layout.php';
   <ol class="cluster cluster-tight" style="display:flex;list-style:none;padding:0;margin:0">
     <li><a href="../index.php">Docs</a></li>
     <li>Components</li>
-    <li aria-current="page">File</li>
+    <li aria-current="page">File upload</li>
   </ol>
 </nav>
 
 <header class="stack stack-3">
-  <h1>File</h1>
+  <h1>File upload</h1>
   <p class="lede">
     <code>.file</code> is a dashed, centred drop zone that goes on a
     <code>&lt;label&gt;</code> wrapping a real <code>&lt;input type="file"&gt;</code>.

@@ -15,16 +15,16 @@ fails the build if a public class is missing from this file, or if a class in
 
 | bucket | count | meaning |
 | --- | ---: | --- |
-| public | 841 | in the freeze, semver applies |
+| public | 844 | in the freeze, semver applies |
 | internal | 104 | Deck's own; may change any release |
 | deprecated | 0 | works, warns, removed at v1 |
 | removed | 31 | already gone, before first publish |
 
-Total classes in `src/`: **945**.
+Total classes in `src/`: **948**.
 
 ## How big this actually is
 
-841 is more names than anyone will learn, and this document should say
+844 is more names than anyone will learn, and this document should say
 so rather than let a reader discover it by scrolling. What makes it workable is
 that the surface is not flat:
 
@@ -32,7 +32,7 @@ that the surface is not flat:
 | --- | ---: | --- |
 | `deck.components` | 378 | Looked up per component, not memorised. |
 | `deck.utilities` | 237 | A grammar. Learn the pattern, get the family. |
-| `deck.effects` | 73 | Opt-in. Nothing runs unless you add the class. |
+| `deck.effects` | 76 | Opt-in. Nothing runs unless you add the class. |
 | `deck.layout` | 65 | The eight or so primitives most pages actually use. |
 | `deck.motion` | 37 | Opt-in. Nothing runs unless you add the class. |
 | `deck.mobile` | 30 | Only if you build the mobile shell. |
@@ -43,10 +43,10 @@ that the surface is not flat:
 
 The utility layer is a grammar — once you know that `-1` through `-8` are the
 spacing steps and that `p`, `m` and `gap` take them, you know the whole family
-without reading it. The component layers are the opposite: 99 components,
+without reading it. The component layers are the opposite: 100 components,
 each a handful of names, and a page that uses six of them needs six.
 
-One number that is not comfortable: **4 of the 841 public classes are
+One number that is not comfortable: **4 of the 844 public classes are
 used nowhere in this repository** — not in the demo, not in the docs, not in
 Deck's own JavaScript. They are frozen on the strength of their source alone.
 
@@ -603,7 +603,7 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | class | layer | purpose |
 | --- | --- | --- |
 | `.g-scrim` | deck.effects | A caption over a photo needs a legible floor. A flat 50% black overlay |
-| `.g-scrim-auto` | deck.effects | The scrim in the theme's own colour, from --scrim-auto: a light floor |
+| `.g-scrim-auto` | deck.effects | The scrim that follows the theme, from --scrim-auto: a light floor of |
 | `.g-scrim-top` | deck.effects | Modifier; see the component. |
 
 ## g-text
@@ -612,6 +612,15 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | --- | --- | --- |
 | `.g-text` | deck.effects | background-clip on the text. Always keep a real color underneath so the |
 | `.g-text-shine` | deck.effects | Sets color, background-image, background-size, -webkit-background-clip, and 2 more. |
+
+## glass
+
+| class | layer | purpose |
+| --- | --- | --- |
+| `.glass` | deck.effects | A frosted surface for a .card, a .panel or a bar over a photo or video. |
+| `.glass-lg` | deck.effects | Sets --glass-blur. |
+| `.glass-sm` | deck.effects | Sets --glass-blur. |
+| `.glass-solid` | deck.effects | Straight over a photo, where the text matters more than the view. |
 
 ## gradients
 
@@ -636,7 +645,6 @@ Deck's own JavaScript. They are frozen on the strength of their source alone.
 | `.g-sunken` | deck.effects | Sets background-image. |
 | `.g-surface` | deck.effects | Quiet. These sit behind content and must never fight it. |
 | `.g-warn` | deck.effects | Sets background-image, color. |
-| `.glass` | deck.effects | A frosted surface for a .card, a .panel or a bar laid over an image or a |
 
 ## grid
 

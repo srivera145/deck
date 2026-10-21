@@ -55,13 +55,19 @@
     place-items: center;
     border-radius: var(--r-full);
     background: color-mix(in oklab, var(--surface) 88%, transparent);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(var(--blur-sm));
+    -webkit-backdrop-filter: blur(var(--blur-sm));
     border: 1px solid var(--line);
     box-shadow: var(--shadow-2);
     color: var(--text);
     cursor: pointer;
     transition: opacity var(--dur-2) var(--ease-out), scale var(--dur-1) var(--ease-out);
+  }
+  /* Opaque, with no blur, for a reader who has asked for less transparency.
+     The native buttons below have their own, since ::scroll-button cannot
+     share a selector list without taking it down where it is unsupported. */
+  @media (prefers-reduced-transparency: reduce) {
+    .carousel-arrow { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
   }
   .carousel-arrow:hover { scale: 1.06; }
   .carousel-arrow[disabled] { opacity: 0; pointer-events: none; }
@@ -134,8 +140,8 @@
       place-items: center;
       border-radius: var(--r-full);
       background: color-mix(in oklab, var(--surface) 88%, transparent);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(var(--blur-sm));
+      -webkit-backdrop-filter: blur(var(--blur-sm));
       border: 1px solid var(--line);
       box-shadow: var(--shadow-2);
       color: var(--text);
@@ -143,6 +149,9 @@
       line-height: 1;
       cursor: pointer;
       transition: opacity var(--dur-2) var(--ease-out), scale var(--dur-1) var(--ease-out);
+    }
+    @media (prefers-reduced-transparency: reduce) {
+      .carousel-track::scroll-button(*) { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
     }
     .carousel-track::scroll-button(*):hover { scale: 1.06; }
     .carousel-track::scroll-button(*):disabled { opacity: 0; pointer-events: none; }
