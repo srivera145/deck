@@ -100,12 +100,15 @@ require __DIR__ . '/../_layout.php';
   <p>
     Deck's supported answer for an exact brand colour is to override its role tokens rather
     than its hue. Setting <code>--brand</code> and <code>--brand-hover</code> to the brand's
-    own values inside an application layer puts the exact colour on every button and link
-    that reads those roles, while tints, borders and the rest of the palette continue to
-    follow <code>--hue-brand</code>. The application then owns the text colour on that fill,
-    <code>--text-on-brand</code>, because Deck computed that value for a colour the
-    application has replaced, and it gives up the lighter dark-mode shade Deck would
-    otherwise have paired with the brand colour.
+    own values inside an application layer puts the exact colour on every link and on the
+    primary, outline and ghost buttons, which read those roles, while tints, borders and
+    the rest of the palette continue to follow <code>--hue-brand</code>. Solid fills that
+    use a ramp step directly, such as <code>.badge-solid</code>, keep the generated colour.
+    The application then owns the text colour on those fills, <code>--text-on-brand</code>,
+    because Deck computed that value for a colour the application has replaced; a primary
+    button computes its own text colour from its fill where the browser supports
+    <code>contrast-color()</code>. The application also gives up the lighter dark-mode
+    shade Deck would otherwise have paired with the brand colour.
   </p>
   <pre class="dx-code"><code>@layer app.base {
   :root {

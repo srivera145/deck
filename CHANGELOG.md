@@ -31,6 +31,7 @@ Notable changes to Deck. The npm package (`@echodial/deck`) and the Composer pac
 - **SortableJS can load after Deck.** With Deck deferred, a SortableJS deferred after it or loaded `async` was not there when the adapters first ran, and the list was left on the native fallback for good, so drag handles did not work on first load. A list on the fallback is now handed to SortableJS when it arrives (at `DOMContentLoaded` or `load`, or on any later `Deck.init()`). The native fallback now honours `data-handle`.
 - **Small icons from Deck's helpers use the small cut.** `Deck::icon($name, 'icon icon-sm')` and the icons deck.js renders with `.icon-sm` (date picker, combobox, toasts) pointed at the regular `#name` symbol rather than the heavier `#name-sm` drawn for 16px.
 - **`.video-poster` shows its play button.** The poster image and the button were two grid rows, so the image overflowed the frame and the button sat below it, clipped. The image now fills the frame and the button is centred on it.
+- **An exact brand colour reaches `.btn-primary`.** The documented override, `--brand` and `--brand-hover` on `:root`, recoloured links and outline buttons but not primary buttons, which filled with the `--brand-600` and `--brand-700` ramp steps. They now fill with `--brand` and `--brand-hover`. Light mode looks exactly as before. In dark mode a primary button is now the lighter step a link uses, with black text worked out from the fill, where it used to be the 600 step with white text in both schemes.
 
 ### Added
 

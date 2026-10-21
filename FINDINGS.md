@@ -2616,3 +2616,35 @@ fills the frame out of flow and the grid centres the disc alone. The paint order
 unchanged: image, then the scrim (`::after`), then the disc at `z-index: 1`. Not on the list
 this pass was working from, so it is its own commit. A test checks that the image fills
 the frame and the disc is centred.
+
+## 113. `.btn-primary` ignored `--brand`, so the documented exact-brand override missed it — FIXED
+
+The theming guide and the "why one hue" page both give the same recipe for a brand colour
+the ramp cannot produce: set `--brand` and `--brand-hover` on `:root` in an app layer.
+Links and outline buttons follow it. `.btn-primary`, the most visible brand surface on a
+page, did not: it set `--btn-bg: var(--brand-600)` and its hover `var(--brand-700)`,
+ramp steps that the recipe does not touch. Measured in Edge, with
+`:root { --brand: #0b5cff }` the link turned blue and the primary button stayed teal,
+`oklch(51.6% .118 196)`. Found while measuring scoped theming (#114).
+
+Honouring `--brand` and keeping the old look in both schemes cannot both be done. In dark
+mode `--brand` is the lighter 400 step (for text on a dark page), while the button filled
+with 600 in both schemes, and CSS cannot tell an overridden `--brand` from Deck's default.
+The choice made was to honour `--brand` in both schemes.
+
+**Fixed** in `src/05-buttons.css`: `.btn-primary` fills with `var(--brand)` and hovers to
+`var(--brand-hover)`. Light mode is unchanged, value for value; a computed-style diff of
+all 19 templates in both schemes changed nothing outside a `.btn-primary`. In dark mode the
+default primary button is now the 400 step at rest and 300 on hover, like a link, and its
+text is black: `contrast-color(var(--btn-bg))` where the browser has it, and otherwise
+black or white picked from the fill's own lightness with relative colour, because white
+manages about 2.7:1 on the 400 step and `--text-on-brand` stays white. The same change
+shows on a light page inside an always-dark band (`data-theme="dark"` or
+`color-scheme: dark`), in jumbotrons, sidebars, it-agency and pricing. With the override,
+the button is `#0b5cff` in both schemes with white text (5.26:1).
+
+`--text-on-brand` itself is unchanged, because every other consumer pairs it with a
+`--brand-600` fill: `.badge-solid`, `.bg-brand`, the current page in `.pagination`, a
+pressed `.btn-soft`, the date picker's selected day, and more. Those fills still ignore a
+`--brand` override; they are ramp fills by design, and the docs now say which surfaces
+the recipe reaches. A test covers the default in both schemes and the override.

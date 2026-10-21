@@ -482,3 +482,43 @@ test('a .video-poster shows its play button in the middle of the frame, over the
   assert.deepEqual(m.img, m.frame, `the image fills the frame: ${JSON.stringify(m)}`);
   assert.deepEqual(m.playCentre, [m.frame[0] / 2, m.frame[1] / 2], `the button is centred: ${JSON.stringify(m)}`);
 });
+
+// WCAG contrast between two computed colours, read back through a canvas as sRGB.
+const contrastOf = (a, b) => page.evaluate(([a, b]) => {
+  const x = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
+  const lum = (c) => {
+    x.clearRect(0, 0, 1, 1); x.fillStyle = c; x.fillRect(0, 0, 1, 1);
+    const ch = [...x.getImageData(0, 0, 1, 1).data.slice(0, 3)].map((v) => (v /= 255) <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
+    return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2];
+  };
+  const [hi, lo] = [lum(a), lum(b)].sort((p, q) => q - p);
+  return (hi + 0.05) / (lo + 0.05);
+}, [a, b]);
+
+test('.btn-primary fills with --brand, so an exact brand colour reaches it in both schemes', async () => {
+  const markup = (scheme) => `
+    <div data-theme="${scheme}">
+      <button class="btn btn-primary" id="${scheme}">Save</button>
+      <span id="${scheme}-brand" style="background: var(--brand)"></span>
+      <span id="${scheme}-600" style="background: var(--brand-600)"></span>
+    </div>`;
+  const read = () => page.evaluate(() => Object.fromEntries(['light', 'dark'].map((s) => {
+    const bg = (id) => getComputedStyle(document.getElementById(id)).backgroundColor;
+    return [s, { bg: bg(s), text: getComputedStyle(document.getElementById(s)).color, brand: bg(s + '-brand'), step600: bg(s + '-600') }];
+  })));
+
+  await render(markup('light') + markup('dark'));
+  const plain = await read();
+  assert.equal(plain.light.bg, plain.light.step600, 'light mode is unchanged: the 600 step');
+  assert.equal(plain.dark.bg, plain.dark.brand, 'dark mode follows --brand, the lighter step');
+  for (const s of ['light', 'dark']) {
+    assert.ok(await contrastOf(plain[s].text, plain[s].bg) >= 4.5, `${s}: text clears 4.5:1 on the fill ${JSON.stringify(plain[s])}`);
+  }
+
+  await render(`<style>@layer app.base { :root { --brand: #0b5cff; --brand-hover: #0847cc; } }</style>` + markup('light') + markup('dark'));
+  const exact = await read();
+  for (const s of ['light', 'dark']) {
+    assert.equal(exact[s].bg, 'rgb(11, 92, 255)', `${s}: the :root --brand override reaches the button`);
+    assert.ok(await contrastOf(exact[s].text, exact[s].bg) >= 4.5, `${s}: text clears 4.5:1 on the override ${JSON.stringify(exact[s])}`);
+  }
+});

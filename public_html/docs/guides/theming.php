@@ -250,8 +250,9 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
   <p>
     Note the last one. In light mode the brand is the 600 step, and in dark it is the 400 —
     lighter, because the same colour that reads as solid on white reads as muddy on near
-    black. Change the hue and both steps move together, so a purple tenant gets a correct
-    dark mode without anyone choosing a second purple.
+    black. Links and <code>.btn-primary</code> both follow it, so a primary button is the
+    lighter step in dark mode, with dark text. Change the hue and both steps move together,
+    so a purple tenant gets a correct dark mode without anyone choosing a second purple.
   </p>
   <p>
     That is why the rule is <strong>reference the roles, not the ramps</strong>. Write
@@ -330,9 +331,15 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
 }</code></pre>
   <p>
     Your <code>@layer app.base</code> beats <code>deck.tokens</code> with no
-    <code>!important</code>, because <a href="layers.php">layer order decides it</a>. If you
-    do this, override <code>--text-on-brand</code> as well — the generated one is computed
-    from a hue you have just stopped using.
+    <code>!important</code>, because <a href="layers.php">layer order decides it</a>. Links,
+    outline and ghost buttons, and <code>.btn-primary</code> read <code>--brand</code>, so
+    they all take the new colour, in light and dark mode alike. A primary button works out
+    its own text colour from its fill where the browser has <code>contrast-color()</code>.
+    Override <code>--text-on-brand</code> as well: it is the ink on the solid fills that
+    still use a ramp step, such as <code>.badge-solid</code> and the current page in
+    <code>.pagination</code>, and on primary buttons in browsers without
+    <code>contrast-color()</code>. The generated one is computed from a hue you have just
+    stopped using.
   </p>
 </section>
 

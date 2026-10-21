@@ -75,14 +75,23 @@
 
   /* --- Variants ----------------------------------------------------------- */
   /* The one important action in a view. Solid brand fill; use exactly one
-     per screen so it keeps meaning something. */
+     per screen so it keeps meaning something. The fill is the --brand role,
+     not a ramp step, so an exact brand colour set on --brand reaches it: by
+     default 600 in light and the lighter 400 in dark, like a link. The ink is
+     worked out from whatever the fill is. Where contrast-color() is missing,
+     light mode keeps --text-on-brand, and dark mode picks black or white from
+     the fill's own lightness: white manages about 2.7:1 on the 400 step, and
+     an overridden --brand can be either side of the line. */
   .btn-primary {
-    --btn-bg: var(--brand-600);
-    --btn-text: var(--text-on-brand);
+    --btn-bg: var(--brand);
+    --btn-text: light-dark(var(--text-on-brand), oklch(from var(--btn-bg) clamp(0, (.565 - l) * 999, 1) 0 0));
     --btn-border: transparent;
     --btn-shadow: var(--shadow-2), var(--shadow-inset);
   }
-  .btn-primary:hover { --btn-bg: var(--brand-700); border-color: transparent; background: var(--brand-700); }
+  .btn-primary:hover { --btn-bg: var(--brand-hover); border-color: transparent; background: var(--brand-hover); }
+  @supports (color: contrast-color(red)) {
+    .btn-primary { --btn-text: contrast-color(var(--btn-bg)); }
+  }
 
   /* A secondary emphasis colour, for upsells and highlights. */
   .btn-accent {

@@ -4,7 +4,7 @@
 [![Packagist version](https://img.shields.io/packagist/v/echodial/deck)](https://packagist.org/packages/echodial/deck)
 [![License: MIT](https://img.shields.io/npm/l/@echodial/deck)](LICENSE)
 
-**Deck is a CSS framework that ships as one 27.8 KB Brotli (34.1 KB gzip) stylesheet: buttons, forms,
+**Deck is a CSS framework that ships as one 27.9 KB Brotli (34.2 KB gzip) stylesheet: buttons, forms,
 tables, a data grid, charts, overlays, an icon sprite, and a full color system. You add it
 with one `<link>` tag. There is no build step, no config file, and zero dependencies.**
 
@@ -33,21 +33,21 @@ Version 0.1.4 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
 ## What Deck weighs
 
-A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **70.1 KB** Brotli, or **85.3 KB** gzip. Every browser Deck supports sends `br` in
+A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **70.2 KB** Brotli, or **85.3 KB** gzip. Every browser Deck supports sends `br` in
 `Accept-Encoding`, and Cloudflare, Vercel, Netlify, and nginx with `ngx_brotli` negotiate
 it for text by default, so Brotli is what most users actually receive.
 
 | File | Brotli | gzip |
 | --- | --- | --- |
-| `deck.min.css` | **27.8 KB** | 34.1 KB |
+| `deck.min.css` | **27.9 KB** | 34.2 KB |
 | `deck-icons.svg` | **31.3 KB** | 38.9 KB |
 | `deck.min.js` | **11.0 KB** | 12.3 KB |
-| **All three** | **70.1 KB** | **85.3 KB** |
+| **All three** | **70.2 KB** | **85.3 KB** |
 
 The sprite is the largest single file, slightly bigger than the stylesheet — worth stating
 plainly rather than leaving you to find it in devtools. Swapping `deck.min.js` for the full
 `deck.bundle.min.js` (adds the carousel, drawer, mega menu, copy button, QR encoder, editor and library adapters)
-makes the JavaScript 19.9 KB and the total 79.1 KB Brotli (95.5 KB gzip).
+makes the JavaScript 19.9 KB and the total 79.2 KB Brotli (95.5 KB gzip).
 
 ### The sprite is a manifest, not a fixed cost
 
@@ -80,7 +80,7 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 
 | File | Brotli | gzip | What it is |
 | --- | --- | --- | --- |
-| `deck.min.css` | 27.8 KB | 34.1 KB | The whole framework |
+| `deck.min.css` | 27.9 KB | 34.2 KB | The whole framework |
 | `deck.min.js` | 11.0 KB | 12.3 KB | Optional behaviour, no dependencies |
 | `deck-extras.min.js` | 6.1 KB | 7.0 KB | Carousel, drawer, mega menu, copy button, QR encoder, editor |
 | `deck-adapters.min.js` | 4.1 KB | 4.7 KB | Optional library integrations, inert unless one is loaded |

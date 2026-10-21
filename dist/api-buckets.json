@@ -1259,7 +1259,7 @@
       "layer": "deck.components",
       "file": "07-components.css",
       "line": 107,
-      "uses": 40
+      "uses": 41
     },
     "badge-warn": {
       "bucket": "public",
@@ -1349,7 +1349,7 @@
       "layer": "deck.utilities",
       "file": "09-utilities.css",
       "line": 153,
-      "uses": 8
+      "uses": 9
     },
     "bg-none": {
       "bucket": "public",
@@ -1538,7 +1538,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 88,
+      "line": 97,
       "uses": 6
     },
     "btn-block": {
@@ -1548,7 +1548,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 163,
+      "line": 172,
       "uses": 81
     },
     "btn-danger": {
@@ -1558,7 +1558,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 97,
+      "line": 106,
       "uses": 20
     },
     "btn-ghost": {
@@ -1568,7 +1568,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 116,
+      "line": 125,
       "uses": 331
     },
     "btn-group": {
@@ -1578,7 +1578,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 175,
+      "line": 184,
       "uses": 9
     },
     "btn-icon": {
@@ -1588,7 +1588,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 166,
+      "line": 175,
       "uses": 258
     },
     "btn-lg": {
@@ -1598,7 +1598,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 156,
+      "line": 165,
       "uses": 100
     },
     "btn-link": {
@@ -1608,7 +1608,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 135,
+      "line": 144,
       "uses": 2
     },
     "btn-outline": {
@@ -1618,7 +1618,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 124,
+      "line": 133,
       "uses": 26
     },
     "btn-primary": {
@@ -1628,8 +1628,8 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 79,
-      "uses": 264
+      "line": 85,
+      "uses": 268
     },
     "btn-round": {
       "bucket": "public",
@@ -1638,7 +1638,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 170,
+      "line": 179,
       "uses": 33
     },
     "btn-sm": {
@@ -1648,7 +1648,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 148,
+      "line": 157,
       "uses": 456
     },
     "btn-soft": {
@@ -1658,8 +1658,8 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 106,
-      "uses": 104
+      "line": 115,
+      "uses": 105
     },
     "bubble": {
       "bucket": "public",
@@ -4018,7 +4018,7 @@
       "overridden": false,
       "layer": "deck.components",
       "file": "05-buttons.css",
-      "line": 224,
+      "line": 233,
       "uses": 11
     },
     "face-back": {
@@ -7229,7 +7229,7 @@
       "layer": "deck.components",
       "file": "07-components.css",
       "line": 521,
-      "uses": 9
+      "uses": 10
     },
     "panel": {
       "bucket": "public",

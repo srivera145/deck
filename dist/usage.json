@@ -36,7 +36,7 @@
     "fw-semi": 290,
     "input": 289,
     "field": 286,
-    "btn-primary": 264,
+    "btn-primary": 268,
     "btn-icon": 258,
     "stack-6": 236,
     "mirror-rtl": 235,
@@ -69,8 +69,8 @@
     "list-main": 113,
     "footer-heading": 106,
     "stat-label": 106,
+    "btn-soft": 105,
     "chart-bar-fill": 105,
-    "btn-soft": 104,
     "carousel-slide": 103,
     "chart-bar": 103,
     "chart-bar-label": 103,
@@ -140,11 +140,11 @@
     "textarea": 44,
     "step": 44,
     "display": 43,
+    "badge-solid": 41,
     "input-group": 41,
     "carousel": 41,
     "number": 41,
     "stat-delta-up": 41,
-    "badge-solid": 40,
     "m-0": 40,
     "block": 40,
     "mono": 40,
@@ -366,6 +366,7 @@
     "inset-ie-0": 10,
     "icon-xl": 10,
     "number-unit": 10,
+    "pagination": 10,
     "phone-flag": 10,
     "phone-code": 10,
     "range-pair": 10,
@@ -400,7 +401,6 @@
     "press": 9,
     "enter-start": 9,
     "shake": 9,
-    "pagination": 9,
     "phone-country": 9,
     "pop-title": 9,
     "pop-body": 9,
@@ -412,6 +412,7 @@
     "toast-close": 9,
     "video-meta": 9,
     "video-duration": 9,
+    "bg-brand": 9,
     "stat-delta-down": 9,
     "tilt": 8,
     "actions-cq": 8,
@@ -436,7 +437,6 @@
     "toast-action": 8,
     "toast-region": 8,
     "empty-title": 8,
-    "bg-brand": 8,
     "tone-icon": 8,
     "px-0": 8,
     "mb-3": 8,
@@ -2060,6 +2060,7 @@
       "src/js/deck.js"
     ],
     "btn-primary": [
+      "FINDINGS.md",
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
       "public_html/docs/components/3d.php",
@@ -2976,6 +2977,7 @@
       "public_html/templates/travel.html"
     ],
     "badge-solid": [
+      "FINDINGS.md",
       "public_html/docs/components/badge.php",
       "public_html/docs/reference/position.php",
       "public_html/templates/carousels.html",
@@ -6759,6 +6761,7 @@
       "public_html/templates/settings.html"
     ],
     "pagination": [
+      "FINDINGS.md",
       "public_html/docs/components/pagination.php",
       "public_html/index.php"
     ],
@@ -7576,6 +7579,7 @@
       "public_html/templates/ecommerce.html"
     ],
     "bg-brand": [
+      "FINDINGS.md",
       "public_html/docs/reference/color.php",
       "public_html/templates/dashboard.html"
     ],

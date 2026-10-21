@@ -6,7 +6,7 @@
     "documented": 323,
     "undocumented": 622,
     "tokens": 152,
-    "rules": 1805,
+    "rules": 1806,
     "components": 99,
     "states": 40,
     "unattributedStates": 0
@@ -523,7 +523,7 @@
         "is-loading",
         "is-disabled"
       ],
-      "ruleCount": 62,
+      "ruleCount": 63,
       "rules": [
         {
           "selector": ".btn.is-loading::after",
@@ -596,211 +596,219 @@
         {
           "selector": ".btn-primary",
           "file": "05-buttons.css",
-          "line": 79,
+          "line": 85,
           "conditions": []
         },
         {
           "selector": ".btn-primary:hover",
           "file": "05-buttons.css",
-          "line": 85,
+          "line": 91,
           "conditions": []
+        },
+        {
+          "selector": ".btn-primary",
+          "file": "05-buttons.css",
+          "line": 93,
+          "conditions": [
+            "@supports (color: contrast-color(red))"
+          ]
         },
         {
           "selector": ".btn-accent",
-          "file": "05-buttons.css",
-          "line": 88,
-          "conditions": []
-        },
-        {
-          "selector": ".btn-accent:hover",
-          "file": "05-buttons.css",
-          "line": 94,
-          "conditions": []
-        },
-        {
-          "selector": ".btn-danger",
           "file": "05-buttons.css",
           "line": 97,
           "conditions": []
         },
         {
-          "selector": ".btn-danger:hover",
+          "selector": ".btn-accent:hover",
           "file": "05-buttons.css",
           "line": 103,
           "conditions": []
         },
         {
-          "selector": ".btn-soft",
+          "selector": ".btn-danger",
           "file": "05-buttons.css",
           "line": 106,
           "conditions": []
         },
         {
-          "selector": ".btn-soft:hover",
+          "selector": ".btn-danger:hover",
           "file": "05-buttons.css",
           "line": 112,
           "conditions": []
         },
         {
-          "selector": ".btn-ghost",
+          "selector": ".btn-soft",
           "file": "05-buttons.css",
-          "line": 116,
+          "line": 115,
           "conditions": []
         },
         {
-          "selector": ".btn-ghost:hover",
+          "selector": ".btn-soft:hover",
           "file": "05-buttons.css",
           "line": 121,
           "conditions": []
         },
         {
-          "selector": ".btn-outline",
+          "selector": ".btn-ghost",
           "file": "05-buttons.css",
-          "line": 124,
+          "line": 125,
           "conditions": []
         },
         {
-          "selector": ".btn-outline:hover",
+          "selector": ".btn-ghost:hover",
           "file": "05-buttons.css",
           "line": 130,
           "conditions": []
         },
         {
+          "selector": ".btn-outline",
+          "file": "05-buttons.css",
+          "line": 133,
+          "conditions": []
+        },
+        {
+          "selector": ".btn-outline:hover",
+          "file": "05-buttons.css",
+          "line": 139,
+          "conditions": []
+        },
+        {
           "selector": ".btn-link",
           "file": "05-buttons.css",
-          "line": 135,
+          "line": 144,
           "conditions": []
         },
         {
           "selector": ".btn-link:hover",
           "file": "05-buttons.css",
-          "line": 143,
+          "line": 152,
           "conditions": []
         },
         {
           "selector": ".btn-sm",
           "file": "05-buttons.css",
-          "line": 148,
+          "line": 157,
           "conditions": []
         },
         {
           "selector": ".btn-lg",
           "file": "05-buttons.css",
-          "line": 156,
+          "line": 165,
           "conditions": []
         },
         {
           "selector": ".btn-block",
           "file": "05-buttons.css",
-          "line": 163,
+          "line": 172,
           "conditions": []
         },
         {
           "selector": ".btn-icon",
           "file": "05-buttons.css",
-          "line": 166,
+          "line": 175,
           "conditions": []
         },
         {
           "selector": ".btn-icon.btn-sm",
           "file": "05-buttons.css",
-          "line": 167,
+          "line": 176,
           "conditions": []
         },
         {
           "selector": ".btn-icon.btn-lg",
           "file": "05-buttons.css",
-          "line": 168,
+          "line": 177,
           "conditions": []
         },
         {
           "selector": ".btn-round",
           "file": "05-buttons.css",
-          "line": 170,
+          "line": 179,
           "conditions": []
         },
         {
           "selector": ".btn-group",
           "file": "05-buttons.css",
-          "line": 175,
+          "line": 184,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn",
           "file": "05-buttons.css",
-          "line": 176,
+          "line": 185,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn:first-child",
           "file": "05-buttons.css",
-          "line": 177,
+          "line": 186,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn:last-child",
           "file": "05-buttons.css",
-          "line": 178,
+          "line": 187,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn + .btn",
           "file": "05-buttons.css",
-          "line": 179,
+          "line": 188,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn:hover",
           "file": "05-buttons.css",
-          "line": 180,
+          "line": 189,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn:focus-visible",
           "file": "05-buttons.css",
-          "line": 180,
+          "line": 189,
           "conditions": []
         },
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *))",
           "file": "05-buttons.css",
-          "line": 191,
+          "line": 200,
           "conditions": []
         },
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *)):hover",
           "file": "05-buttons.css",
-          "line": 197,
+          "line": 206,
           "conditions": []
         },
         {
           "selector": ".btn-soft[aria-pressed=\"true\"]:not(:where(.segmented > *))",
           "file": "05-buttons.css",
-          "line": 201,
+          "line": 210,
           "conditions": []
         },
         {
           "selector": ".btn-soft[aria-pressed=\"true\"]:not(:where(.segmented > *)):hover",
           "file": "05-buttons.css",
-          "line": 202,
+          "line": 211,
           "conditions": []
         },
         {
           "selector": ".btn:is(.btn-primary, .btn-accent, .btn-danger)[aria-pressed=\"true\"]",
           "file": "05-buttons.css",
-          "line": 203,
+          "line": 212,
           "conditions": []
         },
         {
           "selector": ".btn.is-loading",
           "file": "05-buttons.css",
-          "line": 209,
+          "line": 218,
           "conditions": []
         },
         {
           "selector": ".btn.is-loading::after",
           "file": "05-buttons.css",
-          "line": 210,
+          "line": 219,
           "conditions": []
         },
         {
@@ -10073,7 +10081,7 @@
         {
           "selector": "body:has(.tabbar) .fab",
           "file": "05-buttons.css",
-          "line": 242,
+          "line": 251,
           "conditions": []
         },
         {
@@ -13967,73 +13975,73 @@
         {
           "selector": ".btn-group > .btn",
           "file": "05-buttons.css",
-          "line": 176,
+          "line": 185,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn:first-child",
           "file": "05-buttons.css",
-          "line": 177,
+          "line": 186,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn:last-child",
           "file": "05-buttons.css",
-          "line": 178,
+          "line": 187,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn + .btn",
           "file": "05-buttons.css",
-          "line": 179,
+          "line": 188,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn + .btn",
           "file": "05-buttons.css",
-          "line": 179,
+          "line": 188,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn:hover",
           "file": "05-buttons.css",
-          "line": 180,
+          "line": 189,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn:focus-visible",
           "file": "05-buttons.css",
-          "line": 180,
+          "line": 189,
           "conditions": []
         },
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *))",
           "file": "05-buttons.css",
-          "line": 191,
+          "line": 200,
           "conditions": []
         },
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *)):hover",
           "file": "05-buttons.css",
-          "line": 197,
+          "line": 206,
           "conditions": []
         },
         {
           "selector": ".btn:is(.btn-primary, .btn-accent, .btn-danger)[aria-pressed=\"true\"]",
           "file": "05-buttons.css",
-          "line": 203,
+          "line": 212,
           "conditions": []
         },
         {
           "selector": ".btn.is-loading",
           "file": "05-buttons.css",
-          "line": 209,
+          "line": 218,
           "conditions": []
         },
         {
           "selector": ".btn.is-loading::after",
           "file": "05-buttons.css",
-          "line": 210,
+          "line": 219,
           "conditions": []
         },
         {
@@ -14241,7 +14249,7 @@
     {
       "name": "btn-accent",
       "file": "05-buttons.css",
-      "line": 88,
+      "line": 97,
       "layer": "deck.components",
       "section": null,
       "doc": "A secondary emphasis colour, for upsells and highlights.",
@@ -14267,31 +14275,31 @@
         {
           "selector": ".btn-accent",
           "file": "05-buttons.css",
-          "line": 88,
+          "line": 97,
           "conditions": []
         },
         {
           "selector": ".btn-accent:hover",
           "file": "05-buttons.css",
-          "line": 94,
+          "line": 103,
           "conditions": []
         },
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *))",
           "file": "05-buttons.css",
-          "line": 191,
+          "line": 200,
           "conditions": []
         },
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *)):hover",
           "file": "05-buttons.css",
-          "line": 197,
+          "line": 206,
           "conditions": []
         },
         {
           "selector": ".btn:is(.btn-primary, .btn-accent, .btn-danger)[aria-pressed=\"true\"]",
           "file": "05-buttons.css",
-          "line": 203,
+          "line": 212,
           "conditions": []
         }
       ],
@@ -14308,7 +14316,7 @@
     {
       "name": "btn-block",
       "file": "05-buttons.css",
-      "line": 163,
+      "line": 172,
       "layer": "deck.components",
       "section": null,
       "doc": "Full width. For a phone, or the primary action at the end of a form.",
@@ -14322,7 +14330,7 @@
         {
           "selector": ".btn-block",
           "file": "05-buttons.css",
-          "line": 163,
+          "line": 172,
           "conditions": []
         }
       ],
@@ -14334,7 +14342,7 @@
     {
       "name": "btn-danger",
       "file": "05-buttons.css",
-      "line": 97,
+      "line": 106,
       "layer": "deck.components",
       "section": null,
       "doc": "Destructive and irreversible. Pair it with a confirmation.",
@@ -14360,31 +14368,31 @@
         {
           "selector": ".btn-danger",
           "file": "05-buttons.css",
-          "line": 97,
+          "line": 106,
           "conditions": []
         },
         {
           "selector": ".btn-danger:hover",
           "file": "05-buttons.css",
-          "line": 103,
+          "line": 112,
           "conditions": []
         },
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *))",
           "file": "05-buttons.css",
-          "line": 191,
+          "line": 200,
           "conditions": []
         },
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *)):hover",
           "file": "05-buttons.css",
-          "line": 197,
+          "line": 206,
           "conditions": []
         },
         {
           "selector": ".btn:is(.btn-primary, .btn-accent, .btn-danger)[aria-pressed=\"true\"]",
           "file": "05-buttons.css",
-          "line": 203,
+          "line": 212,
           "conditions": []
         }
       ],
@@ -14403,7 +14411,7 @@
     {
       "name": "btn-ghost",
       "file": "05-buttons.css",
-      "line": 116,
+      "line": 125,
       "layer": "deck.components",
       "section": null,
       "doc": "No border or background until hover. For toolbars and dense rows where\nseven bordered buttons would be noise.",
@@ -14425,13 +14433,13 @@
         {
           "selector": ".btn-ghost",
           "file": "05-buttons.css",
-          "line": 116,
+          "line": 125,
           "conditions": []
         },
         {
           "selector": ".btn-ghost:hover",
           "file": "05-buttons.css",
-          "line": 121,
+          "line": 130,
           "conditions": []
         }
       ],
@@ -14445,7 +14453,7 @@
     {
       "name": "btn-group",
       "file": "05-buttons.css",
-      "line": 175,
+      "line": 184,
       "layer": "deck.components",
       "section": null,
       "doc": "Buttons joined into one control, with the inner radii and the doubled\nborder between them removed. Logical radii, so it mirrors under RTL.",
@@ -14459,43 +14467,43 @@
         {
           "selector": ".btn-group",
           "file": "05-buttons.css",
-          "line": 175,
+          "line": 184,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn",
           "file": "05-buttons.css",
-          "line": 176,
+          "line": 185,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn:first-child",
           "file": "05-buttons.css",
-          "line": 177,
+          "line": 186,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn:last-child",
           "file": "05-buttons.css",
-          "line": 178,
+          "line": 187,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn + .btn",
           "file": "05-buttons.css",
-          "line": 179,
+          "line": 188,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn:hover",
           "file": "05-buttons.css",
-          "line": 180,
+          "line": 189,
           "conditions": []
         },
         {
           "selector": ".btn-group > .btn:focus-visible",
           "file": "05-buttons.css",
-          "line": 180,
+          "line": 189,
           "conditions": []
         }
       ],
@@ -14507,7 +14515,7 @@
     {
       "name": "btn-icon",
       "file": "05-buttons.css",
-      "line": 166,
+      "line": 175,
       "layer": "deck.components",
       "section": null,
       "doc": "Square, icon-only button. It has no text, so it needs an aria-label.",
@@ -14525,19 +14533,19 @@
         {
           "selector": ".btn-icon",
           "file": "05-buttons.css",
-          "line": 166,
+          "line": 175,
           "conditions": []
         },
         {
           "selector": ".btn-icon.btn-sm",
           "file": "05-buttons.css",
-          "line": 167,
+          "line": 176,
           "conditions": []
         },
         {
           "selector": ".btn-icon.btn-lg",
           "file": "05-buttons.css",
-          "line": 168,
+          "line": 177,
           "conditions": []
         }
       ],
@@ -14551,7 +14559,7 @@
     {
       "name": "btn-lg",
       "file": "05-buttons.css",
-      "line": 156,
+      "line": 165,
       "layer": "deck.components",
       "section": null,
       "doc": "The large size, from --control-h-lg.",
@@ -14577,13 +14585,13 @@
         {
           "selector": ".btn-lg",
           "file": "05-buttons.css",
-          "line": 156,
+          "line": 165,
           "conditions": []
         },
         {
           "selector": ".btn-icon.btn-lg",
           "file": "05-buttons.css",
-          "line": 168,
+          "line": 177,
           "conditions": []
         }
       ],
@@ -14599,7 +14607,7 @@
     {
       "name": "btn-link",
       "file": "05-buttons.css",
-      "line": 135,
+      "line": 144,
       "layer": "deck.components",
       "section": null,
       "doc": "Looks like a link, behaves like a button. Only for a real <button>\nthat has to sit in a row of links — on an anchor it adds a touch\ntarget, a ring offset and nowrap to something that wanted none of them.",
@@ -14633,13 +14641,13 @@
         {
           "selector": ".btn-link",
           "file": "05-buttons.css",
-          "line": 135,
+          "line": 144,
           "conditions": []
         },
         {
           "selector": ".btn-link:hover",
           "file": "05-buttons.css",
-          "line": 143,
+          "line": 152,
           "conditions": []
         }
       ],
@@ -14654,7 +14662,7 @@
     {
       "name": "btn-outline",
       "file": "05-buttons.css",
-      "line": 124,
+      "line": 133,
       "layer": "deck.components",
       "section": null,
       "doc": "Brand-coloured border, transparent fill.",
@@ -14680,13 +14688,13 @@
         {
           "selector": ".btn-outline",
           "file": "05-buttons.css",
-          "line": 124,
+          "line": 133,
           "conditions": []
         },
         {
           "selector": ".btn-outline:hover",
           "file": "05-buttons.css",
-          "line": 130,
+          "line": 139,
           "conditions": []
         }
       ],
@@ -14701,18 +14709,18 @@
     {
       "name": "btn-primary",
       "file": "05-buttons.css",
-      "line": 79,
+      "line": 85,
       "layer": "deck.components",
       "section": null,
-      "doc": "The one important action in a view. Solid brand fill; use exactly one\nper screen so it keeps meaning something.",
+      "doc": "The one important action in a view. Solid brand fill; use exactly one\nper screen so it keeps meaning something. The fill is the --brand role,\nnot a ramp step, so an exact brand colour set on --brand reaches it: by\ndefault 600 in light and the lighter 400 in dark, like a link. The ink is\nworked out from whatever the fill is. Where contrast-color() is missing,\nlight mode keeps --text-on-brand, and dark mode picks black or white from\nthe fill's own lightness: white manages about 2.7:1 on the 400 step, and\nan overridden --brand can be either side of the line.",
       "declarations": [
         {
           "prop": "--btn-bg",
-          "value": "var(--brand-600)"
+          "value": "var(--brand)"
         },
         {
           "prop": "--btn-text",
-          "value": "var(--text-on-brand)"
+          "value": "light-dark(var(--text-on-brand), oklch(from var(--btn-bg) clamp(0, (.565 - l) * 999, 1) 0 0))"
         },
         {
           "prop": "--btn-border",
@@ -14727,41 +14735,50 @@
         {
           "selector": ".btn-primary",
           "file": "05-buttons.css",
-          "line": 79,
+          "line": 85,
           "conditions": []
         },
         {
           "selector": ".btn-primary:hover",
           "file": "05-buttons.css",
-          "line": 85,
+          "line": 91,
           "conditions": []
+        },
+        {
+          "selector": ".btn-primary",
+          "file": "05-buttons.css",
+          "line": 93,
+          "conditions": [
+            "@supports (color: contrast-color(red))"
+          ]
         },
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *))",
           "file": "05-buttons.css",
-          "line": 191,
+          "line": 200,
           "conditions": []
         },
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *)):hover",
           "file": "05-buttons.css",
-          "line": 197,
+          "line": 206,
           "conditions": []
         },
         {
           "selector": ".btn:is(.btn-primary, .btn-accent, .btn-danger)[aria-pressed=\"true\"]",
           "file": "05-buttons.css",
-          "line": 203,
+          "line": 212,
           "conditions": []
         }
       ],
       "variants": [],
       "tokensUsed": [
-        "--brand-600",
+        "--brand",
         "--text-on-brand",
+        "--btn-bg",
         "--shadow-2",
         "--shadow-inset",
-        "--brand-700"
+        "--brand-hover"
       ],
       "defined": true,
       "definedUnconditional": true
@@ -14769,7 +14786,7 @@
     {
       "name": "btn-round",
       "file": "05-buttons.css",
-      "line": 170,
+      "line": 179,
       "layer": "deck.components",
       "section": null,
       "doc": "A fully rounded button, usually paired with .btn-icon.",
@@ -14783,7 +14800,7 @@
         {
           "selector": ".btn-round",
           "file": "05-buttons.css",
-          "line": 170,
+          "line": 179,
           "conditions": []
         }
       ],
@@ -14797,7 +14814,7 @@
     {
       "name": "btn-sm",
       "file": "05-buttons.css",
-      "line": 148,
+      "line": 157,
       "layer": "deck.components",
       "section": null,
       "doc": "The 34px size. Still clears the 44px touch target, because the target\nis a pseudo-element rather than the box.",
@@ -14827,13 +14844,13 @@
         {
           "selector": ".btn-sm",
           "file": "05-buttons.css",
-          "line": 148,
+          "line": 157,
           "conditions": []
         },
         {
           "selector": ".btn-icon.btn-sm",
           "file": "05-buttons.css",
-          "line": 167,
+          "line": 176,
           "conditions": []
         }
       ],
@@ -14851,7 +14868,7 @@
     {
       "name": "btn-soft",
       "file": "05-buttons.css",
-      "line": 106,
+      "line": 115,
       "layer": "deck.components",
       "section": null,
       "doc": "Tinted, low weight. Good for an action repeated down a list.",
@@ -14877,37 +14894,37 @@
         {
           "selector": ".btn-soft",
           "file": "05-buttons.css",
-          "line": 106,
+          "line": 115,
           "conditions": []
         },
         {
           "selector": ".btn-soft:hover",
           "file": "05-buttons.css",
-          "line": 112,
+          "line": 121,
           "conditions": []
         },
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *))",
           "file": "05-buttons.css",
-          "line": 191,
+          "line": 200,
           "conditions": []
         },
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *)):hover",
           "file": "05-buttons.css",
-          "line": 197,
+          "line": 206,
           "conditions": []
         },
         {
           "selector": ".btn-soft[aria-pressed=\"true\"]:not(:where(.segmented > *))",
           "file": "05-buttons.css",
-          "line": 201,
+          "line": 210,
           "conditions": []
         },
         {
           "selector": ".btn-soft[aria-pressed=\"true\"]:not(:where(.segmented > *)):hover",
           "file": "05-buttons.css",
-          "line": 202,
+          "line": 211,
           "conditions": []
         }
       ],
@@ -28384,7 +28401,7 @@
     {
       "name": "fab",
       "file": "05-buttons.css",
-      "line": 224,
+      "line": 233,
       "layer": "deck.components",
       "section": null,
       "doc": "Floating action button, parked above the tab bar and the notch",
@@ -28450,25 +28467,25 @@
         {
           "selector": ".fab",
           "file": "05-buttons.css",
-          "line": 224,
+          "line": 233,
           "conditions": []
         },
         {
           "selector": ".fab:hover",
           "file": "05-buttons.css",
-          "line": 240,
+          "line": 249,
           "conditions": []
         },
         {
           "selector": ".fab:active",
           "file": "05-buttons.css",
-          "line": 241,
+          "line": 250,
           "conditions": []
         },
         {
           "selector": "body:has(.tabbar) .fab",
           "file": "05-buttons.css",
-          "line": 242,
+          "line": 251,
           "conditions": []
         },
         {
@@ -35785,13 +35802,13 @@
         {
           "selector": ".btn.is-loading",
           "file": "05-buttons.css",
-          "line": 209,
+          "line": 218,
           "conditions": []
         },
         {
           "selector": ".btn.is-loading::after",
           "file": "05-buttons.css",
-          "line": 210,
+          "line": 219,
           "conditions": []
         },
         {
@@ -48494,25 +48511,25 @@
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *))",
           "file": "05-buttons.css",
-          "line": 191,
+          "line": 200,
           "conditions": []
         },
         {
           "selector": ".btn[aria-pressed=\"true\"]:not(:where(.btn-soft, .btn-primary, .btn-accent, .btn-danger, .segmented > *)):hover",
           "file": "05-buttons.css",
-          "line": 197,
+          "line": 206,
           "conditions": []
         },
         {
           "selector": ".btn-soft[aria-pressed=\"true\"]:not(:where(.segmented > *))",
           "file": "05-buttons.css",
-          "line": 201,
+          "line": 210,
           "conditions": []
         },
         {
           "selector": ".btn-soft[aria-pressed=\"true\"]:not(:where(.segmented > *)):hover",
           "file": "05-buttons.css",
-          "line": 202,
+          "line": 211,
           "conditions": []
         },
         {
@@ -52725,7 +52742,7 @@
         {
           "selector": "body:has(.tabbar) .fab",
           "file": "05-buttons.css",
-          "line": 242,
+          "line": 251,
           "conditions": []
         },
         {
