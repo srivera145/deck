@@ -3398,8 +3398,9 @@ Features with a fallback, or with nothing depending on them, are not floors:
 `interpolate-size`, scroll-driven animations and `::scroll-button` (the first two tested with
 `CSS.supports`, the third from MDN).
 
-**Fixed:** `browserslist` is now `chrome >= 131`, `edge >= 131`, `firefox >= 147`,
-`safari >= 26`. `build.mjs` reads esbuild's CSS target from it instead of typing a second
+**Fixed:** in this first pass, `browserslist` became `chrome >= 131`, `edge >= 131`,
+`firefox >= 147`, `safari >= 26`; the retest below replaced it. `build.mjs` reads esbuild's
+CSS target from it instead of typing a second
 copy, and fails if a line is not `<browser> >= <version>`. The output is byte-identical at
 the old and the new target, so `dist/` did not change. README.md, the demo page, llms.txt,
 `docs/explain/why-no-build-step.php` and the Tailwind guide give the tested floor, and say
@@ -3408,13 +3409,36 @@ that Safari's comes from MDN.
 **How it was found:** the launch posts cited `browserslist` as the proof of Firefox 128,
 which is the file the number was typed into rather than anything that needs it.
 
-## 132. A relative colour from a `light-dark()` value crashes Chrome 123–124 and fails until Chrome 131 and Firefox 133 — NOT FIXED
+**Retested the same day after #133, #135 and #136 were fixed and #132 partly fixed.** The
+floor is now Chrome and Edge 131 and Firefox 133. `browserslist` says that and names no
+Safari version, because Safari has not been run.
+
+| Engine | Before | After #133 | After #132 (focus ring) | Set by, and tested in |
+| --- | --- | --- | --- | --- |
+| Chrome | 131 | 131 | 131 | `.btn-primary` ink and pressed fill (#132): Chrome 130 fails, 131 passes |
+| Edge | 131 | 131 | 131 | same engine; only Edge 155 was run |
+| Firefox | 147 | 133 with Floating UI, 147 without | 133 with Floating UI, 147 without | ink and pressed fill (#132): Firefox 132 fails, 133 passes. Placement (#133): 133 and 146 pass with Floating UI and fail without; 147 is native |
+| Safari | 26, from MDN | untested | untested | not run: no Safari, iOS device or BrowserStack account here |
+
+esbuild still gets a Safari target, `safari17.4`. Without one it strips the `-webkit-`
+prefixes Deck writes for Safari, such as `-webkit-user-select`. Any Safari from 17.4 to 26
+gives the same output, so the target is not a floor. `deck.min.css` is byte-identical before
+and after the `browserslist` change.
+
+Testing trap, for the next run: Firefox builds extracted from Mozilla's installers update
+themselves. By the second launch, the 127, 128, 132 and 133 folders were 158.0.1, and every
+result from them was really Firefox 158. They are now extracted with `updater.exe` removed and
+a `distribution/policies.json` of `{"policies":{"DisableAppUpdate":true}}`. Every result is
+checked against the `User-Agent` its request carried.
+
+## 132. A relative colour from a `light-dark()` value crashes Chrome 123–124 and fails until Chrome 131 and Firefox 133 — the focus ring FIXED, the button ink NOT FIXED
 
 `--btn-text` on `.btn-primary` is
 `light-dark(var(--text-on-brand), oklch(from var(--btn-bg) clamp(0, (.565 - l) * 999, 1) 0 0))`,
 and `--btn-bg` is `var(--brand)`, itself a `light-dark()`. `--ring` is
 `light-dark(oklch(from var(--focus) l c h / .32), …)`, and `--focus` is a `light-dark()`
-too. The `.btn` hover at `src/05-buttons.css:214` has the same shape.
+too. A pressed `.btn-primary` (`aria-pressed="true"`, `src/05-buttons.css:214`) darkens
+`--btn-bg` with the same shape.
 
 Reduced in Chrome 123: `:root { color-scheme: light dark } .x { color: oklch(from light-dark(red, blue) l c h) }`
 crashes the renderer, and so does `rgb(from …)`. The same expression with `from red` does
@@ -3427,11 +3451,32 @@ resolve all of it: 4.96:1 and 8.27:1. Those are the versions MDN gives for a rel
 from `currentcolor`, which works by the same mechanism, so its Safari 18 is the likely Safari
 answer.
 
-**Not fixed:** taking the relative colour from a plain value (`--brand-600`, `--brand-400`,
-one per scheme) instead of from `--brand` would remove the crash and the 131 / 133 floor.
-That is a `src/` change and is untested.
+**Fixed: the focus ring.** `--ring` is now
+`light-dark(color-mix(in oklch, var(--focus) 32%, transparent), color-mix(… 42% …))`. Mixing
+with transparent gives the same colour at that alpha, and it still follows an overridden
+`--focus`. Where the old ring worked (Chrome 131, 132, Edge 155, Firefox 133, 146, 147, 158)
+the computed `box-shadow` is the same string. It now appears in Chrome 125–130 and Firefox
+127–132, where it was `none`, and focusing a text field no longer crashes Chrome 123 or 124.
 
-## 133. The Floating UI hand-off for popover triggers never runs — NOT FIXED
+**Not fixed: `.btn-primary`'s text and pressed fill.** Three formulations were measured in
+real builds, against the theming guide's exact-brand example (`--brand: #0b5cff`, whose
+OKLCH lightness of 0.546 is just under the 0.565 switch):
+
+| Formulation | Works from | Exact-brand ink in dark mode |
+| --- | --- | --- |
+| Today's: from `var(--btn-bg)` | Chrome 131, Firefox 133 | white, 5.26:1, every run |
+| From a plain step, `var(--brand-400)` | Chrome 123, Firefox 128 | black, 3.99:1, in Chrome 131–146 and Firefox 133–145; the pressed fill would also take the ramp's hue instead of the brand's, in every browser |
+| From a registered `<color>` copy of `--btn-bg` | Chrome 126, Firefox 128; Chrome 123–124 still crash | black at random in Chrome 130 (1 run in 5) and 131 (3 in 5); white in Chrome 132 and every Firefox |
+| `oklch(from color-mix(… var(--btn-bg) …) …)` | Chrome 131, Firefox 133 | white, but no earlier than today |
+
+Each lowers the floor only by lowering the documented override's contrast, or not at all, so
+none was kept. Chrome 123 and 124 still crash on any page with a `.btn-primary`, and Chrome
+125–130 and Firefox 128–132 still give it the page's text colour. Two more traps found on the
+way: `CSS.supports('color: oklch(from light-dark(red, blue) l c h)')` itself crashes Chrome
+123, so no `@supports` test can guard it, and `@supports (color: rgb(from currentcolor r g b))`
+is already true in Firefox 127, so it does not mark the versions that resolve this either.
+
+## 133. The Floating UI hand-off for popover triggers never runs — FIXED
 
 `src/25-anchor.css` says that where anchor positioning is missing, "deck-adapters.js uses
 Floating UI if it is on the page and falls back to Deck's own placement if it is not", and
@@ -3453,10 +3498,37 @@ Measured with Floating UI loaded from the README's own tags:
 | Chrome 122 | tooltip at (0, 900), 558px from its trigger and below the fold | 8px below, centred |
 | Firefox 133 | where it sits in the markup; 836px from its trigger on the probe page | 8px below, centred |
 
-**Not fixed.** Setting `data-deck-anchor` before the support check would make the
-documented hand-off work for pages that load Floating UI. That would put Firefox at 133 and,
-by MDN, Safari at 18. Without Floating UI, a placement of Deck's own is still missing, or the
-comment and docs should stop promising one.
+**Fixed.** `wireAnchors()` sets `data-deck-anchor` in every browser. Where anchor
+positioning is missing it does so only for a `.tip`, `.pop`, `.menu` or `.mega` opened by a
+trigger outside the panel, and not for a `data-deck-mega` trigger or a
+`popovertargetaction="hide"` button. The date picker, the combobox and a `data-deck-mega` menu
+have placement of their own, and a `.pop`'s Dismiss button sits inside the panel it would
+anchor. Where anchor positioning exists, behaviour is unchanged: positions in Edge 155 and
+Firefox 158 were identical before and after. `deck.min.css` is byte-identical; only the
+scripts changed. Two adapter faults surfaced once it ran, and are #136.
+
+Verified in Firefox 133 and 146 with Floating UI loaded, at 1229×606. Each panel was measured
+with its trigger 250px down the window, again after scrolling 80px, and again with the
+trigger 40px from the bottom. Scrolling was instant: Deck's `scroll-behavior: smooth` made
+an earlier run measure some panels against a moving page.
+
+| Component | Opens | After scrolling | Near the bottom |
+| --- | --- | --- | --- |
+| `.tip` | above, 8px, centred | the same | above |
+| `.pop` | below, 8px | the same | flips above |
+| `.menu` | below, 8px, start-aligned | the same | flips above |
+| `.menu-match` (dropdown) | below, 8px, its trigger's width | the same | flips above |
+| `.mega` | below, 8px, kept inside the window | the same | flips above |
+| `.mega` with `data-deck-mega` (own placement, #135) | below, 8px | the same | stays below and runs off-screen |
+| date picker (own placement, #135) | below, 6px, the side with more room | the same | flips above |
+| combobox list | below, 8px, the control's width | the same | flips above |
+
+Without Floating UI, Firefox 133 and 146 still open a `.tip` 390px and a `.pop` 1347–1348px from
+the trigger. A `.menu` sits at 0px, because it follows its trigger in this markup, but it
+never flips. So the hand-off lowers Firefox to 133 only for a page that loads Floating UI.
+Without it, `.tip` and `.pop` need Firefox 147. The comment in `src/25-anchor.css`, the
+README, `docs/components/menu.php` and the `data-deck-anchor` row in
+`docs/reference/javascript.php` now say so, instead of promising "Deck's own placement".
 
 ## 134. `@supports (anchor-name: --a)` admits Chrome 125–128, which lack `position-area` — NOT FIXED
 
@@ -3468,5 +3540,62 @@ opened at y = 1408 in a 1400px window, and tooltips at the top of it. With trans
 Chrome 125 and 126 also crash the tab when a tooltip opens and then a menu.
 
 **Not fixed:** below the new floor of 131, so it no longer matters for a supported browser.
-Testing `position-area` instead would send 125–128 to the JavaScript path, once #133 is
-fixed.
+Testing `position-area` instead would send 125–128 to the JavaScript path, now that #133 is
+fixed. It would not lower Chrome's floor on its own, because #132's button ink still needs
+Chrome 131.
+
+## 135. The date picker's and a mega menu's own placement ignored the page's scroll — FIXED
+
+Where anchor positioning is missing, `DatePicker.position()` in `src/js/deck.js` and
+`megaMenus()` in `src/js/deck-extras.js` place their panel from `getBoundingClientRect()`,
+which is relative to the window. `.datepicker` and `.mega` are `position: absolute`, and in
+the top layer the containing block of an absolute element is the document. So a panel
+opened as far from its trigger as the page had been scrolled: 5,733px above the date field
+and 5,015px above a `data-deck-mega` trigger on the probe page in Firefox 133.
+
+**Fixed:** both add `scrollX` and `scrollY`, so they are document coordinates, and the panel
+stays with its trigger as the page scrolls. Measured in Firefox 133 and 146: the date picker
+opens 6px from its field on the side with more room, and the mega menu 8px below. The mega
+menu's own placement still never flips, so near the bottom of the window it runs off-screen,
+as native `.menu` does (#137). In a right-to-left page both still set `inset-inline-start`
+from a left offset, which is wrong there (not tested).
+
+## 136. Once the hand-off ran, the adapter covered wide panels' triggers and put tooltips below — FIXED
+
+Two faults in `floating()` in `src/js/deck-adapters.js`, invisible while #133 kept it from
+running:
+
+- **Every panel defaulted to `placement: 'bottom'`.** 25-anchor.css puts a `.tip` above its
+  trigger and a `.menu` below from its start edge. The adapter now defaults `.tip` to `top`
+  and `.menu` to `bottom-start`, and everything else to `bottom`; `data-placement` still
+  overrides it.
+- **`flip()` checked the cross axis.** A `.pop` (20rem) or `.mega` (64rem) centred on a
+  trigger near the window's left edge overflowed sideways, so Floating UI flipped it to a side
+  placement. It then overlapped its own trigger, 147px and 101px to the side. `flip({ crossAxis:
+  false })` flips only between above and below, and `shift()` keeps the panel inside.
+
+Measured in Firefox 133 and 146; the table is in #133.
+
+## 137. Native placement does not flip menus at the bottom of the window, and opens the date picker off-screen — NOT FIXED
+
+The same probe, run where anchor positioning is native (Edge 155, Firefox 158), with instant
+scrolling:
+
+- `.menu`, `.menu-match` and `.mega` open below their trigger even 40px from the bottom of the
+  window, and run off-screen. A `.tip` stays above, as designed, and `.pop` and the combobox
+  list flip.
+- The date picker opens above its field, and with the field 250px down a 768px window, its
+  356px panel runs off the top. A `data-deck-mega` menu also opens above.
+- In Firefox 147 a `.pop` does not stay with its trigger as the page scrolls: 71px from it,
+  then 151px after scrolling 80px. Firefox 158 keeps it at 8px.
+
+The panels that misbehave are the ones declared `position: absolute` (`.menu`, `.mega`,
+`.datepicker`). In the top layer their containing block is the whole document, so
+`position-try-fallbacks` and `position-try-order: most-block-size` measure the room in the
+document rather than in the window. A long page always has room below and, further down it,
+more room above. `.tip`, `.pop` and the combobox list are `position: fixed` and behave.
+
+**Not fixed:** making those three `position: fixed` inside the `@supports (anchor-name: --a)`
+block is the likely fix. It changes how they look in every current browser, so it needs its
+own pass and a visual check, and it is not a floor question: every version with anchor
+positioning does it.

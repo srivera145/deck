@@ -40,7 +40,7 @@ plugins.
   catches the class names that look almost right, in Visual Studio Code and the editors
   built on it. See [Editor support](#editor-support).
 
-Version 0.2.0 · MIT · Chrome 131+, Edge 131+, Firefox 147+, Safari 26+
+Version 0.2.0 · MIT · Chrome 131+, Edge 131+, Firefox 133+ · Safari not yet tested
 
 ## What Deck weighs
 
@@ -52,13 +52,13 @@ it for text by default, so Brotli is what most users actually receive.
 | --- | --- | --- |
 | `deck.min.css` | **28.1 KB** | 34.6 KB |
 | `deck-icons.svg` | **31.3 KB** | 38.9 KB |
-| `deck.min.js` | **11.0 KB** | 12.3 KB |
+| `deck.min.js` | **11.1 KB** | 12.4 KB |
 | **All three** | **70.5 KB** | **85.8 KB** |
 
 The sprite is the largest single file, slightly bigger than the stylesheet — worth stating
 plainly rather than leaving you to find it in devtools. Swapping `deck.min.js` for the full
 `deck.bundle.min.js` (adds the carousel, drawer, mega menu, copy button, QR encoder, editor and library adapters)
-makes the JavaScript 19.9 KB and the total 79.4 KB Brotli (96.0 KB gzip).
+makes the JavaScript 20.0 KB and the total 79.5 KB Brotli (96.1 KB gzip).
 
 ### The sprite is a manifest, not a fixed cost
 
@@ -92,10 +92,10 @@ brand marks through from the previous sprite, and dropping them drops the marks.
 | File | Brotli | gzip | What it is |
 | --- | --- | --- | --- |
 | `deck.min.css` | 28.1 KB | 34.6 KB | The whole framework |
-| `deck.min.js` | 11.0 KB | 12.3 KB | Optional behaviour, no dependencies |
+| `deck.min.js` | 11.1 KB | 12.4 KB | Optional behaviour, no dependencies |
 | `deck-extras.min.js` | 6.1 KB | 7.0 KB | Carousel, drawer, mega menu, copy button, QR encoder, editor |
 | `deck-adapters.min.js` | 4.2 KB | 4.7 KB | Optional library integrations, inert unless one is loaded |
-| `deck.bundle.min.js` | 19.9 KB | 22.5 KB | All three scripts in one file |
+| `deck.bundle.min.js` | 20.0 KB | 22.6 KB | All three scripts in one file |
 | `deck-icons.svg` | 31.3 KB | 38.9 KB | 174 symbols: 86 icons at two weights, plus two brand marks |
 | `src/` | — | — | The 26 source stylesheets, concatenated to build `deck.css` |
 | `dist/layers/` | — | — | One file per layer, if you only want part of Deck |
@@ -714,18 +714,18 @@ assistant.
 
 ## Browser support
 
-Chrome/Edge 131+, Firefox 147+, Safari 26+. Chrome and Firefox were tested in real builds
-at and just below those versions. Safari has not been tested; its number comes from MDN's
-compatibility data. Two things set the floor:
+Chrome 131+ and Firefox 133+, tested in real builds on both sides of each number. Edge
+uses Chrome's engine; only Edge 155 was tested. Safari has not been tested, so Deck states
+no Safari version. Two things set the floor:
 
-- The primary button's text and the focus ring are relative colours taken from
-  `light-dark()` values. That works from Chrome 131 and Firefox 133 (likely Safari 18, going by
-  MDN's closest entry; untested).
-  Below it, a primary button's label takes the page's text colour (3.35:1 in Chrome 130),
-  text fields lose their focus ring, and Chrome 123 and 124 crash the tab.
-- Tooltips, popovers and menus are placed with CSS anchor positioning: Chrome 129, Firefox
-  147, Safari 26. The hand-off to Floating UI for older browsers does not run yet
-  (FINDINGS.md #133), so below those versions those panels open away from their trigger.
+- `.btn-primary`'s text and a pressed primary button's fill are relative colours taken
+  from `--brand`, a `light-dark()` value. That works from Chrome 131 and Firefox 133. In
+  Chrome 130 and Firefox 132 the label takes the page's text colour (3.35:1 in light mode,
+  2.22:1 in dark) and a pressed primary button loses its fill. Chrome 123 and 124 crash
+  the tab on any page with a `.btn-primary` (FINDINGS.md #132).
+- Tooltips, popover cards and menus are placed with CSS anchor positioning in Chrome 129+
+  and Firefox 147+. In Firefox 133–146, load Floating UI (see *Libraries*) and the adapter
+  places them; without it, a `.tip` or `.pop` opens away from its trigger (FINDINGS.md #133).
 
 Everything else degrades rather than breaks. Without `@starting-style`, `allow-discrete`
 transitions, `field-sizing`, container style queries, `interpolate-size` or view
@@ -1448,8 +1448,10 @@ CSS anchor positioning — natively, on the compositor, with no listeners.
 
 `deck.js` pairs every `popovertarget` with its panel and generates a unique
 `anchor-name`, so you write no extra markup. Where the browser lacks it, the Floating UI
-adapter takes over with `flip`, `shift`, `size`, and `arrow`; where neither is present,
-Deck's own placement runs as before.
+adapter takes over with `flip`, `shift`, `size`, and `arrow`. Where neither is present,
+the date picker, the combobox and a `data-deck-mega` menu place themselves, and a `.tip`,
+`.pop` or `.menu` opens where it sits in the markup, so load Floating UI if you use them
+in Firefox 133–146.
 
 New anchored components: `.tip` (a tooltip that can flip and carry an arrow, unlike the
 `::after` one) and `.pop` (a popover card with a title, body, and actions).

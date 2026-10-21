@@ -161,8 +161,10 @@
   }
 
   /* --- Floating UI handoff --------------------------------------------------
-     Where anchor positioning is missing, deck-adapters.js uses Floating UI if
-     it is on the page and falls back to Deck's own placement if it is not.
+     Where anchor positioning is missing, deck-adapters.js places .tip, .pop,
+     .menu and .mega with Floating UI if it is on the page. Without it, the
+     date picker, the combobox and a data-deck-mega menu place themselves, and
+     a .tip or .pop opens where it sits in the markup (FINDINGS 133).
      These rules just get out of the way so the adapter can set inset.
      ---------------------------------------------------------------------- */
   @supports not (anchor-name: --a) {

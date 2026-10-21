@@ -76,8 +76,8 @@ require __DIR__ . '/../_layout.php';
     Every CSS feature Deck depends on has to exist natively in the browser, because nothing
     compiles it down. Deck's colour roles are built on the <code>light-dark()</code>
     function, which first shipped in Chrome and Edge 123, Firefox 120 and Safari 17.5,
-    according to MDN. Two of those roles go further: the primary button's text and the
-    focus ring are relative colours taken from a <code>light-dark()</code> value, and that
+    according to MDN. One role goes further: the primary button's text, and a pressed primary
+    button's fill, are relative colours taken from a <code>light-dark()</code> value, and that
     combination only works from Chrome and Edge 131 and Firefox 133, tested in real builds of
     each. Chrome 123 and 124 crash the tab when they meet it. A browser that cannot resolve
     one of these values does not show a slightly degraded page. MDN documents that when a
@@ -87,12 +87,12 @@ require __DIR__ . '/../_layout.php';
   </p>
   <p>
     Tooltips, popovers and menus are placed with CSS anchor positioning, which Chrome and
-    Edge have in full from 129, Firefox from 147 and Safari from 26. Deck's hand-off to
-    Floating UI for older browsers does not run yet, so below those versions those panels
-    open away from their trigger. Deck's floor is therefore Chrome and Edge 131, Firefox 147
-    and Safari 26, which is what its <code>package.json</code> declares. Chrome and Firefox
-    were tested at and just below each of those versions; Safari has not been tested, and
-    its number comes from MDN's compatibility data.
+    Edge have in full from 129 and Firefox from 147. Where it is missing, Deck hands them to
+    Floating UI if the page loads it; without Floating UI, a tooltip or popover card opens
+    away from its trigger. Deck's floor is therefore Chrome and Edge 131 and Firefox 133,
+    with Floating UI on the page in Firefox 133 to 146, and that is what its
+    <code>package.json</code> declares. Chrome and Firefox were tested at and just below each
+    of those versions. Deck has not been tested in Safari, so it claims no Safari version.
   </p>
 </section>
 
@@ -207,10 +207,11 @@ require __DIR__ . '/../_layout.php';
     data grid, date picker and chart styles are weight the site gets no use from.
   </p>
   <p>
-    A product that must support Safari 25, Firefox 146, or Chrome and Edge 130 or earlier
-    cannot use all of Deck: below those versions its primary buttons, focus rings or
-    anchored panels fail. Tailwind CSS v4 states support for Safari 16.4, Chrome 111 and
-    Firefox 128, so it reaches further back than Deck in every engine.
+    A product that must support Chrome and Edge 130 or Firefox 132 or earlier cannot use all
+    of Deck: below those versions its primary buttons lose their contrast. A product that
+    must support Safari has to test Deck there first, because that has not been done.
+    Tailwind CSS v4 states support for Safari 16.4, Chrome 111 and Firefox 128, so it
+    reaches further back than Deck in Chrome and Firefox.
   </p>
   <p>
     A team whose policy rules out dependencies below 1.0 cannot use Deck yet. Deck is at
@@ -230,8 +231,8 @@ require __DIR__ . '/../_layout.php';
     than a CSS toolchain. That one file is cached once per site, styles every class that
     later content might use, rethemes from a single value at runtime, and adopts new browser
     features without a redeploy. The price is 12.3 KB of unused CSS on a typical settings
-    page, 69 hand-maintained vendor prefixes, and a minimum of Chrome 131, Firefox 147 and
-    Safari 26 — each of which is a number a team can weigh before choosing Deck.
+    page, 69 hand-maintained vendor prefixes, a minimum of Chrome 131 and Firefox 133, and a
+    Safari that nobody has tested yet — each of which a team can weigh before choosing Deck.
   </p>
   <p class="text-sm text-muted">
     Related: <a href="why-cascade-layers.php">why Deck uses cascade layers</a> and

@@ -557,12 +557,12 @@ $ npm run icons</code></pre>
 &lt;html style="--hue-brand: 320"&gt;   /* or per tenant, at runtime */</code></pre>
 
     <h3>What browsers does Deck support?</h3>
-    <p>Deck works in Chrome and Edge 131, Firefox 147 and Safari 26 and newer. Below those
-      versions something visible fails: primary buttons and focus rings use relative colours
-      taken from <code>light-dark()</code> values, which Chrome supports from 131 and Firefox
-      from 133, and tooltips, popovers and menus are placed with CSS anchor positioning,
-      which Firefox has from 147 and Safari from 26. Chrome and Firefox were tested at those
-      versions; Safari was not.
+    <p>Deck works in Chrome and Edge 131 and Firefox 133 and newer, tested in real builds of
+      each. Below those versions a primary button's label loses its contrast, because it is a
+      relative colour taken from a <code>light-dark()</code> value. In Firefox 133 to 146,
+      tooltips and popover cards need Floating UI on the page, since Firefox has CSS anchor
+      positioning only from 147. Deck has not been tested in Safari yet, so it states no
+      Safari version.
       <a href="docs/explain/why-no-build-step.php">Why there is no build step</a> covers
       what that floor costs.</p>
 

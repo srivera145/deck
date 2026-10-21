@@ -225,6 +225,11 @@ async function build() {
     console.error(`  package.json browserslist must be "<browser> >= <version>" lines for chrome, edge, firefox and safari; got ${JSON.stringify(pkg.browserslist)}.`);
     process.exit(1);
   }
+  // Safari's floor has not been tested, so browserslist names no Safari
+  // version. esbuild still needs a Safari target: without one it strips the
+  // -webkit- prefixes written for Safari, such as -webkit-user-select. This is
+  // not a floor, and any Safari from 17.4 to 26 gives the same output.
+  if (!cssTarget.some(t => t.startsWith('safari'))) cssTarget.push('safari17.4');
 
   // The layer statement has to stay first, so minify the body and re-attach
   const minCss = esbuild

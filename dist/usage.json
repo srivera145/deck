@@ -11,7 +11,7 @@
     "icon": 3366,
     "stack-3": 2270,
     "text-muted": 1607,
-    "btn": 1243,
+    "btn": 1242,
     "icon-sm": 1190,
     "text-sm": 737,
     "badge": 643,
@@ -36,7 +36,7 @@
     "input": 299,
     "fw-semi": 294,
     "field": 288,
-    "btn-primary": 279,
+    "btn-primary": 286,
     "btn-icon": 258,
     "stack-6": 236,
     "card-title": 235,
@@ -113,6 +113,7 @@
     "emoji": 61,
     "grid-tight": 60,
     "lift": 60,
+    "menu": 59,
     "sidebar": 57,
     "navbar": 56,
     "drawer": 56,
@@ -130,7 +131,6 @@
     "mega-item": 49,
     "carousel-arrow": 48,
     "textarea": 48,
-    "menu": 48,
     "mega-item-title": 48,
     "mega-item-note": 48,
     "tabbar-item": 48,
@@ -154,6 +154,7 @@
     "toast": 39,
     "step-marker": 38,
     "step-label": 38,
+    "tip": 38,
     "drawer-header": 37,
     "drawer-body": 37,
     "stagger": 37,
@@ -209,7 +210,7 @@
     "dg-check": 26,
     "editor-tool": 26,
     "g-brand": 26,
-    "tip": 26,
+    "pop": 26,
     "chart-head": 25,
     "drawer-end": 25,
     "scroller": 25,
@@ -307,13 +308,13 @@
     "inset-be-0": 14,
     "inset-ie-0": 14,
     "indicator-badge-dot": 14,
-    "pop": 14,
     "ring-label": 14,
     "tip-arrow": 14,
     "p-2": 14,
     "back-to-top": 14,
     "text-base": 14,
     "clamp-2": 14,
+    "mega": 14,
     "combo-option": 13,
     "container-xl": 13,
     "inset-is-0": 13,
@@ -397,6 +398,7 @@
     "combo-token": 9,
     "combo-list": 9,
     "has-value": 9,
+    "datepicker": 9,
     "datepicker-preset": 9,
     "editor-toolbar": 9,
     "form-actions-sticky": 9,
@@ -443,6 +445,7 @@
     "g-mesh-subtle": 8,
     "border": 8,
     "p-0": 8,
+    "menu-match": 8,
     "delay-3": 8,
     "reveal-fade": 8,
     "toast-icon": 8,
@@ -470,7 +473,6 @@
     "combo-group": 7,
     "app-shell": 7,
     "dg-sort": 7,
-    "datepicker": 7,
     "editor-footer": 7,
     "field-row-cq": 7,
     "g-hatch": 7,
@@ -520,7 +522,6 @@
     "g-border-spin": 6,
     "g-scrim-top": 6,
     "input-sm": 6,
-    "menu-match": 6,
     "is-animating": 6,
     "scroll-progress": 6,
     "flash-good": 6,
@@ -539,7 +540,6 @@
     "gap-1": 6,
     "gap-cq": 6,
     "break-words": 6,
-    "mega": 6,
     "jumbotron-center": 6,
     "speed-dial": 6,
     "speed-dial-action": 6,
@@ -2083,6 +2083,7 @@
     ],
     "btn-primary": [
       "FINDINGS.md",
+      "README.md",
       "bin/deck.mjs",
       "public_html/docs/_layout.php",
       "public_html/docs/components/3d.php",
@@ -2111,6 +2112,7 @@
       "public_html/docs/start/first-page.php",
       "public_html/docs/start/install.php",
       "public_html/index.php",
+      "public_html/llms.txt",
       "public_html/templates/app-shell.html",
       "public_html/templates/auto-repair.html",
       "public_html/templates/carousels.html",
@@ -6358,6 +6360,7 @@
     ],
     "menu": [
       "FINDINGS.md",
+      "README.md",
       "public_html/docs/components/list.php",
       "public_html/docs/components/menu.php",
       "public_html/docs/components/nav.php",
@@ -6366,7 +6369,9 @@
       "public_html/templates/dashboard.html",
       "public_html/templates/index.php",
       "public_html/templates/settings.html",
-      "public_html/templates/sidebars.html"
+      "public_html/templates/sidebars.html",
+      "src/js/deck-adapters.js",
+      "src/js/deck.js"
     ],
     "menu-label": [
       "public_html/docs/components/menu.php",
@@ -6401,6 +6406,7 @@
       "public_html/templates/sidebars.html"
     ],
     "menu-match": [
+      "FINDINGS.md",
       "public_html/docs/components/menu.php",
       "src/js/deck-adapters.js"
     ],
@@ -6943,9 +6949,11 @@
       "src/js/deck-extras.js"
     ],
     "pop": [
+      "FINDINGS.md",
       "README.md",
       "public_html/docs/components/popover.php",
-      "public_html/index.php"
+      "public_html/index.php",
+      "src/js/deck.js"
     ],
     "pop-title": [
       "public_html/docs/components/popover.php",
@@ -7474,7 +7482,9 @@
       "FINDINGS.md",
       "README.md",
       "public_html/docs/components/tooltip.php",
-      "public_html/index.php"
+      "public_html/index.php",
+      "src/js/deck-adapters.js",
+      "src/js/deck.js"
     ],
     "tip-arrow": [
       "README.md",
@@ -8608,7 +8618,8 @@
       "README.md",
       "public_html/index.php",
       "public_html/templates/ecommerce.html",
-      "public_html/templates/product.html"
+      "public_html/templates/product.html",
+      "src/js/deck.js"
     ],
     "mega-grid": [
       "README.md",

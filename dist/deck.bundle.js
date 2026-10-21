@@ -189,13 +189,17 @@ const Deck = (() => {
          only runs where scroll-state queries are missing. */
       if (CSS.supports('anchor-name: --a')) return;
       if (window.innerWidth <= 480) return; // becomes a sheet in CSS
+      /* The panel is position: absolute in the top layer, where the containing
+         block is the document rather than the window, so the window
+         coordinates need the scroll offset. Without it the panel opened as far
+         from its field as the page had been scrolled. */
       const r = this.root.getBoundingClientRect();
       const p = this.panel;
-      p.style.insetInlineStart = Math.max(8, Math.min(r.left, window.innerWidth - p.offsetWidth - 8)) + 'px';
+      p.style.insetInlineStart = (scrollX + Math.max(8, Math.min(r.left, window.innerWidth - p.offsetWidth - 8))) + 'px';
       const below = window.innerHeight - r.bottom;
-      p.style.insetBlockStart = (below > p.offsetHeight + 12 || below > r.top)
-        ? (r.bottom + 6) + 'px'
-        : Math.max(8, r.top - p.offsetHeight - 6) + 'px';
+      p.style.insetBlockStart = (scrollY + ((below > p.offsetHeight + 12 || below > r.top)
+        ? r.bottom + 6
+        : Math.max(8, r.top - p.offsetHeight - 6))) + 'px';
     }
 
     blocked(d) {
@@ -1443,20 +1447,30 @@ const Deck = (() => {
 
   /* Anchor positioning needs a unique anchor-name per pair. Rather than make
      the author invent one, pair up every popovertarget with its panel and
-     generate it. Where the browser lacks anchor positioning this is inert and
-     the Floating UI adapter or Deck's own placement takes over. */
+     generate it. Where the browser lacks anchor positioning, data-deck-anchor
+     hands the panel to the Floating UI adapter instead. That used to happen
+     only after the support check had already returned, so the adapter never
+     saw a trigger (FINDINGS 133). It now covers the panels that have no
+     placement of their own (the date picker, the combobox and a
+     data-deck-mega menu place themselves), opened by a trigger outside the
+     panel: a .pop's own Dismiss button must not become its anchor. */
   let anchorSeq = 0;
+  const FLOATED = '.tip, .pop, .menu, .mega';
   function wireAnchors(root) {
-    if (!CSS.supports('anchor-name: --a')) return;
+    const native = CSS.supports('anchor-name: --a');
     $$('[popovertarget]', root).forEach(trigger => {
       const panel = document.getElementById(trigger.getAttribute('popovertarget'));
       if (!panel || trigger.dataset.deckAnchored) return;
+      if (!native && (!panel.matches(FLOATED) || panel.contains(trigger) ||
+          trigger.hasAttribute('data-deck-mega') ||
+          trigger.getAttribute('popovertargetaction') === 'hide')) return;
       trigger.dataset.deckAnchored = '1';
+      trigger.setAttribute('data-deck-anchor', '#' + panel.id);
+      if (!native) return;
       const name = panel.style.getPropertyValue('--anchor') || `--dk-a${++anchorSeq}`;
       trigger.classList.add('anchor');
       trigger.style.setProperty('--anchor', name);
       panel.style.setProperty('--anchor', name);
-      trigger.setAttribute('data-deck-anchor', '#' + panel.id);
     });
   }
 
@@ -1791,11 +1805,14 @@ if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
            inline insets would then be resolved against the anchored region and
            double-offset the panel. */
         if (CSS.supports('anchor-name: --a')) return;
+        /* .mega is position: absolute in the top layer, so these are document
+           coordinates: the window ones from getBoundingClientRect() plus the
+           scroll offset, or a scrolled page opened it far from its trigger. */
         const r = trigger.getBoundingClientRect();
-        panel.style.insetBlockStart = (r.bottom + 8) + 'px';
+        panel.style.insetBlockStart = (scrollY + r.bottom + 8) + 'px';
         const w = panel.offsetWidth;
         const start = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
-        panel.style.insetInlineStart = start + 'px';
+        panel.style.insetInlineStart = (scrollX + start) + 'px';
       };
       panel.addEventListener('toggle', e => { if (e.newState === 'open') place(); });
       addEventListener('resize', () => { if (panel.matches(':popover-open')) place(); });
@@ -2617,13 +2634,21 @@ if (typeof module !== 'undefined' && module.exports) module.exports = Deck;
       const panel = $(trigger.dataset.deckAnchor);
       if (!panel) return;
       const arrowEl = $('.tip-arrow', panel);
-      const placement = panel.dataset.placement || 'bottom';
+      /* The side each panel takes natively in 25-anchor.css: a tooltip above,
+         a menu below from its start edge, a popover card, mega menu or
+         combobox list below and centred. data-placement overrides it. */
+      const placement = panel.dataset.placement ||
+        (panel.matches('.tip') ? 'top' : panel.matches('.menu') ? 'bottom-start' : 'bottom');
       const matchWidth = panel.classList.contains('menu-match') ||
                          panel.classList.contains('combo-list');
 
       const middleware = [
         offset(8),
-        flip({ fallbackAxisSideDirection: 'start' }),
+        /* Flip between above and below only. With the cross axis checked, a
+           wide panel centred on a trigger near the window's edge overflowed
+           sideways, flipped to a side placement and covered its own trigger;
+           shift() is what keeps it inside horizontally. */
+        flip({ crossAxis: false }),
         shift({ padding: 8 }),
         size({
           padding: 8,

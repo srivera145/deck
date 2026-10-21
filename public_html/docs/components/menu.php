@@ -152,10 +152,12 @@ position-try-order: most-block-size;') ?></code></pre>
     <h3 id="p-fallback-browsers">Where anchor positioning is missing</h3>
     <p>
       The whole block is inside <code>@supports (anchor-name: --a)</code>. Without
-      support, <code>.menu</code> keeps its <code>position: absolute</code> from
-      <code>07-components.css</code> and Deck's adapter — or Floating UI, if you have
-      loaded it — places it. Neither is required, and nothing breaks: the menu appears,
-      just without the flipping.
+      support, Deck's adapter places the menu with Floating UI if the page loads it:
+      8px below its trigger, from the trigger's start edge, flipping above at the bottom
+      of the window. Without Floating UI, <code>.menu</code> keeps its
+      <code>position: absolute</code> from <code>07-components.css</code> and opens where
+      it sits in the markup, so it is next to its trigger only when it follows the trigger
+      there, and it does not flip.
     </p>
   </div>
 </section>

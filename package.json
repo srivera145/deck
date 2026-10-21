@@ -92,8 +92,7 @@
   "browserslist": [
     "chrome >= 131",
     "edge >= 131",
-    "safari >= 26",
-    "firefox >= 147"
+    "firefox >= 133"
   ],
   "publishConfig": {
     "access": "public"

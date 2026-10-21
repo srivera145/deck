@@ -327,10 +327,11 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
     </li>
     <li>
       <strong>A newer browser floor.</strong> Tailwind v4 targets Safari 16.4+, Chrome 111+
-      and Firefox 128+. Deck needs Chrome and Edge 131+, Firefox 147+ and Safari 26+: it
-      takes relative colours from <code>light-dark()</code> values and places its tooltips,
-      popovers and menus with CSS anchor positioning. If you have to support Safari 18,
-      Deck is not an option yet.
+      and Firefox 128+. Deck needs Chrome and Edge 131+ and Firefox 133+, with Floating UI
+      on the page in Firefox 133 to 146: it takes relative colours from
+      <code>light-dark()</code> values and places its tooltips, popovers and menus with CSS
+      anchor positioning. Deck has not been tested in Safari, so test it there before you
+      rely on it.
     </li>
     <li>
       <strong>Maturity.</strong> Tailwind is at v4.3 with years of production use behind it.
@@ -412,9 +413,9 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
   <h2 id="dont">When not to switch</h2>
   <ul class="stack stack-3">
     <li><strong>Your interface is the product.</strong> A design tool, a game, anything with a distinctive visual language. Components will be in your way.</li>
-    <li><strong>You need Safari 16.</strong> Not negotiable.</li>
+    <li><strong>You must support Safari and cannot test Deck there.</strong> Deck has not been tested in Safari yet.</li>
     <li><strong>Your team is fast in Tailwind.</strong> Fluency is worth more than either framework's feature list, and you would be trading a known speed for an unknown one.</li>
-    <li><strong>You ship a small marketing site.</strong> Purged Tailwind will be smaller than 26 KB and you will not use the components.</li>
+    <li><strong>You ship a small marketing site.</strong> Purged Tailwind will be smaller than Deck's <?= e(docs_kb('deck.min.css')) ?> and you will not use the components.</li>
     <li><strong>You depend on a Tailwind component library.</strong> Replacing a UI kit is a much bigger project than replacing a stylesheet.</li>
   </ul>
 </section>
@@ -441,10 +442,10 @@ function versus(string $title, string $tw, string $deck, string $note = ''): voi
       number would be stale within a month.
     </li>
     <li>
-      <strong>Deck's browser floor.</strong> Chrome and Edge 131, Firefox 147 and Safari 26.
-      Chrome and Firefox were tested in real builds at and just below those versions.
-      Safari was not tested; its number comes from MDN's compatibility data, so test if you
-      are near it.
+      <strong>Deck's browser floor.</strong> Chrome and Edge 131 and Firefox 133, tested in
+      real builds at and just below those versions. Firefox 133 to 146 needs Floating UI for
+      tooltips and popover cards. Deck has not been tested in Safari and claims no Safari
+      version.
     </li>
   </ul>
   <p class="dx-note">

@@ -131,11 +131,14 @@
            inline insets would then be resolved against the anchored region and
            double-offset the panel. */
         if (CSS.supports('anchor-name: --a')) return;
+        /* .mega is position: absolute in the top layer, so these are document
+           coordinates: the window ones from getBoundingClientRect() plus the
+           scroll offset, or a scrolled page opened it far from its trigger. */
         const r = trigger.getBoundingClientRect();
-        panel.style.insetBlockStart = (r.bottom + 8) + 'px';
+        panel.style.insetBlockStart = (scrollY + r.bottom + 8) + 'px';
         const w = panel.offsetWidth;
         const start = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
-        panel.style.insetInlineStart = start + 'px';
+        panel.style.insetInlineStart = (scrollX + start) + 'px';
       };
       panel.addEventListener('toggle', e => { if (e.newState === 'open') place(); });
       addEventListener('resize', () => { if (panel.matches(':popover-open')) place(); });

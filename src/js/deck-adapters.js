@@ -57,13 +57,21 @@
       const panel = $(trigger.dataset.deckAnchor);
       if (!panel) return;
       const arrowEl = $('.tip-arrow', panel);
-      const placement = panel.dataset.placement || 'bottom';
+      /* The side each panel takes natively in 25-anchor.css: a tooltip above,
+         a menu below from its start edge, a popover card, mega menu or
+         combobox list below and centred. data-placement overrides it. */
+      const placement = panel.dataset.placement ||
+        (panel.matches('.tip') ? 'top' : panel.matches('.menu') ? 'bottom-start' : 'bottom');
       const matchWidth = panel.classList.contains('menu-match') ||
                          panel.classList.contains('combo-list');
 
       const middleware = [
         offset(8),
-        flip({ fallbackAxisSideDirection: 'start' }),
+        /* Flip between above and below only. With the cross axis checked, a
+           wide panel centred on a trigger near the window's edge overflowed
+           sideways, flipped to a side placement and covered its own trigger;
+           shift() is what keeps it inside horizontally. */
+        flip({ crossAxis: false }),
         shift({ padding: 8 }),
         size({
           padding: 8,

@@ -497,7 +497,7 @@ $ATTRS = [
     ['data-deck-theme', 'A <code>&lt;button&gt;</code>', 'Makes it a light and dark toggle. No code, no handler, and the choice persists.', 'deck.js'],
     ['data-deck-tick', 'Any element with a number in it', 'Counts the number up when it scrolls into view.', 'deck.js'],
     ['data-deck-flip', 'A trigger', 'Flips a card on click. The value is a selector for the card; without one it flips the nearest.', 'deck.js'],
-    ['data-deck-anchor', 'A popover trigger', 'Anchors the popover to the trigger. Set by Deck on popover triggers it wires, and read by the Floating UI adapter where CSS anchor positioning is missing.', 'deck.js, deck-adapters.js'],
+    ['data-deck-anchor', 'A popover trigger', 'Anchors the popover to the trigger. Set by Deck on every popover trigger where CSS anchor positioning exists, and where it is missing on a trigger that opens a <code>.tip</code>, <code>.pop</code>, <code>.menu</code> or <code>.mega</code> from outside it. The Floating UI adapter reads it where CSS anchor positioning is missing.', 'deck.js, deck-adapters.js'],
     ['data-deck-btt', 'A <code>.back-to-top</code>', 'Marks the link as wired and is the hook the visibility rule keys off. Deck adds it during init, so you rarely write it yourself.', 'deck.js'],
     ['data-deck-carousel', 'A <code>.carousel</code>', 'Wires the slides, arrows and dots. Takes <code>data-autoplay</code> in milliseconds.', 'deck-extras.js'],
     ['data-deck-drawer', 'A trigger', 'Opens the drawer named by its value.', 'deck-extras.js'],

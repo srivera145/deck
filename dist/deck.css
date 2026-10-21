@@ -172,8 +172,13 @@
     --brand-soft:  light-dark(var(--brand-50),  oklch(26% .05 var(--hue-brand)));
     --brand-soft-text: light-dark(var(--brand-800), var(--brand-200));
     --focus: light-dark(var(--brand-500), var(--brand-300));
-    --ring: 0 0 0 3px light-dark(oklch(from var(--focus) l c h / .32),
-                                 oklch(from var(--focus) l c h / .42));
+    /* color-mix() rather than a relative colour: oklch(from var(--focus) …)
+       takes its origin from a light-dark() value, which crashes Chrome 123
+       and 124 and resolves to nothing until Chrome 131 and Firefox 133
+       (FINDINGS 132). Mixing with transparent gives the same colour at that
+       alpha and still follows an overridden --focus. */
+    --ring: 0 0 0 3px light-dark(color-mix(in oklch, var(--focus) 32%, transparent),
+                                 color-mix(in oklch, var(--focus) 42%, transparent));
   }
 
   :root {
@@ -7946,8 +7951,10 @@
   }
 
   /* --- Floating UI handoff --------------------------------------------------
-     Where anchor positioning is missing, deck-adapters.js uses Floating UI if
-     it is on the page and falls back to Deck's own placement if it is not.
+     Where anchor positioning is missing, deck-adapters.js places .tip, .pop,
+     .menu and .mega with Floating UI if it is on the page. Without it, the
+     date picker, the combobox and a data-deck-mega menu place themselves, and
+     a .tip or .pop opens where it sits in the markup (FINDINGS 133).
      These rules just get out of the way so the adapter can set inset.
      ---------------------------------------------------------------------- */
   @supports not (anchor-name: --a) {

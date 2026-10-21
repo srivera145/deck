@@ -189,13 +189,17 @@ const Deck = (() => {
          only runs where scroll-state queries are missing. */
       if (CSS.supports('anchor-name: --a')) return;
       if (window.innerWidth <= 480) return; // becomes a sheet in CSS
+      /* The panel is position: absolute in the top layer, where the containing
+         block is the document rather than the window, so the window
+         coordinates need the scroll offset. Without it the panel opened as far
+         from its field as the page had been scrolled. */
       const r = this.root.getBoundingClientRect();
       const p = this.panel;
-      p.style.insetInlineStart = Math.max(8, Math.min(r.left, window.innerWidth - p.offsetWidth - 8)) + 'px';
+      p.style.insetInlineStart = (scrollX + Math.max(8, Math.min(r.left, window.innerWidth - p.offsetWidth - 8))) + 'px';
       const below = window.innerHeight - r.bottom;
-      p.style.insetBlockStart = (below > p.offsetHeight + 12 || below > r.top)
-        ? (r.bottom + 6) + 'px'
-        : Math.max(8, r.top - p.offsetHeight - 6) + 'px';
+      p.style.insetBlockStart = (scrollY + ((below > p.offsetHeight + 12 || below > r.top)
+        ? r.bottom + 6
+        : Math.max(8, r.top - p.offsetHeight - 6))) + 'px';
     }
 
     blocked(d) {
@@ -1443,20 +1447,30 @@ const Deck = (() => {
 
   /* Anchor positioning needs a unique anchor-name per pair. Rather than make
      the author invent one, pair up every popovertarget with its panel and
-     generate it. Where the browser lacks anchor positioning this is inert and
-     the Floating UI adapter or Deck's own placement takes over. */
+     generate it. Where the browser lacks anchor positioning, data-deck-anchor
+     hands the panel to the Floating UI adapter instead. That used to happen
+     only after the support check had already returned, so the adapter never
+     saw a trigger (FINDINGS 133). It now covers the panels that have no
+     placement of their own (the date picker, the combobox and a
+     data-deck-mega menu place themselves), opened by a trigger outside the
+     panel: a .pop's own Dismiss button must not become its anchor. */
   let anchorSeq = 0;
+  const FLOATED = '.tip, .pop, .menu, .mega';
   function wireAnchors(root) {
-    if (!CSS.supports('anchor-name: --a')) return;
+    const native = CSS.supports('anchor-name: --a');
     $$('[popovertarget]', root).forEach(trigger => {
       const panel = document.getElementById(trigger.getAttribute('popovertarget'));
       if (!panel || trigger.dataset.deckAnchored) return;
+      if (!native && (!panel.matches(FLOATED) || panel.contains(trigger) ||
+          trigger.hasAttribute('data-deck-mega') ||
+          trigger.getAttribute('popovertargetaction') === 'hide')) return;
       trigger.dataset.deckAnchored = '1';
+      trigger.setAttribute('data-deck-anchor', '#' + panel.id);
+      if (!native) return;
       const name = panel.style.getPropertyValue('--anchor') || `--dk-a${++anchorSeq}`;
       trigger.classList.add('anchor');
       trigger.style.setProperty('--anchor', name);
       panel.style.setProperty('--anchor', name);
-      trigger.setAttribute('data-deck-anchor', '#' + panel.id);
     });
   }
 
