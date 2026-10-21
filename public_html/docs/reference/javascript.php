@@ -198,7 +198,10 @@ $CORE = [
         'absent' => 'Not persisted and not validated. A value outside 0–360 wraps the way OKLCH'
             . ' does rather than erroring. For per-tenant theming set the property server-side'
             . ' instead, so the first paint is already correct — <code>Deck::theme()</code> in the'
-            . ' PHP helper emits exactly that.',
+            . ' PHP helper emits exactly that. It sets the root only: for one region, set'
+            . ' <code>--hue-brand</code> on an element that has <code>data-theme-scope</code>. Each call'
+            . ' restyles the whole page, about 12ms at 2,000 elements on a desktop in Edge and about'
+            . ' 97ms with the processor slowed four times.',
         'example' => "// Live preview from a slider\n"
             . "range.addEventListener('input', () => Deck.hue(range.value));",
         'source' => 'src/js/deck.js',

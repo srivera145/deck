@@ -37,10 +37,12 @@ const OUT = path.join(ROOT, 'dist', 'api.json');
 
    Scope, not filename, is the real test: `:root { --dur-4: 420ms }` declares a
    token wherever it is written, and `.card { --gap: … }` does not, however
-   token-shaped the name looks. */
+   token-shaped the name looks. A rule that lists :root among its selectors
+   declares global tokens too: the brand block is `:root, [data-theme-scope]`,
+   so it can be worked out again in a scoped region, and requiring every
+   selector to be the root dropped those eighteen tokens from the reference. */
 const ROOT_SCOPE = /^(?::root|html)(?:[\s.:[]|$)/;
-const isRootScope = (rule) =>
-  rule.selectors.length > 0 && rule.selectors.every((s) => ROOT_SCOPE.test(s.trim()));
+const isRootScope = (rule) => rule.selectors.some((s) => ROOT_SCOPE.test(s.trim()));
 
 /* A comment that is a rule of dashes with a label in it is a section divider,
    not documentation for whichever rule happens to follow. Deck writes them as

@@ -2648,3 +2648,120 @@ the button is `#0b5cff` in both schemes with white text (5.26:1).
 pressed `.btn-soft`, the date picker's selected day, and more. Those fills still ignore a
 `--brand` override; they are ramp fills by design, and the docs now say which surfaces
 the recipe reaches. A test covers the default in both schemes and the override.
+
+## 114. A `--hue-brand` below the root rethemed almost nothing — FIXED with `data-theme-scope`
+
+A custom property is computed on the element that declares it, and its children inherit
+the finished value. `--brand-600: oklch(51.6% var(--chroma-brand) var(--hue-brand))` and the
+other brand tokens were declared on `:root` only, so they were worked out once, from the
+root's hue. `Deck.hue()` worked because it writes to `<html>`, the same element. A
+`--hue-brand` on a `<section>` was inherited and read by almost nothing. Measured in Edge,
+of the 110 colours on a kit of brand components that `Deck.hue()` changes, a section with
+`Deck::theme(hue: 24)` on it changed 6 (`.g-mesh` and chart series 2 and 3). A scoped
+`--chroma-brand` changed none of 104. It made no difference whether the hue came from an
+inline style, script or a stylesheet class. `Deck::theme()` itself was only ever
+documented on `<html>`, where it works; the theming guide warned that a scoped hue did
+nothing, and the token reference said "set one anywhere in the tree", which is not true of
+an input.
+
+Exactly 18 tokens read `--hue-brand` or `--chroma-brand`, as 19 declarations
+(`--text-on-brand` is declared twice, static and in the `@supports contrast-color()`
+block): `--brand-50` to `--brand-950`, `--brand`, `--brand-hover`, `--brand-soft`,
+`--brand-soft-text`, `--text-on-brand`, `--focus` and `--ring`. All ten hue and chroma
+inputs together reach 72.
+
+Three ways were measured on a 2,006-element page, 12 interleaved rounds, medians:
+
+- **Declare the 18 on `*`.** Works for any authoring method, but every element works them
+  out: `Deck.hue()` +16%, a theme toggle +25%, first style +22%, on every page, scoped or
+  not. It also breaks overrides set above the element that reads them, silently: the
+  exact-brand recipe (`:root { --brand: … }`) and the token reference's own
+  `<section style="--brand-soft: var(--good-soft)">` example both reverted below their
+  element.
+- **Declare them on `:root, [style*="--hue-brand"], [style*="--chroma-brand"]`.** No
+  measurable cost, but it depends on how the hue is written (an inline style works, a
+  stylesheet class does not), and it would turn every `.g-mesh style="--hue-brand:34"`,
+  the pattern the gradients page recommends, into a theming scope.
+- **Declare them on `:root, [data-theme-scope]`.** No measurable cost, explicit, and
+  independent of where the hue comes from. Chosen; a data attribute rather than a class,
+  so the class API is unchanged.
+
+**Fixed** in `src/01-tokens.css`: the 19 declarations are one rule,
+`:root, [data-theme-scope]`, with the `@supports` override of `--text-on-brand` split the
+same way. `tools/docs/extract.mjs` now counts a rule as declaring global tokens if any of
+its selectors is the root, not every one, or the 18 would have dropped out of
+`dist/api.json` (152 tokens before and after). `Deck::theme()` takes `scope: true` and then
+adds `data-theme-scope` beside the custom properties; without it the output is
+byte-identical to before for all 60 argument combinations tried.
+
+Measured after the fix:
+
+- Regions marked with the attribute follow on all 110 colours and all 18 tokens, whether
+  the hue is from `Deck::theme()`, a stylesheet class or script, and nested scopes each use
+  their own hue. Two regions, at 24 and 265, sit side by side correctly, chart series
+  included.
+- `Deck.hue()` on the root paints the same as before: 0 of 7,680 values differ, light and
+  dark, at four hues. A computed-style diff of all 19 templates against the previous build
+  changed nothing outside #115.
+- A hue on an element without the attribute behaves as before: 8 of 110 colours follow
+  now rather than 6, the extra 2 being chart series 1 (#116). A `.g-mesh` with an inline
+  hue, and `.g-mesh-warm`, change exactly the values they changed in 0.1.3 unless a
+  `.chart` sits inside, where series 1 now follows too.
+- A `--brand` override on `:root` still works at the root and stops at a scope, which
+  works its own `--brand` out; set on the scope element, it reaches inside. Intended, and
+  documented.
+- Cost, unthrottled: `Deck.hue()` 12.6ms before and 12.9ms after, a theme toggle 13.1 and
+  13.4ms, first style 11.4 and 11.6ms, inside the ±6% noise of two identical builds. With
+  ten scoped cards, `Deck.hue()` is 15.3ms against 15.2ms for the same markup on the
+  previous build, where the inline hues do nothing: the extra cost of a page with ten hues
+  comes from the ten hues, not from working the ramp out again.
+
+Not fixed: the other hues (`--hue-neutral`, `--hue-good` and so on) are still root-only.
+Tests cover two regions, nesting, a bare hue, and the override at a scope.
+
+## 115. `data-theme` on a wrapper gave dark text on dark surfaces — FIXED
+
+`data-theme="dark"` on an element switches its `color-scheme`, so every `light-dark()`
+token inside it takes the dark value. Body text does not: `body { color: var(--text) }` is
+worked out once, on `<body>`, and inherited as a finished colour. A dark section on a light
+page therefore drew dark cards with dark text on them: 22.6% lightness text on a 16.2%
+surface, 1.14:1, and 1:1 on `--surface-2`. Of 412 values a root `data-theme="dark"`
+changes on a kit of components, a wrapper changed 182. `Deck::theme(mode: 'dark')` on a
+wrapper did the same, since it emits the same attribute. Found while measuring #114.
+
+**Fixed** in `src/01-tokens.css`: `:where([data-theme]:not(:root)) { color: var(--text); }`,
+at zero specificity, so any colour a component sets still wins. Card text in a dark
+wrapper is now 16.96:1, text on `--surface-2` 14.91:1, and the wrapper follows on 428 of
+428 values. The root is untouched. In the templates, the only values that changed were
+the inherited colour of four containers in the sidebars template's dark rail, which set
+no colour and draw no border; their visible children set their own. The footers and
+jumbotrons dark sections already set their colours. The element gets no background of its
+own; the dark-mode guide now says so. A test checks the contrast.
+
+## 116. A chart given its own hue kept series 1 in the page's colour — FIXED
+
+`.chart` computes `--c2` to `--c6` from `--hue-brand` on the chart, but `--c1` was
+`var(--brand-500)`, which is worked out on the root. A chart under a local hue, such as
+inside a `.g-mesh` with an inline hue, or a `.chart` given one directly, had series 2 to 6
+in the new hue and series 1 in the page's. Inside a `data-theme-scope` region (#114) this
+would have been right anyway, because `--brand-500` is worked out again there.
+
+**Fixed** in `src/14-charts.css`: `--c1: oklch(60.8% var(--chroma-brand) var(--hue-brand))`,
+the `--brand-500` recipe written out. At the root's hue it is the same colour. One thing
+changes: an app that overrode `--brand-500` itself, which the theming guide advises
+against, no longer moves series 1.
+
+## 117. The theming guide said `Deck.hue()` keeps up "sixty times a second" — FIXED in documentation
+
+The slider demo's caption said the whole page follows sixty times a second. `Deck.hue()`
+sets an inherited custom property on the root, so every element on the page is restyled on
+every call. Measured in Edge on a 2,006-element page, that is about 12ms of style
+recalculation per call on a desktop, which fits a 60fps frame with little to spare, and
+about 97ms with the processor slowed four times to stand in for a low-end phone, about ten
+updates a second. Nothing about the page's layout changes, so this is style alone.
+
+**Fixed in documentation:** the caption no longer claims a rate, and the guide and the
+`Deck.hue()` reference give the measured numbers. The guide suggests previewing on one
+`data-theme-scope` region, which restyles only that region (about 0.5ms for a card), and
+applying the hue to the root on `change` rather than `input`. Not fixed in code: the cost
+is what an inherited custom property on the root costs.

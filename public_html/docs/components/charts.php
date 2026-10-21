@@ -107,10 +107,12 @@ function demo_columns(): string
 <section class="stack stack-3">
   <h2 id="palette">The palette</h2>
   <p>
-    <code>.chart</code> declares six series colours as custom properties, and five of them
-    are computed from the brand hue:
+    <code>.chart</code> declares six series colours as custom properties, all computed from
+    the brand hue on the chart itself. The first is the <code>--brand-500</code> recipe
+    written out, so a chart that is given its own <code>--hue-brand</code> keeps all six
+    series in one family:
   </p>
-  <pre class="dx-code"><code><?= e('--c1: var(--brand-500);
+  <pre class="dx-code"><code><?= e('--c1: oklch(60.8% var(--chroma-brand) var(--hue-brand));
 --c2: oklch(64% .13 calc(var(--hue-brand) + 48));
 --c3: oklch(70% .14 calc(var(--hue-brand) + 96));
 --c4: oklch(62% .13 calc(var(--hue-brand) - 52));

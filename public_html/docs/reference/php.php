@@ -204,17 +204,25 @@ $METHODS = [
     ],
     [
         'id' => 'theme',
-        'signature' => 'Deck::theme(?int $hue = null, ?string $mode = null, ?float $chroma = null): string',
+        'signature' => 'Deck::theme(?int $hue = null, ?string $mode = null, ?float $chroma = null, bool $scope = false): string',
         'summary' => 'The per-tenant theming this whole framework was built for: one inline style'
             . ' on the <code>&lt;html&gt;</code> tag, no rebuild, no second stylesheet, and the'
-            . ' right colours in the very first paint.',
+            . ' right colours in the very first paint. With <code>scope: true</code>, the same'
+            . ' for one region of a page.',
         'params' => [
             ['$hue', '?int', 'An OKLCH hue angle, 0 to 360, emitted as <code>--hue-brand</code>.'],
             ['$mode', '?string', "<code>'light'</code> or <code>'dark'</code>, emitted as <code>data-theme</code>."],
             ['$chroma', '?float', 'Emitted as <code>--chroma-brand</code>. Lower is more muted. Trailing zeros are trimmed.'],
+            ['$scope', 'bool', 'Pass <code>true</code> on any element other than <code>&lt;html&gt;</code>.'
+                . ' Adds <code>data-theme-scope</code> beside the custom properties, which makes Deck work'
+                . ' its 18 brand tokens out again on that element; without it, a hue below the root'
+                . ' reaches only gradients and chart series. Left <code>false</code>, the output is'
+                . ' exactly what it was before the parameter existed. See'
+                . ' <a href="../guides/theming.php#scope">theming one region</a>.'],
         ],
-        'returns' => 'A <code>style</code> attribute, a <code>data-theme</code> attribute, both,'
-            . ' or an empty string. Values are escaped.',
+        'returns' => 'A <code>style</code> attribute (followed by <code>data-theme-scope</code> when'
+            . ' <code>$scope</code> is true), a <code>data-theme</code> attribute, both, or an empty'
+            . ' string. Values are escaped.',
         'absent' => 'Every argument is optional and a null one is simply omitted, so a tenant with'
             . ' no brand colour and a user with no theme preference produce an empty string and'
             . ' the defaults apply. Because it is server-rendered there is no flash of the wrong'
@@ -223,10 +231,14 @@ $METHODS = [
             . ' <code>\'unsafe-inline\'</code>, the <code>style</code> attribute is blocked, and a'
             . ' nonce cannot allow an attribute. There, set the <code>hue</code> option and use'
             . ' <code>Deck::head(nonce: …)</code>, which writes the hue into a nonced'
-            . ' <code>&lt;style&gt;</code> instead.',
+            . ' <code>&lt;style&gt;</code> instead. For a scoped region under such a policy, put the'
+            . ' hue in a class in a nonced stylesheet and write <code>data-theme-scope</code> on the'
+            . ' element yourself: the attribute is not a style, so the policy does not block it.',
         'example' => "<html <?= Deck::htmlAttributes(lang: 'en') ?>\n"
             . "      <?= Deck::theme(hue: \$tenant->hue, mode: \$user->theme) ?>>\n"
-            . "<!-- <html lang=\"en\" style=\"--hue-brand:265\" data-theme=\"dark\"> -->",
+            . "<!-- <html lang=\"en\" style=\"--hue-brand:265\" data-theme=\"dark\"> -->\n\n"
+            . "<section class=\"card\" <?= Deck::theme(hue: \$other->hue, scope: true) ?>>\n"
+            . "<!-- <section class=\"card\" style=\"--hue-brand:24\" data-theme-scope> -->",
     ],
     [
         'id' => 'icon',

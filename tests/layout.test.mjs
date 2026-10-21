@@ -522,3 +522,57 @@ test('.btn-primary fills with --brand, so an exact brand colour reaches it in bo
     assert.ok(await contrastOf(exact[s].text, exact[s].bg) >= 4.5, `${s}: text clears 4.5:1 on the override ${JSON.stringify(exact[s])}`);
   }
 });
+
+test('[data-theme-scope] works the brand out from its own hue; a bare hue reaches only the chart', async () => {
+  const region = (id, attrs) => `
+    <section id="${id}" ${attrs}>
+      <button class="btn btn-primary">Save</button> <a href="#x">Link</a>
+      <div class="chart"><div class="chart-bars"><div class="chart-bar s1"><span class="chart-bar-track"><span class="chart-bar-fill" style="--value:50"></span></span></div></div></div>
+    </section>`;
+  await render(`<div data-theme="light">
+    ${region('page', '')}
+    ${region('rust', 'data-theme-scope style="--hue-brand: 24"')}
+    ${region('violet', 'data-theme-scope style="--hue-brand: 265"')}
+    ${region('bare', 'style="--hue-brand: 24"')}
+    <section data-theme-scope style="--hue-brand: 265">${region('nested', 'data-theme-scope style="--hue-brand: 24"')}</section>
+  </div>`);
+  const r = await page.evaluate(() => Object.fromEntries(['page', 'rust', 'violet', 'bare', 'nested'].map((id) => {
+    const q = (s) => getComputedStyle(document.querySelector(`#${id} ${s}`));
+    return [id, { btn: q('.btn').backgroundColor, link: q('a').color, s1: q('.chart-bar-fill').backgroundColor }];
+  })));
+  const detail = JSON.stringify(r);
+  assert.equal(r.page.btn, 'oklch(0.516 0.118 196)', `the page keeps its hue: ${detail}`);
+  for (const [id, hue] of [['rust', 24], ['violet', 265], ['nested', 24]]) {
+    assert.equal(r[id].btn, `oklch(0.516 0.118 ${hue})`, `${id}: the button takes the region's hue: ${detail}`);
+    assert.equal(r[id].link, r[id].btn, `${id}: so does the link: ${detail}`);
+    assert.equal(r[id].s1, `oklch(0.608 0.118 ${hue})`, `${id}: chart series 1 matches the region: ${detail}`);
+  }
+  assert.equal(r.bare.btn, r.page.btn, `without the attribute the button keeps the page's colour: ${detail}`);
+  assert.equal(r.bare.s1, 'oklch(0.608 0.118 24)', `series 1 reads the hue directly, like series 2 to 6: ${detail}`);
+});
+
+test('a :root --brand override stops at a scope, and reaches inside when set on the scope', async () => {
+  await render(`<style>@layer app.base { :root { --brand: #0b5cff; } }</style>
+    <div data-theme="light">
+      <button class="btn btn-primary" id="root">Page</button>
+      <section data-theme-scope style="--hue-brand: 24"><button class="btn btn-primary" id="scoped">Scope</button></section>
+      <section data-theme-scope style="--hue-brand: 24; --brand: #ff5a1f"><button class="btn btn-primary" id="own">Own</button></section>
+    </div>`);
+  const bg = (id) => page.evaluate((id) => getComputedStyle(document.getElementById(id)).backgroundColor, id);
+  assert.equal(await bg('root'), 'rgb(11, 92, 255)');
+  assert.equal(await bg('scoped'), 'oklch(0.516 0.118 24)');
+  assert.equal(await bg('own'), 'rgb(255, 90, 31)');
+});
+
+test('data-theme on a wrapper gives its text the wrapper\'s ink, so a dark card on a light page is readable', async () => {
+  await render(`
+    <div data-theme="light">
+      <section data-theme="dark"><div class="card" id="card"><div class="card-body"><p id="text">Card text</p></div></div></section>
+    </div>`);
+  const { text, bg } = await page.evaluate(() => ({
+    text: getComputedStyle(document.getElementById('text')).color,
+    bg: getComputedStyle(document.getElementById('card')).backgroundColor,
+  }));
+  const ratio = await contrastOf(text, bg);
+  assert.ok(ratio >= 4.5, `text ${text} on ${bg} is ${ratio.toFixed(2)}:1`);
+});

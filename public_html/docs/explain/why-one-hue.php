@@ -57,35 +57,20 @@ require __DIR__ . '/../_layout.php';
     Deck read from <code>--hue-brand</code> alone.
   </p>
   <p>
-    Giving one region of a page a second brand colour takes 19 declarations in Deck.
-    Setting <code>--hue-brand</code> on a container is not enough, because Deck's 18 brand
-    tokens are declared on the root element and resolve there, so everything inside the
-    container inherits colours already computed from the root's hue. Measured in Chrome, a
-    container given only <code>--hue-brand: 24</code> still renders its primary button in
-    the page's original colour, while a container that redeclares all 18 tokens alongside
-    the hue renders its buttons, links, badges and focus colour in the new one.
+    One region of a page can have a different brand colour, but not a second brand colour
+    used alongside the first in the same place. A region gets its own hue with the
+    <code>data-theme-scope</code> attribute, which makes Deck work its 18 brand tokens out
+    again on that element from the hue set there. The attribute is needed because a custom
+    property resolves on the element that declares it: without it, the 18 tokens are
+    declared on the root alone and resolve there, so everything inside a container given
+    only <code>--hue-brand: 24</code> inherits colours already computed from the root's
+    hue. Measured in Edge, such a container rendered 6 of its 110 hue-driven colours in the
+    new hue, all of them gradient and chart colours that read the hue directly, while the
+    same container with the attribute rendered all 110 in the new hue.
   </p>
-  <pre class="dx-code"><code>.brand-secondary {
-  --hue-brand: 24;
-  --brand-50: oklch(97.4% calc(var(--chroma-brand) * .16) var(--hue-brand));
-  --brand-100: oklch(94.2% calc(var(--chroma-brand) * .30) var(--hue-brand));
-  --brand-200: oklch(88.6% calc(var(--chroma-brand) * .48) var(--hue-brand));
-  --brand-300: oklch(80.4% calc(var(--chroma-brand) * .70) var(--hue-brand));
-  --brand-400: oklch(70.2% calc(var(--chroma-brand) * .90) var(--hue-brand));
-  --brand-500: oklch(60.8% var(--chroma-brand) var(--hue-brand));
-  --brand-600: oklch(51.6% var(--chroma-brand) var(--hue-brand));
-  --brand-700: oklch(43.4% calc(var(--chroma-brand) * .92) var(--hue-brand));
-  --brand-800: oklch(35.6% calc(var(--chroma-brand) * .78) var(--hue-brand));
-  --brand-900: oklch(28.2% calc(var(--chroma-brand) * .62) var(--hue-brand));
-  --brand-950: oklch(20.4% calc(var(--chroma-brand) * .46) var(--hue-brand));
-  --text-on-brand: oklch(99% .01 var(--hue-brand));
-  --brand: light-dark(var(--brand-600), var(--brand-400));
-  --brand-hover: light-dark(var(--brand-700), var(--brand-300));
-  --brand-soft: light-dark(var(--brand-50), oklch(26% .05 var(--hue-brand)));
-  --brand-soft-text: light-dark(var(--brand-800), var(--brand-200));
-  --focus: light-dark(var(--brand-500), var(--brand-300));
-  --ring: 0 0 0 3px light-dark(oklch(from var(--focus) l c h / .32), oklch(from var(--focus) l c h / .42));
-}</code></pre>
+  <pre class="dx-code"><code>&lt;section data-theme-scope style="--hue-brand: 24"&gt;
+  &lt;!-- buttons, links, badges, focus rings and charts in hue 24 --&gt;
+&lt;/section&gt;</code></pre>
   <p>
     An exact brand colour is usually not one of the eleven shades Deck generates. Each Deck
     shade has a fixed perceptual lightness, from 97.4% for the lightest to 20.4% for the
@@ -193,9 +178,9 @@ require __DIR__ . '/../_layout.php';
   <p>
     Deck's one-hue model does not suit a brand defined by two co-equal primary colours that
     both need to appear across buttons, links and focus states. Deck can express that brand
-    only by redeclaring its 18 brand tokens in every region that uses the second colour, and
-    an interface that alternates between the two colours throughout will repeat that work in
-    every such region.
+    only by marking every region that uses the second colour with
+    <code>data-theme-scope</code> and the second hue, and an interface that alternates
+    between the two colours throughout, button by button, needs a scope around each one.
   </p>
   <p>
     Deck's one-hue model also does not suit a design system specified as an exact palette of
@@ -219,9 +204,9 @@ require __DIR__ . '/../_layout.php';
     applications, a readable palette in each customer's own colour matters more than a
     second brand colour or an exact swatch match. One number produces eleven shades, a
     dark-mode pairing and 198 declarations of brand styling, can be stored per customer and
-    rendered into the first byte of HTML, and needs no build per tenant. The price is 19
-    declarations for each region that needs a second brand colour, and three role overrides
-    for an exact brand hex.
+    rendered into the first byte of HTML, and needs no build per tenant. The price is a
+    scoped region, one attribute and a hue, wherever a second brand colour appears, and
+    three role overrides for an exact brand hex.
   </p>
   <p class="text-sm text-muted">
     Related: <a href="why-no-build-step.php">why Deck has no build step</a>,

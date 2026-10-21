@@ -33,7 +33,7 @@ Version 0.1.4 · MIT · Chrome 117+, Edge 117+, Safari 17.4+, Firefox 128+
 
 ## What Deck weighs
 
-A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **70.2 KB** Brotli, or **85.3 KB** gzip. Every browser Deck supports sends `br` in
+A page that loads the stylesheet, the icon sprite, and the optional JavaScript transfers **70.2 KB** Brotli, or **85.4 KB** gzip. Every browser Deck supports sends `br` in
 `Accept-Encoding`, and Cloudflare, Vercel, Netlify, and nginx with `ngx_brotli` negotiate
 it for text by default, so Brotli is what most users actually receive.
 
@@ -42,12 +42,12 @@ it for text by default, so Brotli is what most users actually receive.
 | `deck.min.css` | **27.9 KB** | 34.2 KB |
 | `deck-icons.svg` | **31.3 KB** | 38.9 KB |
 | `deck.min.js` | **11.0 KB** | 12.3 KB |
-| **All three** | **70.2 KB** | **85.3 KB** |
+| **All three** | **70.2 KB** | **85.4 KB** |
 
 The sprite is the largest single file, slightly bigger than the stylesheet — worth stating
 plainly rather than leaving you to find it in devtools. Swapping `deck.min.js` for the full
 `deck.bundle.min.js` (adds the carousel, drawer, mega menu, copy button, QR encoder, editor and library adapters)
-makes the JavaScript 19.9 KB and the total 79.2 KB Brotli (95.5 KB gzip).
+makes the JavaScript 19.9 KB and the total 79.1 KB Brotli (95.6 KB gzip).
 
 ### The sprite is a manifest, not a fixed cost
 
@@ -471,10 +471,13 @@ buttons, links, focus rings, badges, tab bar, and shadows all follow:
 ```
 
 Per-tenant theming in a multi-tenant Keel app becomes a single inline style on
-`<html>` — no rebuild, no separate stylesheet per customer.
+`<html>` — no rebuild, no separate stylesheet per customer. To give one region its
+own brand, set the hue on that element and add `data-theme-scope`, which makes the
+brand tokens follow it there (`Deck::theme(hue: $h, scope: true)` emits both). A hue
+on an element without the attribute only reaches gradients and chart series.
 
 Dark mode is automatic from the OS. To force it, set `data-theme="dark"` or
-`data-theme="light"` on `<html>`.
+`data-theme="light"` on `<html>`, or on any element to theme just that section.
 
 ## Layers
 

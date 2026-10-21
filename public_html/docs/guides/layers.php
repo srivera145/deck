@@ -225,8 +225,9 @@ $LAYERS = [
     <li>
       <strong>It is a custom property, and you set it too low.</strong>
       <code>--brand-600</code> resolves on <code>:root</code>, so overriding
-      <code>--hue-brand</code> on a card changes nothing. See
-      <a href="theming.php#scope">the theming guide</a>.
+      <code>--hue-brand</code> on a card leaves its buttons and links alone unless the card
+      also has <code>data-theme-scope</code>, which works the brand tokens out again
+      there. See <a href="theming.php#scope">the theming guide</a>.
     </li>
   </ol>
   <p>

@@ -171,6 +171,27 @@ Deck.theme('light');</code></pre>
 </section>
 
 <section class="stack stack-4">
+  <h2 id="region">One dark section on a light page</h2>
+  <p>
+    <code>data-theme</code> works on any element, not only <code>&lt;html&gt;</code>. A
+    footer, a sidebar or a hero band can stay dark whatever the page is doing:
+  </p>
+  <pre class="dx-code"><code>&lt;footer class="footer" data-theme="dark"&gt;…&lt;/footer&gt;
+
+&lt;!-- or from PHP --&gt;
+&lt;footer class="footer" &lt;?= Deck::theme(mode: 'dark') ?&gt;&gt;</code></pre>
+  <p>
+    Every <code>light-dark()</code> token inside it takes the dark value, and the section's
+    own text takes the dark ink. Before Deck 0.1.4 it did not: body text is worked out once,
+    on <code>&lt;body&gt;</code>, and inherited as a finished colour, so a dark section on a
+    light page kept dark text on its own dark cards, at about 1.1:1. Deck now sets
+    <code>color: var(--text)</code> on any non-root element with <code>data-theme</code>, at
+    zero specificity, so a colour your component sets still wins. The element does not
+    get a background; give it one, or put surfaces such as <code>.card</code> inside it.
+  </p>
+</section>
+
+<section class="stack stack-4">
   <h2 id="caveats">Three things that are not automatic yet</h2>
   <p>
     Measured on a real page rather than assumed. None of these will stop you shipping, and

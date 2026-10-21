@@ -6,7 +6,7 @@
     "documented": 323,
     "undocumented": 622,
     "tokens": 152,
-    "rules": 1806,
+    "rules": 1810,
     "components": 99,
     "states": 40,
     "unattributedStates": 0
@@ -1578,91 +1578,91 @@
         {
           "selector": ".chart",
           "file": "14-charts.css",
-          "line": 15,
+          "line": 18,
           "conditions": []
         },
         {
           "selector": ".chart-sm",
           "file": "14-charts.css",
-          "line": 29,
+          "line": 32,
           "conditions": []
         },
         {
           "selector": ".chart-lg",
           "file": "14-charts.css",
-          "line": 30,
+          "line": 33,
           "conditions": []
         },
         {
           "selector": ".chart-head",
           "file": "14-charts.css",
-          "line": 32,
+          "line": 35,
           "conditions": []
         },
         {
           "selector": ".chart-title",
           "file": "14-charts.css",
-          "line": 33,
+          "line": 36,
           "conditions": []
         },
         {
           "selector": ".chart-note",
           "file": "14-charts.css",
-          "line": 34,
+          "line": 37,
           "conditions": []
         },
         {
           "selector": ".chart-legend",
           "file": "14-charts.css",
-          "line": 39,
+          "line": 42,
           "conditions": []
         },
         {
           "selector": ".chart-legend > *",
           "file": "14-charts.css",
-          "line": 40,
+          "line": 43,
           "conditions": []
         },
         {
           "selector": ".chart-legend > *::before",
           "file": "14-charts.css",
-          "line": 41,
+          "line": 44,
           "conditions": []
         },
         {
           "selector": ".chart-legend [aria-pressed=\"false\"]",
           "file": "14-charts.css",
-          "line": 49,
+          "line": 52,
           "conditions": []
         },
         {
           "selector": ".chart-legend button",
           "file": "14-charts.css",
-          "line": 50,
+          "line": 53,
           "conditions": []
         },
         {
           "selector": ".chart-columns",
           "file": "14-charts.css",
-          "line": 56,
+          "line": 59,
           "conditions": []
         },
         {
           "selector": ".chart-col",
           "file": "14-charts.css",
-          "line": 74,
+          "line": 77,
           "conditions": []
         },
         {
           "selector": ".chart-col:hover",
           "file": "14-charts.css",
-          "line": 85,
+          "line": 88,
           "conditions": []
         },
         {
           "selector": ".chart-bar-fill",
           "file": "14-charts.css",
-          "line": 99,
+          "line": 102,
           "conditions": [
             "@supports (color: contrast-color(red))"
           ]
@@ -1670,7 +1670,7 @@
         {
           "selector": ".chart-col",
           "file": "14-charts.css",
-          "line": 99,
+          "line": 102,
           "conditions": [
             "@supports (color: contrast-color(red))"
           ]
@@ -1678,7 +1678,7 @@
         {
           "selector": ".chart-col-stack > span",
           "file": "14-charts.css",
-          "line": 99,
+          "line": 102,
           "conditions": [
             "@supports (color: contrast-color(red))"
           ]
@@ -1686,7 +1686,7 @@
         {
           "selector": ".chart-meter > span",
           "file": "14-charts.css",
-          "line": 99,
+          "line": 102,
           "conditions": [
             "@supports (color: contrast-color(red))"
           ]
@@ -1694,205 +1694,205 @@
         {
           "selector": ".chart-col[data-label]::after",
           "file": "14-charts.css",
-          "line": 103,
+          "line": 106,
           "conditions": []
         },
         {
           "selector": ".chart-col[data-value]::before",
           "file": "14-charts.css",
-          "line": 114,
+          "line": 117,
           "conditions": []
         },
         {
           "selector": ".chart-col:hover::before",
           "file": "14-charts.css",
-          "line": 132,
+          "line": 135,
           "conditions": []
         },
         {
           "selector": ".chart-col-stack",
           "file": "14-charts.css",
-          "line": 136,
+          "line": 139,
           "conditions": []
         },
         {
           "selector": ".chart-col-stack > span",
           "file": "14-charts.css",
-          "line": 146,
+          "line": 149,
           "conditions": []
         },
         {
           "selector": ".chart-group",
           "file": "14-charts.css",
-          "line": 149,
+          "line": 152,
           "conditions": []
         },
         {
           "selector": ".chart-group > .chart-col",
           "file": "14-charts.css",
-          "line": 150,
+          "line": 153,
           "conditions": []
         },
         {
           "selector": ".chart-bars",
           "file": "14-charts.css",
-          "line": 153,
+          "line": 156,
           "conditions": []
         },
         {
           "selector": ".chart-bar",
           "file": "14-charts.css",
-          "line": 154,
+          "line": 157,
           "conditions": []
         },
         {
           "selector": ".chart-bar-label",
           "file": "14-charts.css",
-          "line": 161,
+          "line": 164,
           "conditions": []
         },
         {
           "selector": ".chart-bar-track",
           "file": "14-charts.css",
-          "line": 162,
+          "line": 165,
           "conditions": []
         },
         {
           "selector": ".chart-bar-fill",
           "file": "14-charts.css",
-          "line": 171,
+          "line": 174,
           "conditions": []
         },
         {
           "selector": ".chart-bar-value",
           "file": "14-charts.css",
-          "line": 183,
+          "line": 186,
           "conditions": []
         },
         {
           "selector": ".chart-svg",
           "file": "14-charts.css",
-          "line": 191,
+          "line": 194,
           "conditions": []
         },
         {
           "selector": ".chart-line",
           "file": "14-charts.css",
-          "line": 196,
+          "line": 199,
           "conditions": []
         },
         {
           "selector": ".chart-line-dashed",
           "file": "14-charts.css",
-          "line": 208,
+          "line": 211,
           "conditions": []
         },
         {
           "selector": ".chart-area",
           "file": "14-charts.css",
-          "line": 210,
+          "line": 213,
           "conditions": []
         },
         {
           "selector": ".chart-dot",
           "file": "14-charts.css",
-          "line": 218,
+          "line": 221,
           "conditions": []
         },
         {
           "selector": ".chart-dot-active",
           "file": "14-charts.css",
-          "line": 224,
+          "line": 227,
           "conditions": []
         },
         {
           "selector": ".chart-gridline",
           "file": "14-charts.css",
-          "line": 226,
+          "line": 229,
           "conditions": []
         },
         {
           "selector": ".chart-baseline",
           "file": "14-charts.css",
-          "line": 231,
+          "line": 234,
           "conditions": []
         },
         {
           "selector": ".chart-x",
           "file": "14-charts.css",
-          "line": 234,
+          "line": 237,
           "conditions": []
         },
         {
           "selector": ".chart-y",
           "file": "14-charts.css",
-          "line": 241,
+          "line": 244,
           "conditions": []
         },
         {
           "selector": ".chart-plot",
           "file": "14-charts.css",
-          "line": 252,
+          "line": 255,
           "conditions": []
         },
         {
           "selector": ".sparkline .chart-line",
           "file": "14-charts.css",
-          "line": 262,
+          "line": 265,
           "conditions": []
         },
         {
           "selector": ".sparkline-good .chart-line",
           "file": "14-charts.css",
-          "line": 263,
+          "line": 266,
           "conditions": []
         },
         {
           "selector": ".sparkline-bad .chart-line",
           "file": "14-charts.css",
-          "line": 264,
+          "line": 267,
           "conditions": []
         },
         {
           "selector": ".chart-meter",
           "file": "14-charts.css",
-          "line": 294,
+          "line": 297,
           "conditions": []
         },
         {
           "selector": ".chart-meter > span",
           "file": "14-charts.css",
-          "line": 301,
+          "line": 304,
           "conditions": []
         },
         {
           "selector": ".chart-meter > span + span",
           "file": "14-charts.css",
-          "line": 306,
+          "line": 309,
           "conditions": []
         },
         {
           "selector": ".chart-heat",
           "file": "14-charts.css",
-          "line": 311,
+          "line": 314,
           "conditions": []
         },
         {
           "selector": ".chart-heat > *",
           "file": "14-charts.css",
-          "line": 312,
+          "line": 315,
           "conditions": []
         },
         {
           "selector": ".chart-heat > *:hover",
           "file": "14-charts.css",
-          "line": 317,
+          "line": 320,
           "conditions": []
         },
         {
           "selector": ".chart-area",
           "file": "14-charts.css",
-          "line": 334,
+          "line": 337,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -1900,7 +1900,7 @@
         {
           "selector": ".chart-bar-fill",
           "file": "14-charts.css",
-          "line": 334,
+          "line": 337,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -1908,7 +1908,7 @@
         {
           "selector": ".chart-col",
           "file": "14-charts.css",
-          "line": 334,
+          "line": 337,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -1916,7 +1916,7 @@
         {
           "selector": ".chart-col-stack",
           "file": "14-charts.css",
-          "line": 334,
+          "line": 337,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -1924,7 +1924,7 @@
         {
           "selector": ".chart-line",
           "file": "14-charts.css",
-          "line": 334,
+          "line": 337,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -1932,7 +1932,7 @@
         {
           "selector": ".chart-line",
           "file": "14-charts.css",
-          "line": 335,
+          "line": 338,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -4693,37 +4693,37 @@
         {
           "selector": ".donut",
           "file": "14-charts.css",
-          "line": 270,
+          "line": 273,
           "conditions": []
         },
         {
           "selector": ".donut-wrap",
           "file": "14-charts.css",
-          "line": 282,
+          "line": 285,
           "conditions": []
         },
         {
           "selector": ".donut-center",
           "file": "14-charts.css",
-          "line": 283,
+          "line": 286,
           "conditions": []
         },
         {
           "selector": ".donut-center .donut-value",
           "file": "14-charts.css",
-          "line": 290,
+          "line": 293,
           "conditions": []
         },
         {
           "selector": ".donut-center .donut-label",
           "file": "14-charts.css",
-          "line": 291,
+          "line": 294,
           "conditions": []
         },
         {
           "selector": ".donut",
           "file": "14-charts.css",
-          "line": 334,
+          "line": 337,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -9132,25 +9132,25 @@
         {
           "selector": ".sparkline",
           "file": "14-charts.css",
-          "line": 256,
+          "line": 259,
           "conditions": []
         },
         {
           "selector": ".sparkline .chart-line",
           "file": "14-charts.css",
-          "line": 262,
+          "line": 265,
           "conditions": []
         },
         {
           "selector": ".sparkline-good .chart-line",
           "file": "14-charts.css",
-          "line": 263,
+          "line": 266,
           "conditions": []
         },
         {
           "selector": ".sparkline-bad .chart-line",
           "file": "14-charts.css",
-          "line": 264,
+          "line": 267,
           "conditions": []
         }
       ]
@@ -16659,14 +16659,14 @@
     {
       "name": "chart",
       "file": "14-charts.css",
-      "line": 15,
+      "line": 18,
       "layer": "deck.components",
       "section": null,
-      "doc": "The frame, and the palette. Six series colours are computed by rotating\n--hue-brand, so charts retheme with the rest of the app and stay in one\nfamily. That also makes them hard to tell apart for a colour-blind\nreader — label the marks directly rather than relying on hue.",
+      "doc": "The frame, and the palette. Six series colours are computed by rotating\n--hue-brand, so charts retheme with the rest of the app and stay in one\nfamily. That also makes them hard to tell apart for a colour-blind\nreader — label the marks directly rather than relying on hue. --c1 is\nthe --brand-500 recipe written out rather than var(--brand-500), so all\nsix are worked out here from the same hue: a .chart given its own\n--hue-brand used to keep series 1 in the page's colour.",
       "declarations": [
         {
           "prop": "--c1",
-          "value": "var(--brand-500)"
+          "value": "oklch(60.8% var(--chroma-brand) var(--hue-brand))"
         },
         {
           "prop": "--c2",
@@ -16717,7 +16717,7 @@
         {
           "selector": ".chart",
           "file": "14-charts.css",
-          "line": 15,
+          "line": 18,
           "conditions": []
         },
         {
@@ -16768,7 +16768,7 @@
         "chart-y"
       ],
       "tokensUsed": [
-        "--brand-500",
+        "--chroma-brand",
         "--hue-brand",
         "--line",
         "--space-3"
@@ -16779,7 +16779,7 @@
     {
       "name": "chart-area",
       "file": "14-charts.css",
-      "line": 210,
+      "line": 213,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -16805,13 +16805,13 @@
         {
           "selector": ".chart-area",
           "file": "14-charts.css",
-          "line": 210,
+          "line": 213,
           "conditions": []
         },
         {
           "selector": ".chart-area",
           "file": "14-charts.css",
-          "line": 334,
+          "line": 337,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -16862,7 +16862,7 @@
     {
       "name": "chart-bar",
       "file": "14-charts.css",
-      "line": 154,
+      "line": 157,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -16892,7 +16892,7 @@
         {
           "selector": ".chart-bar",
           "file": "14-charts.css",
-          "line": 154,
+          "line": 157,
           "conditions": []
         }
       ],
@@ -16912,7 +16912,7 @@
     {
       "name": "chart-bar-fill",
       "file": "14-charts.css",
-      "line": 171,
+      "line": 174,
       "layer": "deck.components",
       "section": null,
       "doc": "The filled part of a horizontal bar, sized from --value. It grows from\nthe starting edge, which needs transform-origin — a physical property —\nflipped for RTL in 19-logical.css.",
@@ -16950,7 +16950,7 @@
         {
           "selector": ".chart-bar-fill",
           "file": "14-charts.css",
-          "line": 99,
+          "line": 102,
           "conditions": [
             "@supports (color: contrast-color(red))"
           ]
@@ -16958,13 +16958,13 @@
         {
           "selector": ".chart-bar-fill",
           "file": "14-charts.css",
-          "line": 171,
+          "line": 174,
           "conditions": []
         },
         {
           "selector": ".chart-bar-fill",
           "file": "14-charts.css",
-          "line": 334,
+          "line": 337,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -16999,7 +16999,7 @@
     {
       "name": "chart-bar-label",
       "file": "14-charts.css",
-      "line": 161,
+      "line": 164,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -17025,7 +17025,7 @@
         {
           "selector": ".chart-bar-label",
           "file": "14-charts.css",
-          "line": 161,
+          "line": 164,
           "conditions": []
         }
       ],
@@ -17039,7 +17039,7 @@
     {
       "name": "chart-bar-track",
       "file": "14-charts.css",
-      "line": 162,
+      "line": 165,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -17065,7 +17065,7 @@
         {
           "selector": ".chart-bar-track",
           "file": "14-charts.css",
-          "line": 162,
+          "line": 165,
           "conditions": []
         }
       ],
@@ -17080,7 +17080,7 @@
     {
       "name": "chart-bar-value",
       "file": "14-charts.css",
-      "line": 183,
+      "line": 186,
       "layer": "deck.components",
       "section": null,
       "doc": "The value printed beside a bar rather than inside it. Prefer this over\ntext on the fill: contrast-color() raises the floor for text on a series\ncolour but does not guarantee AA.",
@@ -17102,7 +17102,7 @@
         {
           "selector": ".chart-bar-value",
           "file": "14-charts.css",
-          "line": 183,
+          "line": 186,
           "conditions": []
         }
       ],
@@ -17116,7 +17116,7 @@
     {
       "name": "chart-bars",
       "file": "14-charts.css",
-      "line": 153,
+      "line": 156,
       "layer": "deck.components",
       "section": "Bars (horizontal)",
       "doc": null,
@@ -17138,7 +17138,7 @@
         {
           "selector": ".chart-bars",
           "file": "14-charts.css",
-          "line": 153,
+          "line": 156,
           "conditions": []
         }
       ],
@@ -17152,7 +17152,7 @@
     {
       "name": "chart-baseline",
       "file": "14-charts.css",
-      "line": 231,
+      "line": 234,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -17174,7 +17174,7 @@
         {
           "selector": ".chart-baseline",
           "file": "14-charts.css",
-          "line": 231,
+          "line": 234,
           "conditions": []
         }
       ],
@@ -17188,7 +17188,7 @@
     {
       "name": "chart-col",
       "file": "14-charts.css",
-      "line": 74,
+      "line": 77,
       "layer": "deck.components",
       "section": null,
       "doc": "A column. Its height is calc(var(--value) * 1%), so rendering a chart is\nwriting numbers into style attributes. data-label and data-value are drawn\nas generated content, which means they are for sighted readers only.",
@@ -17234,19 +17234,19 @@
         {
           "selector": ".chart-col",
           "file": "14-charts.css",
-          "line": 74,
+          "line": 77,
           "conditions": []
         },
         {
           "selector": ".chart-col:hover",
           "file": "14-charts.css",
-          "line": 85,
+          "line": 88,
           "conditions": []
         },
         {
           "selector": ".chart-col",
           "file": "14-charts.css",
-          "line": 99,
+          "line": 102,
           "conditions": [
             "@supports (color: contrast-color(red))"
           ]
@@ -17254,31 +17254,31 @@
         {
           "selector": ".chart-col[data-label]::after",
           "file": "14-charts.css",
-          "line": 103,
+          "line": 106,
           "conditions": []
         },
         {
           "selector": ".chart-col[data-value]::before",
           "file": "14-charts.css",
-          "line": 114,
+          "line": 117,
           "conditions": []
         },
         {
           "selector": ".chart-col:hover::before",
           "file": "14-charts.css",
-          "line": 132,
+          "line": 135,
           "conditions": []
         },
         {
           "selector": ".chart-group > .chart-col",
           "file": "14-charts.css",
-          "line": 150,
+          "line": 153,
           "conditions": []
         },
         {
           "selector": ".chart-col",
           "file": "14-charts.css",
-          "line": 334,
+          "line": 337,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -17322,7 +17322,7 @@
     {
       "name": "chart-col-stack",
       "file": "14-charts.css",
-      "line": 136,
+      "line": 139,
       "layer": "deck.components",
       "section": null,
       "doc": "Stacked columns: nest segments inside a .chart-col-stack",
@@ -17364,7 +17364,7 @@
         {
           "selector": ".chart-col-stack > span",
           "file": "14-charts.css",
-          "line": 99,
+          "line": 102,
           "conditions": [
             "@supports (color: contrast-color(red))"
           ]
@@ -17372,19 +17372,19 @@
         {
           "selector": ".chart-col-stack",
           "file": "14-charts.css",
-          "line": 136,
+          "line": 139,
           "conditions": []
         },
         {
           "selector": ".chart-col-stack > span",
           "file": "14-charts.css",
-          "line": 146,
+          "line": 149,
           "conditions": []
         },
         {
           "selector": ".chart-col-stack",
           "file": "14-charts.css",
-          "line": 334,
+          "line": 337,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -17414,7 +17414,7 @@
     {
       "name": "chart-columns",
       "file": "14-charts.css",
-      "line": 56,
+      "line": 59,
       "layer": "deck.components",
       "section": "Columns (vertical bars)",
       "doc": "<div class=\"chart-columns\">\n<div class=\"chart-col\" style=\"--value:68\" data-label=\"Mar\" data-value=\"68\"></div>",
@@ -17464,7 +17464,7 @@
         {
           "selector": ".chart-columns",
           "file": "14-charts.css",
-          "line": 56,
+          "line": 59,
           "conditions": []
         },
         {
@@ -17496,7 +17496,7 @@
     {
       "name": "chart-dot",
       "file": "14-charts.css",
-      "line": 218,
+      "line": 221,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -17522,7 +17522,7 @@
         {
           "selector": ".chart-dot",
           "file": "14-charts.css",
-          "line": 218,
+          "line": 221,
           "conditions": []
         }
       ],
@@ -17540,7 +17540,7 @@
     {
       "name": "chart-dot-active",
       "file": "14-charts.css",
-      "line": 224,
+      "line": 227,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -17554,7 +17554,7 @@
         {
           "selector": ".chart-dot-active",
           "file": "14-charts.css",
-          "line": 224,
+          "line": 227,
           "conditions": []
         }
       ],
@@ -17569,7 +17569,7 @@
     {
       "name": "chart-gridline",
       "file": "14-charts.css",
-      "line": 226,
+      "line": 229,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -17591,7 +17591,7 @@
         {
           "selector": ".chart-gridline",
           "file": "14-charts.css",
-          "line": 226,
+          "line": 229,
           "conditions": []
         }
       ],
@@ -17605,7 +17605,7 @@
     {
       "name": "chart-group",
       "file": "14-charts.css",
-      "line": 149,
+      "line": 152,
       "layer": "deck.components",
       "section": null,
       "doc": "Grouped columns",
@@ -17639,13 +17639,13 @@
         {
           "selector": ".chart-group",
           "file": "14-charts.css",
-          "line": 149,
+          "line": 152,
           "conditions": []
         },
         {
           "selector": ".chart-group > .chart-col",
           "file": "14-charts.css",
-          "line": 150,
+          "line": 153,
           "conditions": []
         }
       ],
@@ -17657,7 +17657,7 @@
     {
       "name": "chart-head",
       "file": "14-charts.css",
-      "line": 32,
+      "line": 35,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -17683,7 +17683,7 @@
         {
           "selector": ".chart-head",
           "file": "14-charts.css",
-          "line": 32,
+          "line": 35,
           "conditions": []
         }
       ],
@@ -17697,7 +17697,7 @@
     {
       "name": "chart-heat",
       "file": "14-charts.css",
-      "line": 311,
+      "line": 314,
       "layer": "deck.components",
       "section": null,
       "doc": "A grid of --cols columns whose cells mix the series colour with the\nsunken background by --value, interpolated in oklab.",
@@ -17719,19 +17719,19 @@
         {
           "selector": ".chart-heat",
           "file": "14-charts.css",
-          "line": 311,
+          "line": 314,
           "conditions": []
         },
         {
           "selector": ".chart-heat > *",
           "file": "14-charts.css",
-          "line": 312,
+          "line": 315,
           "conditions": []
         },
         {
           "selector": ".chart-heat > *:hover",
           "file": "14-charts.css",
-          "line": 317,
+          "line": 320,
           "conditions": []
         },
         {
@@ -17757,7 +17757,7 @@
     {
       "name": "chart-legend",
       "file": "14-charts.css",
-      "line": 39,
+      "line": 42,
       "layer": "deck.components",
       "section": null,
       "doc": "The key. Built from real buttons it gets a working toggle state for free,\nbecause the faded style keys off [aria-pressed=\"false\"].",
@@ -17787,31 +17787,31 @@
         {
           "selector": ".chart-legend",
           "file": "14-charts.css",
-          "line": 39,
+          "line": 42,
           "conditions": []
         },
         {
           "selector": ".chart-legend > *",
           "file": "14-charts.css",
-          "line": 40,
+          "line": 43,
           "conditions": []
         },
         {
           "selector": ".chart-legend > *::before",
           "file": "14-charts.css",
-          "line": 41,
+          "line": 44,
           "conditions": []
         },
         {
           "selector": ".chart-legend [aria-pressed=\"false\"]",
           "file": "14-charts.css",
-          "line": 49,
+          "line": 52,
           "conditions": []
         },
         {
           "selector": ".chart-legend button",
           "file": "14-charts.css",
-          "line": 50,
+          "line": 53,
           "conditions": []
         }
       ],
@@ -17830,7 +17830,7 @@
     {
       "name": "chart-lg",
       "file": "14-charts.css",
-      "line": 30,
+      "line": 33,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -17844,7 +17844,7 @@
         {
           "selector": ".chart-lg",
           "file": "14-charts.css",
-          "line": 30,
+          "line": 33,
           "conditions": []
         }
       ],
@@ -17856,7 +17856,7 @@
     {
       "name": "chart-line",
       "file": "14-charts.css",
-      "line": 196,
+      "line": 199,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -17902,31 +17902,31 @@
         {
           "selector": ".chart-line",
           "file": "14-charts.css",
-          "line": 196,
+          "line": 199,
           "conditions": []
         },
         {
           "selector": ".sparkline .chart-line",
           "file": "14-charts.css",
-          "line": 262,
+          "line": 265,
           "conditions": []
         },
         {
           "selector": ".sparkline-good .chart-line",
           "file": "14-charts.css",
-          "line": 263,
+          "line": 266,
           "conditions": []
         },
         {
           "selector": ".sparkline-bad .chart-line",
           "file": "14-charts.css",
-          "line": 264,
+          "line": 267,
           "conditions": []
         },
         {
           "selector": ".chart-line",
           "file": "14-charts.css",
-          "line": 334,
+          "line": 337,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -17934,7 +17934,7 @@
         {
           "selector": ".chart-line",
           "file": "14-charts.css",
-          "line": 335,
+          "line": 338,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -17957,7 +17957,7 @@
     {
       "name": "chart-line-dashed",
       "file": "14-charts.css",
-      "line": 208,
+      "line": 211,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -17983,7 +17983,7 @@
         {
           "selector": ".chart-line-dashed",
           "file": "14-charts.css",
-          "line": 208,
+          "line": 211,
           "conditions": []
         }
       ],
@@ -17995,7 +17995,7 @@
     {
       "name": "chart-meter",
       "file": "14-charts.css",
-      "line": 294,
+      "line": 297,
       "layer": "deck.components",
       "section": "Progress-style comparison",
       "doc": null,
@@ -18025,7 +18025,7 @@
         {
           "selector": ".chart-meter > span",
           "file": "14-charts.css",
-          "line": 99,
+          "line": 102,
           "conditions": [
             "@supports (color: contrast-color(red))"
           ]
@@ -18033,19 +18033,19 @@
         {
           "selector": ".chart-meter",
           "file": "14-charts.css",
-          "line": 294,
+          "line": 297,
           "conditions": []
         },
         {
           "selector": ".chart-meter > span",
           "file": "14-charts.css",
-          "line": 301,
+          "line": 304,
           "conditions": []
         },
         {
           "selector": ".chart-meter > span + span",
           "file": "14-charts.css",
-          "line": 306,
+          "line": 309,
           "conditions": []
         },
         {
@@ -18074,7 +18074,7 @@
     {
       "name": "chart-note",
       "file": "14-charts.css",
-      "line": 34,
+      "line": 37,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -18092,7 +18092,7 @@
         {
           "selector": ".chart-note",
           "file": "14-charts.css",
-          "line": 34,
+          "line": 37,
           "conditions": []
         }
       ],
@@ -18107,7 +18107,7 @@
     {
       "name": "chart-plot",
       "file": "14-charts.css",
-      "line": 252,
+      "line": 255,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -18125,7 +18125,7 @@
         {
           "selector": ".chart-plot",
           "file": "14-charts.css",
-          "line": 252,
+          "line": 255,
           "conditions": []
         }
       ],
@@ -18137,7 +18137,7 @@
     {
       "name": "chart-sm",
       "file": "14-charts.css",
-      "line": 29,
+      "line": 32,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -18151,7 +18151,7 @@
         {
           "selector": ".chart-sm",
           "file": "14-charts.css",
-          "line": 29,
+          "line": 32,
           "conditions": []
         }
       ],
@@ -18163,7 +18163,7 @@
     {
       "name": "chart-svg",
       "file": "14-charts.css",
-      "line": 191,
+      "line": 194,
       "layer": "deck.components",
       "section": "Line and area (inline SVG)",
       "doc": "<svg class=\"chart-svg\" viewBox=\"0 0 300 100\" preserveAspectRatio=\"none\">\n<path class=\"chart-area\" d=\"...\"/>\n<path class=\"chart-line\" d=\"...\"/>",
@@ -18185,7 +18185,7 @@
         {
           "selector": ".chart-svg",
           "file": "14-charts.css",
-          "line": 191,
+          "line": 194,
           "conditions": []
         },
         {
@@ -18207,7 +18207,7 @@
     {
       "name": "chart-title",
       "file": "14-charts.css",
-      "line": 33,
+      "line": 36,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -18225,7 +18225,7 @@
         {
           "selector": ".chart-title",
           "file": "14-charts.css",
-          "line": 33,
+          "line": 36,
           "conditions": []
         }
       ],
@@ -18239,7 +18239,7 @@
     {
       "name": "chart-x",
       "file": "14-charts.css",
-      "line": 234,
+      "line": 237,
       "layer": "deck.components",
       "section": "Axis labels",
       "doc": null,
@@ -18269,7 +18269,7 @@
         {
           "selector": ".chart-x",
           "file": "14-charts.css",
-          "line": 234,
+          "line": 237,
           "conditions": []
         }
       ],
@@ -18285,7 +18285,7 @@
     {
       "name": "chart-y",
       "file": "14-charts.css",
-      "line": 241,
+      "line": 244,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -18331,7 +18331,7 @@
         {
           "selector": ".chart-y",
           "file": "14-charts.css",
-          "line": 241,
+          "line": 244,
           "conditions": []
         }
       ],
@@ -25858,7 +25858,7 @@
     {
       "name": "donut",
       "file": "14-charts.css",
-      "line": 270,
+      "line": 273,
       "layer": "deck.components",
       "section": null,
       "doc": "A conic gradient driven by --value, with .donut-center holding a figure\nin the hole. One element, no SVG. Give it role=\"img\" and a label — the\nshape carries the meaning and nothing else conveys it.",
@@ -25904,13 +25904,13 @@
         {
           "selector": ".donut",
           "file": "14-charts.css",
-          "line": 270,
+          "line": 273,
           "conditions": []
         },
         {
           "selector": ".donut",
           "file": "14-charts.css",
-          "line": 334,
+          "line": 337,
           "conditions": [
             "@media (prefers-reduced-motion: reduce)"
           ]
@@ -25945,7 +25945,7 @@
     {
       "name": "donut-center",
       "file": "14-charts.css",
-      "line": 283,
+      "line": 286,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -25975,19 +25975,19 @@
         {
           "selector": ".donut-center",
           "file": "14-charts.css",
-          "line": 283,
+          "line": 286,
           "conditions": []
         },
         {
           "selector": ".donut-center .donut-value",
           "file": "14-charts.css",
-          "line": 290,
+          "line": 293,
           "conditions": []
         },
         {
           "selector": ".donut-center .donut-label",
           "file": "14-charts.css",
-          "line": 291,
+          "line": 294,
           "conditions": []
         }
       ],
@@ -25999,7 +25999,7 @@
     {
       "name": "donut-label",
       "file": "14-charts.css",
-      "line": 291,
+      "line": 294,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -26008,7 +26008,7 @@
         {
           "selector": ".donut-center .donut-label",
           "file": "14-charts.css",
-          "line": 291,
+          "line": 294,
           "conditions": []
         }
       ],
@@ -26034,7 +26034,7 @@
     {
       "name": "donut-value",
       "file": "14-charts.css",
-      "line": 290,
+      "line": 293,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -26043,7 +26043,7 @@
         {
           "selector": ".donut-center .donut-value",
           "file": "14-charts.css",
-          "line": 290,
+          "line": 293,
           "conditions": []
         }
       ],
@@ -26076,7 +26076,7 @@
     {
       "name": "donut-wrap",
       "file": "14-charts.css",
-      "line": 282,
+      "line": 285,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -26098,7 +26098,7 @@
         {
           "selector": ".donut-wrap",
           "file": "14-charts.css",
-          "line": 282,
+          "line": 285,
           "conditions": []
         }
       ],
@@ -47761,7 +47761,7 @@
     {
       "name": "s-bad",
       "file": "14-charts.css",
-      "line": 330,
+      "line": 333,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47775,7 +47775,7 @@
         {
           "selector": ".s-bad",
           "file": "14-charts.css",
-          "line": 330,
+          "line": 333,
           "conditions": []
         }
       ],
@@ -47789,7 +47789,7 @@
     {
       "name": "s-good",
       "file": "14-charts.css",
-      "line": 328,
+      "line": 331,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47803,7 +47803,7 @@
         {
           "selector": ".s-good",
           "file": "14-charts.css",
-          "line": 328,
+          "line": 331,
           "conditions": []
         }
       ],
@@ -47817,7 +47817,7 @@
     {
       "name": "s-muted",
       "file": "14-charts.css",
-      "line": 331,
+      "line": 334,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47831,7 +47831,7 @@
         {
           "selector": ".s-muted",
           "file": "14-charts.css",
-          "line": 331,
+          "line": 334,
           "conditions": []
         }
       ],
@@ -47845,7 +47845,7 @@
     {
       "name": "s-warn",
       "file": "14-charts.css",
-      "line": 329,
+      "line": 332,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47859,7 +47859,7 @@
         {
           "selector": ".s-warn",
           "file": "14-charts.css",
-          "line": 329,
+          "line": 332,
           "conditions": []
         }
       ],
@@ -47873,7 +47873,7 @@
     {
       "name": "s1",
       "file": "14-charts.css",
-      "line": 322,
+      "line": 325,
       "layer": "deck.components",
       "section": null,
       "doc": "Series 1. Every chart mark reads --series, so a colour is set once on\nthe element and the fill, stroke and legend swatch all follow.",
@@ -47887,7 +47887,7 @@
         {
           "selector": ".s1",
           "file": "14-charts.css",
-          "line": 322,
+          "line": 325,
           "conditions": []
         }
       ],
@@ -47901,7 +47901,7 @@
     {
       "name": "s2",
       "file": "14-charts.css",
-      "line": 323,
+      "line": 326,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47915,7 +47915,7 @@
         {
           "selector": ".s2",
           "file": "14-charts.css",
-          "line": 323,
+          "line": 326,
           "conditions": []
         }
       ],
@@ -47929,7 +47929,7 @@
     {
       "name": "s3",
       "file": "14-charts.css",
-      "line": 324,
+      "line": 327,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47943,7 +47943,7 @@
         {
           "selector": ".s3",
           "file": "14-charts.css",
-          "line": 324,
+          "line": 327,
           "conditions": []
         }
       ],
@@ -47957,7 +47957,7 @@
     {
       "name": "s4",
       "file": "14-charts.css",
-      "line": 325,
+      "line": 328,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47971,7 +47971,7 @@
         {
           "selector": ".s4",
           "file": "14-charts.css",
-          "line": 325,
+          "line": 328,
           "conditions": []
         }
       ],
@@ -47985,7 +47985,7 @@
     {
       "name": "s5",
       "file": "14-charts.css",
-      "line": 326,
+      "line": 329,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -47999,7 +47999,7 @@
         {
           "selector": ".s5",
           "file": "14-charts.css",
-          "line": 326,
+          "line": 329,
           "conditions": []
         }
       ],
@@ -48013,7 +48013,7 @@
     {
       "name": "s6",
       "file": "14-charts.css",
-      "line": 327,
+      "line": 330,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -48027,7 +48027,7 @@
         {
           "selector": ".s6",
           "file": "14-charts.css",
-          "line": 327,
+          "line": 330,
           "conditions": []
         }
       ],
@@ -50130,7 +50130,7 @@
     {
       "name": "sparkline",
       "file": "14-charts.css",
-      "line": 256,
+      "line": 259,
       "layer": "deck.components",
       "section": null,
       "doc": "A tiny inline chart for a table cell or a stat block.",
@@ -50156,13 +50156,13 @@
         {
           "selector": ".sparkline",
           "file": "14-charts.css",
-          "line": 256,
+          "line": 259,
           "conditions": []
         },
         {
           "selector": ".sparkline .chart-line",
           "file": "14-charts.css",
-          "line": 262,
+          "line": 265,
           "conditions": []
         }
       ],
@@ -50180,7 +50180,7 @@
     {
       "name": "sparkline-bad",
       "file": "14-charts.css",
-      "line": 264,
+      "line": 267,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -50189,7 +50189,7 @@
         {
           "selector": ".sparkline-bad .chart-line",
           "file": "14-charts.css",
-          "line": 264,
+          "line": 267,
           "conditions": []
         }
       ],
@@ -50200,7 +50200,7 @@
     {
       "name": "sparkline-good",
       "file": "14-charts.css",
-      "line": 263,
+      "line": 266,
       "layer": "deck.components",
       "section": null,
       "doc": null,
@@ -50209,7 +50209,7 @@
         {
           "selector": ".sparkline-good .chart-line",
           "file": "14-charts.css",
-          "line": 263,
+          "line": 266,
           "conditions": []
         }
       ],
@@ -57803,128 +57803,205 @@
       "name": "--brand-50",
       "value": "oklch(97.4% calc(var(--chroma-brand) * .16) var(--hue-brand))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
       "conditions": [],
-      "doc": null,
-      "group": null,
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
       "kind": "color"
     },
     {
       "name": "--brand-100",
       "value": "oklch(94.2% calc(var(--chroma-brand) * .30) var(--hue-brand))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
       "conditions": [],
-      "doc": null,
-      "group": null,
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
       "kind": "color"
     },
     {
       "name": "--brand-200",
       "value": "oklch(88.6% calc(var(--chroma-brand) * .48) var(--hue-brand))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
       "conditions": [],
-      "doc": null,
-      "group": null,
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
       "kind": "color"
     },
     {
       "name": "--brand-300",
       "value": "oklch(80.4% calc(var(--chroma-brand) * .70) var(--hue-brand))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
       "conditions": [],
-      "doc": null,
-      "group": null,
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
       "kind": "color"
     },
     {
       "name": "--brand-400",
       "value": "oklch(70.2% calc(var(--chroma-brand) * .90) var(--hue-brand))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
       "conditions": [],
-      "doc": null,
-      "group": null,
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
       "kind": "color"
     },
     {
       "name": "--brand-500",
       "value": "oklch(60.8% var(--chroma-brand) var(--hue-brand))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
       "conditions": [],
-      "doc": null,
-      "group": null,
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
       "kind": "color"
     },
     {
       "name": "--brand-600",
       "value": "oklch(51.6% var(--chroma-brand) var(--hue-brand))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
       "conditions": [],
-      "doc": null,
-      "group": null,
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
       "kind": "color"
     },
     {
       "name": "--brand-700",
       "value": "oklch(43.4% calc(var(--chroma-brand) * .92) var(--hue-brand))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
       "conditions": [],
-      "doc": null,
-      "group": null,
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
       "kind": "color"
     },
     {
       "name": "--brand-800",
       "value": "oklch(35.6% calc(var(--chroma-brand) * .78) var(--hue-brand))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
       "conditions": [],
-      "doc": null,
-      "group": null,
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
       "kind": "color"
     },
     {
       "name": "--brand-900",
       "value": "oklch(28.2% calc(var(--chroma-brand) * .62) var(--hue-brand))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
       "conditions": [],
-      "doc": null,
-      "group": null,
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
       "kind": "color"
     },
     {
       "name": "--brand-950",
       "value": "oklch(20.4% calc(var(--chroma-brand) * .46) var(--hue-brand))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
       "conditions": [],
-      "doc": null,
-      "group": null,
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
       "kind": "color"
+    },
+    {
+      "name": "--text-on-brand",
+      "value": "oklch(99% .01 var(--hue-brand))",
+      "file": "01-tokens.css",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
+      "conditions": [],
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
+      "kind": "color"
+    },
+    {
+      "name": "--brand",
+      "value": "light-dark(var(--brand-600), var(--brand-400))",
+      "file": "01-tokens.css",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
+      "conditions": [],
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
+      "kind": "color"
+    },
+    {
+      "name": "--brand-hover",
+      "value": "light-dark(var(--brand-700), var(--brand-300))",
+      "file": "01-tokens.css",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
+      "conditions": [],
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
+      "kind": "color"
+    },
+    {
+      "name": "--brand-soft",
+      "value": "light-dark(var(--brand-50), oklch(26% .05 var(--hue-brand)))",
+      "file": "01-tokens.css",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
+      "conditions": [],
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
+      "kind": "color"
+    },
+    {
+      "name": "--brand-soft-text",
+      "value": "light-dark(var(--brand-800), var(--brand-200))",
+      "file": "01-tokens.css",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
+      "conditions": [],
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
+      "kind": "color"
+    },
+    {
+      "name": "--focus",
+      "value": "light-dark(var(--brand-500), var(--brand-300))",
+      "file": "01-tokens.css",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
+      "conditions": [],
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
+      "kind": "color"
+    },
+    {
+      "name": "--ring",
+      "value": "0 0 0 3px light-dark(oklch(from var(--focus) l c h / .32), oklch(from var(--focus) l c h / .42))",
+      "file": "01-tokens.css",
+      "line": 49,
+      "scope": ":root, [data-theme-scope]",
+      "conditions": [],
+      "doc": "A custom property is worked out on the element that declares it, and\nits children inherit the finished value. Declared on :root alone, these\neighteen were worked out once from the root's hue, so a --hue-brand set\non a <section> was inherited by everything inside it and read by\nnothing. They are declared on :root and again on any element marked\ndata-theme-scope, which works them out from its own hue and chroma:\n<section data-theme-scope style=\"--hue-brand: 24\">\nWithout the attribute, a hue on an element reaches only the rules that\nread --hue-brand directly, such as .g-mesh and the chart series. A\n--brand set on :root stops at a scope, because the scope works --brand\nout again; set it on the scope to reach inside. No cost was measurable\nuntil a scope exists. FINDINGS 114.",
+      "group": "Brand: every token that reads --hue-brand or --chroma-brand",
+      "kind": "other"
     },
     {
       "name": "--ink-0",
       "value": "oklch(100% 0 0)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -57935,7 +58012,7 @@
       "name": "--ink-25",
       "value": "oklch(99.1% calc(var(--chroma-neutral) * .5) var(--hue-neutral))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -57946,7 +58023,7 @@
       "name": "--ink-50",
       "value": "oklch(97.8% var(--chroma-neutral) var(--hue-neutral))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -57957,7 +58034,7 @@
       "name": "--ink-100",
       "value": "oklch(95.4% calc(var(--chroma-neutral) * 1.4) var(--hue-neutral))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -57968,7 +58045,7 @@
       "name": "--ink-200",
       "value": "oklch(91.2% calc(var(--chroma-neutral) * 1.8) var(--hue-neutral))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -57979,7 +58056,7 @@
       "name": "--ink-300",
       "value": "oklch(84.6% calc(var(--chroma-neutral) * 2.2) var(--hue-neutral))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -57990,7 +58067,7 @@
       "name": "--ink-400",
       "value": "oklch(70.8% calc(var(--chroma-neutral) * 2.6) var(--hue-neutral))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58001,7 +58078,7 @@
       "name": "--ink-500",
       "value": "oklch(58.4% calc(var(--chroma-neutral) * 2.8) var(--hue-neutral))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58012,7 +58089,7 @@
       "name": "--ink-600",
       "value": "oklch(47.6% calc(var(--chroma-neutral) * 2.8) var(--hue-neutral))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58023,7 +58100,7 @@
       "name": "--ink-700",
       "value": "oklch(38.2% calc(var(--chroma-neutral) * 2.6) var(--hue-neutral))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58034,7 +58111,7 @@
       "name": "--ink-800",
       "value": "oklch(29.4% calc(var(--chroma-neutral) * 2.4) var(--hue-neutral))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58045,7 +58122,7 @@
       "name": "--ink-900",
       "value": "oklch(22.6% calc(var(--chroma-neutral) * 2.2) var(--hue-neutral))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58056,7 +58133,7 @@
       "name": "--ink-950",
       "value": "oklch(16.2% calc(var(--chroma-neutral) * 2.0) var(--hue-neutral))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58067,7 +58144,7 @@
       "name": "--ink-1000",
       "value": "oklch(11.4% calc(var(--chroma-neutral) * 1.8) var(--hue-neutral))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58078,7 +58155,7 @@
       "name": "--good-100",
       "value": "oklch(94% calc(var(--chroma-status) * .3) var(--hue-good))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58089,7 +58166,7 @@
       "name": "--good-500",
       "value": "oklch(62% var(--chroma-status) var(--hue-good))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58100,7 +58177,7 @@
       "name": "--good-600",
       "value": "oklch(52% var(--chroma-status) var(--hue-good))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58111,7 +58188,7 @@
       "name": "--good-700",
       "value": "oklch(44% var(--chroma-status) var(--hue-good))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58122,7 +58199,7 @@
       "name": "--warn-100",
       "value": "oklch(95% calc(var(--chroma-status) * .32) var(--hue-warn))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58133,7 +58210,7 @@
       "name": "--warn-500",
       "value": "oklch(76% var(--chroma-status) var(--hue-warn))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58144,7 +58221,7 @@
       "name": "--warn-700",
       "value": "oklch(50% var(--chroma-status) var(--hue-warn))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58155,7 +58232,7 @@
       "name": "--bad-100",
       "value": "oklch(94.5% calc(var(--chroma-status) * .3) var(--hue-bad))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58166,7 +58243,7 @@
       "name": "--bad-500",
       "value": "oklch(58% calc(var(--chroma-status) * 1.25) var(--hue-bad))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58177,7 +58254,7 @@
       "name": "--bad-600",
       "value": "oklch(52% calc(var(--chroma-status) * 1.25) var(--hue-bad))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58188,7 +58265,7 @@
       "name": "--bad-700",
       "value": "oklch(44% calc(var(--chroma-status) * 1.1) var(--hue-bad))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58199,7 +58276,7 @@
       "name": "--accent-100",
       "value": "oklch(95% calc(var(--chroma-accent) * .3) var(--hue-accent))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58210,7 +58287,7 @@
       "name": "--accent-500",
       "value": "oklch(74% var(--chroma-accent) var(--hue-accent))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58221,7 +58298,7 @@
       "name": "--accent-700",
       "value": "oklch(52% calc(var(--chroma-accent) * .9) var(--hue-accent))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58232,7 +58309,7 @@
       "name": "--bg",
       "value": "light-dark(var(--ink-50), var(--ink-1000))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58243,7 +58320,7 @@
       "name": "--bg-sunken",
       "value": "light-dark(var(--ink-100), oklch(8.6% .012 var(--hue-neutral)))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58254,7 +58331,7 @@
       "name": "--surface",
       "value": "light-dark(var(--ink-0), var(--ink-950))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58265,7 +58342,7 @@
       "name": "--surface-2",
       "value": "light-dark(var(--ink-25), var(--ink-900))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58276,7 +58353,7 @@
       "name": "--surface-hover",
       "value": "light-dark(var(--ink-50), var(--ink-900))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58287,7 +58364,7 @@
       "name": "--surface-recessed",
       "value": "light-dark(var(--ink-200), oklch(5% .008 var(--hue-neutral)))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58298,7 +58375,7 @@
       "name": "--line",
       "value": "light-dark(var(--ink-200), oklch(28% .016 var(--hue-neutral)))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58309,7 +58386,7 @@
       "name": "--line-strong",
       "value": "light-dark(var(--ink-300), oklch(36% .018 var(--hue-neutral)))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58320,7 +58397,7 @@
       "name": "--text",
       "value": "light-dark(var(--ink-900), var(--ink-100))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58331,7 +58408,7 @@
       "name": "--text-muted",
       "value": "light-dark(var(--ink-600), var(--ink-400))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58342,18 +58419,7 @@
       "name": "--text-faint",
       "value": "light-dark(var(--ink-500), var(--ink-500))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
-      "conditions": [],
-      "doc": null,
-      "group": null,
-      "kind": "color"
-    },
-    {
-      "name": "--text-on-brand",
-      "value": "oklch(99% .01 var(--hue-brand))",
-      "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58364,7 +58430,7 @@
       "name": "--text-on-accent",
       "value": "oklch(24% .06 var(--hue-accent))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58375,7 +58441,7 @@
       "name": "--text-on-good",
       "value": "oklch(99% .01 var(--hue-good))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58386,7 +58452,7 @@
       "name": "--text-on-warn",
       "value": "oklch(24% .06 var(--hue-warn))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58397,51 +58463,7 @@
       "name": "--text-on-bad",
       "value": "oklch(99% .01 var(--hue-bad))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
-      "conditions": [],
-      "doc": null,
-      "group": null,
-      "kind": "color"
-    },
-    {
-      "name": "--brand",
-      "value": "light-dark(var(--brand-600), var(--brand-400))",
-      "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
-      "conditions": [],
-      "doc": null,
-      "group": null,
-      "kind": "color"
-    },
-    {
-      "name": "--brand-hover",
-      "value": "light-dark(var(--brand-700), var(--brand-300))",
-      "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
-      "conditions": [],
-      "doc": null,
-      "group": null,
-      "kind": "color"
-    },
-    {
-      "name": "--brand-soft",
-      "value": "light-dark(var(--brand-50), oklch(26% .05 var(--hue-brand)))",
-      "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
-      "conditions": [],
-      "doc": null,
-      "group": null,
-      "kind": "color"
-    },
-    {
-      "name": "--brand-soft-text",
-      "value": "light-dark(var(--brand-800), var(--brand-200))",
-      "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58452,7 +58474,7 @@
       "name": "--good-soft",
       "value": "light-dark(var(--good-100), oklch(26% .05 var(--hue-good)))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58463,7 +58485,7 @@
       "name": "--good-soft-text",
       "value": "light-dark(var(--good-700), oklch(80% .13 var(--hue-good)))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58474,7 +58496,7 @@
       "name": "--warn-soft",
       "value": "light-dark(var(--warn-100), oklch(26% .05 var(--hue-warn)))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58485,7 +58507,7 @@
       "name": "--warn-soft-text",
       "value": "light-dark(var(--warn-700), oklch(84% .13 var(--hue-warn)))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58496,7 +58518,7 @@
       "name": "--bad-soft",
       "value": "light-dark(var(--bad-100), oklch(26% .05 var(--hue-bad)))",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58507,18 +58529,7 @@
       "name": "--bad-soft-text",
       "value": "light-dark(var(--bad-700), oklch(76% .13 var(--hue-bad)))",
       "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
-      "conditions": [],
-      "doc": null,
-      "group": null,
-      "kind": "color"
-    },
-    {
-      "name": "--focus",
-      "value": "light-dark(var(--brand-500), var(--brand-300))",
-      "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58529,7 +58540,7 @@
       "name": "--space-0",
       "value": "0",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58540,7 +58551,7 @@
       "name": "--space-px",
       "value": "1px",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58551,7 +58562,7 @@
       "name": "--space-1",
       "value": ".25rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58562,7 +58573,7 @@
       "name": "--space-2",
       "value": ".5rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58573,7 +58584,7 @@
       "name": "--space-3",
       "value": ".75rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58584,7 +58595,7 @@
       "name": "--space-4",
       "value": "1rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58595,7 +58606,7 @@
       "name": "--space-5",
       "value": "1.25rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58606,7 +58617,7 @@
       "name": "--space-6",
       "value": "1.5rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58617,7 +58628,7 @@
       "name": "--space-8",
       "value": "2rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58628,7 +58639,7 @@
       "name": "--space-10",
       "value": "2.5rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58639,7 +58650,7 @@
       "name": "--space-12",
       "value": "3rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58650,7 +58661,7 @@
       "name": "--space-16",
       "value": "4rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58661,7 +58672,7 @@
       "name": "--space-20",
       "value": "5rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58672,7 +58683,7 @@
       "name": "--space-24",
       "value": "6rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58683,7 +58694,7 @@
       "name": "--space-section",
       "value": "clamp(2.5rem, 1.4rem + 5.5vw, 6rem)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58694,7 +58705,7 @@
       "name": "--space-gutter",
       "value": "clamp(1rem, .55rem + 2.2vw, 2rem)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58705,7 +58716,7 @@
       "name": "--r-xs",
       "value": "4px",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58716,7 +58727,7 @@
       "name": "--r-sm",
       "value": "7px",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58727,7 +58738,7 @@
       "name": "--r-md",
       "value": "12px",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58738,7 +58749,7 @@
       "name": "--r-lg",
       "value": "18px",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58749,7 +58760,7 @@
       "name": "--r-full",
       "value": "999px",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58760,7 +58771,7 @@
       "name": "--shadow-color",
       "value": "var(--hue-neutral)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58771,7 +58782,7 @@
       "name": "--shadow-1",
       "value": "0 1px 2px oklch(20% .03 var(--shadow-color) / .06), 0 1px 1px oklch(20% .03 var(--shadow-color) / .04)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58782,7 +58793,7 @@
       "name": "--shadow-2",
       "value": "0 2px 4px oklch(20% .03 var(--shadow-color) / .05), 0 4px 12px oklch(20% .03 var(--shadow-color) / .07)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58793,7 +58804,7 @@
       "name": "--shadow-3",
       "value": "0 4px 8px oklch(20% .03 var(--shadow-color) / .06), 0 12px 28px oklch(20% .03 var(--shadow-color) / .10)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58804,7 +58815,7 @@
       "name": "--shadow-4",
       "value": "0 8px 16px oklch(20% .03 var(--shadow-color) / .08), 0 24px 56px oklch(20% .03 var(--shadow-color) / .14)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58815,7 +58826,7 @@
       "name": "--shadow-inset",
       "value": "inset 0 1px 0 oklch(100% 0 0 / .6)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58826,7 +58837,7 @@
       "name": "--scrim",
       "value": "linear-gradient(to top, oklch(12% .02 var(--hue-neutral) / .82) 0%, oklch(12% .02 var(--hue-neutral) / .62) 22%, oklch(12% .02 var(--hue-neutral) / .28) 48%, transparent 78%)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58837,7 +58848,7 @@
       "name": "--scrim-auto",
       "value": "linear-gradient(to top, color-mix(in oklab, var(--surface) 90%, transparent) 0%, color-mix(in oklab, var(--surface) 70%, transparent) 22%, color-mix(in oklab, var(--surface) 32%, transparent) 48%, transparent 78%)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58848,7 +58859,7 @@
       "name": "--font-sans",
       "value": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI Variable Text\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58859,7 +58870,7 @@
       "name": "--font-mono",
       "value": "ui-monospace, \"SF Mono\", \"Cascadia Mono\", \"Roboto Mono\", Menlo, Consolas, monospace",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58870,7 +58881,7 @@
       "name": "--font-display",
       "value": "var(--font-sans)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58881,7 +58892,7 @@
       "name": "--text-2xs",
       "value": ".6875rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58892,7 +58903,7 @@
       "name": "--text-xs",
       "value": ".75rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58903,7 +58914,7 @@
       "name": "--text-sm",
       "value": ".8125rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58914,7 +58925,7 @@
       "name": "--text-base",
       "value": ".9375rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58925,7 +58936,7 @@
       "name": "--text-md",
       "value": "1.0625rem",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58936,7 +58947,7 @@
       "name": "--text-lg",
       "value": "clamp(1.125rem, 1.06rem + .32vw, 1.3125rem)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58947,7 +58958,7 @@
       "name": "--text-xl",
       "value": "clamp(1.3125rem, 1.19rem + .62vw, 1.625rem)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58958,7 +58969,7 @@
       "name": "--text-2xl",
       "value": "clamp(1.5625rem, 1.33rem + 1.16vw, 2.125rem)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58969,7 +58980,7 @@
       "name": "--text-3xl",
       "value": "clamp(1.875rem, 1.44rem + 2.16vw, 2.875rem)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58980,7 +58991,7 @@
       "name": "--text-4xl",
       "value": "clamp(2.25rem, 1.5rem + 3.75vw, 3.75rem)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -58991,7 +59002,7 @@
       "name": "--leading-tight",
       "value": "1.12",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59002,7 +59013,7 @@
       "name": "--leading-snug",
       "value": "1.3",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59013,7 +59024,7 @@
       "name": "--leading-normal",
       "value": "1.55",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59024,7 +59035,7 @@
       "name": "--leading-loose",
       "value": "1.72",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59035,7 +59046,7 @@
       "name": "--measure",
       "value": "68ch",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59046,7 +59057,7 @@
       "name": "--ease-out",
       "value": "cubic-bezier(.22, 1, .36, 1)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59057,7 +59068,7 @@
       "name": "--ease-in-out",
       "value": "cubic-bezier(.65, 0, .35, 1)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59068,7 +59079,7 @@
       "name": "--ease-spring",
       "value": "linear(0, .18 6%, .53 14%, .89 24%, 1.04 32%, 1.06 40%, 1)",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59079,7 +59090,7 @@
       "name": "--dur-1",
       "value": "110ms",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59090,7 +59101,7 @@
       "name": "--dur-2",
       "value": "190ms",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59101,7 +59112,7 @@
       "name": "--dur-3",
       "value": "300ms",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59112,7 +59123,7 @@
       "name": "--tap",
       "value": "44px",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59123,7 +59134,7 @@
       "name": "--control-h-sm",
       "value": "34px",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59134,7 +59145,7 @@
       "name": "--control-h",
       "value": "42px",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59145,7 +59156,7 @@
       "name": "--control-h-lg",
       "value": "50px",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59153,21 +59164,10 @@
       "kind": "length"
     },
     {
-      "name": "--ring",
-      "value": "0 0 0 3px light-dark(oklch(from var(--focus) l c h / .32), oklch(from var(--focus) l c h / .42))",
-      "file": "01-tokens.css",
-      "line": 11,
-      "scope": ":root",
-      "conditions": [],
-      "doc": null,
-      "group": null,
-      "kind": "other"
-    },
-    {
       "name": "--z-sticky",
       "value": "100",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59178,7 +59178,7 @@
       "name": "--z-nav",
       "value": "200",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59189,7 +59189,7 @@
       "name": "--z-sheet",
       "value": "300",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59200,7 +59200,7 @@
       "name": "--z-modal",
       "value": "400",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,
@@ -59211,7 +59211,7 @@
       "name": "--z-toast",
       "value": "500",
       "file": "01-tokens.css",
-      "line": 11,
+      "line": 74,
       "scope": ":root",
       "conditions": [],
       "doc": null,

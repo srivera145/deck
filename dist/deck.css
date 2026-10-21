@@ -119,7 +119,8 @@
     /* --- Hue control -------------------------------------------------------
        These six numbers are the whole palette. Set --hue-brand to 12 and the
        framework becomes rust. Set it to 265 and it becomes violet. Buttons,
-       focus rings, links, charts, and shadows all follow.
+       focus rings, links, charts, and shadows all follow. For one region
+       rather than the page, see the brand block below.
        ---------------------------------------------------------------------- */
     --hue-brand: 196;   /* harbor teal   */
     --hue-accent: 42;   /* signal amber  */
@@ -132,8 +133,25 @@
     --chroma-accent: .142;
     --chroma-status: .132;
     --chroma-neutral: .012; /* neutrals carry a trace of the ink hue */
+  }
 
-    /* --- Brand ramp -------------------------------------------------------- */
+  /* --- Brand: every token that reads --hue-brand or --chroma-brand -------
+     A custom property is worked out on the element that declares it, and
+     its children inherit the finished value. Declared on :root alone, these
+     eighteen were worked out once from the root's hue, so a --hue-brand set
+     on a <section> was inherited by everything inside it and read by
+     nothing. They are declared on :root and again on any element marked
+     data-theme-scope, which works them out from its own hue and chroma:
+
+       <section data-theme-scope style="--hue-brand: 24">
+
+     Without the attribute, a hue on an element reaches only the rules that
+     read --hue-brand directly, such as .g-mesh and the chart series. A
+     --brand set on :root stops at a scope, because the scope works --brand
+     out again; set it on the scope to reach inside. No cost was measurable
+     until a scope exists. FINDINGS 114.
+     ---------------------------------------------------------------------- */
+  :root, [data-theme-scope] {
     --brand-50:  oklch(97.4% calc(var(--chroma-brand) * .16) var(--hue-brand));
     --brand-100: oklch(94.2% calc(var(--chroma-brand) * .30) var(--hue-brand));
     --brand-200: oklch(88.6% calc(var(--chroma-brand) * .48) var(--hue-brand));
@@ -146,6 +164,19 @@
     --brand-900: oklch(28.2% calc(var(--chroma-brand) * .62) var(--hue-brand));
     --brand-950: oklch(20.4% calc(var(--chroma-brand) * .46) var(--hue-brand));
 
+    /* The brand roles. The ink on a brand fill is the static guess here; the
+       @supports block below replaces it with contrast-color(). */
+    --text-on-brand:  oklch(99% .01 var(--hue-brand));
+    --brand:       light-dark(var(--brand-600), var(--brand-400));
+    --brand-hover: light-dark(var(--brand-700), var(--brand-300));
+    --brand-soft:  light-dark(var(--brand-50),  oklch(26% .05 var(--hue-brand)));
+    --brand-soft-text: light-dark(var(--brand-800), var(--brand-200));
+    --focus: light-dark(var(--brand-500), var(--brand-300));
+    --ring: 0 0 0 3px light-dark(oklch(from var(--focus) l c h / .32),
+                                 oklch(from var(--focus) l c h / .42));
+  }
+
+  :root {
     /* --- Neutral ramp ------------------------------------------------------ */
     --ink-0:   oklch(100% 0 0);
     --ink-25:  oklch(99.1% calc(var(--chroma-neutral) * .5) var(--hue-neutral));
@@ -198,18 +229,14 @@
     /* --- Ink on a coloured surface ----------------------------------------
        One per saturated surface. These are the static values: they are correct
        for the shipped hues but they are guesses about any hue you set, which
-       is what the @supports block below fixes.
+       is what the @supports block below fixes. --text-on-brand is with the
+       brand block above.
        -------------------------------------------------------------------- */
-    --text-on-brand:  oklch(99% .01 var(--hue-brand));
     --text-on-accent: oklch(24% .06 var(--hue-accent));
     --text-on-good:   oklch(99% .01 var(--hue-good));
     --text-on-warn:   oklch(24% .06 var(--hue-warn));
     --text-on-bad:    oklch(99% .01 var(--hue-bad));
 
-    --brand:       light-dark(var(--brand-600), var(--brand-400));
-    --brand-hover: light-dark(var(--brand-700), var(--brand-300));
-    --brand-soft:  light-dark(var(--brand-50),  oklch(26% .05 var(--hue-brand)));
-    --brand-soft-text: light-dark(var(--brand-800), var(--brand-200));
     /* The same soft pair for each status: badges, alerts, banners. The -100
        and -700 steps are fixed light values, so a --good-100 fill is a
        near-white block in dark mode. The dark fill matches --brand-soft, so
@@ -220,8 +247,6 @@
     --warn-soft-text: light-dark(var(--warn-700), oklch(84% .13 var(--hue-warn)));
     --bad-soft:       light-dark(var(--bad-100),  oklch(26% .05 var(--hue-bad)));
     --bad-soft-text:  light-dark(var(--bad-700),  oklch(76% .13 var(--hue-bad)));
-
-    --focus: light-dark(var(--brand-500), var(--brand-300));
 
     /* --- Space: 4px base, plus fluid steps for page rhythm ------------------ */
     --space-0: 0;
@@ -316,8 +341,7 @@
     --control-h-sm: 34px;
     --control-h: 42px;
     --control-h-lg: 50px;
-    --ring: 0 0 0 3px light-dark(oklch(from var(--focus) l c h / .32),
-                                 oklch(from var(--focus) l c h / .42));
+    /* --focus and --ring are with the brand block, since both follow its hue. */
 
     --z-sticky: 100;
     --z-nav: 200;
@@ -333,8 +357,10 @@
      --good-600 and --bad-600 above. Baseline Newly Available, so the static
      values in :root stand in where it is missing. */
   @supports (color: contrast-color(red)) {
-    :root {
+    :root, [data-theme-scope] {
       --text-on-brand:  contrast-color(var(--brand-600));
+    }
+    :root {
       --text-on-accent: contrast-color(var(--accent-500));
       --text-on-good:   contrast-color(var(--good-600));
       --text-on-warn:   contrast-color(var(--warn-500));
@@ -345,6 +371,11 @@
   /* Explicit theme override beats the OS setting */
   [data-theme="light"] { color-scheme: light; }
   [data-theme="dark"]  { color-scheme: dark; }
+  /* On an element rather than the root, a theme also needs its own ink.
+     body works --text out once and children inherit the finished colour, so
+     a dark section on a light page kept dark text on its own dark cards.
+     Zero specificity, so any colour a component sets still wins. */
+  :where([data-theme]:not(:root)) { color: var(--text); }
 
   /* Dark mode wants slightly less shadow and slightly more border */
   @media (prefers-color-scheme: dark) {
@@ -4138,9 +4169,12 @@
   /* The frame, and the palette. Six series colours are computed by rotating
      --hue-brand, so charts retheme with the rest of the app and stay in one
      family. That also makes them hard to tell apart for a colour-blind
-     reader — label the marks directly rather than relying on hue. */
+     reader — label the marks directly rather than relying on hue. --c1 is
+     the --brand-500 recipe written out rather than var(--brand-500), so all
+     six are worked out here from the same hue: a .chart given its own
+     --hue-brand used to keep series 1 in the page's colour. */
   .chart {
-    --c1: var(--brand-500);
+    --c1: oklch(60.8% var(--chroma-brand) var(--hue-brand));
     --c2: oklch(64% .13 calc(var(--hue-brand) + 48));
     --c3: oklch(70% .14 calc(var(--hue-brand) + 96));
     --c4: oklch(62% .13 calc(var(--hue-brand) - 52));

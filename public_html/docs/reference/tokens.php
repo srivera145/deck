@@ -188,7 +188,10 @@ ksort($byFile);
   <h2 id="using">Using a token</h2>
   <p>
     Tokens are plain CSS custom properties. Read one with <code>var()</code> in your own
-    rules, and set one anywhere in the tree to change it from that element down.
+    rules, and set one anywhere in the tree to change it from that element down. The
+    exceptions are <code>--hue-brand</code> and <code>--chroma-brand</code>: other tokens
+    are computed from them, so below the root they need <code>data-theme-scope</code> on
+    the same element, or they change almost nothing.
   </p>
   <pre class="dx-code"><code>@layer app.pages {
   .invoice-total { font-size: var(--text-xl); color: var(--text); }
@@ -197,8 +200,11 @@ ksort($byFile);
 &lt;!-- one tenant, one number, no rebuild --&gt;
 &lt;html style="--hue-brand: 265"&gt;
 
-&lt;!-- or scoped to a subtree --&gt;
-&lt;section class="card" style="--brand-soft: var(--good-soft)"&gt;</code></pre>
+&lt;!-- a role token, scoped to a subtree --&gt;
+&lt;section class="card" style="--brand-soft: var(--good-soft)"&gt;
+
+&lt;!-- a hue, scoped to a subtree: the attribute makes the 18 brand tokens follow it --&gt;
+&lt;section class="card" data-theme-scope style="--hue-brand: 24"&gt;</code></pre>
   <p>
     Reach for the <a href="#roles">semantic roles</a> before the ramps.
     <code>--surface</code> resolves to a different step of the neutral ramp in light and
@@ -267,7 +273,18 @@ ksort($byFile);
   <p>
     Custom properties inherit, so where you set one decides how far the change reaches.
     On <code>:root</code> or the <code>&lt;html&gt;</code> element it is the whole
-    document; on a component it is that subtree.
+    document; on a component it is that subtree. That holds for a token you read directly,
+    such as <code>--brand</code> or <code>--surface</code>. It does not hold for an input
+    other tokens are computed from. A custom property is computed on the element that
+    declares it, so <code>--brand-600</code>, declared on <code>:root</code>, is worked out
+    from the root's <code>--hue-brand</code>, and a <code>--hue-brand</code> set on a
+    component is inherited and read by almost nothing. Deck declares the 18 tokens computed
+    from <code>--hue-brand</code> and <code>--chroma-brand</code> on
+    <code>[data-theme-scope]</code> as well, so a component with that attribute works them
+    out again from its own hue. Without it, only <code>.g-mesh</code> and the chart series,
+    which read the hue directly, follow. The other hues, such as
+    <code>--hue-neutral</code> and <code>--hue-good</code>, are root-only. See
+    <a href="../guides/theming.php#scope">theming one region</a>.
   </p>
   <p>
     Specificity still applies to the declaration that sets the property, so a token set

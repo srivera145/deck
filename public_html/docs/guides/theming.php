@@ -4,18 +4,19 @@ declare(strict_types=1);
 /**
  * Theming — the differentiator, so it gets the depth.
  *
- * Two claims on this page were tested in a browser rather than reasoned about,
- * because both are the kind of thing that is obviously true and turns out not
- * to be: that Deck.hue() actually repaints (it does), and that setting
- * --hue-brand on a subtree rethemes it (it does not). The second is in here as
- * a warning rather than left for a reader to find.
+ * The claims on this page were tested in a browser rather than reasoned about,
+ * because they are the kind of thing that is obviously true and turns out not
+ * to be: that Deck.hue() actually repaints (it does), that setting --hue-brand
+ * on a subtree rethemes it (on its own it does not; with data-theme-scope it
+ * does), and how fast the slider is (it was "sixty times a second", which a
+ * slow phone does not manage). FINDINGS 114 and 117 have the measurements.
  */
 
 $page = [
     'path' => 'guides/theming.php',
     'title' => 'Change your brand colour',
     'level' => 'Beginner',
-    'description' => "Retheme an entire Deck app from one number. How the OKLCH ramps are generated, how to do it per tenant from PHP, at runtime from JavaScript, and what not to override.",
+    'description' => "Retheme an entire Deck app from one number. How the OKLCH ramps are generated, how to do it per tenant from PHP, at runtime from JavaScript, for one region of a page, and what not to override.",
 ];
 
 require __DIR__ . '/../_layout.php';
@@ -166,6 +167,12 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
     <code>style="--hue-brand:265"</code> on the <code>&lt;html&gt;</code> tag from whatever
     renders it.
   </p>
+  <p>
+    Two tenants on one page, such as an admin list of customers or a preview of a
+    customer's brand, is the same call on the region's element with
+    <code>scope: true</code>. That adds the <code>data-theme-scope</code> attribute,
+    which is <a href="#scope">what makes a region retheme</a>.
+  </p>
 </section>
 
 <section class="stack stack-4">
@@ -182,9 +189,19 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
       '  <label class="label" for="g-hue">Brand hue</label>' . "\n" .
       '  <input class="range" id="g-hue" type="range" min="0" max="360" value="196" oninput="Deck.hue(this.value)">' . "\n" .
       '</div>',
-      'Drag it. The whole page follows, sixty times a second',
+      'Drag it. The whole page follows',
       'stack'
   ); ?>
+  <p>
+    Each call restyles every element on the page, because every element inherits the hue.
+    Measured in Edge on a page of 2,000 elements, that was about 12ms of style
+    recalculation per call on a desktop, which fits in a 60fps frame with little to spare,
+    and about 97ms with the processor slowed four times to stand in for a low-end phone,
+    which is closer to ten updates a second. On a big page that has to feel smooth on slow
+    devices, preview the hue on one <a href="#scope">scoped region</a>, which restyles only
+    that region, and call <code>Deck.hue()</code> on <code>change</code> rather than
+    <code>input</code>, so the whole page restyles once, on release.
+  </p>
   <p>
     To make it stick, save the number and render it server-side next time. Doing it the
     other way round — reading <code>localStorage</code> in a script and calling
@@ -195,46 +212,91 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
 </section>
 
 <section class="stack stack-4">
-  <h2 id="scope">The one that will catch you: it has to be on the root</h2>
+  <h2 id="scope">One region, its own brand: <code>data-theme-scope</code></h2>
+  <p>
+    A hue on the root themes the page. To give one region its own brand, such as a second
+    tenant's card on an admin page or the preview pane of a theme editor, set the hue on
+    that element <em>and</em> mark the element with <code>data-theme-scope</code>:
+  </p>
+  <pre class="dx-code"><code>&lt;section class="card" data-theme-scope style="--hue-brand: 24"&gt;
+  &lt;div class="card-body"&gt;&lt;button class="btn btn-primary"&gt;Rust&lt;/button&gt;&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- or from PHP --&gt;
+&lt;section class="card" &lt;?= Deck::theme(hue: $other-&gt;hue, scope: true) ?&gt;&gt;
+&lt;!-- &lt;section class="card" style="--hue-brand:24" data-theme-scope&gt; --&gt;</code></pre>
+  <?php docs_example(
+      '<div class="grid grid-fixed-2">' . "\n" .
+      '  <div class="card" data-theme-scope style="--hue-brand: 24">' . "\n" .
+      '    <div class="card-body stack">' . "\n" .
+      '      <div class="cluster"><button class="btn btn-primary">Rust</button><button class="btn btn-soft">Soft</button><span class="badge badge-brand">24</span><a href="#scope">A link</a></div>' . "\n" .
+      '      <div class="chart"><div class="chart-bars">' . "\n" .
+      '        <div class="chart-bar s1"><span class="chart-bar-label">Series 1</span><span class="chart-bar-track"><span class="chart-bar-fill" style="--value:70"></span></span><span>70</span></div>' . "\n" .
+      '        <div class="chart-bar s2"><span class="chart-bar-label">Series 2</span><span class="chart-bar-track"><span class="chart-bar-fill" style="--value:45"></span></span><span>45</span></div>' . "\n" .
+      '      </div></div>' . "\n" .
+      '    </div>' . "\n" .
+      '  </div>' . "\n" .
+      '  <div class="card" data-theme-scope style="--hue-brand: 265">' . "\n" .
+      '    <div class="card-body stack">' . "\n" .
+      '      <div class="cluster"><button class="btn btn-primary">Violet</button><button class="btn btn-soft">Soft</button><span class="badge badge-brand">265</span><a href="#scope">A link</a></div>' . "\n" .
+      '      <div class="chart"><div class="chart-bars">' . "\n" .
+      '        <div class="chart-bar s1"><span class="chart-bar-label">Series 1</span><span class="chart-bar-track"><span class="chart-bar-fill" style="--value:70"></span></span><span>70</span></div>' . "\n" .
+      '        <div class="chart-bar s2"><span class="chart-bar-label">Series 2</span><span class="chart-bar-track"><span class="chart-bar-fill" style="--value:45"></span></span><span>45</span></div>' . "\n" .
+      '      </div></div>' . "\n" .
+      '    </div>' . "\n" .
+      '  </div>' . "\n" .
+      '</div>',
+      'Two brands on one page. The rest of this page keeps its own hue'
+  ); ?>
   <div class="alert alert-warn">
     <svg class="icon"><use href="../../assets/deck/deck-icons.svg#alert-triangle"></use></svg>
     <div>
-      <div class="alert-title">Setting <code>--hue-brand</code> on anything but the root silently does nothing</div>
+      <div class="alert-title">Without <code>data-theme-scope</code>, a hue on an element recolours almost nothing</div>
       <p class="alert-body">
-        No error, no warning, no visual change. This is the single most likely way to lose
-        an hour with Deck's theming, so it is worth understanding rather than memorising.
+        No error and no warning: the buttons, links and badges inside keep the page's
+        colour. This is the most likely way to lose an hour with Deck's theming, so it is
+        worth understanding rather than memorising.
       </p>
     </div>
   </div>
-  <pre class="dx-code"><code>&lt;!-- Does NOT work. The card stays teal. --&gt;
-&lt;div class="card" style="--hue-brand: 42"&gt;
-  &lt;div class="card-body"&gt;&lt;button class="btn btn-primary"&gt;Still teal&lt;/button&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
   <p>
-    The reason is how custom properties resolve. <code>--brand-600</code> is declared once,
-    on <code>:root</code>, as <code>oklch(51.6% var(--chroma-brand) var(--hue-brand))</code>.
-    That <code>var()</code> is substituted where the property is <em>declared</em>, not
-    where it is used — so <code>--brand-600</code> computes to a finished colour on the root
-    element, and everything below inherits that finished colour. Your
-    <code>--hue-brand: 42</code> is inherited correctly by the card and read by nothing,
-    because nothing below the root recalculates the ramp.
+    The reason is how custom properties resolve. <code>--brand-600</code> is declared as
+    <code>oklch(51.6% var(--chroma-brand) var(--hue-brand))</code>, and that
+    <code>var()</code> is substituted where the property is <em>declared</em>, not where it
+    is used. So <code>--brand-600</code> computes to a finished colour on the element that
+    declares it, and everything below inherits that finished colour. Deck declares the 18
+    tokens that read the hue on <code>:root</code> and again on
+    <code>[data-theme-scope]</code>, so a marked element works the ramp out again from its
+    own hue. On an unmarked element, <code>--hue-brand: 42</code> is inherited correctly
+    and read only by the few rules that use the hue directly: <code>.g-mesh</code> and the
+    series colours of a <code>.chart</code>. That is how
+    <code>&lt;div class="g-mesh" style="--hue-brand: 34"&gt;</code> tints a hero's
+    gradient without touching the buttons in it.
   </p>
   <p>
-    If you genuinely need a differently-themed region — a preview pane in a theme editor is
-    the honest use case — redeclare the ramp steps you use on that element:
+    Where the hue comes from does not matter, only the attribute: an inline style, a
+    class in your stylesheet on an element that also carries the attribute, or
+    <code>element.style.setProperty('--hue-brand', n)</code> at runtime.
+    <code>--chroma-brand</code> works the same way, and scopes nest, each using its own
+    hue.
   </p>
-  <pre class="dx-code"><code>&lt;div class="card" style="
-     --hue-brand: 42;
-     --brand-400: oklch(70.2% calc(var(--chroma-brand) * .90) var(--hue-brand));
-     --brand-500: oklch(60.8% var(--chroma-brand) var(--hue-brand));
-     --brand-600: oklch(51.6% var(--chroma-brand) var(--hue-brand));
-     --brand: light-dark(var(--brand-600), var(--brand-400));
-   "&gt;</code></pre>
   <p>
-    That works — the <code>var()</code>s now resolve on the card, where
-    <code>--hue-brand</code> is 42. It is also verbose and easy to get half-right, which
-    is why the answer for almost every real case is: put it on the root and render one
-    theme per page.
+    A <code>--brand</code> you set on <code>:root</code>, the exact-colour override
+    <a href="#beyond">below</a>, stops at a scope. That is intended: the scope works
+    <code>--brand</code> out again from its own hue, which is what it is for. To give a
+    scoped region an exact colour, set <code>--brand</code> on the scope element itself.
+  </p>
+  <p>
+    Light or dark for one region is <code>data-theme</code> on the element, which
+    <code>Deck::theme(mode: 'dark')</code> emits. The region's text takes the region's
+    ink, so a dark card on a light page reads as one. The two combine:
+    <code>&lt;section data-theme-scope data-theme="dark" style="--hue-brand: 24"&gt;</code>.
+  </p>
+  <p>
+    Measured in Edge on a page of 2,000 elements, the attribute costs nothing until an
+    element carries it. Ten scoped cards cost the same as ten cards with an inline hue and
+    no attribute, because most of the cost is having ten different hues on the page at
+    all.
   </p>
 </section>
 
@@ -339,7 +401,9 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
     still use a ramp step, such as <code>.badge-solid</code> and the current page in
     <code>.pagination</code>, and on primary buttons in browsers without
     <code>contrast-color()</code>. The generated one is computed from a hue you have just
-    stopped using.
+    stopped using. An override on <code>:root</code> stops at a
+    <a href="#scope"><code>data-theme-scope</code></a> region, which works out its own
+    brand; set it on the scope element to reach inside.
   </p>
 </section>
 
@@ -362,8 +426,9 @@ $SWATCHES = ['--brand-50', '--brand-100', '--brand-200', '--brand-300', '--brand
       static fallback text colours reaches 4.5:1 on that surface, at the hues Deck ships.
     </li>
     <li>
-      <strong>Not <code>--hue-brand</code> on a component.</strong> Covered
-      <a href="#scope">above</a>. It does nothing, quietly.
+      <strong>Not <code>--hue-brand</code> on a component without
+      <code>data-theme-scope</code>.</strong> Covered <a href="#scope">above</a>. Without
+      the attribute it tints gradients and chart series and nothing else, quietly.
     </li>
     <li>
       <strong>Not with <code>!important</code>.</strong> If an override is not landing, the

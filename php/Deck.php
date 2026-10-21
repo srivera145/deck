@@ -248,8 +248,16 @@ final class Deck
      * no second stylesheet.
      *
      *   <html <?= Deck::theme(hue: $tenant->hue, mode: $user->theme) ?>>
+     *
+     * On any other element, pass scope: true. Deck works its brand palette out
+     * on the root and on elements marked data-theme-scope, so without the
+     * attribute a hue on a <section> reaches almost nothing. With it, a second
+     * tenant's card can sit on the first tenant's page:
+     *
+     *   <section <?= Deck::theme(hue: $other->hue, scope: true) ?>>
+     *   <!-- <section style="--hue-brand:24" data-theme-scope> -->
      */
-    public static function theme(?int $hue = null, ?string $mode = null, ?float $chroma = null): string
+    public static function theme(?int $hue = null, ?string $mode = null, ?float $chroma = null, bool $scope = false): string
     {
         $vars = [];
 
@@ -265,6 +273,11 @@ final class Deck
 
         if ($vars !== []) {
             $out .= sprintf('style="%s"', htmlspecialchars(implode(';', $vars), ENT_QUOTES));
+
+            // The root works the palette out already; anywhere else needs the marker.
+            if ($scope) {
+                $out .= ' data-theme-scope';
+            }
         }
 
         if ($mode !== null) {
